@@ -21,8 +21,9 @@ import {
   ll2v,
   v2ll,
 } from './app_core.js';
-import { Globe } from './globe.js';
-import { Labels } from './labels.js';
+import { Globe } from './globe_cesium.js';
+import { Labels } from './labels_cesium.js';
+import { initImagery } from './basemap.js';
 import { loadTexURI, inject } from './loader.js';
 import { buildRegistry, ensureLayer, applyLayerVis, layerItemsOn, hydroTiles } from './layers.js';
 import { initTimeline, tickPlayback } from './ui_timeline.js';
@@ -46,14 +47,15 @@ window.GM_PERF = {
 };
 
 async function boot() {
-  const canvas = $('#globe');
-  const g = new Globe(canvas);
+  const g = new Globe($('#globe'), { onStatus: setStatus });
+  const canvas = g.canvas;
   ctx.globe = g;
-  ctx.labels = new Labels($('#labels'), g);
+  ctx.labels = new Labels(g);
+  initImagery(g);
   buildRegistry();
-  // textures: quick 2K first, then 8K day/night + 4K bump/specular
+  // bundled 2K day/night textures: offline basemap and night-lights fallback (streamed imagery is the default)
   const tx = async (slot, name, o) => g.setTexture(slot, await loadTexURI(name), o);
-  await Promise.all([tx('dayTex', 'day2k'), tx('nightTex', 'night2k')]).catch((e) => console.warn(e));
+  Promise.all([tx('dayTex', 'day2k'), tx('nightTex', 'night2k')]).catch((e) => console.warn(e));
   // country id map (for country glow / hit tests)
   loadLayer('countries').then((p) => {
     ctx.countries = p;
@@ -129,13 +131,11 @@ async function boot() {
   }
   emit('filters');
   requestAnimationFrame(loop);
-  // upgrade textures in the background
-  Promise.all([tx('dayTex', 'day8k'), tx('nightTex', 'night8k'), tx('bumpTex', 'bump4k'), tx('specTex', 'spec4k')])
-    .then(() => {
-      document.body.dataset.hires = '1';
-      setStatus('');
-    })
-    .catch((e) => console.warn('hi-res textures', e));
+  // offline basemap only: upgrade the bundled textures to 8K (streamed imagery needs no bundled texture)
+  if (g.basemapId === 'local')
+    Promise.all([tx('dayTex', 'day8k'), tx('nightTex', 'night8k')])
+      .then(() => (document.body.dataset.hires = '1'))
+      .catch((e) => console.warn('hi-res textures', e));
   document.body.dataset.ready = '1';
 }
 
@@ -151,6 +151,7 @@ export function buildCases() {
     timeAware: true,
     mode: st.mode,
     radius: 1.0045,
+    clamp: true,
     order: 8,
   });
   const imp = cs.filter((c) => !PRECISE(c));
@@ -187,17 +188,26 @@ on('time', () => {
   clusterDirty = true;
 });
 
-// ---- screen-space clustering (splits as you zoom) ----
+// ---- clustering (splits as you zoom). Grouping is decided in screen space once the camera settles; the badges are
+// Cesium billboards at the members' geographic centroid, so they stay glued to the surface while the globe moves ----
 let clusterDirty = true,
   lastCam = new THREE.Vector3(),
-  lastClusterT = 0;
+  lastMoveT = 0,
+  settled = true;
 function recluster(now) {
   const g = ctx.globe;
   const cam = g.camera.position;
-  const moved = cam.distanceToSquared(lastCam) > 1e-7;
-  if (!(clusterDirty || moved) || now - lastClusterT < 90) return;
-  lastCam.copy(cam);
-  lastClusterT = now;
+  if (cam.distanceToSquared(lastCam) > 1e-9) {
+    lastCam.copy(cam);
+    lastMoveT = now;
+    settled = false;
+    return;
+  }
+  if (!settled && now - lastMoveT > 160) {
+    settled = true;
+    clusterDirty = true;
+  }
+  if (!clusterDirty) return;
   clusterDirty = false;
   const alt = cam.length() - 1;
   const prevHidden = clusterHidden;
@@ -212,19 +222,19 @@ function recluster(now) {
       if (!p) continue;
       const k = Math.floor(p.x / cell) + ':' + Math.floor(p.y / cell);
       let b = grid.get(k);
-      if (!b) grid.set(k, (b = { m: [], x: 0, y: 0 }));
+      if (!b) grid.set(k, (b = { m: [], v: new THREE.Vector3() }));
       b.m.push(c);
-      b.x += p.x;
-      b.y += p.y;
+      b.v.add(ll2v(c.lat, c.lon, 1));
     }
     for (const b of grid.values())
       if (b.m.length >= 3) {
         const cnt = {};
         b.m.forEach((c) => (cnt[c.category] = (cnt[c.category] || 0) + 1));
         const top = Object.entries(cnt).sort((a, b2) => b2[1] - a[1])[0][0];
+        const ll = v2ll(b.v);
         ctx.clusters.push({
-          x: b.x / b.m.length,
-          y: b.y / b.m.length,
+          lat: ll.lat,
+          lon: ll.lon,
           n: b.m.length,
           color: catColor(top),
           members: b.m,
@@ -351,7 +361,10 @@ function countryAt(ll) {
 // ---- picking (CPU, angular prefilter on unit vectors; cheap even for 100k+ points) ----
 export function pickAt(x, y, radiusPx = 12) {
   const g = ctx.globe;
-  for (const c of ctx.clusters) if (Math.hypot(c.x - x, c.y - y) < 18) return { cluster: c };
+  for (const c of ctx.clusters) {
+    const s = g.project(c.lat, c.lon);
+    if (s && Math.hypot(s.x - x, s.y - y) < 10 + Math.min(14, Math.sqrt(c.n) * 3)) return { cluster: c };
+  }
   const hit = g.pickGlobe(x, y);
   if (!hit) return null;
   const hn = hit.clone().normalize();
@@ -435,11 +448,8 @@ function bindPointer(canvas) {
     const p = pickAt(e.clientX - r.left, e.clientY - r.top);
     if (!p) return;
     if (p.cluster) {
-      const m = p.cluster.members;
-      const lat = m.reduce((s, c) => s + c.lat, 0) / m.length,
-        lon = m.reduce((s, c) => s + c.lon, 0) / m.length;
       const alt = ctx.globe.camera.position.length() - 1;
-      ctx.globe.flyTo(lat, lon, 1 + alt * 0.4, 1000);
+      ctx.globe.flyTo(p.cluster.lat, p.cluster.lon, 1 + alt * 0.4, 1000);
       return;
     }
     openDossier(p.item, p.kind);
@@ -577,6 +587,7 @@ window.__open = (c) => import('./ui_panels.js').then((m) => m.openDossier(c));
 window.__setDay = (iso) => import('./ui_timeline.js').then((m) => m.setDay(dateToDay(iso)));
 window.__pick = (x, y) => pickAt(x, y);
 window.__fly = (lat, lon, d) => ctx.globe.flyTo(lat, lon, d, 800);
+window.__globe = () => ctx.globe;
 boot().catch((e) => {
   console.error(e);
   setStatus('Boot error: ' + e.message);

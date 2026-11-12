@@ -348,16 +348,17 @@ function endLasso(cancel) {
 }
 // ---- screenshot (globe + labels composited) ----
 function screenshot() {
-  const g = $('#globe'),
-    lb = $('#labels');
+  // the Cesium canvas draws markers and labels itself; it may be wider than the window (panel centring), so crop to it
+  const g = ctx.globe.canvas;
+  const r = g.getBoundingClientRect();
+  const k = g.width / r.width;
   const cv = document.createElement('canvas');
-  cv.width = g.width;
+  cv.width = Math.round(innerWidth * k);
   cv.height = g.height;
   const c2 = cv.getContext('2d');
-  c2.drawImage(g, 0, 0);
-  c2.drawImage(lb, 0, 0, cv.width, cv.height);
+  c2.drawImage(g, Math.round(-r.left * k), 0, cv.width, cv.height, 0, 0, cv.width, cv.height);
   c2.fillStyle = 'rgba(230,241,247,0.8)';
-  c2.font = `${14 * (cv.width / g.clientWidth)}px Inter, sans-serif`;
+  c2.font = `${14 * k}px Inter, sans-serif`;
   c2.fillText(`Global Map · ${dayLabel(st.cur)} · ${filteredCases().length} cases`, 16, cv.height - 16);
   const a = document.createElement('a');
   a.download = `globalmap-${dayToISO(st.cur)}.png`;

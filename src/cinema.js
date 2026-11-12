@@ -5,7 +5,7 @@ import { audio, unlockAudio, setMuted, setVolumes, sfx } from './audio.js';
 import { caseRank, domainOf } from './report_gen.js';
 import { icon } from './icons.js';
 import { setDay } from './ui_timeline.js';
-import { basemap, setSatelliteBasemap } from './basemap.js';
+import { BASEMAPS, TERRAINS, imagery, setBasemap, setTerrain } from './basemap.js';
 
 const P = new URLSearchParams(location.search);
 export const params = {
@@ -103,8 +103,10 @@ function renderSettings() {
    <label class="tog"><input type="checkbox" id="s-hud" ${s.hud ? 'checked' : ''}> HUD (reticle, coordinates, sweep)</label>
    <label class="tog"><input type="checkbox" id="s-perf" ${s.perf ? 'checked' : ''}> Performance mode (no post-FX, 1× pixel ratio)</label>
    <label class="tog"><input type="checkbox" id="s-red" ${s.reduced ? 'checked' : ''}> Reduced motion (instant fly-to, no typing, no sweeps)</label>
-   <h4>${icon('globe', 14)} Basemap</h4>
-   <label class="tog"><input type="checkbox" id="s-s2" ${basemap.on ? 'checked' : ''}> Satellite basemap (Sentinel-2 cloudless 2016, EOX, CC BY 4.0; online)</label>
+   <h4>${icon('globe', 14)} Imagery and terrain</h4>
+   <label>Basemap <select id="s-basemap">${BASEMAPS.map((b) => `<option value="${b.id}" ${b.id === imagery.basemap ? 'selected' : ''}>${esc(b.name)}</option>`).join('')}</select></label>
+   <label>Terrain <select id="s-terrain">${TERRAINS.map((t) => `<option value="${t.id}" ${t.id === imagery.terrain ? 'selected' : ''}>${esc(t.name)}</option>`).join('')}</select></label>
+   <p class="small muted">All imagery and terrain is streamed from free, keyless sources (no API key, no Cesium ion). Tiles sharpen as you zoom, down to street level. Attributions are shown bottom-left and in Index › Credits.</p>
    <h4>${icon('clapperboard', 14)} Intro</h4><button class="btn" id="s-intro">Replay intro</button> <button class="btn" id="s-tour">Start guided tour</button>`;
   $('#s-mute').onchange = (e) => setMuted(e.target.checked);
   $('#s-music').oninput = (e) => setVolumes({ music: e.target.value });
@@ -119,7 +121,8 @@ function renderSettings() {
   b('#s-hud', 'hud');
   b('#s-perf', 'perf');
   b('#s-red', 'reduced');
-  $('#s-s2').onchange = (e) => setSatelliteBasemap(e.target.checked);
+  $('#s-basemap').onchange = (e) => setBasemap(e.target.value);
+  $('#s-terrain').onchange = (e) => setTerrain(e.target.value);
   $('#s-bloom').oninput = (e) => {
     s.bloom = +e.target.value;
     applySettings();
@@ -162,7 +165,7 @@ function hudFrame() {
   const NS = ll.lat >= 0 ? 'N' : 'S',
     EW = ll.lon >= 0 ? 'E' : 'W';
   $('#hud-coord').textContent =
-    `${Math.abs(ll.lat).toFixed(3)}°${NS} ${Math.abs(ll.lon).toFixed(3)}°${EW}  ALT ${fmt(altKm)} KM`;
+    `${Math.abs(ll.lat).toFixed(3)}°${NS} ${Math.abs(ll.lon).toFixed(3)}°${EW}  ALT ${altKm < 10 ? fmt(Math.round(altKm * 1000)) + ' M' : fmt(altKm) + ' KM'}`;
   $('#hud-date').textContent = `T ${dayLabel(st.cur)}`;
 }
 export function sweep() {
@@ -645,7 +648,6 @@ export function initCinema() {
   if (params.fx === '0') cine.settings.fx = false;
   applySettings();
   syncMute();
-  if (params.basemap === 's2') setSatelliteBasemap(true);
   // launch logic: ?tour=intro shows ENGAGE every time; otherwise the title card plays once (remembered); ?intro=0 skips it
   if (params.tour) {
     showBoot(true);

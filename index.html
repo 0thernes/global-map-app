@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self' file:; script-src 'self' file:; style-src 'self' file: 'unsafe-inline'; img-src 'self' file: data: blob: https://tiles.maps.eox.at; media-src 'self' file:; font-src 'self' file:; connect-src 'self' file: data: blob:; worker-src 'self' blob:; object-src 'none'; base-uri 'none'; form-action 'none'"
+      content="default-src 'self' file:; script-src 'self' file: 'wasm-unsafe-eval'; style-src 'self' file: 'unsafe-inline'; img-src 'self' file: data: blob: https://server.arcgisonline.com https://services.arcgisonline.com https://elevation3d.arcgis.com https://tiles.maps.eox.at https://tile.openstreetmap.org https://*.basemaps.cartocdn.com https://gibs.earthdata.nasa.gov https://s3.amazonaws.com; media-src 'self' file:; font-src 'self' file:; connect-src 'self' file: data: blob: https://server.arcgisonline.com https://services.arcgisonline.com https://elevation3d.arcgis.com https://tiles.maps.eox.at https://tile.openstreetmap.org https://*.basemaps.cartocdn.com https://gibs.earthdata.nasa.gov https://s3.amazonaws.com; worker-src 'self' file: blob:; object-src 'none'; base-uri 'none'; form-action 'none'"
     />
     <meta
       name="description"
@@ -14,12 +14,12 @@
     <meta name="color-scheme" content="dark" />
     <title>Global Map: OSINT globe</title>
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="vendor/cesium/Widgets/CesiumWidget.css" />
     <link rel="stylesheet" href="css/tokens.css" />
     <link rel="stylesheet" href="css/app.css" />
   </head>
   <body>
-    <canvas id="globe" aria-label="3D globe"></canvas>
-    <canvas id="labels" aria-hidden="true"></canvas>
+    <div id="globe" role="application" aria-label="3D globe"></div>
     <canvas id="lasso" hidden></canvas>
     <div id="tooltip" class="tooltip" hidden></div>
 
