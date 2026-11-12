@@ -738,9 +738,19 @@ body.rail-collapsed .hud-date {
 }
 .hud-date {
   right: calc(var(--occ-right, 0px) + var(--s-1));
+  width: 17ch;
+  text-align: right;
+  white-space: nowrap;
+  overflow: hidden;
 }
 .hud-coord {
-  right: calc(var(--occ-right, 0px) + 128px);
+  right: calc(var(--occ-right, 0px) + var(--s-1) + 17ch + var(--s-2));
+  white-space: nowrap;
+}
+/* the status line sits one row above the credit strip, centred in the free globe area */
+#status {
+  left: calc((var(--occ-left, 0px) + 100vw - var(--occ-right, 0px)) / 2);
+  bottom: calc(var(--timeline-h) + var(--s-3) + var(--s-h));
 }
 
 /* number columns of the wars (Deaths, Civilians, Displaced) and analysis tables */
