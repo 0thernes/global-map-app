@@ -10,6 +10,19 @@
 | --: | ----: | ----: | ------: | ------: | -------: | ----: |
 |   3 |     0 |     2 |       0 |       0 |        0 |     5 |
 
+## Checks
+
+| check                                      | result                                                                                             |
+| ------------------------------------------ | -------------------------------------------------------------------------------------------------- |
+| ESLint 9 (eslint .)                        | 0 errors, 0 warnings                                                                               |
+| Prettier 3 (--check .)                     | all files formatted                                                                                |
+| Unit tests (node --test)                   | 66 pass, 0 fail                                                                                    |
+| Data validation (scripts/validate_data.py) | 22 CSV files, 0 errors, 78 warnings                                                                |
+| Headless smoke test (test/smoke.mjs)       | 14/14 steps ok, 0 console or page errors, 139 s under SwiftShader                                  |
+| Bundle (js/app.js, esbuild IIFE)           | 955 KB                                                                                             |
+| Largest tracked file                       | data/layers/faults_usgs.js, 10.7 MB (limit 95 MB, no LFS)                                          |
+| Slowest smoke steps                        | hotspots 56 s, analysis 20 s, index tabs 21 s, reports 13 s (software WebGL; a GPU is much faster) |
+
 ## Notes
 
 - CSP: `default-src 'self' file:`, no inline script, images only from self, data:, blob: and tiles.maps.eox.at, `object-src 'none'`, `base-uri 'none'`, `form-action 'none'`.
