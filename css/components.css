@@ -742,3 +742,12 @@ body.rail-collapsed .hud-date {
 .hud-coord {
   right: calc(var(--occ-right, 0px) + 128px);
 }
+
+/* number columns of the wars (Deaths, Civilians, Displaced) and analysis tables */
+table.wars th:nth-child(n + 4),
+table.wars td:nth-child(n + 4),
+table.an th:not(:first-child),
+table.an td:not(:first-child) {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
