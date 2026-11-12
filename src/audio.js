@@ -48,10 +48,11 @@ function applyMusic() {
 export function unlockAudio() {
   if (audio.unlocked) return;
   audio.unlocked = true;
-  if (!audio._music.length) audio._music = [
-    { el: el('score', true), gain: 0.8 },
-    { el: el('drone', true), gain: 0.55 },
-  ];
+  if (!audio._music.length)
+    audio._music = [
+      { el: el('score', true), gain: 0.8 },
+      { el: el('drone', true), gain: 0.55 },
+    ];
   applyMusic();
 }
 export function setMuted(m) {
@@ -85,11 +86,60 @@ export function sfx(name, gain = 1) {
   a.play().catch(() => {});
 }
 export const AUDIO_CREDITS = [
-  { file: FILES.score, title: 'Persistence (loop)', author: 'cinameng', license: 'CC0 1.0', url: 'https://opengameart.org/content/persistence', use: 'music bed' },
-  { file: FILES.drone, title: 'Manaos Drones (drone 1, first 90 s, faded)', author: 'Tozan', license: 'CC0 1.0', url: 'https://opengameart.org/content/manaos-drones', use: 'ambient drone' },
-  { file: FILES.blip, title: 'rollover2 (51 UI sound effects)', author: 'Kenney (kenney.nl)', license: 'CC0 1.0', url: 'https://opengameart.org/content/51-ui-sound-effects-buttons-switches-and-clicks', use: 'UI blip' },
-  { file: FILES.tick, title: 'click3 (51 UI sound effects)', author: 'Kenney (kenney.nl)', license: 'CC0 1.0', url: 'https://opengameart.org/content/51-ui-sound-effects-buttons-switches-and-clicks', use: 'UI tick' },
-  { file: FILES.whoosh, title: 'swish-9 (Swishes Sound Pack)', author: 'artisticdude', license: 'CC0 1.0', url: 'https://opengameart.org/content/swishes-sound-pack', use: 'fly-to whoosh' },
-  { file: FILES.boom, title: 'lowDown (63 Digital sound effects), pitched down 1 octave + low-pass', author: 'Kenney (kenney.nl)', license: 'CC0 1.0', url: 'https://opengameart.org/content/63-digital-sound-effects-lasers-phasers-space-etc', use: 'reveal boom' },
-  { file: FILES.chatter, title: 'tone1 (63 Digital sound effects)', author: 'Kenney (kenney.nl)', license: 'CC0 1.0', url: 'https://opengameart.org/content/63-digital-sound-effects-lasers-phasers-space-etc', use: 'data chatter' },
+  {
+    file: FILES.score,
+    title: 'Persistence (loop)',
+    author: 'cinameng',
+    license: 'CC0 1.0',
+    url: 'https://opengameart.org/content/persistence',
+    use: 'music bed',
+  },
+  {
+    file: FILES.drone,
+    title: 'Manaos Drones (drone 1, first 90 s, faded)',
+    author: 'Tozan',
+    license: 'CC0 1.0',
+    url: 'https://opengameart.org/content/manaos-drones',
+    use: 'ambient drone',
+  },
+  {
+    file: FILES.blip,
+    title: 'rollover2 (51 UI sound effects)',
+    author: 'Kenney (kenney.nl)',
+    license: 'CC0 1.0',
+    url: 'https://opengameart.org/content/51-ui-sound-effects-buttons-switches-and-clicks',
+    use: 'UI blip',
+  },
+  {
+    file: FILES.tick,
+    title: 'click3 (51 UI sound effects)',
+    author: 'Kenney (kenney.nl)',
+    license: 'CC0 1.0',
+    url: 'https://opengameart.org/content/51-ui-sound-effects-buttons-switches-and-clicks',
+    use: 'UI tick',
+  },
+  {
+    file: FILES.whoosh,
+    title: 'swish-9 (Swishes Sound Pack)',
+    author: 'artisticdude',
+    license: 'CC0 1.0',
+    url: 'https://opengameart.org/content/swishes-sound-pack',
+    use: 'fly-to whoosh',
+  },
+  {
+    file: FILES.boom,
+    title: 'lowDown (63 Digital sound effects), pitched down 1 octave + low-pass',
+    author: 'Kenney (kenney.nl)',
+    license: 'CC0 1.0',
+    url: 'https://opengameart.org/content/63-digital-sound-effects-lasers-phasers-space-etc',
+    use: 'reveal boom',
+  },
+  {
+    file: FILES.chatter,
+    title: 'tone1 (63 Digital sound effects)',
+    author: 'Kenney (kenney.nl)',
+    license: 'CC0 1.0',
+    url: 'https://opengameart.org/content/63-digital-sound-effects-lasers-phasers-space-etc',
+    use: 'data chatter',
+  },
 ];

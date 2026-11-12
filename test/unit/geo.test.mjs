@@ -49,7 +49,12 @@ test('timeline scale is monotonic and invertible', () => {
   assert.equal(G.posToDay(0), G.DAYMIN);
 });
 test('ll2v / v2ll round-trip', () => {
-  for (const [lat, lon] of [[0, 0], [51.5, -0.12], [-33.9, 151.2], [89, 179]]) {
+  for (const [lat, lon] of [
+    [0, 0],
+    [51.5, -0.12],
+    [-33.9, 151.2],
+    [89, 179],
+  ]) {
     const ll = G.v2ll(G.ll2v(lat, lon));
     assert.ok(Math.abs(ll.lat - lat) < 1e-9 && Math.abs(ll.lon - lon) < 1e-9);
   }

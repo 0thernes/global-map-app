@@ -19,7 +19,12 @@ export function buildCaseIndex(cases) {
     if (!c || !c.name) continue;
     const L = letterOf(c.name);
     if (!m.has(L)) m.set(L, []);
-    m.get(L).push({ id: c.id, name: c.name, date: c.date || '', area: c._area || c.country_display || c.country || '' });
+    m.get(L).push({
+      id: c.id,
+      name: c.name,
+      date: c.date || '',
+      area: c._area || c.country_display || c.country || '',
+    });
   }
   return [...m.entries()]
     .sort((a, b) => (a[0] === '#') - (b[0] === '#') || a[0].localeCompare(b[0]))
@@ -34,7 +39,13 @@ export function buildSiteIndex(layers) {
       layerName: l.name,
       items: l.items
         .filter((x) => x.name)
-        .map((x) => ({ name: x.name, lat: x.lat, lon: x.lon, country: x.country || x.country_display || '', url: x.source_url || x.url || '' }))
+        .map((x) => ({
+          name: x.name,
+          lat: x.lat,
+          lon: x.lon,
+          country: x.country || x.country_display || '',
+          url: x.source_url || x.url || '',
+        }))
         .sort(byName),
     }));
 }

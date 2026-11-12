@@ -35,13 +35,27 @@ export function caseSub(c) {
 
 /** Reference-layer sub-layer keys. */
 export const SUB_FIELD = {
-  military: (it) => (it.src === 'MIRTA' ? 'US DoD (MIRTA)' : /^fort/.test(it.kind || '') ? 'fort / historic fortification' : /^gendarmerie/.test(it.kind || '') ? 'gendarmerie / police barracks' : it.kind || 'other'),
+  military: (it) =>
+    it.src === 'MIRTA'
+      ? 'US DoD (MIRTA)'
+      : /^fort/.test(it.kind || '')
+        ? 'fort / historic fortification'
+        : /^gendarmerie/.test(it.kind || '')
+          ? 'gendarmerie / police barracks'
+          : it.kind || 'other',
   nuclear: (it) => (/operat/i.test(it.status || '') ? 'operating' : it.status || 'unknown status'),
   map_nuclear_tests: (it) => it.environment || 'unknown environment',
   map_nuclear_sites: (it) => nucKind(`${it.subtype || ''} ${it.name || ''}`),
   volcanoes: (it) => it.type || it.primary_type || 'volcano',
   hydrolakes: (it) => (it.vol_src === 3 ? 'depth modelled (unmapped depth)' : 'depth/volume reported'),
-  map_offlimits_mountains: (it) => ({ offlimits_mountain: 'off-limits mountain', nuclear_storage: 'nuclear-weapons storage', literal_name: "literal 'secret' place name" })[it.category] || it.category || 'other',
+  map_offlimits_mountains: (it) =>
+    ({
+      offlimits_mountain: 'off-limits mountain',
+      nuclear_storage: 'nuclear-weapons storage',
+      literal_name: "literal 'secret' place name",
+    })[it.category] ||
+    it.category ||
+    'other',
   trenches: (it) => (it.kind === 'deep' ? 'named deep' : 'trench'),
   fireballs: (it) => (+it.impact_energy_kt >= 1 ? 'impact energy ≥ 1 kt' : 'impact energy < 1 kt'),
 };

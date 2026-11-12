@@ -14,7 +14,7 @@ Thanks for helping. Global Map is evidence-first: a contribution is only as good
    boilerplate is added to summaries.
 5. **Disagreements stay visible.** If your source disagrees with an existing row, add your row; the build links them and
    shows both values.
-6. **Licences matter.** Only add data you may redistribute. If a dataset has no licence, open a *data source* issue first.
+6. **Licences matter.** Only add data you may redistribute. If a dataset has no licence, open a _data source_ issue first.
 
 Use the **Data source** issue template, or a pull request that edits a CSV in `data/sources/` using the common schema
 (see `data/build_data.py`, `COMMON`).
@@ -37,7 +37,7 @@ npm run check      # lint, format check, unit tests, data validation, build, hea
 
 - Small, focused commits with a clear message (`area: what and why`).
 - Fill in the pull-request template, including the sources checklist for data changes.
-- Add a line to `CHANGELOG.md` under *Unreleased*.
+- Add a line to `CHANGELOG.md` under _Unreleased_.
 
 ## Conduct
 

@@ -10,33 +10,33 @@ you asked for it. Press **Esc** to skip.
 
 Twenty steps: welcome, layers, timeline, search, dossiers, graph, analysis, reports, glossary, the state of the
 dataset, the five best-sourced precise cases (with an orbit), the top three hotspots, the findings, the water/USO
-caveat, what is happening now, and your turn. ←/→ or Space to move, Esc to stop. Settings (,) → *Replay tour*.
+caveat, what is happening now, and your turn. ←/→ or Space to move, Esc to stop. Settings (,) → _Replay tour_.
 
 ## Reading the globe
 
 - **Pins** are exact or within 1 km. **Circles** are uncertainty areas (locality 10 km, region 100 km, or the row's own
   radius). Nothing is jittered.
-- Colours follow the category legend in the Layers panel. Badges in dossiers show grade, precision, *conflict* (sources
-  disagree) and *[verify]* (citation flagged for checking).
+- Colours follow the category legend in the Layers panel. Badges in dossiers show grade, precision, _conflict_ (sources
+  disagree) and _[verify]_ (citation flagged for checking).
 - The night side, the terminator and the glow of active wars follow the timeline date.
 
 ## Layers (L)
 
 Groups › layers › sub-layers, each tri-state. ⓘ shows source, licence and legend. Highlights:
 
-| Layer | What it shows |
-|---|---|
-| Off-limits mountains | 13 off-limits, high-strangeness mountains (QWM PDF 7 G12.19 / G12.14.1.5), plus QWM's nuclear-storage table and literal "secret" place names as sub-layers. Click for source, grade, coordinate source and the computed distance to the nearest military site. |
-| Unmapped seafloor | ocean cells the GEBCO 2025 TID grid marks as not directly measured |
-| HydroLAKES | lakes ≥ 10 km² always, 1–10 km² when you zoom in; dark blue = depth modelled, not measured |
-| Oceanic trenches | Wikidata trench centre points and named deeps (with depth where stated) |
-| Fireballs | NASA JPL CNEOS fireballs and bolides, sized by impact energy |
-| USO / Satellite anomalies | water and satellite cases; off-world records are in Index › Off-world |
+| Layer                     | What it shows                                                                                                                                                                                                                                                  |
+| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Off-limits mountains      | 13 off-limits, high-strangeness mountains (QWM PDF 7 G12.19 / G12.14.1.5), plus QWM's nuclear-storage table and literal "secret" place names as sub-layers. Click for source, grade, coordinate source and the computed distance to the nearest military site. |
+| Unmapped seafloor         | ocean cells the GEBCO 2025 TID grid marks as not directly measured                                                                                                                                                                                             |
+| HydroLAKES                | lakes ≥ 10 km² always, 1–10 km² when you zoom in; dark blue = depth modelled, not measured                                                                                                                                                                     |
+| Oceanic trenches          | Wikidata trench centre points and named deeps (with depth where stated)                                                                                                                                                                                        |
+| Fireballs                 | NASA JPL CNEOS fireballs and bolides, sized by impact energy                                                                                                                                                                                                   |
+| USO / Satellite anomalies | water and satellite cases; off-world records are in Index › Off-world                                                                                                                                                                                          |
 
 ## Filters (F)
 
 Category and subtype tree, grade, era, precision, country or area, water (over water, ≤ 5/25/100 km from shore),
-*conflicting values only*, *citation needs verification*.
+_conflicting values only_, _citation needs verification_.
 
 ## Hotspots (Z)
 

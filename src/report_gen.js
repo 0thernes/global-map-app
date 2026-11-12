@@ -10,7 +10,10 @@ export const DISCLAIMER =
   'Styling only: this is not a government document and carries no real classification. Generated from the sourced rows in this app.';
 
 const escH = (s) =>
-  String(s ?? '').replace(/[&<>"']/g, (m) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[m]);
+  String(s ?? '').replace(
+    /[&<>"']/g,
+    (m) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[m],
+  );
 const count = (arr, fn) => {
   const m = new Map();
   for (const x of arr) {
@@ -108,12 +111,15 @@ function decadesSVG(decades, w = 640, h = 110) {
 /** equirectangular dot map (graticule only; no basemap needed, works offline and in print) */
 export function insetSVG(points, w = 360, h = 180) {
   const grat = [];
-  for (let lon = -180; lon <= 180; lon += 30) grat.push(`<line x1="${((lon + 180) / 360) * w}" y1="0" x2="${((lon + 180) / 360) * w}" y2="${h}"/>`);
-  for (let lat = -60; lat <= 60; lat += 30) grat.push(`<line x1="0" y1="${((90 - lat) / 180) * h}" x2="${w}" y2="${((90 - lat) / 180) * h}"/>`);
+  for (let lon = -180; lon <= 180; lon += 30)
+    grat.push(`<line x1="${((lon + 180) / 360) * w}" y1="0" x2="${((lon + 180) / 360) * w}" y2="${h}"/>`);
+  for (let lat = -60; lat <= 60; lat += 30)
+    grat.push(`<line x1="0" y1="${((90 - lat) / 180) * h}" x2="${w}" y2="${((90 - lat) / 180) * h}"/>`);
   const col = Object.fromEntries(GRADES.map((g) => [g.k, g.color]));
   const P = points.length > 6000 ? points.filter((_, i) => i % Math.ceil(points.length / 6000) === 0) : points;
   const dots = P.map(
-    ([la, lo, g]) => `<circle cx="${(((lo + 180) / 360) * w).toFixed(1)}" cy="${(((90 - la) / 180) * h).toFixed(1)}" r="1.3" fill="${col[g] || '#9db1c2'}"/>`,
+    ([la, lo, g]) =>
+      `<circle cx="${(((lo + 180) / 360) * w).toFixed(1)}" cy="${(((90 - la) / 180) * h).toFixed(1)}" r="1.3" fill="${col[g] || '#9db1c2'}"/>`,
   ).join('');
   return `<svg class="rp-inset" viewBox="0 0 ${w} ${h}" role="img" aria-label="Case locations (equirectangular)"><rect width="${w}" height="${h}" class="rp-sea"/><g class="rp-grat">${grat.join('')}</g>${dots}</svg>`;
 }
@@ -123,7 +129,10 @@ export function reportHTML(r, opt = {}) {
   const pct = (v) => (r.n ? ((100 * v) / r.n).toFixed(1) + '%' : '');
   const top = r.top
     .map(
-      (c, i) => `<tr><td class="rp-n">${i + 1}</td><td><a href="#" data-case="${escH(c.id)}">${escH(c.name)}</a><div class="rp-sub">${escH(c.summary || '')}</div></td>
+      (
+        c,
+        i,
+      ) => `<tr><td class="rp-n">${i + 1}</td><td><a href="#" data-case="${escH(c.id)}">${escH(c.name)}</a><div class="rp-sub">${escH(c.summary || '')}</div></td>
       <td>${escH(c.date || '')}</td><td>${escH(c._area || c.country_display || c.country || '')}</td><td><span class="rp-grade" data-g="${escH(gc(c))}">${escH(c.grade || gc(c))}</span></td>
       <td>${escH(c.coord_precision || '')}</td><td><a href="${escH(c.source_url)}" target="_blank" rel="noopener">${escH(domainOf(c.source_url))}</a></td></tr>`,
     )
@@ -137,7 +146,10 @@ export function reportHTML(r, opt = {}) {
 ${r.grades.map(([k, v, c]) => `<li><b style="color:${c}">${fmtN(v)}</b><span>${escH(k)} · ${pct(v)}</span></li>`).join('')}</ul>
 <p>${fmtN(r.n)} cases across ${fmtN(r.countries.length)} countries/areas and ${fmtN(r.categories.length)} categories, from ${fmtN(r.sources.length)} source domains. ${r.precision.find((p) => p[0] === 'exact_site' || p[0] === 'within_1km') ? `${fmtN(r.precision.filter((p) => p[0] === 'exact_site' || p[0] === 'within_1km').reduce((a, p) => a + p[1], 0))} have a site-level location (exact or within 1 km).` : ''}</p></section>
 <section class="rp-sec rp-cols"><div><h2>2. Map inset</h2>${opt.snapshot ? `<img class="rp-snap" src="${opt.snapshot}" alt="Globe view at report time">` : ''}${insetSVG(r.points)}<p class="rp-cap">Dots coloured by grade. Imprecise locations are shown at their recorded point; see coord_precision.</p></div>
-<div><h2>3. Grade breakdown</h2>${barsSVG(r.grades.filter((g) => g[1]), '#38e8ff')}<h2>4. Categories</h2>${barsSVG(r.categories, '#7c9cff', 320, 8)}</div></section>
+<div><h2>3. Grade breakdown</h2>${barsSVG(
+    r.grades.filter((g) => g[1]),
+    '#38e8ff',
+  )}<h2>4. Categories</h2>${barsSVG(r.categories, '#7c9cff', 320, 8)}</div></section>
 <section class="rp-sec"><h2>5. Timeline (cases per decade)</h2>${decadesSVG(r.decades)}</section>
 <section class="rp-sec rp-cols"><div><h2>6. Countries / areas</h2>${barsSVG(r.countries, '#7c9cff', 320, 10)}</div><div><h2>7. Location precision</h2>${barsSVG(r.precision, '#6dff8e', 320, 6)}</div></section>
 <section class="rp-sec"><h2>8. Top cases</h2><p class="rp-cap">Ranked by grade, then location precision, then oldest first. Text is copied from each record.</p>
@@ -145,8 +157,13 @@ ${r.grades.map(([k, v, c]) => `<li><b style="color:${c}">${fmtN(v)}</b><span>${e
 <section class="rp-sec"><h2>9. Sources cited</h2><p class="rp-cap">Domains of each case's source_url, with record counts${r.datasets.length ? '; datasets as named in the rows' : ''}.</p>
 <ol class="rp-src">${r.sources
     .slice(0, 40)
-    .map(([d, v]) => `<li><a href="https://${escH(d)}" target="_blank" rel="noopener">${escH(d)}</a> <span>${fmtN(v)}</span></li>`)
-    .join('')}</ol>${r.sources.length > 40 ? `<p class="rp-cap">…and ${fmtN(r.sources.length - 40)} more domains.</p>` : ''}
+    .map(
+      ([d, v]) =>
+        `<li><a href="https://${escH(d)}" target="_blank" rel="noopener">${escH(d)}</a> <span>${fmtN(v)}</span></li>`,
+    )
+    .join(
+      '',
+    )}</ol>${r.sources.length > 40 ? `<p class="rp-cap">…and ${fmtN(r.sources.length - 40)} more domains.</p>` : ''}
 ${r.datasets.length ? `<ul class="rp-src">${r.datasets.map(([d, v]) => `<li>${escH(d)} <span>${fmtN(v)}</span></li>`).join('')}</ul>` : ''}</section>
 <footer class="rp-foot">${DISCLAIMER}</footer>
 <div class="rp-bar">${HEADER_TAG}</div></article>`;

@@ -4,30 +4,112 @@
    Scale 12/14/16/20/28 px; 8 px spacing grid; dark theme with WCAG AA text contrast:
    --fg #E6F1F7 on --bg-1 #0B1220 = 15.6:1; --fg-muted #9DB1C2 on #0B1220 = 8.3:1; --accent #38E8FF on #0B1220 = 11.9:1;
    --warn #FFC857 = 11.6:1; --danger #FF6B6B = 6.4:1 (all >= 4.5:1 for normal text). */
-@font-face{font-family:Inter;src:url(../vendor/fonts/inter-latin-400-normal.woff2) format('woff2');font-weight:400;font-display:swap}
-@font-face{font-family:Inter;src:url(../vendor/fonts/inter-latin-500-normal.woff2) format('woff2');font-weight:500;font-display:swap}
-@font-face{font-family:Inter;src:url(../vendor/fonts/inter-latin-600-normal.woff2) format('woff2');font-weight:600;font-display:swap}
-@font-face{font-family:Inter;src:url(../vendor/fonts/inter-latin-700-normal.woff2) format('woff2');font-weight:700;font-display:swap}
-@font-face{font-family:Rajdhani;src:url(../vendor/fonts/rajdhani-latin-500-normal.woff2) format('woff2');font-weight:500;font-display:swap}
-@font-face{font-family:Rajdhani;src:url(../vendor/fonts/rajdhani-latin-600-normal.woff2) format('woff2');font-weight:600;font-display:swap}
-@font-face{font-family:Rajdhani;src:url(../vendor/fonts/rajdhani-latin-700-normal.woff2) format('woff2');font-weight:700;font-display:swap}
-@font-face{font-family:'IBM Plex Mono';src:url(../vendor/fonts/ibm-plex-mono-latin-400-normal.woff2) format('woff2');font-weight:400;font-display:swap}
-@font-face{font-family:'IBM Plex Mono';src:url(../vendor/fonts/ibm-plex-mono-latin-500-normal.woff2) format('woff2');font-weight:500;font-display:swap}
-:root{
+@font-face {
+  font-family: Inter;
+  src: url(../vendor/fonts/inter-latin-400-normal.woff2) format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: Inter;
+  src: url(../vendor/fonts/inter-latin-500-normal.woff2) format('woff2');
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: Inter;
+  src: url(../vendor/fonts/inter-latin-600-normal.woff2) format('woff2');
+  font-weight: 600;
+  font-display: swap;
+}
+@font-face {
+  font-family: Inter;
+  src: url(../vendor/fonts/inter-latin-700-normal.woff2) format('woff2');
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: Rajdhani;
+  src: url(../vendor/fonts/rajdhani-latin-500-normal.woff2) format('woff2');
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: Rajdhani;
+  src: url(../vendor/fonts/rajdhani-latin-600-normal.woff2) format('woff2');
+  font-weight: 600;
+  font-display: swap;
+}
+@font-face {
+  font-family: Rajdhani;
+  src: url(../vendor/fonts/rajdhani-latin-700-normal.woff2) format('woff2');
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'IBM Plex Mono';
+  src: url(../vendor/fonts/ibm-plex-mono-latin-400-normal.woff2) format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'IBM Plex Mono';
+  src: url(../vendor/fonts/ibm-plex-mono-latin-500-normal.woff2) format('woff2');
+  font-weight: 500;
+  font-display: swap;
+}
+:root {
   --font-ui: Inter, system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-display: Rajdhani, Inter, system-ui, sans-serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
-  --fs-12: 12px; --fs-14: 14px; --fs-16: 16px; --fs-20: 20px; --fs-28: 28px;
-  --lh-tight: 1.2; --lh: 1.45;
-  --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 24px; --sp-6: 32px; --sp-8: 48px;
-  --radius-1: 4px; --radius-2: 8px;
-  --bg-0: #03060C; --bg-1: #0B1220; --bg-2: #101A2B; --bg-3: #16243A; --glass: rgba(9,16,28,0.86);
-  --line: rgba(120,190,230,0.18); --line-strong: rgba(120,190,230,0.38);
-  --fg: #E6F1F7; --fg-muted: #9DB1C2; --fg-dim: #7A90A3;
-  --accent: #38E8FF; --accent-2: #7C9CFF; --ok: #6DFF8E; --warn: #FFC857; --danger: #FF6B6B; --conflict: #FF5A2B;
-  --shadow: 0 8px 32px rgba(0,0,0,0.55);
-  --rail-w: 320px; --dossier-w: 420px; --timeline-h: 112px; --topbar-h: 56px;
-  --dur-1: 120ms; --dur-2: 240ms; --dur-3: 480ms; --dur-4: 900ms; --ease-out: cubic-bezier(.16,1,.3,1); --ease-inout: cubic-bezier(.65,0,.35,1);
-  --tier-a: #38E8FF; --tier-b: #6DFF8E; --tier-c: #FFD23F; --tier-d: #FF9A3C; --tier-e: #FF6B6B; --tier-f: #7A90A3;
-  --focus: 0 0 0 2px #03060C, 0 0 0 4px var(--accent);
+  --fs-12: 12px;
+  --fs-14: 14px;
+  --fs-16: 16px;
+  --fs-20: 20px;
+  --fs-28: 28px;
+  --lh-tight: 1.2;
+  --lh: 1.45;
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-8: 48px;
+  --radius-1: 4px;
+  --radius-2: 8px;
+  --bg-0: #03060c;
+  --bg-1: #0b1220;
+  --bg-2: #101a2b;
+  --bg-3: #16243a;
+  --glass: rgba(9, 16, 28, 0.86);
+  --line: rgba(120, 190, 230, 0.18);
+  --line-strong: rgba(120, 190, 230, 0.38);
+  --fg: #e6f1f7;
+  --fg-muted: #9db1c2;
+  --fg-dim: #7a90a3;
+  --accent: #38e8ff;
+  --accent-2: #7c9cff;
+  --ok: #6dff8e;
+  --warn: #ffc857;
+  --danger: #ff6b6b;
+  --conflict: #ff5a2b;
+  --shadow: 0 8px 32px rgba(0, 0, 0, 0.55);
+  --rail-w: 320px;
+  --dossier-w: 420px;
+  --timeline-h: 112px;
+  --topbar-h: 56px;
+  --dur-1: 120ms;
+  --dur-2: 240ms;
+  --dur-3: 480ms;
+  --dur-4: 900ms;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-inout: cubic-bezier(0.65, 0, 0.35, 1);
+  --tier-a: #38e8ff;
+  --tier-b: #6dff8e;
+  --tier-c: #ffd23f;
+  --tier-d: #ff9a3c;
+  --tier-e: #ff6b6b;
+  --tier-f: #7a90a3;
+  --focus: 0 0 0 2px #03060c, 0 0 0 4px var(--accent);
 }

@@ -8,7 +8,20 @@
 import { gradeClass } from './grades.js';
 
 export const ISO_TOTAL = 249;
-export const CORE_FIELDS = ['name', 'date', 'lat', 'lon', 'coord_precision', 'coord_source', 'country', 'category', 'subtype', 'summary', 'source_url', 'grade'];
+export const CORE_FIELDS = [
+  'name',
+  'date',
+  'lat',
+  'lon',
+  'coord_precision',
+  'coord_source',
+  'country',
+  'category',
+  'subtype',
+  'summary',
+  'source_url',
+  'grade',
+];
 const GW = { CIT: 1, 'Official record': 0.8, ST: 0.6, Testimony: 0.3, 'Online claim': 0.1, Other: 0.2 };
 const dom = (u) => {
   const m = /^https?:\/\/(?:www\.)?([^/:?#]+)/i.exec(String(u || ''));
@@ -82,8 +95,14 @@ export function measure(rows, opt = {}) {
     live: urls ? live / urls : null,
   };
   // single 0..1 indices so nodes can be compared and labelled
-  const B = 0.45 * breadth.countryShare + 0.25 * Math.min(1, breadth.decades / 30) + 0.3 * Math.min(1, breadth.sources / 20);
-  const D = 0.3 * depth.completeness + 0.25 * depth.precise + 0.25 * depth.gradeStrength + 0.1 * Math.min(1, (depth.corroboration - 1) * 2) + 0.1 * depth.witnesses;
+  const B =
+    0.45 * breadth.countryShare + 0.25 * Math.min(1, breadth.decades / 30) + 0.3 * Math.min(1, breadth.sources / 20);
+  const D =
+    0.3 * depth.completeness +
+    0.25 * depth.precise +
+    0.25 * depth.gradeStrength +
+    0.1 * Math.min(1, (depth.corroboration - 1) * 2) +
+    0.1 * depth.witnesses;
   return { breadth, depth, B, D, profile: profileOf(B, D, n) };
 }
 export function profileOf(B, D, n) {
@@ -117,7 +136,13 @@ export function coverageTree(groups, opt = {}) {
           if (!bySt.has(s)) bySt.set(s, []);
           bySt.get(s).push(r);
         }
-        const kids = bySt.size > 1 ? [...bySt.entries()].sort((a, b) => b[1].length - a[1].length).slice(0, 25).map(([s, x]) => ({ name: s, level: 'subtype', ...measure(x, opt) })) : [];
+        const kids =
+          bySt.size > 1
+            ? [...bySt.entries()]
+                .sort((a, b) => b[1].length - a[1].length)
+                .slice(0, 25)
+                .map(([s, x]) => ({ name: s, level: 'subtype', ...measure(x, opt) }))
+            : [];
         return { name: k, level: 'sub-layer', ...measure(rs, opt), children: kids };
       });
     tree.push({ name: g.layer, domain: g.domain, level: 'layer', ...measure(g.rows, opt), children });

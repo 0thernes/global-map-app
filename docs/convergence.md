@@ -1,8 +1,8 @@
 # Convergence hotspots
 
 Press **Z** (or the hotspot button in the top bar). The app divides the globe into cells and asks, for each cell:
-*how many different kinds of strange, military, nuclear, conflict, water and sky records meet here, how strong are
-they, and is that more than the local population would explain?* Implementation: `src/convergence.js` (pure,
+_how many different kinds of strange, military, nuclear, conflict, water and sky records meet here, how strong are
+they, and is that more than the local population would explain?_ Implementation: `src/convergence.js` (pure,
 unit-tested) and `src/ui_hotspots.js` (panel, globe overlay, dossier).
 
 ## Inputs
@@ -28,7 +28,7 @@ score              S   = R / F
 G: CIT 1, Official record 0.8, ST 0.6, Testimony 0.3, Online claim 0.1, other 0.2.
 P: exact_site and within_1km 1, locality 0.7, region 0.3, unspecified 0.2.
 
-Clusters are connected cells with D ≥ *min layers* and S above the chosen percentile. Controls: cell size (50–400 km),
+Clusters are connected cells with D ≥ _min layers_ and S above the chosen percentile. Controls: cell size (50–400 km),
 minimum layers, top %, and a time window (only records inside the timeline window count).
 
 ## Evidence grade of a cluster
@@ -48,7 +48,7 @@ country or ocean.
 
 ## Reading it honestly
 
-A hotspot says *several kinds of record share a place*. It does not say one causes another. Military bases, nuclear
+A hotspot says _several kinds of record share a place_. It does not say one causes another. Military bases, nuclear
 sites and UAP reports all cluster where people, airspace and reporting exist; the population factor reduces but does not
 remove that. The cluster dossier shows the score breakdown, co-occurrence within ±1 year, every source, and this note.
 For a statistical test against baselines, use **Analyze (A)**.

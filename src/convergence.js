@@ -38,7 +38,7 @@ export function makeGrid(cellKm = 100) {
   const cellOf = (lat, lon) => {
     const r = Math.min(rows - 1, Math.max(0, Math.floor((lat + 90) / dLat)));
     const n = ncol[r];
-    const c = Math.min(n - 1, Math.max(0, Math.floor((((lon + 180) % 360) + 360) % 360 / (360 / n))));
+    const c = Math.min(n - 1, Math.max(0, Math.floor(((((lon + 180) % 360) + 360) % 360) / (360 / n))));
     return r * 100000 + c;
   };
   const center = (id) => {
@@ -60,7 +60,7 @@ export function makeGrid(cellKm = 100) {
         w = 360 / m;
       const a = Math.floor((lon0 + 180) / w),
         b = Math.floor((lon1 + 180 - 1e-9) / w);
-      for (let k = a - 1; k <= b + 1; k++) out.push(rr * 100000 + ((k % m) + m) % m);
+      for (let k = a - 1; k <= b + 1; k++) out.push(rr * 100000 + (((k % m) + m) % m));
     }
     return out;
   };
@@ -92,7 +92,10 @@ export function computeHotspots(records, pop = [], opt = {}) {
     if (!isFinite(r.lat) || !isFinite(r.lon)) continue;
     if (win && r.day != null && isFinite(r.day) && (r.day < win[0] || r.day > win[1])) continue;
     const c = cell(grid.cellOf(r.lat, r.lon));
-    const w = r.zero ? 0 : (r.isCase ? (GRADE_W[r.grade] ?? GRADE_W.Other) : REF_W) * (PREC_W[r.prec] ?? (r.isCase ? PREC_W.unspecified : 1));
+    const w = r.zero
+      ? 0
+      : (r.isCase ? (GRADE_W[r.grade] ?? GRADE_W.Other) : REF_W) *
+        (PREC_W[r.prec] ?? (r.isCase ? PREC_W.unspecified : 1));
     if (w > 0) c.groups[r.group] = (c.groups[r.group] || 0) + w; // zero-weight rows are listed but never add a layer
     c.recs.push(r);
   }
@@ -113,7 +116,9 @@ export function computeHotspots(records, pop = [], opt = {}) {
     list.push(c);
   }
   const sorted = list.map((c) => c.S).sort((a, b) => a - b);
-  const thr = sorted.length ? sorted[Math.min(sorted.length - 1, Math.floor((opt.pct ?? 0.9) * sorted.length))] : Infinity;
+  const thr = sorted.length
+    ? sorted[Math.min(sorted.length - 1, Math.floor((opt.pct ?? 0.9) * sorted.length))]
+    : Infinity;
   const hot = new Set(list.filter((c) => c.D >= minLayers && c.S >= thr).map((c) => c.id));
   const seen = new Set();
   const clusters = [];
@@ -142,8 +147,12 @@ export function summarize(mem) {
   const groups = {};
   for (const c of mem) for (const [k, v] of Object.entries(c.contrib)) groups[k] = (groups[k] || 0) + v;
   const cases = recs.filter((r) => r.isCase);
-  const strong = cases.length ? cases.filter((r) => r.grade === 'CIT' || r.grade === 'Official record').length / cases.length : 0;
-  const precise = cases.length ? cases.filter((r) => r.prec === 'exact_site' || r.prec === 'within_1km').length / cases.length : 0;
+  const strong = cases.length
+    ? cases.filter((r) => r.grade === 'CIT' || r.grade === 'Official record').length / cases.length
+    : 0;
+  const precise = cases.length
+    ? cases.filter((r) => r.prec === 'exact_site' || r.prec === 'within_1km').length / cases.length
+    : 0;
   const sources = new Set(recs.map((r) => r.src && (domainOf(r.src) || r.src)).filter(Boolean)).size;
   const E = 0.5 * strong + 0.3 * precise + 0.2 * Math.min(1, sources / 5);
   const t = tierOf(E);

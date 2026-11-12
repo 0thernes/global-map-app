@@ -1,328 +1,274 @@
 [
- {
-  "file": "analysis.json",
-  "n": 24,
-  "refs": {
-   "military": {
-    "pairs": 24,
-    "max_abs_diff_km": 0.0,
-    "within_0.5km": 24,
-    "only_py": 0,
-    "only_js": 0,
-    "median_py": 3.88,
-    "median_js": 3.88,
-    "w50_py": [
-     0.6415,
-     0.9332
-    ],
-    "w50_js": [
-     0.6415,
-     0.9332
-    ],
-    "ci_js": [
-     1.271116225522183,
-     23.46228745012145
-    ],
-    "mc": {
-     "uniform": {
-      "p_py": 0.0002,
-      "p_js": 0.001,
-      "mc_se": 0.0002,
-      "se_js": 0.001,
-      "agree": true,
-      "baseline_med_py": 198.0,
-      "baseline_med_js": 193.6,
-      "ratio_py": 0.02,
-      "ratio_js": 0.02
-     },
-     "pop": {
-      "p_py": 0.0176,
-      "p_js": 0.021,
-      "mc_se": 0.0019,
-      "se_js": 0.0045,
-      "agree": true,
-      "baseline_med_py": 13.3,
-      "baseline_med_js": 12.2,
-      "ratio_py": 0.291,
-      "ratio_js": 0.317
-     }
+  {
+    "file": "analysis.json",
+    "n": 24,
+    "refs": {
+      "military": {
+        "pairs": 24,
+        "max_abs_diff_km": 0.0,
+        "within_0.5km": 24,
+        "only_py": 0,
+        "only_js": 0,
+        "median_py": 3.88,
+        "median_js": 3.88,
+        "w50_py": [0.6415, 0.9332],
+        "w50_js": [0.6415, 0.9332],
+        "ci_js": [1.271116225522183, 23.46228745012145],
+        "mc": {
+          "uniform": {
+            "p_py": 0.0002,
+            "p_js": 0.001,
+            "mc_se": 0.0002,
+            "se_js": 0.001,
+            "agree": true,
+            "baseline_med_py": 198.0,
+            "baseline_med_js": 193.6,
+            "ratio_py": 0.02,
+            "ratio_js": 0.02
+          },
+          "pop": {
+            "p_py": 0.0176,
+            "p_js": 0.021,
+            "mc_se": 0.0019,
+            "se_js": 0.0045,
+            "agree": true,
+            "baseline_med_py": 13.3,
+            "baseline_med_js": 12.2,
+            "ratio_py": 0.291,
+            "ratio_js": 0.317
+          }
+        }
+      },
+      "nuclear": {
+        "pairs": 24,
+        "max_abs_diff_km": 0.2913,
+        "within_0.5km": 24,
+        "only_py": 0,
+        "only_js": 0,
+        "median_py": 92.62,
+        "median_js": 92.62,
+        "w50_py": [0.2116, 0.5729],
+        "w50_js": [0.2116, 0.5729],
+        "ci_js": [28.017023052426445, 154.25873112583403],
+        "mc": {
+          "uniform": {
+            "p_py": 0.0002,
+            "p_js": 0.001,
+            "mc_se": 0.0002,
+            "se_js": 0.001,
+            "agree": true,
+            "baseline_med_py": 750.9,
+            "baseline_med_js": 740.3,
+            "ratio_py": 0.123,
+            "ratio_js": 0.125
+          },
+          "pop": {
+            "p_py": 0.0128,
+            "p_js": 0.022,
+            "mc_se": 0.0016,
+            "se_js": 0.0046,
+            "agree": true,
+            "baseline_med_py": 169.5,
+            "baseline_med_js": 168.9,
+            "ratio_py": 0.546,
+            "ratio_js": 0.548
+          },
+          "time": {
+            "p_py": 0.5316,
+            "p_js": 0.522,
+            "mc_se": 0.0071,
+            "se_js": 0.0158,
+            "agree": true,
+            "baseline_med_py": 92.6,
+            "baseline_med_js": 92.6,
+            "ratio_py": 1.0,
+            "ratio_js": 1
+          }
+        }
+      },
+      "conflict": {
+        "pairs": 9,
+        "max_abs_diff_km": 0.0,
+        "within_0.5km": 9,
+        "only_py": 0,
+        "only_js": 0,
+        "median_py": 1371.8,
+        "median_js": 1371.8,
+        "w50_py": [0.0, 0.2992],
+        "w50_js": [0, 0.2992],
+        "ci_js": [432.76777754970703, 1863.4226469081057],
+        "mc": {
+          "uniform": {
+            "p_py": 0.8176,
+            "p_js": 0.809,
+            "mc_se": 0.0055,
+            "se_js": 0.0124,
+            "agree": true,
+            "baseline_med_py": 753.5,
+            "baseline_med_js": 758.5,
+            "ratio_py": 1.821,
+            "ratio_js": 1.809
+          },
+          "pop": {
+            "p_py": 0.9254,
+            "p_js": 0.938,
+            "mc_se": 0.0037,
+            "se_js": 0.0076,
+            "agree": true,
+            "baseline_med_py": 540.1,
+            "baseline_med_js": 548.6,
+            "ratio_py": 2.54,
+            "ratio_js": 2.501
+          },
+          "time": {
+            "p_py": 0.8462,
+            "p_js": 0.846,
+            "mc_se": 0.0051,
+            "se_js": 0.0114,
+            "agree": true,
+            "baseline_med_py": 970.7,
+            "baseline_med_js": 970.7,
+            "ratio_py": 1.413,
+            "ratio_js": 1.413
+          }
+        }
+      }
     }
-   },
-   "nuclear": {
-    "pairs": 24,
-    "max_abs_diff_km": 0.2913,
-    "within_0.5km": 24,
-    "only_py": 0,
-    "only_js": 0,
-    "median_py": 92.62,
-    "median_js": 92.62,
-    "w50_py": [
-     0.2116,
-     0.5729
-    ],
-    "w50_js": [
-     0.2116,
-     0.5729
-    ],
-    "ci_js": [
-     28.017023052426445,
-     154.25873112583403
-    ],
-    "mc": {
-     "uniform": {
-      "p_py": 0.0002,
-      "p_js": 0.001,
-      "mc_se": 0.0002,
-      "se_js": 0.001,
-      "agree": true,
-      "baseline_med_py": 750.9,
-      "baseline_med_js": 740.3,
-      "ratio_py": 0.123,
-      "ratio_js": 0.125
-     },
-     "pop": {
-      "p_py": 0.0128,
-      "p_js": 0.022,
-      "mc_se": 0.0016,
-      "se_js": 0.0046,
-      "agree": true,
-      "baseline_med_py": 169.5,
-      "baseline_med_js": 168.9,
-      "ratio_py": 0.546,
-      "ratio_js": 0.548
-     },
-     "time": {
-      "p_py": 0.5316,
-      "p_js": 0.522,
-      "mc_se": 0.0071,
-      "se_js": 0.0158,
-      "agree": true,
-      "baseline_med_py": 92.6,
-      "baseline_med_js": 92.6,
-      "ratio_py": 1.0,
-      "ratio_js": 1
-     }
+  },
+  {
+    "file": "analysis_all.json",
+    "n": 2556,
+    "refs": {
+      "military": {
+        "pairs": 2556,
+        "max_abs_diff_km": 0.0,
+        "within_0.5km": 2556,
+        "only_py": 0,
+        "only_js": 0,
+        "median_py": 2.59,
+        "median_js": 2.59,
+        "w50_py": [0.9828, 0.9914],
+        "w50_js": [0.9828, 0.9914],
+        "ci_js": [2.416744136020487, 2.7099805137174715],
+        "mc": {
+          "uniform": {
+            "p_py": 0.0002,
+            "p_js": 0.01,
+            "mc_se": 0.0002,
+            "se_js": 0.01,
+            "agree": true,
+            "baseline_med_py": 195.8,
+            "baseline_med_js": 196.2,
+            "ratio_py": 0.013,
+            "ratio_js": 0.013
+          },
+          "pop": {
+            "p_py": 0.0002,
+            "p_js": 0.01,
+            "mc_se": 0.0002,
+            "se_js": 0.01,
+            "agree": true,
+            "baseline_med_py": 12.1,
+            "baseline_med_js": 12.0,
+            "ratio_py": 0.214,
+            "ratio_js": 0.216
+          }
+        }
+      },
+      "nuclear": {
+        "pairs": 2556,
+        "max_abs_diff_km": 0.7771,
+        "within_0.5km": 2540,
+        "only_py": 0,
+        "only_js": 0,
+        "median_py": 59.52,
+        "median_js": 59.52,
+        "w50_py": [0.3946, 0.4327],
+        "w50_js": [0.3946, 0.4327],
+        "ci_js": [56.82421589741622, 61.598511856146786],
+        "mc": {
+          "uniform": {
+            "p_py": 0.0002,
+            "p_js": 0.01,
+            "mc_se": 0.0002,
+            "se_js": 0.01,
+            "agree": true,
+            "baseline_med_py": 753.5,
+            "baseline_med_js": 752.7,
+            "ratio_py": 0.079,
+            "ratio_js": 0.079
+          },
+          "pop": {
+            "p_py": 0.0002,
+            "p_js": 0.01,
+            "mc_se": 0.0002,
+            "se_js": 0.01,
+            "agree": true,
+            "baseline_med_py": 166.5,
+            "baseline_med_js": 167.5,
+            "ratio_py": 0.358,
+            "ratio_js": 0.355
+          },
+          "time": {
+            "p_py": 0.5044,
+            "p_js": 0.55,
+            "mc_se": 0.0071,
+            "se_js": 0.05,
+            "agree": true,
+            "baseline_med_py": 59.5,
+            "baseline_med_js": 59.3,
+            "ratio_py": 1.0,
+            "ratio_js": 1.004
+          }
+        }
+      },
+      "conflict": {
+        "pairs": 1844,
+        "max_abs_diff_km": 0.0,
+        "within_0.5km": 1844,
+        "only_py": 0,
+        "only_js": 0,
+        "median_py": 551.11,
+        "median_js": 551.11,
+        "w50_py": [0.0399, 0.0596],
+        "w50_js": [0.0399, 0.0596],
+        "ci_js": [520.0164387017339, 579.3655979776398],
+        "mc": {
+          "uniform": {
+            "p_py": 0.0002,
+            "p_js": 0.01,
+            "mc_se": 0.0002,
+            "se_js": 0.01,
+            "agree": true,
+            "baseline_med_py": 910.5,
+            "baseline_med_js": 896.5,
+            "ratio_py": 0.605,
+            "ratio_js": 0.615
+          },
+          "pop": {
+            "p_py": 0.541,
+            "p_js": 0.48,
+            "mc_se": 0.007,
+            "se_js": 0.0502,
+            "agree": true,
+            "baseline_med_py": 548.7,
+            "baseline_med_js": 556.0,
+            "ratio_py": 1.004,
+            "ratio_js": 0.991
+          },
+          "time": {
+            "p_py": 0.2976,
+            "p_js": 0.51,
+            "mc_se": 0.0065,
+            "se_js": 0.0502,
+            "agree": true,
+            "baseline_med_py": 556.7,
+            "baseline_med_js": 550.3,
+            "ratio_py": 0.99,
+            "ratio_js": 1.001
+          }
+        }
+      }
     }
-   },
-   "conflict": {
-    "pairs": 9,
-    "max_abs_diff_km": 0.0,
-    "within_0.5km": 9,
-    "only_py": 0,
-    "only_js": 0,
-    "median_py": 1371.8,
-    "median_js": 1371.8,
-    "w50_py": [
-     0.0,
-     0.2992
-    ],
-    "w50_js": [
-     0,
-     0.2992
-    ],
-    "ci_js": [
-     432.76777754970703,
-     1863.4226469081057
-    ],
-    "mc": {
-     "uniform": {
-      "p_py": 0.8176,
-      "p_js": 0.809,
-      "mc_se": 0.0055,
-      "se_js": 0.0124,
-      "agree": true,
-      "baseline_med_py": 753.5,
-      "baseline_med_js": 758.5,
-      "ratio_py": 1.821,
-      "ratio_js": 1.809
-     },
-     "pop": {
-      "p_py": 0.9254,
-      "p_js": 0.938,
-      "mc_se": 0.0037,
-      "se_js": 0.0076,
-      "agree": true,
-      "baseline_med_py": 540.1,
-      "baseline_med_js": 548.6,
-      "ratio_py": 2.54,
-      "ratio_js": 2.501
-     },
-     "time": {
-      "p_py": 0.8462,
-      "p_js": 0.846,
-      "mc_se": 0.0051,
-      "se_js": 0.0114,
-      "agree": true,
-      "baseline_med_py": 970.7,
-      "baseline_med_js": 970.7,
-      "ratio_py": 1.413,
-      "ratio_js": 1.413
-     }
-    }
-   }
   }
- },
- {
-  "file": "analysis_all.json",
-  "n": 2556,
-  "refs": {
-   "military": {
-    "pairs": 2556,
-    "max_abs_diff_km": 0.0,
-    "within_0.5km": 2556,
-    "only_py": 0,
-    "only_js": 0,
-    "median_py": 2.59,
-    "median_js": 2.59,
-    "w50_py": [
-     0.9828,
-     0.9914
-    ],
-    "w50_js": [
-     0.9828,
-     0.9914
-    ],
-    "ci_js": [
-     2.416744136020487,
-     2.7099805137174715
-    ],
-    "mc": {
-     "uniform": {
-      "p_py": 0.0002,
-      "p_js": 0.01,
-      "mc_se": 0.0002,
-      "se_js": 0.01,
-      "agree": true,
-      "baseline_med_py": 195.8,
-      "baseline_med_js": 196.2,
-      "ratio_py": 0.013,
-      "ratio_js": 0.013
-     },
-     "pop": {
-      "p_py": 0.0002,
-      "p_js": 0.01,
-      "mc_se": 0.0002,
-      "se_js": 0.01,
-      "agree": true,
-      "baseline_med_py": 12.1,
-      "baseline_med_js": 12.0,
-      "ratio_py": 0.214,
-      "ratio_js": 0.216
-     }
-    }
-   },
-   "nuclear": {
-    "pairs": 2556,
-    "max_abs_diff_km": 0.7771,
-    "within_0.5km": 2540,
-    "only_py": 0,
-    "only_js": 0,
-    "median_py": 59.52,
-    "median_js": 59.52,
-    "w50_py": [
-     0.3946,
-     0.4327
-    ],
-    "w50_js": [
-     0.3946,
-     0.4327
-    ],
-    "ci_js": [
-     56.82421589741622,
-     61.598511856146786
-    ],
-    "mc": {
-     "uniform": {
-      "p_py": 0.0002,
-      "p_js": 0.01,
-      "mc_se": 0.0002,
-      "se_js": 0.01,
-      "agree": true,
-      "baseline_med_py": 753.5,
-      "baseline_med_js": 752.7,
-      "ratio_py": 0.079,
-      "ratio_js": 0.079
-     },
-     "pop": {
-      "p_py": 0.0002,
-      "p_js": 0.01,
-      "mc_se": 0.0002,
-      "se_js": 0.01,
-      "agree": true,
-      "baseline_med_py": 166.5,
-      "baseline_med_js": 167.5,
-      "ratio_py": 0.358,
-      "ratio_js": 0.355
-     },
-     "time": {
-      "p_py": 0.5044,
-      "p_js": 0.55,
-      "mc_se": 0.0071,
-      "se_js": 0.05,
-      "agree": true,
-      "baseline_med_py": 59.5,
-      "baseline_med_js": 59.3,
-      "ratio_py": 1.0,
-      "ratio_js": 1.004
-     }
-    }
-   },
-   "conflict": {
-    "pairs": 1844,
-    "max_abs_diff_km": 0.0,
-    "within_0.5km": 1844,
-    "only_py": 0,
-    "only_js": 0,
-    "median_py": 551.11,
-    "median_js": 551.11,
-    "w50_py": [
-     0.0399,
-     0.0596
-    ],
-    "w50_js": [
-     0.0399,
-     0.0596
-    ],
-    "ci_js": [
-     520.0164387017339,
-     579.3655979776398
-    ],
-    "mc": {
-     "uniform": {
-      "p_py": 0.0002,
-      "p_js": 0.01,
-      "mc_se": 0.0002,
-      "se_js": 0.01,
-      "agree": true,
-      "baseline_med_py": 910.5,
-      "baseline_med_js": 896.5,
-      "ratio_py": 0.605,
-      "ratio_js": 0.615
-     },
-     "pop": {
-      "p_py": 0.541,
-      "p_js": 0.48,
-      "mc_se": 0.007,
-      "se_js": 0.0502,
-      "agree": true,
-      "baseline_med_py": 548.7,
-      "baseline_med_js": 556.0,
-      "ratio_py": 1.004,
-      "ratio_js": 0.991
-     },
-     "time": {
-      "p_py": 0.2976,
-      "p_js": 0.51,
-      "mc_se": 0.0065,
-      "se_js": 0.0502,
-      "agree": true,
-      "baseline_med_py": 556.7,
-      "baseline_med_js": 550.3,
-      "ratio_py": 0.99,
-      "ratio_js": 1.001
-     }
-    }
-   }
-  }
- }
 ]

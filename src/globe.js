@@ -9,8 +9,15 @@ import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js';
 
 // final cinematic pass: vignette + film grain + chromatic aberration (CA ramps up only during camera transitions)
 const LensShader = {
-  uniforms: { tDiffuse: { value: null }, time: { value: 0 }, vignette: { value: 0.35 }, grain: { value: 0.035 }, ca: { value: 0 } },
-  vertexShader: 'varying vec2 vUv; void main(){ vUv=uv; gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0); }',
+  uniforms: {
+    tDiffuse: { value: null },
+    time: { value: 0 },
+    vignette: { value: 0.35 },
+    grain: { value: 0.035 },
+    ca: { value: 0 },
+  },
+  vertexShader:
+    'varying vec2 vUv; void main(){ vUv=uv; gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0); }',
   fragmentShader: `uniform sampler2D tDiffuse; uniform float time, vignette, grain, ca; varying vec2 vUv;
   float h(vec2 p){ return fract(sin(dot(p, vec2(12.9898,78.233))) * 43758.5453); }
   void main(){ vec2 d=vUv-0.5; float r2=dot(d,d); vec2 off=d*ca*0.012*(0.4+r2*2.0);
@@ -133,34 +140,79 @@ void main(){ float r=length(vUv-0.5)*2.0; if(r>1.0||vA<0.001) discard;
 export class Globe {
   constructor(canvas) {
     this.canvas = canvas;
-    this.renderer = new THREE.WebGLRenderer({ canvas, antialias: true, preserveDrawingBuffer: true, alpha: false, logarithmicDepthBuffer: false });
+    this.renderer = new THREE.WebGLRenderer({
+      canvas,
+      antialias: true,
+      preserveDrawingBuffer: true,
+      alpha: false,
+      logarithmicDepthBuffer: false,
+    });
     this.renderer.setPixelRatio(Math.min(2, window.devicePixelRatio || 1));
-    this.scene = new THREE.Scene(); this.scene.background = new THREE.Color(0x01030a);
-    this.camera = new THREE.PerspectiveCamera(40, 1, 0.001, 200); this.camera.position.set(0.8, 1.2, 3.6);
+    this.scene = new THREE.Scene();
+    this.scene.background = new THREE.Color(0x01030a);
+    this.camera = new THREE.PerspectiveCamera(40, 1, 0.001, 200);
+    this.camera.position.set(0.8, 1.2, 3.6);
     this.controls = new OrbitControls(this.camera, canvas);
-    Object.assign(this.controls, { enableDamping: true, dampingFactor: 0.06, rotateSpeed: 0.45, zoomSpeed: 0.8, minDistance: 1.012, maxDistance: 9, enablePan: false });
-    this.lineLayers = {}; this.pointLayers = {}; this.time = 0;
+    Object.assign(this.controls, {
+      enableDamping: true,
+      dampingFactor: 0.06,
+      rotateSpeed: 0.45,
+      zoomSpeed: 0.8,
+      minDistance: 1.012,
+      maxDistance: 9,
+      enablePan: false,
+    });
+    this.lineLayers = {};
+    this.pointLayers = {};
+    this.time = 0;
     this.compare = { mode: 'off', x: 0.5 };
-    this.fx = { on: false, bloom: 0.55, ca: 0, caPulse: 0 }; this.orbit = null; this.onFly = null;
+    this.fx = { on: false, bloom: 0.55, ca: 0, caPulse: 0 };
+    this.orbit = null;
+    this.onFly = null;
     this.sunDir = new THREE.Vector3(1, 0, 0);
-    this._buildEarth(); this._buildAtmo(); this._buildStars();
-    this.rings = []; this.ringGroup = new THREE.Group(); this.scene.add(this.ringGroup);
-    this.arcGroup = new THREE.Group(); this.scene.add(this.arcGroup);
-    this.overlayGroup = new THREE.Group(); this.scene.add(this.overlayGroup);
+    this._buildEarth();
+    this._buildAtmo();
+    this._buildStars();
+    this.rings = [];
+    this.ringGroup = new THREE.Group();
+    this.scene.add(this.ringGroup);
+    this.arcGroup = new THREE.Group();
+    this.scene.add(this.arcGroup);
+    this.overlayGroup = new THREE.Group();
+    this.scene.add(this.overlayGroup);
     this.resize();
   }
   _buildEarth() {
-    const ph = new THREE.DataTexture(new Uint8Array([10, 20, 40, 255]), 1, 1); ph.needsUpdate = true;
-    const black = new THREE.DataTexture(new Uint8Array([0, 0, 0, 255]), 1, 1); black.needsUpdate = true;
-    this.glowData = new Uint8Array(512 * 4); this.glowTex = new THREE.DataTexture(this.glowData, 512, 1); this.glowTex.needsUpdate = true;
+    const ph = new THREE.DataTexture(new Uint8Array([10, 20, 40, 255]), 1, 1);
+    ph.needsUpdate = true;
+    const black = new THREE.DataTexture(new Uint8Array([0, 0, 0, 255]), 1, 1);
+    black.needsUpdate = true;
+    this.glowData = new Uint8Array(512 * 4);
+    this.glowTex = new THREE.DataTexture(this.glowData, 512, 1);
+    this.glowTex.needsUpdate = true;
     this.glowTex.magFilter = this.glowTex.minFilter = THREE.NearestFilter;
     this.earthU = {
-      dayTex: { value: ph }, nightTex: { value: black }, specTex: { value: black }, bumpTex: { value: black }, idTex: { value: black }, glowTex: { value: this.glowTex },
-      sunDir: { value: this.sunDir }, camPos: { value: this.camera.position }, time: { value: 0 }, bumpScale: { value: 2.0 }, bumpTexel: { value: new THREE.Vector2(1 / 4096, 1 / 2048) },
-      glowOn: { value: 1 }, glowColor: { value: new THREE.Color(1.0, 0.25, 0.08) }, hiId: { value: -1 }, nightGain: { value: 1.0 }, dayGain: { value: 1.0 }, lightingOn: { value: 1 },
+      dayTex: { value: ph },
+      nightTex: { value: black },
+      specTex: { value: black },
+      bumpTex: { value: black },
+      idTex: { value: black },
+      glowTex: { value: this.glowTex },
+      sunDir: { value: this.sunDir },
+      camPos: { value: this.camera.position },
+      time: { value: 0 },
+      bumpScale: { value: 2.0 },
+      bumpTexel: { value: new THREE.Vector2(1 / 4096, 1 / 2048) },
+      glowOn: { value: 1 },
+      glowColor: { value: new THREE.Color(1.0, 0.25, 0.08) },
+      hiId: { value: -1 },
+      nightGain: { value: 1.0 },
+      dayGain: { value: 1.0 },
+      lightingOn: { value: 1 },
     };
     const mat = new THREE.ShaderMaterial({ vertexShader: earthVS, fragmentShader: earthFS, uniforms: this.earthU });
-    this.earth = new THREE.Mesh(new THREE.SphereGeometry(1, 192, 128), mat); this.earth.renderOrder = 0;
+    this.earth = new THREE.Mesh(new THREE.SphereGeometry(1, 192, 128), mat);
+    this.earth.renderOrder = 0;
     this.scene.add(this.earth);
   }
   setTexture(slot, uri, opts = {}) {
@@ -168,8 +220,13 @@ export class Globe {
       new THREE.TextureLoader().load(uri, (t) => {
         if (opts.srgb !== false && (slot === 'dayTex' || slot === 'nightTex')) t.colorSpace = THREE.NoColorSpace;
         t.anisotropy = this.renderer.capabilities.getMaxAnisotropy();
-        if (opts.nearest) { t.magFilter = t.minFilter = THREE.NearestFilter; t.generateMipmaps = false; }
-        const old = this.earthU[slot].value; this.earthU[slot].value = t; if (old && old.dispose) old.dispose();
+        if (opts.nearest) {
+          t.magFilter = t.minFilter = THREE.NearestFilter;
+          t.generateMipmaps = false;
+        }
+        const old = this.earthU[slot].value;
+        this.earthU[slot].value = t;
+        if (old && old.dispose) old.dispose();
         if (slot === 'bumpTex') this.earthU.bumpTexel.value.set(1 / t.image.width, 1 / t.image.height);
         res(t);
       });
@@ -177,114 +234,376 @@ export class Globe {
   }
   _buildAtmo() {
     this.atmoU = { sunDir: { value: this.sunDir }, camPos: { value: this.camera.position } };
-    const m = new THREE.ShaderMaterial({ vertexShader: atmoVS, fragmentShader: atmoFS, uniforms: this.atmoU, side: THREE.BackSide, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false });
-    this.atmo = new THREE.Mesh(new THREE.SphereGeometry(1.06, 96, 64), m); this.scene.add(this.atmo);
+    const m = new THREE.ShaderMaterial({
+      vertexShader: atmoVS,
+      fragmentShader: atmoFS,
+      uniforms: this.atmoU,
+      side: THREE.BackSide,
+      transparent: true,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false,
+    });
+    this.atmo = new THREE.Mesh(new THREE.SphereGeometry(1.06, 96, 64), m);
+    this.scene.add(this.atmo);
   }
-  _buildStars() { // decorative background only (procedural, not data)
-    const n = 6000, pos = new Float32Array(n * 3), col = new Float32Array(n * 3); let s = 12345;
-    const r = () => ((s = (s * 16807) % 2147483647) / 2147483647);
-    for (let i = 0; i < n; i++) { const u = r() * 2 - 1, th = r() * Math.PI * 2, d = 60 + r() * 30, c = Math.sqrt(1 - u * u);
-      pos.set([d * c * Math.cos(th), d * u, d * c * Math.sin(th)], i * 3); const w = 0.55 + r() * 0.45, t = r(); col.set([w * (0.8 + 0.2 * t), w * 0.9, w * (1.0 - 0.2 * t)], i * 3); }
-    const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.BufferAttribute(pos, 3)); g.setAttribute('color', new THREE.BufferAttribute(col, 3));
-    this.stars = new THREE.Points(g, new THREE.PointsMaterial({ size: 0.12, vertexColors: true, sizeAttenuation: true, transparent: true, opacity: 0.85, depthWrite: false }));
+  _buildStars() {
+    // decorative background only (procedural, not data)
+    const n = 6000,
+      pos = new Float32Array(n * 3),
+      col = new Float32Array(n * 3);
+    let s = 12345;
+    const r = () => (s = (s * 16807) % 2147483647) / 2147483647;
+    for (let i = 0; i < n; i++) {
+      const u = r() * 2 - 1,
+        th = r() * Math.PI * 2,
+        d = 60 + r() * 30,
+        c = Math.sqrt(1 - u * u);
+      pos.set([d * c * Math.cos(th), d * u, d * c * Math.sin(th)], i * 3);
+      const w = 0.55 + r() * 0.45,
+        t = r();
+      col.set([w * (0.8 + 0.2 * t), w * 0.9, w * (1.0 - 0.2 * t)], i * 3);
+    }
+    const g = new THREE.BufferGeometry();
+    g.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+    g.setAttribute('color', new THREE.BufferAttribute(col, 3));
+    this.stars = new THREE.Points(
+      g,
+      new THREE.PointsMaterial({
+        size: 0.12,
+        vertexColors: true,
+        sizeAttenuation: true,
+        transparent: true,
+        opacity: 0.85,
+        depthWrite: false,
+      }),
+    );
     this.scene.add(this.stars);
   }
-  setDate(date) { const s = subsolar(date); ll2v(s.lat, s.lon, 1, this.sunDir).normalize(); this.subsolar = s; }
+  setDate(date) {
+    const s = subsolar(date);
+    ll2v(s.lat, s.lon, 1, this.sunDir).normalize();
+    this.subsolar = s;
+  }
   // ---- line layers ----
   addLines(name, payload, { color = 0x88ccff, opacity = 0.5, radius = 1.0015, order = 1, filter = null } = {}) {
-    const q = payload.q || 1000; const segs = []; const v = new THREE.Vector3();
+    const q = payload.q || 1000;
+    const segs = [];
+    const v = new THREE.Vector3();
     payload.lines.forEach((l, li) => {
       if (filter && !filter(li)) return;
       for (let i = 0; i + 3 < l.length; i += 2) {
-        ll2v(l[i + 1] / q, l[i] / q, radius, v); segs.push(v.x, v.y, v.z); ll2v(l[i + 3] / q, l[i + 2] / q, radius, v); segs.push(v.x, v.y, v.z);
+        ll2v(l[i + 1] / q, l[i] / q, radius, v);
+        segs.push(v.x, v.y, v.z);
+        ll2v(l[i + 3] / q, l[i + 2] / q, radius, v);
+        segs.push(v.x, v.y, v.z);
       }
     });
-    const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.Float32BufferAttribute(segs, 3));
+    const g = new THREE.BufferGeometry();
+    g.setAttribute('position', new THREE.Float32BufferAttribute(segs, 3));
     const m = new THREE.LineBasicMaterial({ color, transparent: true, opacity, depthWrite: false });
-    const obj = new THREE.LineSegments(g, m); obj.renderOrder = order; this.scene.add(obj);
-    this.lineLayers[name] = obj; return obj;
+    const obj = new THREE.LineSegments(g, m);
+    obj.renderOrder = order;
+    this.scene.add(obj);
+    this.lineLayers[name] = obj;
+    return obj;
   }
   // ---- point layers ----
-  addPoints(name, items, { colorFn, sizeFn = () => 6, t0Fn = null, t1Fn = null, shapeFn = null, radius = 1.004, order = 5, mode = 0, timeAware = false, opacity = 1 } = {}) {
+  addPoints(
+    name,
+    items,
+    {
+      colorFn,
+      sizeFn = () => 6,
+      t0Fn = null,
+      t1Fn = null,
+      shapeFn = null,
+      radius = 1.004,
+      order = 5,
+      mode = 0,
+      timeAware = false,
+      opacity = 1,
+    } = {},
+  ) {
     if (this.pointLayers[name]) this.removePoints(name);
-    const n = items.length; const pos = new Float32Array(n * 3), col = new Float32Array(n * 3), size = new Float32Array(n), t0 = new Float32Array(n), t1 = new Float32Array(n), vis = new Float32Array(n).fill(1), shp = new Float32Array(n);
-    const v = new THREE.Vector3(), c = new THREE.Color();
-    items.forEach((it, i) => { ll2v(it.lat, it.lon, radius, v); pos.set([v.x, v.y, v.z], i * 3); c.set(colorFn(it)); col.set([c.r, c.g, c.b], i * 3); size[i] = sizeFn(it); t0[i] = t0Fn ? t0Fn(it) : -1e9; { const a0 = t0Fn ? t0Fn(it) : -1e9, a1 = t1Fn ? t1Fn(it) : 1e12; t0[i] = isFinite(a0) ? a0 : -1e9; t1[i] = isFinite(a1) ? a1 : 1e12; } shp[i] = shapeFn ? shapeFn(it) : 0; });
+    const n = items.length;
+    const pos = new Float32Array(n * 3),
+      col = new Float32Array(n * 3),
+      size = new Float32Array(n),
+      t0 = new Float32Array(n),
+      t1 = new Float32Array(n),
+      vis = new Float32Array(n).fill(1),
+      shp = new Float32Array(n);
+    const v = new THREE.Vector3(),
+      c = new THREE.Color();
+    items.forEach((it, i) => {
+      ll2v(it.lat, it.lon, radius, v);
+      pos.set([v.x, v.y, v.z], i * 3);
+      c.set(colorFn(it));
+      col.set([c.r, c.g, c.b], i * 3);
+      size[i] = sizeFn(it);
+      t0[i] = t0Fn ? t0Fn(it) : -1e9;
+      {
+        const a0 = t0Fn ? t0Fn(it) : -1e9,
+          a1 = t1Fn ? t1Fn(it) : 1e12;
+        t0[i] = isFinite(a0) ? a0 : -1e9;
+        t1[i] = isFinite(a1) ? a1 : 1e12;
+      }
+      shp[i] = shapeFn ? shapeFn(it) : 0;
+    });
     const g = new THREE.BufferGeometry();
-    g.setAttribute('position', new THREE.BufferAttribute(pos, 3)); g.setAttribute('color', new THREE.BufferAttribute(col, 3)); g.setAttribute('size', new THREE.BufferAttribute(size, 1));
-    g.setAttribute('t0', new THREE.BufferAttribute(t0, 1)); g.setAttribute('t1', new THREE.BufferAttribute(t1, 1)); g.setAttribute('vis', new THREE.BufferAttribute(vis, 1)); g.setAttribute('shape', new THREE.BufferAttribute(shp, 1));
-    const u = { cur: { value: 0 }, fade: { value: 180 }, mode: { value: mode }, pxScale: { value: this.renderer.getPixelRatio() }, flash: { value: 30 }, history: { value: 0.0 }, timeAware: { value: timeAware ? 1 : 0 }, opacity: { value: opacity }, camPos: { value: this.camera.position }, time: this.earthU.time };
-    const m = new THREE.ShaderMaterial({ vertexShader: ptsVS, fragmentShader: ptsFS, uniforms: u, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending });
-    const obj = new THREE.Points(g, m); obj.renderOrder = order; obj.frustumCulled = false; this.scene.add(obj);
-    const L = { obj, items, u, pos, vis, radius }; this.pointLayers[name] = L; return L;
+    g.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+    g.setAttribute('color', new THREE.BufferAttribute(col, 3));
+    g.setAttribute('size', new THREE.BufferAttribute(size, 1));
+    g.setAttribute('t0', new THREE.BufferAttribute(t0, 1));
+    g.setAttribute('t1', new THREE.BufferAttribute(t1, 1));
+    g.setAttribute('vis', new THREE.BufferAttribute(vis, 1));
+    g.setAttribute('shape', new THREE.BufferAttribute(shp, 1));
+    const u = {
+      cur: { value: 0 },
+      fade: { value: 180 },
+      mode: { value: mode },
+      pxScale: { value: this.renderer.getPixelRatio() },
+      flash: { value: 30 },
+      history: { value: 0.0 },
+      timeAware: { value: timeAware ? 1 : 0 },
+      opacity: { value: opacity },
+      camPos: { value: this.camera.position },
+      time: this.earthU.time,
+    };
+    const m = new THREE.ShaderMaterial({
+      vertexShader: ptsVS,
+      fragmentShader: ptsFS,
+      uniforms: u,
+      transparent: true,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending,
+    });
+    const obj = new THREE.Points(g, m);
+    obj.renderOrder = order;
+    obj.frustumCulled = false;
+    this.scene.add(obj);
+    const L = { obj, items, u, pos, vis, radius };
+    this.pointLayers[name] = L;
+    return L;
   }
-  removePoints(name) { const L = this.pointLayers[name]; if (!L) return; this.scene.remove(L.obj); L.obj.geometry.dispose(); L.obj.material.dispose(); delete this.pointLayers[name]; }
+  removePoints(name) {
+    const L = this.pointLayers[name];
+    if (!L) return;
+    this.scene.remove(L.obj);
+    L.obj.geometry.dispose();
+    L.obj.material.dispose();
+    delete this.pointLayers[name];
+  }
   // geodesic uncertainty circles (instanced discs tangent to the sphere; radius in km). Never a pin.
   addCircles(name, items, { colorFn, radiusKmFn, t0Fn = null, timeAware = true, opacity = 0.9 } = {}) {
-    if (this.circleLayers && this.circleLayers[name]) { const o = this.circleLayers[name]; this.scene.remove(o.obj); o.obj.geometry.dispose(); o.obj.material.dispose(); }
+    if (this.circleLayers && this.circleLayers[name]) {
+      const o = this.circleLayers[name];
+      this.scene.remove(o.obj);
+      o.obj.geometry.dispose();
+      o.obj.material.dispose();
+    }
     this.circleLayers = this.circleLayers || {};
-    const n = Math.max(1, items.length); const geo = new THREE.CircleGeometry(1, 64);
-    const col = new Float32Array(n * 3), t0 = new Float32Array(n), vis = new Float32Array(n);
-    geo.setAttribute('iColor', new THREE.InstancedBufferAttribute(col, 3)); geo.setAttribute('iT0', new THREE.InstancedBufferAttribute(t0, 1)); geo.setAttribute('iVis', new THREE.InstancedBufferAttribute(vis, 1));
-    const u = { cur: { value: 0 }, fade: { value: 0 }, timeAware: { value: timeAware ? 1 : 0 }, opacity: { value: opacity }, camPos: { value: this.camera.position } };
-    const m = new THREE.ShaderMaterial({ vertexShader: circVS, fragmentShader: circFS, uniforms: u, transparent: true, depthWrite: false, side: THREE.DoubleSide });
-    const obj = new THREE.InstancedMesh(geo, m, n); obj.frustumCulled = false; obj.renderOrder = 4;
-    const M = new THREE.Matrix4(), q = new THREE.Quaternion(), z = new THREE.Vector3(0, 0, 1), sc = new THREE.Vector3(), c = new THREE.Color(), v = new THREE.Vector3();
+    const n = Math.max(1, items.length);
+    const geo = new THREE.CircleGeometry(1, 64);
+    const col = new Float32Array(n * 3),
+      t0 = new Float32Array(n),
+      vis = new Float32Array(n);
+    geo.setAttribute('iColor', new THREE.InstancedBufferAttribute(col, 3));
+    geo.setAttribute('iT0', new THREE.InstancedBufferAttribute(t0, 1));
+    geo.setAttribute('iVis', new THREE.InstancedBufferAttribute(vis, 1));
+    const u = {
+      cur: { value: 0 },
+      fade: { value: 0 },
+      timeAware: { value: timeAware ? 1 : 0 },
+      opacity: { value: opacity },
+      camPos: { value: this.camera.position },
+    };
+    const m = new THREE.ShaderMaterial({
+      vertexShader: circVS,
+      fragmentShader: circFS,
+      uniforms: u,
+      transparent: true,
+      depthWrite: false,
+      side: THREE.DoubleSide,
+    });
+    const obj = new THREE.InstancedMesh(geo, m, n);
+    obj.frustumCulled = false;
+    obj.renderOrder = 4;
+    const M = new THREE.Matrix4(),
+      q = new THREE.Quaternion(),
+      z = new THREE.Vector3(0, 0, 1),
+      sc = new THREE.Vector3(),
+      c = new THREE.Color(),
+      v = new THREE.Vector3();
     items.forEach((it, i) => {
-      ll2v(it.lat, it.lon, 1.0018, v); q.setFromUnitVectors(z, v.clone().normalize()); const r = Math.max(0.05, radiusKmFn(it)) / 6371.0088; sc.set(r, r, r);
-      M.compose(v, q, sc); obj.setMatrixAt(i, M); c.set(colorFn(it)); col.set([c.r, c.g, c.b], i * 3); t0[i] = t0Fn ? t0Fn(it) : -1e9; vis[i] = 1;
+      ll2v(it.lat, it.lon, 1.0018, v);
+      q.setFromUnitVectors(z, v.clone().normalize());
+      const r = Math.max(0.05, radiusKmFn(it)) / 6371.0088;
+      sc.set(r, r, r);
+      M.compose(v, q, sc);
+      obj.setMatrixAt(i, M);
+      c.set(colorFn(it));
+      col.set([c.r, c.g, c.b], i * 3);
+      t0[i] = t0Fn ? t0Fn(it) : -1e9;
+      vis[i] = 1;
     });
     if (!items.length) obj.count = 0;
-    obj.instanceMatrix.needsUpdate = true; this.scene.add(obj);
-    const L = { obj, items, u, vis, attr: geo.attributes.iVis }; this.circleLayers[name] = L; return L;
+    obj.instanceMatrix.needsUpdate = true;
+    this.scene.add(obj);
+    const L = { obj, items, u, vis, attr: geo.attributes.iVis };
+    this.circleLayers[name] = L;
+    return L;
   }
-  setCircleVis(L, fn) { for (let i = 0; i < L.items.length; i++) L.vis[i] = fn(L.items[i], i) ? 1 : 0; L.attr.needsUpdate = true; }
-  setVis(L, fn) { const a = L.obj.geometry.attributes.vis; for (let i = 0; i < L.items.length; i++) a.array[i] = fn(L.items[i], i) ? 1 : 0; a.needsUpdate = true; }
+  setCircleVis(L, fn) {
+    for (let i = 0; i < L.items.length; i++) L.vis[i] = fn(L.items[i], i) ? 1 : 0;
+    L.attr.needsUpdate = true;
+  }
+  setVis(L, fn) {
+    const a = L.obj.geometry.attributes.vis;
+    for (let i = 0; i < L.items.length; i++) a.array[i] = fn(L.items[i], i) ? 1 : 0;
+    a.needsUpdate = true;
+  }
   // ---- effects ----
   pulse(lat, lon, color) {
-    const v = ll2v(lat, lon, 1.003); const geo = new THREE.RingGeometry(0.8, 1.0, 48);
-    const m = new THREE.MeshBasicMaterial({ color, transparent: true, opacity: 0.9, side: THREE.DoubleSide, depthWrite: false, blending: THREE.AdditiveBlending });
-    const ring = new THREE.Mesh(geo, m); ring.position.copy(v); ring.lookAt(v.clone().multiplyScalar(2)); ring.scale.setScalar(0.002);
+    const v = ll2v(lat, lon, 1.003);
+    const geo = new THREE.RingGeometry(0.8, 1.0, 48);
+    const m = new THREE.MeshBasicMaterial({
+      color,
+      transparent: true,
+      opacity: 0.9,
+      side: THREE.DoubleSide,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending,
+    });
+    const ring = new THREE.Mesh(geo, m);
+    ring.position.copy(v);
+    ring.lookAt(v.clone().multiplyScalar(2));
+    ring.scale.setScalar(0.002);
     // particle trail: a short beam of particles rising from the surface
-    const np = 24, pp = new Float32Array(np * 3); const nrm = v.clone().normalize();
-    for (let i = 0; i < np; i++) { const h = 1.003 + i * 0.0025; pp.set([nrm.x * h, nrm.y * h, nrm.z * h], i * 3); }
-    const pg = new THREE.BufferGeometry(); pg.setAttribute('position', new THREE.BufferAttribute(pp, 3));
-    const beam = new THREE.Points(pg, new THREE.PointsMaterial({ color, size: 0.012, transparent: true, opacity: 0.9, depthWrite: false, blending: THREE.AdditiveBlending }));
-    this.ringGroup.add(ring); this.ringGroup.add(beam); this.rings.push({ ring, beam, t: 0 });
-    if (this.rings.length > 80) { const r = this.rings.shift(); this._killRing(r); }
+    const np = 24,
+      pp = new Float32Array(np * 3);
+    const nrm = v.clone().normalize();
+    for (let i = 0; i < np; i++) {
+      const h = 1.003 + i * 0.0025;
+      pp.set([nrm.x * h, nrm.y * h, nrm.z * h], i * 3);
+    }
+    const pg = new THREE.BufferGeometry();
+    pg.setAttribute('position', new THREE.BufferAttribute(pp, 3));
+    const beam = new THREE.Points(
+      pg,
+      new THREE.PointsMaterial({
+        color,
+        size: 0.012,
+        transparent: true,
+        opacity: 0.9,
+        depthWrite: false,
+        blending: THREE.AdditiveBlending,
+      }),
+    );
+    this.ringGroup.add(ring);
+    this.ringGroup.add(beam);
+    this.rings.push({ ring, beam, t: 0 });
+    if (this.rings.length > 80) {
+      const r = this.rings.shift();
+      this._killRing(r);
+    }
   }
-  _killRing(r) { this.ringGroup.remove(r.ring); this.ringGroup.remove(r.beam); r.ring.geometry.dispose(); r.ring.material.dispose(); r.beam.geometry.dispose(); r.beam.material.dispose(); }
-  clearArcs() { while (this.arcGroup.children.length) { const c = this.arcGroup.children.pop(); c.geometry.dispose(); c.material.dispose(); } }
+  _killRing(r) {
+    this.ringGroup.remove(r.ring);
+    this.ringGroup.remove(r.beam);
+    r.ring.geometry.dispose();
+    r.ring.material.dispose();
+    r.beam.geometry.dispose();
+    r.beam.material.dispose();
+  }
+  clearArcs() {
+    while (this.arcGroup.children.length) {
+      const c = this.arcGroup.children.pop();
+      c.geometry.dispose();
+      c.material.dispose();
+    }
+  }
   addArc(a, b, color = 0xffe066, opacity = 0.9) {
-    const va = ll2v(a.lat, a.lon, 1), vb = ll2v(b.lat, b.lon, 1); const ang = va.angleTo(vb); const pts = [];
-    for (let i = 0; i <= 48; i++) { const t = i / 48; const v = new THREE.Vector3().copy(va).lerp(vb, t).normalize(); v.multiplyScalar(1.003 + Math.sin(Math.PI * t) * Math.min(0.25, 0.05 + ang * 0.35)); pts.push(v); }
+    const va = ll2v(a.lat, a.lon, 1),
+      vb = ll2v(b.lat, b.lon, 1);
+    const ang = va.angleTo(vb);
+    const pts = [];
+    for (let i = 0; i <= 48; i++) {
+      const t = i / 48;
+      const v = new THREE.Vector3().copy(va).lerp(vb, t).normalize();
+      v.multiplyScalar(1.003 + Math.sin(Math.PI * t) * Math.min(0.25, 0.05 + ang * 0.35));
+      pts.push(v);
+    }
     const g = new THREE.BufferGeometry().setFromPoints(pts);
-    const l = new THREE.Line(g, new THREE.LineBasicMaterial({ color, transparent: true, opacity, depthWrite: false, blending: THREE.AdditiveBlending })); l.renderOrder = 20; this.arcGroup.add(l);
+    const l = new THREE.Line(
+      g,
+      new THREE.LineBasicMaterial({
+        color,
+        transparent: true,
+        opacity,
+        depthWrite: false,
+        blending: THREE.AdditiveBlending,
+      }),
+    );
+    l.renderOrder = 20;
+    this.arcGroup.add(l);
   }
   setOverlayTexture(canvas, opacity = 0.85) {
     if (!this.overlay) {
-      this.overlayTex = new THREE.CanvasTexture(canvas); this.overlayTex.colorSpace = THREE.NoColorSpace;
-      this.overlay = new THREE.Mesh(new THREE.SphereGeometry(1.0025, 128, 96), new THREE.MeshBasicMaterial({ map: this.overlayTex, transparent: true, opacity, depthWrite: false, blending: THREE.AdditiveBlending }));
-      this.overlay.renderOrder = 3; this.overlayGroup.add(this.overlay);
-    } else { this.overlayTex.image = canvas; this.overlayTex.needsUpdate = true; this.overlay.material.opacity = opacity; }
+      this.overlayTex = new THREE.CanvasTexture(canvas);
+      this.overlayTex.colorSpace = THREE.NoColorSpace;
+      this.overlay = new THREE.Mesh(
+        new THREE.SphereGeometry(1.0025, 128, 96),
+        new THREE.MeshBasicMaterial({
+          map: this.overlayTex,
+          transparent: true,
+          opacity,
+          depthWrite: false,
+          blending: THREE.AdditiveBlending,
+        }),
+      );
+      this.overlay.renderOrder = 3;
+      this.overlayGroup.add(this.overlay);
+    } else {
+      this.overlayTex.image = canvas;
+      this.overlayTex.needsUpdate = true;
+      this.overlay.material.opacity = opacity;
+    }
     this.overlay.visible = true;
   }
   // static texture overlays (e.g. GEBCO 'never directly measured' mask), equirectangular, drawn just above the surface
   addTexOverlay(name, image, opacity = 0.8) {
-    const t = new THREE.Texture(image); t.needsUpdate = true; t.colorSpace = THREE.NoColorSpace;
-    const m = new THREE.Mesh(new THREE.SphereGeometry(1.0015, 160, 120), new THREE.MeshBasicMaterial({ map: t, transparent: true, opacity, depthWrite: false }));
-    m.renderOrder = 2; this.overlayGroup.add(m); return m;
+    const t = new THREE.Texture(image);
+    t.needsUpdate = true;
+    t.colorSpace = THREE.NoColorSpace;
+    const m = new THREE.Mesh(
+      new THREE.SphereGeometry(1.0015, 160, 120),
+      new THREE.MeshBasicMaterial({ map: t, transparent: true, opacity, depthWrite: false }),
+    );
+    m.renderOrder = 2;
+    this.overlayGroup.add(m);
+    return m;
   }
-  hideOverlay() { if (this.overlay) this.overlay.visible = false; }
+  hideOverlay() {
+    if (this.overlay) this.overlay.visible = false;
+  }
   // eased great-circle fly-to: slerp the direction, raise the camera on an arc proportional to the angle travelled
   flyTo(lat, lon, dist = 1.9, ms = 1600) {
-    const start = this.camera.position.clone(); const sd = start.length(); const end = ll2v(lat, lon, 1).normalize();
-    const s0 = start.clone().normalize(); const ang = s0.angleTo(end);
+    const start = this.camera.position.clone();
+    const sd = start.length();
+    const end = ll2v(lat, lon, 1).normalize();
+    const s0 = start.clone().normalize();
+    const ang = s0.angleTo(end);
     const q = new THREE.Quaternion().setFromUnitVectors(s0, end);
-    const t0 = performance.now(); this._fly = { start: s0, end, q, ang, sd, ed: dist, t0, ms: ms * (this.reducedMotion ? 0.01 : 1) };
-    this.orbit = null; this.fx.caPulse = Math.min(1, 0.3 + ang); if (this.onFly) this.onFly(ang);
+    const t0 = performance.now();
+    this._fly = { start: s0, end, q, ang, sd, ed: dist, t0, ms: ms * (this.reducedMotion ? 0.01 : 1) };
+    this.orbit = null;
+    this.fx.caPulse = Math.min(1, 0.3 + ang);
+    if (this.onFly) this.onFly(ang);
   }
-  setOrbit(lat, lon) { this.orbit = lat == null ? null : { axis: ll2v(lat, lon, 1).normalize(), speed: 0.18 }; }
+  setOrbit(lat, lon) {
+    this.orbit = lat == null ? null : { axis: ll2v(lat, lon, 1).normalize(), speed: 0.18 };
+  }
   setPostFX(on) {
     this.fx.on = !!on;
     if (on && !this.composer) {
@@ -295,24 +614,39 @@ export class Globe {
       this.composer.addPass(new RenderPass(this.scene, this.camera));
       this.bloomPass = new UnrealBloomPass(new THREE.Vector2(size.x, size.y), this.fx.bloom, 0.6, 0.72);
       this.composer.addPass(this.bloomPass);
-      this.lensPass = new ShaderPass(LensShader); this.composer.addPass(this.lensPass);
+      this.lensPass = new ShaderPass(LensShader);
+      this.composer.addPass(this.lensPass);
       this.resize();
     }
   }
   // shift the projection centre (px) so the globe stays centred in the area not covered by docked panels
-  setCenterShift(px) { this.centerShift = px; this.resize(); }
+  setCenterShift(px) {
+    this.centerShift = px;
+    this.resize();
+  }
   resize() {
-    const w = this.canvas.clientWidth, h = this.canvas.clientHeight; if (!w || !h) return;
-    this.renderer.setSize(w, h, false); this.camera.aspect = w / h;
-    if (this.centerShift) this.camera.setViewOffset(w, h, -this.centerShift, 0, w, h); else this.camera.clearViewOffset();
+    const w = this.canvas.clientWidth,
+      h = this.canvas.clientHeight;
+    if (!w || !h) return;
+    this.renderer.setSize(w, h, false);
+    this.camera.aspect = w / h;
+    if (this.centerShift) this.camera.setViewOffset(w, h, -this.centerShift, 0, w, h);
+    else this.camera.clearViewOffset();
     this.camera.updateProjectionMatrix();
-    if (this.composer) { this.composer.setPixelRatio(this.renderer.getPixelRatio()); this.composer.setSize(w, h); }
-    for (const k in this.pointLayers) this.pointLayers[k].u.pxScale.value = this.renderer.getPixelRatio() * Math.min(1.6, h / 700);
+    if (this.composer) {
+      this.composer.setPixelRatio(this.renderer.getPixelRatio());
+      this.composer.setSize(w, h);
+    }
+    for (const k in this.pointLayers)
+      this.pointLayers[k].u.pxScale.value = this.renderer.getPixelRatio() * Math.min(1.6, h / 700);
   }
   update(dt) {
-    this.time += dt; this.earthU.time.value = this.time;
+    this.time += dt;
+    this.earthU.time.value = this.time;
     if (this._fly) {
-      const f = this._fly; let t = Math.min(1, (performance.now() - f.t0) / f.ms); const e = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+      const f = this._fly;
+      let t = Math.min(1, (performance.now() - f.t0) / f.ms);
+      const e = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
       const dir = f.start.clone().applyQuaternion(new THREE.Quaternion().slerp(f.q, e)).normalize();
       const lift = Math.sin(Math.PI * e) * Math.min(1.2, f.ang * 0.8);
       this.camera.position.copy(dir.multiplyScalar(f.sd + (f.ed - f.sd) * e + lift));
@@ -324,18 +658,31 @@ export class Globe {
     this.controls.zoomSpeed = 0.8;
     this.controls.update();
     for (let i = this.rings.length - 1; i >= 0; i--) {
-      const r = this.rings[i]; r.t += dt; const k = r.t / 2.2;
-      r.ring.scale.setScalar(0.004 + k * 0.06); r.ring.material.opacity = Math.max(0, 0.9 * (1 - k));
-      r.beam.material.opacity = Math.max(0, 0.9 * (1 - k)); r.beam.scale.setScalar(1 + k * 0.02);
-      if (k >= 1) { this._killRing(r); this.rings.splice(i, 1); }
+      const r = this.rings[i];
+      r.t += dt;
+      const k = r.t / 2.2;
+      r.ring.scale.setScalar(0.004 + k * 0.06);
+      r.ring.material.opacity = Math.max(0, 0.9 * (1 - k));
+      r.beam.material.opacity = Math.max(0, 0.9 * (1 - k));
+      r.beam.scale.setScalar(1 + k * 0.02);
+      if (k >= 1) {
+        this._killRing(r);
+        this.rings.splice(i, 1);
+      }
     }
   }
   render(sideHook) {
-    const R = this.renderer, w = this.canvas.width, h = this.canvas.height;
+    const R = this.renderer,
+      w = this.canvas.width,
+      h = this.canvas.height;
     if (this.compare.mode === 'off' || !sideHook) {
-      R.setScissorTest(false); R.setViewport(0, 0, w, h);
+      R.setScissorTest(false);
+      R.setViewport(0, 0, w, h);
       if (this.fx.on && this.composer) {
-        const u = this.lensPass.uniforms; u.time.value = this.time; u.ca.value = this.fx.caEnabled === false ? 0 : this.fx.ca + this.fx.caPulse * 1.6; this.bloomPass.strength = this.fx.bloom;
+        const u = this.lensPass.uniforms;
+        u.time.value = this.time;
+        u.ca.value = this.fx.caEnabled === false ? 0 : this.fx.ca + this.fx.caPulse * 1.6;
+        this.bloomPass.strength = this.fx.bloom;
         this.composer.render();
       } else R.render(this.scene, this.camera);
       return;
@@ -343,26 +690,49 @@ export class Globe {
     const xs = Math.round(w * this.compare.x);
     R.setScissorTest(true);
     if (this.compare.mode === 'swipe') {
-      sideHook('A'); R.setViewport(0, 0, w, h); R.setScissor(0, 0, xs, h); R.render(this.scene, this.camera);
-      sideHook('B'); R.setScissor(xs, 0, w - xs, h); R.render(this.scene, this.camera);
-    } else { // split: two synced half-width views
-      const hw = Math.floor(w / 2); const asp = this.camera.aspect; this.camera.aspect = hw / h; this.camera.updateProjectionMatrix();
-      sideHook('A'); R.setViewport(0, 0, hw, h); R.setScissor(0, 0, hw, h); R.render(this.scene, this.camera);
-      sideHook('B'); R.setViewport(hw, 0, w - hw, h); R.setScissor(hw, 0, w - hw, h); R.render(this.scene, this.camera);
-      this.camera.aspect = asp; this.camera.updateProjectionMatrix();
+      sideHook('A');
+      R.setViewport(0, 0, w, h);
+      R.setScissor(0, 0, xs, h);
+      R.render(this.scene, this.camera);
+      sideHook('B');
+      R.setScissor(xs, 0, w - xs, h);
+      R.render(this.scene, this.camera);
+    } else {
+      // split: two synced half-width views
+      const hw = Math.floor(w / 2);
+      const asp = this.camera.aspect;
+      this.camera.aspect = hw / h;
+      this.camera.updateProjectionMatrix();
+      sideHook('A');
+      R.setViewport(0, 0, hw, h);
+      R.setScissor(0, 0, hw, h);
+      R.render(this.scene, this.camera);
+      sideHook('B');
+      R.setViewport(hw, 0, w - hw, h);
+      R.setScissor(hw, 0, w - hw, h);
+      R.render(this.scene, this.camera);
+      this.camera.aspect = asp;
+      this.camera.updateProjectionMatrix();
     }
-    sideHook('A'); R.setScissorTest(false);
+    sideHook('A');
+    R.setScissorTest(false);
   }
   // project a lat/lon to CSS pixels; returns null if on the far side
   project(lat, lon, r = 1.004, v = new THREE.Vector3()) {
-    ll2v(lat, lon, r, v); const cp = this.camera.position;
-    if ((v.x * (cp.x - v.x) + v.y * (cp.y - v.y) + v.z * (cp.z - v.z)) < 0) return null;
-    v.project(this.camera); const w = this.canvas.clientWidth, h = this.canvas.clientHeight;
-    return { x: (v.x + 1) / 2 * w, y: (1 - v.y) / 2 * h };
+    ll2v(lat, lon, r, v);
+    const cp = this.camera.position;
+    if (v.x * (cp.x - v.x) + v.y * (cp.y - v.y) + v.z * (cp.z - v.z) < 0) return null;
+    v.project(this.camera);
+    const w = this.canvas.clientWidth,
+      h = this.canvas.clientHeight;
+    return { x: ((v.x + 1) / 2) * w, y: ((1 - v.y) / 2) * h };
   }
   pickGlobe(x, y) {
-    const w = this.canvas.clientWidth, h = this.canvas.clientHeight; const ray = new THREE.Raycaster();
-    ray.setFromCamera(new THREE.Vector2(x / w * 2 - 1, -(y / h) * 2 + 1), this.camera);
-    const hit = ray.intersectObject(this.earth)[0]; return hit ? hit.point : null;
+    const w = this.canvas.clientWidth,
+      h = this.canvas.clientHeight;
+    const ray = new THREE.Raycaster();
+    ray.setFromCamera(new THREE.Vector2((x / w) * 2 - 1, -(y / h) * 2 + 1), this.camera);
+    const hit = ray.intersectObject(this.earth)[0];
+    return hit ? hit.point : null;
   }
 }

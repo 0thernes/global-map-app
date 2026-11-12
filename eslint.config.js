@@ -3,7 +3,17 @@ import globals from 'globals';
 
 export default [
   {
-    ignores: ['node_modules/', 'js/', 'vendor/', 'data/', 'textures/', 'shots/', 'docs/screenshots/', 'dist/', 'coverage/'],
+    ignores: [
+      'node_modules/',
+      'js/',
+      'vendor/',
+      'data/',
+      'textures/',
+      'shots/',
+      'docs/screenshots/',
+      'dist/',
+      'coverage/',
+    ],
   },
   js.configs.recommended,
   {
@@ -13,6 +23,11 @@ export default [
   {
     files: ['scripts/**/*.mjs', 'test/**/*.mjs', 'eslint.config.js'],
     languageOptions: { ecmaVersion: 2022, sourceType: 'module', globals: { ...globals.node } },
+  },
+  {
+    // Playwright scripts: code inside page.evaluate() runs in the browser
+    files: ['test/smoke.mjs', 'test/screens.mjs', 'scripts/audit/*.mjs'],
+    languageOptions: { globals: { ...globals.node, ...globals.browser } },
   },
   {
     rules: {

@@ -51,20 +51,20 @@ the snapshot `data/sources/offlimits_mountains.csv` (never both).
 
 ## Military class policy
 
-The Wikidata query walks `P31/P279*` from *military base*, *installation*, *air base*, *naval base* and *fort*. That
+The Wikidata query walks `P31/P279*` from _military base_, _installation_, _air base_, _naval base_ and _fort_. That
 walk also reaches fire lookout towers, belfries, bird hides and medieval towers. `data/tools/military_class_policy.json`
-lists 115 direct classes: an item whose every class is *drop* is removed (2,624 items); one whose classes are all
+lists 115 direct classes: an item whose every class is _drop_ is removed (2,624 items); one whose classes are all
 historic is labelled a fort/historic fortification (9,149); gendarmerie, Guardia Civil and Carabinieri barracks are
 labelled as such (3,688). Historic and gendarmerie rows stay visible but are excluded from the analysis and hotspots.
 Refresh the class map with the queries described in `data/tools/build_military.py`.
 
 ## External snapshots kept in the repo
 
-| File | Source |
-|---|---|
-| `data/sources/external/cneos_fireball.json` | NASA JPL SSD fireball API |
+| File                                                                  | Source                                |
+| --------------------------------------------------------------------- | ------------------------------------- |
+| `data/sources/external/cneos_fireball.json`                           | NASA JPL SSD fireball API             |
 | `data/sources/external/wikidata_trenches.json`, `wikidata_deeps.json` | Wikidata SPARQL and entity data (CC0) |
-| `data/sources/qwm/*.csv.gz` | QWM public layer snapshot |
+| `data/sources/qwm/*.csv.gz`                                           | QWM public layer snapshot             |
 
 Large rasters and shapefiles (GEBCO TID GeoTIFF, HydroLAKES shapefile, NASA textures source) are not committed; the
 derived, downsampled outputs are.

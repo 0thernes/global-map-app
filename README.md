@@ -31,18 +31,18 @@ sources shown rather than hidden.**
 
 ## Features
 
-| | |
-|---|---|
-| **Cinematic globe** | NASA day/night Blue/Black Marble blended by the real sun terminator, relief, specular ocean, atmosphere, bloom, optional film grain and chromatic aberration, HUD frame, optional EOX Sentinel‑2 2016 satellite basemap. |
-| **ENGAGE and the tour** | Boot screen with an ENGAGE button (unlocks audio, fullscreen, fly-in), then a 20-step guided tour that flies to the best-sourced cases, hotspots and findings. Muted until you interact. |
-| **Timeline** | 8000 BCE to today; day resolution since 1900; playback, date brushing, range bars for uncertain dates. |
-| **Cases** | 2,593 public sourced rows (plus local-only private rows), graded CIT / Official record / ST / Testimony; pins only for exact or ≤ 1 km sites, uncertainty circles otherwise. |
-| **Layers of layers** | 30+ data layers in a tri-state tree (group › layer › sub-layer): military (MIRTA, Wikidata), reactors, nuclear sites and 2,057 tests, UCDP conflicts, volcanoes, faults, pyramids, megaliths, caves, ocean anomalies, **off-limits mountains**, **HydroLAKES**, **unmapped seafloor (GEBCO 2025)**, **oceanic trenches**, **CNEOS fireballs**, USO and satellite anomalies. |
-| **Convergence hotspots** | Grid score of where many kinds of record meet, corrected for population, with an evidence grade A–F and a dossier per cluster. |
-| **Analysis** | Distances to the nearest base / nuclear site / conflict event against uniform, population-weighted and date-permuted baselines; Monte Carlo p, bootstrap CIs, Bonferroni note; independently re-derived in Python. |
-| **Reports** | One-click dossier-style reports for the selection, a country, an era or a category; print to PDF or export standalone HTML. |
-| **Reference** | Sources, glossary, A–Z, sites, countries, coverage matrix (breadth × depth), off-world targets and credits. |
-| **OSINT tools** | Search, filters (grade, precision, water distance, conflicts, `[verify]`), link graph, compare view, charts, lasso, exports (CSV, GeoJSON, Markdown), workspaces. |
+|                          |                                                                                                                                                                                                                                                                                                                                                                             |
+| ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Cinematic globe**      | NASA day/night Blue/Black Marble blended by the real sun terminator, relief, specular ocean, atmosphere, bloom, optional film grain and chromatic aberration, HUD frame, optional EOX Sentinel‑2 2016 satellite basemap.                                                                                                                                                    |
+| **ENGAGE and the tour**  | Boot screen with an ENGAGE button (unlocks audio, fullscreen, fly-in), then a 20-step guided tour that flies to the best-sourced cases, hotspots and findings. Muted until you interact.                                                                                                                                                                                    |
+| **Timeline**             | 8000 BCE to today; day resolution since 1900; playback, date brushing, range bars for uncertain dates.                                                                                                                                                                                                                                                                      |
+| **Cases**                | 2,593 public sourced rows (plus local-only private rows), graded CIT / Official record / ST / Testimony; pins only for exact or ≤ 1 km sites, uncertainty circles otherwise.                                                                                                                                                                                                |
+| **Layers of layers**     | 30+ data layers in a tri-state tree (group › layer › sub-layer): military (MIRTA, Wikidata), reactors, nuclear sites and 2,057 tests, UCDP conflicts, volcanoes, faults, pyramids, megaliths, caves, ocean anomalies, **off-limits mountains**, **HydroLAKES**, **unmapped seafloor (GEBCO 2025)**, **oceanic trenches**, **CNEOS fireballs**, USO and satellite anomalies. |
+| **Convergence hotspots** | Grid score of where many kinds of record meet, corrected for population, with an evidence grade A–F and a dossier per cluster.                                                                                                                                                                                                                                              |
+| **Analysis**             | Distances to the nearest base / nuclear site / conflict event against uniform, population-weighted and date-permuted baselines; Monte Carlo p, bootstrap CIs, Bonferroni note; independently re-derived in Python.                                                                                                                                                          |
+| **Reports**              | One-click dossier-style reports for the selection, a country, an era or a category; print to PDF or export standalone HTML.                                                                                                                                                                                                                                                 |
+| **Reference**            | Sources, glossary, A–Z, sites, countries, coverage matrix (breadth × depth), off-world targets and credits.                                                                                                                                                                                                                                                                 |
+| **OSINT tools**          | Search, filters (grade, precision, water distance, conflicts, `[verify]`), link graph, compare view, charts, lasso, exports (CSV, GeoJSON, Markdown), workspaces.                                                                                                                                                                                                           |
 
 <table>
 <tr><td><img src="docs/screenshots/01_engage.png" alt="ENGAGE boot screen"></td><td><img src="docs/screenshots/07_hotspots.png" alt="Convergence hotspots"></td></tr>
@@ -66,15 +66,15 @@ It is a static browser app (HTML, CSS, one JavaScript bundle and data files); it
 
 ### URL options
 
-| Parameter | Effect |
-|---|---|
-| `?tour=intro` | start the guided tour after boot |
-| `?audio=on` | start with sound on (still needs one click in most browsers) |
-| `?fullscreen=1` | ask for full screen on ENGAGE |
-| `?intro=0` | skip the boot screen |
-| `?fx=low` / `?perf=1` | fewer post effects / performance mode |
-| `?basemap=s2` | EOX Sentinel‑2 cloudless 2016 satellite basemap (online) |
-| `?private=0` | do not try to load local-only private data |
+| Parameter             | Effect                                                       |
+| --------------------- | ------------------------------------------------------------ |
+| `?tour=intro`         | start the guided tour after boot                             |
+| `?audio=on`           | start with sound on (still needs one click in most browsers) |
+| `?fullscreen=1`       | ask for full screen on ENGAGE                                |
+| `?intro=0`            | skip the boot screen                                         |
+| `?fx=low` / `?perf=1` | fewer post effects / performance mode                        |
+| `?basemap=s2`         | EOX Sentinel‑2 cloudless 2016 satellite basemap (online)     |
+| `?private=0`          | do not try to load local-only private data                   |
 
 ## Keyboard
 

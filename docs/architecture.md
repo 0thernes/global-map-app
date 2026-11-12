@@ -42,13 +42,13 @@ they never disagree.
 
 ## Pure modules (unit-tested)
 
-| Module | Job |
-|---|---|
-| `stats.js` | haversine, spatial index, medians, bootstrap, Wilson, Monte Carlo baselines, DBSCAN, KDE |
-| `convergence.js` | hotspot grid score, clusters and evidence grade |
-| `coverage.js` | breadth/depth measures and the layers-of-layers coverage tree |
-| `report_gen.js` · `index_gen.js` | report and reference content |
-| `grades.js` · `taxonomy.js` · `geo.js` · `sun.js` | grade classes, sub-layer keys, geodesy, solar position |
+| Module                                            | Job                                                                                      |
+| ------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `stats.js`                                        | haversine, spatial index, medians, bootstrap, Wilson, Monte Carlo baselines, DBSCAN, KDE |
+| `convergence.js`                                  | hotspot grid score, clusters and evidence grade                                          |
+| `coverage.js`                                     | breadth/depth measures and the layers-of-layers coverage tree                            |
+| `report_gen.js` · `index_gen.js`                  | report and reference content                                                             |
+| `grades.js` · `taxonomy.js` · `geo.js` · `sun.js` | grade classes, sub-layer keys, geodesy, solar position                                   |
 
 Tests: `test/unit/*.test.mjs` (Node test runner). Headless end-to-end: `test/smoke.mjs` (Playwright, SwiftShader).
 The statistics are re-derived independently in Python by `scripts/audit/stats_crosscheck.py`.

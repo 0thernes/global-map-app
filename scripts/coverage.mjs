@@ -14,21 +14,50 @@ load('data/cases.js');
 const pub = win.GM_CASES || expandCases(win.GM_CASES_COLS);
 const includePrivate = process.argv.includes('--private');
 let priv = [];
-if (includePrivate && existsSync('data/private/cases_private.js')) { load('data/private/cases_private.js'); priv = expandCases(win.GM_CASES_PRIVATE_COLS); }
+if (includePrivate && existsSync('data/private/cases_private.js')) {
+  load('data/private/cases_private.js');
+  priv = expandCases(win.GM_CASES_PRIVATE_COLS);
+}
 const cases = [...pub, ...priv];
-const live = existsSync('data/url_status.js') ? (load('data/url_status.js'), new Map(Object.entries(win.GM_URL_STATUS.urls).map(([k, v]) => [k, !!v]))) : null;
+const live = existsSync('data/url_status.js')
+  ? (load('data/url_status.js'), new Map(Object.entries(win.GM_URL_STATUS.urls).map(([k, v]) => [k, !!v])))
+  : null;
 const groups = [];
 const byLayer = {};
 for (const c of cases) (byLayer[c.layer || 'local'] = byLayer[c.layer || 'local'] || []).push(c);
-for (const [k, rows] of Object.entries(byLayer)) groups.push({ domain: 'Cases', layer: k, rows, sub: (r) => r.category, subtype: caseSub });
-const REF = { military: 'Military bases & sites', nuclear: 'Nuclear power reactors', map_nuclear_sites: 'Nuclear sites (QWM / Wikidata)', map_nuclear_tests: 'Nuclear tests (SIPRI via QWM)', volcanoes: 'Volcanoes (GVP)', map_conflicts: 'Conflicts (QWM)', map_pyramids: 'Pyramids', map_megaliths: 'Megaliths', map_caves_underground: 'Caves & underground', map_ancient_cities_remote_sensing: 'Ancient cities (remote sensing)', map_ocean: 'Ocean anomalies', map_weird_coordinates: 'Weird coordinates', map_offlimits_mountains: 'Off-limits mountains', fireballs: 'Fireballs (NASA JPL CNEOS)', hydrolakes: 'Lakes ≥ 10 km² (HydroLAKES)', trenches: 'Oceanic trenches & deeps (Wikidata)' };
+for (const [k, rows] of Object.entries(byLayer))
+  groups.push({ domain: 'Cases', layer: k, rows, sub: (r) => r.category, subtype: caseSub });
+const REF = {
+  military: 'Military bases & sites',
+  nuclear: 'Nuclear power reactors',
+  map_nuclear_sites: 'Nuclear sites (QWM / Wikidata)',
+  map_nuclear_tests: 'Nuclear tests (SIPRI via QWM)',
+  volcanoes: 'Volcanoes (GVP)',
+  map_conflicts: 'Conflicts (QWM)',
+  map_pyramids: 'Pyramids',
+  map_megaliths: 'Megaliths',
+  map_caves_underground: 'Caves & underground',
+  map_ancient_cities_remote_sensing: 'Ancient cities (remote sensing)',
+  map_ocean: 'Ocean anomalies',
+  map_weird_coordinates: 'Weird coordinates',
+  map_offlimits_mountains: 'Off-limits mountains',
+  fireballs: 'Fireballs (NASA JPL CNEOS)',
+  hydrolakes: 'Lakes ≥ 10 km² (HydroLAKES)',
+  trenches: 'Oceanic trenches & deeps (Wikidata)',
+};
 for (const [id, name] of Object.entries(REF)) {
   load(`data/layers/${id}.js`);
-  const p = reg[id]; if (!p) continue;
+  const p = reg[id];
+  if (!p) continue;
   let items = p.items;
   if (!items && p.cols && p.rows) items = p.rows.map((r) => Object.fromEntries(p.cols.map((c, i) => [c, r[i]])));
   if (!items || !items.length) continue;
-  groups.push({ domain: 'Reference', layer: name, rows: items, sub: SUB_FIELD[id] || ((r) => r.subtype || r.category || r.kind || r.type || 'all') });
+  groups.push({
+    domain: 'Reference',
+    layer: name,
+    rows: items,
+    sub: SUB_FIELD[id] || ((r) => r.subtype || r.category || r.kind || r.type || 'all'),
+  });
 }
 const tree = coverageTree(groups, { live });
 const md = `# Coverage matrix
@@ -47,7 +76,16 @@ ${treeToMarkdown(tree)}
 
 ## Flags
 
-${tree.flatMap((n) => [n, ...n.children]).filter((n) => /wide but shallow|deep but narrow|narrow and shallow/.test(n.profile)).map((n) => `- **${n.name}** (${n.level}, ${n.depth.n} records): ${n.profile}. Breadth ${n.B.toFixed(2)}, depth ${n.D.toFixed(2)}.`).join('\n') || '- none'}
+${
+  tree
+    .flatMap((n) => [n, ...n.children])
+    .filter((n) => /wide but shallow|deep but narrow|narrow and shallow/.test(n.profile))
+    .map(
+      (n) =>
+        `- **${n.name}** (${n.level}, ${n.depth.n} records): ${n.profile}. Breadth ${n.B.toFixed(2)}, depth ${n.D.toFixed(2)}.`,
+    )
+    .join('\n') || '- none'
+}
 `;
 writeFileSync('docs/audit/coverage.md', md);
 console.log('wrote docs/audit/coverage.md', groups.length, 'layers');

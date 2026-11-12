@@ -13,27 +13,27 @@ offered under **CC BY 4.0**: credit "Global Map / 0thernes L.L.C." and keep the 
 
 Exceptions that carry their own terms:
 
-| Data | Licence | What it means |
-|---|---|---|
-| Rows with `coord_source` from OpenStreetMap Nominatim | ODbL 1.0 | Attribute "© OpenStreetMap contributors"; if you publish a *database* derived from these geocodes, it must be shared under ODbL too. |
-| UCDP GED / ACD / BRD (conflicts) | CC BY 4.0 | Attribute UCDP. |
-| GeoNames (cities, postal codes, population baseline) | CC BY 4.0 | Attribute GeoNames. |
-| GeoNuclearData (reactors) | ODbL 1.0 | Attribute; share-alike for derived databases. |
-| HydroLAKES (lakes) | CC BY 4.0 | Attribute Messager et al. 2016. |
-| GEBCO 2025 TID (unmapped seafloor) | public domain, attribution requested | Cite GEBCO Compilation Group (2025). |
-| GEM Global Active Faults | CC BY-SA 4.0 | Share-alike. |
-| Wikidata-derived rows | CC0 | No conditions. |
-| Natural Earth, NASA imagery, USGS, DoD MIRTA | public domain | No conditions (credit appreciated). |
-| GEIPAN | Licence Ouverte / Etalab 2.0 | Attribute CNES/GEIPAN. |
-| SIPRI/FOA nuclear explosions | research report, attribution required | Cite Bergkvist & Ferm (2000). |
-| NASA JPL CNEOS fireballs | NASA/JPL-Caltech, use with credit | Credit CNEOS. |
-| EOxCloudless 2016 (optional online basemap) | CC BY 4.0 | Not stored in the repo; loaded from EOX on demand. |
+| Data                                                  | Licence                               | What it means                                                                                                                        |
+| ----------------------------------------------------- | ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| Rows with `coord_source` from OpenStreetMap Nominatim | ODbL 1.0                              | Attribute "© OpenStreetMap contributors"; if you publish a _database_ derived from these geocodes, it must be shared under ODbL too. |
+| UCDP GED / ACD / BRD (conflicts)                      | CC BY 4.0                             | Attribute UCDP.                                                                                                                      |
+| GeoNames (cities, postal codes, population baseline)  | CC BY 4.0                             | Attribute GeoNames.                                                                                                                  |
+| GeoNuclearData (reactors)                             | ODbL 1.0                              | Attribute; share-alike for derived databases.                                                                                        |
+| HydroLAKES (lakes)                                    | CC BY 4.0                             | Attribute Messager et al. 2016.                                                                                                      |
+| GEBCO 2025 TID (unmapped seafloor)                    | public domain, attribution requested  | Cite GEBCO Compilation Group (2025).                                                                                                 |
+| GEM Global Active Faults                              | CC BY-SA 4.0                          | Share-alike.                                                                                                                         |
+| Wikidata-derived rows                                 | CC0                                   | No conditions.                                                                                                                       |
+| Natural Earth, NASA imagery, USGS, DoD MIRTA          | public domain                         | No conditions (credit appreciated).                                                                                                  |
+| GEIPAN                                                | Licence Ouverte / Etalab 2.0          | Attribute CNES/GEIPAN.                                                                                                               |
+| SIPRI/FOA nuclear explosions                          | research report, attribution required | Cite Bergkvist & Ferm (2000).                                                                                                        |
+| NASA JPL CNEOS fireballs                              | NASA/JPL-Caltech, use with credit     | Credit CNEOS.                                                                                                                        |
+| EOxCloudless 2016 (optional online basemap)           | CC BY 4.0                             | Not stored in the repo; loaded from EOX on demand.                                                                                   |
 
 ## Not included: NUFORC
 
 The NUFORC report extract used by QWM states **no licence**. Its 80,000+ rows are therefore **not** in the repository,
 the releases or the GitHub Pages site. The build writes them to the git-ignored `data/private/` so they work on your
-own machine only. Options for changing this are logged as a *dilemma* in `docs/audit/SUMMARY.md`.
+own machine only. Options for changing this are logged as a _dilemma_ in `docs/audit/SUMMARY.md`.
 
 ## Your contributions
 
