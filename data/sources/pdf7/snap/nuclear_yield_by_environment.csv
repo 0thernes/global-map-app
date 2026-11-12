@@ -1,0 +1,6 @@
+environment,tests,with_yield,sum_kt,median_kt,max_kt
+atmospheric,413,409,388751.032,20.0,50000.0
+space,4,4,602.4,150.6,300.0
+surface,105,105,105545.2407,14.0,15000.0
+underground,1527,1526,167079.796,20.0,10000.0
+underwater,8,8,106.3,9.5,30.0
