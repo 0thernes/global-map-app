@@ -98,5 +98,6 @@ First public release.
 - Duplicated composite grades (`X / X`) collapsed.
 - Briefing Markdown is sanitised with an allow-list; data links are limited to http(s) and mailto.
 
-[Unreleased]: https://github.com/0thernes/global-map-app/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/0thernes/global-map-app/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/0thernes/global-map-app/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/0thernes/global-map-app/releases/tag/v1.0.0
