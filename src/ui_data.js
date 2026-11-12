@@ -1,7 +1,7 @@
 // Data panel (D): the non-spatial PDF 7 layer and everything that cannot be a pin. Entries, PDF 7 tables as sortable
 // data tables, charts that reproduce PDF 7 figures from the CSVs, source types, a cross-layer test battery with
 // honest p-values, and the unplaced-but-sourced list. Every number names its PDF 7 § and page or its source column.
-import { ctx, $, $$, esc, fmt, link } from './app_core.js';
+import { ctx, $, $$, esc, fmt, link, download } from './app_core.js';
 import { inject } from './loader.js';
 import { openDossier } from './ui_panels.js';
 import { countBy, ranked, crosstab, eraOf, ERAS, histogram, sortRows, gradeClass, battery } from './pdf7_stats.js';
@@ -148,11 +148,14 @@ function hist(values, edges, labels, color = '#38E8FF') {
     { color: () => color },
   );
 }
+const csvReg = new Map();
+const csvCell = (v) => (/[",\n]/.test(String(v ?? '')) ? `"${String(v).replace(/"/g, '""')}"` : String(v ?? ''));
 function sortable(id, head, rows, { limit = 0, html = null } = {}) {
   const s = sortState[id] || { col: -1, dir: 1 };
   const rs = s.col >= 0 ? sortRows(rows, s.col, s.dir) : rows;
+  csvReg.set(id, [head, rs]);
   const vis = limit ? rs.slice(0, limit) : rs;
-  return `<div class="dscroll"><table class="dtable" data-sort="${esc(id)}"><thead><tr>${head
+  return `<p class="dtools"><button class="btn small" data-csv="${esc(id)}" title="Download these ${rs.length} rows (current sort and filter) as CSV">CSV (${rs.length} rows)</button></p><div class="dscroll"><table class="dtable" data-sort="${esc(id)}"><thead><tr>${head
     .map(
       (h, i) =>
         `<th data-col="${i}" class="${s.col === i ? (s.dir > 0 ? 'asc' : 'desc') : ''}" title="Sort by ${esc(h)}">${esc(h)}</th>`,
@@ -172,6 +175,17 @@ function wireSort() {
         const s = sortState[id] || { col: -1, dir: 1 };
         sortState[id] = { col, dir: s.col === col ? -s.dir : 1 };
         render();
+      }),
+  );
+  $$('#data-body [data-csv]').forEach(
+    (b) =>
+      (b.onclick = () => {
+        const [head, rows] = csvReg.get(b.dataset.csv);
+        download(
+          `pdf7-${b.dataset.csv}.csv`,
+          [head, ...rows].map((r) => r.map(csvCell).join(',')).join('\n') + '\n',
+          'text/csv',
+        );
       }),
   );
   const more = $('#d-more');

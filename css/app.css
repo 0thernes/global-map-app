@@ -1982,3 +1982,7 @@ tr.dconf td {
   width: 100%;
   height: auto;
 }
+.dtools {
+  margin: 0 0 4px;
+  text-align: right;
+}

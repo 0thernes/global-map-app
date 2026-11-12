@@ -161,7 +161,7 @@ function escape() {
     ['#brief', toggleBrief],
   ])
     if (!$(id).hidden) return f(false);
-  for (const id of ['#hs-dossier', '#hotspots', '#reports', '#reference', '#settings']) {
+  for (const id of ['#hs-dossier', '#hotspots', '#reports', '#reference', '#datap', '#settings']) {
     const e = $(id);
     if (e && !e.hidden) {
       if (id === '#hotspots') return import('./ui_hotspots.js').then((m) => m.toggleHotspots(false));

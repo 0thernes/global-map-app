@@ -110,6 +110,21 @@ await step('index tabs', async () => {
   }
   await page.keyboard.press('Escape');
 });
+await step('data panel tabs', async () => {
+  await page.keyboard.press('d');
+  await page.waitForSelector('#data-body .data-overview', { timeout: 120000 });
+  for (const t of ['entries', 'charts', 'tables', 'sources', 'stats', 'unplaced']) {
+    await page.click(`[data-dt="${t}"]`);
+    await page.waitForTimeout(t === 'stats' ? 1500 : 200);
+  }
+  await page.click('[data-dt="tables"]');
+  await page.click('#data-body [data-t="T038"]');
+  await page.click('#data-body th[data-col="3"]');
+  const first = await page.$eval('#data-body .dtable tbody tr td:nth-child(4)', (td) => td.textContent);
+  if (!/^\d/.test(first)) throw new Error('sorted Prior column does not start with a number: ' + first);
+  await page.keyboard.press('Escape');
+  if (!(await page.$eval('#datap', (e) => e.hidden))) throw new Error('Escape did not close the Data panel');
+});
 await step('settings', async () => {
   await page.keyboard.press(',');
   await page.waitForSelector('#set-body h4');
