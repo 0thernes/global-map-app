@@ -1,0 +1,1 @@
+GM.reg("hydrolakes_tiles/-50_70",{"cols":["id","name","lon","lat","area_km2","depth_avg_m","vol_total_mcm","vol_src","country","lake_type","elevation_m"],"rows":[[185159,"",70.4271,-49.2396,3.37,2.0,6.67,3,"France",1,34],[185161,"",70.0313,-49.2802,1.13,17.9,20.15,3,"France",1,74]]});

@@ -1,0 +1,813 @@
+{
+ "counts": {
+  "2": {
+   "problem": 370,
+   "issue": 92,
+   "error": 21
+  },
+  "3": {
+   "conflict": 179,
+   "error": 5,
+   "issue": 188
+  },
+  "4": {
+   "issue": 700
+  },
+  "5": {
+   "conflict": 239
+  },
+  "6": {
+   "problem": 3,
+   "conflict": 4,
+   "issue": 1353,
+   "dilemma": 1
+  }
+ },
+ "by_detail": {
+  "2": [
+   [
+    "problem",
+    "missing coordinates",
+    370
+   ],
+   [
+    "issue",
+    "precision mismatch",
+    57
+   ],
+   [
+    "issue",
+    "repeated coordinate",
+    32
+   ],
+   [
+    "error",
+    "precision mismatch",
+    21
+   ],
+   [
+    "issue",
+    "admin-N centroid-looking coordinate",
+    3
+   ]
+  ],
+  "3": [
+   [
+    "issue",
+    "date_precision says year but the date carries month/day",
+    188
+   ],
+   [
+    "conflict",
+    "summary/date conflict",
+    179
+   ],
+   [
+    "error",
+    "date_low after date_high",
+    2
+   ],
+   [
+    "error",
+    "date outside [date_low, date_high]",
+    2
+   ],
+   [
+    "error",
+    "impossible calendar date",
+    1
+   ]
+  ],
+  "4": [
+   [
+    "issue",
+    "skeptic boilerplate wording in summary (rule",
+    679
+   ],
+   [
+    "issue",
+    "citation needs verification ([verify] tag); shown with a badge in the app",
+    9
+   ],
+   [
+    "issue",
+    "Hastings/Pasulka source not graded CIT (rule update",
+    5
+   ],
+   [
+    "issue",
+    "ST on an archival/official source",
+    4
+   ],
+   [
+    "issue",
+    "Greer/Maussan-linked row",
+    3
+   ]
+  ],
+  "5": [
+   [
+    "conflict",
+    "cross-dataset conflict on grade",
+    83
+   ],
+   [
+    "conflict",
+    "cross-dataset conflict on category",
+    72
+   ],
+   [
+    "conflict",
+    "cross-dataset conflict on coord_precision",
+    28
+   ],
+   [
+    "conflict",
+    "cross-dataset conflict on lon",
+    28
+   ],
+   [
+    "conflict",
+    "cross-dataset conflict on lat",
+    25
+   ],
+   [
+    "conflict",
+    "cross-dataset conflict on date",
+    3
+   ]
+  ],
+  "6": [
+   [
+    "issue",
+    "yield is a SIPRI yield-class range, not a value",
+    1350
+   ],
+   [
+    "problem",
+    "spot-check",
+    3
+   ],
+   [
+    "conflict",
+    "spot-check",
+    3
+   ],
+   [
+    "issue",
+    "date is one day off the local-time date (SIPRI lists GMT); not an error, but captions should say GMT",
+    3
+   ],
+   [
+    "conflict",
+    "yield differs from the published reference value by >N%",
+    1
+   ],
+   [
+    "dilemma",
+    "N SIPRI rows are region precision",
+    1
+   ]
+  ]
+ },
+ "examples": {
+  "2|missing coordinates": [
+   {
+    "id": "UAP-PDF7-iraq-jellyfish-2017",
+    "name": "Iraq 'jellyfish' UAP (filmed Oct 2017; released Jan 2024)",
+    "value": ",",
+    "other": ""
+   },
+   {
+    "id": "UAP-PDF7-yemen-orb-2024",
+    "name": "Yemen MQ-9 'Hellfire orb' (30 October 2024; shown 9 September 2025)",
+    "value": ",",
+    "other": ""
+   },
+   {
+    "id": "UAP-PDF7-pursue-302-2026",
+    "name": "PURSUE Release 01: FBI 302 helicopter orbs (released 8 May 2026)",
+    "value": ",",
+    "other": ""
+   },
+   {
+    "id": "UAP-PDF7-byrd-highjump-1947",
+    "name": "Operation Highjump and Byrd's El Mercurio interview (1946-1947)",
+    "value": ",",
+    "other": ""
+   }
+  ],
+  "2|precision mismatch": [
+   {
+    "id": "UAP-PDF7-savannah-river-2016",
+    "name": "Reported drones over the Savannah River Site (June-Nov 2016)",
+    "value": "exact_site",
+    "other": "33.25,-81.65"
+   },
+   {
+    "id": "NUC-Q1640098",
+    "name": "Asc\u00f3 Nuclear Power Plant",
+    "value": "exact_site",
+    "other": "41.2,0.56944444"
+   },
+   {
+    "id": "NUC-Q1715858",
+    "name": "Cofrentes Nuclear Power Plant",
+    "value": "exact_site",
+    "other": "39.21666667,-1.05"
+   },
+   {
+    "id": "NUC-Q1739359",
+    "name": "Beloyarsk Nuclear Power Station",
+    "value": "exact_site",
+    "other": "56.85,61.31666667"
+   }
+  ],
+  "2|admin-1 centroid-looking coordinate": [
+   {
+    "id": "PYR-Q26282918",
+    "name": "Pyramid Monument Approximately 25 Metres North West Of St Annes Limehouse Parish Church",
+    "value": "exact_site",
+    "other": "51.5162,-0.0263"
+   },
+   {
+    "id": "MEG-mono-22",
+    "name": "Vatican Obelisk",
+    "value": "within_1km",
+    "other": "41.9033,12.4534"
+   },
+   {
+    "id": "CAVE-hypogeum",
+    "name": "\u0126al Saflieni Hypogeum",
+    "value": "within_1km",
+    "other": "35.8725,14.5042"
+   }
+  ],
+  "2|repeated coordinate": [
+   {
+    "id": "UAP-PDF7-savannah-river-2016",
+    "name": "Reported drones over the Savannah River Site (June-Nov 2016)",
+    "value": "33.25,-81.65",
+    "other": "reported drones over the savannah river site (june-nov 2016); savannah river plant; savannah river site"
+   },
+   {
+    "id": "NUC-Q2458173",
+    "name": "Savannah River Site",
+    "value": "33.25,-81.65",
+    "other": "reported drones over the savannah river site (june-nov 2016); savannah river plant; savannah river site"
+   },
+   {
+    "id": "NUC-Q139796054",
+    "name": "Savannah River Plant",
+    "value": "33.25,-81.65",
+    "other": "reported drones over the savannah river site (june-nov 2016); savannah river plant; savannah river site"
+   },
+   {
+    "id": "NUC-Q1739377",
+    "name": "Chooz Nuclear Power Plant",
+    "value": "50.09,4.7906",
+    "other": "chooz a; chooz nuclear power plant; chooz-b-2"
+   }
+  ],
+  "3|summary/date conflict": [
+   {
+    "id": "UAP-PDF7-hs-skinwalker",
+    "name": "Skinwalker Ranch (Utah)",
+    "value": "1996",
+    "other": "2025"
+   },
+   {
+    "id": "MIS-dyatlov-1959",
+    "name": "Dyatlov Pass incident",
+    "value": "1959-02-01",
+    "other": "2019"
+   },
+   {
+    "id": "MIS-atadero-1999",
+    "name": "Death of Jaryd Atadero",
+    "value": "1999-10-02",
+    "other": "2003"
+   }
+  ],
+  "3|impossible calendar date": [
+   {
+    "id": "GEIPAN-1811",
+    "name": "BACOUEL (60) 31.09.2000",
+    "value": "2000-09-31",
+    "other": ""
+   }
+  ],
+  "3|date_precision says year but the date carries month/day": [
+   {
+    "id": "NUC-Q1575435",
+    "name": "Forsmark Nuclear Power Plant",
+    "value": "year",
+    "other": "1980-12-10"
+   },
+   {
+    "id": "NUC-Q1595271",
+    "name": "Berkeley nuclear power station",
+    "value": "year",
+    "other": "1956-01-01"
+   },
+   {
+    "id": "NUC-Q1623116",
+    "name": "Tsuruga Nuclear Power Plant",
+    "value": "year",
+    "other": "1966-01-01"
+   },
+   {
+    "id": "NUC-Q1640098",
+    "name": "Asc\u00f3 Nuclear Power Plant",
+    "value": "year",
+    "other": "1971-01-01"
+   }
+  ],
+  "3|date_low after date_high": [
+   {
+    "id": "CON-WP-12",
+    "name": "Reconquista",
+    "value": "718 > 1492",
+    "other": ""
+   },
+   {
+    "id": "CON-WP-41",
+    "name": "Jewish\u2013Roman wars",
+    "value": "66 > 135",
+    "other": ""
+   }
+  ],
+  "3|date outside [date_low, date_high]": [
+   {
+    "id": "CON-WP-12",
+    "name": "Reconquista",
+    "value": "718",
+    "other": "718..1492"
+   },
+   {
+    "id": "CON-WP-41",
+    "name": "Jewish\u2013Roman wars",
+    "value": "66",
+    "other": "66..135"
+   }
+  ],
+  "4|skeptic boilerplate wording in summary (rule": [],
+  "4|Greer/Maussan-linked row": [],
+  "4|Hastings/Pasulka source not graded CIT (rule update": [],
+  "4|ST on an archival/official source": [
+   {
+    "id": "ABD-allagash-1976",
+    "name": "Allagash abductions (Eagle Lake)",
+    "value": "ST",
+    "other": "press + periodical archive"
+   },
+   {
+    "id": "ABD-strieber-1985",
+    "name": "Whitley Strieber \"Communion\" experience",
+    "value": "ST",
+    "other": "journal (cufos iur) + newspaper clipping archive"
+   },
+   {
+    "id": "ABD-cahill-1993",
+    "name": "Kelly Cahill abduction (Narre Warren North)",
+    "value": "ST",
+    "other": "press/official"
+   },
+   {
+    "id": "MUT-snippy-1967",
+    "name": "\"Snippy\" (Lady), Appaloosa horse, King Ranch",
+    "value": "ST",
+    "other": "press/official"
+   }
+  ],
+  "4|citation needs verification ([verify] tag); shown with a badge in the app": [
+   {
+    "id": "USO-gallaudet-gofast-2015",
+    "name": "Gallaudet 'urgent safety of flight' GOFAST email (Jan 2015)",
+    "value": "[verify]",
+    "other": ""
+   },
+   {
+    "id": "USO-stockholm-2014",
+    "name": "Stockholm archipelago submarine hunt (Oct 2014)",
+    "value": "[verify]",
+    "other": ""
+   },
+   {
+    "id": "SAT-gobi-grids-2011",
+    "name": "Gobi desert grid patterns (Google Earth, Nov 2011)",
+    "value": "[verify]",
+    "other": ""
+   },
+   {
+    "id": "SAT-google-ocean-atlantis-2009",
+    "name": "'Atlantis' grid on Google Ocean, off the Canary Islands (Feb 2009)",
+    "value": "[verify]",
+    "other": ""
+   }
+  ],
+  "5|cross-dataset conflict on date": [
+   {
+    "id": "UAP-PDF7-battle-la-1942",
+    "name": "Battle of Los Angeles (24-25 February 1942)",
+    "value": "1942-02-25",
+    "other": "1942-02-24 (local curated (data/sources/qwm_uap_cases.csv), qwm-hs-12)"
+   },
+   {
+    "id": "UAP-PDF7-hudson-valley-1983",
+    "name": "Hudson Valley 'boomerang' wave (1982-1986)",
+    "value": "1982-01-01",
+    "other": "1982-12-31 (local curated (data/sources/qwm_uap_cases.csv), qwm-gl-G12.4.1.5)"
+   },
+   {
+    "id": "UAP-PDF7-samudra-tapu-2004",
+    "name": "Samudra Tapu 'robot-like' figure (September 2004)",
+    "value": "2004-09-01",
+    "other": "2004-09-27 (local curated (data/sources/qwm_uap_cases.csv), qwm-gl-G12.6.1.6)"
+   }
+  ],
+  "5|cross-dataset conflict on coord_precision": [
+   {
+    "id": "UAP-PDF7-battle-la-1942",
+    "name": "Battle of Los Angeles (24-25 February 1942)",
+    "value": "locality",
+    "other": "region (local curated (data/sources/qwm_uap_cases.csv), qwm-hs-12)"
+   },
+   {
+    "id": "UAP-PDF7-mantell-1948",
+    "name": "Mantell crash (7 January 1948)",
+    "value": "within_1km",
+    "other": "region (local curated (data/sources/qwm_uap_cases.csv), qwm-hs-07)"
+   },
+   {
+    "id": "UAP-PDF7-lakenheath-1956",
+    "name": "Lakenheath-Bentwaters radar-visual (13-14 August 1956)",
+    "value": "exact_site",
+    "other": "region (local curated (data/sources/qwm_uap_cases.csv), qwm-hs-08)"
+   },
+   {
+    "id": "UAP-PDF7-starfish-prime-1962",
+    "name": "Starfish Prime high-altitude nuclear test (9 July 1962)",
+    "value": "locality",
+    "other": "region (local curated (data/sources/qwm_uap_cases.csv), qwm-gl-G12.2.1.2)"
+   }
+  ],
+  "5|cross-dataset conflict on lat": [
+   {
+    "id": "UAP-PDF7-mantell-1948",
+    "name": "Mantell crash (7 January 1948)",
+    "value": "36.667778",
+    "other": "37.9068 (local curated (data/sources/qwm_uap_cases.csv), qwm-hs-07)"
+   },
+   {
+    "id": "UAP-PDF7-starfish-prime-1962",
+    "name": "Starfish Prime high-altitude nuclear test (9 July 1962)",
+    "value": "16.466667",
+    "other": "21.30455 (local curated (data/sources/qwm_uap_cases.csv), qwm-gl-G12.2.1.2)"
+   },
+   {
+    "id": "UAP-PDF7-sac-overflights-1975",
+    "name": "Low-flying unknowns over SAC nuclear bases: Loring, Wurtsmith and Malmstrom (Oct-Nov 1975)",
+    "value": "46.949722",
+    "other": "46.908611 (NUFORC (scrubbed), NUFORC-S4825)"
+   },
+   {
+    "id": "MIS-valentich-1978",
+    "name": "Frederick Valentich disappearance",
+    "value": "-39.4",
+    "other": "-39.47301 (local curated (data/sources/qwm_uap_cases.csv), qwm-hs-17)"
+   }
+  ],
+  "5|cross-dataset conflict on lon": [
+   {
+    "id": "UAP-PDF7-mantell-1948",
+    "name": "Mantell crash (7 January 1948)",
+    "value": "-86.557778",
+    "other": "-85.9723 (local curated (data/sources/qwm_uap_cases.csv), qwm-hs-07)"
+   },
+   {
+    "id": "UAP-PDF7-starfish-prime-1962",
+    "name": "Starfish Prime high-altitude nuclear test (9 July 1962)",
+    "value": "-169.633333",
+    "other": "-157.85568 (local curated (data/sources/qwm_uap_cases.csv), qwm-gl-G12.2.1.2)"
+   },
+   {
+    "id": "UAP-PDF7-shag-harbour-1967",
+    "name": "Shag Harbour splashdown (4 October 1967)",
+    "value": "-65.7",
+    "other": "-65.71799 (local curated (data/sources/qwm_uap_cases.csv), qwm-hs-02)"
+   },
+   {
+    "id": "UAP-PDF7-sac-overflights-1975",
+    "name": "Low-flying unknowns over SAC nuclear bases: Loring, Wurtsmith and Malmstrom (Oct-Nov 1975)",
+    "value": "-67.888889",
+    "other": "-67.826389 (NUFORC (scrubbed), NUFORC-S4825)"
+   }
+  ],
+  "5|cross-dataset conflict on grade": [
+   {
+    "id": "UAP-PDF7-mantell-1948",
+    "name": "Mantell crash (7 January 1948)",
+    "value": "CIT",
+    "other": "CIT (military) (local curated (data/sources/qwm_uap_cases.csv), qwm-hs-07)"
+   },
+   {
+    "id": "UAP-PDF7-aztec-1948",
+    "name": "Aztec, New Mexico crash claim (25 March 1948)",
+    "value": "TE",
+    "other": "Testimony / Testimony (local curated (data/sources/qwm_uap_cases.csv), qwm-gl-G12.2.1.1)"
+   },
+   {
+    "id": "UAP-PDF7-lubbock-1951",
+    "name": "Lubbock Lights (25-31 August 1951)",
+    "value": "CIT",
+    "other": "CIT (STEM professors) (local curated (data/sources/qwm_uap_cases.csv), qwm-hs-06)"
+   },
+   {
+    "id": "UAP-PDF7-flatwoods-1952",
+    "name": "Flatwoods encounter (12 September 1952)",
+    "value": "CIT",
+    "other": "Cred. Insider Testimony / Serious Testimony (local curated (data/sources/qwm_uap_cases.csv), qwm-gl-G12.6.1.2)"
+   }
+  ],
+  "5|cross-dataset conflict on category": [
+   {
+    "id": "MIS-dyatlov-1959",
+    "name": "Dyatlov Pass incident",
+    "value": "Missing person",
+    "other": "UAP case (PDF 7 Part V (G12), UAP-PDF7-dyatlov-1959)"
+   },
+   {
+    "id": "UAP-PDF7-dyatlov-1959",
+    "name": "Dyatlov Pass incident, Kholat Syakhl, northern Urals (1-2 February 1959)",
+    "value": "UAP case",
+    "other": "Missing person (curated missing/unsolved, MIS-dyatlov-1959)"
+   },
+   {
+    "id": "ABD-hill-1961",
+    "name": "Betty and Barney Hill abduction",
+    "value": "Abduction",
+    "other": "UAP case (curated additions, UAP-ADD-Q850529)"
+   },
+   {
+    "id": "UAP-ADD-Q850529",
+    "name": "Barney and Betty Hill incident",
+    "value": "UAP case",
+    "other": "Abduction (curated abductions, ABD-hill-1961)"
+   }
+  ],
+  "6|spot-check": [
+   {
+    "id": "",
+    "name": "Fort Bragg",
+    "value": "35.10871,-79.14125",
+    "other": ""
+   },
+   {
+    "id": "",
+    "name": "Q135102851",
+    "value": "31.92513,35.22339",
+    "other": ""
+   },
+   {
+    "id": "",
+    "name": "Davis-Monthan Air Force Base",
+    "value": "32.1608,-110.84872",
+    "other": ""
+   },
+   {
+    "id": "",
+    "name": "Tau",
+    "value": "-14.23,-169.454",
+    "other": ""
+   }
+  ],
+  "6|date is one day off the local-time date (SIPRI lists GMT); not an error, but captions should say GMT": [
+   {
+    "id": "NT-45002",
+    "name": "LITTLEBOY",
+    "value": "1945-08-05",
+    "other": "1945-08-06"
+   },
+   {
+    "id": "NT-52010",
+    "name": "MIKE",
+    "value": "1952-10-31",
+    "other": "1952-11-01"
+   },
+   {
+    "id": "NT-54001",
+    "name": "BRAVO",
+    "value": "1954-02-28",
+    "other": "1954-03-01"
+   }
+  ],
+  "6|yield differs from the published reference value by >15%": [
+   {
+    "id": "NT-60001",
+    "name": "GERBOISE BLEUE",
+    "value": "0-200",
+    "other": "70"
+   }
+  ],
+  "6|yield is a SIPRI yield-class range, not a value": [
+   {
+    "id": "NT-51012",
+    "name": "ABLE",
+    "value": "0-0.1",
+    "other": ""
+   },
+   {
+    "id": "NT-54013",
+    "name": "USSR test 54013",
+    "value": "0-0.001",
+    "other": ""
+   },
+   {
+    "id": "NT-56001",
+    "name": "PROJECT 56:4",
+    "value": "0-20",
+    "other": ""
+   },
+   {
+    "id": "NT-58003",
+    "name": "VENUS",
+    "value": "0-0.001",
+    "other": ""
+   }
+  ],
+  "6|2048 SIPRI rows are region precision": [
+   {
+    "id": "",
+    "name": "SIPRI DD.MM coordinates",
+    "value": "2048",
+    "other": ""
+   }
+  ]
+ },
+ "rows_checked": {
+  "map_uap_cit": 83194,
+  "map_abductions": 11,
+  "map_animal_mutilations": 15,
+  "map_missing_unsolved": 14,
+  "map_uso_water": 22,
+  "map_satellite_anomalies": 20,
+  "map_nuclear_sites": 833,
+  "map_nuclear_tests": 2057,
+  "map_conflicts": 409,
+  "map_pyramids": 580,
+  "map_megaliths": 50,
+  "map_caves_underground": 30,
+  "map_ancient_cities_remote_sensing": 18,
+  "map_ocean": 17,
+  "map_weird_coordinates": 38
+ },
+ "pass5": {
+  "linked_rows": 22,
+  "conflicts_by_field": {
+   "date": 3,
+   "coord_precision": 28,
+   "lat": 25,
+   "lon": 28,
+   "grade": 83,
+   "category": 72
+  },
+  "public_rows": 2593
+ },
+ "pass6": {
+  "spot": {
+   "military": {
+    "n": 50,
+    "flagged": 3
+   },
+   "nuclear_sites": {
+    "n": 50,
+    "flagged": 0
+   },
+   "volcanoes": {
+    "n": 30,
+    "flagged": 1
+   },
+   "conflicts (QWM)": {
+    "n": 30,
+    "flagged": 2
+   }
+  },
+  "nuclear_tests": [
+   {
+    "row_date": "1945-07-16",
+    "test": "TRINITY",
+    "date": "1945-07-16",
+    "found": true,
+    "id": "NT-45001",
+    "yield_row": "21",
+    "yield_ref": 21,
+    "yield_ok": true,
+    "coord_ok": true,
+    "src": "https://en.wikipedia.org/wiki/Trinity_(nuclear_test)"
+   },
+   {
+    "row_date": "1945-08-05",
+    "test": "LITTLEBOY",
+    "date": "1945-08-06",
+    "found": true,
+    "id": "NT-45002",
+    "yield_row": "15",
+    "yield_ref": 15,
+    "yield_ok": true,
+    "coord_ok": true,
+    "src": "https://en.wikipedia.org/wiki/Little_Boy"
+   },
+   {
+    "row_date": "1945-08-09",
+    "test": "FATMAN",
+    "date": "1945-08-09",
+    "found": true,
+    "id": "NT-45003",
+    "yield_row": "21",
+    "yield_ref": 21,
+    "yield_ok": true,
+    "coord_ok": true,
+    "src": "https://en.wikipedia.org/wiki/Fat_Man"
+   },
+   {
+    "row_date": "1949-08-29",
+    "test": "USSR TEST 49001",
+    "date": "1949-08-29",
+    "found": true,
+    "id": "NT-49001",
+    "yield_row": "22",
+    "yield_ref": 22,
+    "yield_ok": true,
+    "coord_ok": true,
+    "src": "https://en.wikipedia.org/wiki/RDS-1"
+   },
+   {
+    "row_date": "1952-10-31",
+    "test": "MIKE",
+    "date": "1952-11-01",
+    "found": true,
+    "id": "NT-52010",
+    "yield_row": "10400",
+    "yield_ref": 10400,
+    "yield_ok": true,
+    "coord_ok": true,
+    "src": "https://en.wikipedia.org/wiki/Ivy_Mike"
+   },
+   {
+    "row_date": "1952-10-03",
+    "test": "HURRICANE",
+    "date": "1952-10-03",
+    "found": true,
+    "id": "NT-52009",
+    "yield_row": "25",
+    "yield_ref": 25,
+    "yield_ok": true,
+    "coord_ok": true,
+    "src": "https://en.wikipedia.org/wiki/Operation_Hurricane"
+   },
+   {
+    "row_date": "1954-02-28",
+    "test": "BRAVO",
+    "date": "1954-03-01",
+    "found": true,
+    "id": "NT-54001",
+    "yield_row": "15000",
+    "yield_ref": 15000,
+    "yield_ok": true,
+    "coord_ok": true,
+    "src": "https://en.wikipedia.org/wiki/Castle_Bravo"
+   },
+   {
+    "row_date": "1960-02-13",
+    "test": "GERBOISE BLEUE",
+    "date": "1960-02-13",
+    "found": true,
+    "id": "NT-60001",
+    "yield_row": "0-200",
+    "yield_ref": 70,
+    "yield_ok": false,
+    "coord_ok": true,
+    "src": "https://en.wikipedia.org/wiki/Gerboise_Bleue"
+   },
+   {
+    "row_date": "1961-10-30",
+    "test": "USSR TEST 61053",
+    "date": "1961-10-30",
+    "found": true,
+    "id": "NT-61053",
+    "yield_row": "50000",
+    "yield_ref": 50000,
+    "yield_ok": true,
+    "coord_ok": true,
+    "src": "https://en.wikipedia.org/wiki/Tsar_Bomba"
+   }
+  ]
+ },
+ "pass8": {
+  "glossary_terms": 39,
+  "with_url": 28,
+  "with_doc": 11
+ },
+ "total": 3155
+}

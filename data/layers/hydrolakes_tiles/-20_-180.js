@@ -1,0 +1,1 @@
+GM.reg("hydrolakes_tiles/-20_-180",{"cols":["id","name","lon","lat","area_km2","depth_avg_m","vol_total_mcm","vol_src","country","lake_type","elevation_m"],"rows":[[119841,"",-171.5561,-13.9685,1.45,7.6,10.96,3,"Samoa",1,314],[120614,"",-174.0437,-18.6479,2.46,14.9,36.63,3,"Tonga",1,0],[120674,"",-175.0687,-19.7521,7.09,36.6,259.3,3,"Tonga",1,30]]});

@@ -1,0 +1,34 @@
+{
+  "name": "global-map-app",
+  "owner": "0thernes",
+  "description": "Cinematic 3D OSINT globe of sourced UAP and high-strangeness cases vs military, nuclear, conflict, water and sky layers. Sourced rows only.",
+  "homepage": "https://0thernes.github.io/global-map-app/",
+  "topics": [
+    "osint",
+    "uap",
+    "ufo",
+    "threejs",
+    "webgl",
+    "globe",
+    "geospatial",
+    "data-visualization",
+    "gis",
+    "timeline",
+    "open-data",
+    "nuclear",
+    "conflict-data",
+    "bathymetry",
+    "static-site"
+  ],
+  "license": "MIT",
+  "visibility_note": "Public repo: data/private/ (NUFORC rows, no licence) is git-ignored and never pushed.",
+  "has_pages": true,
+  "pages_source": "GitHub Actions (.github/workflows/pages.yml)",
+  "default_branch": "main",
+  "gh_commands": [
+    "gh repo create 0thernes/global-map-app --public --description \"$(jq -r .description docs/repo-metadata.json)\" --homepage https://0thernes.github.io/global-map-app/ --source . --remote origin",
+    "gh repo edit 0thernes/global-map-app $(jq -r '.topics | map(\"--add-topic \" + .) | join(\" \")' docs/repo-metadata.json)",
+    "git push -u origin main --follow-tags",
+    "gh api -X POST repos/0thernes/global-map-app/pages -f build_type=workflow"
+  ]
+}

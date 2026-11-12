@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900" font-family="Inter, sans-serif">
+<rect width="1440" height="900" fill="#03060C"/>
+<defs><pattern id="g" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M32 0H0V32" fill="none" stroke="#0f2236" stroke-width="1"/></pattern></defs>
+<rect width="1440" height="900" fill="url(#g)"/>
+<text x="24" y="884" fill="#7A90A3" font-size="14">WIREFRAME · Main console</text>
+<rect x="0" y="0" width="1440" height="56" rx="8" fill="rgba(16,26,43,0.85)" stroke="#9DB1C2" stroke-width="1.5"/>
+<text x="12" y="24" fill="#9DB1C2" font-size="15" font-weight="600">TOP BAR  [/] search-everything (cases · people · sites · sources · places)   |  investigation ▾  save  export ▾  ?</text>
+<rect x="0" y="56" width="320" height="732" rx="8" fill="rgba(16,26,43,0.85)" stroke="#7C9CFF" stroke-width="1.5"/>
+<text x="12" y="80" fill="#7C9CFF" font-size="15" font-weight="600">LEFT RAIL (L)  collapsible</text>
+<text x="12" y="98" fill="#C9D7E2" font-size="12" font-weight="400">Layers: on · opacity · ▲▼ order · A/B side</text>
+<text x="12" y="116" fill="#C9D7E2" font-size="12" font-weight="400">Filters: category · grade · era · country</text>
+<text x="12" y="134" fill="#C9D7E2" font-size="12" font-weight="400">precision · search</text>
+<text x="12" y="152" fill="#C9D7E2" font-size="12" font-weight="400">Counts + mini charts (brushable)</text>
+<circle cx="670.0" cy="422.0" r="340.0" fill="#0B1F33" stroke="#38E8FF" stroke-width="2" stroke-dasharray="6 6"/>
+<text x="332" y="80" fill="#38E8FF" font-size="15" font-weight="600">GLOBE (center never covered)</text>
+<rect x="1020" y="56" width="420" height="732" rx="8" fill="rgba(16,26,43,0.85)" stroke="#7C9CFF" stroke-width="1.5"/>
+<text x="1032" y="80" fill="#7C9CFF" font-size="15" font-weight="600">RIGHT DOSSIER (Esc closes)</text>
+<text x="1032" y="98" fill="#C9D7E2" font-size="12" font-weight="400">case / site / conflict / country</text>
+<text x="1032" y="116" fill="#C9D7E2" font-size="12" font-weight="400">source + grade badges, precision</text>
+<text x="1032" y="134" fill="#C9D7E2" font-size="12" font-weight="400">related, nearby sites, mini timeline</text>
+<text x="1032" y="152" fill="#C9D7E2" font-size="12" font-weight="400">export md / html</text>
+<rect x="0" y="788" width="1440" height="112" rx="8" fill="rgba(16,26,43,0.85)" stroke="#9DB1C2" stroke-width="1.5"/>
+<text x="12" y="812" fill="#9DB1C2" font-size="15" font-weight="600">TIMELINE  ▶ ❚❚  −Y −M −D  [1900 ━━━━━━━━━●━━ 2026]  +D +M +Y   speed ▾  mode ▾  ±N d / km</text>
+<text x="12" y="830" fill="#C9D7E2" font-size="12" font-weight="400">event-density sparkline (drag = brush a date range)  ·  date readout 1976-09-19 12:00 UTC  ·  co-occurrence count</text>
+</svg>

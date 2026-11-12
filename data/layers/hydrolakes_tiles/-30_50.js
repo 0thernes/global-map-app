@@ -1,0 +1,1 @@
+GM.reg("hydrolakes_tiles/-30_50",{"cols":["id","name","lon","lat","area_km2","depth_avg_m","vol_total_mcm","vol_src","country","lake_type","elevation_m"],"rows":[[182748,"",57.4313,-20.2562,1.44,4.9,7.07,3,"Mauritius",1,145],[182760,"",57.5021,-20.3729,3.55,4.3,15.2,3,"Mauritius",1,568]]});

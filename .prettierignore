@@ -1,0 +1,11 @@
+node_modules/
+js/
+vendor/
+data/
+textures/
+shots/
+docs/screenshots/
+docs/wireframes/
+dist/
+package-lock.json
+*.min.js

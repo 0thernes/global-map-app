@@ -1,0 +1,25 @@
+# dependencies and build output
+node_modules/
+dist/
+coverage/
+*.log
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# local-only data with no redistribution licence (NUFORC etc.). See data/private/README.md and DATA_LICENSE.md.
+data/private/*
+!data/private/README.md
+
+# scratch
+/tmp/
+*.bundle
+/global-map-app-*.zip
+
+# local render output (curated copies live in docs/screenshots)
+/shots/

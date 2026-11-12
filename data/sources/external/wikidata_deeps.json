@@ -1,0 +1,162 @@
+{
+ "Q510": {
+  "label": "Mariana Trench",
+  "desc": "deepest oceanic trench on Earth",
+  "coord": {
+   "latitude": 11.35,
+   "longitude": 142.2,
+   "altitude": null,
+   "precision": 0.0166667,
+   "globe": "http://www.wikidata.org/entity/Q2"
+  },
+  "depth": []
+ },
+ "Q459173": {
+  "label": "Challenger Deep",
+  "desc": "deepest known point in the Earth's seabed hydrosphere",
+  "coord": {
+   "latitude": 11.373333333333333,
+   "longitude": 142.59166666666667,
+   "altitude": null,
+   "precision": 0.0002777777777777778,
+   "globe": "http://www.wikidata.org/entity/Q2"
+  },
+  "depth": []
+ },
+ "Q5631165": {
+  "label": "Sirena Deep",
+  "desc": "deep area in Mariana trench",
+  "coord": {
+   "latitude": 12.0654,
+   "longitude": 144.58113333,
+   "altitude": null,
+   "precision": 2.77777777778e-06,
+   "globe": "http://www.wikidata.org/entity/Q2"
+  },
+  "depth": []
+ },
+ "Q1628178": {
+  "label": "Horizon Deep",
+  "desc": null,
+  "coord": {
+   "latitude": -25,
+   "longitude": -175,
+   "altitude": null,
+   "precision": 1,
+   "globe": "http://www.wikidata.org/entity/Q2"
+  },
+  "depth": [
+   "+10817"
+  ]
+ },
+ "Q1700129": {
+  "label": "Milwaukee Deep",
+  "desc": "deepest part of the Atlantic Ocean \u2013 part of the Puerto Rico Trench",
+  "coord": {
+   "latitude": 19.583333,
+   "longitude": -66.5,
+   "altitude": null,
+   "precision": 0.016666666666667,
+   "globe": "http://www.wikidata.org/entity/Q2"
+  },
+  "depth": [
+   "+8605"
+  ]
+ },
+ "Q1943612": {
+  "label": "Molloy Deep",
+  "desc": "Bathymetric feature in the Fram Strait",
+  "coord": {
+   "latitude": 79.137,
+   "longitude": 2.817,
+   "altitude": null,
+   "precision": 1e-08,
+   "globe": "http://www.wikidata.org/entity/Q2"
+  },
+  "depth": []
+ },
+ "Q126368412": {
+  "label": "Scholl Deep",
+  "desc": "deep near New Zealand",
+  "coord": {
+   "latitude": -31.933,
+   "longitude": -177.283,
+   "altitude": null,
+   "precision": 0.001,
+   "globe": "http://www.wikidata.org/entity/Q2"
+  },
+  "depth": []
+ },
+ "Q1491734": {
+  "label": "Galathea Depth",
+  "desc": "portion the Philippine Trench exceeding 6,000-metre (20,000 ft) depths in the south-western Pacific Ocean",
+  "coord": {
+   "latitude": 12,
+   "longitude": 127,
+   "altitude": null,
+   "precision": 1,
+   "globe": "http://www.wikidata.org/entity/Q2"
+  },
+  "depth": []
+ },
+ "Q119196": {
+  "label": "Kermadec Trench",
+  "desc": "Linear ocean trench in the south Pacific north west of New Zealand",
+  "coord": {
+   "latitude": -31,
+   "longitude": -177,
+   "altitude": null,
+   "precision": 1,
+   "globe": "http://www.wikidata.org/entity/Q2"
+  },
+  "depth": []
+ },
+ "Q119294": {
+  "label": "Tonga Trench",
+  "desc": "deepest oceanic trench in the southwestern Pacific Ocean",
+  "coord": {
+   "latitude": -22.944722222222,
+   "longitude": -174.73305555556,
+   "altitude": null,
+   "precision": null,
+   "globe": "http://www.wikidata.org/entity/Q2"
+  },
+  "depth": []
+ },
+ "Q118518": {
+  "label": "South Sandwich Trench",
+  "desc": "deep arcuate trench in the South Atlantic Ocean east of the South Sandwich Islands",
+  "coord": {
+   "latitude": -55.66666667,
+   "longitude": -25.91666667,
+   "altitude": null,
+   "precision": 0.016666666666667,
+   "globe": "http://www.wikidata.org/entity/Q2"
+  },
+  "depth": []
+ },
+ "Q1478402": {
+  "label": "Meteor Deep",
+  "desc": "deepest point of the South Sandwich Trench",
+  "coord": {
+   "latitude": -55.66666667,
+   "longitude": -25.91666667,
+   "altitude": null,
+   "precision": 0.016666666666667,
+   "globe": "http://www.wikidata.org/entity/Q2"
+  },
+  "depth": []
+ },
+ "Q5270660": {
+  "label": "Diamantina Fracture Zone",
+  "desc": "escarpment, separating two oceanic plateaus in the southeast Indian Ocean",
+  "coord": {
+   "latitude": -35,
+   "longitude": 104,
+   "altitude": null,
+   "precision": 1,
+   "globe": "http://www.wikidata.org/entity/Q2"
+  },
+  "depth": []
+ }
+}

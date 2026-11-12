@@ -1,0 +1,17 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    groups:
+      dev-tooling:
+        patterns: ['eslint*', '@eslint/*', 'prettier', 'globals', 'esbuild', 'playwright']
+    ignore:
+      # three.js is vendored at r170 (vendor/three); upgrade deliberately, not by bot
+      - dependency-name: three
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly

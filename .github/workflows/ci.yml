@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Lint, test, validate, smoke
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install
+        run: npm ci
+      - name: ESLint
+        run: npm run lint:js
+      - name: Prettier check
+        run: npm run format:check
+      - name: Unit tests (stats, geo, grades, convergence, reports, index, coverage)
+        run: npm test
+      - name: CSV schema validation
+        run: npm run test:data
+      - name: Bundle is up to date
+        run: |
+          npm run build
+          git diff --exit-code -- js/app.js || (echo "js/app.js is stale: run npm run build and commit" && exit 1)
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Headless smoke test (no console errors)
+        run: npm run test:smoke
+      - name: Largest files
+        run: find . -path ./node_modules -prune -o -path ./.git -prune -o -type f -size +50M -print | tee /dev/stderr | (! grep .)

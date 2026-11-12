@@ -1,0 +1,465 @@
+{
+ "_doc": "Direct Wikidata P31 classes reached by the military-base subclass traversal that are not current military sites. An item is dropped only when every direct class is drop; it is relabelled historic (or gendarmerie/police) when every class is drop/historic/police. Everything else stays a military site. Built by data/tools/build_military.py from RAW/wd/wd_classes.json.",
+ "classes": {
+  "Q1005960": {
+   "policy": "historic",
+   "label": "Fortresses of the German Confederation"
+  },
+  "Q100955806": {
+   "policy": "historic",
+   "label": "sperfort"
+  },
+  "Q10856363": {
+   "policy": "historic",
+   "label": "daiba"
+  },
+  "Q112302460": {
+   "policy": "drop",
+   "label": "city wall tower"
+  },
+  "Q112631697": {
+   "policy": "historic",
+   "label": "eupseong"
+  },
+  "Q112971684": {
+   "policy": "historic",
+   "label": "castle with zuda"
+  },
+  "Q115458966": {
+   "policy": "historic",
+   "label": "Ighrem"
+  },
+  "Q11558822": {
+   "policy": "historic",
+   "label": "Japanese sea fort"
+  },
+  "Q1156360": {
+   "policy": "historic",
+   "label": "tegart fort"
+  },
+  "Q11573460": {
+   "policy": "historic",
+   "label": "remaining original tenshu"
+  },
+  "Q115939831": {
+   "policy": "historic",
+   "label": "donjon"
+  },
+  "Q116257904": {
+   "policy": "historic",
+   "label": "former barracks"
+  },
+  "Q116693136": {
+   "policy": "historic",
+   "label": "former military hospital"
+  },
+  "Q11863091": {
+   "policy": "historic",
+   "label": "Czech artillery fort"
+  },
+  "Q11974618": {
+   "policy": "historic",
+   "label": "Heeres Küsten Batterie"
+  },
+  "Q120170641": {
+   "policy": "drop",
+   "label": "mock town"
+  },
+  "Q120721368": {
+   "policy": "historic",
+   "label": "fortified clock tower"
+  },
+  "Q122946297": {
+   "policy": "drop",
+   "label": "wooden observation tower"
+  },
+  "Q123905961": {
+   "policy": "historic",
+   "label": "anti-aircraft battery"
+  },
+  "Q12593177": {
+   "policy": "historic",
+   "label": "dondae"
+  },
+  "Q12797": {
+   "policy": "historic",
+   "label": "star fort"
+  },
+  "Q12798329": {
+   "policy": "historic",
+   "label": "hospitals of the Yugoslav Partisans"
+  },
+  "Q1293150": {
+   "policy": "historic",
+   "label": "coastal tower"
+  },
+  "Q130641764": {
+   "policy": "historic",
+   "label": "heliographic post"
+  },
+  "Q131322997": {
+   "policy": "historic",
+   "label": "rifle fort"
+  },
+  "Q131668": {
+   "policy": "drop",
+   "label": "acropolis"
+  },
+  "Q133884822": {
+   "policy": "drop",
+   "label": "military parish church"
+  },
+  "Q13405507": {
+   "policy": "drop",
+   "label": "gyro tower"
+  },
+  "Q134318865": {
+   "policy": "police",
+   "label": "Carabinieri barracks"
+  },
+  "Q137887272": {
+   "policy": "historic",
+   "label": "keep"
+  },
+  "Q1427123": {
+   "policy": "historic",
+   "label": "flanking tower"
+  },
+  "Q1440300": {
+   "policy": "drop",
+   "label": "observation tower"
+  },
+  "Q146924": {
+   "policy": "historic",
+   "label": "Roman limes"
+  },
+  "Q1494386": {
+   "policy": "drop",
+   "label": "garrison church"
+  },
+  "Q1539291": {
+   "policy": "historic",
+   "label": "Wignacourt towers"
+  },
+  "Q1568283": {
+   "policy": "historic",
+   "label": "milecastle"
+  },
+  "Q15922766": {
+   "policy": "drop",
+   "label": "courier route"
+  },
+  "Q16187491": {
+   "policy": "drop",
+   "label": "tunnel of aggression"
+  },
+  "Q16536851": {
+   "policy": "historic",
+   "label": "coastal battery"
+  },
+  "Q1661497": {
+   "policy": "drop",
+   "label": "wind turbine with observation deck"
+  },
+  "Q16838994": {
+   "policy": "historic",
+   "label": "battery tower"
+  },
+  "Q1703660": {
+   "policy": "historic",
+   "label": "Kriegsakademie"
+  },
+  "Q1713061": {
+   "policy": "historic",
+   "label": "Kriegsschule"
+  },
+  "Q1735281": {
+   "policy": "historic",
+   "label": "kastal"
+  },
+  "Q17504814": {
+   "policy": "historic",
+   "label": "gunpowder magazine"
+  },
+  "Q1765492": {
+   "policy": "historic",
+   "label": "half tower"
+  },
+  "Q1785071": {
+   "policy": "historic",
+   "label": "fort"
+  },
+  "Q18419193": {
+   "policy": "historic",
+   "label": "maschio"
+  },
+  "Q1911186": {
+   "policy": "historic",
+   "label": "Maunsell fort"
+  },
+  "Q20034791": {
+   "policy": "historic",
+   "label": "defensive tower"
+  },
+  "Q20097897": {
+   "policy": "historic",
+   "label": "sea fort"
+  },
+  "Q2051519": {
+   "policy": "historic",
+   "label": "tower fort"
+  },
+  "Q2100004": {
+   "policy": "historic",
+   "label": "powder tower"
+  },
+  "Q21086297": {
+   "policy": "drop",
+   "label": "castellum aquae"
+  },
+  "Q2244608": {
+   "policy": "drop",
+   "label": "bird hide"
+  },
+  "Q2290623": {
+   "policy": "historic",
+   "label": "sich"
+  },
+  "Q2302643": {
+   "policy": "historic",
+   "label": "Bergfried"
+  },
+  "Q23498144": {
+   "policy": "historic",
+   "label": "tour-reduit"
+  },
+  "Q263274": {
+   "policy": "historic",
+   "label": "kremlin"
+  },
+  "Q27404": {
+   "policy": "historic",
+   "label": "detinets"
+  },
+  "Q28776984": {
+   "policy": "historic",
+   "label": "corner tower"
+  },
+  "Q2910756": {
+   "policy": "historic",
+   "label": "bordj"
+  },
+  "Q2997748": {
+   "policy": "historic",
+   "label": "Crenellated guardhouse, 1846 model"
+  },
+  "Q30559999": {
+   "policy": "historic",
+   "label": "historical military facility"
+  },
+  "Q3307670": {
+   "policy": "historic",
+   "label": "albarrana tower"
+  },
+  "Q3323096": {
+   "policy": "historic",
+   "label": "presidio"
+  },
+  "Q39535649": {
+   "policy": "historic",
+   "label": "artillery fort"
+  },
+  "Q3968555": {
+   "policy": "historic",
+   "label": "statio"
+  },
+  "Q4383575": {
+   "policy": "historic",
+   "label": "machine gun nest"
+  },
+  "Q459760": {
+   "policy": "historic",
+   "label": "Junker School"
+  },
+  "Q49144": {
+   "policy": "historic",
+   "label": "tenshu"
+  },
+  "Q5549733": {
+   "policy": "historic",
+   "label": "hiṣn"
+  },
+  "Q5613989": {
+   "policy": "historic",
+   "label": "guard tower"
+  },
+  "Q56344492": {
+   "policy": "historic",
+   "label": "artillery battery"
+  },
+  "Q5645932": {
+   "policy": "police",
+   "label": "Guardia Civil barracks"
+  },
+  "Q5704775": {
+   "policy": "historic",
+   "label": "artillery magazine"
+  },
+  "Q57831": {
+   "policy": "historic",
+   "label": "fortress"
+  },
+  "Q586552": {
+   "policy": "historic",
+   "label": "Viking ring fortress"
+  },
+  "Q603192": {
+   "policy": "historic",
+   "label": "yagura"
+  },
+  "Q613611": {
+   "policy": "historic",
+   "label": "alcázar"
+  },
+  "Q6513371": {
+   "policy": "historic",
+   "label": "Volynskaya tower"
+  },
+  "Q6675524": {
+   "policy": "drop",
+   "label": "lookout tree"
+  },
+  "Q685204": {
+   "policy": "historic",
+   "label": "gate tower"
+  },
+  "Q6857854": {
+   "policy": "drop",
+   "label": "military road"
+  },
+  "Q71754457": {
+   "policy": "historic",
+   "label": "Royal Naval Air Service station"
+  },
+  "Q7179706": {
+   "policy": "historic",
+   "label": "peñón"
+  },
+  "Q7265965": {
+   "policy": "historic",
+   "label": "qal'a"
+  },
+  "Q74218597": {
+   "policy": "historic",
+   "label": "flakbatterie"
+  },
+  "Q74219295": {
+   "policy": "historic",
+   "label": "anti-aircraft battery of the German Navy"
+  },
+  "Q748998": {
+   "policy": "drop",
+   "label": "fire lookout tower"
+  },
+  "Q7493718": {
+   "policy": "historic",
+   "label": "shell keep"
+  },
+  "Q81324829": {
+   "policy": "historic",
+   "label": "temporary camp associated with the Antonine Wall"
+  },
+  "Q815448": {
+   "policy": "drop",
+   "label": "belfry"
+  },
+  "Q81839": {
+   "policy": "historic",
+   "label": "roundel bastion"
+  },
+  "Q81851": {
+   "policy": "historic",
+   "label": "bastion"
+  },
+  "Q81917": {
+   "policy": "historic",
+   "label": "fortified tower"
+  },
+  "Q83554028": {
+   "policy": "police",
+   "label": "Gendarmerie barracks"
+  },
+  "Q875783": {
+   "policy": "historic",
+   "label": "diaolou"
+  },
+  "Q88205": {
+   "policy": "historic",
+   "label": "castrum"
+  },
+  "Q88291": {
+   "policy": "historic",
+   "label": "citadel"
+  },
+  "Q891475": {
+   "policy": "historic",
+   "label": "bulwark"
+  },
+  "Q89468": {
+   "policy": "historic",
+   "label": "kasbah"
+  },
+  "Q89477": {
+   "policy": "historic",
+   "label": "castellum"
+  },
+  "Q90754": {
+   "policy": "historic",
+   "label": "redoubt"
+  },
+  "Q91165": {
+   "policy": "historic",
+   "label": "keep"
+  },
+  "Q91285": {
+   "policy": "historic",
+   "label": "Martello tower"
+  },
+  "Q91717": {
+   "policy": "historic",
+   "label": "alcazaba"
+  },
+  "Q91914": {
+   "policy": "historic",
+   "label": "flak tower"
+  },
+  "Q92049": {
+   "policy": "historic",
+   "label": "land battery"
+  },
+  "Q92275707": {
+   "policy": "historic",
+   "label": "crusader castle"
+  },
+  "Q9261759": {
+   "policy": "historic",
+   "label": "infantry fort"
+  },
+  "Q9346578": {
+   "policy": "historic",
+   "label": "Strażnica"
+  },
+  "Q940500": {
+   "policy": "historic",
+   "label": "bastille"
+  },
+  "Q976390": {
+   "policy": "drop",
+   "label": "prison tower"
+  },
+  "Q996564": {
+   "policy": "drop",
+   "label": "bridge tower"
+  }
+ }
+}

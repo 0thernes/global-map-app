@@ -1,0 +1,1 @@
+GM.reg("hydrolakes_tiles/20_40",{"cols":["id","name","lon","lat","area_km2","depth_avg_m","vol_total_mcm","vol_src","country","lake_type","elevation_m"],"rows":[[176592,"",48.3841,28.6529,1.93,1.5,2.82,3,"Kuwait",1,-2],[176778,"",49.6641,27.3094,1.18,0.5,0.59,3,"Saudi Arabia",1,0],[177007,"",49.7925,25.5479,5.43,1.2,6.77,3,"Saudi Arabia",1,102]]});

@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' file:; script-src 'self' file:; style-src 'self' file: 'unsafe-inline'; img-src 'self' file: data: blob: https://tiles.maps.eox.at; media-src 'self' file:; font-src 'self' file:; connect-src 'self' file: data: blob:; worker-src 'self' blob:; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="description" content="Global Map: a cinematic 3D OSINT globe of sourced high-strangeness cases against military, nuclear, conflict, water and sky reference layers.">
+<meta name="color-scheme" content="dark">
+<title>Global Map: OSINT globe</title>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<canvas id="globe" aria-label="3D globe"></canvas>
+<canvas id="labels" aria-hidden="true"></canvas>
+<canvas id="lasso" hidden></canvas>
+<div id="tooltip" class="tooltip" hidden></div>
+
+<header id="topbar">
+  <div class="brand"><span class="logo" aria-hidden="true">◉</span> <span class="display">GLOBAL MAP</span> <small>HIGH STRANGENESS // SOURCED · v1.0.0</small></div>
+  <div class="searchbox"><input id="search" type="search" placeholder="Search cases, sites, countries…  ( / )" aria-label="Search" autocomplete="off"><ul id="search-results" role="listbox" hidden></ul></div>
+  <nav class="tools" aria-label="Views">
+    <button class="btn" id="btn-wars" data-icon="swords" title="Wars & conflicts ranked (W)">Wars</button>
+    <button class="btn" id="btn-analyze" data-icon="activity" title="UAP vs conflict / nuclear / military (A)">Analyze</button>
+    <button class="btn" id="btn-hotspots" data-icon="radar" title="Convergence hotspots (Z)">Hotspots</button>
+    <button class="btn" id="btn-charts" data-icon="chart-column" title="Charts & analytics (V)">Charts</button>
+    <button class="btn" id="btn-graph" data-icon="share-2" title="Link graph (G)">Graph</button>
+    <button class="btn" id="btn-compare" data-icon="columns-2" title="Compare two dates (C)">Compare</button>
+    <button class="btn" id="btn-reports" data-icon="file-text" title="Reports / briefs (E)">Reports</button>
+    <button class="btn" id="btn-index" data-icon="library" title="Sources, glossary, indexes, coverage, credits (I)">Index</button>
+    <button class="btn" id="btn-brief" data-icon="scroll-text" title="Briefings & QWM data drops (B)">Briefings</button>
+    <span class="sep"></span>
+    <button class="btn icon" id="btn-lasso" title="Lasso-select cases on the globe (S)" aria-label="Lasso">⬠</button>
+    <button class="btn icon" id="btn-random" title="Fly to a random case (R)" aria-label="Random case">⚄</button>
+    <button class="btn icon" id="btn-shot" title="Screenshot (PNG)" aria-label="Screenshot">⎙</button>
+    <span class="menuwrap"><button class="btn icon" id="btn-export" data-menu title="Export & workspace" aria-label="Export">⤓</button>
+      <div id="menu-export" class="menu" hidden>
+        <button id="exp-csv">Filtered cases → CSV</button><button id="exp-geojson">Filtered cases → GeoJSON</button><hr>
+        <button id="ws-save">Save workspace (browser)</button><button id="ws-load">Load workspace (browser)</button>
+        <button id="exp-ws">Export workspace JSON</button><label class="file">Import workspace JSON<input type="file" id="imp-ws" accept=".json"></label>
+      </div></span>
+    <button class="btn icon" id="btn-tour" title="Guided tour (T)" aria-label="Guided tour" data-icon="clapperboard"></button>
+    <button class="btn icon" id="btn-mute" title="Sound (M)" aria-label="Sound on/off" aria-pressed="false"></button>
+    <button class="btn icon" id="btn-settings" title="Settings (,)" aria-label="Settings" data-icon="settings"></button>
+    <button class="btn icon" id="btn-help" title="Keyboard shortcuts (?)" aria-label="Help">?</button>
+  </nav>
+</header>
+
+<aside id="rail" aria-label="Layers and filters">
+  <div class="tabs"><button class="tab on" data-tab="layers">Layers <kbd>L</kbd></button><button class="tab" data-tab="filters">Filters <kbd>F</kbd></button><button id="rail-toggle" class="btn icon sm" title="Collapse panel" aria-label="Collapse panel">⟨</button></div>
+  <div id="count" class="count"></div>
+  <div class="pane" id="pane-layers"></div>
+  <div class="pane" id="pane-filters" hidden></div>
+</aside>
+
+<aside id="dossier" class="panel" hidden aria-label="Dossier"><button id="dossier-close" class="close" aria-label="Close">×</button><div id="dossier-body"></div></aside>
+
+<section id="wars" class="panel dock-r" hidden aria-label="Wars and conflicts"><header><h3>Wars, conflicts & genocides <small>active at the timeline date</small></h3><button id="wars-close" class="close" aria-label="Close">×</button></header><div id="wars-body"></div></section>
+
+<section id="analysis" class="panel dock-r" hidden aria-label="Hypothesis analysis">
+  <header><h3>UAP vs conflict / nuclear / military</h3><button id="an-close" class="close" aria-label="Close">×</button></header>
+  <div class="an-opts">
+    <label class="tog"><input type="checkbox" id="an-exact" checked> Exact / within 1 km only</label>
+    <label>Window ± <input id="an-win" type="number" value="365" min="0" step="30"> days</label>
+    <label>Iterations <input id="an-iters" type="number" value="999" min="99" step="100"></label>
+    <label>Seed <input id="an-seed" type="number" value="42"></label>
+    <label class="tog"><input type="checkbox" id="an-hot" checked> Hotspot overlay</label>
+    <button class="btn primary" id="an-run">Run analysis</button><button class="btn" id="an-csv">Export CSV</button>
+  </div>
+  <p class="muted small">Uses the UAP-type cases that pass the current filters (UAP case, CIT UFO sighting, nuclear-site incident, wartime, mass sighting, abduction).</p>
+  <div id="an-out"></div>
+</section>
+
+<section id="graph" class="panel dock-r" hidden aria-label="Link graph">
+  <header><h3>Link graph <small id="graph-stats"></small></h3><button id="graph-close" class="close" aria-label="Close">×</button></header>
+  <div class="g-opts"><label class="tog"><input type="checkbox" id="g-people"> witnesses</label><label class="tog"><input type="checkbox" id="g-src"> source domains</label><label class="tog"><input type="checkbox" id="g-prox"> same category ≤500 km</label><label class="tog"><input type="checkbox" id="g-time"> ≤1 year apart</label></div>
+  <div class="g-wrap"><canvas id="graph-canvas"></canvas><div id="graph-tip" class="tooltip" hidden></div></div>
+  <p class="muted small">Edges come only from fields in the data: linked_case, named witnesses, source domain, distance, dates. Drag nodes, scroll to zoom, click a case to open it.</p>
+</section>
+
+<section id="charts" class="panel" hidden aria-label="Charts"><header><h3>Analytics <small>linked to the globe: click bars, brush years; lasso (S) on the globe filters these</small></h3><button id="charts-close" class="close" aria-label="Close">×</button></header><div id="charts-body"></div></section>
+
+<section id="brief" class="panel modal" hidden aria-label="Briefings"><header><h3>Briefings</h3><button id="brief-close" class="close" aria-label="Close">×</button></header><div id="brief-body"></div></section>
+
+<div id="compare-bar" class="panel" hidden><label>Compare <select id="cmp-mode"><option value="off">off</option><option value="swipe">swipe</option><option value="split">split</option></select></label><span class="muted">A = timeline date · B =</span><input id="cmp-date" spellcheck="false" aria-label="Date B"></div>
+<div id="cmp-divider" hidden title="drag"></div>
+
+<section id="help" class="panel modal" hidden aria-label="Keyboard shortcuts">
+  <header><h3>Keyboard</h3><button id="help-close" class="close" aria-label="Close">×</button></header>
+  <table class="kv keys">
+    <tr><th><kbd>/</kbd></th><td>Search</td></tr><tr><th><kbd>Space</kbd></th><td>Play / pause</td></tr>
+    <tr><th><kbd>←</kbd> <kbd>→</kbd></th><td>±1 day (<kbd>Shift</kbd> month, <kbd>Alt</kbd> year)</td></tr>
+    <tr><th><kbd>L</kbd> / <kbd>F</kbd></th><td>Layers / Filters</td></tr><tr><th><kbd>G</kbd></th><td>Link graph</td></tr><tr><th><kbd>C</kbd></th><td>Compare dates</td></tr>
+    <tr><th><kbd>A</kbd></th><td>Hypothesis analysis</td></tr><tr><th><kbd>V</kbd></th><td>Charts</td></tr><tr><th><kbd>W</kbd></th><td>Wars ranked</td></tr><tr><th><kbd>B</kbd></th><td>Briefings</td></tr>
+    <tr><th><kbd>S</kbd></th><td>Lasso select</td></tr><tr><th><kbd>H</kbd></th><td>Heatmap</td></tr><tr><th><kbd>R</kbd></th><td>Random case</td></tr><tr><th><kbd>P</kbd></th><td>FPS meter</td></tr>
+    <tr><th><kbd>Z</kbd></th><td>Convergence hotspots</td></tr><tr><th><kbd>E</kbd></th><td>Reports</td></tr><tr><th><kbd>I</kbd></th><td>Index (sources, glossary, coverage…)</td></tr>
+    <tr><th><kbd>T</kbd></th><td>Guided tour (← → step, Space pause, Esc exit)</td></tr><tr><th><kbd>M</kbd></th><td>Sound on / off</td></tr><tr><th><kbd>,</kbd></th><td>Settings (audio, FX, performance, reduced motion)</td></tr>
+    <tr><th><kbd>Esc</kbd></th><td>Close the top panel</td></tr><tr><th><kbd>?</kbd></th><td>This help</td></tr>
+  </table>
+  <p class="muted small">Timeline: drag to scrub, <kbd>Shift</kbd>+drag to select a date range, double-click to clear. The bar is segmented: 8000 BCE–1 CE, 1–1500, 1500–1900 compressed; 1900–2026 at day resolution.</p>
+  <p class="muted small">Markers: sharp pin = exact site or within 1 km; translucent circle with a faint centre dot = locality/region uncertainty (never a pin, never jittered).</p>
+</section>
+
+<section id="hotspots" class="panel dock-r" hidden aria-label="Convergence hotspots">
+  <header><h3>Convergence hotspots <small>where many layers meet</small></h3><button id="hs-close" class="close" aria-label="Close">×</button></header>
+  <div id="hs-opts" class="an-opts"></div><div id="hs-formula"></div><div id="hs-list"></div>
+</section>
+<aside id="hs-dossier" class="panel" hidden aria-label="Cluster dossier"></aside>
+
+<section id="reports" class="panel modal wide" hidden aria-label="Reports">
+  <header><h3>Reports <small>auto-generated briefs from the loaded rows</small></h3><button id="rep-close" class="close" aria-label="Close">×</button></header>
+  <div id="rep-form" class="an-opts"></div><div id="rep-out" class="rep-out"></div>
+</section>
+
+<section id="reference" class="panel modal wide" hidden aria-label="Index and reference">
+  <header><h3>Index <small>sources · glossary · cases · sites · countries · coverage · off-world · credits</small></h3><button id="ref-close" class="close" aria-label="Close">×</button></header>
+  <div class="ref-top"><div id="ref-tabs" class="tabs" role="tablist"></div><input id="ref-q" type="search" placeholder="Search this index…" aria-label="Search the index"></div>
+  <div id="ref-body" class="ref-body"></div>
+</section>
+
+<section id="settings" class="panel dock-r narrow" hidden aria-label="Settings">
+  <header><h3>Settings</h3><button id="set-close" class="close" aria-label="Close">×</button></header><div id="set-body"></div>
+</section>
+
+<div id="hud" aria-hidden="true"><div class="reticle"><i></i><i></i><i></i><i></i></div><div id="hud-coord" class="hud-coord"></div><div id="hud-date" class="hud-date"></div><div id="hud-sweep" class="hud-sweep"></div></div>
+
+<section id="lowerthird" hidden aria-live="polite" aria-label="Tour caption">
+  <div class="lt-bar"><span id="lt-kicker" class="lt-kicker"></span><span id="lt-src" class="lt-src"></span></div>
+  <h2 id="lt-title" class="display"></h2><p id="lt-text"></p>
+  <div class="lt-ctl"><button class="btn icon" id="lt-back" aria-label="Previous step"></button><button class="btn icon" id="lt-pause" aria-label="Pause or resume"></button><button class="btn icon" id="lt-next" aria-label="Next step"></button><button class="btn icon" id="lt-exit" aria-label="Exit tour (Esc)"></button><span class="muted small">← → step · Space pause · Esc exit</span></div>
+  <div id="lt-progress" class="lt-progress"></div>
+</section>
+
+<div id="boot" hidden role="dialog" aria-modal="true" aria-label="Global Map title card">
+  <canvas id="boot-stars"></canvas>
+  <div class="boot-card">
+    <p class="boot-tag">HIGH STRANGENESS // SOURCED</p>
+    <h1 class="display">GLOBAL MAP</h1>
+    <p class="boot-sub">An open-source intelligence globe · 0thernes L.L.C.</p>
+    <div id="boot-lines" class="boot-lines mono"></div>
+    <button id="boot-engage" class="engage">ENGAGE</button>
+    <p class="boot-hint">Enter or click: sound on, full screen, guided tour</p>
+    <div class="boot-alt"><button class="btn ghost" id="boot-explore">Explore without the tour</button><button class="btn ghost" id="boot-skip">Skip (Esc)</button></div>
+    <p class="boot-legal">Styling only. Not a government document; no classification is implied.</p>
+  </div>
+</div>
+
+<footer id="timeline" aria-label="Timeline"></footer>
+<div id="status" role="status" aria-live="polite"></div>
+<div id="fps" hidden></div>
+
+<script src="data/catalog.js"></script>
+<script src="data/cases.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

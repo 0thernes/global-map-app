@@ -1,0 +1,849 @@
+{
+  "head" : {
+    "vars" : [ "i", "iLabel", "coord", "depth", "len" ]
+  },
+  "results" : {
+    "bindings" : [ {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q119177"
+      },
+      "len" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#decimal",
+        "type" : "literal",
+        "value" : "3400000"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(172.0 52.0)"
+      },
+      "iLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Aleutian Trench"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q702908"
+      },
+      "len" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#decimal",
+        "type" : "literal",
+        "value" : "1398000"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(128.0 24.75)"
+      },
+      "iLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Ryukyu Trench"
+      },
+      "depth" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#decimal",
+        "type" : "literal",
+        "value" : "7460"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q118394"
+      },
+      "depth" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#decimal",
+        "type" : "literal",
+        "value" : "7729"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(109.96666667 -10.31666667)"
+      },
+      "iLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Sunda Trench"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q118518"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-25.91666667 -55.66666667)"
+      },
+      "iLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "South Sandwich Trench"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q118525"
+      },
+      "depth" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#decimal",
+        "type" : "literal",
+        "value" : "10542"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(155.35 47.5)"
+      },
+      "iLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Kuril–Kamchatka Trench"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q118537"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(144.316666666 40.116666666)"
+      },
+      "iLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Japan Trench"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q118544"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(142.68333333 29.65)"
+      },
+      "iLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Izu-Ogasawara Trench"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q118873"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-71.0 -23.0)"
+      },
+      "iLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Peru–Chile Trench"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q119167"
+      },
+      "depth" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#decimal",
+        "type" : "literal",
+        "value" : "7686"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-83.0 18.5)"
+      },
+      "iLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Cayman Trough"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q119196"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-177.0 -31.0)"
+      },
+      "iLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Kermadec Trench"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q119294"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-174.733055555 -22.944722222)"
+      },
+      "iLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Tonga Trench"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q119294"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-173.0 -20.0)"
+      },
+      "iLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Tonga Trench"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q164040"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-94.836744444 14.682384722)"
+      },
+      "iLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Middle America Trench"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q442490"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(152.0 -6.0)"
+      },
+      "iLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "New Britain Trench"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q594978"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-18.0 2.778E-5)"
+      },
+      "iLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Romanche Trench"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q656364"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(126.68245 10.043928)"
+      },
+      "iLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Philippine Trench"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q666090"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-66.754444444 19.835833333)"
+      },
+      "iLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Puerto Rico Trench"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1027846"
+      },
+      "depth" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#decimal",
+        "type" : "literal",
+        "value" : "5269"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(21.13333333 36.56666667)"
+      },
+      "iLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Calypso Deep"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1085390"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(119.0 14.7)"
+      },
+      "iLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Manila Trench"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1423293"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(138.0 10.0)"
+      },
+      "iLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Yap Trench"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1606815"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-81.0 -9.0)"
+      },
+      "iLabel" : {
+        "type" : "literal",
+        "value" : "Q1606815"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1739275"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-175.2035525 -24.5956083)"
+      },
+      "iLabel" : {
+        "type" : "literal",
+        "value" : "Q1739275"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1754654"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(154.0359358 -6.4178597)"
+      },
+      "iLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Bougainville Trench"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1937156"
+      },
+      "depth" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#decimal",
+        "type" : "literal",
+        "value" : "5449"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(19.51666667 82.4)"
+      },
+      "iLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Litke Deep"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1980619"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(168.0 -20.0)"
+      },
+      "iLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "New Hebrides Trench"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q2047462"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(133.0 7.0)"
+      },
+      "iLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Palau Trench"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q3079494"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(-5.42 54.785)"
+      },
+      "iLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Beaufort's Dyke"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q3373484"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(178.64 -39.74)"
+      },
+      "iLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Hikurangi Trench"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q4182045"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(70.3333 80.0167)"
+      },
+      "iLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "St. Anna Trough"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q4353271"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(0.66666667 56.63333333)"
+      },
+      "iLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Devil's Hole"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q6753204"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(146.9081862 -0.23395233)"
+      },
+      "iLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Manus Trench"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q7262655"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(164.451448 -48.029177)"
+      },
+      "iLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Puysegur Trench"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q7687394"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(144.604 -44.6074)"
+      },
+      "iLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Tasman Fracture"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q9325559"
+      },
+      "coord" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/.well-known/genid/c15d64fbe6cca3743c24add2b5976f26"
+      },
+      "iLabel" : {
+        "type" : "literal",
+        "value" : "Q9325559"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q9325574"
+      },
+      "coord" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/.well-known/genid/1ca8427c933875d992421691ba0e52df"
+      },
+      "iLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Obi trench"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q9325582"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(127.0 -9.0)"
+      },
+      "iLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Timor Trough"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q21470947"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(131.0 -64.33333)"
+      },
+      "iLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Porpoise Canyon"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q21471023"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(159.0 -69.0)"
+      },
+      "iLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Terra Nova Canyon"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q24572018"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(138.48816 9.53033)"
+      },
+      "iLabel" : {
+        "type" : "literal",
+        "value" : "Q24572018"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q24573810"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(137.8949 8.31478)"
+      },
+      "iLabel" : {
+        "type" : "literal",
+        "value" : "Q24573810"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q31972067"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(166.0 -13.0)"
+      },
+      "iLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "North New Hebrides Trench"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q32023055"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(170.0 -22.5)"
+      },
+      "iLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "South New Hebrides Trench"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q35471721"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(38.5833333 -69.6666667)"
+      },
+      "iLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Shirase Kaitei-koku"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q35471761"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(39.3333333 -69.5833333)"
+      },
+      "iLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Telen Kaitei-koku"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q39206120"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(153.0 56.0)"
+      },
+      "iLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "TINRO Trench"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q39267437"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(41.5 80.5)"
+      },
+      "iLabel" : {
+        "type" : "literal",
+        "value" : "Q39267437"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q49467411"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(164.5 -11.0)"
+      },
+      "iLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "South Solomon Trench"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q49467409"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(134.96979 7.45779)"
+      },
+      "iLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Palau Trench"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q85286917"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(166.29 -45.22)"
+      },
+      "iLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Fiordland Trench"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q110921475"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(119.6 6.2)"
+      },
+      "iLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Sulu Trench"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q110921475"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(121.4 7.2)"
+      },
+      "iLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Sulu Trench"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q118212924"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(166.85 -36.792)"
+      },
+      "iLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Bellona Gap"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q137295548"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(131.3234 -11.8232)"
+      },
+      "iLabel" : {
+        "type" : "literal",
+        "value" : "Q137295548"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q140172546"
+      },
+      "coord" : {
+        "datatype" : "http://www.opengis.net/ont/geosparql#wktLiteral",
+        "type" : "literal",
+        "value" : "Point(124.75 4.0)"
+      },
+      "iLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Sangihe Trench"
+      }
+    } ]
+  }
+}

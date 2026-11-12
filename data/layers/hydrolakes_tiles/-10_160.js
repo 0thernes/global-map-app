@@ -1,0 +1,1 @@
+GM.reg("hydrolakes_tiles/-10_160",{"cols":["id","name","lon","lat","area_km2","depth_avg_m","vol_total_mcm","vol_src","country","lake_type","elevation_m"],"rows":[[181762,"",160.439,-9.888,3.27,4.9,15.85,3,"Solomon Islands",1,0]]});

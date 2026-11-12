@@ -1,0 +1,1 @@
+GM.reg("hydrolakes_tiles/20_10",{"cols":["id","name","lon","lat","area_km2","depth_avg_m","vol_total_mcm","vol_src","country","lake_type","elevation_m"],"rows":[[176483,"",19.6979,28.9396,8.21,4.8,39.45,3,"Libya",1,130]]});

@@ -1,0 +1,1 @@
+GM.reg("hydrolakes_tiles/20_-10",{"cols":["id","name","lon","lat","area_km2","depth_avg_m","vol_total_mcm","vol_src","country","lake_type","elevation_m"],"rows":[[176208,"",-9.4929,29.8443,6.18,51.8,320.0,2,"Morocco",2,97]]});

@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+message: "If you use Global Map or its compiled data, please cite it as below, and cite the original data sources listed in CREDITS.md."
+title: "Global Map: a cinematic OSINT globe of sourced high-strangeness cases"
+type: software
+version: 1.0.0
+date-released: 2026-11-12
+license: MIT
+authors:
+  - name: "0thernes L.L.C."
+    email: 0_0@0thernes.art
+    website: "https://0thernes.art"
+repository-code: "https://github.com/0thernes/global-map-app"
+url: "https://0thernes.github.io/global-map-app/"
+keywords:
+  - OSINT
+  - UAP
+  - geospatial
+  - three.js
+  - data visualization
+  - globe
+abstract: >-
+  A static three.js globe that plots sourced UAP and other high-strangeness cases against military, nuclear,
+  conflict, water, sky and ancient-site reference layers, with a timeline, dossiers, a link graph, convergence
+  hotspots, a hypothesis-testing panel with explicit baselines, generated reports and a full audit trail.

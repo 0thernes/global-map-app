@@ -1,0 +1,30 @@
+dataset,owner,country,coverage_years,url,licence,rows_used,layers
+NUFORC public report database (scrubbed + geocoded extract),NUFORC; extract by Sigmond Axel (planetsig),US (global filers),1906-2014,https://github.com/planetsig/ufo-reports,"not stated; NUFORC content public, used for research",80332,map_uap_cit
+GEIPAN cas (UAP case files),CNES / GEIPAN via data.gouv.fr,FR,1937-2018,https://www.data.gouv.fr/,Licence Ouverte / Etalab 2.0,2768,map_uap_cit
+Commune geocoding API,geo.api.gouv.fr (Etalab/IGN/INSEE),FR,2024 COG,https://geo.api.gouv.fr/,Licence Ouverte 2.0,2454 geocodes,map_uap_cit
+PDF 7 curated cases (hs.CASES),QWM PDF 7 build (Alex Donahue project),global,1561-2026,/workspace/qwm/wiw/hs.py,project-internal; underlying citations per row,78,map_uap_cit
+SIPRI/FOA nuclear explosions 1945-1998 (Bergkvist & Ferm 2000),SIPRI / Swedish Defence Research Agency FOA,global,1945-1998,https://www.sipri.org/,SIPRI research report; attribution required,2051,map_nuclear_tests
+USGS ComCat earthquake catalogue (DPRK tests),US Geological Survey,KP,2006-2017,https://earthquake.usgs.gov/fdsnws/event/1/,US public domain,6,map_nuclear_tests
+RERF DS02 Bomb Parameters ch.1 (hypocenters),Radiation Effects Research Foundation,JP,1945,https://www.rerf.or.jp/library/scidata/scids/ds02/pdf/chapter01/cha01-p42-61.pdf,"© RERF; cited, coordinates are facts",2,map_nuclear_tests
+Hiroshima hypocenter JGD2011 coordinates (Takesaki 2020),Chugoku Shimbun / Hiroshima Peace Media Center,JP,1945,https://www.hiroshimapeacemedia.jp/?p=101616,press; cited,1,map_nuclear_tests
+"Wikidata (SPARQL, P625 etc.)",Wikimedia Foundation,global,all,https://query.wikidata.org/,CC0,"pyramids ~320, nuclear sites 751, military reference 9176, many lookups",several
+"Wikipedia (en, ru, fr, es and others) articles/lists",Wikimedia Foundation,global,all,https://en.wikipedia.org/,CC BY-SA 4.0 (text); coordinates are facts,"lists: wars 129, genocides 43, Mesoamerican pyramids, largest monoliths; many coord lookups",several
+OpenStreetMap Nominatim,OpenStreetMap contributors,global,2026,https://nominatim.openstreetmap.org/,"ODbL 1.0 (attribution, share-alike for derived DB)",geocodes for curated rows,several
+UCDP Georeferenced Event Dataset v25.1,Uppsala Conflict Data Program,global,1989-2024,https://ucdp.uu.se/downloads/,CC BY 4.0,385918 events; 237 conflicts,"map_conflicts, map_conflict_events_ucdp"
+"Natural Earth 10m/110m admin0, admin1, land",Natural Earth,global,v5,https://www.naturalearthdata.com/,public domain,"reverse geocoding, label points",all
+GeoNames cities15000,GeoNames,global,2026,https://download.geonames.org/export/dump/,CC BY 4.0,"urban/rural proxy, population baseline",all
+Google canonical country & US-state centroids,Google Developers (Dataset Publishing Language),global,,https://developers.google.com/public-data/docs/canonical/countries_csv,CC BY 4.0 (Google developers docs),centroid audit reference,audit
+Internet Archive Wayback Machine,Internet Archive,global,1996-2026,https://web.archive.org/,archive access; original rights holders,archived URLs for weird coordinates/social rows,map_weird_coordinates
+Chronicling America,Library of Congress,US,1909,https://chroniclingamerica.loc.gov/,public domain newspapers,1,map_caves_underground
+FBI Vault (animal mutilations),FBI,US,1975-1980,https://vault.fbi.gov/,US public domain,2,map_animal_mutilations
+"International UFO Reporter 13(2), 1988",CUFOS,US,1985,https://cufos.org/PDFs/IUR%20issues/IUR%20Vol.%2013%20No.%202%20March-April%201988.pdf,© CUFOS; cited,1,map_abductions
+UFO Newsclipping Service no.248 (MUFON archive),MUFON Project Aquarius archive,US,1990,https://projectaquarius.mufon.com/,press clippings; cited,1,map_abductions
+Nature / Science / PNAS / Antiquity / Nat. Commun. / Internet Archaeology articles,publishers (per row),global,2013-2024,see source_url per row,cited facts only,~20,"caves, remote sensing"
+Reddit / GitHub / YouTube public posts,platform users (per row),global,2012-2024,see source_url per row,platform terms; cited with Wayback copies where possible,social rows only (weird coordinates),map_weird_coordinates
+AARO UAP case resolution reports,DoD All-domain Anomaly Resolution Office,US,2023-2026,https://www.aaro.mil/UAP-Cases/UAP-Case-Resolution-Reports/,US public domain,1,map_uso_water
+The Debrief / NBC News (USS Omaha DoD confirmation),press,US,2021,https://thedebrief.org/pentagon-confirms-leaked-video-showing-transmedium-ufo-is-authentic/,press; cited,1,map_uso_water
+US Navy deck logs via FOIA (The War Zone),US Navy / TWZ,US,2019,https://www.twz.com/39913/multiple-destroyers-were-swarmed-by-mysterious-drones-off-california-over-numerous-nights,FOIA records public domain; article cited,1,map_uso_water
+House Oversight hearing 13 Nov 2024 (Gallaudet),US House of Representatives,US,2024,https://oversight.house.gov/,public record,1,map_uso_water
+NASA Earth Observatory / NASA science (imagery),NASA,US/global,1965-2022,https://earthobservatory.nasa.gov/,NASA imagery generally public domain,5,map_satellite_anomalies
+CORONA Atlas of the Middle East,"CAST, University of Arkansas",Middle East,1960-1972 imagery,https://corona.cast.uark.edu/,free research use; USGS imagery public domain,1,map_satellite_anomalies
+Antiquity / PLOS ONE / other journals (satellite archaeology),publishers (per row),global,2003-2023,see source_url per row,cited facts; PLOS ONE CC BY,6,map_satellite_anomalies

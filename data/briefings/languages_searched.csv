@@ -1,0 +1,13 @@
+code,language,used,how,layers
+en,English,yes,"Wikipedia/Wikidata, press, journals, NUFORC, UCDP",most layers
+fr,French,yes,"GEIPAN case files, geo.api.gouv.fr, Wikidata labels","UAP, pyramids"
+es,Spanish,yes,"Wikidata labels/search (pirámide), Argentine mutilation press","pyramids, animal mutilations"
+pt,Portuguese,yes,Wikidata labels/search (pirâmide),pyramids
+de,German,yes,Wikidata labels/search (Pyramide),pyramids
+it,Italian,yes,Wikidata labels/search (piramide),pyramids
+ru,Russian,yes,"ru.wikipedia (Korovina group), Nominatim (Медведицкая гряда), Wikidata labels","missing/unsolved, caves, pyramids"
+zh,Chinese,yes,Wikidata labels/search (金字塔),pyramids
+ja,Japanese,yes,Wikidata labels/search (ピラミッド); Hiroshima/Nagasaki sources partly Japanese (Nagasaki Univ. repository),"pyramids, nuclear tests"
+ar,Arabic,yes,Wikidata labels/search (هرم),pyramids
+uk,Ukrainian,geocode only,Nominatim place-name lookup (Білокоровичі),UAP
+pl,Polish,limited,Wikipedia lookup (Emilcin),abductions

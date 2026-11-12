@@ -1,0 +1,1176 @@
+{
+ "Tehran, Iran": {
+  "place_id": 212253622,
+  "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+  "osm_type": "relation",
+  "osm_id": 6663864,
+  "lat": "35.6892523",
+  "lon": "51.3896004",
+  "category": "boundary",
+  "type": "administrative",
+  "place_rank": 13,
+  "importance": 0.7426641900169068,
+  "addresstype": "city",
+  "name": "Tehran",
+  "display_name": "Tehran, Central Tehran section, Tehran County, Tehran Province, Iran",
+  "address": {
+   "city": "Tehran",
+   "municipality": "Central Tehran section",
+   "county": "Tehran County",
+   "state": "Tehran Province",
+   "ISO3166-2-lvl4": "IR-23",
+   "country": "Iran",
+   "country_code": "ir"
+  },
+  "boundingbox": [
+   "35.5682071",
+   "35.8284702",
+   "51.0892219",
+   "51.6063007"
+  ]
+ },
+ "Shag Harbour, Nova Scotia": {
+  "place_id": 357536349,
+  "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+  "osm_type": "relation",
+  "osm_id": 9265853,
+  "lat": "43.4939108",
+  "lon": "-65.7179933",
+  "category": "boundary",
+  "type": "administrative",
+  "place_rank": 16,
+  "importance": 0.1867125375753414,
+  "addresstype": "village",
+  "name": "Shag Harbour",
+  "display_name": "Shag Harbour, Municipality of the District of Barrington, Shelburne County, Nova Scotia, B0W 3B0, Canada",
+  "address": {
+   "village": "Shag Harbour",
+   "municipality": "Municipality of the District of Barrington",
+   "county": "Shelburne County",
+   "state": "Nova Scotia",
+   "ISO3166-2-lvl4": "CA-NS",
+   "postcode": "B0W 3B0",
+   "country": "Canada",
+   "country_code": "ca"
+  },
+  "boundingbox": [
+   "43.4290113",
+   "43.5231780",
+   "-65.7694149",
+   "-65.6757847"
+  ]
+ },
+ "Socorro, New Mexico": {
+  "place_id": 330780643,
+  "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+  "osm_type": "relation",
+  "osm_id": 171289,
+  "lat": "34.0572858",
+  "lon": "-106.8930799",
+  "category": "boundary",
+  "type": "administrative",
+  "place_rank": 16,
+  "importance": 0.6741135462173778,
+  "addresstype": "city",
+  "name": "Socorro",
+  "display_name": "Socorro, Socorro County, New Mexico, United States",
+  "address": {
+   "city": "Socorro",
+   "county": "Socorro County",
+   "state": "New Mexico",
+   "ISO3166-2-lvl4": "US-NM",
+   "country": "United States",
+   "country_code": "us"
+  },
+  "boundingbox": [
+   "34.0223420",
+   "34.0985820",
+   "-106.9395940",
+   "-106.8651040"
+  ]
+ },
+ "Kecksburg, Pennsylvania": {
+  "place_id": 351563790,
+  "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+  "osm_type": "node",
+  "osm_id": 157581766,
+  "lat": "40.1846849",
+  "lon": "-79.4608984",
+  "category": "place",
+  "type": "hamlet",
+  "place_rank": 20,
+  "importance": 0.3363461829037416,
+  "addresstype": "hamlet",
+  "name": "Kecksburg",
+  "display_name": "Kecksburg, Mount Pleasant Township, Westmoreland County, Pennsylvania, 15664, United States",
+  "address": {
+   "hamlet": "Kecksburg",
+   "city": "Mount Pleasant Township",
+   "county": "Westmoreland County",
+   "state": "Pennsylvania",
+   "ISO3166-2-lvl4": "US-PA",
+   "postcode": "15664",
+   "country": "United States",
+   "country_code": "us"
+  },
+  "boundingbox": [
+   "40.1646849",
+   "40.2046849",
+   "-79.4808984",
+   "-79.4408984"
+  ]
+ },
+ "Kelly, Christian County, Kentucky": {
+  "place_id": 338151823,
+  "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+  "osm_type": "node",
+  "osm_id": 153608549,
+  "lat": "36.9705997",
+  "lon": "-87.4769483",
+  "category": "place",
+  "type": "hamlet",
+  "place_rank": 20,
+  "importance": 0.13618373728802152,
+  "addresstype": "hamlet",
+  "name": "Kelly",
+  "display_name": "Kelly, Christian County, Kentucky, United States",
+  "address": {
+   "hamlet": "Kelly",
+   "county": "Christian County",
+   "state": "Kentucky",
+   "ISO3166-2-lvl4": "US-KY",
+   "country": "United States",
+   "country_code": "us"
+  },
+  "boundingbox": [
+   "36.9505997",
+   "36.9905997",
+   "-87.4969483",
+   "-87.4569483"
+  ]
+ },
+ "Lubbock, Texas": {
+  "place_id": 329300120,
+  "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+  "osm_type": "relation",
+  "osm_id": 115401,
+  "lat": "33.5855677",
+  "lon": "-101.8470215",
+  "category": "boundary",
+  "type": "administrative",
+  "place_rank": 16,
+  "importance": 0.6224255871925702,
+  "addresstype": "city",
+  "name": "Lubbock",
+  "display_name": "Lubbock, Lubbock County, Texas, United States",
+  "address": {
+   "city": "Lubbock",
+   "county": "Lubbock County",
+   "state": "Texas",
+   "ISO3166-2-lvl4": "US-TX",
+   "country": "United States",
+   "country_code": "us"
+  },
+  "boundingbox": [
+   "33.4478552",
+   "33.7084347",
+   "-102.0321210",
+   "-101.7490053"
+  ]
+ },
+ "Godman Army Airfield, Kentucky": {
+  "place_id": 337924435,
+  "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+  "osm_type": "node",
+  "osm_id": 368383540,
+  "lat": "37.9068000",
+  "lon": "-85.9723000",
+  "category": "aeroway",
+  "type": "aerodrome",
+  "place_rank": 30,
+  "importance": 0.40712885412943295,
+  "addresstype": "aeroway",
+  "name": "Godman Army Airfield",
+  "display_name": "Godman Army Airfield, Pilot Street, Hardin County, Kentucky, 40121, United States",
+  "address": {
+   "aeroway": "Godman Army Airfield",
+   "road": "Pilot Street",
+   "county": "Hardin County",
+   "state": "Kentucky",
+   "ISO3166-2-lvl4": "US-KY",
+   "postcode": "40121",
+   "country": "United States",
+   "country_code": "us"
+  },
+  "boundingbox": [
+   "37.8918000",
+   "37.9218000",
+   "-85.9873000",
+   "-85.9573000"
+  ]
+ },
+ "RAF Lakenheath": {
+  "place_id": 159258701,
+  "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+  "osm_type": "way",
+  "osm_id": 102826331,
+  "lat": "52.4042010",
+  "lon": "0.5565787",
+  "category": "aeroway",
+  "type": "aerodrome",
+  "place_rank": 30,
+  "importance": 0.46871289517150294,
+  "addresstype": "aeroway",
+  "name": "RAF Lakenheath",
+  "display_name": "RAF Lakenheath, Brandon, West Suffolk, Suffolk, England, IP7 9PN, United Kingdom",
+  "address": {
+   "aeroway": "RAF Lakenheath",
+   "administrative": "Brandon",
+   "city": "West Suffolk",
+   "county": "Suffolk",
+   "ISO3166-2-lvl6": "GB-SFK",
+   "state": "England",
+   "ISO3166-2-lvl4": "GB-ENG",
+   "postcode": "IP7 9PN",
+   "country": "United Kingdom",
+   "country_code": "gb"
+  },
+  "boundingbox": [
+   "52.3892402",
+   "52.4201672",
+   "0.5326304",
+   "0.5830379"
+  ]
+ },
+ "Levelland, Texas": {
+  "place_id": 329272028,
+  "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+  "osm_type": "relation",
+  "osm_id": 115231,
+  "lat": "33.5871311",
+  "lon": "-102.3776980",
+  "category": "boundary",
+  "type": "administrative",
+  "place_rank": 16,
+  "importance": 0.5129487752650739,
+  "addresstype": "town",
+  "name": "Levelland",
+  "display_name": "Levelland, Hockley County, Texas, 79336, United States",
+  "address": {
+   "town": "Levelland",
+   "county": "Hockley County",
+   "state": "Texas",
+   "ISO3166-2-lvl4": "US-TX",
+   "postcode": "79336",
+   "country": "United States",
+   "country_code": "us"
+  },
+  "boundingbox": [
+   "33.5378544",
+   "33.6083138",
+   "-102.4016025",
+   "-102.3260460"
+  ]
+ },
+ "Kölmjärv": {
+  "place_id": 272847173,
+  "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+  "osm_type": "node",
+  "osm_id": 6772752511,
+  "lat": "66.3721481",
+  "lon": "22.3097652",
+  "category": "place",
+  "type": "hamlet",
+  "place_rank": 20,
+  "importance": 0.1333881383993286,
+  "addresstype": "hamlet",
+  "name": "Kölmjärv",
+  "display_name": "Kölmjärv, Överkalix kommun, Norrbotten County, Sweden",
+  "address": {
+   "hamlet": "Kölmjärv",
+   "municipality": "Överkalix kommun",
+   "county": "Norrbotten County",
+   "ISO3166-2-lvl4": "SE-BD",
+   "country": "Sweden",
+   "country_code": "se"
+  },
+  "boundingbox": [
+   "66.3521481",
+   "66.3921481",
+   "22.2897652",
+   "22.3297652"
+  ]
+ },
+ "Los Angeles, California": {
+  "place_id": 316388634,
+  "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+  "osm_type": "relation",
+  "osm_id": 207359,
+  "lat": "34.0536923",
+  "lon": "-118.2427676",
+  "category": "boundary",
+  "type": "administrative",
+  "place_rank": 16,
+  "importance": 0.8410828881088647,
+  "addresstype": "city",
+  "name": "Los Angeles",
+  "display_name": "Los Angeles, Los Angeles County, California, United States",
+  "address": {
+   "city": "Los Angeles",
+   "county": "Los Angeles County",
+   "state": "California",
+   "ISO3166-2-lvl4": "US-CA",
+   "country": "United States",
+   "country_code": "us"
+  },
+  "boundingbox": [
+   "33.6595410",
+   "34.3373060",
+   "-118.6681798",
+   "-118.1552983"
+  ]
+ },
+ "Minot Air Force Base": {
+  "place_id": 376664921,
+  "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+  "osm_type": "relation",
+  "osm_id": 6550288,
+  "lat": "48.4200110",
+  "lon": "-101.3372095",
+  "category": "military",
+  "type": "airfield",
+  "place_rank": 30,
+  "importance": 0.48205878795408014,
+  "addresstype": "military",
+  "name": "Minot Air Force Base",
+  "display_name": "Minot Air Force Base, Mallard Trail, Minot AFB Housing, Ward County, North Dakota, 58704, United States",
+  "address": {
+   "military": "Minot Air Force Base",
+   "road": "Mallard Trail",
+   "residential": "Minot AFB Housing",
+   "county": "Ward County",
+   "state": "North Dakota",
+   "ISO3166-2-lvl4": "US-ND",
+   "postcode": "58704",
+   "country": "United States",
+   "country_code": "us"
+  },
+  "boundingbox": [
+   "48.3955226",
+   "48.4440731",
+   "-101.3918492",
+   "-101.2997375"
+  ]
+ },
+ "Mansfield, Ohio": {
+  "place_id": 369543060,
+  "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+  "osm_type": "relation",
+  "osm_id": 182659,
+  "lat": "40.7583900",
+  "lon": "-82.5154471",
+  "category": "boundary",
+  "type": "administrative",
+  "place_rank": 16,
+  "importance": 0.5336839258794829,
+  "addresstype": "city",
+  "name": "Mansfield",
+  "display_name": "Mansfield, Richland County, Ohio, United States",
+  "address": {
+   "city": "Mansfield",
+   "county": "Richland County",
+   "state": "Ohio",
+   "ISO3166-2-lvl4": "US-OH",
+   "country": "United States",
+   "country_code": "us"
+  },
+  "boundingbox": [
+   "40.6886407",
+   "40.8436307",
+   "-82.5900433",
+   "-82.4554768"
+  ]
+ },
+ "Zeitoun, Cairo, Egypt": {
+  "place_id": 50668148,
+  "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+  "osm_type": "way",
+  "osm_id": 646484243,
+  "lat": "30.1060907",
+  "lon": "31.3107525",
+  "category": "highway",
+  "type": "tertiary",
+  "place_rank": 26,
+  "importance": 0.05341293736171508,
+  "addresstype": "tertiary",
+  "name": "Mahata Al Zeitoun Street",
+  "display_name": "Mahata Al Zeitoun Street, Al Zaitoun El Baharia, Al-Zaitoun, Cairo, 11734, Egypt",
+  "address": {
+   "road": "Mahata Al Zeitoun Street",
+   "neighbourhood": "Al Zaitoun El Baharia",
+   "suburb": "Al-Zaitoun",
+   "city": "Cairo",
+   "state": "Cairo",
+   "ISO3166-2-lvl4": "EG-C",
+   "postcode": "11734",
+   "country": "Egypt",
+   "country_code": "eg"
+  },
+  "boundingbox": [
+   "30.0996937",
+   "30.1132318",
+   "31.3058268",
+   "31.3142672"
+  ]
+ },
+ "Petrozavodsk, Karelia, Russia": {
+  "place_id": 198389930,
+  "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+  "osm_type": "relation",
+  "osm_id": 1701311,
+  "lat": "61.7892210",
+  "lon": "34.3688041",
+  "category": "place",
+  "type": "city",
+  "place_rank": 16,
+  "importance": 0.5951966866565476,
+  "addresstype": "city",
+  "name": "Petrozavodsk",
+  "display_name": "Petrozavodsk, Petrozavodsk Urban Okrug, Karelia, Northwestern Federal District, 185000, Russia",
+  "address": {
+   "city": "Petrozavodsk",
+   "county": "Petrozavodsk Urban Okrug",
+   "state": "Karelia",
+   "ISO3166-2-lvl4": "RU-KR",
+   "region": "Northwestern Federal District",
+   "postcode": "185000",
+   "country": "Russia",
+   "country_code": "ru"
+  },
+  "boundingbox": [
+   "61.7116070",
+   "61.8626763",
+   "34.1862065",
+   "34.6527543"
+  ]
+ },
+ "Bass Strait": {
+  "place_id": 20047992,
+  "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+  "osm_type": "relation",
+  "osm_id": 9457256,
+  "lat": "-39.4730144",
+  "lon": "145.2623668",
+  "category": "natural",
+  "type": "strait",
+  "place_rank": 22,
+  "importance": 0.552887730708444,
+  "addresstype": "strait",
+  "name": "Bass Strait",
+  "display_name": "Bass Strait",
+  "address": {
+   "strait": "Bass Strait"
+  },
+  "boundingbox": [
+   "-41.4410435",
+   "-37.5050131",
+   "143.5115231",
+   "149.9765907"
+  ]
+ },
+ "Kaikoura, New Zealand": {
+  "place_id": 24695073,
+  "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+  "osm_type": "node",
+  "osm_id": 205039578,
+  "lat": "-42.4005999",
+  "lon": "173.6811428",
+  "category": "place",
+  "type": "town",
+  "place_rank": 18,
+  "importance": 0.44274316916110606,
+  "addresstype": "town",
+  "name": "Kaikōura",
+  "display_name": "Kaikōura, Kaikōura District, Canterbury, 7300, New Zealand",
+  "address": {
+   "town": "Kaikōura",
+   "county": "Kaikōura District",
+   "state": "Canterbury",
+   "ISO3166-2-lvl4": "NZ-CAN",
+   "postcode": "7300",
+   "country": "New Zealand",
+   "country_code": "nz"
+  },
+  "boundingbox": [
+   "-42.4405999",
+   "-42.3605999",
+   "173.6411428",
+   "173.7211428"
+  ]
+ },
+ "Huffman, Texas": {
+  "place_id": 305767531,
+  "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+  "osm_type": "node",
+  "osm_id": 151637791,
+  "lat": "30.0271626",
+  "lon": "-95.0857627",
+  "category": "place",
+  "type": "hamlet",
+  "place_rank": 20,
+  "importance": 0.33935777253266924,
+  "addresstype": "hamlet",
+  "name": "Huffman",
+  "display_name": "Huffman, Harris County, Texas, 77336, United States",
+  "address": {
+   "hamlet": "Huffman",
+   "county": "Harris County",
+   "state": "Texas",
+   "ISO3166-2-lvl4": "US-TX",
+   "postcode": "77336",
+   "country": "United States",
+   "country_code": "us"
+  },
+  "boundingbox": [
+   "30.0071626",
+   "30.0471626",
+   "-95.1057627",
+   "-95.0657627"
+  ]
+ },
+ "Trans-en-Provence, Var, France": {
+  "place_id": 82675175,
+  "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+  "osm_type": "relation",
+  "osm_id": 190815,
+  "lat": "43.5039337",
+  "lon": "6.4867321",
+  "category": "boundary",
+  "type": "administrative",
+  "place_rank": 16,
+  "importance": 0.5053843047479154,
+  "addresstype": "village",
+  "name": "Trans-en-Provence",
+  "display_name": "Trans-en-Provence, Draguignan, Var, Provence-Alpes-Côte d'Azur, Metropolitan France, 83720, France",
+  "address": {
+   "village": "Trans-en-Provence",
+   "municipality": "Draguignan",
+   "county": "Var",
+   "ISO3166-2-lvl6": "FR-83",
+   "state": "Provence-Alpes-Côte d'Azur",
+   "ISO3166-2-lvl4": "FR-PAC",
+   "region": "Metropolitan France",
+   "postcode": "83720",
+   "country": "France",
+   "country_code": "fr"
+  },
+  "boundingbox": [
+   "43.4829355",
+   "43.5220687",
+   "6.4490323",
+   "6.5248128"
+  ]
+ },
+ "Varginha, Minas Gerais": {
+  "place_id": 9848923,
+  "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+  "osm_type": "relation",
+  "osm_id": 315111,
+  "lat": "-21.5565914",
+  "lon": "-45.4340674",
+  "category": "boundary",
+  "type": "administrative",
+  "place_rank": 16,
+  "importance": 0.5745837805718689,
+  "addresstype": "city",
+  "name": "Varginha",
+  "display_name": "Varginha, Minas Gerais, Southeast Region, Brazil",
+  "address": {
+   "city": "Varginha",
+   "state": "Minas Gerais",
+   "ISO3166-2-lvl4": "BR-MG",
+   "region": "Southeast Region",
+   "country": "Brazil",
+   "country_code": "br"
+  },
+  "boundingbox": [
+   "-21.6850000",
+   "-21.4593162",
+   "-45.5497069",
+   "-45.2503040"
+  ]
+ },
+ "Campeche, Campeche, Mexico": {
+  "place_id": 305916583,
+  "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+  "osm_type": "node",
+  "osm_id": 269908857,
+  "lat": "19.8436755",
+  "lon": "-90.5367454",
+  "category": "place",
+  "type": "city",
+  "place_rank": 16,
+  "importance": 0.5222113273701312,
+  "addresstype": "city",
+  "name": "Campeche City",
+  "display_name": "Campeche City, Municipio de Campeche, Campeche, 24000, Mexico",
+  "address": {
+   "city": "Campeche City",
+   "county": "Municipio de Campeche",
+   "state": "Campeche",
+   "ISO3166-2-lvl4": "MX-CAM",
+   "postcode": "24000",
+   "country": "Mexico",
+   "country_code": "mx"
+  },
+  "boundingbox": [
+   "19.6836755",
+   "20.0036755",
+   "-90.6967454",
+   "-90.3767454"
+  ]
+ },
+ "O'Hare International Airport": {
+  "place_id": 418394660,
+  "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+  "osm_type": "relation",
+  "osm_id": 13423944,
+  "lat": "41.9799743",
+  "lon": "-87.9098160",
+  "category": "aeroway",
+  "type": "aerodrome",
+  "place_rank": 30,
+  "importance": 0.5551084320137329,
+  "addresstype": "aeroway",
+  "name": "O'Hare International Airport",
+  "display_name": "O'Hare International Airport, 10000, West Higgins Road, Chicago, Maine Township, Cook County, Illinois, 60666, United States",
+  "address": {
+   "aeroway": "O'Hare International Airport",
+   "house_number": "10000",
+   "road": "West Higgins Road",
+   "city": "Chicago",
+   "municipality": "Maine Township",
+   "county": "Cook County",
+   "state": "Illinois",
+   "ISO3166-2-lvl4": "US-IL",
+   "postcode": "60666",
+   "country": "United States",
+   "country_code": "us"
+  },
+  "boundingbox": [
+   "41.9475841",
+   "42.0088700",
+   "-87.9412194",
+   "-87.8708217"
+  ]
+ },
+ "Stephenville, Texas": {
+  "place_id": 333673011,
+  "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+  "osm_type": "relation",
+  "osm_id": 8062338,
+  "lat": "32.2201387",
+  "lon": "-98.2045388",
+  "category": "boundary",
+  "type": "administrative",
+  "place_rank": 16,
+  "importance": 0.5241664138726163,
+  "addresstype": "town",
+  "name": "Stephenville",
+  "display_name": "Stephenville, Erath County, Texas, United States",
+  "address": {
+   "town": "Stephenville",
+   "county": "Erath County",
+   "state": "Texas",
+   "ISO3166-2-lvl4": "US-TX",
+   "country": "United States",
+   "country_code": "us"
+  },
+  "boundingbox": [
+   "32.1888541",
+   "32.2518786",
+   "-98.2650408",
+   "-98.1731345"
+  ]
+ },
+ "Aguadilla, Puerto Rico": {
+  "place_id": 308369370,
+  "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+  "osm_type": "relation",
+  "osm_id": 4468292,
+  "lat": "18.4496551",
+  "lon": "-67.1184764",
+  "category": "boundary",
+  "type": "administrative",
+  "place_rank": 12,
+  "importance": 0.4949771268997878,
+  "addresstype": "county",
+  "name": "Aguadilla",
+  "display_name": "Aguadilla, Puerto Rico, United States",
+  "address": {
+   "county": "Aguadilla",
+   "state": "Puerto Rico",
+   "ISO3166-2-lvl4": "US-PR",
+   "country": "United States",
+   "country_code": "us"
+  },
+  "boundingbox": [
+   "18.3858992",
+   "18.5133522",
+   "-67.1693785",
+   "-67.0562773"
+  ]
+ },
+ "San Antonio, Valparaíso, Chile": {
+  "place_id": 2034140,
+  "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+  "osm_type": "relation",
+  "osm_id": 296816,
+  "lat": "-33.5808615",
+  "lon": "-71.6132377",
+  "category": "boundary",
+  "type": "administrative",
+  "place_rank": 16,
+  "importance": 0.4696253167523786,
+  "addresstype": "city",
+  "name": "San Antonio",
+  "display_name": "San Antonio, Provincia de San Antonio, Valparaiso Region, Chile",
+  "address": {
+   "city": "San Antonio",
+   "county": "Provincia de San Antonio",
+   "state": "Valparaiso Region",
+   "ISO3166-2-lvl4": "CL-VS",
+   "country": "Chile",
+   "country_code": "cl"
+  },
+  "boundingbox": [
+   "-33.7880182",
+   "-33.5517292",
+   "-71.6302116",
+   "-71.3290346"
+  ]
+ },
+ "Barksdale Air Force Base": {
+  "place_id": 334129592,
+  "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+  "osm_type": "way",
+  "osm_id": 4673219,
+  "lat": "32.4975230",
+  "lon": "-93.6108428",
+  "category": "military",
+  "type": "base",
+  "place_rank": 30,
+  "importance": 0.46642750586093373,
+  "addresstype": "military",
+  "name": "Barksdale Air Force Base",
+  "display_name": "Barksdale Air Force Base, 500, Bossier Parish, Louisiana, 71110, United States",
+  "address": {
+   "military": "Barksdale Air Force Base",
+   "house_number": "500",
+   "administrative": "Bossier Parish",
+   "state": "Louisiana",
+   "ISO3166-2-lvl4": "US-LA",
+   "postcode": "71110",
+   "country": "United States",
+   "country_code": "us"
+  },
+  "boundingbox": [
+   "32.4607743",
+   "32.5337344",
+   "-93.6929627",
+   "-93.5310687"
+  ]
+ },
+ "Bayside Marketplace, Miami": {
+  "place_id": 305201412,
+  "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+  "osm_type": "relation",
+  "osm_id": 17832055,
+  "lat": "25.7782365",
+  "lon": "-80.1871026",
+  "category": "shop",
+  "type": "mall",
+  "place_rank": 30,
+  "importance": 0.3925477355191416,
+  "addresstype": "shop",
+  "name": "Bayside Marketplace",
+  "display_name": "Bayside Marketplace, 401, Biscayne Boulevard, Downtown Miami, Torch of Friendship, Miami, Miami-Dade County, Florida, 33132, United States",
+  "address": {
+   "shop": "Bayside Marketplace",
+   "house_number": "401",
+   "road": "Biscayne Boulevard",
+   "neighbourhood": "Downtown Miami",
+   "hamlet": "Torch of Friendship",
+   "city": "Miami",
+   "county": "Miami-Dade County",
+   "state": "Florida",
+   "ISO3166-2-lvl4": "US-FL",
+   "postcode": "33132",
+   "country": "United States",
+   "country_code": "us"
+  },
+  "boundingbox": [
+   "25.7764674",
+   "25.7798967",
+   "-80.1884626",
+   "-80.1839354"
+  ]
+ },
+ "Aztec, New Mexico": {
+  "place_id": 331260815,
+  "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+  "osm_type": "relation",
+  "osm_id": 171270,
+  "lat": "36.8220629",
+  "lon": "-107.9928990",
+  "category": "boundary",
+  "type": "administrative",
+  "place_rank": 16,
+  "importance": 0.43802392276794555,
+  "addresstype": "city",
+  "name": "Aztec",
+  "display_name": "Aztec, San Juan County, New Mexico, United States",
+  "address": {
+   "city": "Aztec",
+   "county": "San Juan County",
+   "state": "New Mexico",
+   "ISO3166-2-lvl4": "US-NM",
+   "country": "United States",
+   "country_code": "us"
+  },
+  "boundingbox": [
+   "36.7648382",
+   "36.8553498",
+   "-108.0364755",
+   "-107.9150449"
+  ]
+ },
+ "Honolulu, Hawaii": {
+  "place_id": 376692557,
+  "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+  "osm_type": "relation",
+  "osm_id": 119231,
+  "lat": "21.3045470",
+  "lon": "-157.8556760",
+  "category": "place",
+  "type": "city",
+  "place_rank": 16,
+  "importance": 0.6733709368178348,
+  "addresstype": "city",
+  "name": "Honolulu",
+  "display_name": "Honolulu, Honolulu County, Hawaii, United States",
+  "address": {
+   "city": "Honolulu",
+   "county": "Honolulu County",
+   "state": "Hawaii",
+   "ISO3166-2-lvl4": "US-HI",
+   "country": "United States",
+   "country_code": "us"
+  },
+  "boundingbox": [
+   "21.2548159",
+   "21.4021936",
+   "-157.9503569",
+   "-157.6486277"
+  ]
+ },
+ "Strasbourg, France": {
+  "place_id": 120975157,
+  "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+  "osm_type": "relation",
+  "osm_id": 71033,
+  "lat": "48.5846140",
+  "lon": "7.7507127",
+  "category": "boundary",
+  "type": "administrative",
+  "place_rank": 16,
+  "importance": 0.7372988337549014,
+  "addresstype": "city",
+  "name": "Strasbourg",
+  "display_name": "Strasbourg, Bas-Rhin, European Collectivity of Alsace, Great East, Metropolitan France, France",
+  "address": {
+   "city": "Strasbourg",
+   "municipality": "Strasbourg",
+   "county": "Bas-Rhin",
+   "ISO3166-2-lvl6": "FR-67",
+   "state_district": "European Collectivity of Alsace",
+   "ISO3166-2-lvl5": "FR-6AE",
+   "state": "Great East",
+   "ISO3166-2-lvl4": "FR-GES",
+   "region": "Metropolitan France",
+   "country": "France",
+   "country_code": "fr"
+  },
+  "boundingbox": [
+   "48.4919357",
+   "48.6461896",
+   "7.6881371",
+   "7.8360646"
+  ]
+ },
+ "Hudson Valley, New York": {
+  "place_id": 354690366,
+  "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+  "osm_type": "relation",
+  "osm_id": 20410509,
+  "lat": "42.2503030",
+  "lon": "-73.6319754",
+  "category": "boundary",
+  "type": "region",
+  "place_rank": 18,
+  "importance": 0.5200330762606131,
+  "addresstype": "region",
+  "name": "Hudson Valley",
+  "display_name": "Hudson Valley, New York, United States",
+  "address": {
+   "region": "Hudson Valley",
+   "state": "New York",
+   "ISO3166-2-lvl4": "US-NY",
+   "country": "United States",
+   "country_code": "us"
+  },
+  "boundingbox": [
+   "40.8718250",
+   "43.6283860",
+   "-74.7620170",
+   "-73.2412980"
+  ]
+ },
+ "Hangzhou Xiaoshan International Airport": {
+  "place_id": 222566353,
+  "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+  "osm_type": "way",
+  "osm_id": 328062510,
+  "lat": "30.2368729",
+  "lon": "120.4291244",
+  "category": "aeroway",
+  "type": "aerodrome",
+  "place_rank": 30,
+  "importance": 0.5307615705816392,
+  "addresstype": "aeroway",
+  "name": "Hangzhou Xiaoshan International Airport",
+  "display_name": "Hangzhou Xiaoshan International Airport, 坎红路, Nanyang, Xiaoshan District, Hangzhou City, Zhejiang, 311215, China",
+  "address": {
+   "aeroway": "Hangzhou Xiaoshan International Airport",
+   "road": "坎红路",
+   "town": "Nanyang",
+   "city": "Xiaoshan District",
+   "state": "Zhejiang",
+   "ISO3166-2-lvl4": "CN-ZJ",
+   "postcode": "311215",
+   "country": "China",
+   "country_code": "cn"
+  },
+  "boundingbox": [
+   "30.2183079",
+   "30.2550406",
+   "120.3989352",
+   "120.4595679"
+  ]
+ },
+ "Chongqing, China": {
+  "place_id": 241420339,
+  "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+  "osm_type": "relation",
+  "osm_id": 913069,
+  "lat": "30.0551800",
+  "lon": "107.8748712",
+  "category": "boundary",
+  "type": "administrative",
+  "place_rank": 8,
+  "importance": 0.6768836105099797,
+  "addresstype": "state",
+  "name": "Chongqing",
+  "display_name": "Chongqing, China",
+  "address": {
+   "state": "Chongqing",
+   "ISO3166-2-lvl4": "CN-CQ",
+   "country": "China",
+   "country_code": "cn"
+  },
+  "boundingbox": [
+   "28.1617440",
+   "32.2036631",
+   "105.2868306",
+   "110.1944429"
+  ]
+ },
+ "Thakung, Ladakh": {
+  "place_id": 214202937,
+  "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+  "osm_type": "way",
+  "osm_id": 813608426,
+  "lat": "33.7051922",
+  "lon": "78.6623687",
+  "category": "landuse",
+  "type": "farmland",
+  "place_rank": 24,
+  "importance": 0.08000999999999997,
+  "addresstype": "farmland",
+  "name": "Thakung",
+  "display_name": "Thakung, Leh district, Ladakh, India",
+  "address": {
+   "farmland": "Thakung",
+   "state_district": "Leh district",
+   "state": "Ladakh",
+   "ISO3166-2-lvl4": "IN-LA",
+   "country": "India",
+   "country_code": "in"
+  },
+  "boundingbox": [
+   "33.7047400",
+   "33.7053528",
+   "78.6620750",
+   "78.6627652"
+  ]
+ },
+ "Flatwoods, West Virginia": {
+  "place_id": 337988410,
+  "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+  "osm_type": "relation",
+  "osm_id": 240081,
+  "lat": "38.7231759",
+  "lon": "-80.6498017",
+  "category": "boundary",
+  "type": "administrative",
+  "place_rank": 16,
+  "importance": 0.41081406578491936,
+  "addresstype": "village",
+  "name": "Flatwoods",
+  "display_name": "Flatwoods, Braxton County, West Virginia, United States",
+  "address": {
+   "village": "Flatwoods",
+   "county": "Braxton County",
+   "state": "West Virginia",
+   "ISO3166-2-lvl4": "US-WV",
+   "country": "United States",
+   "country_code": "us"
+  },
+  "boundingbox": [
+   "38.7116000",
+   "38.7298760",
+   "-80.6617600",
+   "-80.6412180"
+  ]
+ },
+ "Voronezh, Russia": {
+  "place_id": 192962604,
+  "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+  "osm_type": "relation",
+  "osm_id": 3536492,
+  "lat": "51.6605982",
+  "lon": "39.2005858",
+  "category": "place",
+  "type": "city",
+  "place_rank": 16,
+  "importance": 0.6524841063189211,
+  "addresstype": "city",
+  "name": "Voronezh",
+  "display_name": "Voronezh, Voronezh Oblast, Central Federal District, Russia",
+  "address": {
+   "city": "Voronezh",
+   "county": "Voronezh",
+   "state": "Voronezh Oblast",
+   "ISO3166-2-lvl4": "RU-VOR",
+   "region": "Central Federal District",
+   "country": "Russia",
+   "country_code": "ru"
+  },
+  "boundingbox": [
+   "51.4848657",
+   "51.9027698",
+   "39.0132338",
+   "39.6589505"
+  ]
+ },
+ "Broad Haven, Pembrokeshire": {
+  "place_id": 285929019,
+  "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+  "osm_type": "node",
+  "osm_id": 259370295,
+  "lat": "51.7803689",
+  "lon": "-5.1023775",
+  "category": "place",
+  "type": "village",
+  "place_rank": 19,
+  "importance": 0.4041879687077734,
+  "addresstype": "village",
+  "name": "Broad Haven",
+  "display_name": "Broad Haven, Pembrokeshire, Wales, SA62 3JR, United Kingdom",
+  "address": {
+   "village": "Broad Haven",
+   "county": "Pembrokeshire",
+   "ISO3166-2-lvl6": "GB-PEM",
+   "state": "Wales",
+   "ISO3166-2-lvl4": "GB-WLS",
+   "postcode": "SA62 3JR",
+   "country": "United Kingdom",
+   "country_code": "gb"
+  },
+  "boundingbox": [
+   "51.7603689",
+   "51.8003689",
+   "-5.1223775",
+   "-5.0823775"
+  ]
+ },
+ "Samudra Tapu": {
+  "place_id": 213574485,
+  "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+  "osm_type": "way",
+  "osm_id": 310321060,
+  "lat": "32.4698389",
+  "lon": "77.4187024",
+  "category": "natural",
+  "type": "glacier",
+  "place_rank": 22,
+  "importance": 0.10667666666666664,
+  "addresstype": "glacier",
+  "name": "Samudra Tapu Glacier",
+  "display_name": "Samudra Tapu Glacier, Lahaul, Lahaul and Spiti, Himachal Pradesh, India",
+  "address": {
+   "glacier": "Samudra Tapu Glacier",
+   "county": "Lahaul",
+   "state_district": "Lahaul and Spiti",
+   "state": "Himachal Pradesh",
+   "ISO3166-2-lvl4": "IN-HP",
+   "country": "India",
+   "country_code": "in"
+  },
+  "boundingbox": [
+   "32.4034985",
+   "32.5340570",
+   "77.3776092",
+   "77.5416272"
+  ]
+ },
+ "Shapingba, Chongqing": {
+  "place_id": 241465959,
+  "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+  "osm_type": "relation",
+  "osm_id": 4738519,
+  "lat": "29.5436056",
+  "lon": "106.4534691",
+  "category": "boundary",
+  "type": "administrative",
+  "place_rank": 12,
+  "importance": 0.4812207658458383,
+  "addresstype": "city",
+  "name": "Shapingba District",
+  "display_name": "Shapingba District, Jiulongpo, Chongqing, China",
+  "address": {
+   "city": "Shapingba District",
+   "district": "Jiulongpo",
+   "state": "Chongqing",
+   "ISO3166-2-lvl4": "CN-CQ",
+   "country": "China",
+   "country_code": "cn"
+  },
+  "boundingbox": [
+   "29.4947723",
+   "29.7537457",
+   "106.2460842",
+   "106.4890087"
+  ]
+ }
+}

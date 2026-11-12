@@ -1,0 +1,31 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*.*.*']
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Build bundle
+        run: npm run build
+      - name: Package zip
+        run: node scripts/package.mjs --zip
+      - name: Create GitHub release with the zip attached
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="${GITHUB_REF_NAME}"
+          NOTES="RELEASE_NOTES_${TAG}.md"
+          [ -f "$NOTES" ] || NOTES=CHANGELOG.md
+          gh release create "$TAG" dist/global-map-app-${TAG}.zip --title "Global Map ${TAG}" --notes-file "$NOTES" --verify-tag

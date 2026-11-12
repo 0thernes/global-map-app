@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900" font-family="Inter, sans-serif">
+<rect width="1440" height="900" fill="#03060C"/>
+<defs><pattern id="g" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M32 0H0V32" fill="none" stroke="#0f2236" stroke-width="1"/></pattern></defs>
+<rect width="1440" height="900" fill="url(#g)"/>
+<text x="24" y="884" fill="#7A90A3" font-size="14">WIREFRAME · Compare (C): swipe or split · swipe divider drag</text>
+<rect x="0" y="0" width="1440" height="56" rx="8" fill="rgba(16,26,43,0.85)" stroke="#9DB1C2" stroke-width="1.5"/>
+<text x="12" y="24" fill="#9DB1C2" font-size="15" font-weight="600">TOP BAR  [/] search-everything (cases · people · sites · sources · places)   |  investigation ▾  save  export ▾  ?</text>
+<circle cx="360.0" cy="422.0" r="350.0" fill="#0B1F33" stroke="#38E8FF" stroke-width="2" stroke-dasharray="6 6"/>
+<text x="12" y="80" fill="#38E8FF" font-size="15" font-weight="600">SIDE A  (date A, layer set A)</text>
+<circle cx="1080.0" cy="422.0" r="350.0" fill="#0B1F33" stroke="#38E8FF" stroke-width="2" stroke-dasharray="6 6"/>
+<text x="732" y="80" fill="#38E8FF" font-size="15" font-weight="600">SIDE B  (date B, layer set B)</text>
+<rect x="712" y="56" width="16" height="732" rx="8" fill="rgba(16,26,43,0.85)" stroke="#FFC857" stroke-width="1.5"/>
+<text x="724" y="80" fill="#FFC857" font-size="15" font-weight="600"></text>
+<rect x="0" y="788" width="1440" height="112" rx="8" fill="rgba(16,26,43,0.85)" stroke="#9DB1C2" stroke-width="1.5"/>
+<text x="12" y="812" fill="#9DB1C2" font-size="15" font-weight="600">TIMELINE  ▶ ❚❚  −Y −M −D  [1900 ━━━━━━━━━●━━ 2026]  +D +M +Y   speed ▾  mode ▾  ±N d / km</text>
+<text x="12" y="830" fill="#C9D7E2" font-size="12" font-weight="400">event-density sparkline (drag = brush a date range)  ·  date readout 1976-09-19 12:00 UTC  ·  co-occurrence count</text>
+</svg>

@@ -1,0 +1,1 @@
+GM.reg("hydrolakes_tiles/-20_170",{"cols":["id","name","lon","lat","area_km2","depth_avg_m","vol_total_mcm","vol_src","country","lake_type","elevation_m"],"rows":[[182559,"",178.0048,-17.7182,1.07,5.7,6.14,3,"Fiji",1,755],[182562,"",177.6674,-17.7476,2.0,9.8,19.58,3,"Fiji",1,531],[182564,"",178.0509,-17.7551,3.92,14.0,54.62,3,"Fiji",1,760]]});

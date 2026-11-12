@@ -1,0 +1,1 @@
+GM.reg("hydrolakes_tiles/-10_-180",{"cols":["id","name","lon","lat","area_km2","depth_avg_m","vol_total_mcm","vol_src","country","lake_type","elevation_m"],"rows":[[118584,"",-171.2479,-4.4562,3.42,0.5,1.71,3,"Kiribati",1,0]]});

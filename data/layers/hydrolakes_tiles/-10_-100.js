@@ -1,0 +1,1 @@
+GM.reg("hydrolakes_tiles/-10_-100",{"cols":["id","name","lon","lat","area_km2","depth_avg_m","vol_total_mcm","vol_src","country","lake_type","elevation_m"],"rows":[[116947,"",-91.3509,-0.288,1.81,17.9,32.55,3,"Ecuador",1,4]]});
