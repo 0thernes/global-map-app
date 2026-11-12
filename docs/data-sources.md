@@ -51,6 +51,25 @@ texture is the fallback.
 
 Each event's dossier links back to the feed's own page (`source_url`). Nothing is cached or redistributed.
 
+## PDF 7 as data (since 1.2)
+
+`data/tools/pdf7_dataset.py` builds `data/pdf7_data.js` from a committed snapshot in `data/sources/pdf7/snap/`. The
+snapshot is refreshed from `/workspace/qwm` when that folder exists. Nothing in this file has coordinates.
+
+| Part                 | Source                                                                                    | Traceability                                                                       |
+| -------------------- | ----------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| Entries (660)        | `What-Is-What-of-the-What-entries.csv` (Part I), `...-glitches.csv` (Parts II and V)      | § from the label position in `main.tex`; printed page from `main.aux`              |
+| Tables (165 + 7)     | every `tabular`/`longtable` in `main.tex`; QWM `counts_by_*`, nuclear and distance tables | § from `main.toc`; page found in the PDF text layer; `main.tex` line; or file name |
+| Figures (58)         | `\includegraphics` with caption                                                           | § and page                                                                         |
+| CIT / ST (144)       | `What-Is-What-of-the-What-CIT-sources.csv`                                                | register label and page where the source is in the printed register (115)          |
+| Taxonomy (169)       | `What-Is-What-of-the-What-UAP-NHI.csv`                                                    | taxonomy path                                                                      |
+| Document links (237) | `\url`/`\href` inside the Part V case files                                               | case path; source type from the host rule                                          |
+
+`data/unplaced.js` is written by `data/build_data.py`. It holds the public rows that the loader rejected for having no
+valid point but that do have a source (397), plus the PDF 7 unplaced list and the QWM hs_candidates rows with no
+single place. The same case is listed only once across these sources. It also counts rows that have a point but no
+source (37). Private datasets (NUFORC) are never included.
+
 ## Reviewed, documented, not wired in (yet)
 
 | Source                                                      | Hub                                     | Why it is interesting                                  | Why not now                                                                                                |

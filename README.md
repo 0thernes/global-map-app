@@ -44,6 +44,7 @@ sources shown rather than hidden.**
 | **Analysis**                 | Distances to the nearest base / nuclear site / conflict event against uniform, population-weighted and date-permuted baselines; Monte Carlo p, bootstrap CIs, Bonferroni note; independently re-derived in Python.                                                                                                                                                                                                                    |
 | **Reports**                  | One-click dossier-style reports for the selection, a country, an era or a category; print to PDF or export standalone HTML.                                                                                                                                                                                                                                                                                                           |
 | **PDF 7 as a source**        | Every place in PDF 7 (_What Is What of the What_) is cross-checked against the map: 31 Wikidata-geocoded rows added, 134 rows tagged **PDF 7 §x.y**, 32 unplaceable entries logged with reasons; a **PDF 7 index** maps sections to map entries.                                                                                                                                                                                      |
+| **Data (PDF 7 as data)**     | Everything that is not a place, kept off the globe: 660 PDF 7 entries with § and page, all 165 PDF 7 tables as sortable data tables, charts rebuilt from the PDF 7 CSVs, source-type breakdowns, a seven-test battery with permutation p-values, Holm adjustment and caveats, and 397 unplaced-but-sourced rows. CSV export for every table.                                                                                          |
 | **Reference**                | Sources, glossary, A–Z, sites, countries, coverage matrix (breadth × depth), off-world targets, PDF 7 index and credits.                                                                                                                                                                                                                                                                                                              |
 | **OSINT tools**              | Search, filters (grade, precision, water distance, conflicts, `[verify]`), link graph, compare view, charts, lasso, exports (CSV, GeoJSON, Markdown), workspaces.                                                                                                                                                                                                                                                                     |
 
@@ -60,6 +61,14 @@ the ground at every zoom level:
 <tr><td><img src="docs/screenshots/01_engage.png" alt="ENGAGE boot screen"></td><td><img src="docs/screenshots/07_hotspots.png" alt="Convergence hotspots"></td></tr>
 <tr><td><img src="docs/screenshots/05_dossier.png" alt="Case dossier"></td><td><img src="docs/screenshots/08_report.png" alt="Report"></td></tr>
 <tr><td><img src="docs/screenshots/03_layers_tree.png" alt="Layer tree"></td><td><img src="docs/screenshots/09_index_coverage.png" alt="Coverage matrix"></td></tr>
+</table>
+
+Data panel (v1.2): PDF 7 as data, not pins.
+
+<table>
+<tr><td><img src="docs/screenshots/19_data_overview.png" alt="Data overview: stated vs recomputed counts"></td><td><img src="docs/screenshots/21_data_charts.png" alt="Charts rebuilt from the PDF 7 CSVs"></td></tr>
+<tr><td><img src="docs/screenshots/22_data_tables.png" alt="PDF 7 table as a sortable data table"></td><td><img src="docs/screenshots/24_data_stats.png" alt="Test battery with p-values and caveats"></td></tr>
+<tr><td><img src="docs/screenshots/20_data_entries.png" alt="All PDF 7 entries with section and page"></td><td><img src="docs/screenshots/25_data_unplaced.png" alt="Unplaced but sourced rows"></td></tr>
 </table>
 
 ## Quick start
@@ -95,7 +104,7 @@ It is a static browser app (HTML, CSS, one JavaScript bundle and data files); it
 ## Keyboard
 
 `/` search · `Space` play · `←/→` day (Shift month, Alt year) · `L` layers · `F` filters · `Z` hotspots · `E` reports ·
-`I` index · `A` analyze · `V` charts · `G` graph · `C` compare · `W` wars · `B` briefings · `S` lasso · `H` heatmap ·
+`I` index · `D` data · `A` analyze · `V` charts · `G` graph · `C` compare · `W` wars · `B` briefings · `S` lasso · `H` heatmap ·
 `T` tour · `M` mute · `,` settings · `R` random case · `Esc` close · `?` help
 
 ## Architecture
@@ -155,6 +164,8 @@ Ten forensic passes (sources, values, cross-dataset conflicts, grades, duplicate
 glossary, code and security, UX) are in [docs/audit](docs/audit/SUMMARY.md). Every finding is classed as a bug, error,
 issue, problem, dilemma or conflict ([TAXONOMY.md](docs/audit/TAXONOMY.md)) and listed in
 [qwm-data-issues.csv](docs/audit/qwm-data-issues.csv).
+The v1.2 data gap audit ([v1.2-data-gap-audit.md](docs/audit/v1.2-data-gap-audit.md)) inventories every PDF 7 table,
+figure, stated count and list and every QWM data file (356 items) and tracks each from v1.1.0 to v1.2.0.
 
 ## Development
 
@@ -194,7 +205,7 @@ If you use Global Map in research, cite it with [CITATION.cff](CITATION.cff) (Gi
 button), and cite the underlying datasets listed in [CREDITS.md](CREDITS.md).
 
 ```
-0thernes L.L.C. (2026). Global Map (Version 1.1.0) [Computer software]. https://github.com/0thernes/global-map-app
+0thernes L.L.C. (2026). Global Map (Version 1.2.0) [Computer software]. https://github.com/0thernes/global-map-app
 ```
 
 ## Licence

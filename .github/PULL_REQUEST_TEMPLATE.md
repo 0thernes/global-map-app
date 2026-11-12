@@ -23,6 +23,9 @@
 - [ ] No API keys, tokens or Cesium ion assets; new remote hosts are keyless, CORS-enabled and added to the CSP
       (`img-src`/`connect-src`) and to `docs/data-sources.md` + `CREDITS.md` with their attribution
 - [ ] Globe objects are world-anchored Cesium primitives (no screen-space overlays that can drift)
+- [ ] Non-spatial items (theories, lab results, off-Earth objects, unplaceable rows) go to the Data panel, not onto
+      the globe; every number traces to a PDF 7 § and page or a source row
+- [ ] New statistics are seeded and report n, method, raw and Holm-adjusted p, and a caveat
 - [ ] Screenshots for UI changes (real captures, several zoom levels if the globe is affected)
 
 ## Notes for reviewers

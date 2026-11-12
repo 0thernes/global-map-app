@@ -32,7 +32,12 @@ Use this list before tagging a release. CI covers the items marked **(CI)**.
       radius
 - [ ] Geocodes come only from GNIS, GeoNames, Wikidata or OSM, and the one used is recorded. Coordinates are never
       invented or jittered
-- [ ] Rows that cannot be placed are logged (for example `docs/audit/pdf7-unplaced.csv`)
+- [ ] Rows that cannot be placed are logged (for example `docs/audit/pdf7-unplaced.csv`) and appear in Data ›
+      Unplaced (`data/unplaced.js`), never as pins
+- [ ] `python3 data/tools/pdf7_dataset.py` and `python3 data/tools/gap_audit.py` have been re-run. Every open gap in
+      `docs/audit/v1.2-data-gap-audit.md` has a reason, and stated-vs-computed conflicts are shown, not edited away
+- [ ] Every number in the Data panel names its PDF 7 § and page or its source column; new statistical tests are
+      seeded, report n, method, raw and Holm p, and a caveat, and have a unit test
 - [ ] `docs/layer-catalog.md` is regenerated (`python3 scripts/layer_catalog.py`)
 
 ## Docs and release

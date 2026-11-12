@@ -5,6 +5,58 @@ All notable changes to this project are documented here. The format follows
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-11-12
+
+### Added
+
+- **Data panel** (`D`, top-bar **Data**): PDF 7 and other non-spatial data, never drawn on the globe. See
+  [ADR 0002](docs/adr/0002-non-spatial-data-layer.md). Tabs:
+  - **Overview:**
+    - counts stated in PDF 7 next to the counts recomputed from its CSVs, with conflicts flagged
+    - counts by part, kind, placement, era, grade, section and country
+  - **Entries:** all 660 entries (279 theories, 273 glitches, 108 Part V cases), sortable and filterable.
+    - Each entry shows its section and printed page.
+    - The PDF year is shown next to the map event date.
+  - **Charts:** the PDF 7 figures rebuilt from the CSVs. Each chart names the figure it reproduces:
+    - tier by domain
+    - testability
+    - composite score histogram
+    - timeline
+    - grade by domain
+    - possibility map
+    - Part V grades
+    - testimony sources
+    - taxonomy
+    - domain trees
+  - **PDF 7 tables:** all 165 LaTeX tables, plus 7 QWM aggregate tables, as sortable data tables. Each shows its
+    section, printed page and `main.tex` line.
+  - **Sources:** a source-type breakdown of the 237 Part V document links, map rows by `source_type`, and unplaced
+    rows by dataset.
+  - **Stats:** seven pre-set tests, including two cross-layer ones. Each reports n, the statistic, a seeded
+    permutation or Fisher exact p-value, the Holm-adjusted p-value, the method and a caveat.
+  - **Unplaced:** 397 rows that have a source but no single point, plus a count of 37 rows that have no source.
+  - CSV download for every table, using the current sort and filter.
+- `data/pdf7_data.js`: the non-spatial PDF 7 layer, built by `data/tools/pdf7_dataset.py` from a committed snapshot
+  (`data/sources/pdf7/snap/`).
+- `data/unplaced.js`: written by `data/build_data.py`.
+- `data/tools/pdf7_tex.py`: the LaTeX table and figure parser, which finds pages through the PDF text layer.
+- `docs/audit/v1.2-data-gap-audit.{md,csv}` and `data/tools/gap_audit.py`:
+  - 356 inventory items, each marked present, partial or missing for v1.1.0 and v1.2.0
+  - exactly one label per gap
+  - the v1.2 status is recomputed from the built files
+- Tests: `test/unit/pdf7_data.test.mjs` and `test/unit/pdf7_stats.test.mjs` (22 tests). The smoke test now covers
+  every Data tab, sorting and Escape.
+- Screenshots 19–25 of the Data panel.
+
+### Fixed
+
+- **PDF 7 section numbers.** All 273 Part II references cited the longtable counter as the section. For example,
+  Hubble tension was cited as "§14" but is in §16. Sections now come from the label's position in `main.tex`; the
+  pages were already correct.
+- Rows with a source but no single point (314 GEIPAN cases, 39 conflicts, PDF 7 Part V rows and others) were left
+  out of every view, including analytics. They are now listed and counted in Data › Unplaced, and still never drawn
+  as pins.
+
 ## [1.1.0] - 2026-11-12
 
 ### Changed
@@ -98,6 +150,7 @@ First public release.
 - Duplicated composite grades (`X / X`) collapsed.
 - Briefing Markdown is sanitised with an allow-list; data links are limited to http(s) and mailto.
 
-[Unreleased]: https://github.com/0thernes/global-map-app/compare/v1.1.0...HEAD
+[Unreleased]: https://github.com/0thernes/global-map-app/compare/v1.2.0...HEAD
+[1.2.0]: https://github.com/0thernes/global-map-app/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/0thernes/global-map-app/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/0thernes/global-map-app/releases/tag/v1.0.0

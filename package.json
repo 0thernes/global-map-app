@@ -1,6 +1,6 @@
 {
   "name": "global-map-app",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "OSINT 3D globe: sourced UAP, anomaly and reference layers on a CesiumJS Earth with keyless streamed imagery and terrain, an 8000 BCE to today timeline, hypothesis analysis and linked charts. Static site: GitHub Pages or file://.",
   "private": true,
   "type": "module",

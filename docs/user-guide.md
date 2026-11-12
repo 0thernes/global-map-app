@@ -62,6 +62,28 @@ The PDF 7 index lists every entry of PDF 7 (_What Is What of the What_) that nam
 page, with its status (added, already on the map, or unplaced with the reason) and links to its map rows. Rows that come
 from or match PDF 7 show **PDF 7 §x.y (p. n) · G-path** in their dossier; click it to jump to the index.
 
+## Data (D)
+
+Everything in PDF 7 and the QWM data that is not a place lives here, never on the globe.
+
+- **Overview.** The counts PDF 7 states (front-matter table, figure captions, Part V taxonomy) sit next to the same
+  counts recomputed from its CSVs. A mismatch is shown as a conflict, not corrected. Below that are counts by part,
+  kind, placement, era, grade, section and the country of linked map rows.
+- **Entries.** All 660 entries (Part I theories, Part II glitches, Part V cases), each with its section and printed
+  page. Filter by part, kind or placement, and click a header to sort. **PDF year** is the year of the first source
+  in PDF 7, and **map date** is the event date on the linked map row. Both are kept when they differ.
+- **Charts.** The PDF 7 figures rebuilt from the CSVs. Each caption names the figure and page it reproduces.
+- **PDF 7 tables.** Every table in the PDF, plus the QWM aggregate tables, as a sortable data table with its section,
+  page and source line.
+- **Sources.** Part V document links grouped by source type, using a host rule that is documented in
+  `data/tools/pdf7_dataset.py`.
+- **Stats.** Seven pre-set tests. Read the caveat column first. p-values come from seeded permutations or Fisher's
+  exact test and are shown raw and Holm-adjusted. The smallest p a permutation can report is 0.0005.
+- **Unplaced.** Items that have a source but no single point: multi-site waves, region-scale finds, redacted
+  locations and GEIPAN cases without a commune. They are counted here so analytics do not silently lose them.
+
+Every table has a **CSV** button that downloads the rows as shown (current sort and filter).
+
 ## Analyze (A)
 
 Nearest military base, nuclear site and conflict event for each UAP-type case against three baselines. Read the
