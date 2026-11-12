@@ -18,6 +18,7 @@ PREC = {'exact_site', 'within_1km', 'locality', 'region', 'unspecified', 'not_pl
 DATE = re.compile(r'^(-?\d{1,6}(-\d{2}(-\d{2})?)?|\d{3}-|\d{3}0s|)$')
 errors, warns, checked = [], [], 0
 # upstream (QWM) defects already flagged in docs/audit/qwm-data-issues.csv; reported as WARN so CI tracks new ones only
+QWM_OWNED = {'offlimits_mountains.csv'}
 KNOWN_DUP_IDS = {('map_nuclear_tests', 'NT-74044')}
 
 
@@ -52,7 +53,9 @@ def check_file(p):
         except ValueError:
             errors.append(f'{rel}:{i}: non-numeric lat/lon {la},{lo}')
         cp = row.get('coord_precision', '')
-        if cp not in PREC: errors.append(f'{rel}:{i}: coord_precision {cp!r} not in {sorted(PREC - {""})}')
+        # QWM-owned snapshots are not edited here: an unknown precision is drawn as 'unspecified' (25 km circle) and
+        # logged by the audit (pass 2), so it is a warning there; in our own curated CSVs it is an error
+        if cp not in PREC: (warns if os.path.basename(p) in QWM_OWNED else errors).append(f'{rel}:{i}: coord_precision {cp!r} not in {sorted(PREC - {""})}' + (' (QWM file; plotted as unspecified)' if os.path.basename(p) in QWM_OWNED else ''))
         su = (row.get('source_url') or '').strip()
         if la and lo and su and not re.match(r'^https?://', su) and not su.startswith('/workspace'):
             errors.append(f'{rel}:{i}: source_url is not http(s): {su[:60]}')
