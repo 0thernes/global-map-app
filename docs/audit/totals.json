@@ -1,0 +1,58 @@
+{
+  "per_pass": {
+    "1": {
+      "problem": 35,
+      "error": 1,
+      "dilemma": 2
+    },
+    "2": {
+      "problem": 370,
+      "issue": 102,
+      "conflict": 2,
+      "error": 23,
+      "dilemma": 1
+    },
+    "3": {
+      "conflict": 179,
+      "error": 5,
+      "issue": 188
+    },
+    "4": {
+      "issue": 700
+    },
+    "5": {
+      "error": 1,
+      "conflict": 90,
+      "bug": 3
+    },
+    "6": {
+      "problem": 3,
+      "issue": 1353,
+      "conflict": 1,
+      "dilemma": 1,
+      "bug": 1
+    },
+    "7": {
+      "issue": 1
+    },
+    "8": {
+      "bug": 1
+    },
+    "9": {
+      "bug": 3,
+      "issue": 2
+    },
+    "10": {
+      "bug": 2,
+      "issue": 2
+    }
+  },
+  "total": {
+    "problem": 408,
+    "error": 30,
+    "dilemma": 4,
+    "issue": 2348,
+    "conflict": 272,
+    "bug": 10
+  }
+}

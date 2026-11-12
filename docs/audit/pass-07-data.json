@@ -21,21 +21,21 @@
             "mc_se": 0.0002,
             "se_js": 0.001,
             "agree": true,
-            "baseline_med_py": 198.0,
-            "baseline_med_js": 193.6,
-            "ratio_py": 0.02,
-            "ratio_js": 0.02
+            "baseline_med_py": 224.5,
+            "baseline_med_js": 222.1,
+            "ratio_py": 0.017,
+            "ratio_js": 0.017
           },
           "pop": {
-            "p_py": 0.0176,
-            "p_js": 0.021,
-            "mc_se": 0.0019,
-            "se_js": 0.0045,
+            "p_py": 0.003,
+            "p_js": 0.002,
+            "mc_se": 0.0008,
+            "se_js": 0.0014,
             "agree": true,
-            "baseline_med_py": 13.3,
-            "baseline_med_js": 12.2,
-            "ratio_py": 0.291,
-            "ratio_js": 0.317
+            "baseline_med_py": 17.9,
+            "baseline_med_js": 16.7,
+            "ratio_py": 0.216,
+            "ratio_js": 0.232
           }
         }
       },
@@ -145,11 +145,11 @@
         "within_0.5km": 2556,
         "only_py": 0,
         "only_js": 0,
-        "median_py": 2.59,
-        "median_js": 2.59,
-        "w50_py": [0.9828, 0.9914],
-        "w50_js": [0.9828, 0.9914],
-        "ci_js": [2.416744136020487, 2.7099805137174715],
+        "median_py": 16.03,
+        "median_js": 16.03,
+        "w50_py": [0.8798, 0.9038],
+        "w50_js": [0.8798, 0.9038],
+        "ci_js": [15.019202713746115, 16.833861316435833],
         "mc": {
           "uniform": {
             "p_py": 0.0002,
@@ -157,21 +157,21 @@
             "mc_se": 0.0002,
             "se_js": 0.01,
             "agree": true,
-            "baseline_med_py": 195.8,
-            "baseline_med_js": 196.2,
-            "ratio_py": 0.013,
-            "ratio_js": 0.013
+            "baseline_med_py": 222.5,
+            "baseline_med_js": 223.8,
+            "ratio_py": 0.072,
+            "ratio_js": 0.072
           },
           "pop": {
-            "p_py": 0.0002,
-            "p_js": 0.01,
-            "mc_se": 0.0002,
-            "se_js": 0.01,
+            "p_py": 0.2922,
+            "p_js": 0.31,
+            "mc_se": 0.0064,
+            "se_js": 0.0465,
             "agree": true,
-            "baseline_med_py": 12.1,
-            "baseline_med_js": 12.0,
-            "ratio_py": 0.214,
-            "ratio_js": 0.216
+            "baseline_med_py": 16.6,
+            "baseline_med_js": 16.5,
+            "ratio_py": 0.963,
+            "ratio_js": 0.97
           }
         }
       },

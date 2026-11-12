@@ -1,4 +1,6 @@
 pass,class,dataset,id,name,field,value,other,detail,source_url,private_row
+1,dilemma,NUFORC,,NUFORC,licence,,,"NUFORC report extract (83k rows) states no licence. Default: excluded from the repo, built into git-ignored data/private/ and loaded locally only. Options: keep local-only; ask NUFORC for permission and publish with attribution; make the repo private. OPEN (owner decision)",,
+1,dilemma,OSM geocodes,,OSM geocodes,licence,,,"some QWM coordinates come from OSM Nominatim (ODbL): publishing the compiled database triggers ODbL attribution and share-alike for that derived database. Default: attribute and note ODbL in DATA_LICENSE.md. Options: keep; re-geocode those rows from public-domain sources (GNIS, GeoNames CC BY). OPEN (owner decision)",,
 1,error,EOX imagery,,EOX imagery,licence,,,"satellite close-ups used EOX s2cloudless 2023 (CC BY-NC-SA 4.0, non-commercial); switched to the 2016 vintage (CC BY 4.0). FIXED",,
 1,problem,map_offlimits_mountains,NUC-001,KUMMSC (Kirtland Underground Munitions Maintenance and Storage Complex),source_url,,,no source_url: row is not plotted (sourced rows only); QWM to add the citation,,
 1,problem,map_offlimits_mountains,NUC-002,Clarksville Base (Fort Campbell),source_url,,,no source_url: row is not plotted (sourced rows only); QWM to add the citation,,
@@ -37,6 +39,7 @@ pass,class,dataset,id,name,field,value,other,detail,source_url,private_row
 1,problem,nuclear_osm,,nuclear_osm,rows,,,OSM nuclear test site layer is empty (Overpass unavailable during the build); layer shows 0 rows. OPEN (staged),,
 2,conflict,map_offlimits_mountains,LIT-096,Secret Harbor Beach,country_iso,US,VI,"country conflict: point lies in U.S. Virgin Is. (VI) per Natural Earth 10m, 1878 km from the stated country US (a territory of the same sovereign)",https://prd-tnm.s3.amazonaws.com/StagedProducts/GeographicNames/DomesticNames/,
 2,conflict,map_offlimits_mountains,NUC-005,"Naval museum complex Balaklava (Object 825 GTS, Mount Tavros)",country_iso,UA,RU,"country conflict: point lies in Russia (RU) per Natural Earth 10m, 172 km from the stated country UA",,
+2,dilemma,military,,military,policy,,,"whether gendarmerie, Guardia Civil and Carabinieri barracks count as military sites (they are military-status police). Default: shown, labelled, excluded from analysis and hotspots. This choice moves the all-case military result (pass 7). OPEN (owner decision)",,
 2,error,map_ancient_cities_remote_sensing,RS-aguada-fenix,Aguada Fénix monumental platform,coord_precision,within_1km,"17.8,-91.15",precision mismatch: 1 decimal(s) (≥5 km step) marked within_1km,https://www.nature.com/articles/s41586-020-2343-4,
 2,error,map_conflicts,CON-UCDP-11706,FPRC - Civilians,coord_precision,exact_site,"5.5,16.97",precision mismatch: 1 decimal(s) (≥5 km step) marked exact_site,https://ucdp.uu.se/downloads/,
 2,error,map_conflicts,CON-UCDP-413,Ethiopia: Oromiya,coord_precision,exact_site,"8.53333,34.8",precision mismatch: 1 decimal(s) (≥5 km step) marked exact_site,https://ucdp.uu.se/downloads/,
@@ -3066,4 +3069,5 @@ pass,class,dataset,id,name,field,value,other,detail,source_url,private_row
 9,issue,ui_reports.js,,ui_reports.js,performance,,,report generation with 83k local private rows took ~16 s headless; smoke test runs with ?private=0. OPEN,,
 10,bug,test/smoke.mjs,,test/smoke.mjs,hooks,,,smoke test opened dossiers from raw rows instead of prepared cases (window.__case added). FIXED,,
 10,bug,ui_misc.js,,ui_misc.js,captions,,,"briefing gallery captions looked up by path, not basename; captions were missing. FIXED",,
+10,issue,cinema.js,,cinema.js,HUD,,,"HUD reticle marks the screen centre, while camera flights centre the target in the free area right of the docked Layers panel (~100 px apart at 1600 px). OPEN",,
 10,issue,smoke,,smoke,panels,,,"with private rows loaded, slow panels stayed open and blocked later clicks in the headless run. FIXED (test uses ?private=0)",,

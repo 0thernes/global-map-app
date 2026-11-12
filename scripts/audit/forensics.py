@@ -27,6 +27,9 @@ examples = collections.defaultdict(list)
 # found and fixed during the build (code review, build logs, screenshots); see pass-NN.md for detail
 MANUAL = [
     (1, 'error', 'EOX imagery', 'licence', 'satellite close-ups used EOX s2cloudless 2023 (CC BY-NC-SA 4.0, non-commercial); switched to the 2016 vintage (CC BY 4.0). FIXED'),
+    (1, 'dilemma', 'NUFORC', 'licence', 'NUFORC report extract (83k rows) states no licence. Default: excluded from the repo, built into git-ignored data/private/ and loaded locally only. Options: keep local-only; ask NUFORC for permission and publish with attribution; make the repo private. OPEN (owner decision)'),
+    (1, 'dilemma', 'OSM geocodes', 'licence', 'some QWM coordinates come from OSM Nominatim (ODbL): publishing the compiled database triggers ODbL attribution and share-alike for that derived database. Default: attribute and note ODbL in DATA_LICENSE.md. Options: keep; re-geocode those rows from public-domain sources (GNIS, GeoNames CC BY). OPEN (owner decision)'),
+    (2, 'dilemma', 'military', 'policy', 'whether gendarmerie, Guardia Civil and Carabinieri barracks count as military sites (they are military-status police). Default: shown, labelled, excluded from analysis and hotspots. This choice moves the all-case military result (pass 7). OPEN (owner decision)'),
     (1, 'problem', 'nuclear_osm', 'rows', 'OSM nuclear test site layer is empty (Overpass unavailable during the build); layer shows 0 rows. OPEN (staged)'),
     (1, 'problem', 'military', 'OSM', 'OSM military extract not merged (Overpass 502s); bases layer is MIRTA + Wikidata only. OPEN (staged)'),
     (2, 'error', 'military', 'kind', 'Wikidata P279* walk pulled 2,624 non-military items (fire lookout towers, belfries, bird hides, acropolises, churches) into the bases layer; removed by class policy. FIXED'),
@@ -44,6 +47,7 @@ MANUAL = [
     (9, 'issue', 'ui_reports.js', 'performance', 'report generation with 83k local private rows took ~16 s headless; smoke test runs with ?private=0. OPEN'),
     (10, 'bug', 'test/smoke.mjs', 'hooks', 'smoke test opened dossiers from raw rows instead of prepared cases (window.__case added). FIXED'),
     (10, 'bug', 'ui_misc.js', 'captions', 'briefing gallery captions looked up by path, not basename; captions were missing. FIXED'),
+    (10, 'issue', 'cinema.js', 'HUD', 'HUD reticle marks the screen centre, while camera flights centre the target in the free area right of the docked Layers panel (~100 px apart at 1600 px). OPEN'),
     (10, 'issue', 'smoke', 'panels', 'with private rows loaded, slow panels stayed open and blocked later clicks in the headless run. FIXED (test uses ?private=0)'),
 ]
 

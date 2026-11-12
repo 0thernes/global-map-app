@@ -7,7 +7,7 @@ import { mkdirSync } from 'node:fs';
 
 const OUT = 'docs/screenshots';
 mkdirSync(OUT, { recursive: true });
-const only = process.argv.includes('--only') ? process.argv[process.argv.indexOf('--only') + 1] : null;
+const only = process.argv.includes('--only') ? process.argv[process.argv.indexOf('--only') + 1].split(',') : null;
 const ARGS = [
   '--use-gl=angle',
   '--use-angle=swiftshader',
@@ -24,7 +24,7 @@ async function open(q) {
   return p;
 }
 async function shot(p, name, fn, wait = 1500) {
-  if (only && only !== name) return;
+  if (only && !only.includes(name)) return;
   try {
     await fn();
     await p.waitForTimeout(wait);
@@ -71,10 +71,10 @@ await shot(
       const m = document.querySelector('input[data-layer="military"]');
       if (m && !m.checked) m.click();
     });
-    await p.keyboard.press('Escape');
-    await p.evaluate(() => window.__fly(37.18, -115.84, 1.25));
+    await p.keyboard.press('l');
+    await p.evaluate(() => window.__fly(37.3, -115.9, 0.6));
   },
-  5000,
+  7000,
 );
 await shot(
   p,

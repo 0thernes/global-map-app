@@ -37,7 +37,7 @@ METHODS = {
     10: 'test/smoke.mjs (Playwright, SwiftShader) across all panels and the tour; test/screens.mjs for the screenshots; manual review of reduced-motion and audio defaults.',
 }
 NOTES = {
-    1: ["Rows without a source are not plotted (sourced rows only); QWM should add the citations: 13 USO (water), 7 satellite anomaly and 13 off-limits rows.",
+    1: ["Rows without a source are not plotted (sourced rows only); QWM should add the citations: 13 USO (water) rows, 7 satellite-anomaly Earth rows, and 13 rows of the nuclear-storage table in offlimits_mountains.csv (NUC-001 to NUC-014 except NUC-006). All 13 off-limits mountains themselves are sourced and plotted.",
         "EOX: only the 2016 s2cloudless vintage is CC BY 4.0. The 2018+ vintages are CC BY-NC-SA and cannot be used by a company; the app now uses 2016 only.",
         "NUFORC: no licence stated. Kept local-only (see the dilemma in SUMMARY.md)."],
     2: ["Military layer: the Wikidata subclass walk had pulled in fire lookout towers, belfries and bird hides, and counted 9k historic forts and 3.7k gendarmerie barracks as bases. Fixed with a class policy (data/tools/military_class_policy.json); this changes the military analysis numbers.",
@@ -51,10 +51,17 @@ NOTES = {
     6: ["Nuclear tests: Trinity, Little Boy, Fat Man, RDS-1, Ivy Mike, Hurricane, Castle Bravo and Tsar Bomba match the published references. Gerboise Bleue carries a yield class '0-200' vs the published 70 kt (conflict).",
         "1,350 SIPRI yields are yield classes (ranges), not values; the app shows them as ranges and sizes markers by the upper bound.",
         "Three dates differ by one day because SIPRI lists GMT (e.g. Little Boy 1945-08-05 GMT = 08-06 local)."],
-    7: [],
+    7: ["**Material change from the military class policy (pass 2).** For all 2,556 public UAP-type cases (any precision), the median distance to the nearest military site rose from 2.6 km to 16.0 km once fire lookouts were removed and historic forts and gendarmerie barracks were excluded, and the population-weighted p went from 0.0002 to about 0.3. The earlier 'very close to military sites' result for the public report databases was an artefact of gendarmerie barracks in almost every French commune (GEIPAN rows are geocoded to communes). For the 24 exact or within-1 km cases the result is unchanged (median 3.9 km, population-weighted p ≈ 0.003).",
+         "Correlation is not causation; the analysis panel repeats this, shows its baselines and a Bonferroni-adjusted threshold."],
     8: ["All glossary terms carry a source (URL or document)."],
-    9: [],
-    10: [],
+    9: ["CSP: `default-src 'self' file:`, no inline script, images only from self, data:, blob: and tiles.maps.eox.at, `object-src 'none'`, `base-uri 'none'`, `form-action 'none'`.",
+         "Every data value that reaches innerHTML goes through `esc()`; links go through `link()` (http(s)/mailto only); briefing Markdown is allow-list sanitised.",
+         "Dependencies bundled: three.js (MIT), d3-force/quadtree/dispatch/timer (ISC), marked (MIT). Fonts OFL 1.1, icons ISC, audio CC0. Dev only: ESLint, Prettier (MIT), Playwright (Apache-2.0).",
+         "No secrets, tokens or personal paths in the tree; private data is git-ignored and checked by the validator."],
+    10: ["Audio is muted until a user gesture; ENGAGE is the gesture. Reduced motion (OS setting or Settings) gives instant fly-to, no typing and no sweeps.",
+         "Contrast (WCAG, computed from css/tokens.css): text --fg 13.6–17.7:1, muted 7.1–9.2:1, dim 4.7–6.1:1 on the four panel backgrounds, so all pass AA. Esc closes the top panel; every panel has a key.",
+         "Responsive breakpoints at 1100 px and 820 px; print stylesheet for reports and dossiers.",
+         "Open: the HUD reticle marks the screen centre while camera flights centre the target in the free area right of the docked panel (about 100 px apart at 1600 px wide)."],
 }
 
 
@@ -118,3 +125,39 @@ tot = collections.Counter()
 for p in range(1, 11): tot.update(counts(p))
 json.dump({'per_pass': {p: counts(p) for p in range(1, 11)}, 'total': dict(tot)}, open(os.path.join(A, 'totals.json'), 'w'), indent=1)
 print('passes written; totals', dict(tot), sum(tot.values()))
+
+# ---------- SUMMARY.md ----------
+dil = [r for r in rows if r['class'] == 'dilemma']
+openi = [r for r in rows if 'OPEN' in r['detail'] and r['class'] != 'dilemma']
+fixed = [r for r in rows if 'FIXED' in r['detail']]
+S = ['# Audit summary', '', 'Ten forensic passes over the QWM v2 drop, the built layers and the app code, run on 2026-11-12 (all times '
+     'America/Los_Angeles). Every finding has exactly one class; definitions are in [TAXONOMY.md](TAXONOMY.md). '
+     'Row-level findings: [qwm-data-issues.csv](qwm-data-issues.csv). Private (NUFORC) rows appear by id only.', '',
+     '## Findings per pass', '', '| pass | topic | ' + ' | '.join(CLASSES) + ' | total |', '|---:|---|' + '---:|' * (len(CLASSES) + 1)]
+for p in range(1, 11):
+    c = counts(p)
+    S.append(f'| [{p:02d}](pass-{p:02d}.md) | {TITLES[p][0]} | ' + ' | '.join(str(c.get(k, 0)) for k in CLASSES) + f' | {sum(c.values())} |')
+S.append('| | **total** | ' + ' | '.join(f'**{tot.get(k, 0)}**' for k in CLASSES) + f' | **{sum(tot.values())}** |')
+S += ['', 'Most volume is mechanical and expected: 1,350 SIPRI yield classes (ranges, not values), 679 skeptic-wording hits inside private '
+      'NUFORC narratives, 370 rows QWM keeps without coordinates, and 188 reactor dates with year precision but a full date. None of '
+      'these change what is plotted; they are listed so QWM can clean them at source.', '',
+      '## What changed because of the audit', '']
+cap = lambda t: t[:1].upper() + t[1:]
+S += [f"- {cap(r['detail'].replace(' FIXED (test) / NOTED (method)', ' Test fixed; method difference noted.').replace(' FIXED (test uses ?private=0)', ' Fixed: the test uses ?private=0.').replace(' FIXED', '').rstrip('.'))} (pass {r['pass']}, {r['class']})." for r in fixed]
+S += ['', '## The finding that matters most', '',
+      'The military-site layer had been built from a Wikidata subclass walk that also collected fire lookout towers, belfries and bird hides, '
+      'and counted thousands of historic forts and gendarmerie barracks as bases. After the fix, the median distance from the 2,556 public '
+      'UAP-type cases to the nearest military site is 16.0 km (was 2.6 km) and the population-weighted test is no longer significant '
+      '(p ≈ 0.3, was 0.0002). For the 24 precisely located cases the result is unchanged (median 3.9 km, p ≈ 0.003). See [pass 7](pass-07.md).', '',
+      '## Open dilemmas (owner decisions)', '']
+S += [f"{i}. **{r['dataset']}**: {r['detail'].replace(' OPEN (owner decision)', '')}" for i, r in enumerate(dil, 1)]
+S += ['', '## Still open', '']
+S += [f"- {cap(r['detail']).replace(' OPEN (staged)', ' (staged)').replace(' OPEN', '')} (pass {r['pass']}, {r['class']})" for r in openi]
+S += ['- QWM data corrections listed as error, issue, problem and conflict rows in the CSV (QWM owns the source files; nothing was edited in place).', '',
+      '## Reproduce', '', '```bash', 'python3 scripts/audit/check_urls.py            # pass 1 liveness (slow, polite)',
+      'python3 scripts/audit/forensics.py             # passes 1-6, 8 + recorded code findings',
+      'node scripts/audit/dump_analysis.mjs /tmp/analysis.json && node scripts/audit/dump_analysis.mjs /tmp/analysis_all.json all',
+      'python3 scripts/audit/stats_crosscheck.py /tmp/analysis.json /tmp/analysis_all.json > docs/audit/pass-07-data.json',
+      'node scripts/coverage.mjs && python3 scripts/audit/write_passes.py', '```', '']
+open(os.path.join(A, 'SUMMARY.md'), 'w', encoding='utf-8').write('\n'.join(S))
+print('SUMMARY.md written')
