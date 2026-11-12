@@ -26,7 +26,14 @@ export default [
   },
   {
     // Playwright scripts: code inside page.evaluate() runs in the browser
-    files: ['test/smoke.mjs', 'test/screens.mjs', 'scripts/audit/*.mjs'],
+    files: [
+      'test/smoke.mjs',
+      'test/screens.mjs',
+      'test/ui_audit.mjs',
+      'test/ui_views.mjs',
+      'test/a11y.mjs',
+      'scripts/audit/*.mjs',
+    ],
     languageOptions: { globals: { ...globals.node, ...globals.browser } },
   },
   {
