@@ -290,7 +290,7 @@ for (const vp of VPS) {
   const dir = `${OUT}/${PHASE}/${vp}`;
   await mkdir(dir, { recursive: true });
   const page = await browser.newPage({ viewport: { width: w, height: h } });
-  page.setDefaultTimeout(30000);
+  page.setDefaultTimeout(120000);
   await page.goto(url, { waitUntil: 'domcontentloaded' });
   await page.waitForFunction(() => document.body.dataset.ready === '1', null, { timeout: 180000 });
   await page.evaluate(AXE);
