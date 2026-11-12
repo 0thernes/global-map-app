@@ -353,7 +353,7 @@ def main():
                          status_v1_3=st.get(k, 'open'), fix_v1_3=FIX.get(k[0], '')))
     os.makedirs('docs/audit', exist_ok=True)
     with open('docs/audit/v1.3-ui-audit.csv', 'w', newline='') as fh:
-        w = csv.DictWriter(fh, fieldnames=list(rows[0]))
+        w = csv.DictWriter(fh, fieldnames=list(rows[0]), lineterminator='\n')
         w.writeheader()
         w.writerows(rows)
     by = defaultdict(int)

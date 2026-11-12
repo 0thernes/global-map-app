@@ -714,3 +714,31 @@ summary {
   max-height: none;
   overflow: visible;
 }
+
+/* HUD read-outs and the imagery credit share the free strip above the timeline (outside the window safe area),
+   and follow the docked windows (--occ-left / --occ-right are set by src/ui/window.js) */
+#credits {
+  left: calc(var(--occ-left, 328px) + var(--s-1));
+  bottom: calc(var(--timeline-h) + var(--s-h));
+  max-width: 40vw;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+body.rail-collapsed #credits {
+  left: calc(var(--occ-left, 0px) + var(--s-1));
+}
+.hud-coord,
+.hud-date,
+body.rail-collapsed .hud-coord,
+body.rail-collapsed .hud-date {
+  left: auto;
+  bottom: calc(var(--timeline-h) + var(--s-h));
+  line-height: 16px;
+}
+.hud-date {
+  right: calc(var(--occ-right, 0px) + var(--s-1));
+}
+.hud-coord {
+  right: calc(var(--occ-right, 0px) + 128px);
+}

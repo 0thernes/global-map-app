@@ -151,7 +151,9 @@ const cssPx = (name, d) => {
 };
 export function currentSafe() {
   const rail = document.getElementById('rail');
-  const rr = rail && !rail.hidden && rail.offsetParent !== null ? rail.getBoundingClientRect() : null;
+  // (the rail is position:fixed, so offsetParent is always null: test its box instead)
+  const rb = rail && !rail.hidden ? rail.getBoundingClientRect() : null;
+  const rr = rb && rb.width > 0 && getComputedStyle(rail).display !== 'none' ? rb : null;
   const narrow = innerWidth < NARROW;
   return {
     safe: safeArea({
@@ -430,6 +432,9 @@ export function layout() {
   const railR = currentSafe().safe.x - GAP;
   const prev = occ;
   occ = { left: Math.max(railR, res.occ.left), right: innerWidth - res.occ.right };
+  const root = document.documentElement.style;
+  root.setProperty('--occ-left', occ.left + 'px');
+  root.setProperty('--occ-right', occ.right + 'px');
   if (prev.left !== occ.left || prev.right !== occ.right) for (const fn of listeners) fn(occ);
 }
 
