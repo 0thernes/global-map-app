@@ -205,7 +205,7 @@ If you use Global Map in research, cite it with [CITATION.cff](CITATION.cff) (Gi
 button), and cite the underlying datasets listed in [CREDITS.md](CREDITS.md).
 
 ```
-0thernes L.L.C. (2026). Global Map (Version 1.2.0) [Computer software]. https://github.com/0thernes/global-map-app
+0thernes L.L.C. (2026). Global Map (Version 1.3.0) [Computer software]. https://github.com/0thernes/global-map-app
 ```
 
 ## Licence
