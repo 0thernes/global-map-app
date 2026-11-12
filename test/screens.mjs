@@ -84,6 +84,15 @@ await shot(
 await esc(p);
 await shot(
   p,
+  '05b_dossier_pdf7_ref',
+  async () => {
+    await p.evaluate(() => window.__open(window.__case('UAP-PDF7-rendlesham-1980')));
+  },
+  9000,
+);
+await esc(p);
+await shot(
+  p,
   '06_tour',
   async () => {
     await p.evaluate(() => window.__tour(4));
@@ -114,7 +123,7 @@ await shot(
   1500,
 );
 await esc(p);
-for (const t of ['glossary', 'coverage', 'offworld', 'sources']) {
+for (const t of ['glossary', 'coverage', 'offworld', 'sources', 'pdf7']) {
   await shot(
     p,
     `09_index_${t}`,

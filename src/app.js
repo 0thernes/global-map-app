@@ -581,7 +581,7 @@ function loop(now) {
   cpuHist.push(performance.now() - now);
   if (cpuHist.length > 120) cpuHist.shift();
 }
-window.__case = (i) => ctx.cases[i];
+window.__case = (i) => (typeof i === 'string' ? ctx.cases.find((c) => c.id === i) : ctx.cases[i]);
 window.__lastAnalysis = () => import('./ui_analysis.js').then((m) => m.lastAnalysis());
 window.__open = (c) => import('./ui_panels.js').then((m) => m.openDossier(c));
 window.__setDay = (iso) => import('./ui_timeline.js').then((m) => m.setDay(dateToDay(iso)));
