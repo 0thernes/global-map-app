@@ -9,7 +9,7 @@ flowchart TB
   HTML[index.html<br/>CSP, panels, HUD, boot] --> BUNDLE[js/app.js<br/>esbuild IIFE bundle]
   BUNDLE --> APP[src/app.js<br/>boot, render loop, test hooks]
   APP --> CORE[src/app_core.js<br/>ctx, state, filters, case prep]
-  APP --> GLOBE[src/globe.js<br/>three.js scene, shaders, picking]
+  APP --> GLOBE[src/globe_cesium.js<br/>CesiumJS adapter: tiles, terrain, primitives, picking]
   APP --> LOADER[src/loader.js<br/>inject + GM.reg]
   CORE --> LAYERS[src/layers.js<br/>registry, builders]
   CORE --> TAX[src/taxonomy.js<br/>sub-layer keys]
@@ -28,11 +28,24 @@ zoom in. Optional private files (`data/private/`) are tried last; their absence 
 
 ## Rendering
 
-`src/globe.js` owns the three.js r170 scene: a custom day/night shader (sun position from `src/sun.js` for the timeline
-date and UTC hour), bump and specular maps, atmosphere, starfield, instanced point layers with a shape atlas
-(pin, circle, diamond, glitch), uncertainty circles, line layers with level-of-detail swaps, a texture overlay (GEBCO
-unmapped seafloor), arcs, and post-processing (bloom, grain, chromatic aberration, vignette) through EffectComposer.
-DPR is capped at 2. Picking is CPU-side on a spatial index.
+Since v1.1 the globe is **CesiumJS** (decision record: [adr/0001-cesium-renderer.md](adr/0001-cesium-renderer.md)).
+`src/globe_cesium.js` is an adapter with the same API as the old three.js `Globe`:
+
+- `src/cesium/C.js` lists the engine classes used (tree-shaken from `@cesium/engine` / `@cesium/core`).
+- `src/cesium/sources.js` is the keyless imagery and terrain catalogue; `src/basemap.js` switches and persists it.
+- `src/cesium/terrarium.js` turns AWS Terrain Tiles (terrarium PNG) into a `CustomHeightmapTerrainProvider`.
+- `src/cesium/icons.js` draws the marker shapes (glow, pin, imprecise dot, glitch) and cluster badges as data URLs.
+- Point layers are `BillboardCollection`s whose alpha/scale are recomputed on the CPU only when time, filters or
+  playback mode change. Uncertainty circles are batched ellipse primitives at real radii in metres with
+  per-instance `show`. Line layers are one GL_LINES primitive each.
+- `src/labels_cesium.js` places labels and cluster badges as world-anchored primitives; level of detail and greedy
+  collision avoidance only choose which labels are visible.
+- Lighting uses the sun at the timeline date and UTC hour (`clock.currentTime`), with NASA Black Marble night lights,
+  sky and ground atmosphere, and fog. A custom post-process stage adds glow, grain, chromatic aberration and
+  vignette, plus FXAA.
+- DPR is capped at 2 and tracked with a `matchMedia` watcher. Picking projects candidates with
+  `SceneTransforms.worldToWindowCoordinates` and checks horizon visibility.
+- `src/live_feeds.js` fetches the keyless live layers (USGS earthquakes, NASA EONET).
 
 ## State and filters
 

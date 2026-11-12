@@ -5,6 +5,44 @@ All notable changes to this project are documented here. The format follows
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-11-12
+
+### Changed
+
+- **Renderer: three.js → CesiumJS 1.147** (Apache-2.0, bundled from `@cesium/engine` 26.5.0 / `@cesium/core` 0.1.1;
+  runtime vendored in `vendor/cesium/`). See [ADR 0001](docs/adr/0001-cesium-renderer.md).
+  - Markers, uncertainty circles, labels and cluster badges are now world-anchored primitives. They stay glued to the
+    surface instead of floating over it, and they are hidden on the far side of the globe.
+  - Streamed level-of-detail imagery stays sharp from orbit to street level, instead of one static 8K texture.
+  - Keyless 3D terrain from AWS Terrain Tiles (Mapzen terrarium), with Esri World Elevation and flat as options.
+  - Real sun lighting for the timeline date and hour, NASA Black Marble night lights, atmosphere and fog. Lighting
+    fades out near the ground so cities stay readable.
+  - Fly-tos tilt the camera when close (Google Earth-style). The tour orbit circles the target.
+  - Clustering is decided once the camera settles; badges sit at the members' centroid.
+  - Responsive to window and DPI changes; MSAA on hardware GPUs, FXAA everywhere.
+- Settings: the basemap checkbox is replaced by **Basemap** and **Terrain** pickers. The choice persists, and
+  `?basemap=` and `?terrain=` URL parameters set it.
+- CSP: tile hosts added to `img-src`/`connect-src`. `'wasm-unsafe-eval'` is the only relaxation; there is still no
+  `'unsafe-eval'`.
+- Smoke test: serves the repo over HTTP like GitHub Pages. It asserts that markers are anchored (≤ 3 px) and that no
+  Cesium ion request is made, and it switches basemap and terrain.
+
+### Added
+
+- Keyless basemaps: Esri World Imagery (default) and Esri hybrid; EOX Sentinel-2 cloudless 2016; OpenStreetMap;
+  CARTO dark; NASA GIBS Blue Marble; **NASA MODIS Terra imagery of the timeline day**; offline bundled Blue Marble.
+  An automatic offline fallback kicks in when tiles fail.
+- Live layers: **USGS earthquakes M4.5+ (30 days)** and **NASA EONET open natural events**.
+- `docs/data-sources.md`: review of keyless sources from public-apis and other hubs, covering what is used, what is
+  documented for later, and why.
+- `docs/adr/0001-cesium-renderer.md`, `docs/repo-checklist.md`, unit tests for the source catalogue and terrarium
+  maths. The PR template checks keyless sources and anchored globe objects.
+
+### Removed
+
+- `src/globe.js` (three.js scene and shaders), `src/labels.js` (2D canvas label overlay) and the z3 EOX reprojection.
+  three.js remains only for vector maths.
+
 ## [1.0.0] - 2026-11-12
 
 First public release.

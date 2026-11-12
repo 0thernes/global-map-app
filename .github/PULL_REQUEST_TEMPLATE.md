@@ -20,6 +20,9 @@
 - [ ] Coordinates: pins only for `exact_site` / `within_1km`; everything else gets an uncertainty radius
 - [ ] Grades only go up; nothing from Greer/Maussan carries weight; no skeptic boilerplate in summaries
 - [ ] No unlicensed rows (e.g. NUFORC) outside `data/private/`
-- [ ] Screenshots for UI changes
+- [ ] No API keys, tokens or Cesium ion assets; new remote hosts are keyless, CORS-enabled and added to the CSP
+      (`img-src`/`connect-src`) and to `docs/data-sources.md` + `CREDITS.md` with their attribution
+- [ ] Globe objects are world-anchored Cesium primitives (no screen-space overlays that can drift)
+- [ ] Screenshots for UI changes (real captures, several zoom levels if the globe is affected)
 
 ## Notes for reviewers

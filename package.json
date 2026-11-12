@@ -1,7 +1,7 @@
 {
   "name": "global-map-app",
-  "version": "1.0.0",
-  "description": "OSINT 3D globe: sourced UAP, anomaly and reference layers on a three.js WebGL Earth with an 8000 BCE to today timeline, hypothesis analysis and linked charts. Static, offline, opens from file://.",
+  "version": "1.1.0",
+  "description": "OSINT 3D globe: sourced UAP, anomaly and reference layers on a CesiumJS Earth with keyless streamed imagery and terrain, an 8000 BCE to today timeline, hypothesis analysis and linked charts. Static site: GitHub Pages or file://.",
   "private": true,
   "type": "module",
   "license": "MIT",
@@ -17,12 +17,13 @@
   "keywords": [
     "osint",
     "3d-globe",
-    "threejs",
     "webgl",
     "uap",
     "geospatial",
     "data-visualization",
-    "timeline"
+    "timeline",
+    "cesiumjs",
+    "keyless"
   ],
   "engines": {
     "node": ">=22"

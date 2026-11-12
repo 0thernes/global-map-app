@@ -14,6 +14,24 @@ Every layer shows its source in-app (Layers → ⓘ). Nothing on the globe is in
 | spec4k                                                                                                                                                                                   | derived water mask from GEBCO_08 bathymetry (_gebco_08_rev_bath_)                                     | NASA/GEBCO, public domain                                                       | 4096×2048                             |
 | Downloaded from assets.science.nasa.gov (the eoimages.gsfc.nasa.gov host refused TLS from the box). Textures are base64-inlined into `textures/*.js` so `index.html` works from file://. |
 
+## Streamed imagery, terrain and live feeds (Cesium globe, since 1.1; all keyless)
+
+Attributions for the active sources are also shown live in the bottom-left corner of the globe. Details, endpoints and
+terms are in [docs/data-sources.md](docs/data-sources.md).
+
+| Use                                    | Source and required attribution                                                                                                             | Licence / terms                                   |
+| -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
+| Default satellite basemap (to z19)     | Esri World Imagery: "Esri, Maxar, Earthstar Geographics, and the GIS User Community"                                                        | Esri terms of use (keyless public tile service)   |
+| Hybrid roads and place names           | Esri World Transportation, World Boundaries and Places (Esri, HERE, Garmin)                                                                 | Esri terms of use                                 |
+| Sentinel-2 basemap                     | EOxCloudless 2016, https://s2maps.eu by EOX IT Services GmbH (Contains modified Copernicus Sentinel data 2016 & 2017)                       | CC BY 4.0                                         |
+| Street map                             | © OpenStreetMap contributors (tile.openstreetmap.org)                                                                                       | ODbL 1.0 data; OSMF tile usage policy             |
+| Dark basemap                           | © OpenStreetMap contributors © CARTO                                                                                                        | CARTO basemap terms (non-commercial / low volume) |
+| Blue Marble, MODIS daily, night lights | NASA Earth Observatory Blue Marble; NASA MODIS Terra corrected reflectance; NASA Black Marble (VIIRS), all served by NASA EOSDIS GIBS       | NASA imagery, no restrictions (credit requested)  |
+| 3D terrain (default)                   | Terrain Tiles on AWS Open Data (Mapzen/Tilezen): SRTM, GMTED2010, ETOPO1, NED, EU-DEM, ArcticDEM and others (see tilezen/joerd attribution) | open data; attribution per source                 |
+| 3D terrain (option)                    | Esri World Elevation 3D                                                                                                                     | Esri terms of use                                 |
+| LIVE earthquakes                       | USGS Earthquake Hazards Program                                                                                                             | public domain                                     |
+| LIVE natural events                    | NASA Earth Observatory Natural Event Tracker (EONET v3)                                                                                     | public domain                                     |
+
 ## Reference layers (data/layers/)
 
 | Layer                                                                                           | Source                                                                                                                                                                                                                                                                                                                                                            | Licence                                                          |
@@ -80,4 +98,4 @@ Sound is muted until you interact; master mute, music and effects sliders are in
 
 ## Software (vendor/, bundled into js/app.js)
 
-three.js r170 + OrbitControls, EffectComposer, UnrealBloomPass, ShaderPass (MIT) · d3-force/d3-quadtree/d3-dispatch/d3-timer (ISC) · marked (MIT) · build with esbuild (MIT). Dev only: ESLint (MIT), Prettier (MIT), Playwright (Apache-2.0).
+CesiumJS 1.147 (`@cesium/engine` 26.5.0 + `@cesium/core` 0.1.1, Apache-2.0; runtime Workers/Assets/wasm in `vendor/cesium/` with its LICENSE.md, which lists its own third-party notices) · three.js r170 math classes only (MIT) · d3-force/d3-quadtree/d3-dispatch/d3-timer (ISC) · marked (MIT) · build with esbuild (MIT). Dev only: ESLint (MIT), Prettier (MIT), Playwright (Apache-2.0).
