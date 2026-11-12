@@ -7,7 +7,8 @@
 //   raw score          R = D x sum_g c_g
 //   population factor  F = sqrt(1 + pop_cell / pop_ref)   (pop_cell = GeoNames cities>=15k population in the cell)
 //   score              S = R / F       so dense cities are not hotspots just because people live there
-// Clusters: 4/8-connected cells with D >= minLayers and S >= the chosen percentile of non-empty cells.
+// Clusters: 4/8-connected cells with D >= minLayers and S >= the chosen percentile of non-empty cells; components larger
+// than maxCells (12) are split at their score peaks (steepest-ascent watershed) so one dense region is not one cluster.
 // Evidence grade of a cluster: E = 0.5 x strong + 0.3 x precise + 0.2 x min(1, sources / 5)
 //   strong  = share of case records graded CIT or Official record
 //   precise = share of case records with exact_site / within_1km coordinates
@@ -136,12 +137,49 @@ export function computeHotspots(records, pop = [], opt = {}) {
           q.push(n);
         }
     }
-    clusters.push(summarize(mem));
+    // a very large component (dense regions such as western Europe) is split at its score peaks: every cell climbs to
+    // its highest-scoring neighbour until it reaches a local maximum, and cells sharing a peak form one cluster
+    if (mem.length > (opt.maxCells ?? 12))
+      for (const part of splitAtPeaks(mem, grid, cells)) clusters.push(summarize(part));
+    else clusters.push(summarize(mem));
   }
   clusters.sort((a, b) => b.score - a.score);
   return { grid, cells: list, clusters, threshold: thr };
 }
 
+export function splitAtPeaks(mem, grid, cells) {
+  const inC = new Set(mem.map((c) => c.id));
+  const peakOf = new Map();
+  const climb = (id) => {
+    const path = [];
+    let x = id;
+    while (!peakOf.has(x)) {
+      path.push(x);
+      let best = x;
+      for (const n of grid.neighbors(x)) {
+        if (!inC.has(n)) continue;
+        const a = cells.get(n).S,
+          b = cells.get(best).S;
+        if (a > b || (a === b && n < best)) best = n; // ties: strict order on (S, id), so plateaus share one peak
+      }
+      if (best === x) {
+        peakOf.set(x, x);
+        break;
+      }
+      x = best;
+    }
+    const pk = peakOf.get(x);
+    for (const y of path) peakOf.set(y, pk);
+    return pk;
+  };
+  const parts = new Map();
+  for (const c of mem) {
+    const pk = climb(c.id);
+    if (!parts.has(pk)) parts.set(pk, []);
+    parts.get(pk).push(c);
+  }
+  return [...parts.values()];
+}
 export function summarize(mem) {
   const recs = mem.flatMap((c) => c.recs);
   const groups = {};

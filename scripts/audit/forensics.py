@@ -18,10 +18,34 @@ OUT = os.path.join(ROOT, 'docs', 'audit')
 TODAY = datetime.date(2026, 11, 12)
 PRIVATE = ('NUFORC',)
 CASE_LAYERS = ['map_uap_cit', 'map_abductions', 'map_animal_mutilations', 'map_missing_unsolved', 'map_uso_water', 'map_satellite_anomalies']
-REF_LAYERS = ['map_nuclear_sites', 'map_nuclear_tests', 'map_conflicts', 'map_pyramids', 'map_megaliths', 'map_caves_underground', 'map_ancient_cities_remote_sensing', 'map_ocean', 'map_weird_coordinates']
+REF_LAYERS = ['map_offlimits_mountains', 'map_nuclear_sites', 'map_nuclear_tests', 'map_conflicts', 'map_pyramids', 'map_megaliths', 'map_caves_underground', 'map_ancient_cities_remote_sensing', 'map_ocean', 'map_weird_coordinates']
 findings = []
 counts = collections.defaultdict(collections.Counter)
 examples = collections.defaultdict(list)
+
+
+# found and fixed during the build (code review, build logs, screenshots); see pass-NN.md for detail
+MANUAL = [
+    (1, 'error', 'EOX imagery', 'licence', 'satellite close-ups used EOX s2cloudless 2023 (CC BY-NC-SA 4.0, non-commercial); switched to the 2016 vintage (CC BY 4.0). FIXED'),
+    (1, 'problem', 'nuclear_osm', 'rows', 'OSM nuclear test site layer is empty (Overpass unavailable during the build); layer shows 0 rows. OPEN (staged)'),
+    (1, 'problem', 'military', 'OSM', 'OSM military extract not merged (Overpass 502s); bases layer is MIRTA + Wikidata only. OPEN (staged)'),
+    (2, 'error', 'military', 'kind', 'Wikidata P279* walk pulled 2,624 non-military items (fire lookout towers, belfries, bird hides, acropolises, churches) into the bases layer; removed by class policy. FIXED'),
+    (2, 'issue', 'military', 'kind', '9,149 historic fortifications and 3,688 gendarmerie/police barracks were counted as military bases in the analysis; relabelled and excluded. FIXED'),
+    (5, 'bug', 'build_data.py', 'ingest', 'offlimits_mountains.csv ingested twice (notes file and data/sources snapshot): 12 duplicate rows with ~suffix ids. FIXED'),
+    (5, 'bug', 'build_data.py', 'grade', "composite grades duplicated by the QWM merge ('Official record / Official record'); collapsed, raw kept in grade_raw. FIXED"),
+    (5, 'bug', 'build_data.py', 'same_as/conflicts', 'public rows carried values copied from private NUFORC rows via conflicts/same_as; moved to data/private/private_links.js. FIXED'),
+    (6, 'bug', 'forensics.py', 'spot-check', "country spot-check compared only the first word of names: 'Dem. Rep. Congo' vs 'Democratic Republic of the Congo' and territories (American Samoa vs United States) were false conflicts; now uses all Natural Earth name forms and the sovereign. FIXED"),
+    (7, 'issue', 'stats_crosscheck.py', 'agree', 'agreement test used only the Python Monte Carlo error; now combines both runs. Conflict pop/time p for all-precision cases differ (pooled vs paired null), borderline. FIXED (test) / NOTED (method)'),
+    (8, 'bug', 'forensics.py', 'glossary', "pass-8 regex missed glossary entries whose src is a named constant (src: POLICY). FIXED"),
+    (9, 'bug', 'ui_misc.js', 'innerHTML', 'briefing Markdown was only stripped of <script>; now allow-list sanitised (no handlers, styles, iframes, non-http links). FIXED'),
+    (9, 'bug', 'app_core.js', 'link()', 'data URLs were linked without a scheme check (javascript: possible from a data file); now http(s)/mailto only. FIXED'),
+    (9, 'bug', 'cinema.js', 'imports', 'unused imports (emit, on) failed ESLint. FIXED'),
+    (9, 'issue', 'ui_analysis.js', 'performance', 'all-precision analysis (~2.5k cases, time permutation on 114k GED events) takes minutes under software WebGL; run on demand, iterations capped. OPEN'),
+    (9, 'issue', 'ui_reports.js', 'performance', 'report generation with 83k local private rows took ~16 s headless; smoke test runs with ?private=0. OPEN'),
+    (10, 'bug', 'test/smoke.mjs', 'hooks', 'smoke test opened dossiers from raw rows instead of prepared cases (window.__case added). FIXED'),
+    (10, 'bug', 'ui_misc.js', 'captions', 'briefing gallery captions looked up by path, not basename; captions were missing. FIXED'),
+    (10, 'issue', 'smoke', 'panels', 'with private rows loaded, slow panels stayed open and blocked later clicks in the headless run. FIXED (test uses ?private=0)'),
+]
 
 
 def F(pas, cls, ds, row, field, value, detail, other='', src=''):
@@ -34,7 +58,15 @@ def F(pas, cls, ds, row, field, value, detail, other='', src=''):
         examples[key].append({'id': row.get('id'), 'name': row.get('name'), 'value': str(value)[:120], 'other': str(other)[:120]})
 
 
+NOTES = os.environ.get('QWM_NOTES_DIR', '/workspace/qwm/wiw/notes')
+EXTRA = {'map_offlimits_mountains': 'offlimits_mountains.csv'}
+
+
 def rows_of(stem):
+    if stem in EXTRA:
+        for q in (os.path.join(NOTES, EXTRA[stem]), os.path.join(ROOT, 'data', 'sources', EXTRA[stem])):
+            if os.path.exists(q): return list(csv.DictReader(open(q, encoding='utf-8-sig')))
+        return []
     p = os.path.join(MAP_DIR, stem + '.csv')
     if not os.path.exists(p):
         p = os.path.join(ROOT, 'data', 'sources', 'qwm', stem + '.csv.gz')
@@ -70,7 +102,7 @@ def load_admin0():
         rec = dict(zip(flds, sr.record))
         g = shape(sr.shape.__geo_interface__)
         if not g.is_valid: g = g.buffer(0)
-        geoms.append(g); meta.append({'a2': rec.get('ISO_A2_EH') or rec.get('ISO_A2'), 'a3': rec.get('ADM0_A3'), 'name': rec.get('NAME'), 'lx': rec.get('LABEL_X'), 'ly': rec.get('LABEL_Y'), 'cx': g.centroid.x, 'cy': g.centroid.y})
+        geoms.append(g); meta.append({'a2': rec.get('ISO_A2_EH') or rec.get('ISO_A2'), 'a3': rec.get('ADM0_A3'), 'name': rec.get('NAME'), 'aliases': [rec.get(k) for k in ('NAME', 'NAME_LONG', 'ADMIN', 'SOVEREIGNT', 'FORMAL_EN', 'NAME_EN') if rec.get(k)], 'sov_a3': rec.get('SOV_A3'), 'lx': rec.get('LABEL_X'), 'ly': rec.get('LABEL_Y'), 'cx': g.centroid.x, 'cy': g.centroid.y})
     return geoms, meta, STRtree(geoms)
 
 
@@ -143,7 +175,7 @@ def main():
                 if iso and len(iso) == 2 and m['a2'] not in (iso, '-99') and iso not in ('XK',):
                     d = dist_to_country_km(lat, lon, iso)
                     if d > 10:
-                        F(2, 'conflict', stem, r, 'country_iso', iso, f'country conflict: point lies {d:.0f} km inside {m["name"]} ({m["a2"]}) per Natural Earth 10m', m['a2'])
+                        F(2, 'conflict', stem, r, 'country_iso', iso, f'country conflict: point lies in {m["name"]} ({m["a2"]}) per Natural Earth 10m, {d:.0f} km from the stated country {iso}' + (' (a territory of the same sovereign)' if any(mm['a2'] == iso and mm.get('sov_a3') == m.get('sov_a3') for mm in meta) else ''), m['a2'])
             if precise:
                 for m in ([meta[i]] if i is not None else []):
                     for (cx, cy, lbl) in ((m['cx'], m['cy'], 'polygon centroid'), (m['lx'], m['ly'], 'label point')):
@@ -243,9 +275,12 @@ def main():
                 o = seen[r['id']]
                 F(5, 'error', stem, r, 'id', r['id'], 'duplicate id within one QWM file (two different rows share it)', f"{o.get('name')} {o.get('date')} / {r.get('name')} {r.get('date')}")
             seen[r.get('id')] = r
-        if stem in CASE_LAYERS:
+        if stem in CASE_LAYERS or stem in EXTRA:
             for r in rows_:
                 la, lo = fnum(r.get('lat')), fnum(r.get('lon'))
+                pr = (r.get('coord_precision') or '').strip()
+                if stem in EXTRA and pr and pr not in ('exact_site', 'within_1km', 'locality', 'region'):
+                    F(2, 'issue', stem, r, 'coord_precision', pr, 'coord_precision value is not in the schema; plotted as unspecified (25 km circle)')
                 if la is not None and lo is not None and not (r.get('source_url') or '').strip() and (r.get('body') or 'Earth') in ('', 'Earth'):
                     F(1, 'problem', stem, r, 'source_url', '', 'no source_url: row is not plotted (sourced rows only); QWM to add the citation')
     t = open(os.path.join(ROOT, 'data', 'cases.js'), encoding='utf-8').read()
@@ -308,7 +343,10 @@ def main():
             if la is None or lo is None: probs.append('no coordinates')
             else:
                 i = country_at(la, lo); cn = (it.get('country') or '')
-                if i is not None and cn and meta[i]['name'] and meta[i]['name'].split()[0].lower() not in cn.lower() and cn.split()[0].lower() not in (meta[i]['name'] or '').lower():
+                # match against every Natural Earth name form and the sovereign (territories such as American Samoa
+                # count as their sovereign); 'Dem. Rep.' style abbreviations are expanded before comparing
+                nz = lambda t: re.sub(r'[^a-z]', '', re.sub(r'\bdem\.?\s*rep\.?', 'democratic republic', re.sub(r'^the\s+', '', (t or '').lower())).replace(' of the ', ' of ').replace('of the', 'of'))
+                if i is not None and cn and meta[i]['name'] and not any(nz(a) and (nz(a) in nz(cn) or nz(cn) in nz(a)) for a in meta[i].get('aliases', [meta[i]['name']])):
                     probs.append(f"point in {meta[i]['name']}, row says {cn}")
             for f in fields:
                 if not it.get(f): probs.append(f'missing {f}')
@@ -359,6 +397,11 @@ def main():
     terms = re.findall(r"term:\s*'([^']+)'", gl); srcs = re.findall(r"src:\s*([^,}]+)", gl)
     p8 = {'glossary_terms': len(terms), 'with_url': sum(1 for s in srcs if "'http" in s), 'with_doc': sum(1 for s in srcs if "'http" not in s)}
     if len(srcs) < len(terms): F(8, 'bug', 'glossary', {'id': '', 'name': 'glossary'}, 'src', len(srcs), 'glossary entry without a source', len(terms))
+
+    # ===== findings from code review and build checks (passes 1, 2, 6, 9, 10), recorded here so the CSV is complete =====
+    M = {'id': '', 'name': ''}
+    for pas, cls, ds, field, detail in MANUAL:
+        F(pas, cls, ds, dict(M, name=ds), field, '', detail)
 
     # ===== write =====
     os.makedirs(OUT, exist_ok=True)

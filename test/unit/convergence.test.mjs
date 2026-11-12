@@ -96,3 +96,30 @@ test('a zero-weight row alone does not add a layer (D)', () => {
   );
   assert.equal(r.clusters[0].D, 1);
 });
+
+test('large components are split at score peaks', async () => {
+  const { computeHotspots } = await import('../../src/convergence.js');
+  // two strong peaks joined by a weaker bridge of hot cells along the equator (100 km cells)
+  const recs = [];
+  const groups = ['A', 'B', 'C', 'D'];
+  for (let i = 0; i < 20; i++) {
+    const lon = i * 0.9;
+    const strength = i === 2 || i === 17 ? 40 : 3;
+    for (const g of groups) for (let k = 0; k < strength; k++) recs.push({ lat: 0.1, lon, group: g, isCase: false });
+  }
+  const res = computeHotspots(recs, [], { cellKm: 100, minLayers: 3, pct: 0, maxCells: 12 });
+  assert.ok(
+    res.clusters.length >= 2,
+    'expected the long ridge to split into at least two clusters, got ' + res.clusters.length,
+  );
+});
+
+test('a flat plateau stays one cluster when split', async () => {
+  const { splitAtPeaks, makeGrid } = await import('../../src/convergence.js');
+  const grid = makeGrid(100);
+  const ids = [];
+  for (let i = 0; i < 15; i++) ids.push(grid.cellOf(0.1, i * 0.8));
+  const cells = new Map(ids.map((id) => [id, { id, S: 5 }]));
+  const parts = splitAtPeaks([...cells.values()], grid, cells);
+  assert.equal(parts.length, 1);
+});
