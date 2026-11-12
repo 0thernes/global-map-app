@@ -118,7 +118,8 @@ await step('data panel tabs', async () => {
     await page.waitForTimeout(t === 'stats' ? 1500 : 200);
   }
   await page.click('[data-dt="tables"]');
-  await page.click('#data-body [data-t="T038"]');
+  await page.selectOption('#data-tsel', 'T038');
+  await page.waitForSelector('#data-body h4:has-text("T038")');
   await page.click('#data-body th[data-col="3"]');
   const first = await page.$eval('#data-body .dtable tbody tr td:nth-child(4)', (td) => td.textContent);
   if (!/^\d/.test(first)) throw new Error('sorted Prior column does not start with a number: ' + first);
@@ -157,6 +158,82 @@ await step('tour', async () => {
     await page.waitForTimeout(300);
   }
   await page.keyboard.press('Escape');
+});
+// v1.3 window manager: every panel opens, minimizes, restores, maximizes, drags, docks and closes the same way
+const win = (id) =>
+  page.$eval('#' + id, (e) => ({
+    hidden: e.hidden,
+    min: e.classList.contains('min'),
+    mode: e.dataset.mode,
+    x: e.getBoundingClientRect().left,
+    y: e.getBoundingClientRect().top,
+    head: !!e.querySelector(':scope > .win-head .win-min') && !!e.querySelector(':scope > .win-head .win-close'),
+    bodies: e.querySelectorAll(':scope > .win-body').length,
+  }));
+async function cycle(id, open) {
+  await open();
+  await page.waitForSelector('#' + id + ':not([hidden])');
+  let w = await win(id);
+  if (!w.head || w.bodies !== 1) throw new Error(id + ': no standard header / single body');
+  await page.click(`#${id} .win-min`);
+  if (!(await win(id)).min) throw new Error(id + ': minimize');
+  await page.click(`#${id} .win-min`);
+  if ((await win(id)).min) throw new Error(id + ': restore');
+  await page.click(`#${id} .win-max`);
+  if ((await win(id)).mode !== 'max') throw new Error(id + ': maximize');
+  await page.click(`#${id} .win-max`);
+  w = await win(id);
+  // drag the title bar 120 px left and 40 px down: the window floats where it was dropped
+  const t = await page.$eval(`#${id} .win-title`, (e) => {
+    const r = e.getBoundingClientRect();
+    return { x: r.left + Math.min(40, r.width / 2), y: r.top + r.height / 2 };
+  });
+  await page.mouse.move(t.x, t.y);
+  await page.mouse.down();
+  await page.mouse.move(t.x - 60, t.y + 20, { steps: 4 });
+  await page.mouse.move(t.x - 120, t.y + 40, { steps: 4 });
+  await page.mouse.up();
+  const d = await win(id);
+  if (d.mode !== 'float' || Math.abs(d.x - (w.x - 120)) > 24) throw new Error(`${id}: drag ${JSON.stringify([w, d])}`);
+  await page.click(`#${id} .win-close`);
+  if (!(await win(id)).hidden) throw new Error(id + ': close');
+}
+await step('windows: open / minimize / restore / maximize / drag / close', async () => {
+  const k = (key) => () => page.keyboard.press(key);
+  for (const [id, open] of [
+    ['wars', k('w')],
+    ['graph', k('g')],
+    ['charts', k('v')],
+    ['brief', k('b')],
+    ['help', k('?')],
+    ['settings', k(',')],
+    ['reference', k('i')],
+    ['datap', k('d')],
+    ['reports', k('e')],
+    ['analysis', k('a')],
+    ['dossier', () => page.evaluate(() => window.__open(window.__case(0)))],
+    ['hotspots', k('z')],
+  ])
+    await cycle(id, open);
+  // dock: drag a window onto the left edge of the safe area
+  await page.keyboard.press('w');
+  await page.waitForSelector('#wars:not([hidden])');
+  const t = await page.$eval('#wars .win-title', (e) => {
+    const r = e.getBoundingClientRect();
+    return { x: r.left + 30, y: r.top + 20 };
+  });
+  const railR = await page.$eval('#rail', (e) => e.getBoundingClientRect().right);
+  await page.mouse.move(t.x, t.y);
+  await page.mouse.down();
+  await page.mouse.move(t.x - 200, t.y + 100, { steps: 5 });
+  await page.mouse.move(railR + 12, t.y + 100, { steps: 5 });
+  await page.mouse.up();
+  const m = await win('wars');
+  if (m.mode !== 'left') throw new Error('dock left: ' + m.mode);
+  await page.keyboard.press('0'); // reset layout
+  if ((await win('wars')).mode !== 'right') throw new Error('reset layout');
+  await page.keyboard.press('Escape');
+  if (!(await win('wars')).hidden) throw new Error('Esc closes the window');
 });
 await step('timeline play', async () => {
   await page.keyboard.press(' ');
