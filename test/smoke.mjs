@@ -198,7 +198,9 @@ async function cycle(id, open) {
   await page.mouse.move(t.x + dx, t.y + 40, { steps: 4 });
   await page.mouse.up();
   const d = await win(id);
-  if (d.mode !== 'float' || Math.abs(d.x - (w.x + dx)) > 24) throw new Error(`${id}: drag ${JSON.stringify([w, d])}`);
+  // (a full-width window is clamped inside the safe area, so it may only move vertically)
+  if (d.mode !== 'float' || (Math.abs(d.x - (w.x + dx)) > 24 && Math.abs(d.y - (w.y + 40)) > 24))
+    throw new Error(`${id}: drag ${JSON.stringify([w, d])}`);
   await page.click(`#${id} .win-close`);
   if (!(await win(id)).hidden) throw new Error(id + ': close');
 }
