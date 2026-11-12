@@ -55,6 +55,8 @@ def snapshot():
     for k, f in CSVS.items(): shutil.copy(os.path.join(QWM, f), os.path.join(SNAP, k + '.csv'))
     for a in AGG: shutil.copy(os.path.join(WIW, 'data', 'map', a + '.csv'), os.path.join(SNAP, a + '.csv'))
     sec, toc = P.load_aux(os.path.join(WIW, 'main.aux'))
+    pos = P.label_sections(os.path.join(WIW, 'main.tex'), os.path.join(WIW, 'main.toc'))
+    sec = {k: (pos.get(k) or v[0], v[1], v[2]) for k, v in sec.items()}  # aux section is the longtable counter for table rows
     with open(os.path.join(SNAP, 'labels.csv'), 'w', newline='') as f:
         w = csv.writer(f, lineterminator='\n'); w.writerow(['label', 'section', 'page'])
         for k, (s, p, _) in sorted(sec.items()):
@@ -95,7 +97,8 @@ def snapshot():
             figures.append(dict(id='F%02d' % fi, file=d['file'], caption=d['caption'], part=d['part'], sec=secnum,
                                 section=d['section'], subsection=d['subsection'], case=d['case'], line=d['line'],
                                 page=page or sp or None, page_basis='located in PDF text layer' if page else 'section start page (main.toc)'))
-    json.dump(tables, gzip.open(os.path.join(SNAP, 'tables.json.gz'), 'wt', encoding='utf-8'), ensure_ascii=False)
+    with open(os.path.join(SNAP, 'tables.json.gz'), 'wb') as raw, gzip.GzipFile(fileobj=raw, mode='wb', mtime=0) as gz:  # mtime=0: byte-stable
+        gz.write(json.dumps(tables, ensure_ascii=False).encode('utf-8'))
     with open(os.path.join(SNAP, 'figures.csv'), 'w', newline='', encoding='utf-8') as f:
         w = csv.DictWriter(f, list(figures[0]), lineterminator='\n'); w.writeheader(); w.writerows(figures)
     # Part V document links per case file (\url / \href inside each deep block)
@@ -127,7 +130,7 @@ def build():
         s, p = lab.get(plab.get(r['path_id'], ''), ('', None))
         entries.append(dict(id=r['path_id'], part='I', kind='theory', domain=r['domain'], category=r['category'], name=r['name'],
                             year=int(r['year']) if r['year'].lstrip('-').isdigit() else None, grade=r['tier'], tier=r['tier'],
-                            testable=r['testable'], composite=num(r['composite']), band=r['possibility_band'], radical=num(r['radicalness']),
+                            testable=r['testable'], deep=r['deep_profile'].strip().lower() in ('yes', 'true', '1', 'y'), composite=num(r['composite']), band=r['possibility_band'], radical=num(r['radicalness']),
                             src=r['origin_source'][:160], sec=s, page=p, place='theory (not a place)', map=[]))
     for r in rd('glitches.csv'):
         e = ent7.get(r['path_id'], {}); st = status.get(r['path_id'], {})

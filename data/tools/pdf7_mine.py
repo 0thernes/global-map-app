@@ -20,7 +20,7 @@ Outputs
 Never invents coordinates: every coordinate is Wikidata P625 of the cited item, fetched live (cached in
 data/tools/geocode_cache.json under 'wd:<QID>')."""
 import csv, gzip, json, os, re, sys, time, urllib.parse, urllib.request
-HERE = os.path.dirname(os.path.abspath(__file__)); DATA = os.path.dirname(HERE); ROOT = os.path.dirname(DATA)
+HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE); DATA = os.path.dirname(HERE); ROOT = os.path.dirname(DATA)
 QWM = os.environ.get('QWM_DIR', '/workspace/qwm')
 SNAP = os.path.join(DATA, 'sources', 'pdf7', 'pdf7_entries.csv')
 CUR = os.path.join(DATA, 'sources', 'pdf7', 'curation.csv')
@@ -36,6 +36,9 @@ def entries():
     lab = {}
     for m in re.finditer(r'\\newlabel\{([gh]:[^}]+)\}\{\{([^}]*)\}\{(\d+)\}', open(aux, encoding='utf-8').read()):
         lab[m.group(1)] = (m.group(2), m.group(3))
+    import pdf7_tex  # section from the label's position in main.tex (aux records the longtable counter for table rows)
+    secs = pdf7_tex.label_sections(tex, os.path.join(QWM, 'wiw', 'main.toc'))
+    lab = {k: (secs.get(k) or v[0], v[1]) for k, v in lab.items()}
     t = open(tex, encoding='utf-8').read(); p2l = {}
     for m in re.finditer(r'\\label\{(g:[^}]+)\}\\texttt\{\\scriptsize (G[\d.]+)\}', t): p2l[m.group(2)] = m.group(1)
     for m in re.finditer(r'\\label\{(h:[^}]+)\}\\begin\{deep\}\{[^}]*\}\{(G[\d.]+)~~', t): p2l[m.group(2)] = m.group(1)

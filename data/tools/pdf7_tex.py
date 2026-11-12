@@ -112,3 +112,28 @@ def walk(tex_path):
         yield 'table', dict(env=env, caption=caption, rows=rows, **ctx(m.start()))
     for m in re.finditer(r'\\includegraphics(?:\[[^\]]*\])?\{([^}]*)\}(?:.{0,40}?)\\caption\{((?:[^{}]|\{[^{}]*\})*)\}', t, re.S):
         yield 'figure', dict(file=m.group(1), caption=tex2txt(m.group(2)), **ctx(m.start()))
+
+def toc_titles(toc_path):
+    """title (plain text) -> (number, printed page, kind) for every numbered part/section/subsection in main.toc"""
+    out = {}
+    for m in re.finditer(r'\\contentsline \{(part|section|subsection)\}\{(?:\\numberline \{([\d.]+)\})?(.*?)\}\{(\d+)\}\{', open(toc_path, encoding='utf-8').read()):
+        out.setdefault(tex2txt(m.group(3)), (m.group(2) or '', int(m.group(4)), m.group(1)))
+    return out
+
+def label_sections(tex_path, toc_path):
+    """label -> section number of the innermost numbered heading that contains it.
+
+    main.aux cannot be used for this: labels placed inside a longtable row record the table counter
+    (e.g. g:hubble-tension -> {14}{70}, although G1 is section 16), so the section is taken from the
+    label's position in main.tex instead. Pages from main.aux are correct and are kept."""
+    t = open(tex_path, encoding='utf-8').read(); toc = toc_titles(toc_path)
+    heads = [(m.start(), m.group(1), tex2txt(m.group(2))) for m in re.finditer(r'\\(section|subsection)\*?\{((?:[^{}]|\{[^{}]*\})*)\}', t)]
+    out, hi, sec, sub = {}, 0, '', ''
+    for m in re.finditer(r'\\label\{([^}]+)\}', t):
+        while hi < len(heads) and heads[hi][0] < m.start():
+            _, kind, title = heads[hi]; num = toc.get(title, ('',))[0]
+            if kind == 'section': sec, sub = num, ''
+            else: sub = num
+            hi += 1
+        out[m.group(1)] = sub or sec
+    return out
