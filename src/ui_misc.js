@@ -79,7 +79,7 @@ function toggleBrief(show) {
   const exp = cat.expected || {};
   let h = `<h3>Data drops from QWM <small class="muted">(${esc(cat.map_dir || '')}, built ${esc(cat.built || '')})</small></h3><table class="kv">${Object.entries(exp).map(([k, v]) => `<tr><th>${esc(k)}</th><td>${v ? '<span class="ok">loaded</span>' : '<span class="muted">waiting</span>'}</td></tr>`).join('')}</table>
   <p class="muted small">Ingested files: ${(cat.files || []).map((f) => `${esc(f.file.split('/').pop())} (${f.plotted}/${f.rows})`).join(' · ')}</p>`;
-  for (const [name, md] of Object.entries(b.md || {})) h += `<article class="md"><h3>${esc(name)}</h3>${marked.parse(md.replace(/<script[\s\S]*?<\/script>/gi, ''))}</article>`;
+  for (const [name, md] of Object.entries(b.md || {})) h += `<article class="md"><h3>${esc(name)}</h3>${safeHTML(marked.parse(md))}</article>`;
   if (!Object.keys(b.md || {}).length) h += '<p class="muted">analysis_summary.md and README.md have not landed yet; they render here automatically after the next data/build_data.py run.</p>';
   if ((b.png || []).length) h += `<div class="gallery">${b.png.map((p) => { const nm = p.split('/').pop(); const cap = (b.captions || {})[p] || Object.entries(b.captions || {}).find(([k]) => k.split('/').pop() === nm)?.[1] || ''; return `<figure><a href="${esc(p)}" target="_blank" rel="noopener"><img src="${esc(p)}" alt="${esc(cap || nm)}" loading="lazy"></a><figcaption><b>${esc(nm)}</b>${cap ? `<br>${esc(cap)}` : ''}</figcaption></figure>`; }).join('')}</div>`;
   if (b.registry) h += `<h3>Sources registry (${b.registry.length})</h3><div class="scroll"><table class="kv small">${b.registry.slice(0, 400).map((r) => `<tr><td>${Object.values(r).slice(0, 4).map((v) => esc(v)).join(' · ')}</td></tr>`).join('')}</table></div>`;
@@ -117,5 +117,12 @@ function screenshot() {
   const g = $('#globe'), lb = $('#labels'); const cv = document.createElement('canvas'); cv.width = g.width; cv.height = g.height; const c2 = cv.getContext('2d');
   c2.drawImage(g, 0, 0); c2.drawImage(lb, 0, 0, cv.width, cv.height); c2.fillStyle = 'rgba(230,241,247,0.8)'; c2.font = `${14 * (cv.width / g.clientWidth)}px Inter, sans-serif`; c2.fillText(`Global Map · ${dayLabel(st.cur)} · ${filteredCases().length} cases`, 16, cv.height - 16);
   const a = document.createElement('a'); a.download = `globalmap-${dayToISO(st.cur)}.png`; a.href = cv.toDataURL('image/png'); a.click();
+}
+// briefings Markdown comes from the QWM folder: allow-list sanitise the rendered HTML (CSP also blocks inline script)
+function safeHTML(html) {
+  const t = document.createElement('template'); t.innerHTML = html;
+  t.content.querySelectorAll('script,style,iframe,object,embed,link,meta,form,input,button,textarea,select,base,svg,math').forEach((n) => n.remove());
+  t.content.querySelectorAll('*').forEach((n) => { for (const a of [...n.attributes]) { const v = a.value.trim().toLowerCase(); if (/^on/i.test(a.name) || a.name === 'style' || (/^(href|src|xlink:href|action|formaction)$/i.test(a.name) && !/^(https?:|mailto:|#|data\/|\.\/|[a-z0-9_-]+\.(png|jpe?g|svg|md)$)/.test(v))) n.removeAttribute(a.name); } if (n.tagName === 'A') { n.setAttribute('rel', 'noopener noreferrer'); n.setAttribute('target', '_blank'); } });
+  return t.innerHTML;
 }
 function randomCase() { const cs = filteredCases(); if (cs.length) openDossier(cs[Math.floor(Math.random() * cs.length)]); }

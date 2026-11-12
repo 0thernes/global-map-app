@@ -29,7 +29,8 @@ export const $ = (s, r = document) => r.querySelector(s);
 export const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 export const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (m) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
 export const fmt = (n) => (n == null || n === '' || isNaN(n) ? '' : Math.round(n).toLocaleString('en-US'));
-export const link = (u, t) => (u ? `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(t || u)}</a>` : '');
+// only http(s)/mailto become links (no javascript:/data: URLs from data files); anything else is shown as text
+export const link = (u, t) => (!u ? '' : /^(https?:|mailto:)/i.test(String(u).trim()) ? `<a href="${esc(String(u).trim())}" target="_blank" rel="noopener noreferrer">${esc(t || u)}</a>` : esc(t || u));
 export const row = (k, v) => (v === undefined || v === null || v === '' ? '' : `<tr><th>${esc(k)}</th><td>${v}</td></tr>`);
 export const domain = (u) => { try { return new URL(u).hostname.replace(/^www\./, ''); } catch { return ''; } };
 
