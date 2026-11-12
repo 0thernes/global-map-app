@@ -1172,5 +1172,175 @@
    "106.2460842",
    "106.4890087"
   ]
+ },
+ "wd:Q1161067": {
+  "label": "ATOMKI",
+  "lat": 47.54369819601174,
+  "lon": 21.625223951786353
+ },
+ "wd:Q14711570": {
+  "label": "High Resolution Fly's Eye Cosmic Ray Detector",
+  "lat": 40.1319,
+  "lon": -112.959
+ },
+ "wd:Q1138406": {
+  "label": "Ohio State University Radio Observatory",
+  "lat": 40.25111111111111,
+  "lon": -83.04916666666666
+ },
+ "wd:Q148044": {
+  "label": "Parkes Observatory",
+  "lat": -32.997777777778,
+  "lon": 148.26291666667
+ },
+ "wd:Q21578": {
+  "label": "Princeton University",
+  "lat": 40.345277777778,
+  "lon": -74.656111111111
+ },
+ "wd:Q14452": {
+  "label": "Easter Island",
+  "lat": -27.12,
+  "lon": -109.35
+ },
+ "wd:Q249707": {
+  "label": "Phaistos",
+  "lat": 35.05123,
+  "lon": 24.814267
+ },
+ "wd:Q182324": {
+  "label": "Antikythera mechanism",
+  "lat": 35.864167,
+  "lon": 23.305
+ },
+ "wd:Q1530": {
+  "label": "Baghdad",
+  "lat": 33.31527777777778,
+  "lon": 44.36611111111111
+ },
+ "wd:Q2998349": {
+  "label": "Coso Range",
+  "lat": 36.1416,
+  "lon": -117.69
+ },
+ "wd:Q969351": {
+  "label": "Kensington Runestone",
+  "lat": 45.813133333333,
+  "lon": -95.67175
+ },
+ "wd:Q125953": {
+  "label": "Tunguska event",
+  "lat": 60.916666666667,
+  "lon": 101.95
+ },
+ "wd:Q2620036": {
+  "label": "Nazca Lines",
+  "lat": -14.6975,
+  "lon": -75.135
+ },
+ "wd:Q59222": {
+  "label": "Roanoke Colony",
+  "lat": 35.93694444444444,
+  "lon": -75.7088888888889
+ },
+ "wd:Q2164598": {
+  "label": "Wardenclyffe Tower",
+  "lat": 40.947583333333,
+  "lon": -72.898194444444
+ },
+ "wd:Q3373063": {
+  "label": "Pavillon de Breteuil",
+  "lat": 48.82931944,
+  "lon": 2.22017778
+ },
+ "wd:Q1563": {
+  "label": "Havana",
+  "lat": 23.136666666667,
+  "lon": -82.358888888889
+ },
+ "wd:Q178331": {
+  "label": "Shroud of Turin",
+  "lat": 45.073055555556,
+  "lon": 7.6858333333333
+ },
+ "wd:Q2302161": {
+  "label": "Miracle of the Sun",
+  "lat": 39.632130555556,
+  "lon": -8.6717861111111
+ },
+ "wd:Q7709620": {
+  "label": "Sanctuary of Our Lady of Lourdes",
+  "lat": 43.0976,
+  "lon": -0.05654
+ },
+ "wd:Q380176": {
+  "label": "Marfa lights",
+  "lat": 30.31194444,
+  "lon": -104.02472222
+ },
+ "wd:Q516415": {
+  "label": "San Antonio",
+  "lat": 33.916111111111,
+  "lon": -106.87
+ },
+ "wd:Q960480": {
+  "label": "Ellsworth Air Force Base",
+  "lat": 44.145041666667,
+  "lon": -103.10356666667
+ },
+ "wd:Q2274620": {
+  "label": "Leary",
+  "lat": 31.4856,
+  "lon": -84.5133
+ },
+ "wd:Q1965863": {
+  "label": "Moberly–Jourdain incident",
+  "lat": 48.815833333333,
+  "lon": 2.1097222222222
+ },
+ "wd:Q49650": {
+  "label": "Loch Ness",
+  "lat": 57.3,
+  "lon": -4.45
+ },
+ "wd:Q1011524": {
+  "label": "Point Pleasant",
+  "lat": 38.857527,
+  "lon": -82.128571
+ },
+ "wd:Q306201": {
+  "label": "Devils Tower",
+  "lat": 44.590277777778,
+  "lon": -104.71527777778
+ },
+ "wd:Q5038362": {
+  "label": "Cardiff",
+  "lat": 42.889722222222,
+  "lon": -76.143333333333
+ },
+ "wd:Q1345": {
+  "label": "Philadelphia",
+  "lat": 39.952777777778,
+  "lon": -75.163611111111
+ },
+ "wd:Q1029846": {
+  "label": "Camp Hero State Park",
+  "lat": 41.06667,
+  "lon": -71.86778
+ },
+ "wd:Q536580": {
+  "label": "Vatican Apostolic Archives",
+  "lat": 41.90694444444444,
+  "lon": 12.456111111111111
+ },
+ "wd:Q4703278": {
+  "label": "Al-Taqaddum Air Base",
+  "lat": 33.339444,
+  "lon": 43.59
+ },
+ "wd:Q55181030": {
+  "label": "Little America IV",
+  "lat": -78.55,
+  "lon": -163.93333305556
  }
 }
