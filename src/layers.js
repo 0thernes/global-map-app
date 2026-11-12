@@ -1,5 +1,6 @@
 // Layer registry: every toggleable layer, its legend, source and how to build it on the globe.
 import { ctx, st, L, loadLayer, dateToDay, PALETTE, emit, setStatus } from './app_core.js';
+import { usgsQuakes, nasaEonet } from './live_feeds.js';
 
 const ENV_COLOR = {
   atmospheric: '#ff9a3c',
@@ -125,6 +126,18 @@ export function buildRegistry() {
     lineL('plates', 'Plate boundaries (PB2002)', 'Earth hazards', 'plates', 0xff5a8a, 0.75),
     lineL('faults', 'Active faults (GEM)', 'Earth hazards', 'faults_gem', 0xff9e57, 0.55),
     lineL('qfaults', 'Quaternary faults (USGS, US)', 'Earth hazards', 'faults_usgs', 0xffb36b, 0.45),
+    L('live_quakes', 'LIVE: earthquakes M4.5+, 30 days (USGS)', 'points', {
+      group: 'Earth hazards',
+      fetch: usgsQuakes,
+      color: '#ff3d6e',
+      legend: [['epicentre (live feed, online only)', '#ff3d6e']],
+    }),
+    L('live_eonet', 'LIVE: natural events (NASA EONET)', 'points', {
+      group: 'Earth hazards',
+      fetch: nasaEonet,
+      color: '#ffb000',
+      legend: [['open event: wildfire, storm, volcano, ice (online only)', '#ffb000']],
+    }),
     L('volcanoes', 'Volcanoes (Smithsonian GVP)', 'points', {
       group: 'Earth hazards',
       file: 'volcanoes',
@@ -328,7 +341,7 @@ function normItem(it, l) {
   return o;
 }
 async function buildPoints(l) {
-  const p = await loadLayer(l.file);
+  const p = l.fetch ? await l.fetch() : await loadLayer(l.file);
   l.source = p.source;
   l.payload = p;
   const raw = p.items || (p.rows || []).map((r) => Object.fromEntries(p.cols.map((c, i) => [c, r[i]])));
