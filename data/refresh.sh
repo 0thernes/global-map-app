@@ -13,3 +13,4 @@ else
 fi
 $PY build_data.py "$@"                # cases.js, case_details/, layers/map_*.js, catalog.js, briefings/
 rm -f layers/map_military_bases.js
+$PY tools/pdf7_dataset.py              # pdf7_data.js: non-spatial PDF 7 layer (entries, tables, figures, CIT, sources)
