@@ -16,8 +16,8 @@ Thanks for helping. Global Map is evidence-first: a contribution is only as good
    shows both values.
 6. **Licences matter.** Only add data you may redistribute. If a dataset has no licence, open a _data source_ issue first.
 
-Use the **Data source** issue template, or a pull request that edits a CSV in `data/sources/` using the common schema
-(see `data/build_data.py`, `COMMON`).
+Use the **Data source** issue template and attach rows in the common schema (see `data/build_data.py`, `COMMON`). The
+maintainer adds them; the project does not take pull requests.
 
 ## Code
 
@@ -33,11 +33,15 @@ npm run check      # lint, format check, unit tests, data validation, build, hea
 - Respect `prefers-reduced-motion`, keep audio muted until a user gesture, and keep the app working from `file://`.
 - Prettier formats, ESLint lints; CI runs both.
 
-## Commits and pull requests
+## Commits
 
+- Commits go straight to `main`. There are no pull requests, no review bots and no dependency bots (no Dependabot,
+  CodeRabbit or Copilot). Run `npm run check` before every push instead.
 - Small, focused commits with a clear message (`area: what and why`).
-- Fill in the pull-request template, including the sources checklist for data changes.
+- Data changes follow the data rules in [docs/repo-checklist.md](docs/repo-checklist.md): source, grade, coordinate
+  source, pins only for exact sites, nothing private.
 - Add a line to `CHANGELOG.md` under _Unreleased_.
+- Dependencies are upgraded by hand, on purpose, with the checklist re-run.
 
 ## Conduct
 

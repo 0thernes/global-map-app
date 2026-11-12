@@ -48,6 +48,13 @@ All notable changes to this project are documented here. The format follows
   every Data tab, sorting and Escape.
 - Screenshots 19–25 of the Data panel.
 
+### Removed
+
+- `.github/dependabot.yml` and the pull-request template. Commits go straight to `main`, with no pull requests and
+  no Dependabot, CodeRabbit or Copilot. CI and CodeQL run on pushes to `main`, not on pull requests.
+  `docs/repo-checklist.md` now covers what the PR template used to, and `CONTRIBUTING.md` says data arrives
+  through issues.
+
 ### Fixed
 
 - **PDF 7 section numbers.** All 273 Part II references cited the longtable counter as the section. For example,

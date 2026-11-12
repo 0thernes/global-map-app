@@ -1,6 +1,9 @@
 # Repository and release checklist
 
-Use this list before tagging a release. CI covers the items marked **(CI)**.
+Use this list before every push to `main` and before tagging a release. CI covers the items marked **(CI)**.
+
+Workflow: commits go straight to `main`. There are no pull requests and no bots: no Dependabot, CodeRabbit or
+Copilot, and no `.github/dependabot.yml` or pull-request template. This list replaces the PR template.
 
 ## Code quality
 
@@ -27,6 +30,9 @@ Use this list before tagging a release. CI covers the items marked **(CI)**.
 
 ## Data
 
+- [ ] Non-spatial items (theories, lab results, off-Earth objects, unplaceable rows) go to the Data panel, not onto
+      the globe; every number traces to a PDF 7 § and page or a source row
+- [ ] Grades only go up; nothing from Greer/Maussan carries weight; no skeptic boilerplate in summaries
 - [ ] Every new plotted row has a `source_url`, a grade, `coord_source` and `coord_precision`
 - [ ] Pins are used only for `exact_site` and `within_1km`; every other row gets an uncertainty circle at its real
       radius
@@ -48,5 +54,7 @@ Use this list before tagging a release. CI covers the items marked **(CI)**.
 - [ ] README badges and screenshots are real captures of this build (`node test/screens.mjs`), taken at several zoom
       levels including street level
 - [ ] `CREDITS.md` and `docs/data-sources.md` list every imagery, terrain and live-feed source with its attribution
+- [ ] No `.github/dependabot.yml`, no pull-request template, no review or coding bots configured; dependency upgrades
+      are manual
 - [ ] Annotated tag `vX.Y.Z` on `main`; bundle or zip produced with `npm run package -- --zip`
 - [ ] The GitHub Pages deploy loads with no console errors, and the imagery attribution is visible at the bottom left

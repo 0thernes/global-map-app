@@ -51,5 +51,8 @@ graphs without exported data, out-of-scope catalogs, raw caches and private NUFO
 
 ## Upgrade notes
 
+- Workflow: commits go straight to `main`. Dependabot and the pull-request template are removed; the repo checklist
+  is the gate.
+
 - No new remote hosts, keys or tokens. The data layer is about 1 MB and loads only when the Data panel opens.
 - Architecture: [ADR 0002](docs/adr/0002-non-spatial-data-layer.md).
