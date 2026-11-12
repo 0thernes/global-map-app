@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="vendor/cesium/Widgets/CesiumWidget.css" />
     <link rel="stylesheet" href="css/tokens.css" />
     <link rel="stylesheet" href="css/app.css" />
+    <link rel="stylesheet" href="css/components.css" />
   </head>
   <body>
     <div id="globe" role="application" aria-label="3D globe"></div>
@@ -35,8 +36,12 @@
           placeholder="Search cases, sites, countries…  ( / )"
           aria-label="Search"
           autocomplete="off"
+          role="combobox"
+          aria-autocomplete="list"
+          aria-controls="search-results"
+          aria-expanded="false"
         />
-        <ul id="search-results" role="listbox" hidden></ul>
+        <ul id="search-results" role="listbox" aria-label="Search results" tabindex="0" hidden></ul>
       </div>
       <nav class="tools" aria-label="Views">
         <button class="btn" id="btn-wars" data-icon="swords" title="Wars & conflicts ranked (W)">Wars</button>
@@ -68,20 +73,47 @@
           Briefings
         </button>
         <span class="sep"></span>
-        <button class="btn icon" id="btn-lasso" title="Lasso-select cases on the globe (S)" aria-label="Lasso">
-          ⬠
-        </button>
-        <button class="btn icon" id="btn-random" title="Fly to a random case (R)" aria-label="Random case">⚄</button>
-        <button class="btn icon" id="btn-shot" title="Screenshot (PNG)" aria-label="Screenshot">⎙</button>
+        <button
+          class="btn icon"
+          id="btn-lasso"
+          title="Lasso-select cases on the globe (S)"
+          aria-label="Lasso"
+          data-icon="lasso"
+        ></button>
+        <button
+          class="btn icon"
+          id="btn-random"
+          title="Fly to a random case (R)"
+          aria-label="Random case"
+          data-icon="dices"
+        ></button>
+        <button
+          class="btn icon"
+          id="btn-shot"
+          title="Screenshot (PNG)"
+          aria-label="Screenshot"
+          data-icon="camera"
+        ></button>
         <span class="menuwrap"
-          ><button class="btn icon" id="btn-export" data-menu title="Export & workspace" aria-label="Export">⤓</button>
+          ><button
+            class="btn icon"
+            id="btn-export"
+            data-menu
+            title="Export & workspace"
+            aria-label="Export"
+            aria-haspopup="menu"
+            data-icon="download"
+          ></button>
           <div id="menu-export" class="menu" hidden>
             <button id="exp-csv">Filtered cases → CSV</button><button id="exp-geojson">Filtered cases → GeoJSON</button>
             <hr />
             <button id="ws-save">Save workspace (browser)</button><button id="ws-load">Load workspace (browser)</button>
             <button id="exp-ws">Export workspace JSON</button
-            ><label class="file">Import workspace JSON<input type="file" id="imp-ws" accept=".json" /></label></div
-        ></span>
+            ><label class="file">Import workspace JSON<input type="file" id="imp-ws" accept=".json" /></label>
+            <hr />
+            <button id="win-reset">Reset window layout (0)</button>
+          </div></span
+        >
         <button
           class="btn icon"
           id="btn-tour"
@@ -103,15 +135,26 @@
           aria-label="Settings"
           data-icon="settings"
         ></button>
-        <button class="btn icon" id="btn-help" title="Keyboard shortcuts (?)" aria-label="Help">?</button>
+        <button
+          class="btn icon"
+          id="btn-help"
+          title="Keyboard shortcuts (?)"
+          aria-label="Help"
+          data-icon="circle-help"
+        ></button>
       </nav>
     </header>
 
     <aside id="rail" aria-label="Layers and filters">
-      <div class="tabs">
-        <button class="tab on" data-tab="layers">Layers <kbd>L</kbd></button
-        ><button class="tab" data-tab="filters">Filters <kbd>F</kbd></button
-        ><button id="rail-toggle" class="btn icon sm" title="Collapse panel" aria-label="Collapse panel">⟨</button>
+      <div class="rail-head">
+        <div id="rail-tabs"></div>
+        <button
+          id="rail-toggle"
+          class="btn icon sm"
+          data-icon="panel-left-close"
+          title="Collapse panel"
+          aria-label="Collapse panel"
+        ></button>
       </div>
       <div id="count" class="count"></div>
       <div class="pane" id="pane-layers"></div>
@@ -119,7 +162,10 @@
     </aside>
 
     <aside id="dossier" class="panel" hidden aria-label="Dossier">
-      <button id="dossier-close" class="close" aria-label="Close">×</button>
+      <header>
+        <h3>Dossier</h3>
+        <button id="dossier-close" class="close" aria-label="Close">×</button>
+      </header>
       <div id="dossier-body"></div>
     </aside>
 
@@ -277,6 +323,18 @@
           <td>Data (PDF 7 entries, tables, charts, stats, unplaced items)</td>
         </tr>
         <tr>
+          <th><kbd>0</kbd></th>
+          <td>Reset window layout (positions, sizes and docks)</td>
+        </tr>
+        <tr>
+          <th>Windows</th>
+          <td>
+            Drag a title bar to move a window; drop it on the left, right or bottom edge to dock it. Drag the corner (or
+            the inner edge of a docked window) to resize. Double-click a title bar to maximize. Esc closes the window
+            that has focus.
+          </td>
+        </tr>
+        <tr>
           <th><kbd>I</kbd></th>
           <td>Index (sources, glossary, coverage…)</td>
         </tr>
@@ -320,7 +378,13 @@
       <div id="hs-formula"></div>
       <div id="hs-list"></div>
     </section>
-    <aside id="hs-dossier" class="panel" hidden aria-label="Cluster dossier"></aside>
+    <aside id="hs-dossier" class="panel" hidden aria-label="Cluster dossier">
+      <header>
+        <h3 id="hsd-title">Cluster</h3>
+        <button class="close" id="hsd-close" aria-label="Close">×</button>
+      </header>
+      <div id="hs-dbody"></div>
+    </aside>
 
     <section id="reports" class="panel modal wide" hidden aria-label="Reports">
       <header>

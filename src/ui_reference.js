@@ -1,11 +1,12 @@
 // Reference apparatus: Sources index, Glossary, A-Z cases, Sites, Countries, Coverage, Off-world, Credits. All searchable and
 // cross-linked to the globe (click flies there / opens the dossier).
-import { ctx, st, $, $$, esc, fmt, link, emit, caseSub } from './app_core.js';
+import { ctx, st, $, esc, fmt, link, emit, caseSub } from './app_core.js';
 import { GLOSSARY } from './glossary.js';
 import { buildCaseIndex, buildSiteIndex, buildCountryIndex, buildSourcesIndex, searchItems } from './index_gen.js';
 import { coverageTree } from './coverage.js';
 import { AUDIO_CREDITS } from './audio.js';
 import { SUB_FIELD } from './layers.js';
+import { makeTabs } from './ui/tabs.js';
 
 const TABS = [
   ['sources', 'Sources'],
@@ -19,17 +20,20 @@ const TABS = [
   ['credits', 'Credits'],
 ];
 let tab = 'glossary',
-  q = '';
+  q = '',
+  rtabs = null;
 export function initReference() {
   $('#ref-close').onclick = () => toggleReference(false);
-  $('#ref-tabs').innerHTML = TABS.map(([k, t]) => `<button class="tab" data-rt="${k}">${t}</button>`).join('');
-  $$('#ref-tabs [data-rt]').forEach(
-    (b) =>
-      (b.onclick = () => {
-        tab = b.dataset.rt;
-        render();
-      }),
-  );
+  rtabs = makeTabs($('#ref-tabs'), TABS, {
+    active: tab,
+    attr: 'rt',
+    panel: 'ref-body',
+    label: 'Index sections',
+    onChange: (id) => {
+      tab = id;
+      render();
+    },
+  });
   $('#ref-q').oninput = (e) => {
     q = e.target.value;
     clearTimeout(initReference.t);
@@ -104,7 +108,7 @@ const DATASETS = () => {
   return [...files, ...layers];
 };
 function render() {
-  $$('#ref-tabs [data-rt]').forEach((b) => b.classList.toggle('on', b.dataset.rt === tab));
+  if (rtabs) rtabs.set(tab);
   const out = $('#ref-body');
   const Q = q.trim();
   if (tab === 'glossary') {
@@ -204,7 +208,7 @@ function render() {
       .join('')}</table>`;
   } else if (tab === 'credits') {
     out.innerHTML = `<h4>Audio (all CC0 1.0)</h4><table class="kv idx">${AUDIO_CREDITS.map((a) => `<tr><th>${esc(a.use)}</th><td>${esc(a.title)} by ${esc(a.author)} · ${esc(a.license)} · ${link(a.url, 'OpenGameArt')}</td></tr>`).join('')}</table>
-      <h4>Fonts (SIL Open Font License 1.1)</h4><p>Rajdhani (Indian Type Foundry) for titles · Inter (Rasmus Andersson) for UI · IBM Plex Mono (IBM) for data. Vendored in vendor/fonts with licences.</p>
+      <h4>Fonts (SIL Open Font License 1.1)</h4><p>Inter (Rasmus Andersson) for UI and titles · JetBrains Mono (JetBrains) for data and numbers. Vendored in vendor/fonts with licences.</p>
       <h4>Icons</h4><p>Lucide (ISC licence), vendor/icons/LICENSE-Lucide.txt.</p>
       <h4>Imagery and maps</h4><p>NASA Blue Marble / Black Marble (public domain) · Natural Earth (public domain) · GEBCO 2025 Grid and TID (GEBCO Compilation Group 2025) · Streamed keyless tiles (Settings → Imagery and terrain): Esri World Imagery and reference layers, Sentinel-2 cloudless 2016 by EOX IT Services GmbH (contains modified Copernicus Sentinel data, CC BY 4.0), OpenStreetMap contributors (ODbL), CARTO, NASA GIBS. Terrain: AWS Terrain Tiles (Mapzen terrarium; SRTM, GMTED, ETOPO1 and others) or Esri World Elevation. Attribution for the active layers is shown at the bottom left.</p>
       <h4>Data</h4><p>Every dataset and its licence: Sources tab, CREDITS.md and DATA_LICENSE.md. Software: CesiumJS (Apache-2.0), three.js maths (MIT), d3-force (ISC), marked (MIT).</p>`;

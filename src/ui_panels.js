@@ -32,6 +32,10 @@ import { setLayerOn, ensureLayer, applyLayerVis } from './layers.js';
 import { setDay } from './ui_timeline.js';
 import { loadCaseDetails } from './loader.js';
 import { subKey, applySub } from './layers.js';
+import { makeTabs } from './ui/tabs.js';
+import { icon } from './icons.js';
+
+let railTabs = null;
 
 export function initPanels() {
   // ---------- search (typeahead over cases, reference items, countries) ----------
@@ -45,6 +49,7 @@ export function initPanels() {
     sel = -1;
     if (q.length < 2) {
       res.hidden = true;
+      inp.setAttribute('aria-expanded', 'false');
       return;
     }
     for (const c of ctx.cases)
@@ -70,11 +75,13 @@ export function initPanels() {
       ? hits
           .map(
             (h, i) =>
-              `<li role="option" data-i="${i}"><span class="dot" style="background:${h.t === 'case' ? catColor(h.it.category) : '#9db1c2'}"></span><b>${hl(h.label, q)}</b><small>${esc(h.sub)}</small></li>`,
+              `<li role="option" id="sr-${i}" aria-selected="false" data-i="${i}"><span class="dot" style="background:${h.t === 'case' ? catColor(h.it.category) : '#9db1c2'}"></span><b>${hl(h.label, q)}</b><small>${esc(h.sub)}</small></li>`,
           )
-          .join('') + `<li class="foot">Enter: open · Shift+Enter: filter cases by “${esc(q)}”</li>`
-      : '<li class="foot">No matches in loaded data</li>';
+          .join('') +
+        `<li class="foot" role="option" aria-disabled="true" aria-selected="false">Enter: open · Shift+Enter: filter cases by “${esc(q)}”</li>`
+      : '<li class="foot" role="option" aria-disabled="true" aria-selected="false">No matches in loaded data</li>';
     res.hidden = false;
+    inp.setAttribute('aria-expanded', 'true');
   };
   const hl = (s, q) => {
     s = String(s || '');
@@ -96,7 +103,11 @@ export function initPanels() {
     if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
       e.preventDefault();
       sel = Math.max(0, Math.min(hits.length - 1, sel + (e.key === 'ArrowDown' ? 1 : -1)));
-      $$('li', res).forEach((li, i) => li.classList.toggle('active', i === sel));
+      $$('li[data-i]', res).forEach((li, i) => {
+        li.classList.toggle('active', i === sel);
+        li.setAttribute('aria-selected', String(i === sel));
+      });
+      inp.setAttribute('aria-activedescendant', 'sr-' + sel);
     } else if (e.key === 'Enter') {
       if (e.shiftKey) {
         st.f.q = inp.value.trim().toLowerCase();
@@ -137,8 +148,22 @@ export function initPanels() {
   };
 
   // ---------- rail tabs ----------
-  $$('#rail .tab').forEach((t) => (t.onclick = () => railTab(t.dataset.tab)));
-  $('#rail-toggle').onclick = () => document.body.classList.toggle('rail-collapsed');
+  railTabs = makeTabs(
+    $('#rail-tabs'),
+    [
+      ['layers', 'Layers'],
+      ['filters', 'Filters'],
+    ],
+    { active: 'layers', attr: 'tab', label: 'Rail', kbd: { layers: 'L', filters: 'F' }, onChange: (t) => railTab(t) },
+  );
+  $('#rail-toggle').onclick = () => {
+    const c = document.body.classList.toggle('rail-collapsed');
+    const b = $('#rail-toggle');
+    b.setAttribute('aria-label', c ? 'Expand panel' : 'Collapse panel');
+    b.title = c ? 'Expand panel' : 'Collapse panel';
+    b.setAttribute('aria-expanded', String(!c));
+    b.innerHTML = icon(c ? 'panel-left-open' : 'panel-left-close', 16);
+  };
   renderLayers();
   renderFilters();
   on('layers-changed', renderLayers);
@@ -168,8 +193,15 @@ function toggleMenu(sel) {
 }
 export function railTab(t) {
   document.body.classList.remove('rail-collapsed');
-  $$('#rail .tab').forEach((x) => x.classList.toggle('on', x.dataset.tab === t));
-  $$('#rail .pane').forEach((p) => (p.hidden = p.id !== 'pane-' + t));
+  if (railTabs) railTabs.set(t);
+  const b = $('#rail-toggle');
+  b.setAttribute('aria-label', 'Collapse panel');
+  b.innerHTML = icon('panel-left-close', 16);
+  $$('#rail .pane').forEach((p) => {
+    p.hidden = p.id !== 'pane-' + t;
+    p.setAttribute('role', 'tabpanel');
+    p.setAttribute('aria-labelledby', 'rail-tabs-' + p.id.slice(5));
+  });
 }
 function countLine() {
   const n = filteredCases().length;
@@ -253,7 +285,8 @@ export function renderLayers() {
   el.querySelectorAll('[data-info]').forEach(
     (b) =>
       (b.onclick = () => {
-        b.closest('.lrow').querySelector('.lsrc').classList.toggle('open');
+        const open = b.closest('.lrow').querySelector('.lsrc').classList.toggle('open');
+        b.setAttribute('aria-expanded', String(open));
       }),
   );
   $('#opt-cluster').onchange = (e) => {
@@ -324,7 +357,7 @@ function subTree(l) {
   if (keys.length < 2) return '';
   const off = l.subOff || new Set();
   const offN = keys.filter(([k]) => off.has(k)).length;
-  return `<details class="tree"><summary><input type="checkbox" data-subs-all="${l.id}" data-tri="${offN && offN < keys.length ? 'mixed' : ''}" ${offN < keys.length ? 'checked' : ''} aria-label="all sub-layers"> Sub-layers (${keys.length})</summary><div class="tkids">${keys
+  return `<details class="tree"><summary>Sub-layers (${keys.length})</summary><div class="tkids"><label class="tall"><input type="checkbox" data-subs-all="${l.id}" data-tri="${offN && offN < keys.length ? 'mixed' : ''}" ${offN < keys.length ? 'checked' : ''}> <b>All sub-layers</b></label>${keys
     .slice(0, 40)
     .map(
       ([k, n]) =>
@@ -345,9 +378,9 @@ function layerRow(l) {
     .map(([k, c]) => `<span class="lgd"><i style="background:${c}"></i>${esc(k)}</span>`)
     .join('');
   return `<div class="lrow ${waiting ? 'waiting' : ''}">
-    <label><input type="checkbox" data-layer="${l.id}" ${l.on ? 'checked' : ''} ${dis ? 'disabled' : ''}> <span>${esc(l.name)}</span>${cnt}${l.loading && !l.loaded ? ' <span class="spin" aria-label="loading"></span>' : ''}</label>
+    <label><input type="checkbox" data-layer="${l.id}" ${l.on ? 'checked' : ''} ${dis ? 'disabled' : ''}> <span title="${esc(l.name)}">${esc(l.name)}</span>${cnt}${l.loading && !l.loaded ? ' <span class="spin" aria-label="loading"></span>' : ''}</label>
     ${dis ? '' : `<input type="range" class="op" min="0" max="1" step="0.05" value="${l.opacity ?? 1}" data-op="${l.id}" title="opacity" aria-label="${esc(l.name)} opacity">`}
-    <button class="info" data-info="${l.id}" title="source & legend" aria-label="source">i</button>
+    <button class="info" data-info="${l.id}" title="Source and legend" aria-label="${esc(l.name)}: source and legend" aria-expanded="false">${icon('info', 14)}</button>
     <div class="lsrc">${leg}<div class="src">${esc(l.status || '')}${l.status ? '<br>' : ''}${esc(l.source || 'source shown once loaded; see CREDITS.md')}</div></div></div>`;
 }
 
@@ -581,7 +614,8 @@ export function openDossier(it, kind = 'case') {
   if (pin)
     pin.onclick = () => {
       st.pinned.has(it.id) ? st.pinned.delete(it.id) : st.pinned.add(it.id);
-      pin.textContent = st.pinned.has(it.id) ? '★ Pinned' : '☆ Pin';
+      pin.innerHTML = `${icon('star', 14)} ${st.pinned.has(it.id) ? 'Pinned' : 'Pin'}`;
+      pin.setAttribute('aria-pressed', String(st.pinned.has(it.id)));
       emit('pinned');
     };
   const ld = body.querySelector('#dz-loadrefs');
@@ -658,7 +692,7 @@ function caseHTML(c) {
   }
   <h4>Nearest reference sites</h4>${near.length ? `<table class="kv">${near.map((n) => row(n.layer, `${esc(n.name)} <span class="mono">${fmt(n.d)} km</span>`)).join('')}</table>` : ''}<button class="btn sm" id="dz-loadrefs">Load military / nuclear / conflict layers to compute</button>
   ${imageryHTML(c)}
-  <div class="dz-actions"><button class="btn sm" id="dz-pin">${st.pinned.has(c.id) ? '★ Pinned' : '☆ Pin'}</button><button class="btn sm" id="dz-md">Export Markdown</button><button class="btn sm" id="dz-html">Printable</button></div>`;
+  <div class="dz-actions"><button class="btn sm" id="dz-pin" aria-pressed="${st.pinned.has(c.id)}">${icon('star', 14)} ${st.pinned.has(c.id) ? 'Pinned' : 'Pin'}</button><button class="btn sm" id="dz-md">Export Markdown</button><button class="btn sm" id="dz-html">Printable</button></div>`;
 }
 function refHTML(it, kind) {
   const l = layerById(kind);

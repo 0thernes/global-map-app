@@ -18,7 +18,8 @@ import {
   layerById,
 } from './app_core.js';
 import { togglePlay, stepTime, drawTimeline } from './ui_timeline.js';
-import { railTab, openDossier, closeDossier } from './ui_panels.js';
+import { railTab, openDossier } from './ui_panels.js';
+import { closeTop, resetLayout } from './ui/window.js';
 import { toggleWars } from './ui_conflicts.js';
 import { toggleAnalysis } from './ui_analysis.js';
 import { toggleCharts } from './ui_charts.js';
@@ -57,6 +58,10 @@ export function initMisc() {
     '#btn-data': () => import('./ui_data.js').then((m) => m.toggleData()),
   };
   for (const [s, f] of Object.entries(B)) $(s).onclick = f;
+  $('#win-reset').onclick = () => {
+    resetLayout();
+    setStatus('Window layout reset');
+  };
   $('#help-close').onclick = () => toggleHelp(false);
   $('#brief-close').onclick = () => toggleBrief(false);
   // ---- keyboard ----
@@ -99,6 +104,7 @@ export function initMisc() {
     else if (k === 'e' || k === 'E') import('./ui_reports.js').then((m) => m.toggleReports());
     else if (k === 'i' || k === 'I') import('./ui_reference.js').then((m) => m.toggleReference());
     else if (k === 'd' || k === 'D') import('./ui_data.js').then((m) => m.toggleData());
+    else if (k === '0') resetLayout();
   });
   // ---- compare ----
   $('#cmp-mode').onchange = (e) => setCompare(e.target.value);
@@ -149,26 +155,15 @@ export function initMisc() {
   const n = $('#notes');
   if (n) n.oninput = () => (st.notes = n.value);
 }
+// Esc: end the lasso first, then close an open menu, then close the window that has focus (or the top-most one), then leave compare mode
 function escape() {
-  if (!$('#help').hidden) return toggleHelp(false);
   if (ctx.hooks.lassoActive) return endLasso(true);
-  if (!$('#dossier').hidden) return closeDossier();
-  for (const [id, f] of [
-    ['#graph', toggleGraph],
-    ['#analysis', toggleAnalysis],
-    ['#charts', toggleCharts],
-    ['#wars', toggleWars],
-    ['#brief', toggleBrief],
-  ])
-    if (!$(id).hidden) return f(false);
-  for (const id of ['#hs-dossier', '#hotspots', '#reports', '#reference', '#datap', '#settings']) {
-    const e = $(id);
-    if (e && !e.hidden) {
-      if (id === '#hotspots') return import('./ui_hotspots.js').then((m) => m.toggleHotspots(false));
-      e.hidden = true;
-      return;
-    }
+  const menu = document.querySelector('.menu:not([hidden])');
+  if (menu) {
+    menu.hidden = true;
+    return;
   }
+  if (closeTop()) return;
   if (ctx.globe.compare.mode !== 'off') return setCompare('off');
 }
 function toggleHelp(show) {
@@ -250,7 +245,7 @@ function toggleBrief(show) {
       .join('')}</table></div>`;
   if (b.languages)
     h += `<h3>Languages searched (${b.languages.length})</h3><p class="small">${b.languages.map((r) => esc(Object.values(r)[0])).join(', ')}</p>`;
-  h += `<h3>Analyst notes <small class="muted">(saved with the workspace)</small></h3><textarea id="notes2" rows="6">${esc(st.notes)}</textarea>`;
+  h += `<h3>Analyst notes <small class="muted">(saved with the workspace)</small></h3><textarea id="notes2" rows="6" aria-label="Analyst notes">${esc(st.notes)}</textarea>`;
   $('#brief-body').innerHTML = h;
   $('#brief-body')
     .querySelectorAll('a')

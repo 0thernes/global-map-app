@@ -1,4 +1,5 @@
 // Nonlinear timeline 8000 BCE -> 2026-11-11 (segmented: deep past compressed, 1900-2026 at day resolution).
+import { icon } from './icons.js';
 import {
   ctx,
   st,
@@ -39,7 +40,7 @@ export function initTimeline() {
   const el = $('#timeline');
   el.innerHTML = `
   <div class="tl-controls">
-    <button id="tl-play" class="btn primary" title="Play / pause (Space)" aria-label="Play">▶</button>
+    <button id="tl-play" class="btn primary" title="Play / pause (Space)" aria-label="Play" aria-pressed="false">${icon('play', 16)}</button>
     <div class="tl-steps">
       <button class="btn sm" data-step="-Y" title="−1 year (Alt+←)">−Y</button><button class="btn sm" data-step="-M" title="−1 month (Shift+←)">−M</button><button class="btn sm" data-step="-D" title="−1 day (←)">−D</button>
       <button class="btn sm" data-step="+D" title="+1 day (→)">+D</button><button class="btn sm" data-step="+M" title="+1 month (Shift+→)">+M</button><button class="btn sm" data-step="+Y" title="+1 year (Alt+→)">+Y</button>
@@ -114,7 +115,7 @@ export function initTimeline() {
     const b = $('#tl-brush');
     if (st.f.range) {
       b.classList.remove('hidden');
-      b.innerHTML = `range ${esc(dayLabel(st.f.range[0]))} → ${esc(dayLabel(st.f.range[1]))} <button class="x" title="clear">×</button>`;
+      b.innerHTML = `range ${esc(dayLabel(st.f.range[0]))} → ${esc(dayLabel(st.f.range[1]))} <button class="x" title="Clear the date range" aria-label="Clear the date range">${icon('x', 14)}</button>`;
       b.querySelector('button').onclick = () => {
         st.f.range = null;
         emit('filters');
@@ -141,7 +142,8 @@ export const stepTime = step;
 export function togglePlay() {
   st.playing = !st.playing;
   if (st.playing && st.cur >= NDAYS) st.cur = st.f.range ? st.f.range[0] : dayOf(1900);
-  $('#tl-play').textContent = st.playing ? '❚❚' : '▶';
+  $('#tl-play').innerHTML = icon(st.playing ? 'pause' : 'play', 16);
+  $('#tl-play').setAttribute('aria-pressed', String(!!st.playing));
   $('#tl-play').setAttribute('aria-label', st.playing ? 'Pause' : 'Play');
   emit('play', st.playing);
 }
@@ -209,7 +211,7 @@ function draw() {
     c2.fillStyle = 'rgba(120,190,230,0.25)';
     c2.fillRect(x, histTop - 4, 1, histH + 8);
     c2.fillStyle = '#9DB1C2';
-    c2.font = '500 11px Inter, sans-serif';
+    c2.font = '500 12px Inter, sans-serif';
     c2.textAlign = i === 0 ? 'left' : i === 4 ? 'right' : 'center';
     c2.fillText(segNames[i], x, H - 3);
   });
@@ -217,8 +219,8 @@ function draw() {
   const x1900 = dayToX(dayOf(1900));
   c2.fillRect(x1900, histTop - 4, W - PADR - x1900, histH + 8);
   // decade ticks in the modern segment
-  c2.fillStyle = 'rgba(157,177,194,0.6)';
-  c2.font = '400 10px Inter, sans-serif';
+  c2.fillStyle = '#A9BCCB';
+  c2.font = '400 12px Inter, sans-serif';
   c2.textAlign = 'center';
   for (let y = 1910; y <= 2020; y += 10) {
     const x = dayToX(dayOf(y));
@@ -305,7 +307,7 @@ function draw() {
     c2.fillStyle = 'rgba(230,241,247,0.5)';
     c2.fillRect(hx, histTop, 1, histH);
     c2.fillStyle = '#E6F1F7';
-    c2.font = '500 11px "IBM Plex Mono", monospace';
+    c2.font = '500 12px "JetBrains Mono", monospace';
     c2.textAlign = hx > W - 120 ? 'right' : 'left';
     c2.fillText(dayLabel(hoverDay), hx + (hx > W - 120 ? -6 : 6), histTop + 10);
   }

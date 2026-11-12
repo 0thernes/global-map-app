@@ -3,6 +3,9 @@
 // honest p-values, and the unplaced-but-sourced list. Every number names its PDF 7 § and page or its source column.
 import { ctx, $, $$, esc, fmt, link, download } from './app_core.js';
 import { inject } from './loader.js';
+import { makeTabs } from './ui/tabs.js';
+import { icon } from './icons.js';
+import { numericCols } from './ui/table.js';
 import { openDossier } from './ui_panels.js';
 import { countBy, ranked, crosstab, eraOf, ERAS, histogram, sortRows, gradeClass, battery } from './pdf7_stats.js';
 
@@ -15,22 +18,8 @@ const TABS = [
   ['stats', 'Stats'],
   ['unplaced', 'Unplaced'],
 ];
-const COLORS = [
-  '#38E8FF',
-  '#FFB547',
-  '#B48CFF',
-  '#5BE49B',
-  '#FF6B8B',
-  '#7C9CFF',
-  '#FFE14D',
-  '#4DD0C8',
-  '#FF9A3C',
-  '#C3E88D',
-  '#F78CFF',
-  '#9DB1C2',
-  '#E57373',
-  '#81D4FA',
-];
+// categorical chart palette: design tokens --chart-1..12 (css/tokens.css), tuned for AA contrast on --bg-2
+const COLORS = Array.from({ length: 12 }, (_, i) => `var(--chart-${i + 1})`);
 const PART = { I: 'Part I theories', II: 'Part II glitches', V: 'Part V cases' };
 let tab = 'overview',
   q = '',
@@ -40,19 +29,22 @@ let tab = 'overview',
   sortState = {},
   shown = 200,
   filt = { part: '', kind: '', place: '' },
-  bat = null;
+  bat = null,
+  dtabs = null;
 
 export function initData() {
   $('#data-close').onclick = () => toggleData(false);
-  $('#data-tabs').innerHTML = TABS.map(([k, t]) => `<button class="tab" data-dt="${k}">${t}</button>`).join('');
-  $$('#data-tabs [data-dt]').forEach(
-    (b) =>
-      (b.onclick = () => {
-        tab = b.dataset.dt;
-        shown = 200;
-        render();
-      }),
-  );
+  dtabs = makeTabs($('#data-tabs'), TABS, {
+    active: tab,
+    attr: 'dt',
+    panel: 'data-body',
+    label: 'Data views',
+    onChange: (id) => {
+      tab = id;
+      shown = 200;
+      render();
+    },
+  });
   $('#data-q').oninput = (e) => {
     q = e.target.value;
     clearTimeout(initData.t);
@@ -82,12 +74,12 @@ const figRef = (file) => {
 const src = (s) => `<small class="muted dsrc">Source: ${s}</small>`;
 
 // ---------- small SVG/HTML chart helpers ----------
-function hbars(pairs, { color = () => '#38E8FF', max = null, unit = '' } = {}) {
+function hbars(pairs, { color = () => 'var(--chart-1)', max = null, unit = '' } = {}) {
   const m = max || Math.max(1, ...pairs.map((p) => p[1]));
   return `<table class="dbars">${pairs
     .map(
       ([k, n], i) =>
-        `<tr><th title="${esc(k)}">${esc(k)}</th><td><span style="width:${((n / m) * 100).toFixed(1)}%;background:${color(k, i)}"></span></td><td class="n">${fmt(n)}${unit}</td></tr>`,
+        `<tr><th title="${esc(k)}">${esc(k)}</th><td><span style="width:${((n / m) * 100).toFixed(1)}%;background:${color(k, i)}"></span></td><td class="n num">${fmt(n)}${unit}</td></tr>`,
     )
     .join('')}</table>`;
 }
@@ -108,7 +100,7 @@ function stacked(rows, segs, cell, { colors = COLORS } = {}) {
               ? `<span style="width:${((v / m) * 100).toFixed(2)}%;background:${colors[i % colors.length]}" title="${esc(r)} · ${esc(s)}: ${v}"></span>`
               : '';
           })
-          .join('')}</td><td class="n">${tot[ri]}</td></tr>`,
+          .join('')}</td><td class="n num">${tot[ri]}</td></tr>`,
     )
     .join('')}</table>`;
 }
@@ -117,7 +109,7 @@ function heat(ct) {
   return `<div class="dscroll"><table class="dheat"><tr><th></th>${ct.cols.map((c) => `<th title="${esc(c)}">${esc(c)}</th>`).join('')}</tr>${ct.rows
     .map(
       (r, i) =>
-        `<tr><th title="${esc(r)}">${esc(r)}</th>${ct.t[i].map((v) => `<td style="background:rgba(56,232,255,${(0.08 + (0.8 * v) / m).toFixed(2)})">${v || ''}</td>`).join('')}</tr>`,
+        `<tr><th title="${esc(r)}">${esc(r)}</th>${ct.t[i].map((v) => `<td class="num${8 + (80 * v) / m >= 52 ? ' hi' : ''}" style="background:color-mix(in srgb, var(--chart-1) ${Math.round(8 + (80 * v) / m)}%, transparent)">${v || ''}</td>`).join('')}</tr>`,
     )
     .join('')}</table></div>`;
 }
@@ -135,13 +127,13 @@ function scatter(pts, { xl, yl, W = 860, H = 260 }) {
   return `<svg viewBox="0 0 ${W} ${H}" class="dsvg">${pts
     .map(
       (p, i) =>
-        `<${p.shape === 'sq' ? 'rect' : 'circle'} ${p.shape === 'sq' ? `x="${sx(p.x) + jit(i) * 8 - 3}" y="${sy(p.y) + jit(i + 7) * 8 - 3}" width="6" height="6"` : `cx="${sx(p.x) + jit(i) * 8}" cy="${sy(p.y) + jit(i + 7) * 8}" r="3"`} fill="${p.c}" opacity="0.75"><title>${esc(p.t)}</title></${p.shape === 'sq' ? 'rect' : 'circle'}>`,
+        `<${p.shape === 'sq' ? 'rect' : 'circle'} ${p.shape === 'sq' ? `x="${sx(p.x) + jit(i) * 8 - 3}" y="${sy(p.y) + jit(i + 7) * 8 - 3}" width="6" height="6"` : `cx="${sx(p.x) + jit(i) * 8}" cy="${sy(p.y) + jit(i + 7) * 8}" r="3"`} style="fill:${p.c}" opacity="0.75"><title>${esc(p.t)}</title></${p.shape === 'sq' ? 'rect' : 'circle'}>`,
     )
     .join(
       '',
-    )}<text x="${P}" y="${H - 6}" font-size="10" fill="#9DB1C2">${esc(xl)}: ${fmt(x0)} → ${fmt(x1)}</text><text x="4" y="12" font-size="10" fill="#9DB1C2">${esc(yl)}: ${fmt(y0)} → ${fmt(y1)}</text></svg>`;
+    )}<text class="ax" x="${P}" y="${H - 6}">${esc(xl)}: ${fmt(x0)} → ${fmt(x1)}</text><text class="ax" x="4" y="14">${esc(yl)}: ${fmt(y0)} → ${fmt(y1)}</text></svg>`;
 }
-function hist(values, edges, labels, color = '#38E8FF') {
+function hist(values, edges, labels, color = 'var(--chart-1)') {
   const h = histogram(values, edges);
   return hbars(
     h.map((n, i) => [labels ? labels[i] : `${edges[i]}–${edges[i + 1]}`, n]),
@@ -155,13 +147,18 @@ function sortable(id, head, rows, { limit = 0, html = null } = {}) {
   const rs = s.col >= 0 ? sortRows(rows, s.col, s.dir) : rows;
   csvReg.set(id, [head, rs]);
   const vis = limit ? rs.slice(0, limit) : rs;
+  const num = numericCols(head.length, rows);
+  const nc = (i) => (num[i] ? ' num' : '');
   return `<p class="dtools"><button class="btn small" data-csv="${esc(id)}" title="Download these ${rs.length} rows (current sort and filter) as CSV">CSV (${rs.length} rows)</button></p><div class="dscroll"><table class="dtable" data-sort="${esc(id)}"><thead><tr>${head
     .map(
       (h, i) =>
-        `<th data-col="${i}" class="${s.col === i ? (s.dir > 0 ? 'asc' : 'desc') : ''}" title="Sort by ${esc(h)}">${esc(h)}</th>`,
+        `<th data-col="${i}" scope="col" tabindex="0" aria-sort="${s.col === i ? (s.dir > 0 ? 'ascending' : 'descending') : 'none'}" class="${s.col === i ? (s.dir > 0 ? 'asc' : 'desc') : ''}${nc(i)}" title="Sort by ${esc(h)}">${esc(h)}</th>`,
     )
     .join('')}</tr></thead><tbody>${vis
-    .map((r, ri) => `<tr>${r.map((c, ci) => `<td>${html ? html(r, ci, c, ri) : esc(c)}</td>`).join('')}</tr>`)
+    .map(
+      (r, ri) =>
+        `<tr>${r.map((c, ci) => `<td class="${nc(ci).trim()}">${html ? html(r, ci, c, ri) : esc(c)}</td>`).join('')}</tr>`,
+    )
     .join(
       '',
     )}</tbody></table></div>${limit && rs.length > limit ? `<p><button class="btn" id="d-more">Show more (${rs.length - limit} left)</button></p>` : ''}`;
@@ -169,13 +166,18 @@ function sortable(id, head, rows, { limit = 0, html = null } = {}) {
 function wireSort() {
   $$('#data-body table[data-sort] th[data-col]').forEach(
     (th) =>
-      (th.onclick = () => {
-        const id = th.closest('table').dataset.sort,
-          col = +th.dataset.col;
-        const s = sortState[id] || { col: -1, dir: 1 };
-        sortState[id] = { col, dir: s.col === col ? -s.dir : 1 };
-        render();
-      }),
+      (th.onclick = th.onkeydown =
+        (e) => {
+          if (e.type === 'keydown' && e.key !== 'Enter' && e.key !== ' ') return;
+          e.preventDefault();
+          const id = th.closest('table').dataset.sort,
+            col = +th.dataset.col;
+          const s = sortState[id] || { col: -1, dir: 1 };
+          sortState[id] = { col, dir: s.col === col ? -s.dir : 1 };
+          render();
+          const again = $(`#data-body table[data-sort="${id}"] th[data-col="${col}"]`);
+          if (again && e.type === 'keydown') again.focus();
+        }),
   );
   $$('#data-body [data-csv]').forEach(
     (b) =>
@@ -298,7 +300,7 @@ function entries() {
       match(`${e.id} ${e.name} ${e.domain} ${e.category} ${e.grade} ${e.src}`),
   );
   const opt = (k, vals) =>
-    `<select data-f="${k}"><option value="">all ${k}s</option>${vals.map((v) => `<option ${filt[k] === v ? 'selected' : ''}>${esc(v)}</option>`).join('')}</select>`;
+    `<select data-f="${k}" aria-label="Filter by ${k}"><option value="">all ${k}s</option>${vals.map((v) => `<option ${filt[k] === v ? 'selected' : ''}>${esc(v)}</option>`).join('')}</select>`;
   const rows = E.map((e) => {
     const md = (e.map || []).map((id) => mapped.get(id)).find((c) => c && c.date);
     return [
@@ -424,7 +426,7 @@ function charts() {
          P2.filter((e) => e.score != null && e.radical != null).map((e) => ({
            x: e.radical,
            y: e.score,
-           c: e.fringe ? '#FF6B8B' : '#FFB547',
+           c: e.fringe ? 'var(--chart-5)' : 'var(--chart-2)',
            shape: 'sq',
            t: `${e.id} ${e.name}: glitch score ${e.score}, radicalness ${e.radical}`,
          })),
@@ -486,14 +488,10 @@ function tables() {
     body = t.rows.slice(1);
   const width = Math.max(head.length, ...body.map((r) => r.length));
   const pad = (r) => r.concat(new Array(Math.max(0, width - r.length)).fill(''));
-  return `<div class="data-tables dsplit"><div class="dlist">${list
-    .map(
-      (x) =>
-        `<a href="#" data-t="${esc(x.id)}" class="${x.id === t.id ? 'on' : ''}"><b>${esc(x.id)}</b> <small>${x.env === 'csv' ? 'QWM csv' : `§${esc(x.sec || '?')} p.${esc(x.page ?? '?')}`}</small><br>${esc(name(x).slice(0, 80))} <small class="muted">${Math.max(0, x.rows.length - 1)} rows${x.case ? ' · ' + esc(x.case) : ''}</small></a>`,
-    )
-    .join(
-      '',
-    )}</div><div class="dmain"><h4>${esc(t.id)} · ${esc(name(t))}</h4><p class="small muted">${t.env === 'csv' ? esc(t.page_basis) : `PDF 7 §${esc(t.sec || '?')} ${esc(t.section)}${t.subsection ? ' › ' + esc(t.subsection) : ''}${t.case ? ' · case file ' + esc(t.case) : ''}, printed page ${esc(t.page)} (${esc(t.page_basis)}); main.tex line ${esc(t.line)}`}. Cell text is the LaTeX source with markup removed; sort by clicking a header.</p>${sortable('tbl-' + t.id, pad(head.map((h, i) => h || `col ${i + 1}`)), body.map(pad))}</div></div>`;
+  const i = list.findIndex((x) => x.id === t.id);
+  const opt = (x) =>
+    `<option value="${esc(x.id)}"${x.id === t.id ? ' selected' : ''}>${esc(x.id)} · ${x.env === 'csv' ? 'QWM csv' : `§${esc(x.sec || '?')} p.${esc(x.page ?? '?')}`} · ${esc(name(x).slice(0, 70))} (${Math.max(0, x.rows.length - 1)} rows${x.case ? ' · ' + esc(x.case) : ''})</option>`;
+  return `<div class="data-tables"><div class="dpick"><label for="data-tsel">Table</label><select id="data-tsel">${(list.some((x) => x.id === t.id) ? list : [t, ...list]).map(opt).join('')}</select><button class="btn sm icon" data-t="${esc((list[i - 1] || list[list.length - 1] || t).id)}" aria-label="Previous table" title="Previous table">${icon('chevron-left')}</button><button class="btn sm icon" data-t="${esc((list[i + 1] || list[0] || t).id)}" aria-label="Next table" title="Next table">${icon('chevron-right')}</button><small class="muted">${list.length} of ${D.tables.length} tables match the filter</small></div><div class="dmain"><h4>${esc(t.id)} · ${esc(name(t))}</h4><p class="small muted">${t.env === 'csv' ? esc(t.page_basis) : `PDF 7 §${esc(t.sec || '?')} ${esc(t.section)}${t.subsection ? ' › ' + esc(t.subsection) : ''}${t.case ? ' · case file ' + esc(t.case) : ''}, printed page ${esc(t.page)} (${esc(t.page_basis)}); main.tex line ${esc(t.line)}`}. Cell text is the LaTeX source with markup removed; sort by clicking a header.</p>${sortable('tbl-' + t.id, pad(head.map((h, i) => h || `col ${i + 1}`)), body.map(pad))}</div></div>`;
 }
 function sources() {
   const types = ranked(countBy(D.docs, (d) => d.type));
@@ -549,11 +547,18 @@ function unplaced() {
   )}</details></div>`;
 }
 function render() {
-  $$('#data-tabs [data-dt]').forEach((b) => b.classList.toggle('on', b.dataset.dt === tab));
+  if (dtabs) dtabs.set(tab);
   if (!D) return;
   const out = $('#data-body');
   out.innerHTML = { overview, entries, charts, tables, sources, stats: statsTab, unplaced }[tab]();
   wireSort();
+  const tsel = $('#data-tsel');
+  if (tsel)
+    tsel.onchange = () => {
+      sel = tsel.value;
+      render();
+      $('#data-tsel')?.focus();
+    };
   $$('#data-body [data-t]').forEach(
     (a) =>
       (a.onclick = (e) => {

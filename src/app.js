@@ -38,6 +38,7 @@ import { initHotspots } from './ui_hotspots.js';
 import { initReports } from './ui_reports.js';
 import { initReference } from './ui_reference.js';
 import { initData, openData } from './ui_data.js';
+import { initWindows, occupied, onLayout } from './ui/window.js';
 
 const fpsHist = [],
   cpuHist = [];
@@ -120,6 +121,7 @@ async function boot() {
   initReference();
   initData();
   initCinema();
+  initWindows();
   for (const l of ctx.layers) if (l.on && !l.loaded) ensureLayer(l);
   initLabels();
   bindPointer(canvas);
@@ -339,7 +341,7 @@ function postalLOD(alt) {
         'postal_' + c.iso2,
         p.items.map(([code, place, x, y]) => ({ name: code + ' ' + place, lon: x, lat: y, pri: 0 })),
         {
-          font: '500 10px "IBM Plex Mono", monospace',
+          font: '500 11px "JetBrains Mono", monospace',
           color: '#ffc857',
           dot: '#ffc857',
           maxAlt: 0.035,
@@ -489,22 +491,18 @@ function bindPointer(canvas) {
   });
   canvas.addEventListener('pointerleave', () => (tip.hidden = true));
 }
+// the globe stays centred in the area not covered by the rail and docked windows (src/ui/window.js reports it)
 function centerShift() {
-  const b = document.body.classList;
-  const left = b.contains('rail-collapsed') ? 0 : 330;
-  let right = 0;
-  if (b.contains('dossier-open')) right += 430;
-  if (b.contains('wars-open') || b.contains('analysis-open') || b.contains('graph-open'))
-    right += Math.min(600, innerWidth * 0.46) + 8;
-  return Math.round((left - right) / 2);
+  const o = occupied();
+  return Math.round((o.left - o.right) / 2);
 }
-new MutationObserver(() => {
+onLayout(() => {
   const s = centerShift();
   if (ctx.globe && s !== ctx.globe.centerShift) {
     ctx.globe.setCenterShift(s);
     ctx.labels.resize();
   }
-}).observe(document.body, { attributes: true, attributeFilter: ['class'] });
+});
 function resize() {
   ctx.globe.centerShift = centerShift();
   ctx.globe.resize();

@@ -222,7 +222,7 @@ function draw() {
   ctx.labels.addSet(
     'hotspots',
     top.map((c, i) => ({ name: `${c.tier} · ${c.name} ${glyphRow(c, false)}`, lat: c.lat, lon: c.lon, pri: i })),
-    { font: '600 12px Rajdhani, Inter, sans-serif', color: '#ffe8a3', dot: '#ffe8a3', limit: 50, z: 9, dy: -14 },
+    { font: '600 12px Inter, sans-serif', color: '#ffe8a3', dot: '#ffe8a3', limit: 50, z: 9, dy: -14 },
   );
 }
 export function toggleHotspots(show) {
@@ -300,9 +300,8 @@ export function openCluster(cl) {
   const co = cases.filter((c) => evts.some((e) => Math.abs(e.day - c.day) <= 365)).length;
   const srcs = [...new Set(cl.recs.map((r) => domainOf(r.src) || r.src).filter(Boolean))];
   $('#hs-dossier').hidden = false;
-  $('#hs-dossier').innerHTML =
-    `<header><h3><span class="tier" style="--c:${cl.tierColor}">${cl.tier}</span> ${esc(cl.name)}</h3><button class="close" id="hsd-close" aria-label="Close">×</button></header>
-  <p class="glyphs big">${glyphRow(cl)}</p>
+  $('#hsd-title').innerHTML = `<span class="tier" style="--c:${cl.tierColor}">${cl.tier}</span> ${esc(cl.name)}`;
+  $('#hs-dbody').innerHTML = `<p class="glyphs big">${glyphRow(cl)}</p>
   <table class="kv"><tr><th>Centre</th><td class="mono">${cl.lat.toFixed(3)}, ${cl.lon.toFixed(3)}</td></tr><tr><th>Cells</th><td>${cl.cells.length} × ~${hs.opts.cellKm} km</td></tr><tr><th>Time span</th><td>${esc(span)}</td></tr>
   <tr><th>Score</th><td>${cl.score.toFixed(2)} (D = ${cl.D} layers)</td></tr><tr><th>Evidence E</th><td>${cl.E.toFixed(2)} = 0.5 × ${cl.strong.toFixed(2)} (CIT/Official share) + 0.3 × ${cl.precise.toFixed(2)} (exact/1 km share) + 0.2 × min(1, ${cl.sources}/5) (sources)</td></tr>
   <tr><th>Co-occurrence</th><td>${co} of ${cases.length} dated cases within ±1 year of a dated reference event in the cluster</td></tr></table>
