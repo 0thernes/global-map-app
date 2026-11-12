@@ -28,6 +28,8 @@ page.on('console', (m) => {
 page.on('request', (r) => /cesium\.com|ion\.cesium/.test(r.url()) && errors.push('Cesium ion request: ' + r.url()));
 page.on('pageerror', (e) => errors.push('pageerror: ' + e.message));
 page.on('requestfailed', (r) => {
+  // a streamed <audio> load that the player stops or swaps is cancelled (ERR_ABORTED): that is not a missing file
+  if (r.resourceType() === 'media' && /ERR_ABORTED/.test(r.failure()?.errorText || '')) return;
   if (!ALLOW.some((x) => x.test(r.url())) && !/^https:/.test(r.url())) errors.push('requestfailed: ' + r.url());
 });
 const t0 = Date.now();
@@ -183,18 +185,20 @@ async function cycle(id, open) {
   if ((await win(id)).mode !== 'max') throw new Error(id + ': maximize');
   await page.click(`#${id} .win-max`);
   w = await win(id);
-  // drag the title bar 120 px left and 40 px down: the window floats where it was dropped
+  // drag the title bar 120 px toward the centre and 40 px down: the window floats where it was dropped
+  // (dragging toward an edge would snap it to that dock instead, which the dock step below checks)
+  const dx = w.x < 800 ? 120 : -120;
   const t = await page.$eval(`#${id} .win-title`, (e) => {
     const r = e.getBoundingClientRect();
     return { x: r.left + Math.min(40, r.width / 2), y: r.top + r.height / 2 };
   });
   await page.mouse.move(t.x, t.y);
   await page.mouse.down();
-  await page.mouse.move(t.x - 60, t.y + 20, { steps: 4 });
-  await page.mouse.move(t.x - 120, t.y + 40, { steps: 4 });
+  await page.mouse.move(t.x + dx / 2, t.y + 20, { steps: 4 });
+  await page.mouse.move(t.x + dx, t.y + 40, { steps: 4 });
   await page.mouse.up();
   const d = await win(id);
-  if (d.mode !== 'float' || Math.abs(d.x - (w.x - 120)) > 24) throw new Error(`${id}: drag ${JSON.stringify([w, d])}`);
+  if (d.mode !== 'float' || Math.abs(d.x - (w.x + dx)) > 24) throw new Error(`${id}: drag ${JSON.stringify([w, d])}`);
   await page.click(`#${id} .win-close`);
   if (!(await win(id)).hidden) throw new Error(id + ': close');
 }
