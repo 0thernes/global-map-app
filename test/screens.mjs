@@ -165,6 +165,26 @@ await shot(
   800,
 );
 await esc(p);
+// v1.2 Data panel (PDF 7 as data): one shot per tab that carries new analytics
+for (const [name, tab, table, sel] of [
+  ['19_data_overview', 'overview', null, '.data-overview'],
+  ['20_data_entries', 'entries', null, '.data-entries'],
+  ['21_data_charts', 'charts', null, '.fig-tier-bars'],
+  ['22_data_tables', 'tables', 'T038', '.data-tables'],
+  ['23_data_sources', 'sources', null, '.data-sources'],
+  ['24_data_stats', 'stats', null, '.data-corr'],
+  ['25_data_unplaced', 'unplaced', null, '.data-unplaced'],
+])
+  await shot(
+    p,
+    name,
+    async () => {
+      await p.evaluate(([t, tb]) => window.__data(t, tb), [tab, table]);
+      await p.waitForSelector('#data-body ' + sel, { timeout: 120000 });
+    },
+    800,
+  );
+await p.evaluate(() => document.querySelector('#data-close').click());
 await p.close();
 // streamed imagery at several zoom levels: labels and markers stay glued to the ground
 const z = await open('?intro=0&private=0&basemap=hybrid');

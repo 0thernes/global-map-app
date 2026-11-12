@@ -37,6 +37,7 @@ import { initCinema } from './cinema.js';
 import { initHotspots } from './ui_hotspots.js';
 import { initReports } from './ui_reports.js';
 import { initReference } from './ui_reference.js';
+import { initData, openData } from './ui_data.js';
 
 const fpsHist = [],
   cpuHist = [];
@@ -117,6 +118,7 @@ async function boot() {
   initHotspots();
   initReports();
   initReference();
+  initData();
   initCinema();
   for (const l of ctx.layers) if (l.on && !l.loaded) ensureLayer(l);
   initLabels();
@@ -583,6 +585,7 @@ function loop(now) {
 }
 window.__case = (i) => (typeof i === 'string' ? ctx.cases.find((c) => c.id === i) : ctx.cases[i]);
 window.__lastAnalysis = () => import('./ui_analysis.js').then((m) => m.lastAnalysis());
+window.__data = (tab, table) => openData(tab, table);
 window.__open = (c) => import('./ui_panels.js').then((m) => m.openDossier(c));
 window.__setDay = (iso) => import('./ui_timeline.js').then((m) => m.setDay(dateToDay(iso)));
 window.__pick = (x, y) => pickAt(x, y);

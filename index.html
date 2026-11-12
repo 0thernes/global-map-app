@@ -50,6 +50,14 @@
         <button class="btn" id="btn-reports" data-icon="file-text" title="Reports / briefs (E)">Reports</button>
         <button
           class="btn"
+          id="btn-data"
+          data-icon="table-2"
+          title="PDF 7 data: entries, tables, charts, stats, unplaced (D)"
+        >
+          Data
+        </button>
+        <button
+          class="btn"
           id="btn-index"
           data-icon="library"
           title="Sources, glossary, indexes, coverage, credits (I)"
@@ -265,6 +273,10 @@
           <td>Reports</td>
         </tr>
         <tr>
+          <th><kbd>D</kbd></th>
+          <td>Data (PDF 7 entries, tables, charts, stats, unplaced items)</td>
+        </tr>
+        <tr>
           <th><kbd>I</kbd></th>
           <td>Index (sources, glossary, coverage…)</td>
         </tr>
@@ -317,6 +329,23 @@
       </header>
       <div id="rep-form" class="an-opts"></div>
       <div id="rep-out" class="rep-out"></div>
+    </section>
+
+    <section id="datap" class="panel modal wide" hidden aria-label="PDF 7 data and analytics">
+      <header>
+        <h3>
+          Data
+          <small
+            >PDF 7 as data · entries · sortable tables · charts · sources · stats · unplaced (not on the globe)</small
+          >
+        </h3>
+        <button id="data-close" class="close" aria-label="Close">×</button>
+      </header>
+      <div class="ref-top">
+        <div id="data-tabs" class="tabs" role="tablist"></div>
+        <input id="data-q" type="search" placeholder="Filter this tab…" aria-label="Filter the data tab" />
+      </div>
+      <div id="data-body" class="ref-body data-body"></div>
     </section>
 
     <section id="reference" class="panel modal wide" hidden aria-label="Index and reference">

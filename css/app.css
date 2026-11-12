@@ -1812,3 +1812,173 @@ body.perf .panel {
     break-inside: avoid;
   }
 }
+
+/* ---- Data panel (PDF 7 as data) ---- */
+#datap.modal.wide {
+  width: min(1280px, 97vw);
+}
+.data-body .cgrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  gap: var(--sp-3);
+}
+.data-body figure {
+  margin: 0;
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-1);
+  padding: var(--sp-2) var(--sp-3);
+  min-width: 0;
+}
+.data-body figure.wide {
+  grid-column: 1 / -1;
+}
+.data-body figcaption {
+  font-weight: 600;
+  margin-bottom: var(--sp-2);
+}
+.dsrc {
+  display: block;
+  font-weight: 400;
+}
+.dbars {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+.dbars th {
+  text-align: left;
+  font-weight: 400;
+  width: 34%;
+  max-width: 260px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 1px 6px 1px 0;
+}
+.dbars td {
+  padding: 1px 0;
+}
+.dbars td:not(.n) {
+  display: flex;
+  height: 14px;
+}
+.dbars td span {
+  display: block;
+  height: 100%;
+  min-width: 1px;
+}
+.dbars td.n {
+  width: 56px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  padding-left: 6px;
+}
+.dlegend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  font-size: 11px;
+  margin-bottom: 4px;
+}
+.dlegend i {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: 4px;
+  vertical-align: -1px;
+}
+.dscroll {
+  overflow: auto;
+  max-height: 60vh;
+}
+.dscroll.short {
+  max-height: 280px;
+}
+.dheat,
+.dtable {
+  border-collapse: collapse;
+  font-size: 12px;
+}
+.dheat th,
+.dheat td,
+.dtable th,
+.dtable td {
+  border: 1px solid var(--line);
+  padding: 2px 6px;
+  vertical-align: top;
+}
+.dheat th {
+  font-weight: 400;
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.dheat td {
+  text-align: center;
+  min-width: 34px;
+  font-variant-numeric: tabular-nums;
+}
+.dtable {
+  width: 100%;
+}
+.dtable thead th {
+  position: sticky;
+  top: 0;
+  background: var(--bg-1, #0b1118);
+  cursor: pointer;
+  text-align: left;
+  white-space: nowrap;
+}
+.dtable th.asc::after {
+  content: ' ▲';
+}
+.dtable th.desc::after {
+  content: ' ▼';
+}
+.dtable td {
+  max-width: 420px;
+}
+.dconf,
+tr.dconf td {
+  color: #ffb547;
+}
+.dsplit {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: var(--sp-3);
+  min-height: 60vh;
+}
+.dlist {
+  overflow: auto;
+  max-height: 72vh;
+  border-right: 1px solid var(--line);
+  padding-right: var(--sp-2);
+}
+.dlist a {
+  display: block;
+  padding: 4px 6px;
+  border-radius: 4px;
+  color: inherit;
+  text-decoration: none;
+  font-size: 12px;
+}
+.dlist a.on,
+.dlist a:hover {
+  background: var(--bg-2);
+}
+.dmain {
+  min-width: 0;
+}
+.dfilters select {
+  background: var(--bg-2);
+  color: inherit;
+  border: 1px solid var(--line-strong);
+  border-radius: 4px;
+  height: 28px;
+}
+.dsvg {
+  width: 100%;
+  height: auto;
+}

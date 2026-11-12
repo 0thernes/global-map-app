@@ -9,3 +9,4 @@ docs/wireframes/
 dist/
 package-lock.json
 *.min.js
+docs/audit/v1.2-data-gap-audit.md

@@ -54,6 +54,7 @@ export function initMisc() {
     '#btn-hotspots': () => import('./ui_hotspots.js').then((m) => m.toggleHotspots()),
     '#btn-reports': () => import('./ui_reports.js').then((m) => m.toggleReports()),
     '#btn-index': () => import('./ui_reference.js').then((m) => m.toggleReference()),
+    '#btn-data': () => import('./ui_data.js').then((m) => m.toggleData()),
   };
   for (const [s, f] of Object.entries(B)) $(s).onclick = f;
   $('#help-close').onclick = () => toggleHelp(false);
@@ -97,6 +98,7 @@ export function initMisc() {
     else if (k === 'z' || k === 'Z') import('./ui_hotspots.js').then((m) => m.toggleHotspots());
     else if (k === 'e' || k === 'E') import('./ui_reports.js').then((m) => m.toggleReports());
     else if (k === 'i' || k === 'I') import('./ui_reference.js').then((m) => m.toggleReference());
+    else if (k === 'd' || k === 'D') import('./ui_data.js').then((m) => m.toggleData());
   });
   // ---- compare ----
   $('#cmp-mode').onchange = (e) => setCompare(e.target.value);
