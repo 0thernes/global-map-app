@@ -182,6 +182,15 @@ for (const [name, lat, lon, alt, ms] of views)
     z,
     name,
     async () => {
+      // daylight at the target: set the timeline's UTC hour to local solar noon
+      await z.evaluate(
+        (h) => {
+          const el = document.querySelector('#tl-hour');
+          el.value = String(h);
+          el.dispatchEvent(new Event('input'));
+        },
+        ((Math.round(12 - lon / 15) % 24) + 24) % 24,
+      );
       await z.evaluate(([a, b, d]) => window.__fly(a, b, d), [lat, lon, 1 + alt / R]);
       await settle(z, ms);
     },
