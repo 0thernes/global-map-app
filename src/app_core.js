@@ -38,6 +38,7 @@ export const PALETTE = {
   'Missing person': '#6dff8e',
   'USO (water)': '#3fd0ff',
   'Satellite anomaly': '#c6ff4a',
+  'PDF 7 place': '#ffc6f2',
 };
 export const CASE_CATS = Object.keys(PALETTE).filter((k) => !k.includes(':'));
 export const UAP_TYPES = [

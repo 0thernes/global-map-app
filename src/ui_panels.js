@@ -550,6 +550,13 @@ export function openDossier(it, kind = 'case') {
         if (c) openDossier(c);
       }),
   );
+  body.querySelectorAll('[data-pdf7]').forEach(
+    (a) =>
+      (a.onclick = (e) => {
+        e.preventDefault();
+        import('./ui_reference.js').then((m) => m.openPdf7(a.dataset.pdf7));
+      }),
+  );
   body.querySelectorAll('[data-date]').forEach(
     (a) =>
       (a.onclick = (e) => {
@@ -597,6 +604,19 @@ export function closeDossier() {
 }
 const badge = (gc, raw) =>
   `<span class="badge" style="--c:${gradeColor(gc)}" title="${esc(raw || '')}">${esc(gc)}</span>`;
+/** 'PDF 7 §47.4 (p. 152) · G12.3.1.1 | …' -> links that open the PDF 7 index at that entry. */
+function pdf7HTML(it) {
+  if (!it.pdf7_ref) return '';
+  const refs = String(it.pdf7_ref)
+    .split(/\s*\|\s*/)
+    .filter(Boolean);
+  return `<h4>PDF 7 reference</h4><p>${refs
+    .map((r) => {
+      const path = (r.match(/G[\d.]+$/) || [''])[0];
+      return `<a href="#" data-pdf7="${esc(path)}" title="Open the PDF 7 index at this entry">${esc(r)}</a>`;
+    })
+    .join('<br>')}</p>`;
+}
 function caseHTML(c) {
   const rel = related(c);
   const near = nearby(c);
@@ -612,7 +632,7 @@ function caseHTML(c) {
   ${row('Coordinates', `<span class="mono">${c.lat.toFixed(4)}, ${c.lon.toFixed(4)}</span>${PRECISE(c) ? '' : ` <small>± ${fmt(c._r)} km</small>`}`)}${row('Coord. source', esc(c.coord_source))}${row('Urban / rural', esc(c.urban_rural))}${c.shore_km != null ? row('Water', `${c.over_water ? `over ${esc(c.over_water)} · ` : ''}<span class="mono">${fmt(c.shore_km)} km</span> to the nearest shoreline <small>(NE 10m coast + lakes)</small>`) : ''}
   ${row('Grade', esc(c.grade))}${row('Witnesses', esc(c.witnesses))}${row('Witness count', esc(c.witness_count))}${row('Count', esc(c.count))}</table>
   ${c.summary || c.description ? `<h4>What happened</h4><p class="typed">${esc(c.summary || c.description)}</p>` : ''}
-  ${conflictsHTML(c)}
+  ${pdf7HTML(c)}${conflictsHTML(c)}
   ${c.official_position ? `<h4>Official position</h4><p>${esc(c.official_position)}</p>` : ''}
   <h4>Sources</h4><p>${link(c.source_url, c.source_title || c.source_url)}${c.source_type ? ` <small>(${esc(c.source_type)})</small>` : ''}${
     c.extra_sources
@@ -642,7 +662,7 @@ function caseHTML(c) {
 }
 function refHTML(it, kind) {
   const l = layerById(kind);
-  const skip = new Set(['lat', 'lon', '_layer', '_day', '_t1', 'name', 'source_url', 'url', 'seed_url']);
+  const skip = new Set(['lat', 'lon', '_layer', '_day', '_t1', 'name', 'source_url', 'url', 'seed_url', 'pdf7_ref']);
   const kv = Object.entries(it).filter(
     ([k, v]) => !skip.has(k) && !k.startsWith('_') && v !== '' && v != null && typeof v !== 'object',
   );
@@ -652,7 +672,7 @@ function refHTML(it, kind) {
    <h2>${esc(it.name || it.conflict || '(unnamed)')}</h2>
    <table class="kv">${row('Coordinates', `<span class="mono">${(+it.lat).toFixed(4)}, ${(+it.lon).toFixed(4)}</span>`)}${isFinite(it._day) ? row('Date', `<a href="#" data-date="${it._day}">${esc(dayLabel(it._day))}</a>`) : ''}${kv.map(([k, v]) => row(k.replace(/_/g, ' '), esc(v))).join('')}</table>
    ${it.why_weird ? `<h4>Why weird</h4><p>${esc(it.why_weird)}</p>` : ''}
-   <h4>Source</h4><p>${link(it.source_url || it.url || it.seed_url, it.source_title)}</p><p class="muted small">${esc(l ? l.source || '' : '')}</p>${imageryHTML(it)}`;
+   ${pdf7HTML(it)}<h4>Source</h4><p>${link(it.source_url || it.url || it.seed_url, it.source_title)}</p><p class="muted small">${esc(l ? l.source || '' : '')}</p>${imageryHTML(it)}`;
 }
 import { gradeClass as gradeOf } from './app_core.js';
 // both values of every field another dataset disagrees on, each with its record id and source (never silently pick one)

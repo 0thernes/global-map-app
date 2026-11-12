@@ -15,6 +15,7 @@ const TABS = [
   ['countries', 'Countries'],
   ['coverage', 'Coverage'],
   ['offworld', 'Off-world'],
+  ['pdf7', 'PDF 7 index'],
   ['credits', 'Credits'],
 ];
 let tab = 'glossary',
@@ -34,6 +35,51 @@ export function initReference() {
     clearTimeout(initReference.t);
     initReference.t = setTimeout(render, 120);
   };
+}
+/** Open the PDF 7 index filtered to one entry path (e.g. 'G12.3.1.1'), from a dossier's PDF 7 reference. */
+export function openPdf7(path) {
+  q = path || '';
+  const inp = $('#ref-q');
+  if (inp) inp.value = q;
+  toggleReference(true, 'pdf7');
+}
+const ACT = {
+  add: ['added', 'New map row from PDF 7 (coordinates from Wikidata P625)'],
+  merge: ['added', 'Same place as another PDF 7 entry: one map row carries both references'],
+  link: ['on map', 'Already on the map: the existing rows now carry this PDF 7 reference'],
+  unplaced: ['unplaced', 'Names a place that cannot be placed honestly; see docs/audit/pdf7-unplaced.csv'],
+};
+function renderPdf7(out, Q) {
+  const P = window.GM_PDF7 || { counts: {}, entries: [] };
+  const n = P.counts || {};
+  const rows = searchItems(P.entries, Q, ['name', 'path', 'section', 'domain']);
+  const bySec = new Map();
+  for (const e of rows) {
+    const k = e.section || '?';
+    if (!bySec.has(k)) bySec.set(k, []);
+    bySec.get(k).push(e);
+  }
+  const mapLink = (m) => {
+    if (m.id.startsWith('@layer:')) return `<span class="chip">whole layer: ${esc(m.layer)}</span>`;
+    const c = ctx.cases.find((x) => x.id === m.id);
+    if (c) return `<a href="#" data-case="${esc(m.id)}">${esc(c.name)}</a>`;
+    if (m.lat != null)
+      return `<a href="#" data-fly="${m.lat},${m.lon}">${esc(m.name || m.id)}</a> <small>${esc(m.layer || '')}</small>`;
+    return `<small class="mono">${esc(m.id)}</small>`;
+  };
+  out.innerHTML = `<p class="small muted">PDF 7, <i>What Is What of the What</i> (257 pages): every entry that names a place on Earth, by section, with the map entries it maps to. ${n.add || 0} new rows were added, ${n.link || 0} entries were already on the map, ${n.unplaced || 0} name a place that could not be placed, and ${n.no_place || 0} entries have no place (theories, laboratory results, off-Earth objects). Coordinates come only from Wikidata, OSM, GeoNames or GNIS, and are never invented.</p>
+  <table class="kv idx"><tr><th>§ / page</th><td><b>Entry</b></td><td><b>Status</b></td><td><b>Map entries</b></td></tr>${[
+    ...bySec,
+  ]
+    .map(([sec, es]) =>
+      es
+        .map(
+          (e, i) =>
+            `<tr><th>${i ? '' : `§${esc(sec)}`}<br><small>p. ${esc(e.page)}</small></th><td><span class="mono small">${esc(e.path)}</span> ${esc(e.name)}<br><small class="muted">${esc(e.domain)}</small></td><td title="${esc((ACT[e.action] || [])[1] || '')}"><span class="pbadge ${e.action === 'unplaced' ? 'circ' : 'pin'}">${esc((ACT[e.action] || [e.action])[0])}</span>${e.reason ? `<br><small>${esc(e.reason)}</small>` : ''}</td><td>${(e.map || []).map(mapLink).join('<br>') || '—'}</td></tr>`,
+        )
+        .join(''),
+    )
+    .join('')}</table>`;
 }
 export function toggleReference(show, which) {
   const el = $('#reference');
@@ -143,6 +189,7 @@ function render() {
         }),
     );
   } else if (tab === 'coverage') renderCoverage(out, Q);
+  else if (tab === 'pdf7') renderPdf7(out, Q);
   else if (tab === 'offworld') {
     const ow = (window.GM_CATALOG || {}).offworld || [];
     out.innerHTML = `<p class="small muted">Records about other bodies are never plotted on Earth. Coordinates are planetocentric as published${ow.some((o) => /verify/i.test(o.notes)) ? '; rows marked [verify] need their citation checked' : ''}.</p><table class="kv idx"><tr><th>Body</th><td><b>Record</b></td><td><b>Body lat/lon</b></td><td><b>Grade</b></td><td><b>Source</b></td></tr>${searchItems(
@@ -159,8 +206,8 @@ function render() {
     out.innerHTML = `<h4>Audio (all CC0 1.0)</h4><table class="kv idx">${AUDIO_CREDITS.map((a) => `<tr><th>${esc(a.use)}</th><td>${esc(a.title)} by ${esc(a.author)} · ${esc(a.license)} · ${link(a.url, 'OpenGameArt')}</td></tr>`).join('')}</table>
       <h4>Fonts (SIL Open Font License 1.1)</h4><p>Rajdhani (Indian Type Foundry) for titles · Inter (Rasmus Andersson) for UI · IBM Plex Mono (IBM) for data. Vendored in vendor/fonts with licences.</p>
       <h4>Icons</h4><p>Lucide (ISC licence), vendor/icons/LICENSE-Lucide.txt.</p>
-      <h4>Imagery and maps</h4><p>NASA Blue Marble / Black Marble (public domain) · Natural Earth (public domain) · GEBCO 2025 Grid and TID (GEBCO Compilation Group 2025) · Sentinel-2 cloudless by EOX IT Services GmbH (contains modified Copernicus Sentinel data), CC BY 4.0, loaded only when you open a close-up.</p>
-      <h4>Data</h4><p>Every dataset and its licence: Sources tab, CREDITS.md and DATA_LICENSE.md. Software: three.js (MIT), d3-force (ISC), marked (MIT).</p>`;
+      <h4>Imagery and maps</h4><p>NASA Blue Marble / Black Marble (public domain) · Natural Earth (public domain) · GEBCO 2025 Grid and TID (GEBCO Compilation Group 2025) · Streamed keyless tiles (Settings → Imagery and terrain): Esri World Imagery and reference layers, Sentinel-2 cloudless 2016 by EOX IT Services GmbH (contains modified Copernicus Sentinel data, CC BY 4.0), OpenStreetMap contributors (ODbL), CARTO, NASA GIBS. Terrain: AWS Terrain Tiles (Mapzen terrarium; SRTM, GMTED, ETOPO1 and others) or Esri World Elevation. Attribution for the active layers is shown at the bottom left.</p>
+      <h4>Data</h4><p>Every dataset and its licence: Sources tab, CREDITS.md and DATA_LICENSE.md. Software: CesiumJS (Apache-2.0), three.js maths (MIT), d3-force (ISC), marked (MIT).</p>`;
   }
   out.querySelectorAll('[data-case]').forEach(
     (a) =>
