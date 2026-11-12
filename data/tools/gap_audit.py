@@ -43,6 +43,8 @@ def add(id, kind, where, title, size, st, where11, label, finding, after):
     assert (st == 'present') == (label == ''), (id, st, label)
     assert label in ('', 'bug', 'error', 'issue', 'problem', 'dilemma', 'conflict'), label
     a_st, a_where = after() if after else ('', '')
+    if label == 'conflict' and a_st == 'present':  # surfacing a disagreement does not resolve it
+        a_st, a_where = 'partial', a_where + '; both values shown, the disagreement stays in the sources'
     items.append(dict(id=id, kind=kind, location=where, title=title[:140], size=size, v1_1_status=st, v1_1_where=where11,
                       label=label, finding=finding, v1_2_status=a_st or st, v1_2_where=a_where or where11))
 
@@ -190,6 +192,22 @@ for e in D.get('entries', []):
                 'PDF 7 year is the first report or publication; the map row carries the event date. Both are sourced; neither is changed.',
                 lambda: ('present', 'Data panel > Entries shows PDF year and map date side by side') if ui('data-datebasis') else ('', ''))
 
+# section numbers in PDF 7 references: main.aux stores the longtable counter for labels inside table rows
+sys.path.insert(0, HERE)
+import pdf7_tex
+if os.path.exists(os.path.join(WIW, 'main.aux')):
+    raw = {k: v[0] for k, v in pdf7_tex.load_aux(os.path.join(WIW, 'main.aux'))[0].items()}
+    pos = pdf7_tex.label_sections(os.path.join(WIW, 'main.tex'), os.path.join(WIW, 'main.toc'))
+    bad_g = sorted(k for k in raw if k.startswith('g:') and raw[k] != pos.get(k))
+    snap = {r['label']: r['section'] for r in csv.DictReader(open(os.path.join(DATA, 'sources', 'pdf7', 'pdf7_entries.csv'), encoding='utf-8'))}
+    fixed = all(snap.get(k) == pos.get(k) for k in bad_g)
+    add('E01', 'list', 'main.aux \\newlabel for g: labels; data/sources/pdf7/pdf7_entries.csv; map rows pdf7_ref',
+        'Section numbers in PDF 7 references (Part II entries)', '%d entries' % len(bad_g), 'partial',
+        'PDF 7 index tab and dossier references (page right, section wrong)', 'error',
+        'v1.1 took the section from main.aux, which records the longtable counter for labels inside table rows: '
+        'all %d Part II entries were cited with the wrong § (e.g. Hubble tension "§14", really §16 G1 Cosmology anomalies, p. 70 unchanged).' % len(bad_g),
+        lambda: ('present', 'section from the label position in main.tex (pdf7_tex.label_sections); refs rebuilt') if fixed else ('', ''))
+
 # ---- 4. lists in PDF 7 --------------------------------------------------------------------------------------------
 add('L01', 'list', 'PDF 7 back matter (glossary, main.tex ~line 2496)', 'PDF 7 glossary', '', 'partial', 'Index > Glossary (app glossary, own wording)', 'issue',
     "app glossary is the app's own; PDF 7 glossary terms not cross-checked", None)
@@ -291,7 +309,7 @@ with open(os.path.join(OUT, 'v1.2-data-gap-audit.csv'), 'w', newline='', encodin
 K = collections.Counter(i['kind'] for i in items)
 S = collections.Counter(i['v1_1_status'] for i in items); S2 = collections.Counter(i['v1_2_status'] for i in items)
 L = collections.Counter(i['label'] for i in items if i['label'])
-L2 = collections.Counter(i['label'] for i in items if i['label'] and i['v1_2_status'] != 'present')
+L2 = collections.Counter(i['label'] for i in items if i['label'] and i['v1_2_status'] != 'present')  # conflicts stay open by design
 by = collections.defaultdict(collections.Counter)
 for i in items: by[i['kind']][i['v1_1_status']] += 1
 md = ['# v1.2 data gap audit', '',
