@@ -293,8 +293,8 @@ export function battery(D, cases, opt = {}) {
     );
     T.push({
       id: 'B3',
-      title: 'Parts II+V: testimony weight vs reality score',
-      data: `${CSV_G}: testimony_weight, reality_0_5 (G1-G12)`,
+      title: 'Part II: testimony weight vs reality score',
+      data: `${CSV_G}: testimony_weight, reality_0_5 (rows with both; the G12 rows carry neither)`,
       n: r.n,
       stat: `ρ = ${r.rho.toFixed(2)}`,
       p: r.p,
