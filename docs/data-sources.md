@@ -63,3 +63,24 @@ Each event's dossier links back to the feed's own page (`source_url`). Nothing i
 | GeoNames web services                                       | public-apis › Geocoding                 | gazetteer                                              | needs a username (a free account); the dumps are used offline instead                                      |
 | GBIF occurrence API                                         | public-apis › Science                   | keyless species occurrence (animal-mutilation context) | out of scope for v1.1                                                                                      |
 | Sunrise-Sunset API                                          | public-apis › Science                   | twilight times                                         | computed locally instead (src/sun.js)                                                                      |
+
+## PDF 7 places and geocoding (since 1.1)
+
+PDF 7 (_What Is What of the What_, QWM) is used as a source of places. `data/tools/pdf7_mine.py` reads all 381 entries
+and their section numbers and pages, then applies the reviewed decisions in `data/sources/pdf7/curation.csv`.
+
+| Item             | Rule                                                                                                                                                                                     |
+| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Which entries    | Only entries whose PDF 7 text names a place on Earth. Theories, lab results with no named site and off-Earth objects are `no_place`.                                                     |
+| Cross-check      | Each entry is matched against every map layer (name, then proximity < 10 km). If it is already there, the existing rows get the PDF 7 reference instead of a duplicate.                  |
+| Coordinates      | **Wikidata P625 only** (keyless `wbgetentities` API), and the Q-id and read date are recorded in `coord_source`. Allowed: GNIS, GeoNames, Wikidata, OSM. Never invented, never jittered. |
+| Precision        | `within_1km` (pin) only for a specific building or site item; towns are `locality` (10 km circle) and ranges or areas are `region`.                                                      |
+| Source           | Each row keeps the PDF 7 citation (`source_title`). `source_url` is the case document cited in PDF 7, or else the Wikidata item for the topic.                                           |
+| Cannot be placed | Logged with the reason in [audit/pdf7-unplaced.csv](audit/pdf7-unplaced.csv), for example a sea region, a 1,000 km mountain range, or a site that PDF 7 does not name.                   |
+
+Result (12 Nov 2026):
+
+- 31 rows added and 1 merged into another row.
+- 119 entries already on the map (134 rows tagged).
+- 32 unplaced.
+- 198 with no place.

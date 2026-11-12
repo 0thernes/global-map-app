@@ -18,7 +18,12 @@ caveat, what is happening now, and your turn. ←/→ or Space to move, Esc to s
   radius). Nothing is jittered.
 - Colours follow the category legend in the Layers panel. Badges in dossiers show grade, precision, _conflict_ (sources
   disagree) and _[verify]_ (citation flagged for checking).
-- The night side, the terminator and the glow of active wars follow the timeline date.
+- Markers, circles and labels are fixed to the ground: they stay in place as you tilt, rotate or zoom, and are hidden
+  behind the horizon. Labels are thinned with distance and by collision; dense areas collapse into cluster badges that
+  zoom in when clicked.
+- Imagery streams in tiles and sharpens as you zoom, down to street level. Drag with the right button or Ctrl to tilt;
+  mountains are shown in 3D when terrain is on.
+- The night side (with NASA night lights), the terminator and the glow of active wars follow the timeline date.
 
 ## Layers (L)
 
@@ -50,8 +55,12 @@ a standalone HTML file.
 
 ## Index (I)
 
-Sources, glossary, A–Z, sites, countries, coverage (breadth × depth, see [TAXONOMY.md](audit/TAXONOMY.md)), off-world
-and credits. Everything links back to the globe.
+Sources, glossary, A–Z, sites, countries, coverage (breadth × depth, see [TAXONOMY.md](audit/TAXONOMY.md)), off-world,
+**PDF 7 index** and credits. Everything links back to the globe.
+
+The PDF 7 index lists every entry of PDF 7 (_What Is What of the What_) that names a place on Earth, by section and
+page, with its status (added, already on the map, or unplaced with the reason) and links to its map rows. Rows that come
+from or match PDF 7 show **PDF 7 §x.y (p. n) · G-path** in their dossier; click it to jump to the index.
 
 ## Analyze (A)
 
@@ -61,8 +70,9 @@ is shown).
 
 ## Settings (,)
 
-Master, music and effects volume; post effects; chromatic aberration; HUD; performance mode; reduced motion; satellite
-basemap; replay intro and tour. Settings are kept in your browser.
+Master, music and effects volume; post effects; chromatic aberration; HUD; performance mode; reduced motion; **imagery and terrain** (Esri, Esri
+hybrid, Sentinel-2 cloudless, OpenStreetMap, CARTO dark, NASA Blue Marble, NASA MODIS imagery of the timeline day,
+offline; terrain from AWS Terrain Tiles, Esri, or flat); replay intro and tour. Settings are kept in your browser.
 
 ## Exports
 

@@ -38,6 +38,21 @@ All notable changes to this project are documented here. The format follows
 - `docs/adr/0001-cesium-renderer.md`, `docs/repo-checklist.md`, unit tests for the source catalogue and terrarium
   maths. The PR template checks keyless sources and anchored globe objects.
 
+### Added: PDF 7 (_What Is What of the What_) as a source
+
+- `data/tools/pdf7_mine.py` reads all 381 PDF 7 entries, with section numbers and pages taken from the LaTeX
+  build (`main.aux`). It applies a reviewed curation file (`data/sources/pdf7/curation.csv`) and cross-checks
+  every entry against the map.
+  - 31 new map rows. Coordinates come only from Wikidata P625, and each row records its Q-id. Each row cites the
+    PDF 7 citation and a source URL, and the pin vs circle rule applies.
+  - 119 entries were already on the map. The 134 matching map rows now carry their PDF 7 reference.
+  - 32 entries name a place that cannot be placed honestly; they are logged with reasons in
+    `docs/audit/pdf7-unplaced.csv`.
+  - 198 entries have no place (theories, laboratory results without a named site, off-Earth objects).
+- Clicking a row shows **PDF 7 §x.y (p. n) · G-path**. The new **PDF 7 index** tab (Index panel) lists every placed or
+  unplaced entry by section, with links to its map entries.
+- A new case category, **PDF 7 place**, covers sites that are not UAP cases (for example Tunguska, Wow! signal, Antikythera).
+
 ### Removed
 
 - `src/globe.js` (three.js scene and shaders), `src/labels.js` (2D canvas label overlay) and the z3 EOX reprojection.
