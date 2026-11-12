@@ -1,9 +1,10 @@
-/* Design tokens: Global Map ops console.
-   Type: Rajdhani (display, titles only) + Inter (UI) + IBM Plex Mono (data), vendored in vendor/fonts (SIL OFL 1.1).
-   Motion: --dur-* / --ease-* tokens; all motion collapses under prefers-reduced-motion or Settings › Reduced motion.
-   Scale 12/14/16/20/28 px; 8 px spacing grid; dark theme with WCAG AA text contrast:
-   --fg #E6F1F7 on --bg-1 #0B1220 = 15.6:1; --fg-muted #9DB1C2 on #0B1220 = 8.3:1; --accent #38E8FF on #0B1220 = 11.9:1;
-   --warn #FFC857 = 11.6:1; --danger #FF6B6B = 6.4:1 (all >= 4.5:1 for normal text). */
+/* Design tokens: Global Map ops console (v1.3 design system, docs/adr/0003-design-system.md,
+   docs/design/style-guide.md). Every size, colour, layer and motion value in the UI comes from here.
+   Type: Inter (UI) + JetBrains Mono (data, coordinates, numbers), vendored in vendor/fonts (SIL OFL 1.1). No CDN.
+   Spacing: 8 px grid with one 4 px half-step (--s-h). Type: modular scale, ratio 1.2 (minor third) on 14 px.
+   Contrast (WCAG AA, measured against --bg-1 #0B1220 and --glass on black):
+   --fg #E6F1F7 15.6:1 · --fg-muted #A9BCCB 9.4:1 · --fg-dim #8DA2B4 6.9:1 · --accent #38E8FF 11.9:1 ·
+   --warn #FFC857 11.6:1 · --danger #FF7A7A 7.0:1 (all >= 4.5:1 for body text). */
 @font-face {
   font-family: Inter;
   src: url(../vendor/fonts/inter-latin-400-normal.woff2) format('woff2');
@@ -29,87 +30,138 @@
   font-display: swap;
 }
 @font-face {
-  font-family: Rajdhani;
-  src: url(../vendor/fonts/rajdhani-latin-500-normal.woff2) format('woff2');
-  font-weight: 500;
-  font-display: swap;
-}
-@font-face {
-  font-family: Rajdhani;
-  src: url(../vendor/fonts/rajdhani-latin-600-normal.woff2) format('woff2');
-  font-weight: 600;
-  font-display: swap;
-}
-@font-face {
-  font-family: Rajdhani;
-  src: url(../vendor/fonts/rajdhani-latin-700-normal.woff2) format('woff2');
-  font-weight: 700;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'IBM Plex Mono';
-  src: url(../vendor/fonts/ibm-plex-mono-latin-400-normal.woff2) format('woff2');
+  font-family: 'JetBrains Mono';
+  src: url(../vendor/fonts/jetbrains-mono-latin-400-normal.woff2) format('woff2');
   font-weight: 400;
   font-display: swap;
 }
 @font-face {
-  font-family: 'IBM Plex Mono';
-  src: url(../vendor/fonts/ibm-plex-mono-latin-500-normal.woff2) format('woff2');
+  font-family: 'JetBrains Mono';
+  src: url(../vendor/fonts/jetbrains-mono-latin-500-normal.woff2) format('woff2');
   font-weight: 500;
   font-display: swap;
 }
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url(../vendor/fonts/jetbrains-mono-latin-700-normal.woff2) format('woff2');
+  font-weight: 700;
+  font-display: swap;
+}
 :root {
+  /* type */
   --font-ui: Inter, system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-display: Rajdhani, Inter, system-ui, sans-serif;
-  --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
-  --fs-12: 12px;
-  --fs-14: 14px;
-  --fs-16: 16px;
-  --fs-20: 20px;
-  --fs-28: 28px;
-  --lh-tight: 1.2;
-  --lh: 1.45;
-  --sp-1: 4px;
-  --sp-2: 8px;
-  --sp-3: 12px;
-  --sp-4: 16px;
-  --sp-5: 24px;
-  --sp-6: 32px;
-  --sp-8: 48px;
+  --font-display: Inter, system-ui, sans-serif; /* titles: Inter 700, tracked caps */
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  --fs-1: 12px; /* caption, table, kbd: the floor; nothing in the UI is smaller */
+  --fs-2: 14px; /* body, controls */
+  --fs-3: 17px; /* window titles */
+  --fs-4: 20px; /* dossier / section titles */
+  --fs-5: 24px;
+  --fs-6: 29px; /* display */
+  --lh-tight: 1.25;
+  --lh: 1.5;
+  --track-caps: 0.08em;
+  /* spacing: 8 px grid */
+  --s-h: 4px;
+  --s-1: 8px;
+  --s-2: 16px;
+  --s-3: 24px;
+  --s-4: 32px;
+  --s-5: 40px;
+  --s-6: 48px;
+  --s-8: 64px;
+  /* control sizes (multiples of 8; 24 px is the WCAG 2.5.8 minimum target) */
+  --ctl-sm: 24px;
+  --ctl: 32px;
+  --ctl-lg: 40px;
+  /* radii, elevation, glass */
   --radius-1: 4px;
   --radius-2: 8px;
+  --radius-3: 12px;
+  --shadow-1: 0 2px 8px rgba(0, 0, 0, 0.4);
+  --shadow: 0 8px 32px rgba(0, 0, 0, 0.55);
+  --shadow-2: 0 16px 48px rgba(0, 0, 0, 0.65);
+  --blur: blur(8px);
+  /* colour: dark ops console */
   --bg-0: #03060c;
   --bg-1: #0b1220;
   --bg-2: #101a2b;
   --bg-3: #16243a;
-  --glass: rgba(9, 16, 28, 0.86);
+  --bg-4: #1d2f4a;
+  --glass: rgba(9, 16, 28, 0.92);
+  --glass-head: rgba(14, 24, 40, 0.96);
   --line: rgba(120, 190, 230, 0.18);
   --line-strong: rgba(120, 190, 230, 0.38);
   --fg: #e6f1f7;
-  --fg-muted: #9db1c2;
-  --fg-dim: #7a90a3;
+  --fg-muted: #a9bccb;
+  --fg-dim: #8da2b4;
   --accent: #38e8ff;
+  --accent-soft: rgba(56, 232, 255, 0.14);
   --accent-2: #7c9cff;
   --ok: #6dff8e;
   --warn: #ffc857;
-  --danger: #ff6b6b;
-  --conflict: #ff5a2b;
-  --shadow: 0 8px 32px rgba(0, 0, 0, 0.55);
+  --danger: #ff7a7a;
+  --conflict: #ff7a4d;
+  --zebra: rgba(120, 190, 230, 0.05);
+  --hover: rgba(120, 190, 230, 0.1);
+  --sb-thumb: rgba(120, 190, 230, 0.32);
+  --sb-thumb-hover: rgba(120, 190, 230, 0.55);
+  --focus: 0 0 0 2px #03060c, 0 0 0 4px var(--accent);
+  /* categorical chart palette (non-text >= 3:1 on --bg-2) */
+  --chart-1: #38e8ff;
+  --chart-2: #ffb547;
+  --chart-3: #b48cff;
+  --chart-4: #5be49b;
+  --chart-5: #ff6b8b;
+  --chart-6: #7c9cff;
+  --chart-7: #ffe14d;
+  --chart-8: #4dd0c8;
+  --chart-9: #ff9a3c;
+  --chart-10: #c3e88d;
+  --chart-11: #f78cff;
+  --chart-12: #a9bccb;
+  --chart-axis: var(--fg-muted);
+  --chart-grid: rgba(120, 190, 230, 0.14);
+  /* evidence tiers (also used on the globe) */
+  --tier-a: #38e8ff;
+  --tier-b: #6dff8e;
+  --tier-c: #ffd23f;
+  --tier-d: #ff9a3c;
+  --tier-e: #ff7a7a;
+  --tier-f: #8da2b4;
+  /* layout */
   --rail-w: 320px;
   --dossier-w: 420px;
   --timeline-h: 112px;
   --topbar-h: 56px;
+  /* z-index layers: one ladder for the whole app (windows add 0..8 inside their layer) */
+  --z-globe: 0;
+  --z-hud: 5;
+  --z-credit: 6;
+  --z-overlay: 9; /* compare divider */
+  --z-rail: 10;
+  --z-win: 20; /* docked and floating windows */
+  --z-chrome: 30; /* top bar, timeline, compare bar, status */
+  --z-modal: 40; /* dialogs (Data, Index, Reports, Briefings, Help) */
+  --z-snap: 49; /* dock preview while dragging */
+  --z-menu: 50; /* menus, search results */
+  --z-lasso: 55;
+  --z-tooltip: 60;
+  --z-tour: 70; /* tour caption, spotlight */
+  --z-boot: 100;
+  /* motion */
   --dur-1: 120ms;
   --dur-2: 240ms;
   --dur-3: 480ms;
   --dur-4: 900ms;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-inout: cubic-bezier(0.65, 0, 0.35, 1);
-  --tier-a: #38e8ff;
-  --tier-b: #6dff8e;
-  --tier-c: #ffd23f;
-  --tier-d: #ff9a3c;
-  --tier-e: #ff6b6b;
-  --tier-f: #7a90a3;
-  --focus: 0 0 0 2px #03060c, 0 0 0 4px var(--accent);
+}
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-1: 0ms;
+    --dur-2: 0ms;
+    --dur-3: 0ms;
+    --dur-4: 0ms;
+  }
 }

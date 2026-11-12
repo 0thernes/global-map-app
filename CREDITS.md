@@ -88,13 +88,14 @@ Sound is muted until you interact; master mute, music and effects sliders are in
 
 ## Fonts (vendor/fonts/, SIL Open Font License 1.1; licence files alongside)
 
-- **Rajdhani** (Indian Type Foundry), display face for titles only.
-- **Inter** (Rasmus Andersson), UI text.
-- **IBM Plex Mono** (IBM), data and coordinates.
+- **Inter** (Rasmus Andersson), UI text and titles (400/500/600/700).
+- **JetBrains Mono** (JetBrains), data, coordinates and numbers (400/500/700), from `@fontsource/jetbrains-mono` 5.3.0.
+
+Since v1.3 these are the only two faces (Rajdhani and IBM Plex Mono were removed; see docs/adr/0003-design-system.md).
 
 ## Icons
 
-**Lucide** (ISC licence; `vendor/icons/LICENSE-Lucide.txt`), inlined as SVG strings in `src/icons.js`.
+**Lucide** (ISC licence; `vendor/icons/LICENSE-Lucide.txt`), inlined as SVG strings in `src/icons.js`, generated from `lucide-static` 1.72.0 by `scripts/gen_icons.mjs`.
 
 ## Software (vendor/, bundled into js/app.js)
 
