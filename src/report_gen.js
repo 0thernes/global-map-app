@@ -87,7 +87,7 @@ function barsSVG(list, color, w = 320, max = 10) {
   const L = list.slice(0, max);
   const mx = Math.max(1, ...L.map((x) => x[1]));
   const rh = 18;
-  return `<svg class="rp-bars" viewBox="0 0 ${w} ${L.length * rh + 2}" role="img">${L.map(
+  return `<svg class="rp-bars" viewBox="0 0 ${w} ${L.length * rh + 2}" role="img" aria-label="${escH(L.map((x) => `${x[0]}: ${fmtN(x[1])}`).join('; '))}">${L.map(
     ([k, v, c], i) =>
       `<text x="0" y="${i * rh + 13}">${escH(String(k).slice(0, 30))}</text><rect x="150" y="${i * rh + 4}" width="${((w - 200) * v) / mx}" height="11" fill="${c || color}"/><text x="${w}" y="${i * rh + 13}" text-anchor="end">${fmtN(v)}</text>`,
   ).join('')}</svg>`;
@@ -106,7 +106,7 @@ function decadesSVG(decades, w = 640, h = 110) {
     const bh = ((h - 20) * v) / mx;
     s += `<rect x="${i * bw}" y="${h - 16 - bh}" width="${Math.max(1, bw - 1)}" height="${bh}"><title>${yr(d0 + i * 10)}s: ${v}</title></rect>`;
   }
-  return `<svg class="rp-hist" viewBox="0 0 ${w} ${h}" role="img">${s}<text x="0" y="${h - 2}">${yr(d0)}s</text><text x="${w}" y="${h - 2}" text-anchor="end">${yr(d1)}s</text><text x="0" y="10">max ${fmtN(mx)}/decade</text></svg>`;
+  return `<svg class="rp-hist" viewBox="0 0 ${w} ${h}" role="img" aria-label="Cases per decade, ${yr(d0)}s to ${yr(d1)}s, max ${fmtN(mx)} per decade">${s}<text x="0" y="${h - 2}">${yr(d0)}s</text><text x="${w}" y="${h - 2}" text-anchor="end">${yr(d1)}s</text><text x="0" y="10">max ${fmtN(mx)}/decade</text></svg>`;
 }
 /** equirectangular dot map (graticule only; no basemap needed, works offline and in print) */
 export function insetSVG(points, w = 360, h = 180) {

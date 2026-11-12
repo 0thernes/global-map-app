@@ -6,6 +6,13 @@ import { inject } from './loader.js';
 import { makeTabs } from './ui/tabs.js';
 import { icon } from './icons.js';
 import { numericCols } from './ui/table.js';
+
+// Heat fill strength (8–88 %). Between ~45 % and ~57 % neither light nor dark text reaches 4.5:1 on the cyan fill,
+// so those cells are pushed to 42 % (light text) or 58 % (dark text).
+const heatPct = (v, m) => {
+  const p = Math.round(8 + (80 * v) / m);
+  return p < 50 ? Math.min(p, 42) : Math.max(p, 58);
+};
 import { openDossier } from './ui_panels.js';
 import { countBy, ranked, crosstab, eraOf, ERAS, histogram, sortRows, gradeClass, battery } from './pdf7_stats.js';
 
@@ -109,7 +116,7 @@ function heat(ct) {
   return `<div class="dscroll"><table class="dheat"><tr><th></th>${ct.cols.map((c) => `<th title="${esc(c)}">${esc(c)}</th>`).join('')}</tr>${ct.rows
     .map(
       (r, i) =>
-        `<tr><th title="${esc(r)}">${esc(r)}</th>${ct.t[i].map((v) => `<td class="num${8 + (80 * v) / m >= 52 ? ' hi' : ''}" style="background:color-mix(in srgb, var(--chart-1) ${Math.round(8 + (80 * v) / m)}%, transparent)">${v || ''}</td>`).join('')}</tr>`,
+        `<tr><th title="${esc(r)}">${esc(r)}</th>${ct.t[i].map((v) => `<td class="num${heatPct(v, m) >= 58 ? ' hi' : ''}" style="background:color-mix(in srgb, var(--chart-1) ${heatPct(v, m)}%, transparent)">${v || ''}</td>`).join('')}</tr>`,
     )
     .join('')}</table></div>`;
 }

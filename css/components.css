@@ -751,3 +751,10 @@ table.an td:not(:first-child) {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
+
+/* PDF 7 cross-links in the dossier are standalone targets: at least 24 px tall (WCAG 2.5.8) */
+a[data-pdf7] {
+  display: inline-block;
+  min-height: var(--ctl-sm);
+  line-height: var(--ctl-sm);
+}
