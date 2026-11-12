@@ -72,7 +72,7 @@ await shot(
       if (m && !m.checked) m.click();
     });
     await p.keyboard.press('l');
-    await p.evaluate(() => window.__fly(37.3, -115.9, 0.6));
+    await p.evaluate(() => window.__fly(37.2, -116.6, 1.12));
   },
   7000,
 );
