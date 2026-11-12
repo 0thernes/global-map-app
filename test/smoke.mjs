@@ -1,12 +1,41 @@
-// Headless smoke test: load index.html from file://, wait for boot, exercise the main panels and the tour,
-// and fail on any console error or page error. The optional gitignored private data file (data/private/) is the
-// only whitelisted failure, because it is absent in a fresh clone by design.
+// Headless smoke test: serve the repo over http (as GitHub Pages does), wait for boot, exercise the main panels and
+// the tour, and fail on any console error or page error. The optional gitignored private data file (data/private/)
+// is the only whitelisted failure, because it is absent in a fresh clone by design. Remote tile errors (offline CI)
+// are ignored; any request to Cesium ion is a failure (the app must stay keyless).
 import { chromium } from 'playwright';
-import { pathToFileURL } from 'node:url';
-import { resolve } from 'node:path';
+import { createServer } from 'node:http';
+import { readFile } from 'node:fs/promises';
+import { resolve, extname, sep } from 'node:path';
 
-const url = pathToFileURL(resolve('index.html')).href + '?intro=0&private=0';
+const ROOT = resolve('.');
+const MIME = {
+  '.html': 'text/html',
+  '.js': 'text/javascript',
+  '.mjs': 'text/javascript',
+  '.css': 'text/css',
+  '.json': 'application/json',
+  '.png': 'image/png',
+  '.jpg': 'image/jpeg',
+  '.svg': 'image/svg+xml',
+  '.wasm': 'application/wasm',
+  '.woff2': 'font/woff2',
+  '.mp3': 'audio/mpeg',
+  '.ogg': 'audio/ogg',
+};
+const server = createServer(async (req, res) => {
+  const p = resolve(ROOT, '.' + decodeURIComponent(new URL(req.url, 'http://x').pathname));
+  if (!p.startsWith(ROOT + sep)) return res.writeHead(403).end();
+  try {
+    const body = await readFile(p);
+    res.writeHead(200, { 'content-type': MIME[extname(p)] || 'application/octet-stream' }).end(body);
+  } catch {
+    res.writeHead(404).end();
+  }
+});
+await new Promise((r) => server.listen(0, '127.0.0.1', r));
+const url = `http://127.0.0.1:${server.address().port}/index.html?intro=0&private=0`;
 const ALLOW = [/data\/private\//, /cases_private/];
+const REMOTE = /arcgisonline|arcgis\.com|maps\.eox\.at|openstreetmap|cartocdn|gibs\.earthdata|amazonaws/;
 const errors = [];
 const browser = await chromium.launch({
   args: [
@@ -18,16 +47,18 @@ const browser = await chromium.launch({
   ],
 });
 const page = await browser.newPage({ viewport: { width: 1600, height: 900 } });
+page.setDefaultTimeout(120000); // software WebGL in CI: Cesium frames can take ~1 s, so actions wait longer
 page.on('console', (m) => {
-  if (m.type() === 'error' && !ALLOW.some((r) => r.test(m.text() + ' ' + (m.location().url || ''))))
-    errors.push('console: ' + m.text());
+  const t = m.text() + ' ' + (m.location().url || '');
+  if (m.type() === 'error' && !ALLOW.some((r) => r.test(t)) && !REMOTE.test(t)) errors.push('console: ' + m.text());
 });
+page.on('request', (r) => /cesium\.com|ion\.cesium/.test(r.url()) && errors.push('Cesium ion request: ' + r.url()));
 page.on('pageerror', (e) => errors.push('pageerror: ' + e.message));
 page.on('requestfailed', (r) => {
-  if (!ALLOW.some((x) => x.test(r.url())) && !/^https?:/.test(r.url())) errors.push('requestfailed: ' + r.url());
+  if (!ALLOW.some((x) => x.test(r.url())) && !/^https:/.test(r.url())) errors.push('requestfailed: ' + r.url());
 });
 const t0 = Date.now();
-await page.goto(url);
+await page.goto(url, { waitUntil: 'domcontentloaded' });
 await page.waitForFunction(() => document.body.dataset.ready === '1', null, { timeout: 120000 });
 const steps = [];
 const step = async (name, fn) => {
@@ -43,6 +74,36 @@ const step = async (name, fn) => {
 await step('cases loaded', async () => {
   const n = await page.evaluate(() => (window.GM_CASES ? window.GM_CASES.length : window.GM_CASES_COLS.n));
   if (!(n > 100)) throw new Error('too few cases ' + n);
+});
+await step('cesium globe + keyless imagery', async () => {
+  const r = await page.evaluate(() => {
+    const g = window.__globe();
+    return { canvas: !!g.canvas.getContext, layers: g.scene.imageryLayers.length, base: g.basemapId };
+  });
+  if (!r.canvas || r.layers < 1 || !r.base) throw new Error('globe not initialised ' + JSON.stringify(r));
+});
+await step('markers glued to the surface', async () => {
+  // a world-anchored primitive must move exactly with its lat/lon when the camera moves
+  const d = await page.evaluate(async () => {
+    const g = window.__globe();
+    const c = window.__case(0);
+    window.__fly(c.lat, c.lon, 1.6);
+    await new Promise((r) => setTimeout(r, 2500));
+    const L = g.pointLayers.cases;
+    const b = L.bbs[0];
+    const S = g.C.SceneTransforms.worldToWindowCoordinates(g.scene, b.position);
+    const p = g.project(c.lat, c.lon);
+    return S && p ? Math.hypot(S.x - p.x, S.y - p.y) : -1;
+  });
+  if (!(d >= 0 && d < 3)) throw new Error('marker not anchored, screen error px = ' + d);
+});
+await step('basemap + terrain switch', async () => {
+  await page.evaluate(() => {
+    const g = window.__globe();
+    g.setBasemap('osm');
+    g.setBasemap('esri');
+    return g.setTerrain('off');
+  });
 });
 await step('layers panel', () => page.keyboard.press('l'));
 await step('filters panel', () => page.keyboard.press('f'));
@@ -116,6 +177,7 @@ await step('timeline play', async () => {
 });
 await page.waitForTimeout(500);
 await browser.close();
+server.close();
 for (const s of steps) console.log(`${s[1].padEnd(4)} ${s[0]} (${s[2]} ms)`);
 console.log(`boot+steps ${(Date.now() - t0) / 1000}s; errors: ${errors.length}`);
 if (errors.length) {
