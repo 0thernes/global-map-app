@@ -41,6 +41,8 @@
     "serve": "python3 -m http.server 8080"
   },
   "devDependencies": {
+    "@cesium/core": "0.1.1",
+    "@cesium/engine": "26.5.0",
     "@eslint/js": "^9.39.0",
     "d3-force": "^3.0.0",
     "esbuild": "^0.24.2",
