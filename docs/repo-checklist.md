@@ -14,9 +14,24 @@ Copilot, and no `.github/dependabot.yml` or pull-request template. This list rep
 - [ ] `npm run test:data` passes: CSV schema validation, 0 errors **(CI)**
 - [ ] `npm run build` has been run and the regenerated `js/app.js` and `js/app.js.map` are committed
 - [ ] `npm run test:smoke` passes. It serves the repo over HTTP, boots, checks markers are glued to the surface,
-      switches basemap and terrain, opens every panel and runs the tour, with zero console or page errors and zero
+      switches basemap and terrain, opens every panel, cycles every window through minimize, restore, maximize, drag,
+      dock and close, and runs the tour, with zero console or page errors and zero
       Cesium ion requests **(CI)**
+- [ ] `npm run test:a11y` passes: axe-core 4.11 (WCAG 2.0 / 2.1 / 2.2 A + AA, including colour contrast) on every UI
+      view at 1920x1080 reports 0 violations
 - [ ] CodeQL reports no new alerts **(CI)**
+
+## Design system (v1.3, [ADR 0003](adr/0003-design-system.md), [style guide](design/style-guide.md))
+
+- [ ] New CSS uses tokens from `css/tokens.css` (spacing `--s-*`, type `--fs-*`, z-index `--z-*`, colours); no raw
+      px font sizes below 12 px and no literal z-index values
+- [ ] Every panel is a window from `src/ui/window.js` (standard header with minimize / maximize / close, one
+      `.win-body` scroll region) and is listed in `initWindows()`; no inner `max-height` scroll boxes
+- [ ] Every tab bar is built with `makeTabs()` from `src/ui/tabs.js` (ARIA roles, arrow keys, overflow arrows)
+- [ ] Icons come from Lucide via `scripts/gen_icons.mjs` (`npm run icons`); no Unicode glyphs as icons
+- [ ] Only Inter and JetBrains Mono are vendored and used (`vendor/fonts`, SIL OFL licences alongside)
+- [ ] The UI audit has been re-run for UI changes (`npm run audit:ui -- --phase after`, then
+      `python3 scripts/audit/ui_audit_report.py --after`) and `docs/audit/v1.3-ui-audit.md` has no new bugs or errors
 
 ## Security and privacy
 
