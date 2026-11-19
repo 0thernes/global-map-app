@@ -3,7 +3,7 @@
 // the selection is refreshed while the camera moves (throttled), positions are always world-anchored.
 import * as THREE from 'three';
 import { ll2v } from './geo.js';
-import { clusterBadge } from './cesium/icons.js';
+import { clusterBadge, badgeRadius } from './cesium/icons.js';
 import { Cesium } from './cesium/C.js';
 
 export class Labels {
@@ -89,7 +89,7 @@ export class Labels {
     this.badges.removeAll();
     for (const c of clusters) {
       if (c.lat == null) continue;
-      const rad = 10 + Math.min(14, Math.sqrt(c.n) * 3);
+      const rad = badgeRadius(c.n);
       const sz = Math.ceil(rad * 2 + 8);
       this.badges.add({
         position: C.Cartesian3.fromDegrees(c.lon, c.lat, 0),
@@ -129,7 +129,7 @@ export class Labels {
       if (c.lat == null) continue;
       const p = g.project(c.lat, c.lon);
       if (!p) continue;
-      const rad = 10 + Math.min(14, Math.sqrt(c.n) * 3);
+      const rad = badgeRadius(c.n);
       boxes.push({ x: p.x - rad, y: p.y - rad, w: rad * 2, h: rad * 2 });
     }
     const capCos = Math.min(0.999, 1 / (1 + alt));

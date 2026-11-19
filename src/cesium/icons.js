@@ -85,14 +85,19 @@ const badgeCache = new Map();
  * Cluster badge (v1.4): dark disc, count (1.2k style above 999), and a ring split by category share so the
  * badge shows the mix it hides; `mix` = [[colour, count], ...] sorted by count (falls back to one `color` ring).
  */
+/** UI scale of the chrome: 1.25 at 4K (DPR 1), as the CSS token ladder (css/console.css, ADR 0004 §13). */
+export const uiScale = () => (typeof innerWidth !== 'undefined' && innerWidth >= 2560 ? 1.25 : 1);
+/** Cluster badge radius in CSS px: grows with log10(count) so a 2,000-case badge is not 4x a 20-case one (v1.4). */
+export const badgeRadius = (n, s = uiScale()) => Math.round((11 + 4.5 * Math.log10(Math.max(1, n))) * s * 10) / 10;
 export function clusterBadge(n, color, mix) {
   const segs = mix && mix.length ? mix : [[color || '#5ff', n]];
   const tot = segs.reduce((a, s) => a + s[1], 0) || 1;
   // cache key: count + each colour with its share quantised to 1/24 of the ring
-  const k = n + '|' + segs.map(([c, m]) => c + Math.round((m / tot) * 24)).join(',');
+  const S = uiScale();
+  const k = S + '|' + n + '|' + segs.map(([c, m]) => c + Math.round((m / tot) * 24)).join(',');
   let c = badgeCache.get(k);
   if (c) return c;
-  const rad = 10 + Math.min(14, Math.sqrt(n) * 3);
+  const rad = badgeRadius(n, S);
   const sz = Math.ceil(rad * 2 + 8) * 2;
   c = document.createElement('canvas');
   c.width = c.height = sz;
@@ -103,13 +108,13 @@ export function clusterBadge(n, color, mix) {
   g.beginPath();
   g.arc(h, h, rad, 0, Math.PI * 2);
   g.fill();
-  g.lineWidth = 3;
+  g.lineWidth = 3 * S;
   let a0 = -Math.PI / 2;
   for (const [col, m] of segs) {
     const a1 = a0 + (m / tot) * Math.PI * 2;
     g.strokeStyle = col;
     g.beginPath();
-    g.arc(h, h, rad - 1.5, a0, a1);
+    g.arc(h, h, rad - 1.5 * S, a0, a1);
     g.stroke();
     a0 = a1;
   }
@@ -119,7 +124,7 @@ export function clusterBadge(n, color, mix) {
   g.arc(h, h, rad + 0.5, 0, Math.PI * 2);
   g.stroke();
   g.fillStyle = '#eef8ff';
-  g.font = `600 ${n >= 1000 ? 11 : 12}px Inter, system-ui, sans-serif`;
+  g.font = `600 ${Math.round((n >= 1000 ? 11 : 12) * S)}px Inter, system-ui, sans-serif`;
   g.textAlign = 'center';
   g.textBaseline = 'middle';
   g.fillText(n >= 1000 ? (n / 1000).toFixed(n >= 10000 ? 0 : 1).replace(/\.0$/, '') + 'k' : String(n), h, h + 0.5);

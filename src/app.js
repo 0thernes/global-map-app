@@ -39,6 +39,8 @@ import { initData, openData } from './ui_data.js';
 import { initWindows, occupied, onLayout } from './ui/window.js';
 import { initConsole, hoverCard } from './ui/console.js';
 import { initFeed } from './ui/feed.js';
+import { mergeColliding } from './ui/cluster.js';
+import { badgeRadius, uiScale } from './cesium/icons.js';
 
 const fpsHist = [],
   cpuHist = [];
@@ -220,7 +222,10 @@ function recluster(now) {
   clusterHidden = new Set();
   ctx.clusters = [];
   if (st.clustering && layerOn('cases') && alt > 0.12) {
-    const cell = 46;
+    // screen-space grid, then a collision pass (v1.4): badges whose discs would touch merge into the larger one, so
+    // dense regions (Europe, the US east coast) read as one badge per area instead of a pile of overlapping discs
+    const S = uiScale();
+    const cell = Math.round(48 * S);
     const grid = new Map();
     for (const c of ctx.cases) {
       if (!caseVisibleF(c) || c._day > st.cur) continue;
@@ -232,26 +237,34 @@ function recluster(now) {
       b.m.push(c);
       b.v.add(ll2v(c.lat, c.lon, 1));
     }
-    for (const b of grid.values())
-      if (b.m.length >= 3) {
-        const cnt = {};
-        b.m.forEach((c) => (cnt[c.category] = (cnt[c.category] || 0) + 1));
-        const ranked = Object.entries(cnt).sort((a, b2) => b2[1] - a[1]);
-        const ll = v2ll(b.v);
-        ctx.clusters.push({
-          lat: ll.lat,
-          lon: ll.lon,
-          n: b.m.length,
-          color: catColor(ranked[0][0]),
-          // category mix for the badge ring (v1.4): top 5 categories, the rest folded into one grey segment
-          mix: [
-            ...ranked.slice(0, 5).map(([k, m]) => [catColor(k), m]),
-            ...(ranked.length > 5 ? [['#7a90a3', ranked.slice(5).reduce((a, r) => a + r[1], 0)]] : []),
-          ],
-          members: b.m,
-        });
-        b.m.forEach((c) => clusterHidden.add(c._i));
-      }
+    const groups = mergeColliding(
+      [...grid.values()].filter((b) => b.m.length >= 3),
+      (b) => {
+        const ll = v2ll(b.v.clone());
+        return g.project(ll.lat, ll.lon);
+      },
+      (n) => badgeRadius(n, S),
+      4 * S,
+    );
+    for (const b of groups) {
+      const cnt = {};
+      b.m.forEach((c) => (cnt[c.category] = (cnt[c.category] || 0) + 1));
+      const ranked = Object.entries(cnt).sort((a, b2) => b2[1] - a[1]);
+      const ll = v2ll(b.v.clone());
+      ctx.clusters.push({
+        lat: ll.lat,
+        lon: ll.lon,
+        n: b.m.length,
+        color: catColor(ranked[0][0]),
+        // category mix for the badge ring (v1.4): top 5 categories, the rest folded into one grey segment
+        mix: [
+          ...ranked.slice(0, 5).map(([k, m]) => [catColor(k), m]),
+          ...(ranked.length > 5 ? [['#7a90a3', ranked.slice(5).reduce((a, r) => a + r[1], 0)]] : []),
+        ],
+        members: b.m,
+      });
+      b.m.forEach((c) => clusterHidden.add(c._i));
+    }
   }
   if (clusterHidden.size !== prevHidden.size || [...clusterHidden].some((i) => !prevHidden.has(i))) refreshCaseVis();
 }
