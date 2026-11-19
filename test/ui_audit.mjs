@@ -228,8 +228,17 @@ function measure() {
   const small = [];
   for (const b of document.querySelectorAll('button, [role=button], a[href], input, select, summary')) {
     if (!shown(b) || b.closest('#globe,#boot')) continue;
-    const r = b.getBoundingClientRect();
+    let r = b.getBoundingClientRect();
     if (r.bottom < 0 || r.top > vh) continue;
+    // a checkbox or radio inside (or tied to) a <label>: the label is part of its target (clicking it toggles
+    // the control), so measure the label's box, as WCAG 2.5.8 does
+    const lab =
+      b.matches('input[type=checkbox], input[type=radio]') &&
+      (b.closest('label') || (b.id && document.querySelector(`label[for="${CSS.escape(b.id)}"]`)));
+    if (lab && shown(lab)) {
+      const q = lab.getBoundingClientRect();
+      r = { width: Math.max(q.width, r.width), height: Math.max(q.height, r.height) };
+    }
     if ((r.width < 24 || r.height < 24) && !(b.tagName === 'A' && cs(b).display === 'inline'))
       small.push(path(b) + ' ' + Math.round(r.width) + 'x' + Math.round(r.height));
   }

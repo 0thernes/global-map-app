@@ -25,6 +25,13 @@ try {
   await page.waitForFunction(() => document.body.dataset.ready === '1', null, { timeout: 300000 });
   await page.mouse.move(1, 1);
   await page.waitForTimeout(8000); // boot frames, label and layer loading settle
+  // Cesium keeps requesting frames while globe tiles stream in (by design); idle starts once they have loaded
+  const tilesMs = Date.now();
+  await page
+    .waitForFunction(() => window.__globe().scene.globe.tilesLoaded, null, { timeout: 120000, polling: 500 })
+    .catch(() => fails.push('globe tiles still loading after 120 s'));
+  console.log(`tiles loaded after a further ${Date.now() - tilesMs} ms`);
+  await page.waitForTimeout(1000);
   const a = await page.evaluate(() => window.__perf());
   await page.waitForTimeout(10000);
   const b = await page.evaluate(() => window.__perf());
