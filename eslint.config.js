@@ -32,6 +32,7 @@ export default [
       'test/ui_audit.mjs',
       'test/ui_views.mjs',
       'test/a11y.mjs',
+      'test/devshot.mjs',
       'scripts/audit/*.mjs',
     ],
     languageOptions: { globals: { ...globals.node, ...globals.browser } },
