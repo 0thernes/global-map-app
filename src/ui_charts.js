@@ -95,14 +95,16 @@ function bars(sel, dim, keys, fn) {
   const data = without(dim);
   const counts = keys.map(([k, col]) => [k, col, data.filter((c) => fn(c) === k).length]);
   const mx = Math.max(1, ...counts.map((x) => x[2]));
+  // rows are 24 px at 1:1 (the cards never shrink below 300 px), each with a full-width hit area
   const W = 300,
-    rh = 18,
+    rh = 24,
     H = counts.length * rh + 4;
   $(sel).innerHTML = `<svg viewBox="0 0 ${W} ${H}" class="bars">${counts
     .map(([k, col, n], i) => {
       const on = st.f[dim].has(k);
       const dim2 = st.f[dim].size && !on;
-      return `<g class="bar" data-k="${esc(k)}" tabindex="0" role="button" aria-pressed="${on}"><text x="0" y="${i * rh + 13}" font-size="11" fill="${dim2 ? '#7A90A3' : '#E6F1F7'}">${esc(k.length > 26 ? k.slice(0, 25) + '…' : k)}</text><rect x="150" y="${i * rh + 3}" width="${Math.max(n ? 2 : 0, (n / mx) * 120)}" height="12" rx="2" fill="${col}" opacity="${dim2 ? 0.3 : 0.9}"/>${on ? `<rect x="148" y="${i * rh + 1}" width="${(n / mx) * 120 + 4}" height="16" fill="none" stroke="#fff" rx="3"/>` : ''}<text x="${154 + (n / mx) * 120}" y="${i * rh + 13}" font-size="11" fill="#9DB1C2">${n}</text></g>`;
+      const y = i * rh;
+      return `<g class="bar" data-k="${esc(k)}" tabindex="0" role="button" aria-pressed="${on}" aria-label="${esc(k)}: ${n}"><rect class="hit" x="0" y="${y}" width="${W}" height="${rh}" fill="transparent"/><text x="0" y="${y + 16}" font-size="11" fill="${dim2 ? '#7A90A3' : '#E6F1F7'}">${esc(k.length > 26 ? k.slice(0, 25) + '…' : k)}</text><rect x="150" y="${y + 6}" width="${Math.max(n ? 2 : 0, (n / mx) * 120)}" height="12" rx="2" fill="${col}" opacity="${dim2 ? 0.3 : 0.9}"/>${on ? `<rect x="148" y="${y + 4}" width="${(n / mx) * 120 + 4}" height="16" fill="none" stroke="#fff" rx="3"/>` : ''}<text x="${154 + (n / mx) * 120}" y="${y + 16}" font-size="11" fill="#9DB1C2">${n}</text></g>`;
     })
     .join('')}</svg>`;
   $$(`${sel} .bar`).forEach(
