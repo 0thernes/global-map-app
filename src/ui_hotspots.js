@@ -201,7 +201,7 @@ export const glyphRow = (cl, html = true) => {
     ? g
         .map(
           ([k, v]) =>
-            `<span class="gl" title="${esc(GLYPH[k] ? GLYPH[k][1] : k)}: ${((100 * v) / tot).toFixed(0)}% of score" style="font-size:${(11 + 9 * Math.sqrt(v / tot)).toFixed(0)}px">${GLYPH[k] ? GLYPH[k][0] : '•'}</span>`,
+            `<span class="gl" title="${esc(GLYPH[k] ? GLYPH[k][1] : k)}: ${((100 * v) / tot).toFixed(0)}% of score" style="font-size:${(12 + 8 * Math.sqrt(v / tot)).toFixed(0)}px">${GLYPH[k] ? GLYPH[k][0] : '•'}</span>`,
         )
         .join('')
     : g.map(([k]) => (GLYPH[k] ? GLYPH[k][0] : '•')).join('');

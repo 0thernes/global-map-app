@@ -1322,16 +1322,17 @@ body.theme-hc .uitip {
 #credits .cesium-credit-expand-link {
   font-size: var(--fs-1);
 }
-.glyphs .gl {
-  font-size: max(12px, 1em);
-}
 /* the settings window never grows wider than its dock: long select options and notes wrap or shrink */
 #set-body {
   grid-template-columns: minmax(0, 1fr);
 }
 #set-body label {
   min-width: 0;
+  min-height: 24px;
   flex-wrap: wrap;
+}
+#set-body input[type='range'] {
+  height: 24px;
 }
 #set-body select {
   min-width: 0;
