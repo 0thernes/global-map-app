@@ -15,6 +15,9 @@ water and sky layers. Every plotted row cites its source.**
 [![No API keys](https://img.shields.io/badge/API%20keys-none-success.svg)](docs/data-sources.md)
 [![No Cesium ion](https://img.shields.io/badge/Cesium%20ion-not%20used-success.svg)](docs/adr/0001-cesium-renderer.md)
 [![Static site](https://img.shields.io/badge/runs-GitHub%20Pages%20%7C%20file%3A%2F%2F-success.svg)](#quick-start)
+[![WCAG 2.2 AA: axe 0 violations](https://img.shields.io/badge/WCAG%202.2%20AA-axe%200%20violations-success.svg)](docs/audit/v1.4-ui-audit.md)
+[![UI audit v1.4](https://img.shields.io/badge/UI%20audit-v1.4-informational.svg)](docs/audit/v1.4-ui-audit.md)
+[![Keyboard first](https://img.shields.io/badge/keyboard-Ctrl%2BK%20%C2%B7%20%3F-informational.svg)](#keyboard)
 [![X @0thernes_ai](https://img.shields.io/badge/X-%400thernes__ai-000000.svg)](https://x.com/0thernes_ai)
 
 **[Live demo](https://0thernes.github.io/global-map-app/)** · [User guide](docs/user-guide.md) · [Layer catalog](docs/layer-catalog.md) · [Audit](docs/audit/SUMMARY.md) · [Data sources](docs/data-sources.md) · [ADR: Cesium](docs/adr/0001-cesium-renderer.md) · [Changelog](CHANGELOG.md)
@@ -46,7 +49,19 @@ sources shown rather than hidden.**
 | **PDF 7 as a source**        | Every place in PDF 7 (_What Is What of the What_) is cross-checked against the map: 31 Wikidata-geocoded rows added, 134 rows tagged **PDF 7 §x.y**, 32 unplaceable entries logged with reasons; a **PDF 7 index** maps sections to map entries.                                                                                                                                                                                      |
 | **Data (PDF 7 as data)**     | Everything that is not a place, kept off the globe: 660 PDF 7 entries with § and page, all 165 PDF 7 tables as sortable data tables, charts rebuilt from the PDF 7 CSVs, source-type breakdowns, a seven-test battery with permutation p-values, Holm adjustment and caveats, and 397 unplaced-but-sourced rows. CSV export for every table.                                                                                          |
 | **Reference**                | Sources, glossary, A–Z, sites, countries, coverage matrix (breadth × depth), off-world targets, PDF 7 index and credits.                                                                                                                                                                                                                                                                                                              |
+| **OSINT console (v1.4)**     | Command bar with omnibox (`Ctrl+K`: commands, cases, places, layers), status strip by grade with data age and live-feed state, UTC and Pacific clocks; activity bar; legend (pin vs circle, category icons); provenance-first dossier; selection reticle and hover card; activity feed; comfortable / compact density and a high-contrast theme.                                                                                      |
 | **OSINT tools**              | Search, filters (grade, precision, water distance, conflicts, `[verify]`), link graph, compare view, charts, lasso, exports (CSV, GeoJSON, Markdown), workspaces.                                                                                                                                                                                                                                                                     |
+
+The v1.4 OSINT console: command bar with omnibox (`Ctrl+K`), grade status strip and UTC / Pacific clocks; activity
+bar; legend; case dossier with provenance first; activity feed; timeline dock
+([ADR 0004](docs/adr/0004-osint-console-information-architecture.md), [wireframes](docs/design/wireframes/README.md),
+[before / after](docs/screenshots/v1.4/README.md)):
+
+<table>
+<tr><td><img src="docs/screenshots/v1.4/1920x1080_console_full_after.png" alt="v1.4 console with dossier, activity feed and charts docked"></td><td><img src="docs/screenshots/v1.4/1920x1080_palette_query_after.png" alt="Omnibox with grouped commands, cases, places and layers"></td></tr>
+<tr><td><img src="docs/screenshots/v1.4/1920x1080_dossier_after.png" alt="Case dossier with the provenance block"></td><td><img src="docs/screenshots/v1.4/1920x1080_hover_card_after.png" alt="Hover card with grade, marker type and coordinate source"></td></tr>
+<tr><td><img src="docs/screenshots/v1.4/1920x1080_feed_after.png" alt="Activity feed with live USGS and EONET events"></td><td><img src="docs/screenshots/v1.4/1920x1080_high_contrast_after.png" alt="High-contrast theme"></td></tr>
+</table>
 
 Real captures of this build (headless Chromium, software WebGL), from orbit to street level. Labels and markers stay on
 the ground at every zoom level:
