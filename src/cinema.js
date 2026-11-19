@@ -164,9 +164,14 @@ function hudFrame() {
   const altKm = (p.length() - 1) * 6371;
   const NS = ll.lat >= 0 ? 'N' : 'S',
     EW = ll.lon >= 0 ? 'E' : 'W';
-  $('#hud-coord').textContent =
-    `${Math.abs(ll.lat).toFixed(3)}°${NS} ${Math.abs(ll.lon).toFixed(3)}°${EW}  ALT ${altKm < 10 ? fmt(Math.round(altKm * 1000)) + ' M' : fmt(altKm) + ' KM'}`;
-  $('#hud-date').textContent = `T ${dayLabel(st.cur)}`;
+  // status-row read-out (v1.4 polish: in the timeline foot, tabular numerals); written only when it changes
+  const alt = altKm < 10 ? fmt(Math.round(altKm * 1000)) + ' m' : fmt(altKm) + ' km';
+  const c = `${Math.abs(ll.lat).toFixed(3).padStart(6, '\u2007')}°${NS} ${Math.abs(ll.lon).toFixed(3).padStart(7, '\u2007')}°${EW} · alt ${alt}`;
+  const hc = $('#hud-coord');
+  if (hc.textContent !== c) hc.textContent = c;
+  const t = `T ${dayLabel(st.cur)}`;
+  const hd = $('#hud-date');
+  if (hd.textContent !== t) hd.textContent = t;
 }
 export function sweep() {
   if (reduced() || !cine.settings.hud) return;
@@ -639,7 +644,7 @@ export function initCinema() {
   }).observe($('#dossier-body'), { childList: true });
   let lastH = 0;
   ctx.hooks.frame2 = (now) => {
-    if (now - lastH > 100 && cine.settings.hud) {
+    if (now - lastH > 100) {
       lastH = now;
       hudFrame();
     }

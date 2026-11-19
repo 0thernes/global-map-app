@@ -132,7 +132,7 @@
   /* layout */
   --rail-w: 320px;
   --dossier-w: 420px;
-  --timeline-h: 112px;
+  --timeline-h: 160px; /* v1.4 polish: transport row, overview strip + detail track, focus and read-out row */
   --topbar-h: 56px;
   /* z-index layers: one ladder for the whole app (windows add 0..8 inside their layer) */
   --z-globe: 0;
