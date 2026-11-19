@@ -482,10 +482,17 @@ function bindPointer(canvas) {
     }
     openDossier(p.item, p.kind);
   });
-  let last = 0;
-  canvas.addEventListener('pointermove', (e) => {
+  let last = 0,
+    trail = 0;
+  canvas.addEventListener('pointermove', function onHover(e) {
     const now = performance.now();
-    if (now - last < 70 || down) return;
+    if (down) return;
+    // throttled to one pick per 70 ms, with a trailing pick so the card always matches where the pointer stopped
+    clearTimeout(trail);
+    if (now - last < 70) {
+      trail = setTimeout(() => onHover(e), 70 - (now - last));
+      return;
+    }
     last = now;
     const r = canvas.getBoundingClientRect();
     const x = e.clientX - r.left,
@@ -517,7 +524,10 @@ function bindPointer(canvas) {
     tip.style.left = (x + 16 + tw > innerWidth - o.right ? x - 16 - tw : x + 16) + 'px';
     tip.style.top = Math.max(64, y + 14 + th > innerHeight - 140 ? y - 14 - th : y + 14) + 'px';
   });
-  canvas.addEventListener('pointerleave', () => (tip.hidden = true));
+  canvas.addEventListener('pointerleave', () => {
+    clearTimeout(trail);
+    tip.hidden = true;
+  });
 }
 // the globe stays centred in the area not covered by the rail and docked windows (src/ui/window.js reports it)
 function centerShift() {
