@@ -37,6 +37,7 @@ case.
   - tabular numerals for coordinates, dates and times
   - a 1.25x token ladder at 4K
   - visible tooltips with the shortcut on every icon-only control
+  - on 1280x800 a bottom-docked window runs under the right docks instead of being squeezed between them
 - **Faster**: the globe renders on demand, so an idle globe barely uses the GPU; `npm run test:perf` guards it.
 - **Checks**: `npm run audit:ui -- --check` now fails the build on overlaps, clipped controls, nested scroll bars, tiny
   text, small targets, axe violations or a view over its time budget at 1280x800, 1920x1080 and 3840x2160.
