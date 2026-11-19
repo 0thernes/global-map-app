@@ -77,7 +77,8 @@ symbology shared by every view. No data changed; every plotted row is still a so
 
 - **Render on demand**: Cesium's `requestRenderMode` plus render requests from the app when state changes (time,
   filters, layers, selection, overlays) and on input. An idle globe draws about 6 frames in 10 s on software WebGL
-  instead of one per animation frame. This was behind a 92 min dossier capture in `test/ui_audit.mjs` (a re-run of
+  instead of one per animation frame (`test/perf.mjs` measures once the globe tiles have loaded: 4 frames in 10 s).
+  This was behind a 92 min dossier capture in `test/ui_audit.mjs` (a re-run of
   the same sequence took 29 s; the continuous re-render starved the page under CPU load).
 - `npm run test:perf` (`test/perf.mjs`): idle frame budget and dossier open + capture under 60 s on SwiftShader.
 - `test/ui_audit.mjs --check` fails a view whose open phase takes over 60 s or whose capture takes over 180 s, stops
@@ -101,6 +102,20 @@ symbology shared by every view. No data changed; every plotted row is still a so
 - The status strip said "rows" and the rail said "cases" for the same number.
 - The README key list had drifted from the key handler: `P` (frame rate) and `0` (reset windows) were missing.
 - The status message sat just above the timeline, where it could cover a bottom-docked window.
+- At 1280x800 a bottom-docked window (Analytics) was squeezed to under 280 px between the rail and the right docks
+  and overlapped the feed; with under 400 px free it now runs under the right docks, which end above it.
+- Settings window content ran off the right edge (long basemap names); toggles and sliders are now 24 px targets.
+- Analytics bar rows were 18 px targets (3 px at 1280); they are 24 px rows with a full-width hit area, and the
+  chart cards wrap at 300 px instead of shrinking.
+- Related-case links, the UTC hour slider, the Cesium credit expander (10 px text) and hotspot glyphs (11 px) now
+  meet the 24 px target and 12 px text floors.
+- The activity bar clipped its last button on 800 px tall screens.
+- The narrow command bar hid live-feed names with `font-size: 0` (which also blanked the feed's status line); the
+  names are now visually hidden in the command bar only.
+- Hover card: the 70 ms pick throttle dropped the last pointer move, so a quick move could leave the card hidden; a
+  trailing pick now follows the throttle.
+- `test/ui_audit.mjs` measures a checkbox inside a `<label>` by the label box (WCAG 2.5.8 target) and measures after
+  window transitions settle.
 
 ## [1.3.0] - 2026-11-13
 
