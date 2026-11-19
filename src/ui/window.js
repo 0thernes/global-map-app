@@ -11,6 +11,7 @@ export const MIN_W = 280;
 export const MIN_H = 160;
 export const HEAD_H = 48; // header height: 8 + 32 + 8 on the 8 px grid (minimized windows keep only this)
 export const GAP = 8;
+export const BOTTOM_MIN_W = 400; // narrower than this between side docks, a bottom dock runs under the right docks
 export const NARROW = 900; // below this width every window becomes a full-width bottom sheet
 export const MODES = ['left', 'right', 'bottom', 'float', 'max'];
 export const KEY = (id) => 'gm.win.' + id;
@@ -84,8 +85,17 @@ export function layoutWindows(wins, safe, { narrow = false } = {}) {
   }
   let bottomTop = null;
   if (B.length) {
+    // too little room between the side docks (e.g. 1280 px with the rail, feed and dossier open): the bottom
+    // dock runs under the right docks instead, which end above it, so nothing overlaps
+    const under = rx - lx < BOTTOM_MIN_W;
     const bx = lx,
-      bw = Math.max(MIN_W, rx - lx);
+      bw = under ? safe.x + safe.w - lx : Math.max(MIN_W, rx - lx);
+    if (under) {
+      const hh0 = Math.max(
+        ...B.map((w) => (w.min ? HEAD_H : Math.round(Math.min(Math.max(w.h || 360, MIN_H), safe.h * 0.8)))),
+      );
+      for (const w of R) if (!w.min) rects[w.id].h = Math.max(HEAD_H, safe.h - hh0 - GAP);
+    }
     const each = Math.floor((bw - GAP * (B.length - 1)) / B.length);
     B.forEach((w, i) => {
       const hh = w.min ? HEAD_H : Math.round(Math.min(Math.max(w.h || 360, MIN_H), safe.h * 0.8));

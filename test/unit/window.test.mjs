@@ -10,6 +10,7 @@ import {
   layoutWindows,
   parseState,
   HEAD_H,
+  BOTTOM_MIN_W,
   MIN_W,
   GAP,
   KEY,
@@ -63,6 +64,22 @@ test('layoutWindows: docked windows tile without overlapping each other or the c
   assert.ok(rects.charts.x >= rects.hs.x + rects.hs.w);
   assert.ok(rects.charts.x + rects.charts.w <= rects.wars.x);
   assert.ok(occ.left > SAFE.x && occ.right < SAFE.r);
+});
+test('layoutWindows: a bottom dock with too little room runs under the right docks, which end above it', () => {
+  const s = safeArea({ vw: 1280, vh: 800, top: 56, bottom: 160, railRight: 356 });
+  const wins = [
+    { id: 'dossier', mode: 'right', w: 420, order: -10 },
+    { id: 'feed', mode: 'right', w: 360, order: -5 },
+    { id: 'charts', mode: 'bottom', h: 416, order: 3 },
+  ];
+  const { rects } = layoutWindows(wins, s);
+  const ids = Object.keys(rects);
+  for (let i = 0; i < ids.length; i++)
+    for (let j = i + 1; j < ids.length; j++)
+      assert.ok(!overlap(rects[ids[i]], rects[ids[j]]), ids[i] + ' vs ' + ids[j]);
+  assert.ok(rects.charts.w >= BOTTOM_MIN_W, 'bottom dock keeps a usable width');
+  assert.equal(rects.charts.x + rects.charts.w, s.x + s.w);
+  assert.ok(rects.dossier.y + rects.dossier.h <= rects.charts.y - GAP + 0.5);
 });
 test('layoutWindows: side docks shrink when they would leave less than 30 % of the width', () => {
   const wins = ['a', 'b', 'c', 'd'].map((id, i) => ({ id, mode: 'right', w: 700, order: i }));
