@@ -191,17 +191,20 @@
       ></button>
     </div>
 
-    <aside id="legend" aria-labelledby="legend-title">
+    <aside id="legend" class="collapsed" aria-labelledby="legend-title">
       <header class="lg-head">
-        <h2 id="legend-title">Legend</h2>
-        <span id="legend-n" class="mono muted"></span>
         <button
-          id="legend-close"
-          class="btn icon sm ghost"
-          aria-label="Hide legend (K)"
-          title="Hide legend (K)"
-          data-icon="x"
-        ></button>
+          id="legend-toggle"
+          class="lg-toggle"
+          aria-expanded="false"
+          aria-controls="legend-body"
+          title="Expand or collapse the legend (K)"
+        >
+          <span class="lg-ico" aria-hidden="true" data-icon="map"></span>
+          <span id="legend-title" class="lg-title">Legend</span>
+          <span id="legend-sum" class="lg-sum mono"></span>
+          <span class="lg-chev" aria-hidden="true" data-icon="chevron-down"></span>
+        </button>
       </header>
       <div id="legend-body" class="lg-body"></div>
     </aside>

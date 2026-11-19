@@ -264,7 +264,7 @@ function countLine() {
   const n = filteredCases().length;
   const all = ctx.cases.length;
   $('#count').innerHTML =
-    `<b>${n}</b> of ${all} cases shown at ${esc(dayLabel(st.cur))}` +
+    `<b class="mono">${n.toLocaleString('en-US')}</b> of ${all.toLocaleString('en-US')} cases <span class="muted">at ${esc(dayLabel(st.cur))}</span>` +
     (st.f.lasso ? ' · lasso' : '') +
     (st.f.range ? ' · date range' : '') +
     (st.f.q ? ` · “${esc(st.f.q)}”` : '');
@@ -615,7 +615,7 @@ export function renderFilters() {
       $('#search').value = '';
       emit('filters');
     };
-  $('#count2').textContent = `${filteredCases().length} shown`;
+  $('#count2').textContent = `${filteredCases().length.toLocaleString('en-US')} cases`;
 }
 
 // ---------- dossier ----------

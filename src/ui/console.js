@@ -8,6 +8,7 @@ import { legendModel, markerOf, catColor, catIcon, compact, MARKER_RULE } from '
 import { SHORTCUTS, overlay } from './shortcuts.js';
 import { utc, zoned, ageDays } from './clock.js';
 import { LIVE, onLive } from '../live_feeds.js';
+import { initTips } from './tips.js';
 
 const LSK = { density: 'gm.ui.density', contrast: 'gm.ui.contrast', legend: 'gm.ui.legend' };
 const ls = {
@@ -56,7 +57,7 @@ function syncActbar() {
     b.setAttribute('aria-pressed', String(!!on));
   }
   const lg = $('#btn-legend');
-  if (lg) lg.setAttribute('aria-pressed', String(!$('#legend').hidden));
+  if (lg) lg.setAttribute('aria-pressed', String(legendState() === 'open'));
 }
 function initActbar(railTab) {
   for (const [id, [, rid]] of Object.entries(ACT)) {
@@ -64,7 +65,6 @@ function initActbar(railTab) {
     if (!b) continue;
     const label = b.getAttribute('aria-label');
     b.title = `${label} (${keyOf[rid] || b.dataset.key})`;
-    b.insertAdjacentHTML('beforeend', `<span class="act-key" aria-hidden="true">${esc(b.dataset.key || '')}</span>`);
     b.setAttribute('aria-keyshortcuts', b.dataset.key || '');
   }
   // rail buttons: a click on the active rail view collapses the rail (editor-style), otherwise opens that tab
@@ -102,15 +102,25 @@ function renderStatus() {
   const built = (window.GM_CATALOG && window.GM_CATALOG.built) || '';
   const age = ageDays(built);
   el.innerHTML =
-    `<span class="st-total" title="Rows that pass the current filters at the timeline date"><b class="mono">${compact(m.total)}</b> rows</span>` +
-    `<span class="st-grades" role="list" aria-label="Rows by evidence grade">${m.grades
-      .map(
-        (g) =>
-          `<span role="listitem" class="gchip" style="--c:${g.color}" title="${esc(g.label)}: ${g.n.toLocaleString('en-US')} rows. ${esc(g.desc)}"><i aria-hidden="true"></i><span class="gl">${esc(g.k === 'Official record' ? 'Official' : g.k === 'Online claim' ? 'Online' : g.k === 'Testimony' ? 'TE' : g.k)}</span> <b class="mono">${compact(g.n)}</b></span>`,
-      )
+    `<span class="st-total" title="Cases that pass the current filters at the timeline date (same count as the Layers panel)"><b class="mono">${m.total.toLocaleString('en-US')}</b> cases</span>` +
+    `<span class="st-grades" role="group" aria-label="Filter cases by evidence grade">${m.grades
+      .map((g) => {
+        const on = st.f.grades.has(g.k);
+        return `<button type="button" class="gchip" data-grade="${esc(g.k)}" aria-pressed="${on}" style="--c:${g.color}" title="${esc(g.label)}: ${g.n.toLocaleString('en-US')} cases. ${esc(g.desc)} Click to ${on ? 'remove this grade from' : 'add this grade to'} the grade filter."><i aria-hidden="true"></i><span class="gl">${esc(g.k === 'Official record' ? 'Official' : g.k === 'Online claim' ? 'Online' : g.k === 'Testimony' ? 'TE' : g.k)}</span> <b class="mono">${compact(g.n)}</b></button>`;
+      })
       .join('')}</span>` +
     `<span class="st-fresh" title="Dataset built ${esc(built.replace('T', ' '))}${age != null ? ` (${age} d ago)` : ''}; latest dated case ${esc(dayLabel(NDAYS))}">${icon('database', 14)}<span class="mono">${esc(built.slice(0, 10))}</span></span>` +
     `<span class="st-live" aria-label="Live feeds">${liveDot('usgs', 'USGS')}${liveDot('eonet', 'EONET')}</span>`;
+}
+// grade chips in the status strip are filters (the same set as the Filters panel's Grade chips)
+function bindStatus() {
+  $('#statusbar').addEventListener('click', (e) => {
+    const b = e.target.closest('.gchip[data-grade]');
+    if (!b) return;
+    const k = b.dataset.grade;
+    st.f.grades.has(k) ? st.f.grades.delete(k) : st.f.grades.add(k);
+    emit('filters');
+  });
 }
 function tickClock() {
   const d = new Date();
@@ -140,7 +150,11 @@ function renderLegend() {
   const el = $('#legend-body');
   if (!el || $('#legend').hidden) return;
   const m = legendModel(filteredCases());
-  $('#legend-n').textContent = `${m.total.toLocaleString('en-US')} shown`;
+  // the collapsed chip keeps the pin vs circle rule visible: counts of each marker kind
+  $('#legend-sum').innerHTML =
+    `<span title="Pins: exact site or within 1 km">${GLYPH.pin()}${m.marks.pin.toLocaleString('en-US')}</span>` +
+    `<span title="Uncertainty circles: locality or region, never jittered">${GLYPH.circle()}${m.marks.circle.toLocaleString('en-US')}</span>`;
+  if (legendState() !== 'open') return;
   // markers always show (they carry the pin vs circle rule); categories and grades fold, open by default on
   // tall screens, and keep the user's choice for the session
   const open = (k) => ((lgOpen[k] ?? innerHeight >= 960) ? ' open' : '');
@@ -167,12 +181,30 @@ function renderLegend() {
   for (const d of el.querySelectorAll('details')) d.ontoggle = () => (lgOpen[d.dataset.lg] = d.open);
 }
 const lgOpen = {};
-export function toggleLegend(show) {
+// legend states (v1.4 polish): 'chip' (default: a compact chip docked bottom-left above the timeline), 'open'
+// (expanded upward from the chip) and 'off' (hidden from Settings). Remembered in localStorage.
+function legendState() {
+  const v = ls.get(LSK.legend, 'chip');
+  return v === 'open' || v === 'off' ? v : 'chip';
+}
+function applyLegend() {
   const el = $('#legend');
-  el.hidden = !(show ?? el.hidden);
-  ls.set(LSK.legend, el.hidden ? '0' : '1');
-  if (!el.hidden) renderLegend();
+  const s = legendState();
+  el.hidden = s === 'off';
+  el.classList.toggle('collapsed', s !== 'open');
+  $('#legend-toggle').setAttribute('aria-expanded', String(s === 'open'));
+  renderLegend();
   syncActbar();
+}
+/** K and the map-tools button: expand / collapse (and show the legend again if Settings hid it). */
+export function toggleLegend(open) {
+  const s = legendState();
+  ls.set(LSK.legend, (open ?? s !== 'open') ? 'open' : 'chip');
+  applyLegend();
+}
+function showLegend(on) {
+  ls.set(LSK.legend, on ? 'chip' : 'off');
+  applyLegend();
 }
 
 // ---------------------------------------------------------------- density, contrast
@@ -208,12 +240,12 @@ function settingsSection() {
     `<div id="set-console"><h4>${icon('rows-3', 14)} Console</h4>
      <label>Density <select id="s-density"><option value="comfortable" ${dens === 'comfortable' ? 'selected' : ''}>Comfortable (32 px targets)</option><option value="compact" ${dens === 'compact' ? 'selected' : ''}>Compact (24 px targets)</option></select></label>
      <label class="tog"><input type="checkbox" id="s-hc" ${document.body.classList.contains('theme-hc') ? 'checked' : ''}> High contrast (black, white, yellow focus)</label>
-     <label class="tog"><input type="checkbox" id="s-legend" ${$('#legend').hidden ? '' : 'checked'}> Map legend (K)</label>
+     <label class="tog"><input type="checkbox" id="s-legend" ${$('#legend').hidden ? '' : 'checked'}> Map legend (K expands it)</label>
      <p class="small muted">Shortcuts: U density · X contrast · K legend · ? all keys.</p></div>`,
   );
   $('#s-density').onchange = (e) => setDensity(e.target.value);
   $('#s-hc').onchange = (e) => setContrast(e.target.checked);
-  $('#s-legend').onchange = (e) => toggleLegend(e.target.checked);
+  $('#s-legend').onchange = (e) => showLegend(e.target.checked);
 }
 
 // ---------------------------------------------------------------- help overlay (generated)
@@ -290,11 +322,12 @@ const soon = () => {
 };
 export function initConsole({ railTab }) {
   applyTheme();
+  initTips();
   initActbar(railTab);
   renderHelp();
-  // legend: shown by default (it carries the pin vs circle rule); the choice is remembered
-  $('#legend').hidden = ls.get(LSK.legend, '1') === '0';
-  $('#legend-close').onclick = () => toggleLegend(false);
+  // legend: a collapsed chip by default (it still carries the pin vs circle counts); the choice is remembered
+  if (!['chip', 'open', 'off'].includes(ls.get(LSK.legend, 'chip'))) ls.set(LSK.legend, 'chip'); // v1.4 beta values
+  $('#legend-toggle').onclick = () => toggleLegend();
   $('#btn-legend').onclick = () => toggleLegend();
   on('filters', soon);
   on('layers-changed', soon);
@@ -312,13 +345,18 @@ export function initConsole({ railTab }) {
   ctx.hooks.frame3 = frameReticle;
   // settings window: append the console section whenever it renders
   new MutationObserver(settingsSection).observe($('#set-body'), { childList: true });
+  bindStatus();
   renderStatus();
-  renderLegend();
+  applyLegend();
   // test hooks (test/ui_views.mjs): restore the default theme between views
   window.__uiReset = () => {
     ls.set(LSK.density, 'comfortable');
     ls.set(LSK.contrast, '0');
     applyTheme();
+  };
+  window.__legend = (s) => {
+    ls.set(LSK.legend, s);
+    applyLegend();
   };
   emit('console-ready');
 }

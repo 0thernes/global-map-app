@@ -254,11 +254,17 @@ await step('console: omnibox, legend, activity bar, themes, clocks, status strip
   await page.waitForSelector('#charts:not([hidden])');
   if ((await page.getAttribute('#btn-charts', 'aria-pressed')) !== 'true') throw new Error('activity bar state');
   await page.keyboard.press('Escape');
+  // legend (v1.4 polish): a collapsed chip by default with the pin / circle counts; K expands and collapses it
+  const chip = await page.$eval('#legend', (e) => !e.hidden && e.classList.contains('collapsed'));
+  if (!chip) throw new Error('legend starts as a collapsed chip');
   await page.keyboard.press('k');
-  if (!(await page.$eval('#legend', (e) => e.hidden))) throw new Error('K hides the legend');
+  const lg = await page.$eval(
+    '#legend',
+    (e) => !e.classList.contains('collapsed') && /exact site or within 1 km/.test(e.textContent),
+  );
+  if (!lg) throw new Error('K expands the legend with the pin rule');
   await page.keyboard.press('k');
-  const lg = await page.$eval('#legend', (e) => !e.hidden && /exact site or within 1 km/.test(e.textContent));
-  if (!lg) throw new Error('legend shows the pin rule');
+  if (!(await page.$eval('#legend', (e) => e.classList.contains('collapsed')))) throw new Error('K collapses it');
   await page.keyboard.press('u');
   if (!(await page.evaluate(() => document.body.classList.contains('density-compact')))) throw new Error('density');
   await page.keyboard.press('u');
