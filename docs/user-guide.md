@@ -6,6 +6,24 @@ Open `index.html` (or `launch.cmd` on Windows). The boot screen shows the datase
 ENGAGE turns on sound, asks for full screen if you launched with `?fullscreen=1`, flies in, and starts the tour if
 you asked for it. Press **Esc** to skip.
 
+## The console (v1.4)
+
+- **Command bar** (top): the omnibox, the status strip, the clocks and the utilities. Press **Ctrl+K** or **/** and
+  type to find a command, case, place, layer or reference entry; ↑/↓ and Enter to run it. The status strip shows the
+  rows in view by grade, when the data was built, and whether the live feeds answered. The clocks show UTC and US
+  Pacific.
+- **Activity bar** (left edge): one button per view, grouped Explore, Analyze and Reference. The small letter is its
+  key. Click Layers or Filters again to fold the rail away.
+- **Legend** (bottom left, **K**): pin versus circle, the category colours and icons with counts, and the grades.
+- **Map tools** (top right): home view (**O**), lasso (**S**), random case (**R**) and the legend.
+- **Activity feed** (**N**): Live lists USGS earthquakes and NASA EONET events, newest first; Recent lists the cases
+  you opened and the filters you changed in this session. Click an entry to fly there.
+- **Hover** a marker for its card (grade, pin or circle, coordinate source). **Click** it for the dossier; amber corner
+  brackets mark it on the globe while the dossier is open.
+- **Density** (**U**) switches between comfortable and compact controls. **High contrast** (**X**) switches to black
+  and white with a yellow accent. Both are saved, and both are also in Settings › Console.
+- Press **?** for every key.
+
 ## The tour (T)
 
 Twenty steps: welcome, layers, timeline, search, dossiers, graph, analysis, reports, glossary, the state of the
@@ -16,7 +34,9 @@ caveat, what is happening now, and your turn. ←/→ or Space to move, Esc to s
 
 - **Pins** are exact or within 1 km. **Circles** are uncertainty areas (locality 10 km, region 100 km, or the row's own
   radius). Nothing is jittered.
-- Colours follow the category legend in the Layers panel. Badges in dossiers show grade, precision, _conflict_ (sources
+- Colours and icons follow the legend (bottom left, **K**). Cluster badges show the count with a ring split by
+  category. The dossier opens with a Provenance block: source, grade, coordinate source, precision and coordinates.
+  Badges in dossiers show grade, precision, _conflict_ (sources
   disagree) and _[verify]_ (citation flagged for checking).
 - Markers, circles and labels are fixed to the ground: they stay in place as you tilt, rotate or zoom, and are hidden
   behind the horizon. Labels are thinned with distance and by collision; dense areas collapse into cluster badges that
