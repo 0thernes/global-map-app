@@ -1,4 +1,4 @@
-# Style guide (v1.3 design system)
+# Style guide (v1.3 design system, v1.4 OSINT console)
 
 This page is the working reference for the console UI. The decision record is
 [ADR 0003](../adr/0003-design-system.md). Tokens are in [`css/tokens.css`](../../css/tokens.css), components in
@@ -173,12 +173,14 @@ then add it to the defaults in `initWindows()`.
 
 ## Responsive
 
-| Width     | Behaviour                                                                |
-| --------- | ------------------------------------------------------------------------ |
-| ≥ 1760 px | labelled toolbar                                                         |
-| < 1760 px | icon-only toolbar (names stay as accessible text and tooltips)           |
-| < 1100 px | rail 280 px; toolbar separators hidden                                   |
-| < 900 px  | windows become bottom sheets; toolbar scrolls; brand reduced to the logo |
+| Width     | Behaviour (v1.4)                                                                                        |
+| --------- | ------------------------------------------------------------------------------------------------------- |
+| ≥ 2560 px | the 1.25x ladder: every type, spacing, control and layout token is multiplied by 1.25 (4K at DPR 1)     |
+| ≥ 1760 px | brand subtitle, the row total and grade names in the status strip                                       |
+| < 1760 px | grade chips show the colour and count only (the name is in the tooltip); the data date shows as an icon |
+| < 1440 px | rail 288 px; live-feed names and clock seconds hidden; omnibox shortcut hint hidden                     |
+| < 1100 px | brand reduced to the logo; the data date leaves the strip                                               |
+| < 900 px  | windows become bottom sheets                                                                            |
 
 ## Checks
 
@@ -188,3 +190,59 @@ then add it to the defaults in `initWindows()`.
 | `npm run test:smoke`                                                                         | every window opens, minimizes, restores, maximizes, drags, docks and closes                 |
 | `npm run test:a11y`                                                                          | axe-core on every view at 1920x1080 (WCAG 2.0 / 2.1 / 2.2 A + AA); must report 0 violations |
 | `npm run audit:ui -- --phase after`, then `python3 scripts/audit/ui_audit_report.py --after` | re-measures the audit                                                                       |
+| `npm run audit:ui -- --phase after --check` (v1.4)                                           | fails on overlaps, clipped controls, nested scroll bars, tiny text, small targets, axe      |
+
+## v1.4 OSINT console
+
+The decision record is [ADR 0004](../adr/0004-osint-console-information-architecture.md). The wireframes are in
+[`wireframes/`](wireframes/README.md). The CSS is in [`css/console.css`](../../css/console.css).
+
+### Regions
+
+| Region                  | Element              | Size (1x)                 | Notes                                                                                          |
+| ----------------------- | -------------------- | ------------------------- | ---------------------------------------------------------------------------------------------- |
+| Command bar             | `#topbar`            | 56 px tall                | brand, omnibox, status strip, clocks, utilities                                                |
+| Omnibox                 | `#search`            | 40 px, 240–560 px wide    | `Ctrl+K` or `/`; grouped results: Commands, Cases, Places, Layers, Reference                   |
+| Status strip            | `#statusbar`         | flexible                  | rows by grade (grade colours), data build date, live-feed dots. Never a classification banner. |
+| Clocks                  | `#clocks`            | 2 lines                   | UTC first, then US Pacific with PST or PDT; tabular mono                                       |
+| Activity bar            | `#actbar`            | 56 px wide, 40 px targets | 13 views in 3 groups; `aria-pressed` mirrors the window; key hint in the corner                |
+| Rail                    | `#rail`              | 320 px (288 below 1440)   | beside the activity bar; collapses when its active button is clicked again                     |
+| Legend                  | `#legend`            | 272 px                    | bottom left of the free globe area, above the credit strip and any bottom dock                 |
+| Map tools               | `#maptools`          | 40 px buttons             | top right of the free globe area: home, lasso, random, legend                                  |
+| Credit and camera strip | `#credits`, `#hud-*` | 24 px (`--credit-h`)      | outside the window safe area                                                                   |
+| Timeline dock           | `#timeline`          | 112 px                    | grouped step buttons (segmented), 32 px targets, histogram scrubber                            |
+
+### Symbology
+
+`src/ui/symbology.js` is the only place that maps a category to its colour and icon, and a `coord_precision` to a
+marker. The legend, dossier, hover card, omnibox, feed, charts and globe all import from it.
+
+| Marker  | Rule                                                                     |
+| ------- | ------------------------------------------------------------------------ |
+| Pin     | `exact_site` or `within_1km`                                             |
+| Circle  | `locality` or `region`; radius = `coord_radius_km`; faint centre dot     |
+| Cluster | 3 or more cases in a 46 px cell; ring split by category share; the count |
+
+Do not add a category without a colour and an icon. The unit test fails if an icon is missing from `src/icons.js`.
+
+### Keyboard
+
+`src/ui/shortcuts.js` is the only list of shortcuts. The key handler in `src/ui_misc.js`, the `?` overlay and the
+omnibox commands are generated from it. To add a key, add a row there and a handler with the same id in `ACTIONS`;
+the unit test fails if either is missing.
+
+### Density and themes
+
+| Setting        | Storage          | Effect                                                                           |
+| -------------- | ---------------- | -------------------------------------------------------------------------------- |
+| Comfortable    | `gm.ui.density`  | default; `--ctl-sm` is 32 px, so every button, input, summary and row is ≥ 32 px |
+| Compact        | `gm.ui.density`  | `--ctl-sm` is 24 px (the WCAG 2.5.8 minimum); activity buttons 36 px             |
+| High contrast  | `gm.ui.contrast` | black surfaces, white text, white control borders, yellow accent and focus ring  |
+| Reduced motion | `gm.cine`        | OS setting or Settings: instant fly-to, no typing effect, no transitions         |
+
+Keys: `U` density, `X` contrast, `K` legend. All three are also in Settings › Console and in the omnibox.
+
+### Numbers
+
+Coordinates, dates, times, counts and keys use tabular numerals (`font-variant-numeric: tabular-nums`) so columns
+do not jitter while the timeline plays. Data values use JetBrains Mono; labels use Inter.

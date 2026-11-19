@@ -13,6 +13,8 @@ Copilot, and no `.github/dependabot.yml` or pull-request template. This list rep
 - [ ] `npm test` passes: Node unit tests, including the keyless-source and terrarium maths tests **(CI)**
 - [ ] `npm run test:data` passes: CSV schema validation, 0 errors **(CI)**
 - [ ] `npm run build` has been run and the regenerated `js/app.js` and `js/app.js.map` are committed
+- [ ] No orphaned headless Chrome is left from an earlier run (`pgrep -fa chrome`; stop them first). Two SwiftShader
+      runs at once slow each other down and time out
 - [ ] `npm run test:smoke` passes. It serves the repo over HTTP, boots, checks markers are glued to the surface,
       switches basemap and terrain, opens every panel, cycles every window through minimize, restore, maximize, drag,
       dock and close, and runs the tour, with zero console or page errors and zero
@@ -30,8 +32,24 @@ Copilot, and no `.github/dependabot.yml` or pull-request template. This list rep
 - [ ] Every tab bar is built with `makeTabs()` from `src/ui/tabs.js` (ARIA roles, arrow keys, overflow arrows)
 - [ ] Icons come from Lucide via `scripts/gen_icons.mjs` (`npm run icons`); no Unicode glyphs as icons
 - [ ] Only Inter and JetBrains Mono are vendored and used (`vendor/fonts`, SIL OFL licences alongside)
-- [ ] The UI audit has been re-run for UI changes (`npm run audit:ui -- --phase after`, then
-      `python3 scripts/audit/ui_audit_report.py --after`) and `docs/audit/v1.3-ui-audit.md` has no new bugs or errors
+- [ ] The UI audit has been re-run for UI changes (`npm run audit:ui -- --phase after --check`, then
+      `python3 scripts/audit/ui_audit_v14.py`) and `docs/audit/v1.4-ui-audit.md` has no open bugs or errors
+
+## OSINT console (v1.4, [ADR 0004](adr/0004-osint-console-information-architecture.md))
+
+- [ ] `npm run audit:ui -- --phase after --check` passes at 1280x800, 1920x1080 and 3840x2160: no overlaps between
+      docked parts, no clipped controls, no nested scroll bars, no text under 12 px, no target under 24 px, no chrome
+      control under 32 px at comfortable density, 0 axe violations
+- [ ] A new view has an activity-bar button, a registry key in `src/ui/shortcuts.js` with a handler in `ACTIONS`
+      (`src/ui_misc.js`), an omnibox command and an audit view in `test/ui_views.mjs`
+- [ ] A new category has a colour and a Lucide icon in `src/ui/symbology.js`; the legend, dossier, hover card,
+      omnibox and globe pick it up from there. No colour or icon map anywhere else
+- [ ] Pins only for `exact_site` / `within_1km` (`markerOf()`); the dossier Provenance block shows the coordinate
+      source and precision for every case
+- [ ] The status strip shows grades, data freshness and live feeds only; no classification or caveat markings
+- [ ] Times are shown in UTC and US Pacific; numbers, coordinates and dates use tabular numerals
+- [ ] Dynamic `import()` uses literal paths only, so esbuild bundles the module (a variable path 404s at run time)
+- [ ] Wireframes are regenerated when the layout tokens change (`node scripts/design/wireframes_v14.mjs`)
 
 ## Security and privacy
 
@@ -63,13 +81,19 @@ Copilot, and no `.github/dependabot.yml` or pull-request template. This list rep
 
 ## Docs and release
 
-- [ ] `CHANGELOG.md` has a dated section; `package.json`, `CITATION.cff` and the README citation use the same version
+- [ ] `CHANGELOG.md` has a dated section and compare links for the new tag
 - [ ] `RELEASE_NOTES_vX.Y.Z.md` exists (the release workflow reads it)
 - [ ] ADRs exist for architectural changes (`docs/adr/`)
 - [ ] README badges and screenshots are real captures of this build (`node test/screens.mjs`), taken at several zoom
       levels including street level
+- [ ] Before / after pairs for UI releases are in `docs/screenshots/vX.Y/` (`python3 scripts/audit/pair_shots.py`),
+      quantised to 256 colours, same view, viewport and script on both sides
 - [ ] `CREDITS.md` and `docs/data-sources.md` list every imagery, terrain and live-feed source with its attribution
 - [ ] No `.github/dependabot.yml`, no pull-request template, no review or coding bots configured; dependency upgrades
       are manual
 - [ ] Annotated tag `vX.Y.Z` on `main`; bundle or zip produced with `npm run package -- --zip`
+- [ ] For an offline hand-off, an incremental git bundle (`git bundle create … main vX.Y.Z ^<last pushed>`) passes
+      `git bundle verify`, is split into 4 MiB parts with `SHA256SUMS`, and the full-bundle SHA-256 is recorded
+- [ ] Versions agree: `package.json`, `package-lock.json`, `CITATION.cff` (`version` and `date-released`), the README
+      citation and the brand label in `index.html`
 - [ ] The GitHub Pages deploy loads with no console errors, and the imagery attribution is visible at the bottom left

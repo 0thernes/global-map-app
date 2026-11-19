@@ -103,9 +103,14 @@ It is a static browser app (HTML, CSS, one JavaScript bundle and data files); it
 
 ## Keyboard
 
-`/` search · `Space` play · `←/→` day (Shift month, Alt year) · `L` layers · `F` filters · `Z` hotspots · `E` reports ·
-`I` index · `D` data · `A` analyze · `V` charts · `G` graph · `C` compare · `W` wars · `B` briefings · `S` lasso · `H` heatmap ·
-`T` tour · `M` mute · `,` settings · `R` random case · `Esc` close · `?` help
+Every key lives in one registry ([`src/ui/shortcuts.js`](src/ui/shortcuts.js)); the handler and the `?` overlay are
+generated from it.
+
+`Ctrl+K` or `/` omnibox · `?` help · `Space` play · `←/→` day (Shift month, Alt year) · `L` layers · `F` filters ·
+`W` wars · `A` analyze · `Z` hotspots · `V` charts · `G` graph · `C` compare · `E` reports · `D` data · `I` index ·
+`B` briefings · `N` activity feed · `O` home view · `S` lasso · `R` random case · `H` heatmap · `K` legend ·
+`U` density · `X` high contrast · `T` tour · `M` mute · `,` settings · `P` frame rate · `0` reset windows ·
+`Esc` close
 
 ## Architecture
 
@@ -205,7 +210,7 @@ If you use Global Map in research, cite it with [CITATION.cff](CITATION.cff) (Gi
 button), and cite the underlying datasets listed in [CREDITS.md](CREDITS.md).
 
 ```
-0thernes L.L.C. (2026). Global Map (Version 1.3.0) [Computer software]. https://github.com/0thernes/global-map-app
+0thernes L.L.C. (2026). Global Map (Version 1.4.0) [Computer software]. https://github.com/0thernes/global-map-app
 ```
 
 ## Licence
