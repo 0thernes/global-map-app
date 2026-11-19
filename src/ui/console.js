@@ -75,7 +75,8 @@ function initActbar(railTab) {
   };
   $('#btn-layers').onclick = rail('layers');
   $('#btn-filters').onclick = rail('filters');
-  const mo = new MutationObserver(() => requestAnimationFrame(syncActbar));
+  // synchronous with the change (a MutationObserver batches already): no stale pressed state while frames lag
+  const mo = new MutationObserver(syncActbar);
   for (const el of $$('.panel, #rail .pane, #legend'))
     mo.observe(el, { attributes: true, attributeFilter: ['hidden'] });
   mo.observe(document.body, { attributes: true, attributeFilter: ['class'] });

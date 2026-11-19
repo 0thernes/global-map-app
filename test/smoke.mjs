@@ -135,7 +135,7 @@ await step('settings', async () => {
 });
 await step('hotspots', async () => {
   await page.keyboard.press('z');
-  await page.waitForSelector('.hsb', { timeout: 120000 });
+  await page.waitForSelector('.hsb', { timeout: 240000 }); // as in test/ui_views.mjs: CPU-bound on a shared box
   await page.click('.hsb');
   await page.waitForTimeout(400);
   await page.keyboard.press('Escape');
