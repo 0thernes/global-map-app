@@ -63,9 +63,14 @@ def save(src, name, vp):
     )
 
 
-rows = []
+rows, missing = [], []
 for vp, view, before in pairs:
     bn, an = f"{vp}_{view}_before.png", f"{vp}_{view}_after.png"
+    srcs = [os.path.join(shots, "before", vp, before + ".png"), os.path.join(shots, "after", vp, view + ".png")]
+    if not all(os.path.exists(x) for x in srcs):
+        missing.append(f"{vp} {view}")
+        print("skip (no capture):", vp, view, [x for x in srcs if not os.path.exists(x)])
+        continue
     save(os.path.join(shots, "before", vp, before + ".png"), bn, vp)
     save(os.path.join(shots, "after", vp, view + ".png"), an, vp)
     label = f"`{view}`" if before == view else f"`{view}` (before: `{before}`)"
@@ -77,5 +82,6 @@ with open(os.path.join(out, "README.md"), "w") as f:
         "Where a view is new, the before column shows the closest earlier state, named in brackets.\n"
         "4K shots are scaled to 1920x1080 here. Full sets: `node test/ui_audit.mjs --phase <before|after>`.\n\n"
         f"| View | Viewport | Before ({bl}) | After ({al}) |\n|---|---|---|---|\n" + "\n".join(rows) + "\n"
+        + (f"\nNot paired (no capture on one side): {', '.join(missing)}.\n" if missing else "")
     )
 print(len(rows), "pairs ->", out)
