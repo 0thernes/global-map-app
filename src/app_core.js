@@ -134,7 +134,11 @@ export const ctx = {
   bus: new EventTarget(),
 };
 window.GMAPP = { st, ctx };
-export const emit = (type, detail) => ctx.bus.dispatchEvent(new CustomEvent(type, { detail }));
+export const emit = (type, detail) => {
+  // any app event may change what the globe shows: ask the render-on-demand globe for a few frames
+  if (ctx.globe && ctx.globe.requestRender) ctx.globe.requestRender();
+  return ctx.bus.dispatchEvent(new CustomEvent(type, { detail }));
+};
 export const on = (type, fn) => ctx.bus.addEventListener(type, (e) => fn(e.detail));
 
 export function L(id, name, kind, extra = {}) {

@@ -129,6 +129,10 @@ async function boot() {
   for (const l of ctx.layers) if (l.on && !l.loaded) ensureLayer(l);
   initLabels();
   bindPointer(canvas);
+  // render on demand: user input wakes the globe for a moment (hover highlight, drags, keys)
+  for (const ev of ['pointermove', 'pointerdown', 'wheel', 'keydown'])
+    window.addEventListener(ev, () => g.requestRender(800), { passive: true, capture: true });
+  window.addEventListener('resize', () => g.requestRender(800));
   window.addEventListener('resize', resize);
   resize();
   st.cur = NDAYS;
@@ -606,6 +610,11 @@ function loop(now) {
   cpuHist.push(performance.now() - now);
   if (cpuHist.length > 120) cpuHist.shift();
 }
+// perf probe for the headless checks (test/perf.mjs): frames Cesium actually rendered, and the CPU cost of the loop
+window.__perf = () => ({
+  frames: ctx.globe.frames,
+  cpuMs: cpuHist.length ? Math.round(cpuHist.reduce((x, y) => x + y, 0) / cpuHist.length) : 0,
+});
 window.__case = (i) => (typeof i === 'string' ? ctx.cases.find((c) => c.id === i) : ctx.cases[i]);
 window.__lastAnalysis = () => import('./ui_analysis.js').then((m) => m.lastAnalysis());
 window.__data = (tab, table) => openData(tab, table);

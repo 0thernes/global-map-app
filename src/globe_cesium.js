@@ -68,6 +68,18 @@ export class Globe {
       blurActiveElementOnCanvasFocus: false,
     });
     const sc = (this.scene = this.w.scene);
+    // render on demand (v1.4 perf fix): Cesium redraws only when the camera moves, tiles arrive or the app asks for
+    // a frame (requestRender). Before, every animation frame re-rendered the whole globe; on software WebGL
+    // (SwiftShader in CI) that starved the page and a dossier view once took 92 min to capture in test/ui_audit.mjs.
+    sc.requestRenderMode = true;
+    sc.maximumRenderTimeChange = Infinity;
+    this.frames = 0;
+    this._lastFrameT = 0;
+    this._hotUntil = 0;
+    sc.postRender.addEventListener(() => {
+      this.frames++;
+      this._lastFrameT = performance.now();
+    });
     // MSAA on real GPUs only; software rasterisers (SwiftShader in CI) get FXAA alone
     try {
       const glc = sc.context._gl;
@@ -305,6 +317,7 @@ export class Globe {
     I.c2.putImageData(out, 0, 0);
     I.cv.toBlob((blob) => {
       this._idBusy = false;
+      this.requestRender(1500);
       if (!blob) return;
       const url = URL.createObjectURL(blob);
       const C = this.C;
@@ -323,6 +336,7 @@ export class Globe {
   }
   setDate(date) {
     this._date = date;
+    this.requestRender();
     this.subsolar = subsolar(date);
     this.w.clock.currentTime = this.C.JulianDate.fromDate(date);
     const b = BASEMAPS.find((x) => x.id === this.basemapId);
@@ -525,6 +539,7 @@ export class Globe {
     L._dirty = false;
     L._sig = sig;
     L._t = now;
+    this.requestRender();
     this._alpha(L, L.bbs, u.cur.value);
     if (L.bbsB) this._alpha(L, L.bbsB, L.curB);
   }
@@ -630,6 +645,7 @@ export class Globe {
     L._dirty = false;
     L._sig = sig;
     L._t = now;
+    this.requestRender();
     const SG = this.C.ShowGeometryInstanceAttribute;
     for (let i = 0; i < L.items.length; i++) {
       const s = L.vis[i] > 0 && (!ta || cur >= L.t0[i]) ? 1 : 0;
@@ -645,6 +661,7 @@ export class Globe {
   pulse(lat, lon, color) {
     const C = this.C;
     if (this.rings.length > 24) return;
+    this.requestRender();
     const b = this.fxBillboards.add({
       position: C.Cartesian3.fromDegrees(lon, lat, 0),
       image: this._ringImg,
@@ -656,6 +673,7 @@ export class Globe {
   }
   clearArcs() {
     this.arcs.removeAll();
+    this.requestRender();
   }
   addArc(a, b, color = 0xffe066, opacity = 0.9) {
     const C = this.C;
@@ -671,6 +689,7 @@ export class Globe {
       const h = Math.sin(Math.PI * t) * Math.min(0.25, 0.05 + ang * 0.35) * R_EARTH * 0.6;
       pts.push(C.Cartesian3.fromDegrees(ll.lon, ll.lat, h));
     }
+    this.requestRender();
     this.arcs.add({
       positions: pts,
       width: 2,
@@ -711,6 +730,7 @@ export class Globe {
             URL.revokeObjectURL(old._gmUrl);
           }
           this._ovBusy = false;
+          this.requestRender(1500);
           if (this._ovPending) run();
         }, 250);
       }, 'image/png');
@@ -951,6 +971,11 @@ export class Globe {
     for (const L of Object.values(this.pointLayers)) if (L.collB) L.curB = L.u.cur.value;
     sideHook('A');
   }
+  /** Ask for frames for the next `ms` milliseconds (state changed outside Cesium's view: uniforms, show flags). */
+  requestRender(ms = 400) {
+    const t = performance.now() + ms;
+    if (t > this._hotUntil) this._hotUntil = t;
+  }
   render(sideHook) {
     const now = performance.now();
     this._syncCompare(sideHook);
@@ -959,6 +984,16 @@ export class Globe {
     for (const o of Object.values(this.lineLayers)) o._apply();
     this._applyEarthUniforms();
     this.w.resize();
+    const active =
+      this._flying ||
+      this.orbit ||
+      this.rings.length ||
+      (this.fx.on && !this.software) || // the lens grain animates; on software WebGL it may freeze between frames
+      this.fx.caPulse > 0.001 ||
+      this.compare.mode !== 'off' ||
+      now < this._hotUntil;
+    // a slow heartbeat catches anything that changed without a request (async primitive readiness, imagery alpha)
+    if (active || now - this._lastFrameT > (this.software ? 2500 : 1000)) this.scene.requestRender();
     const t0 = performance.now();
     this.w.render();
     const dt = performance.now() - t0;
@@ -1025,6 +1060,7 @@ class LineObj {
   _apply() {
     if (!this._dirty || !this.prim || !this.prim.ready) return;
     this._dirty = false;
+    this.g.requestRender();
     const C = this.g.C;
     const a = this.prim.getGeometryInstanceAttributes(this.name);
     a.color = C.ColorGeometryInstanceAttribute.toValue(this.color.withAlpha(this._op), a.color);

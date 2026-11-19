@@ -86,6 +86,7 @@ export class Labels {
     if (clusters === this._clusters) return;
     this._clusters = clusters;
     const C = this.C;
+    if (this.g.requestRender) this.g.requestRender();
     this.badges.removeAll();
     for (const c of clusters) {
       if (c.lat == null) continue;
@@ -111,6 +112,7 @@ export class Labels {
     this._t = now;
     this._dirty = false;
     this._select();
+    if (this.g.requestRender) this.g.requestRender();
   }
   _select() {
     const g = this.g;
