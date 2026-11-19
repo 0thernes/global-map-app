@@ -414,6 +414,25 @@ details > summary.lg-h {
   border-top: 1px solid var(--line);
   list-style-position: inside;
 }
+details > summary.lg-h::-webkit-details-marker {
+  display: none;
+}
+details > summary.lg-h::after {
+  content: '';
+  width: 6px;
+  height: 6px;
+  margin-left: var(--s-1);
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(-45deg);
+  transition: transform var(--dur-1);
+}
+details[open] > summary.lg-h::after {
+  transform: rotate(45deg);
+}
+details > summary.lg-h span {
+  margin-left: auto;
+}
 .lg-body ul {
   margin: 0;
   padding: 0;
@@ -692,7 +711,7 @@ details > summary.lg-h {
   margin: var(--s-1) 0 var(--s-h);
 }
 .help-grid table.kv th {
-  width: 9em;
+  width: 7.5em;
   white-space: nowrap;
 }
 
@@ -831,4 +850,34 @@ body.theme-hc a {
     width: 380px;
     max-width: 380px;
   }
+}
+
+/* ---------------------------------------------------------------- timeline dock: grouped controls */
+.tl-controls {
+  gap: var(--s-1);
+}
+.tl-steps {
+  gap: 0;
+}
+.tl-steps .btn.sm {
+  min-width: var(--ctl);
+  border-radius: 0;
+  margin-left: -1px;
+}
+.tl-steps .btn.sm:first-child {
+  border-radius: var(--radius-1) 0 0 var(--radius-1);
+  margin-left: 0;
+}
+.tl-steps .btn.sm:last-child {
+  border-radius: 0 var(--radius-1) var(--radius-1) 0;
+}
+.tl-controls select,
+.tl-date input {
+  height: var(--ctl-sm);
+  font-size: var(--fs-1);
+}
+#tl-label,
+.tl-date input,
+#tl-hour-v {
+  font-variant-numeric: tabular-nums slashed-zero;
 }

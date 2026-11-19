@@ -90,10 +90,10 @@ export class Labels {
     for (const c of clusters) {
       if (c.lat == null) continue;
       const rad = 10 + Math.min(14, Math.sqrt(c.n) * 3);
-      const sz = Math.ceil(rad * 2 + 6);
+      const sz = Math.ceil(rad * 2 + 8);
       this.badges.add({
         position: C.Cartesian3.fromDegrees(c.lon, c.lat, 0),
-        image: clusterBadge(c.n, c.color),
+        image: clusterBadge(c.n, c.color, c.mix),
         width: sz,
         height: sz,
         id: { cluster: c },

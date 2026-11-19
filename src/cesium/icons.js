@@ -81,29 +81,48 @@ export function ringIcon() {
   });
 }
 const badgeCache = new Map();
-export function clusterBadge(n, color) {
-  const k = n + color;
+/**
+ * Cluster badge (v1.4): dark disc, count (1.2k style above 999), and a ring split by category share so the
+ * badge shows the mix it hides; `mix` = [[colour, count], ...] sorted by count (falls back to one `color` ring).
+ */
+export function clusterBadge(n, color, mix) {
+  const segs = mix && mix.length ? mix : [[color || '#5ff', n]];
+  const tot = segs.reduce((a, s) => a + s[1], 0) || 1;
+  // cache key: count + each colour with its share quantised to 1/24 of the ring
+  const k = n + '|' + segs.map(([c, m]) => c + Math.round((m / tot) * 24)).join(',');
   let c = badgeCache.get(k);
   if (c) return c;
   const rad = 10 + Math.min(14, Math.sqrt(n) * 3);
-  const sz = Math.ceil(rad * 2 + 6) * 2;
+  const sz = Math.ceil(rad * 2 + 8) * 2;
   c = document.createElement('canvas');
   c.width = c.height = sz;
   const g = c.getContext('2d');
   g.scale(2, 2);
   const h = sz / 4;
-  g.fillStyle = 'rgba(10,20,35,0.82)';
-  g.strokeStyle = color || '#5ff';
-  g.lineWidth = 2;
+  g.fillStyle = 'rgba(8,14,26,0.88)';
   g.beginPath();
   g.arc(h, h, rad, 0, Math.PI * 2);
   g.fill();
+  g.lineWidth = 3;
+  let a0 = -Math.PI / 2;
+  for (const [col, m] of segs) {
+    const a1 = a0 + (m / tot) * Math.PI * 2;
+    g.strokeStyle = col;
+    g.beginPath();
+    g.arc(h, h, rad - 1.5, a0, a1);
+    g.stroke();
+    a0 = a1;
+  }
+  g.lineWidth = 1;
+  g.strokeStyle = 'rgba(0,0,0,0.7)';
+  g.beginPath();
+  g.arc(h, h, rad + 0.5, 0, Math.PI * 2);
   g.stroke();
-  g.fillStyle = '#e8fbff';
-  g.font = '600 12px Inter, system-ui, sans-serif';
+  g.fillStyle = '#eef8ff';
+  g.font = `600 ${n >= 1000 ? 11 : 12}px Inter, system-ui, sans-serif`;
   g.textAlign = 'center';
   g.textBaseline = 'middle';
-  g.fillText(String(n), h, h + 0.5);
+  g.fillText(n >= 1000 ? (n / 1000).toFixed(n >= 10000 ? 0 : 1).replace(/\.0$/, '') + 'k' : String(n), h, h + 0.5);
   c = c.toDataURL('image/png');
   if (badgeCache.size > 400) badgeCache.clear();
   badgeCache.set(k, c);

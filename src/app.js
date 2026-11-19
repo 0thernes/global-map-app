@@ -236,13 +236,18 @@ function recluster(now) {
       if (b.m.length >= 3) {
         const cnt = {};
         b.m.forEach((c) => (cnt[c.category] = (cnt[c.category] || 0) + 1));
-        const top = Object.entries(cnt).sort((a, b2) => b2[1] - a[1])[0][0];
+        const ranked = Object.entries(cnt).sort((a, b2) => b2[1] - a[1]);
         const ll = v2ll(b.v);
         ctx.clusters.push({
           lat: ll.lat,
           lon: ll.lon,
           n: b.m.length,
-          color: catColor(top),
+          color: catColor(ranked[0][0]),
+          // category mix for the badge ring (v1.4): top 5 categories, the rest folded into one grey segment
+          mix: [
+            ...ranked.slice(0, 5).map(([k, m]) => [catColor(k), m]),
+            ...(ranked.length > 5 ? [['#7a90a3', ranked.slice(5).reduce((a, r) => a + r[1], 0)]] : []),
+          ],
           members: b.m,
         });
         b.m.forEach((c) => clusterHidden.add(c._i));

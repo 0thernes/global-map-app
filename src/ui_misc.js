@@ -40,7 +40,7 @@ const ex =
 const tWars = ex('#wars', () => toggleWars()),
   tAn = ex('#analysis', () => toggleAnalysis()),
   tGraph = ex('#graph', () => toggleGraph());
-const lazy = (mod, fn) => () => import(mod).then((m) => m[fn]());
+// (literal import() paths only: esbuild bundles those into the IIFE; a variable path would be fetched at runtime)
 // every bound key in src/ui/shortcuts.js maps to one of these (test/unit/shortcuts.test.mjs checks the ids)
 const ACTIONS = {
   palette: () => {
@@ -54,21 +54,21 @@ const ACTIONS = {
   filters: () => railTab('filters'),
   wars: () => tWars(),
   analyze: () => tAn(),
-  hotspots: lazy('./ui_hotspots.js', 'toggleHotspots'),
+  hotspots: () => import('./ui_hotspots.js').then((m) => m.toggleHotspots()),
   charts: () => toggleCharts(),
   graph: () => tGraph(),
   compare: () => toggleCompare(),
-  reports: lazy('./ui_reports.js', 'toggleReports'),
-  data: lazy('./ui_data.js', 'toggleData'),
-  index: lazy('./ui_reference.js', 'toggleReference'),
+  reports: () => import('./ui_reports.js').then((m) => m.toggleReports()),
+  data: () => import('./ui_data.js').then((m) => m.toggleData()),
+  index: () => import('./ui_reference.js').then((m) => m.toggleReference()),
   brief: () => toggleBrief(),
-  feed: lazy('./ui/feed.js', 'toggleFeed'),
+  feed: () => import('./ui/feed.js').then((m) => m.toggleFeed()),
   play: () => togglePlay(),
   home: () => homeView(),
   lasso: () => startLasso(),
   random: () => randomCase(),
   heat: () => setLayerOn('heat', !layerById('heat').on),
-  legend: lazy('./ui/console.js', 'toggleLegend'),
+  legend: () => import('./ui/console.js').then((m) => m.toggleLegend()),
   tour: () => $('#btn-tour').click(),
   reset: () => {
     resetLayout();
@@ -77,8 +77,8 @@ const ACTIONS = {
   settings: () => $('#btn-settings').click(),
   mute: () => $('#btn-mute').click(),
   fps: () => ($('#fps').hidden = !$('#fps').hidden),
-  density: lazy('./ui/console.js', 'toggleDensity'),
-  contrast: lazy('./ui/console.js', 'toggleContrast'),
+  density: () => import('./ui/console.js').then((m) => m.toggleDensity()),
+  contrast: () => import('./ui/console.js').then((m) => m.toggleContrast()),
 }; // ACTIONS
 /** Run a registry action by id (the omnibox commands and the activity bar use this). */
 export function runAction(id) {

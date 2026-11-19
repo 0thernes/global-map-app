@@ -1,8 +1,13 @@
-// UI audit capture (v1.3): opens every view at several viewports, screenshots it and measures the DOM:
-// floating boxes (clipping, overlaps, z-index), scroll containers (nested / double scroll bars), header
+// UI audit capture (v1.3, gate added in v1.4): opens every view at several viewports, screenshots it and measures
+// the DOM: floating boxes (clipping, overlaps, z-index), scroll containers (nested / double scroll bars), header
 // controls (minimize / maximize / close), tab markup and style, typography, spacing, target sizes, plus axe-core.
-// Usage: node test/ui_audit.mjs --phase before|after [--vp 1280x800,1920x1080,3840x2160] [--only name,name]
+// Usage: node test/ui_audit.mjs --phase before|after [--vp 1280x800,1920x1080,3840x2160] [--only name,name] [--check]
 // Writes <out>/<phase>/<vp>/<view>.png and <out>/<phase>/<vp>/metrics.json (out defaults to ../gma-ui-shots).
+// --check (v1.4) also fails the run (exit 1) on any of: overlapping chrome or docked boxes (intended overlays such as
+// modal dialogs, menus, the omnibox list, tooltips, the tour caption and maximized/floating windows are allowed),
+// a control clipped or off screen, a nested scroll region (double scroll bars), text under 12 px, a target under
+// 24 px, a chrome control (command bar, activity bar, map tools, timeline, window headers) under 32 px in the
+// comfortable density, or any axe-core violation.
 import { chromium } from 'playwright';
 import { mkdir, writeFile, readFile } from 'node:fs/promises';
 import { startServer } from './static_server.mjs';
@@ -15,6 +20,8 @@ const PHASE = arg('phase', 'before');
 const OUT = arg('out', '../gma-ui-shots');
 const VPS = arg('vp', '1280x800,1920x1080,3840x2160').split(',');
 const ONLY = arg('only', '') ? arg('only').split(',') : null;
+const CHECK = process.argv.includes('--check');
+const NOSHOT = process.argv.includes('--no-shots');
 const AXE = await readFile('node_modules/axe-core/axe.min.js', 'utf8');
 const { server, origin } = await startServer();
 const url = `${origin}/index.html?intro=0&private=0&basemap=local&terrain=off`;
@@ -94,6 +101,11 @@ function measure() {
       overflow: s.overflowY,
     };
   });
+  // intended overlays: they sit on top of the console by design (v1.4 --check allows overlaps with these)
+  const overlay = (e) =>
+    e.getAttribute('aria-modal') === 'true' ||
+    e.matches('.menu, #search-results, .tooltip, [role=tooltip], #lowerthird, .info-pop, .popover') ||
+    (e.classList.contains('win') && ['float', 'max', 'sheet'].includes(e.dataset.mode));
   // overlaps between floating boxes (only those that are not ancestors of each other)
   const overlaps = [];
   for (let i = 0; i < floats.length; i++)
@@ -106,7 +118,15 @@ function measure() {
       const w = Math.min(A.right, B.right) - Math.max(A.left, B.left);
       const h = Math.min(A.bottom, B.bottom) - Math.max(A.top, B.top);
       if (w > 4 && h > 4)
-        overlaps.push({ a: sel(a), b: sel(b), w: Math.round(w), h: Math.round(h), za: cs(a).zIndex, zb: cs(b).zIndex });
+        overlaps.push({
+          a: sel(a),
+          b: sel(b),
+          w: Math.round(w),
+          h: Math.round(h),
+          za: cs(a).zIndex,
+          zb: cs(b).zIndex,
+          ok: overlay(a) || overlay(b),
+        });
     }
   // scroll containers and nesting
   const scrolls = [];
@@ -208,6 +228,17 @@ function measure() {
     if ((r.width < 24 || r.height < 24) && !(b.tagName === 'A' && cs(b).display === 'inline'))
       small.push(path(b) + ' ' + Math.round(r.width) + 'x' + Math.round(r.height));
   }
+  // v1.4: chrome controls at the 32 px desktop target (comfortable density)
+  const chromeSmall = [];
+  if (!document.body.classList.contains('density-compact'))
+    for (const b of document.querySelectorAll(
+      '#topbar button, #topbar input, #actbar button, #maptools button, #timeline button, #timeline select, #timeline input:not([type=range]), .win-head button',
+    )) {
+      if (!shown(b)) continue;
+      const r = b.getBoundingClientRect();
+      if (r.width < 31.5 || r.height < 31.5)
+        chromeSmall.push(path(b) + ' ' + Math.round(r.width) + 'x' + Math.round(r.height));
+    }
   // controls pushed out of view or cut by an overflow:hidden ancestor, and truncated text
   const cut = [];
   for (const b of document.querySelectorAll('button, input, select, a[href], [role=tab]')) {
@@ -265,6 +296,7 @@ function measure() {
     lhs,
     tiny,
     tinyEx,
+    chromeSmall: chromeSmall.slice(0, 40),
     small: small.slice(0, 40),
     nSmall: small.length,
     cut: [...new Set(cut)].slice(0, 40),
@@ -322,7 +354,7 @@ for (const vp of VPS) {
             .map((n) => ({ t: n.target.join(' '), why: (n.any[0] || n.all[0] || n.none[0] || {}).message || '' })),
         }));
       });
-      await page.screenshot({ path: `${dir}/${name}.png`, timeout: 180000 });
+      if (!NOSHOT) await page.screenshot({ path: `${dir}/${name}.png`, timeout: 180000 });
       res[name] = m;
       console.log(vp, name, 'ok', Date.now() - t0, 'ms');
     } catch (e) {
@@ -338,3 +370,29 @@ for (const vp of VPS) {
 }
 await browser.close();
 server.close();
+
+// ---- v1.4 gate ----
+if (CHECK) {
+  const fails = [];
+  for (const vp of VPS) {
+    const M = JSON.parse(await readFile(`${OUT}/${PHASE}/${vp}/metrics.json`, 'utf8'));
+    for (const [view, m] of Object.entries(M)) {
+      if (ONLY && !ONLY.includes(view)) continue;
+      const f = (what) => fails.push(`${vp} ${view}: ${what}`);
+      if (m.failed) {
+        f('could not open: ' + m.failed);
+        continue;
+      }
+      for (const o of m.overlaps.filter((o) => !o.ok)) f(`overlap ${o.a} x ${o.b} (${o.w}x${o.h})`);
+      for (const c of m.cut) f('clipped ' + c);
+      for (const sc of m.scrolls.filter((x) => x.anc)) f(`nested scroll ${sc.sel} inside ${sc.anc}`);
+      if (m.tiny) f(`${m.tiny} text nodes under 12 px: ${m.tinyEx.join(', ')}`);
+      for (const t of m.small) f('target < 24 px ' + t);
+      for (const t of m.chromeSmall || []) f('chrome target < 32 px ' + t);
+      for (const a of m.axe || []) f(`axe ${a.id} (${a.impact}, ${a.n})`);
+    }
+  }
+  console.log(`\nui_audit --check: ${fails.length} failures`);
+  for (const x of fails.slice(0, 200)) console.log('  ✗ ' + x);
+  process.exit(fails.length ? 1 : 0);
+}

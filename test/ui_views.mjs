@@ -2,6 +2,7 @@
 // each entry opens one view on a page that has booted with ?intro=0&private=0.
 const key = (k) => async (p) => p.keyboard.press(k);
 export const closeAll = async (p) => {
+  await p.mouse.move(1, 1); // off the globe: no hover card left over
   for (let i = 0; i < 3; i++) await p.keyboard.press('Escape');
   // a click on empty page background, as a user would do to dismiss an open menu
   await p.evaluate(() => {
@@ -68,12 +69,13 @@ export const VIEWS = [
       const pt = await p.evaluate(async () => {
         const c = window.__case(0);
         window.__fly(c.lat, c.lon, 1.6);
-        await new Promise((r) => setTimeout(r, 2500));
+        await new Promise((r) => setTimeout(r, 4000));
         return window.__globe().project(c.lat, c.lon);
       });
-      await p.mouse.move(pt.x + 2, pt.y + 2);
-      await p.mouse.move(pt.x, pt.y);
-      await p.waitForSelector('#tooltip:not([hidden])', { timeout: 15000 });
+      await p.mouse.move(pt.x + 3, pt.y + 3, { steps: 3 });
+      await p.waitForTimeout(300);
+      await p.mouse.move(pt.x, pt.y, { steps: 3 });
+      await p.waitForSelector('#tooltip:not([hidden])', { timeout: 30000 });
     },
   ],
   ['legend_hidden', key('k')],

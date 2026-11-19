@@ -219,6 +219,7 @@ await step('windows: open / minimize / restore / maximize / drag / close', async
     ['analysis', k('a')],
     ['dossier', () => page.evaluate(() => window.__open(window.__case(0)))],
     ['hotspots', k('z')],
+    ['feed', k('n')],
   ])
     await cycle(id, open);
   // dock: drag a window onto the left edge of the safe area
@@ -240,6 +241,34 @@ await step('windows: open / minimize / restore / maximize / drag / close', async
   if ((await win('wars')).mode !== 'right') throw new Error('reset layout');
   await page.keyboard.press('Escape');
   if (!(await win('wars')).hidden) throw new Error('Esc closes the window');
+});
+// v1.4 console: omnibox commands, legend, activity bar state, density and contrast themes, clocks, status strip
+await step('console: omnibox, legend, activity bar, themes, clocks, status strip', async () => {
+  await page.keyboard.press('Control+k');
+  await page.waitForSelector('#search-results:not([hidden]) li[data-i]');
+  await page.keyboard.type('charts');
+  await page.waitForTimeout(300);
+  const first = await page.$eval('#search-results li[data-i]', (li) => li.textContent);
+  if (!/Charts/.test(first)) throw new Error('omnibox: first hit for "charts" is ' + first);
+  await page.keyboard.press('Enter');
+  await page.waitForSelector('#charts:not([hidden])');
+  if ((await page.getAttribute('#btn-charts', 'aria-pressed')) !== 'true') throw new Error('activity bar state');
+  await page.keyboard.press('Escape');
+  await page.keyboard.press('k');
+  if (!(await page.$eval('#legend', (e) => e.hidden))) throw new Error('K hides the legend');
+  await page.keyboard.press('k');
+  const lg = await page.$eval('#legend', (e) => !e.hidden && /exact site or within 1 km/.test(e.textContent));
+  if (!lg) throw new Error('legend shows the pin rule');
+  await page.keyboard.press('u');
+  if (!(await page.evaluate(() => document.body.classList.contains('density-compact')))) throw new Error('density');
+  await page.keyboard.press('u');
+  await page.keyboard.press('x');
+  if (!(await page.evaluate(() => document.body.classList.contains('theme-hc')))) throw new Error('contrast');
+  await page.keyboard.press('x');
+  const clk = await page.$eval('#clk-utc', (e) => e.textContent);
+  if (!/^\d\d:\d\d:\d\dZ$/.test(clk)) throw new Error('UTC clock ' + clk);
+  const grades = await page.$$eval('#statusbar .gchip', (a) => a.length);
+  if (grades < 5) throw new Error('status strip grade chips ' + grades);
 });
 await step('timeline play', async () => {
   await page.keyboard.press(' ');
