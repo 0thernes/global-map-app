@@ -338,6 +338,9 @@ def main():
         status = 'open' if ina else 'fixed'
         if ina and not inb:
             status = 'open (new in v1.4)'
+        if status == 'fixed' and check == 'small' and isinstance(item, str) and 'label' in item and '> input' in item:
+            # not a UI change: v1.4's audit measures a labelled checkbox by its (>= 24 px) label, as WCAG 2.5.8 does
+            status = 'fixed (re-measured: the label is the target)'
         views = sorted((FB.get(key, {}).get('views', set()) | FA.get(key, {}).get('views', set())))
         vps = sorted((FB.get(key, {}).get('vps', set()) | FA.get(key, {}).get('vps', set())), key=VPS.index)
         rows.append(dict(id='', source='measured', label=label, severity=sev, category=cat,
