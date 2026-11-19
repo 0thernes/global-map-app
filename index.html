@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="css/tokens.css" />
     <link rel="stylesheet" href="css/app.css" />
     <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/console.css" />
   </head>
   <body>
     <div id="globe" role="application" aria-label="3D globe"></div>
@@ -27,66 +28,36 @@
     <header id="topbar">
       <div class="brand">
         <span class="logo" aria-hidden="true">◉</span> <span class="display">GLOBAL MAP</span>
-        <small>HIGH STRANGENESS // SOURCED · v1.3.0</small>
+        <small>OSINT · v1.4.0</small>
       </div>
-      <div class="searchbox">
+      <div class="searchbox omnibox">
+        <span class="omni-ico" aria-hidden="true" data-icon="search"></span>
         <input
           id="search"
           type="search"
-          placeholder="Search cases, sites, countries…  ( / )"
-          aria-label="Search"
+          placeholder="Search or run a command…"
+          aria-label="Search cases, places, layers and commands"
+          aria-keyshortcuts="Control+K /"
           autocomplete="off"
           role="combobox"
           aria-autocomplete="list"
           aria-controls="search-results"
           aria-expanded="false"
         />
+        <kbd class="omni-kbd" aria-hidden="true">Ctrl K</kbd>
         <ul id="search-results" role="listbox" aria-label="Search results" tabindex="0" hidden></ul>
       </div>
-      <nav class="tools" aria-label="Views">
-        <button class="btn" id="btn-wars" data-icon="swords" title="Wars & conflicts ranked (W)">Wars</button>
-        <button class="btn" id="btn-analyze" data-icon="activity" title="UAP vs conflict / nuclear / military (A)">
-          Analyze
-        </button>
-        <button class="btn" id="btn-hotspots" data-icon="radar" title="Convergence hotspots (Z)">Hotspots</button>
-        <button class="btn" id="btn-charts" data-icon="chart-column" title="Charts & analytics (V)">Charts</button>
-        <button class="btn" id="btn-graph" data-icon="share-2" title="Link graph (G)">Graph</button>
-        <button class="btn" id="btn-compare" data-icon="columns-2" title="Compare two dates (C)">Compare</button>
-        <button class="btn" id="btn-reports" data-icon="file-text" title="Reports / briefs (E)">Reports</button>
-        <button
-          class="btn"
-          id="btn-data"
-          data-icon="table-2"
-          title="PDF 7 data: entries, tables, charts, stats, unplaced (D)"
-        >
-          Data
-        </button>
-        <button
-          class="btn"
-          id="btn-index"
-          data-icon="library"
-          title="Sources, glossary, indexes, coverage, credits (I)"
-        >
-          Index
-        </button>
-        <button class="btn" id="btn-brief" data-icon="scroll-text" title="Briefings & QWM data drops (B)">
-          Briefings
-        </button>
-        <span class="sep"></span>
-        <button
-          class="btn icon"
-          id="btn-lasso"
-          title="Lasso-select cases on the globe (S)"
-          aria-label="Lasso"
-          data-icon="lasso"
-        ></button>
-        <button
-          class="btn icon"
-          id="btn-random"
-          title="Fly to a random case (R)"
-          aria-label="Random case"
-          data-icon="dices"
-        ></button>
+      <div
+        id="statusbar"
+        class="statusbar"
+        role="group"
+        aria-label="Data status: filtered rows by evidence grade, data freshness, live feeds"
+      ></div>
+      <div id="clocks" class="clocks" role="group" aria-label="Clocks">
+        <span class="clk"><b>UTC</b> <time id="clk-utc" class="mono">--:--:--Z</time></span>
+        <span class="clk"><b id="clk-pt-z">PT</b> <time id="clk-pt" class="mono">--:--:--</time></span>
+      </div>
+      <nav class="tools" aria-label="Utilities">
         <button
           class="btn icon"
           id="btn-shot"
@@ -140,10 +111,101 @@
           id="btn-help"
           title="Keyboard shortcuts (?)"
           aria-label="Help"
-          data-icon="circle-help"
+          data-icon="keyboard"
         ></button>
       </nav>
     </header>
+
+    <nav id="actbar" aria-label="Views">
+      <div class="act-group" role="group" aria-label="Rail">
+        <button
+          class="act"
+          id="btn-layers"
+          data-icon="layers"
+          data-key="L"
+          aria-label="Layers"
+          aria-pressed="true"
+        ></button>
+        <button
+          class="act"
+          id="btn-filters"
+          data-icon="filter"
+          data-key="F"
+          aria-label="Filters"
+          aria-pressed="false"
+        ></button>
+      </div>
+      <div class="act-group" role="group" aria-label="Analysis">
+        <button class="act" id="btn-wars" data-icon="swords" data-key="W" aria-label="Wars & conflicts ranked"></button>
+        <button
+          class="act"
+          id="btn-analyze"
+          data-icon="activity"
+          data-key="A"
+          aria-label="Hypothesis analysis"
+        ></button>
+        <button class="act" id="btn-hotspots" data-icon="radar" data-key="Z" aria-label="Convergence hotspots"></button>
+        <button
+          class="act"
+          id="btn-charts"
+          data-icon="chart-column"
+          data-key="V"
+          aria-label="Charts & analytics"
+        ></button>
+        <button class="act" id="btn-graph" data-icon="share-2" data-key="G" aria-label="Link graph"></button>
+        <button class="act" id="btn-compare" data-icon="columns-2" data-key="C" aria-label="Compare two dates"></button>
+      </div>
+      <div class="act-group" role="group" aria-label="Intel">
+        <button class="act" id="btn-reports" data-icon="file-text" data-key="E" aria-label="Reports & briefs"></button>
+        <button class="act" id="btn-data" data-icon="table-2" data-key="D" aria-label="PDF 7 data"></button>
+        <button class="act" id="btn-index" data-icon="library" data-key="I" aria-label="Index & sources"></button>
+        <button class="act" id="btn-brief" data-icon="scroll-text" data-key="B" aria-label="Briefings"></button>
+        <button class="act" id="btn-feed" data-icon="rss" data-key="N" aria-label="Activity feed"></button>
+      </div>
+    </nav>
+
+    <div id="maptools" role="toolbar" aria-label="Map tools" aria-orientation="vertical">
+      <button class="btn icon" id="btn-home" data-icon="house" title="Home view (O)" aria-label="Home view"></button>
+      <button
+        class="btn icon"
+        id="btn-lasso"
+        data-icon="lasso"
+        title="Lasso-select cases on the globe (S)"
+        aria-label="Lasso"
+      ></button>
+      <button
+        class="btn icon"
+        id="btn-random"
+        data-icon="dices"
+        title="Fly to a random case (R)"
+        aria-label="Random case"
+      ></button>
+      <button
+        class="btn icon"
+        id="btn-legend"
+        data-icon="map"
+        title="Map legend (K)"
+        aria-label="Map legend"
+        aria-controls="legend"
+        aria-pressed="true"
+      ></button>
+    </div>
+
+    <aside id="legend" aria-labelledby="legend-title">
+      <header class="lg-head">
+        <h2 id="legend-title">Legend</h2>
+        <span id="legend-n" class="mono muted"></span>
+        <button
+          id="legend-close"
+          class="btn icon sm ghost"
+          aria-label="Hide legend (K)"
+          title="Hide legend (K)"
+          data-icon="x"
+        ></button>
+      </header>
+      <div id="legend-body" class="lg-body"></div>
+    </aside>
+    <div id="sel-reticle" aria-hidden="true" hidden><i></i><i></i><i></i><i></i></div>
 
     <aside id="rail" aria-label="Layers and filters">
       <div class="rail-head">
@@ -248,117 +310,24 @@
     </div>
     <div id="cmp-divider" hidden title="drag"></div>
 
+    <section id="feed" class="panel" hidden aria-label="Activity feed">
+      <header>
+        <h3>Activity feed <small>live USGS / NASA EONET · this session</small></h3>
+        <button id="feed-close" class="close" aria-label="Close">×</button>
+      </header>
+      <div class="feed-top">
+        <div id="feed-tabs"></div>
+        <button class="btn sm" id="feed-refresh" data-icon="rotate-ccw">Refresh</button>
+      </div>
+      <div id="feed-body"></div>
+    </section>
+
     <section id="help" class="panel modal" hidden aria-label="Keyboard shortcuts">
       <header>
-        <h3>Keyboard</h3>
+        <h3>Keyboard <small>? any time · Ctrl K for search and commands</small></h3>
         <button id="help-close" class="close" aria-label="Close">×</button>
       </header>
-      <table class="kv keys">
-        <tr>
-          <th><kbd>/</kbd></th>
-          <td>Search</td>
-        </tr>
-        <tr>
-          <th><kbd>Space</kbd></th>
-          <td>Play / pause</td>
-        </tr>
-        <tr>
-          <th><kbd>←</kbd> <kbd>→</kbd></th>
-          <td>±1 day (<kbd>Shift</kbd> month, <kbd>Alt</kbd> year)</td>
-        </tr>
-        <tr>
-          <th><kbd>L</kbd> / <kbd>F</kbd></th>
-          <td>Layers / Filters</td>
-        </tr>
-        <tr>
-          <th><kbd>G</kbd></th>
-          <td>Link graph</td>
-        </tr>
-        <tr>
-          <th><kbd>C</kbd></th>
-          <td>Compare dates</td>
-        </tr>
-        <tr>
-          <th><kbd>A</kbd></th>
-          <td>Hypothesis analysis</td>
-        </tr>
-        <tr>
-          <th><kbd>V</kbd></th>
-          <td>Charts</td>
-        </tr>
-        <tr>
-          <th><kbd>W</kbd></th>
-          <td>Wars ranked</td>
-        </tr>
-        <tr>
-          <th><kbd>B</kbd></th>
-          <td>Briefings</td>
-        </tr>
-        <tr>
-          <th><kbd>S</kbd></th>
-          <td>Lasso select</td>
-        </tr>
-        <tr>
-          <th><kbd>H</kbd></th>
-          <td>Heatmap</td>
-        </tr>
-        <tr>
-          <th><kbd>R</kbd></th>
-          <td>Random case</td>
-        </tr>
-        <tr>
-          <th><kbd>P</kbd></th>
-          <td>FPS meter</td>
-        </tr>
-        <tr>
-          <th><kbd>Z</kbd></th>
-          <td>Convergence hotspots</td>
-        </tr>
-        <tr>
-          <th><kbd>E</kbd></th>
-          <td>Reports</td>
-        </tr>
-        <tr>
-          <th><kbd>D</kbd></th>
-          <td>Data (PDF 7 entries, tables, charts, stats, unplaced items)</td>
-        </tr>
-        <tr>
-          <th><kbd>0</kbd></th>
-          <td>Reset window layout (positions, sizes and docks)</td>
-        </tr>
-        <tr>
-          <th>Windows</th>
-          <td>
-            Drag a title bar to move a window; drop it on the left, right or bottom edge to dock it. Drag the corner (or
-            the inner edge of a docked window) to resize. Double-click a title bar to maximize. Esc closes the window
-            that has focus.
-          </td>
-        </tr>
-        <tr>
-          <th><kbd>I</kbd></th>
-          <td>Index (sources, glossary, coverage…)</td>
-        </tr>
-        <tr>
-          <th><kbd>T</kbd></th>
-          <td>Guided tour (← → step, Space pause, Esc exit)</td>
-        </tr>
-        <tr>
-          <th><kbd>M</kbd></th>
-          <td>Sound on / off</td>
-        </tr>
-        <tr>
-          <th><kbd>,</kbd></th>
-          <td>Settings (audio, FX, performance, reduced motion)</td>
-        </tr>
-        <tr>
-          <th><kbd>Esc</kbd></th>
-          <td>Close the top panel</td>
-        </tr>
-        <tr>
-          <th><kbd>?</kbd></th>
-          <td>This help</td>
-        </tr>
-      </table>
+      <div id="help-body" class="help-grid"></div>
       <p class="muted small">
         Timeline: drag to scrub, <kbd>Shift</kbd>+drag to select a date range, double-click to clear. The bar is
         segmented: 8000 BCE–1 CE, 1–1500, 1500–1900 compressed; 1900–2026 at day resolution.

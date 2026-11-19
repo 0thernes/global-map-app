@@ -10,6 +10,11 @@ const NAMES = [
   ...['square-pen', 'sparkles', 'minus', 'maximize-2', 'minimize-2', 'chevron-left', 'chevron-right'],
   ...['chevron-down', 'info', 'panel-left-close', 'panel-left-open', 'layout-dashboard', 'rotate-ccw', 'star'],
   ...['grip-vertical', 'log-out', 'dices'],
+  // v1.4: category symbology (src/ui/symbology.js) and console chrome (src/ui/console.js, src/ui/feed.js)
+  ...['scan-eye', 'eye', 'database', 'radiation', 'users', 'user-x', 'paw-print', 'skull', 'footprints'],
+  ...['waves', 'satellite', 'book-marked', 'house', 'rss', 'command', 'keyboard', 'contrast', 'rows-3', 'clock'],
+  ...['map', 'circle-dashed', 'locate-fixed', 'history', 'zap', 'flame', 'mountain', 'triangle-alert', 'list'],
+  ...['target', 'cloud', 'snowflake', 'droplets'],
 ];
 const dir = 'node_modules/lucide-static/icons/';
 const ver = JSON.parse(readFileSync('node_modules/lucide-static/package.json', 'utf8')).version;

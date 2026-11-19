@@ -1,4 +1,4 @@
-// Shared list of UI views for the audit (test/ui_audit.mjs) and the accessibility check (test/a11y.mjs):
+// Shared list of UI views for the audit (test/ui_audit.mjs) and the accessibility check (test/a11y.mjs), v1.4:
 // each entry opens one view on a page that has booted with ?intro=0&private=0.
 const key = (k) => async (p) => p.keyboard.press(k);
 export const closeAll = async (p) => {
@@ -7,6 +7,13 @@ export const closeAll = async (p) => {
   await p.evaluate(() => {
     if (document.activeElement && document.activeElement.blur) document.activeElement.blur();
     document.body.click();
+    if (
+      window.__uiReset &&
+      (document.body.classList.contains('density-compact') || document.body.classList.contains('theme-hc'))
+    )
+      window.__uiReset();
+    const lg = document.querySelector('#legend');
+    if (lg && lg.hidden) document.querySelector('#btn-legend').click();
   });
 };
 export const VIEWS = [
@@ -38,6 +45,53 @@ export const VIEWS = [
     async (p) => {
       await p.fill('#search', 'ross');
       await p.waitForTimeout(800);
+    },
+  ],
+  [
+    'palette',
+    async (p) => {
+      await p.keyboard.press('Control+k');
+      await p.waitForSelector('#search-results:not([hidden])');
+    },
+  ],
+  [
+    'palette_query',
+    async (p) => {
+      await p.keyboard.press('Control+k');
+      await p.keyboard.type('nuc');
+      await p.waitForTimeout(600);
+    },
+  ],
+  [
+    'hover_card',
+    async (p) => {
+      const pt = await p.evaluate(async () => {
+        const c = window.__case(0);
+        window.__fly(c.lat, c.lon, 1.6);
+        await new Promise((r) => setTimeout(r, 2500));
+        return window.__globe().project(c.lat, c.lon);
+      });
+      await p.mouse.move(pt.x + 2, pt.y + 2);
+      await p.mouse.move(pt.x, pt.y);
+      await p.waitForSelector('#tooltip:not([hidden])', { timeout: 15000 });
+    },
+  ],
+  ['legend_hidden', key('k')],
+  [
+    'feed',
+    async (p) => {
+      await p.keyboard.press('n');
+      await p.waitForSelector('#feed:not([hidden])');
+      await p.waitForTimeout(2500);
+    },
+  ],
+  [
+    'feed_recent',
+    async (p) => {
+      await p.evaluate(() => window.__open(window.__case(0)));
+      await p.keyboard.press('n');
+      await p.waitForSelector('#feed:not([hidden])');
+      await p.click('[data-ft="recent"]');
     },
   ],
   ['export_menu', async (p) => p.evaluate(() => document.querySelector('#btn-export').click())],
@@ -109,12 +163,36 @@ export const VIEWS = [
     },
   ],
   [
+    'compact',
+    async (p) => {
+      await p.keyboard.press('u');
+      await p.evaluate(() => window.__open(window.__case(0)));
+    },
+  ],
+  [
+    'high_contrast',
+    async (p) => {
+      await p.keyboard.press('x');
+      await p.evaluate(() => window.__open(window.__case(0)));
+    },
+  ],
+  [
     'multi_open',
     async (p) => {
       // the ergonomic worst case: several panels at once
       await p.evaluate(() => window.__open(window.__case(0)));
       await p.keyboard.press('w');
       await p.keyboard.press('v');
+    },
+  ],
+  [
+    'console_full',
+    async (p) => {
+      // v1.4 worst case: dossier + feed on the right, charts docked at the bottom, legend and map tools
+      await p.evaluate(() => window.__open(window.__case(0)));
+      await p.keyboard.press('n');
+      await p.keyboard.press('v');
+      await p.waitForSelector('#charts:not([hidden])');
     },
   ],
 ];

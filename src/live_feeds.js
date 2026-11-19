@@ -1,5 +1,6 @@
 // Live, keyless, CORS-enabled public feeds (found via github.com/public-apis/public-apis; see docs/data-sources.md).
-// Fetched on demand when the layer is switched on; nothing is cached to disk or redistributed.
+// Fetched on demand when the layer is switched on or the activity feed opens (one fetch per session, shared by both);
+// nothing is cached to disk or redistributed. LIVE holds each feed's state for the command-bar status strip (v1.4).
 const get = async (url) => {
   const r = await fetch(url, { mode: 'cors', credentials: 'omit' });
   if (!r.ok) throw new Error(`HTTP ${r.status}`);
@@ -8,7 +9,7 @@ const get = async (url) => {
 const iso = (ms) => new Date(ms).toISOString().slice(0, 10);
 
 // USGS Earthquake Hazards Program: M4.5+ in the past 30 days (GeoJSON summary feed, public domain)
-export async function usgsQuakes() {
+async function fetchUsgs() {
   const j = await get('https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_month.geojson');
   return {
     source: 'USGS Earthquake Hazards Program, M4.5+ past 30 days (live GeoJSON feed, public domain)',
@@ -28,7 +29,7 @@ export async function usgsQuakes() {
   };
 }
 // NASA EONET v3: open natural events (wildfires, storms, volcanoes, ice, floods), latest geometry point
-export async function nasaEonet() {
+async function fetchEonet() {
   const j = await get('https://eonet.gsfc.nasa.gov/api/v3/events?status=open&days=60');
   const items = [];
   for (const e of j.events || []) {
@@ -45,4 +46,37 @@ export async function nasaEonet() {
     });
   }
   return { source: 'NASA Earth Observatory Natural Event Tracker (EONET v3), open events, last 60 days (live)', items };
+}
+
+// ---- shared state (v1.4): off -> loading -> ok | error; listeners re-render the status strip and the feed ----
+export const LIVE = {
+  usgs: { state: 'off', n: 0, t: 0, err: '' },
+  eonet: { state: 'off', n: 0, t: 0, err: '' },
+};
+const subs = new Set();
+export const onLive = (fn) => subs.add(fn);
+const memo = {};
+function set(id, patch) {
+  Object.assign(LIVE[id], patch);
+  for (const fn of subs) fn(id, LIVE[id]);
+}
+function tracked(id, fn) {
+  return () =>
+    (memo[id] ||= (set(id, { state: 'loading', err: '' }), fn()).then(
+      (r) => {
+        set(id, { state: 'ok', n: r.items.length, t: Date.now() });
+        return r;
+      },
+      (e) => {
+        delete memo[id];
+        set(id, { state: 'error', err: String((e && e.message) || e).slice(0, 80) });
+        throw e;
+      },
+    ));
+}
+export const usgsQuakes = tracked('usgs', fetchUsgs);
+export const nasaEonet = tracked('eonet', fetchEonet);
+/** Forget the cached response so the next call fetches again (the feed's Refresh button). */
+export function refreshLive(id) {
+  delete memo[id];
 }

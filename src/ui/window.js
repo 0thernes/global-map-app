@@ -15,11 +15,14 @@ export const NARROW = 900; // below this width every window becomes a full-width
 export const MODES = ['left', 'right', 'bottom', 'float', 'max'];
 export const KEY = (id) => 'gm.win.' + id;
 
-/** Safe area for windows: the viewport minus the top bar, the timeline (+ globe credit line) and the rail. */
-export function safeArea({ vw, vh, top = 56, bottom = 112, railRight = 0, credit = 16 }) {
+/**
+ * Safe area for windows: the viewport minus the top bar, the timeline (+ globe credit line), the activity bar
+ * (v1.4, `left`) and the rail (`railRight`, its right edge when open).
+ */
+export function safeArea({ vw, vh, top = 56, bottom = 112, railRight = 0, credit = 16, left = 0 }) {
   const t = top + GAP;
   const b = vh - bottom - credit - GAP;
-  const l = (railRight > 0 ? railRight : 0) + GAP;
+  const l = Math.max(railRight > 0 ? railRight : 0, left > 0 ? left : 0) + GAP;
   const r = vw - GAP;
   return { x: l, y: t, w: Math.max(0, r - l), h: Math.max(0, b - t), r, b };
 }
@@ -56,7 +59,7 @@ export function layoutWindows(wins, safe, { narrow = false } = {}) {
       const h = w.min ? HEAD_H : Math.round(safe.h * 0.62);
       rects[w.id] = { x: safe.x, y: safe.y + safe.h - h, w: safe.w, h };
     }
-    return { rects, occ: { left: safe.x, right: safe.x + safe.w } };
+    return { rects, occ: { left: safe.x, right: safe.x + safe.w, bottom: 0 } };
   }
   const by = (m) => wins.filter((w) => w.mode === m).sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
   const L = by('left'),
@@ -79,6 +82,7 @@ export function layoutWindows(wins, safe, { narrow = false } = {}) {
     rects[w.id] = { x: rx, y: safe.y, w: ww, h: H(w, safe.h) };
     rx -= GAP;
   }
+  let bottomTop = null;
   if (B.length) {
     const bx = lx,
       bw = Math.max(MIN_W, rx - lx);
@@ -86,6 +90,7 @@ export function layoutWindows(wins, safe, { narrow = false } = {}) {
     B.forEach((w, i) => {
       const hh = w.min ? HEAD_H : Math.round(Math.min(Math.max(w.h || 360, MIN_H), safe.h * 0.8));
       rects[w.id] = { x: bx + i * (each + GAP), y: safe.y + safe.h - hh, w: each, h: hh };
+      bottomTop = Math.min(bottomTop ?? Infinity, safe.y + safe.h - hh);
     });
   }
   for (const w of wins) {
@@ -100,7 +105,15 @@ export function layoutWindows(wins, safe, { narrow = false } = {}) {
       rects[w.id] = c;
     }
   }
-  return { rects, occ: { left: L.length ? lx - GAP : safe.x, right: R.length ? rx + GAP : safe.x + safe.w } };
+  return {
+    rects,
+    occ: {
+      left: L.length ? lx - GAP : safe.x,
+      right: R.length ? rx + GAP : safe.x + safe.w,
+      // height taken by bottom docks above the safe-area floor (the legend and map overlays sit above it)
+      bottom: bottomTop == null ? 0 : safe.y + safe.h - bottomTop + GAP,
+    },
+  };
 }
 
 /** Parse a stored window state, dropping anything malformed. */
@@ -161,6 +174,8 @@ export function currentSafe() {
       vh: innerHeight,
       top: cssPx('--topbar-h', 56),
       bottom: cssPx('--timeline-h', 112),
+      credit: cssPx('--credit-h', 16),
+      left: cssPx('--actbar-w', 0),
       // the rail is a fixed sidebar: windows dock beside it (on narrow screens they cover it as sheets)
       railRight: rr && !narrow && !document.body.classList.contains('rail-collapsed') ? rr.right : 0,
     }),
@@ -398,7 +413,7 @@ export function closeWin(id) {
   if (!w.el.hidden) w.el.hidden = true; // a module without its own close logic
 }
 
-let occ = { left: 0, right: 0 };
+let occ = { left: 0, right: 0, bottom: 0 };
 export const occupied = () => occ;
 export function onLayout(fn) {
   listeners.add(fn);
@@ -428,14 +443,18 @@ export function layout() {
     w.el.dataset.mode = narrow ? 'sheet' : w.st.mode;
   }
   document.body.classList.toggle('win-narrow', narrow);
+  // a maximized window hides the globe overlays (legend, map tools) instead of sitting on top of them
+  document.body.classList.toggle('win-max-open', !narrow && vis.some((w) => w.st.mode === 'max' && !w.st.min));
   applyZ();
   const railR = currentSafe().safe.x - GAP;
   const prev = occ;
-  occ = { left: Math.max(railR, res.occ.left), right: innerWidth - res.occ.right };
+  occ = { left: Math.max(railR, res.occ.left), right: innerWidth - res.occ.right, bottom: res.occ.bottom || 0 };
   const root = document.documentElement.style;
   root.setProperty('--occ-left', occ.left + 'px');
   root.setProperty('--occ-right', occ.right + 'px');
-  if (prev.left !== occ.left || prev.right !== occ.right) for (const fn of listeners) fn(occ);
+  root.setProperty('--occ-bottom', occ.bottom + 'px');
+  if (prev.left !== occ.left || prev.right !== occ.right || prev.bottom !== occ.bottom)
+    for (const fn of listeners) fn(occ);
 }
 
 function startDrag(e, w) {
@@ -555,21 +574,23 @@ export const windows = () => wins;
 /** Default window set for the app. Sizes follow the old fixed layout so nothing moves unexpectedly. */
 export function initWindows() {
   const vw = innerWidth;
-  const side = Math.round(Math.min(600, vw * 0.46));
+  const k = vw >= 2560 ? 1.25 : 1; // the 4K (DPR 1) ladder in css/console.css
+  const side = Math.round(Math.min(600 * k, vw * 0.46));
   const D = {
-    dossier: { mode: 'right', w: 420, order: -10, title: 'Dossier' },
+    dossier: { mode: 'right', w: Math.round(420 * k), order: -10, title: 'Dossier' },
     wars: { mode: 'right', w: side },
     analysis: { mode: 'right', w: side },
     graph: { mode: 'right', w: side },
-    hotspots: { mode: 'right', w: Math.round(Math.min(480, vw * 0.4)) },
-    settings: { mode: 'right', w: 360 },
-    'hs-dossier': { mode: 'left', w: Math.round(Math.min(440, vw * 0.36)), title: 'Cluster dossier' },
-    charts: { mode: 'bottom', h: Math.round(Math.min(innerHeight * 0.52, 560)) },
-    brief: { mode: 'float', w: 860, modal: true },
-    help: { mode: 'float', w: 860, modal: true },
-    reports: { mode: 'float', w: 1100, modal: true },
-    reference: { mode: 'float', w: 1100, modal: true },
-    datap: { mode: 'float', w: 1280, modal: true },
+    hotspots: { mode: 'right', w: Math.round(Math.min(480 * k, vw * 0.4)) },
+    settings: { mode: 'right', w: Math.round(360 * k) },
+    feed: { mode: 'right', w: Math.round(360 * k), order: -5, title: 'Activity feed' },
+    'hs-dossier': { mode: 'left', w: Math.round(Math.min(440 * k, vw * 0.36)), title: 'Cluster dossier' },
+    charts: { mode: 'bottom', h: Math.round(Math.min(innerHeight * 0.52, 560 * k)) },
+    brief: { mode: 'float', w: 860 * k, modal: true },
+    help: { mode: 'float', w: 860 * k, modal: true },
+    reports: { mode: 'float', w: 1100 * k, modal: true },
+    reference: { mode: 'float', w: 1100 * k, modal: true },
+    datap: { mode: 'float', w: 1280 * k, modal: true },
   };
   for (const [id, def] of Object.entries(D)) enhance(document.getElementById(id), def);
   addEventListener('resize', () => layout());

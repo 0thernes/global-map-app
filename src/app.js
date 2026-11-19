@@ -6,7 +6,6 @@ import {
   ctx,
   st,
   $,
-  esc,
   emit,
   on,
   prepCases,
@@ -16,7 +15,6 @@ import {
   setStatus,
   loadLayer,
   dayToDate,
-  dayLabel,
   NDAYS,
   ll2v,
   v2ll,
@@ -27,7 +25,7 @@ import { initImagery } from './basemap.js';
 import { loadTexURI, inject } from './loader.js';
 import { buildRegistry, ensureLayer, applyLayerVis, layerItemsOn, hydroTiles } from './layers.js';
 import { initTimeline, tickPlayback } from './ui_timeline.js';
-import { initPanels, openDossier } from './ui_panels.js';
+import { initPanels, openDossier, railTab } from './ui_panels.js';
 import { initConflicts, updateConflictGlow } from './ui_conflicts.js';
 import { initAnalysis } from './ui_analysis.js';
 import { initCharts } from './ui_charts.js';
@@ -39,6 +37,8 @@ import { initReports } from './ui_reports.js';
 import { initReference } from './ui_reference.js';
 import { initData, openData } from './ui_data.js';
 import { initWindows, occupied, onLayout } from './ui/window.js';
+import { initConsole, hoverCard } from './ui/console.js';
+import { initFeed } from './ui/feed.js';
 
 const fpsHist = [],
   cpuHist = [];
@@ -121,7 +121,9 @@ async function boot() {
   initReference();
   initData();
   initCinema();
+  initFeed();
   initWindows();
+  initConsole({ railTab });
   for (const l of ctx.layers) if (l.on && !l.loaded) ensureLayer(l);
   initLabels();
   bindPointer(canvas);
@@ -479,15 +481,19 @@ function bindPointer(canvas) {
     }
     canvas.style.cursor = 'pointer';
     tip.hidden = false;
-    tip.style.left = x + 14 + 'px';
-    tip.style.top = y + 12 + 'px';
     if (p.cluster) {
-      tip.innerHTML = `<b>${p.cluster.n} cases</b><br><span class=muted>click to zoom in</span>`;
-      return;
+      tip.className = 'tooltip hovercard';
+      tip.innerHTML = `<div class="hc-head" style="--c:${p.cluster.color}"><b>${p.cluster.n} cases</b></div><div class="hc-foot muted">click to zoom in</div>`;
+    } else {
+      tip.className = 'tooltip hovercard';
+      tip.innerHTML = hoverCard(p.item, p.kind);
     }
-    const it = p.item;
-    const why = it.why_weird ? `<div class=why>${esc(it.why_weird)}</div>` : '';
-    tip.innerHTML = `<b>${esc(it.name || it.conflict || '(unnamed)')}</b><br><span class=muted>${esc(it.date ? dayLabel(it._day) : it.kind || it.type || it.subtype || '')}${it.coord_precision ? ' · ' + esc(it.coord_precision) : ''}</span>${why}`;
+    // keep the card inside the free globe area: flip left / up near the edges
+    const tw = tip.offsetWidth,
+      th = tip.offsetHeight;
+    const o = occupied();
+    tip.style.left = (x + 16 + tw > innerWidth - o.right ? x - 16 - tw : x + 16) + 'px';
+    tip.style.top = Math.max(64, y + 14 + th > innerHeight - 140 ? y - 14 - th : y + 14) + 'px';
   });
   canvas.addEventListener('pointerleave', () => (tip.hidden = true));
 }
@@ -578,6 +584,7 @@ function loop(now) {
   ctx.labels.draw(ctx.clusters);
   if (ctx.hooks.frame) ctx.hooks.frame(now);
   if (ctx.hooks.frame2) ctx.hooks.frame2(now);
+  if (ctx.hooks.frame3) ctx.hooks.frame3(now);
   cpuHist.push(performance.now() - now);
   if (cpuHist.length > 120) cpuHist.shift();
 }

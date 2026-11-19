@@ -34,6 +34,8 @@ import { loadCaseDetails } from './loader.js';
 import { subKey, applySub } from './layers.js';
 import { makeTabs } from './ui/tabs.js';
 import { icon } from './icons.js';
+import { catIcon, markerOf } from './ui/symbology.js';
+import { SHORTCUTS } from './ui/shortcuts.js';
 
 let railTabs = null;
 
@@ -43,42 +45,84 @@ export function initPanels() {
     res = $('#search-results');
   let sel = -1,
     hits = [];
+  // omnibox (v1.4, ADR 0004): one grouped list over commands (src/ui/shortcuts.js), cases, places, layers and
+  // reference rows. Ctrl+K or / focuses it; empty input lists the commands.
+  const CMDS = SHORTCUTS.filter((x) => x.cmd);
   const run = () => {
     const q = inp.value.trim().toLowerCase();
     hits = [];
     sel = -1;
-    if (q.length < 2) {
+    if (q.length === 1 || (q.length === 0 && document.activeElement !== inp)) {
       res.hidden = true;
       inp.setAttribute('aria-expanded', 'false');
       return;
     }
-    for (const c of ctx.cases)
-      if (c._search.includes(q))
-        hits.push({ t: 'case', it: c, label: c.name, sub: `${c.category} · ${dayLabel(c._day)} · ${c._area}` });
-    for (const l of ctx.layers)
-      if (l.items && l.kind !== 'ged')
-        for (const it of l.items) {
-          if (hits.length > 60) break;
-          if (
-            String(it.name || '')
-              .toLowerCase()
-              .includes(q)
-          )
-            hits.push({ t: l.id, it, label: it.name, sub: l.name });
+    const groups = [];
+    const add = (name, arr) => arr.length && groups.push([name, arr]);
+    add(
+      'Commands',
+      CMDS.filter((c) => !q || c.label.toLowerCase().includes(q) || c.id.includes(q))
+        .slice(0, q ? 6 : 12)
+        .map((c) => ({ t: 'cmd', id: c.id, label: c.label, sub: 'command', kbd: c.kbd.join(' ') })),
+    );
+    if (q) {
+      const cs = [];
+      for (const c of ctx.cases)
+        if (c._search.includes(q)) {
+          cs.push({ t: 'case', it: c, label: c.name, sub: `${c.category} · ${dayLabel(c._day)} · ${c._area}` });
+          if (cs.length >= 24) break;
         }
-    if (ctx.countries)
-      for (const c of ctx.countries.countries)
-        if (c.name.toLowerCase().includes(q))
-          hits.push({ t: 'country', it: c, label: c.name, sub: 'country · ' + c.continent });
-    hits = hits.slice(0, 40);
+      add('Cases', cs);
+      if (ctx.countries)
+        add(
+          'Places',
+          ctx.countries.countries
+            .filter((c) => c.name.toLowerCase().includes(q))
+            .slice(0, 6)
+            .map((c) => ({ t: 'country', it: c, label: c.name, sub: 'country · ' + c.continent })),
+        );
+      add(
+        'Layers',
+        ctx.layers
+          .filter((l) => l.name.toLowerCase().includes(q) || l.id.includes(q))
+          .slice(0, 6)
+          .map((l) => ({ t: 'layer', it: l, label: l.name, sub: `layer · ${l.group || ''} · ${l.on ? 'on' : 'off'}` })),
+      );
+      const refs = [];
+      for (const l of ctx.layers)
+        if (l.items && l.kind !== 'ged')
+          for (const it of l.items) {
+            if (refs.length >= 12) break;
+            if (
+              String(it.name || '')
+                .toLowerCase()
+                .includes(q)
+            )
+              refs.push({ t: l.id, it, label: it.name, sub: l.name });
+          }
+      add('Reference', refs);
+    }
+    let html = '';
+    for (const [name, arr] of groups) {
+      html += `<li class="grp" role="option" aria-disabled="true" aria-selected="false">${esc(name)}</li>`;
+      for (const h of arr) {
+        const i = hits.push(h) - 1;
+        const lead =
+          h.t === 'cmd'
+            ? `<span class="ri">${icon('command', 14)}</span>`
+            : h.t === 'case'
+              ? `<span class="ri" style="color:${catColor(h.it.category)}">${icon(catIcon(h.it.category), 14)}</span>`
+              : h.t === 'layer'
+                ? `<span class="ri">${icon('layers', 14)}</span>`
+                : h.t === 'country'
+                  ? `<span class="ri">${icon('globe', 14)}</span>`
+                  : `<span class="ri">${icon('map-pin', 14)}</span>`;
+        html += `<li role="option" id="sr-${i}" aria-selected="false" data-i="${i}">${lead}<b>${hl(h.label, q)}</b><small>${esc(h.sub)}</small>${h.kbd ? `<kbd>${esc(h.kbd)}</kbd>` : ''}</li>`;
+      }
+    }
     res.innerHTML = hits.length
-      ? hits
-          .map(
-            (h, i) =>
-              `<li role="option" id="sr-${i}" aria-selected="false" data-i="${i}"><span class="dot" style="background:${h.t === 'case' ? catColor(h.it.category) : '#9db1c2'}"></span><b>${hl(h.label, q)}</b><small>${esc(h.sub)}</small></li>`,
-          )
-          .join('') +
-        `<li class="foot" role="option" aria-disabled="true" aria-selected="false">Enter: open · Shift+Enter: filter cases by “${esc(q)}”</li>`
+      ? html +
+        `<li class="foot" role="option" aria-disabled="true" aria-selected="false">↑↓ move · Enter run / open${q ? ` · Shift+Enter filter cases by “${esc(q)}”` : ''} · Esc close</li>`
       : '<li class="foot" role="option" aria-disabled="true" aria-selected="false">No matches in loaded data</li>';
     res.hidden = false;
     inp.setAttribute('aria-expanded', 'true');
@@ -92,6 +136,18 @@ export function initPanels() {
   };
   const go = (h) => {
     res.hidden = true;
+    inp.setAttribute('aria-expanded', 'false');
+    if (h.t === 'cmd') {
+      inp.value = '';
+      inp.blur();
+      import('./ui_misc.js').then((m) => m.runAction(h.id));
+      return;
+    }
+    if (h.t === 'layer') {
+      setLayerOn(h.it.id, !h.it.on);
+      setStatus(`${h.it.name}: ${h.it.on ? 'on' : 'off'}`);
+      return;
+    }
     if (h.t === 'country') {
       ctx.globe.flyTo(h.it.ly, h.it.lx, 1.9);
       return;
@@ -99,6 +155,7 @@ export function initPanels() {
     openDossier(h.it, h.t);
   };
   inp.addEventListener('input', run);
+  inp.addEventListener('focus', run);
   inp.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
       e.preventDefault();
@@ -659,16 +716,19 @@ function caseHTML(c) {
     (c._hi - c._lo > 1
       ? `<br><small>range ${esc(dayLabel(c._lo))} → ${esc(dayLabel(c._hi))}${c.date_disputed ? ' · disputed' : ''}</small>`
       : '');
-  return `<div class="kicker"><span class="dot" style="background:${catColor(c.category, c.subtype)}"></span>${esc(c.category)}${c.subtype ? ' · ' + esc(c.subtype) : ''} ${badge(c._gc, c.grade)} <span class="pbadge ${PRECISE(c) ? 'pin' : 'circ'}">${esc(PREC_TXT[c.coord_precision] || c.coord_precision)}</span></div>
-  ${c.conflicts && c.conflicts.length ? `<span class="cbadge" title="Another dataset disagrees on some fields; both values are shown below">conflict</span>` : ''}${c.verify ? `<span class="vbadge" title="${esc(c.verify)}">citation needs verification</span>` : ''}
-  <h2>${esc(c.name)}</h2>
-  <table class="kv">${row('Date', `<a href="#" data-date="${c._day}">${dateTxt}</a>`)}${row('Place', esc(c.place || [c.locality, c.admin1, c.country].filter(Boolean).join(', ')))}${row('Area', esc(c._area))}
-  ${row('Coordinates', `<span class="mono">${c.lat.toFixed(4)}, ${c.lon.toFixed(4)}</span>${PRECISE(c) ? '' : ` <small>± ${fmt(c._r)} km</small>`}`)}${row('Coord. source', esc(c.coord_source))}${row('Urban / rural', esc(c.urban_rural))}${c.shore_km != null ? row('Water', `${c.over_water ? `over ${esc(c.over_water)} · ` : ''}<span class="mono">${fmt(c.shore_km)} km</span> to the nearest shoreline <small>(NE 10m coast + lakes)</small>`) : ''}
-  ${row('Grade', esc(c.grade))}${row('Witnesses', esc(c.witnesses))}${row('Witness count', esc(c.witness_count))}${row('Count', esc(c.count))}</table>
+  const mk = markerOf(c);
+  const col = catColor(c.category, c.subtype);
+  // v1.4 dossier: identity header, then provenance (source, grade, coord_source, precision) before the narrative
+  return `<div class="dz-head" style="--c:${col}"><span class="dz-ico" aria-hidden="true">${icon(catIcon(c.category), 20)}</span><div class="dz-id"><div class="kicker">${esc(c.category)}${c.subtype ? ' · ' + esc(c.subtype) : ''}</div><h2>${esc(c.name)}</h2></div></div>
+  <div class="dz-chips">${badge(c._gc, c.grade)} <span class="pbadge ${mk.kind === 'pin' ? 'pin' : 'circ'}" title="${esc(mk.label)}">${esc(mk.text)}</span>${c.conflicts && c.conflicts.length ? ` <span class="cbadge" title="Another dataset disagrees on some fields; both values are shown below">conflict</span>` : ''}${c.verify ? ` <span class="vbadge" title="${esc(c.verify)}">citation needs verification</span>` : ''}</div>
+  <section class="dz-prov" aria-label="Provenance"><h4>Provenance</h4>
+  <table class="kv">${row('Source', `${link(c.source_url, c.source_title || c.source_url)}${c._dom ? ` <small class="muted">${esc(c._dom)}</small>` : ''}${c.source_type ? ` <small>(${esc(c.source_type)})</small>` : ''}`)}${row('Grade', `${esc(c.grade || 'ungraded')} <small class="muted">→ ${esc(c._gc)}</small>`)}${row('Coord. source', esc(c.coord_source || 'not stated'))}${row('Precision', `${esc(PREC_TXT[c.coord_precision] || c.coord_precision || 'unknown')} <small class="muted">${mk.kind === 'pin' ? 'shown as a pin' : 'shown as an uncertainty circle, never a pin'}</small>`)}${row('Coordinates', `<span class="mono">${c.lat.toFixed(4)}, ${c.lon.toFixed(4)}</span>${PRECISE(c) ? '' : ` <small>± ${fmt(c._r)} km</small>`}`)}${row('Date', `<a href="#" data-date="${c._day}">${dateTxt}</a>`)}</table></section>
+  <table class="kv">${row('Place', esc(c.place || [c.locality, c.admin1, c.country].filter(Boolean).join(', ')))}${row('Area', esc(c._area))}${row('Urban / rural', esc(c.urban_rural))}${c.shore_km != null ? row('Water', `${c.over_water ? `over ${esc(c.over_water)} · ` : ''}<span class="mono">${fmt(c.shore_km)} km</span> to the nearest shoreline <small>(NE 10m coast + lakes)</small>`) : ''}
+  ${row('Witnesses', esc(c.witnesses))}${row('Witness count', esc(c.witness_count))}${row('Count', esc(c.count))}</table>
   ${c.summary || c.description ? `<h4>What happened</h4><p class="typed">${esc(c.summary || c.description)}</p>` : ''}
   ${pdf7HTML(c)}${conflictsHTML(c)}
   ${c.official_position ? `<h4>Official position</h4><p>${esc(c.official_position)}</p>` : ''}
-  <h4>Sources</h4><p>${link(c.source_url, c.source_title || c.source_url)}${c.source_type ? ` <small>(${esc(c.source_type)})</small>` : ''}${
+  <h4>All sources</h4><p>${link(c.source_url, c.source_title || c.source_url)}${c.source_type ? ` <small>(${esc(c.source_type)})</small>` : ''}${
     c.extra_sources
       ? '<br>' +
         String(c.extra_sources)

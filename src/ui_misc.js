@@ -25,6 +25,7 @@ import { toggleAnalysis } from './ui_analysis.js';
 import { toggleCharts } from './ui_charts.js';
 import { toggleGraph } from './ui_graph.js';
 import { setLayerOn } from './layers.js';
+import { keyMap, match } from './ui/shortcuts.js';
 
 const RDOCKS = ['#wars', '#analysis', '#graph'];
 const ex =
@@ -39,6 +40,56 @@ const ex =
 const tWars = ex('#wars', () => toggleWars()),
   tAn = ex('#analysis', () => toggleAnalysis()),
   tGraph = ex('#graph', () => toggleGraph());
+const lazy = (mod, fn) => () => import(mod).then((m) => m[fn]());
+// every bound key in src/ui/shortcuts.js maps to one of these (test/unit/shortcuts.test.mjs checks the ids)
+const ACTIONS = {
+  palette: () => {
+    const i = $('#search');
+    i.focus();
+    i.select();
+    i.dispatchEvent(new Event('input'));
+  },
+  help: () => toggleHelp(),
+  layers: () => railTab('layers'),
+  filters: () => railTab('filters'),
+  wars: () => tWars(),
+  analyze: () => tAn(),
+  hotspots: lazy('./ui_hotspots.js', 'toggleHotspots'),
+  charts: () => toggleCharts(),
+  graph: () => tGraph(),
+  compare: () => toggleCompare(),
+  reports: lazy('./ui_reports.js', 'toggleReports'),
+  data: lazy('./ui_data.js', 'toggleData'),
+  index: lazy('./ui_reference.js', 'toggleReference'),
+  brief: () => toggleBrief(),
+  feed: lazy('./ui/feed.js', 'toggleFeed'),
+  play: () => togglePlay(),
+  home: () => homeView(),
+  lasso: () => startLasso(),
+  random: () => randomCase(),
+  heat: () => setLayerOn('heat', !layerById('heat').on),
+  legend: lazy('./ui/console.js', 'toggleLegend'),
+  tour: () => $('#btn-tour').click(),
+  reset: () => {
+    resetLayout();
+    setStatus('Window layout reset');
+  },
+  settings: () => $('#btn-settings').click(),
+  mute: () => $('#btn-mute').click(),
+  fps: () => ($('#fps').hidden = !$('#fps').hidden),
+  density: lazy('./ui/console.js', 'toggleDensity'),
+  contrast: lazy('./ui/console.js', 'toggleContrast'),
+}; // ACTIONS
+/** Run a registry action by id (the omnibox commands and the activity bar use this). */
+export function runAction(id) {
+  const f = ACTIONS[id];
+  if (f) f();
+  return !!f;
+}
+export function homeView() {
+  const g = ctx.globe;
+  g.flyTo(28, -35, 3.3, g.reducedMotion ? 0 : 1200);
+}
 export function initMisc() {
   // ---- top-bar buttons ----
   const B = {
@@ -56,6 +107,8 @@ export function initMisc() {
     '#btn-reports': () => import('./ui_reports.js').then((m) => m.toggleReports()),
     '#btn-index': () => import('./ui_reference.js').then((m) => m.toggleReference()),
     '#btn-data': () => import('./ui_data.js').then((m) => m.toggleData()),
+    '#btn-feed': () => import('./ui/feed.js').then((m) => m.toggleFeed()),
+    '#btn-home': () => homeView(),
   };
   for (const [s, f] of Object.entries(B)) $(s).onclick = f;
   $('#win-reset').onclick = () => {
@@ -64,7 +117,8 @@ export function initMisc() {
   };
   $('#help-close').onclick = () => toggleHelp(false);
   $('#brief-close').onclick = () => toggleBrief(false);
-  // ---- keyboard ----
+  // ---- keyboard: one registry (src/ui/shortcuts.js) drives this handler, the ? overlay and the omnibox ----
+  const keys = keyMap();
   document.addEventListener('keydown', (e) => {
     const t = e.target;
     const typing = t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.tagName === 'SELECT' || t.isContentEditable;
@@ -75,36 +129,22 @@ export function initMisc() {
       }
       return escape();
     }
+    // Ctrl/Cmd+K: the omnibox, from anywhere (also while typing elsewhere)
+    if ((e.ctrlKey || e.metaKey) && !e.altKey && (e.key === 'k' || e.key === 'K')) {
+      e.preventDefault();
+      return runAction('palette');
+    }
     if (typing || e.ctrlKey || e.metaKey) return;
     const k = e.key;
-    if (k === '/') {
-      e.preventDefault();
-      $('#search').focus();
-      $('#search').select();
-    } else if (k === ' ') {
-      e.preventDefault();
-      togglePlay();
-    } else if (k === 'ArrowLeft' || k === 'ArrowRight') {
+    if (k === 'ArrowLeft' || k === 'ArrowRight') {
       e.preventDefault();
       stepTime((k === 'ArrowLeft' ? '-' : '+') + (e.altKey ? 'Y' : e.shiftKey ? 'M' : 'D'));
-    } else if (k === 'l' || k === 'L') railTab('layers');
-    else if (k === 'f' || k === 'F') railTab('filters');
-    else if (k === 'g' || k === 'G') tGraph();
-    else if (k === 'c' || k === 'C') toggleCompare();
-    else if (k === 'a' || k === 'A') tAn();
-    else if (k === 'v' || k === 'V') toggleCharts();
-    else if (k === 'w' || k === 'W') tWars();
-    else if (k === 'b' || k === 'B') toggleBrief();
-    else if (k === 'r' || k === 'R') randomCase();
-    else if (k === 'h' || k === 'H') setLayerOn('heat', !layerById('heat').on);
-    else if (k === 'p' || k === 'P') $('#fps').hidden = !$('#fps').hidden;
-    else if (k === 's' || k === 'S') startLasso();
-    else if (k === '?') toggleHelp();
-    else if (k === 'z' || k === 'Z') import('./ui_hotspots.js').then((m) => m.toggleHotspots());
-    else if (k === 'e' || k === 'E') import('./ui_reports.js').then((m) => m.toggleReports());
-    else if (k === 'i' || k === 'I') import('./ui_reference.js').then((m) => m.toggleReference());
-    else if (k === 'd' || k === 'D') import('./ui_data.js').then((m) => m.toggleData());
-    else if (k === '0') resetLayout();
+      return;
+    }
+    const s = match(e, keys);
+    if (!s || !ACTIONS[s.id]) return;
+    if (s.key === ' ' || s.key === '/') e.preventDefault();
+    ACTIONS[s.id]();
   });
   // ---- compare ----
   $('#cmp-mode').onchange = (e) => setCompare(e.target.value);

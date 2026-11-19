@@ -21,25 +21,9 @@ export {
   hasLayer,
 };
 
-export const PALETTE = {
-  'UAP case': '#38e8ff',
-  'CIT UFO sighting': '#8af6ff',
-  'UAP report (public database)': '#4f9dff',
-  'Nuclear-site incident': '#ffd23f',
-  'Wartime sighting': '#ff8c4a',
-  'Mass sighting': '#b98cff',
-  Abduction: '#ff5fd2',
-  'Animal mutilation': '#ff3b5c',
-  'Animal mutilation: cattle': '#ff4d6a',
-  'Animal mutilation: horse': '#ff7088',
-  'Animal mutilation: dog': '#ff92a8',
-  'Animal mutilation: wildlife': '#ffb3c6',
-  'Human mutilation': '#ff1f1f',
-  'Missing person': '#6dff8e',
-  'USO (water)': '#3fd0ff',
-  'Satellite anomaly': '#c6ff4a',
-  'PDF 7 place': '#ffc6f2',
-};
+// category colours + icons live in src/ui/symbology.js (v1.4) so the map, legend, charts and dossier share them
+import { PALETTE, catColor } from './ui/symbology.js';
+export { PALETTE, catColor };
 export const CASE_CATS = Object.keys(PALETTE).filter((k) => !k.includes(':'));
 export const UAP_TYPES = [
   'UAP case',
@@ -51,17 +35,6 @@ export const UAP_TYPES = [
   'Abduction',
   'USO (water)',
 ];
-export function catColor(c, sub) {
-  if (c === 'Animal mutilation' && sub) {
-    const k =
-      'Animal mutilation: ' +
-      String(sub)
-        .toLowerCase()
-        .split(/[\s/;,]/)[0];
-    if (PALETTE[k]) return PALETTE[k];
-  }
-  return PALETTE[c] || (c && c.startsWith('Animal mutilation') ? PALETTE['Animal mutilation'] : '#d0d0d0');
-}
 export { GRADES, gradeClass, gradeColor } from './grades.js';
 import { gradeClass } from './grades.js';
 export const ERAS = [
