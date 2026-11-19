@@ -93,7 +93,7 @@ function liveDot(id, name) {
         : s.state === 'loading'
           ? `${name}: loading`
           : `${name}: not loaded (open the feed or switch the live layer on)`;
-  return `<span class="live live-${s.state}" title="${esc(txt)}"><i aria-hidden="true"></i>${esc(name)}<span class="sr-only"> ${esc(s.state)}</span></span>`;
+  return `<span class="live live-${s.state}" title="${esc(txt)}"><i aria-hidden="true"></i><span class="lv-n">${esc(name)}</span><span class="sr-only"> ${esc(s.state)}</span></span>`;
 }
 function renderStatus() {
   const el = $('#statusbar');

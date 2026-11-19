@@ -730,13 +730,6 @@ details > summary.lg-h span {
   #topbar {
     gap: var(--s-1);
   }
-  .st-total,
-  .live {
-    font-size: 0;
-  }
-  .live .sr-only {
-    font-size: var(--fs-1);
-  }
   .st-total {
     display: none !important;
   }
@@ -1315,5 +1308,64 @@ body.theme-hc .uitip {
 @media (min-width: 2560px) {
   body.density-compact {
     --timeline-h: 176px;
+  }
+}
+
+/* ---------------------------------------------------------------- polish pass: --check fixes (targets, clipping) */
+/* related-case links, the UTC hour slider and the credit expander meet the 24 px target / 12 px text floor */
+.rel a {
+  min-height: 24px;
+}
+.tl-hour input {
+  height: 24px;
+}
+#credits .cesium-credit-expand-link {
+  font-size: var(--fs-1);
+}
+.glyphs .gl {
+  font-size: max(12px, 1em);
+}
+/* the settings window never grows wider than its dock: long select options and notes wrap or shrink */
+#set-body {
+  grid-template-columns: minmax(0, 1fr);
+}
+#set-body label {
+  min-width: 0;
+  flex-wrap: wrap;
+}
+#set-body select {
+  min-width: 0;
+  max-width: 100%;
+  flex: 1 1 160px;
+}
+/* chart cards wrap below ~300 px instead of shrinking the bar rows under the 24 px target */
+.cgrid {
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+.cgrid svg.bars {
+  max-width: 420px;
+}
+/* short screens (1280x800): the activity bar keeps every button visible */
+@media (max-height: 900px) {
+  :root {
+    --act-btn: 34px;
+  }
+  #actbar {
+    gap: var(--s-h);
+  }
+  .act-group {
+    gap: 2px;
+    padding-bottom: var(--s-h);
+  }
+}
+/* narrow command bar: live-feed names collapse to their dots (name stays in the tooltip and for screen readers) */
+@media (max-width: 1439px) {
+  #topbar .live .lv-n {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
   }
 }
