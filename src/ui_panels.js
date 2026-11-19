@@ -84,7 +84,7 @@ export function initPanels() {
       add(
         'Layers',
         ctx.layers
-          .filter((l) => l.name.toLowerCase().includes(q) || l.id.includes(q))
+          .filter((l) => (l.full || l.name).toLowerCase().includes(q) || l.id.includes(q))
           .slice(0, 6)
           .map((l) => ({ t: 'layer', it: l, label: l.name, sub: `layer · ${l.group || ''} · ${l.on ? 'on' : 'off'}` })),
       );
@@ -279,7 +279,10 @@ export function renderLayers() {
     Object.entries(groups)
       .map(
         ([g, ls]) =>
-          `<section class="lg"><h4>${esc(g)}</h4>${ls.map((l) => layerRow(l) + subTree(l)).join('')}</section>`,
+          `<section class="lg"><h4>${esc(g)}</h4>${ls
+            .filter((l) => l.kind !== 'expected')
+            .map((l) => layerRow(l) + subTree(l))
+            .join('')}${expectedRows(ls)}</section>`,
       )
       .join('') +
     `<section class="lg"><h4>Display</h4>
@@ -294,6 +297,8 @@ export function renderLayers() {
       (r.oninput = () => {
         const l = layerById(r.dataset.op);
         l.opacity = +r.value;
+        const o = r.parentElement.querySelector('output');
+        if (o) o.textContent = Math.round(l.opacity * 100) + '%';
         applyLayerVis(l);
       }),
   );
@@ -367,6 +372,18 @@ export function renderLayers() {
     if (l.pts) l.pts.u.history.value = st.gedHistory ? 0.25 : 0;
   };
 }
+// the QWM case-type files are merged into All cases: listed once, collapsed, with their load status
+function expectedRows(ls) {
+  const ex = ls.filter((l) => l.kind === 'expected');
+  if (!ex.length) return '';
+  const got = ex.filter((l) => l.present !== false).length;
+  return `<details class="tree xfiles"><summary>Case source files <span class="n">${got}/${ex.length} merged</span></summary><ul class="xlist">${ex
+    .map(
+      (l) =>
+        `<li title="${esc(l.note + ' · ' + (l.status || ''))}"><i class="sw" style="--c:${swatchOf(l)}"></i><span>${esc(l.name)}</span><span class="mono muted">${esc(l.present === false ? 'waiting' : 'merged')}</span></li>`,
+    )
+    .join('')}</ul></details>`;
+}
 function subCounts(l) {
   const m = {};
   for (const it of l.items || []) {
@@ -425,20 +442,28 @@ function subTree(l) {
 function layerRow(l) {
   const waiting = l.present === false;
   const dis = waiting || l.kind === 'expected' || l.kind === 'merged';
-  const cnt = l.items
-    ? ` <span class="n">${fmt(l.items.length)}</span>`
-    : l.id === 'cases'
-      ? ` <span class="n">${ctx.cases.length}</span>`
-      : '';
+  const n = l.items ? l.items.length : l.id === 'cases' ? ctx.cases.length : null;
+  const cnt = n != null ? `<span class="n" title="${fmt(n)} rows">${fmtK(n)}</span>` : '<span class="n"></span>';
   const leg = (l.legend || [])
     .slice(0, 8)
     .map(([k, c]) => `<span class="lgd"><i style="background:${c}"></i>${esc(k)}</span>`)
     .join('');
-  return `<div class="lrow ${waiting ? 'waiting' : ''}">
-    <label><input type="checkbox" data-layer="${l.id}" ${l.on ? 'checked' : ''} ${dis ? 'disabled' : ''}> <span title="${esc(l.name)}">${esc(l.name)}</span>${cnt}${l.loading && !l.loaded ? ' <span class="spin" aria-label="loading"></span>' : ''}</label>
-    ${dis ? '' : `<input type="range" class="op" min="0" max="1" step="0.05" value="${l.opacity ?? 1}" data-op="${l.id}" title="opacity" aria-label="${esc(l.name)} opacity">`}
-    <button class="info" data-info="${l.id}" title="Source and legend" aria-label="${esc(l.name)}: source and legend" aria-expanded="false">${icon('info', 14)}</button>
-    <div class="lsrc">${leg}<div class="src">${esc(l.status || '')}${l.status ? '<br>' : ''}${esc(l.source || 'source shown once loaded; see CREDITS.md')}</div></div></div>`;
+  const sw = swatchOf(l);
+  const tip = l.note ? `${l.name}: ${l.note}` : l.name;
+  const op = dis
+    ? ''
+    : `<label class="lop">Opacity <input type="range" class="op" min="0" max="1" step="0.05" value="${l.opacity ?? 1}" data-op="${l.id}" aria-label="${esc(l.name)} opacity"><output class="mono">${Math.round((l.opacity ?? 1) * 100)}%</output></label>`;
+  return `<div class="lrow ${waiting ? 'waiting' : ''} ${dis ? 'dis' : ''}" data-row="${l.id}">
+    <label class="lname" title="${esc(tip)}"><input type="checkbox" data-layer="${l.id}" ${l.on ? 'checked' : ''} ${dis ? 'disabled' : ''}><i class="sw" style="--c:${sw}"></i><span class="lt">${esc(l.name)}</span>${l.loading && !l.loaded ? ' <span class="spin" aria-label="loading"></span>' : ''}</label>
+    ${cnt}
+    <button class="info" data-info="${l.id}" title="${dis ? 'Source and status' : 'Opacity, legend and source'}" aria-label="${esc(l.name)}: ${dis ? 'source and status' : 'opacity, legend and source'}" aria-expanded="false">${icon(dis ? 'info' : 'sliders-horizontal', 14)}</button>
+    <div class="lsrc">${l.note ? `<div class="lnote">${esc(l.note)}</div>` : ''}${op}${leg ? `<div class="lgds">${leg}</div>` : ''}<div class="src"><span class="mono muted">${esc(l.id)}</span> · ${esc(l.status || '')}${l.status ? ' · ' : ''}${esc(l.source || 'source shown once loaded; see CREDITS.md')}</div></div></div>`;
+}
+const fmtK = (n) => (n >= 10000 ? (n / 1000).toFixed(n >= 100000 ? 0 : 1) + 'k' : fmt(n));
+function swatchOf(l) {
+  const c = (l.legend && l.legend[0] && l.legend[0][1]) || l.color;
+  if (typeof c === 'number') return '#' + c.toString(16).padStart(6, '0');
+  return c || 'var(--fg-dim)';
 }
 
 // ---------- filters ----------

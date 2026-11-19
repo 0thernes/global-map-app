@@ -254,8 +254,42 @@ export function buildRegistry() {
         status: cat.expected[id] ? 'loaded into Cases' : 'waiting for QWM file ' + id + '.csv',
       }),
     );
+  for (const l of Ls) humanizeLayer(l);
   ctx.layers = Ls;
   return Ls;
+}
+// v1.4: short human names in the rail; the dataset, version and caveats move to l.note (tooltip and (i) panel).
+// l.full keeps the long form for search and the sources index.
+const NICE = {
+  cases: ['All cases', 'every sourced case row; the QWM case files below are merged into it'],
+  heat: ['Case density', 'heatmap (Gaussian KDE) computed in-app from the filtered cases'],
+  labels: ['Place labels', 'level of detail: continents, countries, states, cities, towns, postcodes'],
+  postal: ['Postal / ZIP codes', 'loaded lazily as you zoom in'],
+  live_quakes: ['Live earthquakes', 'USGS feed, M4.5+, last 30 days; online only'],
+  live_eonet: ['Live natural events', 'NASA EONET open events; online only'],
+  nuclear: ['Nuclear reactors', 'IAEA PRIS power reactors'],
+  conflicts: ['Wars & conflicts', 'country glow; intensity by sourced deaths'],
+  hydrolakes: ['Large lakes', 'HydroLAKES: >= 10 km2 lakes; 1-10 km2 lakes load by region when zoomed'],
+  trenches: ['Ocean trenches & deeps', 'Wikidata'],
+  gebco_unmapped: ['Unmeasured seafloor', 'GEBCO 2025 type identifier grid: never directly measured'],
+  ged: ['Conflict events', 'UCDP Georeferenced Event Dataset'],
+  map_offlimits_mountains: ['Off-limits mountains', "also nuclear-weapons storage and literal 'secret' place names"],
+};
+export function humanizeLayer(l) {
+  if (l._nice) return l;
+  l._nice = true;
+  l.full = l.name;
+  const n = NICE[l.id];
+  if (n) [l.name, l.note] = n;
+  else if (l.kind === 'expected') {
+    const id = l.id.replace(/^exp_/, '');
+    l.name = EXPECTED_CASE_FILES[id] || l.name;
+    l.note = `QWM case file ${id}.csv`;
+  } else {
+    const m = /^(.*?)\s*\((.+)\)$/.exec(l.name);
+    if (m) [l.name, l.note] = [m[1], m[2]];
+  }
+  return l;
 }
 
 // ---- builders ----

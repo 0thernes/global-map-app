@@ -104,7 +104,13 @@ const DATASETS = () => {
   }));
   const layers = ctx.layers
     .filter((l) => l.source || l.payload)
-    .map((l) => ({ id: l.id, name: l.name, source: l.source || '', count: l.items ? l.items.length : null }));
+    .map((l) => ({
+      id: l.id,
+      name: l.name,
+      note: l.note || '',
+      source: l.source || '',
+      count: l.items ? l.items.length : null,
+    }));
   return [...files, ...layers];
 };
 function render() {

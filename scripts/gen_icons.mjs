@@ -15,6 +15,8 @@ const NAMES = [
   ...['waves', 'satellite', 'book-marked', 'house', 'rss', 'command', 'keyboard', 'contrast', 'rows-3', 'clock'],
   ...['map', 'circle-dashed', 'locate-fixed', 'history', 'zap', 'flame', 'mountain', 'triangle-alert', 'list'],
   ...['target', 'cloud', 'snowflake', 'droplets'],
+  // v1.4 polish: layer row details, timeline step groups and era focus
+  ...['sliders-horizontal', 'chevrons-left', 'chevrons-right', 'calendar-range', 'zoom-out'],
 ];
 const dir = 'node_modules/lucide-static/icons/';
 const ver = JSON.parse(readFileSync('node_modules/lucide-static/package.json', 'utf8')).version;
