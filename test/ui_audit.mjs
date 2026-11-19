@@ -357,6 +357,18 @@ for (const vp of VPS) {
         new Promise((_, rej) => setTimeout(() => rej(new Error(`open over ${HARD_MS} ms`)), HARD_MS)),
       ]);
       await page.waitForTimeout(1200);
+      // measure the settled layout: window docks animate left/top/width/height, and on software WebGL a busy
+      // main thread can start those transitions late
+      await page
+        .waitForFunction(
+          () => document.getAnimations().every((a) => !(a instanceof CSSTransition) || a.playState !== 'running'),
+          null,
+          {
+            timeout: 15000,
+            polling: 250,
+          },
+        )
+        .catch(() => {});
       lap('open');
       const m = await page.evaluate(measure);
       lap('measure');
