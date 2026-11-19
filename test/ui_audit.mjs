@@ -332,10 +332,16 @@ for (const vp of VPS) {
   for (const [name, fn] of VIEWS) {
     if (ONLY && !ONLY.includes(name)) continue;
     const t0 = Date.now();
+    const ph = {};
+    const lap = (k) => {
+      ph[k] = Date.now() - t0 - Object.values(ph).reduce((a, b) => a + b, 0);
+    };
     try {
       await fn(page);
       await page.waitForTimeout(1200);
+      lap('open');
       const m = await page.evaluate(measure);
+      lap('measure');
       m.axe = await page.evaluate(async () => {
         const r = await window.axe.run(
           { exclude: [['#globe'], ['#boot']] },
@@ -354,9 +360,13 @@ for (const vp of VPS) {
             .map((n) => ({ t: n.target.join(' '), why: (n.any[0] || n.all[0] || n.none[0] || {}).message || '' })),
         }));
       });
+      lap('axe');
       if (!NOSHOT) await page.screenshot({ path: `${dir}/${name}.png`, timeout: 180000 });
+      lap('shot');
+      m.ms = Date.now() - t0;
+      m.phases = ph;
       res[name] = m;
-      console.log(vp, name, 'ok', Date.now() - t0, 'ms');
+      console.log(vp, name, 'ok', m.ms, 'ms', JSON.stringify(ph));
     } catch (e) {
       res[name] = { failed: String(e.message || e).slice(0, 300) };
       console.log(vp, name, 'FAILED', e.message);
