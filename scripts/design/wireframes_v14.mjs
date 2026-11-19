@@ -15,10 +15,10 @@ export function model(vw, vh) {
   const px = (n) => Math.round(n * k);
   const top = px(56),
     act = px(56),
-    tl = px(112),
+    tl = px(160), // polish pass: transport row, overview + detail track, focus + read-out row
     gap = px(8),
     credit = px(24);
-  const rail = vw < 1440 ? px(288) : px(320);
+  const rail = vw < 1440 ? 304 : big ? 420 : 336;
   const dossier = px(420);
   return { k, top, act, tl, gap, credit, rail, dossier, vw, vh, big };
 }
@@ -220,32 +220,17 @@ function frame(m, { rail = true, dossier = false, feed = false, bottom = false, 
       ]),
     );
   // legend + credit strip
-  const lw = Math.round(248 * k),
-    lh = Math.round(196 * k);
-  P.push(
-    box(gl + gap, gb - lh - gap, lw, lh, 'LEGEND (K, collapsible)', 'panel', [
-      'pin  exact site / within 1 km',
-      'circle  locality / region (±r)',
-      'badge  cluster, click to zoom',
-      'categories: colour + icon + count',
-      'grades: colour chips',
-    ]),
-  );
-  P.push(
-    box(
-      gl + gap,
-      vh - tl - credit + 2,
-      gr - gl - 2 * gap,
-      credit - 4,
-      'imagery credits · status · lat/lon/alt · date (mono)',
-      'chrome',
-    ),
-  );
+  // polish pass: the legend is a chip (pin / circle counts) that expands upward on K
+  const lw = Math.round(220 * k),
+    lh = Math.round(32 * k);
+  P.push(box(gl + gap, gb - lh - gap, lw, lh, 'LEGEND chip · pin n · circle n  ⌃ (K)', 'panel'));
+  P.push(box(gl + gap, vh - tl - credit + 2, gr - gl - 2 * gap, credit - 4, 'imagery credits · status', 'chrome'));
   // timeline dock
   P.push(
     box(0, vh - tl, vw, tl, 'TIMELINE DOCK', 'chrome', [
-      '▶ play · −Y −M −D +D +M +Y · speed · mode · date (mono) · UTC hour · Latest   |  brush chip',
-      'histogram scrubber: per-day case counts by category colour, 8000 BCE … 2026 (segmented), drag = scrub, Shift+drag = range',
+      '▶ Play · STEP −1y −1m −1d +1d +1m +1y · SPEED 1d 1w 1mo 1y 10y 100y Auto · SHOW Cumulative | Recent · DATE · UTC · Latest',
+      'overview strip (8000 BCE … today, focus window) / detail track (focus window, linear): drag = scrub, Shift+drag = range, wheel = zoom',
+      'FOCUS All time · Ancient · 1900–1945 · Cold War · 1990–now · Last 10 y   |  brush chip  |  lat lon · alt · T date (mono)',
     ]),
   );
   if (palette) {
