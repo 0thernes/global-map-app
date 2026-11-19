@@ -25,7 +25,7 @@ symbology shared by every view. No data changed; every plotted row is still a so
 - **Activity bar** on the left: the 13 views in three groups (Explore, Analyze, Reference), 40 px targets,
   `aria-pressed` and a key hint on each. Clicking the active Layers or Filters button collapses the rail.
 - **Legend** at the bottom left of the globe: pin versus uncertainty circle, the category colours and icons with
-  counts, and the grades. `K` shows or hides it.
+  counts, and the grades. `K` expands or collapses it.
 - **Map tools** at the top right of the globe: home view (`O`), lasso, random case and legend.
 - **Selection reticle**: amber corner brackets that follow the open case on the globe, sized to its uncertainty circle, so the selection is not lost after you pan.
 - **Hover card**: category icon, title, date, grade, marker type and coordinate source, before you click.
@@ -49,11 +49,44 @@ symbology shared by every view. No data changed; every plotted row is still a so
   three resolutions. Every finding has one label: bug, error, issue, problem, dilemma or conflict.
 - Before and after screenshots in [`docs/screenshots/v1.4/`](docs/screenshots/v1.4/README.md).
 
+### Polished (second front-end review before release)
+
+- **Layer rail**: short human names (All cases, Place labels, Large lakes, Live earthquakes …) that wrap to two
+  lines instead of truncating; dataset ids, versions and caveats moved to the tooltip and the details row. Opacity
+  moved off every row into the details row (sliders button) with a % read-out. The six QWM case files fold into one
+  "Case source files" list. Wider rail: 336 px (304 px below 1440 px, 420 px at 4K).
+- **Legend**: docked bottom-left above the timeline as a collapsed chip that still shows the pin and circle counts.
+  `K` or the chip expands it upward; the state is remembered; Settings › Console hides it completely.
+- **Timeline**: focus + context. An overview strip shows the whole 8000 BCE to today span with the focus window;
+  the detail track shows the window on a linear scale. Era presets (All time, Ancient, 1900–1945, Cold War,
+  1990–now, Last 10 y), wheel zoom on the track, click or drag the strip to pan. Histogram bins take the colour of
+  their dominant category. The transport row has labelled groups: a large Play / Pause, Step (−1y … +1y, with
+  spoken labels), Speed and Show as segmented controls with tooltips.
+- **Status row**: the camera position, altitude and timeline date moved from the globe (where they sat on the
+  timeline border) into the timeline's bottom row, with tabular numerals.
+- **Status strip**: one count and one noun ("2,624 cases", as in the rail); the grade chips are now toggle buttons
+  on the grade filter.
+- **Cluster badges**: a collision pass merges badges whose discs would touch, so dense regions read as one badge per
+  area; radius grows with log10(count); 1.25x at 4K.
+- **Tooltips**: icon-only controls (activity bar, map tools, command-bar utilities, window buttons) show a visible
+  tooltip with the shortcut as a key chip, on hover and on keyboard focus. The single letters under the activity
+  icons are gone (the key stays in `aria-keyshortcuts`).
+- **Visual hierarchy**: one strong window-header band, section rules in the rail, hover rows, fewer inner borders.
+
+### Performance
+
+- **Render on demand**: Cesium's `requestRenderMode` plus render requests from the app when state changes (time,
+  filters, layers, selection, overlays) and on input. An idle globe draws about 6 frames in 10 s on software WebGL
+  instead of one per animation frame. This was behind a 92 min dossier capture in `test/ui_audit.mjs` (a re-run of
+  the same sequence took 29 s; the continuous re-render starved the page under CPU load).
+- `npm run test:perf` (`test/perf.mjs`): idle frame budget and dossier open + capture under 60 s on SwiftShader.
+- `test/ui_audit.mjs --check` fails a view whose open phase takes over 60 s or whose capture takes over 180 s, stops
+  a view after 300 s, and logs per-phase timings (open, measure, axe, shot).
+
 ### Changed
 
 - The case dossier opens with a **Provenance** block: source and domain, grade and what it means, coordinate source,
   precision (pin or circle with its radius) and coordinates, then the place details. "Sources" is now "All sources".
-- The timeline buttons are grouped into segmented steps with 32 px targets.
 - The status message moved from the bottom of the screen to the top centre, clear of the legend and timeline.
 - At 2560 px and wider every token is scaled by 1.25, so 4K at 100 % zoom reads like 1080p at 125 %.
 - Window defaults and docking account for the activity bar and the credit strip; docked windows report the space
@@ -63,6 +96,9 @@ symbology shared by every view. No data changed; every plotted row is still a so
 
 ### Fixed
 
+- Cluster badges over Europe overlapped (91, 460, 66, 52, 598 … on top of each other at 1920x1080).
+- The coordinate read-out overlapped the top border of the timeline.
+- The status strip said "rows" and the rail said "cases" for the same number.
 - The README key list had drifted from the key handler: `P` (frame rate) and `0` (reset windows) were missing.
 - The status message sat just above the timeline, where it could cover a bottom-docked window.
 

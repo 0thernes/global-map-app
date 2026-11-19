@@ -49,11 +49,12 @@ sources shown rather than hidden.**
 | **PDF 7 as a source**        | Every place in PDF 7 (_What Is What of the What_) is cross-checked against the map: 31 Wikidata-geocoded rows added, 134 rows tagged **PDF 7 §x.y**, 32 unplaceable entries logged with reasons; a **PDF 7 index** maps sections to map entries.                                                                                                                                                                                      |
 | **Data (PDF 7 as data)**     | Everything that is not a place, kept off the globe: 660 PDF 7 entries with § and page, all 165 PDF 7 tables as sortable data tables, charts rebuilt from the PDF 7 CSVs, source-type breakdowns, a seven-test battery with permutation p-values, Holm adjustment and caveats, and 397 unplaced-but-sourced rows. CSV export for every table.                                                                                          |
 | **Reference**                | Sources, glossary, A–Z, sites, countries, coverage matrix (breadth × depth), off-world targets, PDF 7 index and credits.                                                                                                                                                                                                                                                                                                              |
-| **OSINT console (v1.4)**     | Command bar with omnibox (`Ctrl+K`: commands, cases, places, layers), status strip by grade with data age and live-feed state, UTC and Pacific clocks; activity bar; legend (pin vs circle, category icons); provenance-first dossier; selection reticle and hover card; activity feed; comfortable / compact density and a high-contrast theme.                                                                                      |
+| **OSINT console (v1.4)**     | Command bar with omnibox (`Ctrl+K`: commands, cases, places, layers), status strip by grade with data age and live-feed state, UTC and Pacific clocks; activity bar; legend chip (pin vs circle counts, expands to category icons); focus + context timeline with era presets; provenance-first dossier; selection reticle and hover card; activity feed; comfortable / compact density and a high-contrast theme.                    |
 | **OSINT tools**              | Search, filters (grade, precision, water distance, conflicts, `[verify]`), link graph, compare view, charts, lasso, exports (CSV, GeoJSON, Markdown), workspaces.                                                                                                                                                                                                                                                                     |
 
 The v1.4 OSINT console: command bar with omnibox (`Ctrl+K`), grade status strip and UTC / Pacific clocks; activity
-bar; legend; case dossier with provenance first; activity feed; timeline dock
+bar; layer rail with plain names; legend chip; case dossier with provenance first; activity feed; timeline dock
+with an overview strip, a zoomable focus window and era presets; render on demand
 ([ADR 0004](docs/adr/0004-osint-console-information-architecture.md), [wireframes](docs/design/wireframes/README.md),
 [before / after](docs/screenshots/v1.4/README.md)):
 
@@ -123,7 +124,7 @@ generated from it.
 
 `Ctrl+K` or `/` omnibox · `?` help · `Space` play · `←/→` day (Shift month, Alt year) · `L` layers · `F` filters ·
 `W` wars · `A` analyze · `Z` hotspots · `V` charts · `G` graph · `C` compare · `E` reports · `D` data · `I` index ·
-`B` briefings · `N` activity feed · `O` home view · `S` lasso · `R` random case · `H` heatmap · `K` legend ·
+`B` briefings · `N` activity feed · `O` home view · `S` lasso · `R` random case · `H` heatmap · `K` legend (expand) ·
 `U` density · `X` high contrast · `T` tour · `M` mute · `,` settings · `P` frame rate · `0` reset windows ·
 `Esc` close
 
@@ -193,6 +194,7 @@ figure, stated count and list and every QWM data file (356 items) and tracks eac
 npm ci
 npm run build        # esbuild -> js/app.js
 npm run check        # ESLint + Prettier + unit tests + data validation + build + headless smoke test (http)
+npm run test:perf    # render-on-demand and dossier-open budgets on software WebGL
 npm run serve        # http://localhost:8080 (3D terrain needs http)
 npm run package -- --zip   # reproducible release zip in dist/
 ```

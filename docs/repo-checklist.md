@@ -21,6 +21,8 @@ Copilot, and no `.github/dependabot.yml` or pull-request template. This list rep
       Cesium ion requests **(CI)**
 - [ ] `npm run test:a11y` passes: axe-core 4.11 (WCAG 2.0 / 2.1 / 2.2 A + AA, including colour contrast) on every UI
       view at 1920x1080 reports 0 violations
+- [ ] `npm run test:perf` passes: an idle globe renders at most 20 frames in 10 s (render on demand) and a dossier
+      opens and captures in under 60 s on SwiftShader; `ui_audit --check` also fails a view over its time budget
 - [ ] CodeQL reports no new alerts **(CI)**
 
 ## Design system (v1.3, [ADR 0003](adr/0003-design-system.md), [style guide](design/style-guide.md))
@@ -50,6 +52,11 @@ Copilot, and no `.github/dependabot.yml` or pull-request template. This list rep
 - [ ] Times are shown in UTC and US Pacific; numbers, coordinates and dates use tabular numerals
 - [ ] Dynamic `import()` uses literal paths only, so esbuild bundles the module (a variable path 404s at run time)
 - [ ] Wireframes are regenerated when the layout tokens change (`node scripts/design/wireframes_v14.mjs`)
+- [ ] Rail layer names are short and human; dataset ids, versions and caveats go into `NICE` / `l.note`
+      (`src/layers.js`), shown in the tooltip and the row details, never in the label
+- [ ] Icon-only controls have an `aria-label` and are matched by the tooltip selector in `src/ui/tips.js`
+- [ ] State changes that the globe must show outside a camera move call `globe.requestRender()` (or go through
+      `emit()`), so render on demand never shows a stale frame
 
 ## Security and privacy
 

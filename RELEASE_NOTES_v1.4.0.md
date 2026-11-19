@@ -14,13 +14,19 @@ case.
   - **UTC and US Pacific clocks**.
 - **Activity bar**: the 13 views down the left edge in three groups, with key hints. Click Layers or Filters again to
   collapse the rail.
-- **Legend**: pin versus circle, category colours and icons with counts, and grades. `K` toggles it.
+- **Legend**: a chip at the bottom left with the pin and circle counts; `K` expands it to the marker rule, category
+  colours and icons with counts, and grades.
+- **Layer rail**: plain layer names that wrap instead of truncating; dataset ids, caveats and opacity in each row's
+  details.
+- **Timeline**: an overview strip of the whole span plus a zoomable detail track, era presets (Ancient, 1900–1945,
+  Cold War, 1990–now, Last 10 y), labelled Step, Speed and Show controls, and a status row with the camera position
+  and date.
 - **Case dossier**: a Provenance block comes first, with the source, the grade and what it means, the coordinate
   source, the precision (pin or circle and radius) and the coordinates.
 - **On the globe**:
   - a selection reticle that stays on the open case
   - a hover card with grade, marker type and coordinate source
-  - cluster badges that show the category mix
+  - cluster badges that show the category mix, sized by log count and merged so they never overlap
 - **Activity feed** (`N`): live USGS earthquakes and NASA EONET events, plus the cases and filters you touched this
   session.
 - **Ergonomics**:
@@ -30,8 +36,10 @@ case.
   - reduced motion
   - tabular numerals for coordinates, dates and times
   - a 1.25x token ladder at 4K
+  - visible tooltips with the shortcut on every icon-only control
+- **Faster**: the globe renders on demand, so an idle globe barely uses the GPU; `npm run test:perf` guards it.
 - **Checks**: `npm run audit:ui -- --check` now fails the build on overlaps, clipped controls, nested scroll bars, tiny
-  text, small targets or axe violations at 1280x800, 1920x1080 and 3840x2160.
+  text, small targets, axe violations or a view over its time budget at 1280x800, 1920x1080 and 3840x2160.
 
 ## Keyboard
 
@@ -45,7 +53,7 @@ case.
 | `N`                 | activity feed                                             |
 | `Space`, `←` `→`    | play or pause; step a day (Shift: month, Alt: year)       |
 | `O` `S` `R` `H`     | home view, lasso, random case, heatmap                    |
-| `K` `U` `X`         | legend, density, high contrast                            |
+| `K` `U` `X`         | legend (expand), density, high contrast                   |
 | `T` `M` `,` `P` `0` | tour, mute, settings, frame rate, reset window layout     |
 | `Esc`               | close the menu, then the focused window, then the top one |
 
