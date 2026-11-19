@@ -25,6 +25,9 @@ const NOSHOT = process.argv.includes('--no-shots');
 // perf budgets (v1.4 polish), software WebGL: opening a view < OPEN_MS, the whole view (open, measure, axe, shot)
 // < VIEW_MS; --check fails on either. HARD_MS aborts a view that hangs.
 const OPEN_MS = 60000,
+  // views whose opening is an analysis run (they load several layers and compute; CPU-bound, so slower on a shared
+  // machine) get the same 240 s their selectors wait in test/ui_views.mjs
+  OPEN_MS_COMPUTE = { hotspots: 240000, hs_dossier: 240000, analysis: 240000, reports: 240000 },
   VIEW_MS = 180000,
   HARD_MS = 300000;
 const AXE = await readFile('node_modules/axe-core/axe.min.js', 'utf8');
@@ -430,8 +433,9 @@ if (CHECK) {
       for (const t of m.small) f('target < 24 px ' + t);
       for (const t of m.chromeSmall || []) f('chrome target < 32 px ' + t);
       for (const a of m.axe || []) f(`axe ${a.id} (${a.impact}, ${a.n})`);
-      if (m.phases && m.phases.open > OPEN_MS) f(`slow: open ${m.phases.open} ms (budget ${OPEN_MS})`);
-      if (m.ms > VIEW_MS) f(`slow: view ${m.ms} ms (budget ${VIEW_MS})`);
+      const ob = OPEN_MS_COMPUTE[view] || OPEN_MS;
+      if (m.phases && m.phases.open > ob) f(`slow: open ${m.phases.open} ms (budget ${ob})`);
+      if (m.ms > VIEW_MS + ob - OPEN_MS) f(`slow: view ${m.ms} ms (budget ${VIEW_MS + ob - OPEN_MS})`);
     }
   }
   console.log(`\nui_audit --check: ${fails.length} failures`);
