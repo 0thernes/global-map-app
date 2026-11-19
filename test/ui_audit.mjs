@@ -7,7 +7,7 @@
 // modal dialogs, menus, the omnibox list, tooltips, the tour caption and maximized/floating windows are allowed),
 // a control clipped or off screen, a nested scroll region (double scroll bars), text under 12 px, a target under
 // 24 px, a chrome control (command bar, activity bar, map tools, timeline, window headers) under 32 px in the
-// comfortable density, or any axe-core violation.
+// comfortable density, any axe-core violation, or a view over its time budget (OPEN_MS / VIEW_MS below).
 import { chromium } from 'playwright';
 import { mkdir, writeFile, readFile } from 'node:fs/promises';
 import { startServer } from './static_server.mjs';
@@ -22,6 +22,11 @@ const VPS = arg('vp', '1280x800,1920x1080,3840x2160').split(',');
 const ONLY = arg('only', '') ? arg('only').split(',') : null;
 const CHECK = process.argv.includes('--check');
 const NOSHOT = process.argv.includes('--no-shots');
+// perf budgets (v1.4 polish), software WebGL: opening a view < OPEN_MS, the whole view (open, measure, axe, shot)
+// < VIEW_MS; --check fails on either. HARD_MS aborts a view that hangs.
+const OPEN_MS = 60000,
+  VIEW_MS = 180000,
+  HARD_MS = 300000;
 const AXE = await readFile('node_modules/axe-core/axe.min.js', 'utf8');
 const { server, origin } = await startServer();
 const url = `${origin}/index.html?intro=0&private=0&basemap=local&terrain=off`;
@@ -337,7 +342,11 @@ for (const vp of VPS) {
       ph[k] = Date.now() - t0 - Object.values(ph).reduce((a, b) => a + b, 0);
     };
     try {
-      await fn(page);
+      // a view that cannot open within the hard limit fails instead of hanging the run (v1.4: one took 92 min)
+      await Promise.race([
+        fn(page),
+        new Promise((_, rej) => setTimeout(() => rej(new Error(`open over ${HARD_MS} ms`)), HARD_MS)),
+      ]);
       await page.waitForTimeout(1200);
       lap('open');
       const m = await page.evaluate(measure);
@@ -400,6 +409,8 @@ if (CHECK) {
       for (const t of m.small) f('target < 24 px ' + t);
       for (const t of m.chromeSmall || []) f('chrome target < 32 px ' + t);
       for (const a of m.axe || []) f(`axe ${a.id} (${a.impact}, ${a.n})`);
+      if (m.phases && m.phases.open > OPEN_MS) f(`slow: open ${m.phases.open} ms (budget ${OPEN_MS})`);
+      if (m.ms > VIEW_MS) f(`slow: view ${m.ms} ms (budget ${VIEW_MS})`);
     }
   }
   console.log(`\nui_audit --check: ${fails.length} failures`);
