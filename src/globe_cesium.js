@@ -6,7 +6,7 @@ import { ll2v, v2ll } from './geo.js';
 import { subsolar } from './sun.js';
 import { BASEMAPS, NIGHT, TERRAINS } from './cesium/sources.js';
 import { createTerrariumProvider } from './cesium/terrarium.js';
-import { shapeIcons, ringIcon } from './cesium/icons.js';
+import { shapeIcons, ringIcon, uiScale } from './cesium/icons.js';
 import { Cesium } from './cesium/C.js';
 import { graticuleStep, graticuleLines, graticuleLabel, terminatorRings, dashedRing } from './cesium/graticule.js';
 import { planFlight } from './cesium/flight.js';
@@ -1148,7 +1148,7 @@ export class Globe {
           cLon = cc.longitude * D;
         const labLat = Math.round(cLat / step) * step,
           labLon = Math.round(cLon / step) * step;
-        const font = `${Math.round(12 * (innerWidth >= 2560 ? 1.25 : 1))}px "JetBrains Mono", monospace`;
+        const font = `${Math.round(12 * uiScale())}px "JetBrains Mono", monospace`;
         let n = 0;
         for (const l of lines) {
           if (n++ > 72) break;

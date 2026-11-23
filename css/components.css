@@ -448,10 +448,6 @@ body.rail-collapsed #rail .rail-head {
   color: var(--accent);
   background: var(--accent-soft);
 }
-:focus-visible {
-  outline: none;
-  box-shadow: var(--focus);
-}
 .win:focus {
   outline: none;
 }
@@ -623,7 +619,7 @@ svg text.ax {
 }
 
 /* ---------- responsive ---------- */
-@media (max-width: 1759px) {
+@media (width < 1760px) {
   /* toolbar: icon-only views (names stay as accessible text and tooltips) */
   .tools .btn[data-icon]:not(.icon) {
     width: var(--ctl);
@@ -635,7 +631,7 @@ svg text.ax {
     display: none;
   }
 }
-@media (max-width: 1100px) {
+@media (width < 1100px) {
   :root {
     --rail-w: 280px;
   }
@@ -643,7 +639,7 @@ svg text.ax {
     display: none;
   }
 }
-@media (max-width: 900px) {
+@media (width < 900px) {
   /* sheets: windows span the width above the timeline (src/ui/window.js NARROW) */
   #topbar {
     gap: var(--s-1);

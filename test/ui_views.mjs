@@ -15,6 +15,7 @@ export const closeAll = async (p) => {
       window.__uiReset();
     const lg = document.querySelector('#legend');
     if (lg && lg.hidden) document.querySelector('#btn-legend').click();
+    if (window.__ref) window.__ref(false, false); // v1.5 globe reference overlays off between views
   });
 };
 export const VIEWS = [
@@ -113,6 +114,22 @@ export const VIEWS = [
   ['briefings', key('b')],
   ['compare', key('c')],
   ['help', key('?')],
+  // v1.5: globe reference overlays (grid J, terminator Y) and the marker grammar up close
+  [
+    'globe_reference',
+    async (p) => {
+      await p.keyboard.press('j');
+      await p.keyboard.press('y');
+      await p.waitForTimeout(2500);
+    },
+  ],
+  [
+    'markers_close',
+    async (p) => {
+      await p.evaluate(() => window.__fly(39.5, -98.5, 1.32));
+      await p.waitForTimeout(5000);
+    },
+  ],
   [
     'settings',
     async (p) => {

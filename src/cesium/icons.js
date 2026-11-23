@@ -1,4 +1,5 @@
 // Canvas-drawn marker icons for Cesium billboards, returned as data URLs. Drawn white so the per-billboard colour tints them.
+import { BREAKPOINTS } from '../ui/breakpoints.js';
 const S = 64;
 const mk = (draw) => {
   const c = document.createElement('canvas');
@@ -132,7 +133,7 @@ const badgeCache = new Map();
  * badge shows the mix it hides; `mix` = [[colour, count], ...] sorted by count (falls back to one `color` ring).
  */
 /** UI scale of the chrome: 1.25 at 4K (DPR 1), as the CSS token ladder (css/console.css, ADR 0004 §13). */
-export const uiScale = () => (typeof innerWidth !== 'undefined' && innerWidth >= 2560 ? 1.25 : 1);
+export const uiScale = () => (typeof innerWidth !== 'undefined' && innerWidth >= BREAKPOINTS.uhd ? 1.25 : 1);
 /** Cluster badge radius in CSS px: grows with log10(count) so a 2,000-case badge is not 4x a 20-case one (v1.4). */
 export const badgeRadius = (n, s = uiScale()) => Math.round((11 + 4.5 * Math.log10(Math.max(1, n))) * s * 10) / 10;
 export function clusterBadge(n, color, mix) {

@@ -107,6 +107,11 @@
   --sb-thumb: rgba(120, 190, 230, 0.32);
   --sb-thumb-hover: rgba(120, 190, 230, 0.55);
   --focus: 0 0 0 2px #03060c, 0 0 0 4px var(--accent);
+  /* globe reference overlays and marker grammar (v1.5, ADR 0005); src/globe_cesium.js draws the same colours */
+  --ref-grid: rgba(168, 214, 255, 0.26);
+  --ref-major: rgba(56, 232, 255, 0.55);
+  --ref-term: #ffc757;
+  --ref-twilight: rgba(158, 143, 255, 0.45);
   /* categorical chart palette (non-text >= 3:1 on --bg-2) */
   --chart-1: #38e8ff;
   --chart-2: #ffb547;
@@ -156,6 +161,29 @@
   --dur-4: 900ms;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-inout: cubic-bezier(0.65, 0, 0.35, 1);
+  /* breakpoints (v1.5): media queries cannot read custom properties, so these are documentation; the source of truth
+     is src/ui/breakpoints.js and test/unit/breakpoints.test.mjs checks every stylesheet against it.
+     phone < 820 · sheet < 900 · tablet < 1100 · laptop < 1440 · desktop < 1760 · uhd >= 2560 (1.25x ladder) */
+}
+/* one focus indicator for every control (v1.5: consolidated from app.css and components.css). The ring is a
+   box-shadow so it follows rounded corners; forced-colors mode drops box-shadows, so it gets a real outline. */
+:focus-visible {
+  outline: none;
+  box-shadow: var(--focus);
+  border-radius: var(--radius-1);
+}
+@media (forced-colors: active) {
+  :focus-visible {
+    outline: 2px solid CanvasText;
+    outline-offset: 2px;
+  }
+}
+/* the in-app Reduced motion setting (Settings, body.reduced-motion) zeroes the same tokens as the OS preference */
+body.reduced-motion {
+  --dur-1: 0ms;
+  --dur-2: 0ms;
+  --dur-3: 0ms;
+  --dur-4: 0ms;
 }
 @media (prefers-reduced-motion: reduce) {
   :root {

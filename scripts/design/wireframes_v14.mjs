@@ -6,7 +6,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
-const OUT = path.join(root, 'docs/design/wireframes');
+const OUT = path.join(root, 'docs/design/wireframes/v1.4'); // archived in v1.5
 
 // ---- layout model: mirrors css/tokens.css + css/console.css (keep in sync; the unit test reads both) ----
 export function model(vw, vh) {

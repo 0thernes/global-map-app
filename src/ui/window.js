@@ -5,6 +5,7 @@
 // for modal windows. The geometry below is pure and unit-tested (test/unit/window.test.mjs); the DOM part
 // only runs when initWindows() is called.
 import { icon } from '../icons.js';
+import { BREAKPOINTS } from './breakpoints.js';
 
 export const SNAP = 32; // px from a safe-area edge that triggers a dock preview
 export const MIN_W = 280;
@@ -12,7 +13,7 @@ export const MIN_H = 160;
 export const HEAD_H = 48; // header height: 8 + 32 + 8 on the 8 px grid (minimized windows keep only this)
 export const GAP = 8;
 export const BOTTOM_MIN_W = 400; // narrower than this between side docks, a bottom dock runs under the right docks
-export const NARROW = 900; // below this width every window becomes a full-width bottom sheet
+export const NARROW = BREAKPOINTS.sheet; // below this width every window becomes a full-width bottom sheet
 export const MODES = ['left', 'right', 'bottom', 'float', 'max'];
 export const KEY = (id) => 'gm.win.' + id;
 
@@ -584,7 +585,7 @@ export const windows = () => wins;
 /** Default window set for the app. Sizes follow the old fixed layout so nothing moves unexpectedly. */
 export function initWindows() {
   const vw = innerWidth;
-  const k = vw >= 2560 ? 1.25 : 1; // the 4K (DPR 1) ladder in css/console.css
+  const k = vw >= BREAKPOINTS.uhd ? 1.25 : 1; // the 4K (DPR 1) ladder in css/console.css
   const side = Math.round(Math.min(600 * k, vw * 0.46));
   const D = {
     dossier: { mode: 'right', w: Math.round(420 * k), order: -10, title: 'Dossier' },

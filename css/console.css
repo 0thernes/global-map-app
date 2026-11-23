@@ -298,7 +298,7 @@ kbd {
 #rail {
   left: calc(var(--actbar-w) + var(--s-1));
 }
-@media (max-width: 1439px) {
+@media (width < 1440px) {
   :root {
     --rail-w: 288px;
   }
@@ -725,7 +725,7 @@ details > summary.lg-h span {
 }
 
 /* ---------------------------------------------------------------- responsive command bar */
-@media (max-width: 1759px) {
+@media (width < 1760px) {
   #topbar .brand small,
   .st-total {
     display: none !important;
@@ -735,7 +735,7 @@ details > summary.lg-h span {
     display: none;
   }
 }
-@media (max-width: 1439px) {
+@media (width < 1440px) {
   #topbar {
     gap: var(--s-1);
   }
@@ -752,7 +752,7 @@ details > summary.lg-h span {
     display: none;
   }
 }
-@media (max-width: 1100px) {
+@media (width < 1100px) {
   #topbar .brand .display {
     display: none;
   }
@@ -802,7 +802,7 @@ body.theme-hc a {
 }
 
 /* ---------------------------------------------------------------- 4K at DPR 1: the 1.25x ladder (ADR 0004 §13) */
-@media (min-width: 2560px) {
+@media (width >= 2560px) {
   :root {
     --fs-1: 15px;
     --fs-2: 18px;
@@ -893,12 +893,12 @@ body.theme-hc a {
   --glass: rgba(8, 14, 25, 0.9);
   --glass-head: rgba(16, 27, 45, 0.97);
 }
-@media (max-width: 1439px) {
+@media (width < 1440px) {
   :root {
     --rail-w: 304px;
   }
 }
-@media (min-width: 2560px) {
+@media (width >= 2560px) {
   :root {
     --rail-w: 420px;
   }
@@ -1220,7 +1220,7 @@ body.density-compact {
 .tl-readout .hud-date {
   color: var(--accent);
 }
-@media (max-width: 1439px) {
+@media (width < 1440px) {
   .tl-controls .tl-cap,
   #tl-label,
   .tl-play-t {
@@ -1314,7 +1314,7 @@ body.theme-hc .uitip {
   background: #000;
   border-color: #fff;
 }
-@media (min-width: 2560px) {
+@media (width >= 2560px) {
   body.density-compact {
     --timeline-h: 176px;
   }
@@ -1356,7 +1356,7 @@ body.theme-hc .uitip {
   max-width: 420px;
 }
 /* short screens (1280x800): the activity bar keeps every button visible */
-@media (max-height: 900px) {
+@media (height < 900px) {
   :root {
     --act-btn: 34px;
   }
@@ -1369,7 +1369,7 @@ body.theme-hc .uitip {
   }
 }
 /* narrow command bar: live-feed names collapse to their dots (name stays in the tooltip and for screen readers) */
-@media (max-width: 1439px) {
+@media (width < 1440px) {
   #topbar .live .lv-n {
     position: absolute;
     width: 1px;
