@@ -223,8 +223,18 @@ async function cycle(id, open) {
     await cycleOnce(id, open);
   } finally {
     // a failed check must not leave the window open: later steps toggle the same windows and would close it instead
-    if (!(await win(id)).hidden) await page.click(`#${id} .win-close`).catch(() => null);
+    if (!(await win(id)).hidden) await page.click(`#${id} .win-close`, { force: true }).catch(() => null);
   }
+}
+// Window buttons are clicked with force after our own settle check. Playwright's actionability wait polls the
+// button rect on requestAnimationFrame; under software WebGL with Cesium frames of 0.5-1.3 s it intermittently
+// never reports "stable" (v1.4.0 smoke: #datap .win-max; v1.5: #settings .win-max, #reference .win-min) although
+// the rect was identical over 20 sampled frames and no animation was running. Every click below is followed by an
+// assertion on the window state, so forcing the click does not hide a dead button.
+async function wclick(id, btn) {
+  await settled(id);
+  await page.click(`#${id} ${btn}`, { force: true });
+  await settled(id);
 }
 async function cycleOnce(id, open) {
   await open();
@@ -232,14 +242,13 @@ async function cycleOnce(id, open) {
   await settled(id);
   let w = await win(id);
   if (!w.head || w.bodies !== 1) throw new Error(id + ': no standard header / single body');
-  await page.click(`#${id} .win-min`);
+  await wclick(id, '.win-min');
   if (!(await win(id)).min) throw new Error(id + ': minimize');
-  await page.click(`#${id} .win-min`);
+  await wclick(id, '.win-min');
   if ((await win(id)).min) throw new Error(id + ': restore');
-  await page.click(`#${id} .win-max`);
+  await wclick(id, '.win-max');
   if ((await win(id)).mode !== 'max') throw new Error(id + ': maximize');
-  await page.click(`#${id} .win-max`);
-  await settled(id);
+  await wclick(id, '.win-max');
   w = await win(id);
   // drag the title bar 120 px toward the centre and 40 px down: the window floats where it was dropped
   // (dragging toward an edge would snap it to that dock instead, which the dock step below checks)
@@ -258,7 +267,7 @@ async function cycleOnce(id, open) {
   // (a full-width window is clamped inside the safe area, so it may only move vertically)
   if (d.mode !== 'float' || (Math.abs(d.x - (w.x + dx)) > 24 && Math.abs(d.y - (w.y + 40)) > 24))
     throw new Error(`${id}: drag ${JSON.stringify([w, d])}`);
-  await page.click(`#${id} .win-close`);
+  await wclick(id, '.win-close');
   if (!(await win(id)).hidden) throw new Error(id + ': close');
 }
 await step('windows: open / minimize / restore / maximize / drag / close', async () => {
