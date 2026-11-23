@@ -6,9 +6,10 @@ import { ll2v, v2ll } from './geo.js';
 import { subsolar } from './sun.js';
 import { BASEMAPS, NIGHT, TERRAINS } from './cesium/sources.js';
 import { createTerrariumProvider } from './cesium/terrarium.js';
-import { shapeIcons, ringIcon, uiScale } from './cesium/icons.js';
+import { shapeIcons, ringIcon } from './cesium/icons.js';
 import { Cesium } from './cesium/C.js';
-import { graticuleStep, graticuleLines, graticuleLabel, terminatorRings, dashedRing } from './cesium/graticule.js';
+import { dashedRing } from './cesium/graticule.js';
+import { ReferenceOverlays, ecefH, sagH } from './cesium/reference.js';
 import { planFlight } from './cesium/flight.js';
 
 export const R_EARTH = 6371008.8; // metres per app unit (the UI measures altitude in Earth radii)
@@ -26,19 +27,6 @@ function ecef0(lat, lon, out, o) {
   out[o + 1] = N * c * Math.sin(lo);
   out[o + 2] = N * (1 - E2_WGS) * s;
 }
-// same, at height h metres (reference lines are lifted by their chord sag so the globe never hides a segment)
-function ecefH(lat, lon, h, out, o) {
-  const la = lat / D,
-    lo = lon / D;
-  const s = Math.sin(la),
-    c = Math.cos(la);
-  const N = A_WGS / Math.sqrt(1 - E2_WGS * s * s);
-  out[o] = (N + h) * c * Math.cos(lo);
-  out[o + 1] = (N + h) * c * Math.sin(lo);
-  out[o + 2] = (N * (1 - E2_WGS) + h) * s;
-}
-/** Height that keeps a straight chord of `deg` degrees of arc above the ellipsoid (sagitta x 1.4, at least 20 m). */
-const sagH = (deg) => Math.max(20, ((deg * 111195) ** 2 / (8 * 6371008.8)) * 1.4);
 const tc = new THREE.Color();
 const toCesiumColor = (C, c, a = 1) => {
   tc.set(c);
@@ -188,15 +176,7 @@ export class Globe {
         if (this.orbit) this.setOrbit(null);
       });
     this._initNight();
-    this.ref = {
-      grid: false,
-      term: false,
-      gridKey: '',
-      gridPrim: null,
-      gridLabels: null,
-      termPrim: null,
-      termSub: null,
-    };
+    this.ref = new ReferenceOverlays(this); // graticule + terminator (v1.5)
     this.resize();
   }
   // ---------- imagery ----------
@@ -1034,158 +1014,14 @@ export class Globe {
     for (const L of Object.values(this.pointLayers)) if (L.collB) L.curB = L.u.cur.value;
     sideHook('A');
   }
-  // ---------- reference lines (v1.5, ADR 0005 section 2): graticule and terminator, drawn from the camera and date ----------
+  // ---------- reference lines (v1.5, ADR 0005 section 2): graticule and terminator, src/cesium/reference.js ----------
   /** Latitude / longitude grid; spacing adapts to the camera height and only the visible part is built when close. */
   setGraticule(on) {
-    this.ref.grid = !!on;
-    this.ref.gridKey = '';
-    if (!on) this._dropGrid();
-    this.requestRender();
+    this.ref.setGrid(on);
   }
   /** Solar terminator plus civil / nautical / astronomical twilight rings for the timeline date. */
   setTerminator(on) {
-    this.ref.term = !!on;
-    this.ref.termSub = null;
-    if (!on && this.ref.termPrim) {
-      this.scene.primitives.remove(this.ref.termPrim);
-      this.ref.termPrim = null;
-    }
-    this.requestRender();
-  }
-  _dropGrid() {
-    const R = this.ref;
-    if (R.gridPrim) this.scene.primitives.remove(R.gridPrim);
-    if (R.gridLabels) this.scene.primitives.remove(R.gridLabels);
-    R.gridPrim = R.gridLabels = null;
-  }
-  _linesPrim(groups) {
-    // groups: [{ lines: [[ [lat, lon], ... ]], color: Cesium.Color, dashed?, sample }]; one batched GL_LINES primitive
-    const C = this.C;
-    const inst = [];
-    groups.forEach((gp, gi) => {
-      let n = 0;
-      for (const l of gp.lines) n += gp.dashed ? l.length >> 1 : Math.max(0, l.length - 1);
-      if (!n) return;
-      const v = new Float64Array(n * 6);
-      const h = sagH(gp.sample || 2);
-      let o = 0;
-      for (const l of gp.lines) {
-        const stepI = gp.dashed ? 2 : 1;
-        for (let i = 0; i + 1 < l.length; i += stepI) {
-          ecefH(l[i][0], l[i][1], h, v, o);
-          ecefH(l[i + 1][0], l[i + 1][1], h, v, o + 3);
-          o += 6;
-        }
-      }
-      const vals = o === v.length ? v : v.slice(0, o);
-      inst.push(
-        new C.GeometryInstance({
-          id: 'ref' + gi,
-          geometry: new C.Geometry({
-            attributes: {
-              position: new C.GeometryAttribute({
-                componentDatatype: C.ComponentDatatype.DOUBLE,
-                componentsPerAttribute: 3,
-                values: vals,
-              }),
-            },
-            primitiveType: C.PrimitiveType.LINES,
-            boundingSphere: C.BoundingSphere.fromVertices(vals),
-          }),
-          attributes: { color: C.ColorGeometryInstanceAttribute.fromColor(gp.color) },
-        }),
-      );
-    });
-    if (!inst.length) return null;
-    return this.scene.primitives.add(
-      new C.Primitive({
-        geometryInstances: inst,
-        appearance: new C.PerInstanceColorAppearance({ flat: true, translucent: true }),
-        asynchronous: false,
-        allowPicking: false,
-        compressVertices: false,
-      }),
-    );
-  }
-  _viewBox() {
-    const r = this.scene.camera.computeViewRectangle(this.scene.globe.ellipsoid);
-    if (!r) return null;
-    return { west: r.west * D, south: r.south * D, east: r.east * D, north: r.north * D };
-  }
-  _updateRef(now) {
-    const R = this.ref;
-    if (!R.grid && !R.term) return;
-    if (now - (R._t || 0) < 200) return;
-    R._t = now;
-    const C = this.C;
-    if (R.grid) {
-      const cc = this.scene.camera.positionCartographic;
-      const step = graticuleStep(cc.height);
-      const box = step <= 5 ? this._viewBox() : null;
-      const q = (v) => Math.round(v / (step * 4));
-      const key = box ? `${step}|${q(box.west)}|${q(box.south)}|${q(box.east)}|${q(box.north)}` : `${step}|all`;
-      if (key !== R.gridKey) {
-        R.gridKey = key;
-        this._dropGrid();
-        const pad = step * 2;
-        const bb = box && {
-          west: box.west - pad,
-          east: box.east + pad,
-          south: box.south - pad,
-          north: box.north + pad,
-        };
-        const sample = Math.min(2, step / 2);
-        const lines = graticuleLines(step, bb, { sample });
-        const minor = lines.filter((l) => !l.major).map((l) => l.pts);
-        const major = lines.filter((l) => l.major).map((l) => l.pts);
-        R.gridPrim = this._linesPrim([
-          { lines: minor, color: new C.Color(0.66, 0.84, 1, 0.26), sample },
-          { lines: major, color: new C.Color(0.22, 0.91, 1, 0.55), sample },
-        ]);
-        // labels along the parallel and meridian nearest the view centre
-        const lab = new C.LabelCollection();
-        const cLat = cc.latitude * D,
-          cLon = cc.longitude * D;
-        const labLat = Math.round(cLat / step) * step,
-          labLon = Math.round(cLon / step) * step;
-        const font = `${Math.round(12 * uiScale())}px "JetBrains Mono", monospace`;
-        let n = 0;
-        for (const l of lines) {
-          if (n++ > 72) break;
-          const [la, lo] = l.kind === 'meridian' ? [Math.max(-80, Math.min(80, labLat)), l.value] : [l.value, labLon];
-          lab.add({
-            position: C.Cartesian3.fromDegrees(lo, la, sagH(sample)),
-            text: graticuleLabel(l.kind, l.value),
-            font,
-            fillColor: l.major ? new C.Color(0.22, 0.91, 1, 0.95) : new C.Color(0.8, 0.9, 1, 0.8),
-            outlineColor: new C.Color(0.01, 0.02, 0.05, 0.9),
-            outlineWidth: 3,
-            style: C.LabelStyle.FILL_AND_OUTLINE,
-            pixelOffset: new C.Cartesian2(4, -4),
-            horizontalOrigin: C.HorizontalOrigin.LEFT,
-            verticalOrigin: C.VerticalOrigin.BOTTOM,
-          });
-        }
-        R.gridLabels = this.scene.primitives.add(lab);
-        this.requestRender(600);
-      }
-    }
-    if (R.term && this._date) {
-      const sub = subsolar(this._date);
-      const p = R.termSub;
-      if (!p || Math.abs(p.lat - sub.lat) > 0.1 || Math.abs(((p.lon - sub.lon + 540) % 360) - 180) > 0.1) {
-        R.termSub = sub;
-        if (R.termPrim) this.scene.primitives.remove(R.termPrim);
-        const rings = terminatorRings(sub, 180);
-        R.termPrim = this._linesPrim([
-          { lines: [rings[0].pts], color: new C.Color(1, 0.78, 0.34, 0.85), sample: 2 },
-          { lines: [rings[1].pts], color: new C.Color(1, 0.62, 0.3, 0.42), dashed: true, sample: 2 },
-          { lines: [rings[2].pts], color: new C.Color(0.62, 0.56, 1, 0.32), dashed: true, sample: 2 },
-          { lines: [rings[3].pts], color: new C.Color(0.45, 0.5, 1, 0.24), dashed: true, sample: 2 },
-        ]);
-        this.requestRender(600);
-      }
-    }
+    this.ref.setTerminator(on);
   }
   /** Ask for frames for the next `ms` milliseconds (state changed outside Cesium's view: uniforms, show flags). */
   requestRender(ms = 400) {
@@ -1198,7 +1034,7 @@ export class Globe {
     for (const L of Object.values(this.pointLayers)) this._updatePoints(L, now);
     for (const L of Object.values(this.circleLayers)) this._updateCircles(L, now);
     for (const o of Object.values(this.lineLayers)) o._apply();
-    this._updateRef(now);
+    this.ref.update(now, this._date);
     this._applyEarthUniforms();
     this.w.resize();
     const active =

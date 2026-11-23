@@ -94,3 +94,14 @@ test('dashed uncertainty ring: half the chords of an n-gon at the stated radius'
     assert.ok(Math.abs(angDeg([48.85, 2.35], b) - deg) < 1e-9);
   }
 });
+test('reference lines are lifted by their chord sag so the ellipsoid never hides a segment', async () => {
+  const { sagH, ecefH } = await import('../../src/cesium/reference.js');
+  assert.equal(sagH(0.01), 20, 'floor');
+  // a 2 deg chord sags ~0.97 km below the surface: lifted by 1.4x
+  assert.ok(Math.abs(sagH(2) - 0.9707e3 * 1.4) < 15);
+  const o = new Float64Array(3);
+  ecefH(0, 0, 100, o, 0);
+  assert.ok(Math.abs(o[0] - 6378237) < 1e-6 && Math.abs(o[1]) < 1e-6 && Math.abs(o[2]) < 1e-6);
+  ecefH(90, 0, 0, o, 0);
+  assert.ok(Math.abs(o[2] - 6356752.314) < 0.01, 'polar radius');
+});

@@ -1,5 +1,6 @@
 // Performance guard (v1.4 polish): headless Chromium on software WebGL (SwiftShader, as in CI).
 // 1. Render on demand: an idle globe must not re-render every animation frame (budget: IDLE_MAX frames in 10 s).
+// 1b. (v1.5) The same budget holds with the graticule and terminator overlays switched on.
 // 2. Opening a dossier (fly-to, related-case arcs, reticle) and capturing it must finish within OPEN_MAX ms.
 //    test/ui_audit.mjs once spent 92 min on this view; the budget makes a regression fail fast instead of hanging.
 // Usage: node test/perf.mjs [--vp 1920x1080]
@@ -38,6 +39,16 @@ try {
   const idle = b.frames - a.frames;
   console.log(`idle: ${idle} frames rendered in 10 s (budget ${IDLE_MAX}); loop CPU ${b.cpuMs} ms/frame`);
   if (idle > IDLE_MAX) fails.push(`idle globe rendered ${idle} frames in 10 s (render on demand broken?)`);
+  // v1.5: the graticule and terminator overlays rebuild only when the camera or date changes, so they keep idle quiet
+  await page.evaluate(() => window.__ref(true, true));
+  await page.waitForTimeout(3000);
+  const a2 = await page.evaluate(() => window.__perf());
+  await page.waitForTimeout(10000);
+  const b2 = await page.evaluate(() => window.__perf());
+  const idle2 = b2.frames - a2.frames;
+  console.log(`idle with grid + terminator: ${idle2} frames in 10 s (budget ${IDLE_MAX})`);
+  if (idle2 > IDLE_MAX) fails.push(`idle globe with reference overlays rendered ${idle2} frames in 10 s`);
+  await page.evaluate(() => window.__ref(false, false));
   const t0 = Date.now();
   await withBudget(
     (async () => {
