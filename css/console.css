@@ -351,6 +351,15 @@ body.rail-collapsed #rail {
   border-color: var(--line-strong);
   background: var(--accent-soft);
 }
+#maptools .btn[aria-pressed='true'] {
+  color: var(--accent);
+}
+/* v1.5: separator between navigation tools and the globe reference toggles (grid, terminator, heat) */
+#maptools .mt-sep {
+  height: 1px;
+  margin: var(--s-h) var(--s-h);
+  background: var(--line);
+}
 body.win-max-open #maptools,
 body.win-max-open #legend {
   visibility: hidden;

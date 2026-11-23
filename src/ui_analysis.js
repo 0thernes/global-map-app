@@ -20,6 +20,7 @@ import {
   layerById,
 } from './app_core.js';
 import { ensureLayer } from './layers.js';
+import { loadingState } from './ui/states.js';
 import { activeConflicts } from './ui_conflicts.js';
 
 const EDGES = [0, 10, 25, 50, 100, 250, 500, 1000, 2500, 5000, 20100];
@@ -120,7 +121,9 @@ export async function runAnalysis() {
 }
 async function run() {
   const out = $('#an-out');
-  out.innerHTML = '<p class="muted">Loading reference layers and computing…</p>';
+  out.innerHTML = loadingState('Loading reference layers and computing…', {
+    detail: 'Tests run on the filtered cases against the reference layers you picked.',
+  });
   await new Promise((r) => setTimeout(r, 30));
   const win = +$('#an-win').value || 365,
     iters = +$('#an-iters').value || 999,

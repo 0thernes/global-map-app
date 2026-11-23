@@ -17,6 +17,8 @@ const NAMES = [
   ...['target', 'cloud', 'snowflake', 'droplets'],
   // v1.4 polish: layer row details, timeline step groups and era focus
   ...['sliders-horizontal', 'chevrons-left', 'chevrons-right', 'calendar-range', 'zoom-out'],
+  // v1.5: globe reference tools and panel states (src/ui/globe_tools.js, src/ui/states.js)
+  ...['grid-3x3', 'sun-moon', 'loader-circle', 'inbox', 'circle-alert', 'refresh-cw'],
 ];
 const dir = 'node_modules/lucide-static/icons/';
 const ver = JSON.parse(readFileSync('node_modules/lucide-static/package.json', 'utf8')).version;

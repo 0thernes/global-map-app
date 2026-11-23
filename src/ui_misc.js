@@ -68,6 +68,8 @@ const ACTIONS = {
   lasso: () => startLasso(),
   random: () => randomCase(),
   heat: () => setLayerOn('heat', !layerById('heat').on),
+  grid: () => import('./ui/globe_tools.js').then((m) => m.toggleGrid()),
+  terminator: () => import('./ui/globe_tools.js').then((m) => m.toggleTerminator()),
   legend: () => import('./ui/console.js').then((m) => m.toggleLegend()),
   tour: () => $('#btn-tour').click(),
   reset: () => {

@@ -39,7 +39,9 @@ import { initData, openData } from './ui_data.js';
 import { initWindows, occupied, onLayout } from './ui/window.js';
 import { initConsole, hoverCard } from './ui/console.js';
 import { initFeed } from './ui/feed.js';
+import { initGlobeTools } from './ui/globe_tools.js';
 import { mergeColliding } from './ui/cluster.js';
+import { pinShape } from './ui/symbology.js';
 import { badgeRadius, uiScale } from './cesium/icons.js';
 
 const fpsHist = [],
@@ -126,6 +128,7 @@ async function boot() {
   initFeed();
   initWindows();
   initConsole({ railTab });
+  initGlobeTools();
   for (const l of ctx.layers) if (l.on && !l.loaded) ensureLayer(l);
   initLabels();
   bindPointer(canvas);
@@ -158,7 +161,7 @@ export function buildCases() {
   ctx.casePts = g.addPoints('cases', cs, {
     colorFn: (c) => catColor(c.category, c.subtype),
     sizeFn: (c) => (PRECISE(c) ? 11 : 6),
-    shapeFn: (c) => (PRECISE(c) ? 1 : 2),
+    shapeFn: (c) => (PRECISE(c) ? pinShape(c._gc) : 2), // v1.5: grade gauge ring on pins (ADR 0005)
     t0Fn: (c) => c._day,
     timeAware: true,
     mode: st.mode,

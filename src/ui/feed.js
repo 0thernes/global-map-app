@@ -6,6 +6,7 @@
 import { ctx, st, $, esc, on, filteredCases, dayLabel } from '../app_core.js';
 import { icon } from '../icons.js';
 import { makeTabs } from './tabs.js';
+import { loadingState, emptyState, errorState } from './states.js';
 import { catColor, catIcon } from './symbology.js';
 import { usgsQuakes, nasaEonet, refreshLive, LIVE, onLive } from '../live_feeds.js';
 
@@ -88,12 +89,27 @@ function liveHTML() {
               `<li><button class="feed-row" data-live="${i}" title="Fly to ${esc(r.name)}"><span class="fi">${icon(kindIcon(r.kind), 14)}</span><span class="ft mono">${esc(r.date)}</span><span class="fn">${esc(r.name)}</span><span class="fk muted">${esc(r.feed)} · ${esc(r.kind)}</span></button>${r.source_url ? `<a class="fsrc" href="${esc(r.source_url)}" target="_blank" rel="noopener noreferrer" aria-label="Source for ${esc(r.name)}">${icon('file-text', 14)}</a>` : ''}</li>`,
           )
           .join('')}</ol>`
-      : `<p class="muted">${LIVE.usgs.state === 'loading' || LIVE.eonet.state === 'loading' ? 'Loading live feeds…' : 'No live events loaded. The feeds need a network connection; the rest of the console works offline.'}</p>`
+      : liveEmpty()
   }<ul class="feed-src muted small">${src}</ul>`;
+}
+// v1.5: one state markup for loading, empty and error (src/ui/states.js)
+function liveEmpty() {
+  if (LIVE.usgs.state === 'loading' || LIVE.eonet.state === 'loading')
+    return loadingState('Loading live feeds…', { detail: 'USGS earthquakes and NASA EONET events, read live.' });
+  if (LIVE.usgs.state === 'error' && LIVE.eonet.state === 'error')
+    return errorState('The live feeds could not be reached', {
+      detail: `USGS: ${LIVE.usgs.err || 'network'} · EONET: ${LIVE.eonet.err || 'network'}. The rest of the console works offline.`,
+      action: { id: 'feed-retry', label: 'Try again' },
+    });
+  return emptyState('No live events loaded', {
+    detail: 'The feeds need a network connection; the rest of the console works offline.',
+  });
 }
 function recentHTML() {
   if (!recent.length)
-    return '<p class="muted">Nothing yet. Open a case or change a filter and it shows up here (this session only, never stored).</p>';
+    return emptyState('Nothing yet', {
+      detail: 'Open a case or change a filter and it shows up here (this session only, never stored).',
+    });
   return `<ol class="feed-list" aria-label="This session, newest first">${recent
     .map((e, i) =>
       e.kind === 'case'
@@ -112,6 +128,8 @@ function render() {
       if (live[id]) for (const it of live[id].items) liveRows.push({ ...it, feed: id === 'usgs' ? 'USGS' : 'EONET' });
     liveRows.sort((a, b) => String(b.date).localeCompare(String(a.date)));
     body.innerHTML = liveHTML();
+    const retry = body.querySelector('#feed-retry');
+    if (retry) retry.onclick = () => load(true);
   } else body.innerHTML = recentHTML();
 }
 

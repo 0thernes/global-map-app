@@ -82,9 +82,28 @@ export function markerOf(c) {
     text: `Circle · ±${r >= 10 ? Math.round(r) : r.toFixed(1)} km · ${p || 'precision unknown'}`,
   };
 }
+/**
+ * Grade gauge (v1.5, ADR 0005 section 4): the ring of a case pin is a gauge whose filled arc shows the weight of the
+ * evidence grade, so grade reads without colour (the ring is tinted by category). CIT adds an outer halo.
+ * Shapes 4..9 in src/cesium/icons.js are these pins, in GRADES order.
+ */
+export const GRADE_GAUGE = {
+  CIT: 1,
+  'Official record': 1,
+  ST: 0.75,
+  Testimony: 0.5,
+  'Online claim': 0.25,
+  Other: 0.25,
+};
+export const PIN_SHAPE_BASE = 4;
+/** Billboard shape index for a precise case pin of grade class `gc` (falls back to Other). */
+export function pinShape(gc) {
+  const i = GRADES.findIndex((g) => g.k === gc);
+  return PIN_SHAPE_BASE + (i < 0 ? GRADES.length - 1 : i);
+}
 export const MARKER_RULE = [
-  { kind: 'pin', title: 'Pin', text: 'exact site or within 1 km' },
-  { kind: 'circle', title: 'Circle', text: 'locality or region; radius = stated uncertainty; never jittered' },
+  { kind: 'pin', title: 'Pin', text: 'exact site or within 1 km; ring arc = evidence grade' },
+  { kind: 'circle', title: 'Circle', text: 'locality or region; dashed edge = stated uncertainty; never jittered' },
   { kind: 'cluster', title: 'Cluster badge', text: '3+ nearby cases; ring = majority category; click to zoom' },
 ];
 

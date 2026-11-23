@@ -83,3 +83,17 @@ test('compact counts', () => {
   ]);
   assert.equal(compact(NaN), '0');
 });
+
+// v1.5: grade gauge pins (ADR 0005 section 4)
+import { GRADE_GAUGE, pinShape, PIN_SHAPE_BASE } from '../../src/ui/symbology.js';
+import { GAUGES } from '../../src/cesium/icons.js';
+test('every grade class has a gauge fraction, in GRADES order, matching the drawn icons', () => {
+  assert.deepEqual(
+    GRADES.map((g) => GRADE_GAUGE[g.k]),
+    GAUGES,
+  );
+  GRADES.forEach((g, i) => assert.equal(pinShape(g.k), PIN_SHAPE_BASE + i));
+  assert.equal(pinShape('nonsense'), PIN_SHAPE_BASE + GRADES.length - 1);
+  // weight never increases down the grade ladder
+  for (let i = 1; i < GAUGES.length; i++) assert.ok(GAUGES[i] <= GAUGES[i - 1]);
+});

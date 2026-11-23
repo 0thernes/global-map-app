@@ -35,6 +35,15 @@ export const SHORTCUTS = [
   { id: 'home', key: 'o', kbd: ['O'], label: 'Home view (reset the camera)', group: 'Globe and time', cmd: true },
   { id: 'lasso', key: 's', kbd: ['S'], label: 'Lasso-select cases on the globe', group: 'Globe and time', cmd: true },
   { id: 'random', key: 'r', kbd: ['R'], label: 'Fly to a random case', group: 'Globe and time', cmd: true },
+  { id: 'grid', key: 'j', kbd: ['J'], label: 'Latitude / longitude grid', group: 'Globe and time', cmd: true },
+  {
+    id: 'terminator',
+    key: 'y',
+    kbd: ['Y'],
+    label: 'Terminator and twilight rings for the timeline date',
+    group: 'Globe and time',
+    cmd: true,
+  },
   { id: 'heat', key: 'h', kbd: ['H'], label: 'Case density heatmap', group: 'Globe and time', cmd: true },
   {
     id: 'legend',

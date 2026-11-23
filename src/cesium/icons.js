@@ -44,13 +44,18 @@ export function shapeIcons() {
         g.stroke();
       }
     }),
-    // 2: faint centre dot for imprecise rows (the uncertainty circle carries the extent)
+    // 2: centre of an imprecise row (v1.5): a small hollow diamond, never a pin; the dashed uncertainty circle
+    // carries the extent (ADR 0005 section 4)
     mk((g, h) => {
-      const gr = g.createRadialGradient(h, h, 0, h, h, h * 0.5);
-      gr.addColorStop(0, 'rgba(255,255,255,0.95)');
-      gr.addColorStop(1, 'rgba(255,255,255,0)');
-      g.fillStyle = gr;
-      g.fillRect(0, 0, S, S);
+      g.strokeStyle = 'rgba(255,255,255,0.95)';
+      g.lineWidth = 6;
+      g.beginPath();
+      g.moveTo(h, h * 0.42);
+      g.lineTo(h * 1.58, h);
+      g.lineTo(h, h * 1.58);
+      g.lineTo(h * 0.42, h);
+      g.closePath();
+      g.stroke();
     }),
     // 3: glitch (weird coordinates): RGB split, drawn in colour (not tinted)
     mk((g, h) => {
@@ -68,8 +73,49 @@ export function shapeIcons() {
       g.globalCompositeOperation = 'destination-out';
       for (let y = 0; y < S; y += 8) g.fillRect(0, y, S, 2);
     }),
+    // 4..9: case pins with a grade gauge (GRADES order: CIT, Official record, ST, Testimony, Online claim, Other)
+    ...GAUGES.map((f, i) => mk((g, h) => gaugePin(g, h, f, i === 0))),
   ];
   return cache;
+}
+// gauge fractions in GRADES order (src/ui/symbology.js GRADE_GAUGE; test/unit/symbology.test.mjs keeps them equal)
+export const GAUGES = [1, 1, 0.75, 0.5, 0.25, 0.25];
+/** Pin with a grade gauge: dim full track, bright arc from 12 o'clock for `f` of the ring, core, crosshair ticks. */
+function gaugePin(g, h, f, halo) {
+  const r = h * 0.62;
+  g.lineCap = 'butt';
+  g.strokeStyle = 'rgba(255,255,255,0.32)';
+  g.lineWidth = 5;
+  g.beginPath();
+  g.arc(h, h, r, 0, Math.PI * 2);
+  g.stroke();
+  g.strokeStyle = '#fff';
+  g.lineWidth = 7;
+  g.beginPath();
+  g.arc(h, h, r, -Math.PI / 2, -Math.PI / 2 + f * Math.PI * 2);
+  g.stroke();
+  if (halo) {
+    g.lineWidth = 2;
+    g.beginPath();
+    g.arc(h, h, h * 0.9, 0, Math.PI * 2);
+    g.stroke();
+  }
+  g.fillStyle = '#fff';
+  g.beginPath();
+  g.arc(h, h, h * 0.22, 0, Math.PI * 2);
+  g.fill();
+  g.lineWidth = 4;
+  for (const [x0, y0, x1, y1] of [
+    [h, 0, h, h * 0.24],
+    [h, S, h, S - h * 0.24],
+    [0, h, h * 0.24, h],
+    [S, h, S - h * 0.24, h],
+  ]) {
+    g.beginPath();
+    g.moveTo(x0, y0);
+    g.lineTo(x1, y1);
+    g.stroke();
+  }
 }
 export function ringIcon() {
   return mk((g, h) => {

@@ -4,7 +4,8 @@
 // count of loaded rows, and every label comes from a row field or the grading policy (src/grades.js).
 import { ctx, st, $, $$, esc, on, emit, filteredCases, dayLabel, NDAYS, gradeColor } from '../app_core.js';
 import { icon } from '../icons.js';
-import { legendModel, markerOf, catColor, catIcon, compact, MARKER_RULE } from './symbology.js';
+import { emptyState } from './states.js';
+import { legendModel, markerOf, catColor, catIcon, compact, MARKER_RULE, GRADE_GAUGE } from './symbology.js';
 import { SHORTCUTS, overlay } from './shortcuts.js';
 import { utc, zoned, ageDays } from './clock.js';
 import { LIVE, onLive } from '../live_feeds.js';
@@ -140,10 +141,20 @@ function tickClock() {
 }
 
 // ---------------------------------------------------------------- legend
-const pinSVG = (c = 'var(--accent)') =>
-  `<svg width="16" height="20" viewBox="0 0 16 20" aria-hidden="true"><path d="M8 19 3 9a6 6 0 1 1 10 0z" fill="${c}" stroke="#03060c" stroke-width="1"/></svg>`;
+// v1.5: legend glyphs drawn like the globe sprites (src/cesium/icons.js): a pin is a ring gauge with crosshair
+// ticks; a circle is dashed with a hollow diamond centre (ADR 0005 section 4)
+const arcPath = (f, r = 6.2, c = 10) => {
+  if (f >= 1) return `<circle cx="${c}" cy="${c}" r="${r}"/>`;
+  const a = -Math.PI / 2 + f * 2 * Math.PI;
+  const x = (c + r * Math.cos(a)).toFixed(2),
+    y = (c + r * Math.sin(a)).toFixed(2);
+  return `<path d="M${c} ${c - r} A${r} ${r} 0 ${f > 0.5 ? 1 : 0} 1 ${x} ${y}"/>`;
+};
+const pinSVG = (c = 'var(--accent)', f = 1) =>
+  `<svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><g fill="none" stroke="${c}"><circle cx="10" cy="10" r="6.2" stroke-opacity="0.35" stroke-width="1.6"/><g stroke-width="2.4">${arcPath(f)}</g><path d="M10 0.5v3M10 16.5v3M0.5 10h3M16.5 10h3" stroke-width="1.6"/></g><circle cx="10" cy="10" r="2.2" fill="${c}"/></svg>`;
 const circSVG = (c = 'var(--accent)') =>
-  `<svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="8.5" fill="${c}" fill-opacity="0.18" stroke="${c}" stroke-width="1.2"/><circle cx="10" cy="10" r="1.6" fill="${c}"/></svg>`;
+  `<svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="8.5" fill="${c}" fill-opacity="0.08" stroke="${c}" stroke-width="1.4" stroke-dasharray="2.6 2.4"/><path d="M10 7.4 12.6 10 10 12.6 7.4 10z" fill="none" stroke="${c}" stroke-width="1.3"/></svg>`;
+export const gaugeSVG = (k, c = 'var(--fg)') => pinSVG(c, GRADE_GAUGE[k] ?? 0.25);
 const clusterSVG = () =>
   `<svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="9.5" fill="#0b1220" stroke="var(--accent)" stroke-width="2"/><text x="11" y="14.5" text-anchor="middle" font-size="9" font-weight="700" fill="#e6f1f7">12</text></svg>`;
 export const GLYPH = { pin: pinSVG, circle: circSVG, cluster: clusterSVG };
@@ -170,13 +181,14 @@ function renderLegend() {
           (c) =>
             `<li style="--c:${c.color}"><span class="ci" aria-hidden="true">${icon(c.icon, 14)}</span><span class="cn">${esc(c.k)}</span><b class="mono n">${c.n.toLocaleString('en-US')}</b></li>`,
         )
-        .join('') || '<li class="muted">No cases pass the filters</li>'
+        .join('') ||
+      `<li>${emptyState('No cases pass the filters', { compact: true, detail: 'Clear a filter or widen the date range.' })}</li>`
     }</ul></details>` +
-    `<details data-lg="grades"${open('grades')}><summary class="lg-h">Grades</summary><ul class="lg-grades">${m.grades
+    `<details data-lg="grades"${open('grades')}><summary class="lg-h">Grades <span class="muted small">pin ring = weight</span></summary><ul class="lg-grades">${m.grades
       .filter((g) => g.n)
       .map(
         (g) =>
-          `<li style="--c:${g.color}" title="${esc(g.desc)}"><i aria-hidden="true"></i>${esc(g.label)} <b class="mono">${g.n.toLocaleString('en-US')}</b></li>`,
+          `<li style="--c:${g.color}" title="${esc(g.desc)}">${gaugeSVG(g.k, g.color)}${esc(g.label)} <b class="mono">${g.n.toLocaleString('en-US')}</b></li>`,
       )
       .join('')}</ul></details>`;
   for (const d of el.querySelectorAll('details')) d.ontoggle = () => (lgOpen[d.dataset.lg] = d.open);

@@ -18,6 +18,7 @@ import {
   loadLayer,
 } from './app_core.js';
 import { ensureLayer } from './layers.js';
+import { loadingState } from './ui/states.js';
 import { computeHotspots, FORMULA, TIERS } from './convergence.js';
 import { domainOf } from './report_gen.js';
 
@@ -237,7 +238,9 @@ export function toggleHotspots(show) {
   } else draw();
 }
 async function run() {
-  $('#hs-list').innerHTML = '<p class="muted">Loading layers and scoring cells…</p>';
+  $('#hs-list').innerHTML = loadingState('Loading layers and scoring cells…', {
+    detail: 'Convergence is scored on a grid; on software WebGL this can take a few minutes.',
+  });
   await new Promise((r) => setTimeout(r, 20));
   await computeAll();
   render();

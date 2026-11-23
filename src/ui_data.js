@@ -5,6 +5,7 @@ import { ctx, $, $$, esc, fmt, link, download } from './app_core.js';
 import { inject } from './loader.js';
 import { makeTabs } from './ui/tabs.js';
 import { icon } from './icons.js';
+import { loadingState } from './ui/states.js';
 import { numericCols } from './ui/table.js';
 
 // Heat fill strength (8–88 %). Between ~45 % and ~57 % neither light nor dark text reaches 4.5:1 on the cyan fill,
@@ -70,7 +71,7 @@ export async function toggleData(show, which) {
   el.hidden = !s;
   if (which) tab = which;
   if (!s) return;
-  $('#data-body').innerHTML = '<p class="muted">Loading the PDF 7 data layer…</p>';
+  $('#data-body').innerHTML = loadingState('Loading the PDF 7 data layer…');
   await load();
   render();
 }
