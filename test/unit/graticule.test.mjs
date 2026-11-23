@@ -105,3 +105,18 @@ test('reference lines are lifted by their chord sag so the ellipsoid never hides
   ecefH(90, 0, 0, o, 0);
   assert.ok(Math.abs(o[2] - 6356752.314) < 0.01, 'polar radius');
 });
+test('overlay palettes: normal mirrors the --ref-* tokens; high contrast is opaque enough to survive the HC theme', async () => {
+  const { REF_COLORS } = await import('../../src/cesium/reference.js');
+  const { readFileSync } = await import('node:fs');
+  const tokens = readFileSync(new URL('../../css/tokens.css', import.meta.url), 'utf8');
+  const rgba = (name) =>
+    tokens
+      .match(new RegExp(`--${name}:\\s*rgba\\((\\d+),\\s*(\\d+),\\s*(\\d+),\\s*([\\d.]+)\\)`))
+      .slice(1)
+      .map(Number);
+  const near = (c, t) => [0, 1, 2].every((i) => Math.abs(c[i] * 255 - t[i]) < 2) && Math.abs(c[3] - t[3]) < 0.01;
+  assert.ok(near(REF_COLORS.normal.minor, rgba('ref-grid')));
+  assert.ok(near(REF_COLORS.normal.major, rgba('ref-major')));
+  assert.deepEqual(Object.keys(REF_COLORS.hc), Object.keys(REF_COLORS.normal));
+  for (const [k, c] of Object.entries(REF_COLORS.hc)) assert.ok(c[3] >= 0.45, `hc ${k} alpha`);
+});

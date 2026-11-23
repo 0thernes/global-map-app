@@ -65,6 +65,10 @@ export function initGlobeTools() {
   syncHeatButton();
   on('layers-changed', syncHeatButton);
   new MutationObserver(settingsSection).observe($('#set-body'), { childList: true });
+  // high-contrast theme: the overlays switch to opaque white / yellow (src/cesium/reference.js REF_COLORS)
+  const hc = () => ctx.globe.ref.setContrast(document.body.classList.contains('theme-hc'));
+  new MutationObserver(hc).observe(document.body, { attributes: true, attributeFilter: ['class'] });
+  hc();
   window.__ref = (grid, term) => {
     setGrid(!!grid, true);
     setTerminator(!!term, true);

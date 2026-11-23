@@ -47,7 +47,7 @@ source is on every case. NUFORC stays private, and Gendarmerie rows are drawn bu
   - `src/ui/states.js`: panel states
   - `src/ui/breakpoints.js`: the breakpoint list
 
-  The suite now has 153 unit tests.
+  The suite now has 154 unit tests, up from 135.
 
 - **Overlays moved out of the globe adapter** into `src/cesium/reference.js`.
 - **Breakpoints:** CSS media queries use range syntax and only listed breakpoints, and a test enforces it. This

@@ -27,7 +27,7 @@ plotted row is still a sourced row, pins are still only for `exact_site` and `wi
   1280x800, 1920x1080 and 3840x2160, including the globe reference state and the panel states
   (`scripts/design/wireframes_v15.mjs`). The v1.4 set is archived in `docs/design/wireframes/v1.4/`.
 - **Unit tests** for the new modules: `graticule`, `flight`, `states` and `breakpoints`, plus the grade gauge in
-  `symbology` (153 tests, up from 140).
+  `symbology` (154 tests, up from 135).
 - **Audit views** `globe_reference` and `markers_close` in `test/ui_views.mjs`. `test/perf.mjs` also checks idle
   frames with the grid and terminator on.
 
@@ -46,6 +46,7 @@ plotted row is still a sourced row, pins are still only for `exact_site` and `wi
   NASA Black Marble city lights on the night side. Everything is still keyless.
 - **Breakpoints**: one list in `src/ui/breakpoints.js`. Every stylesheet uses range syntax (`width < N`), and a unit
   test rejects unlisted widths.
+- **High-contrast theme** also switches the grid and terminator to opaque white and yellow.
 - **Focus ring** is declared once, in `css/tokens.css`. The in-app Reduced motion setting zeroes the motion tokens.
 - `src/globe_cesium.js` delegates the overlays to `ReferenceOverlays`. Version 1.5.0.
 

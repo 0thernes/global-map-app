@@ -24,6 +24,30 @@ export function ecefH(lat, lon, h, out, o) {
 /** Height that keeps a straight chord of `deg` degrees of arc above the ellipsoid (sagitta x 1.4, at least 20 m). */
 export const sagH = (deg) => Math.max(20, ((deg * 111195) ** 2 / (8 * 6371008.8)) * 1.4);
 
+// overlay colours [r, g, b, a]: the normal palette mirrors the --ref-* tokens in css/tokens.css; the high-contrast
+// theme (body.theme-hc) switches to opaque white / yellow so the overlays survive the black and white theme
+export const REF_COLORS = {
+  normal: {
+    minor: [0.66, 0.84, 1, 0.26],
+    major: [0.22, 0.91, 1, 0.55],
+    labMinor: [0.8, 0.9, 1, 0.8],
+    labMajor: [0.22, 0.91, 1, 0.95],
+    term: [1, 0.78, 0.34, 0.85],
+    civil: [1, 0.62, 0.3, 0.42],
+    nautical: [0.62, 0.56, 1, 0.32],
+    astro: [0.45, 0.5, 1, 0.24],
+  },
+  hc: {
+    minor: [1, 1, 1, 0.6],
+    major: [1, 0.92, 0.2, 1],
+    labMinor: [1, 1, 1, 1],
+    labMajor: [1, 0.92, 0.2, 1],
+    term: [1, 0.92, 0.2, 1],
+    civil: [1, 0.92, 0.2, 0.75],
+    nautical: [1, 1, 1, 0.6],
+    astro: [1, 1, 1, 0.45],
+  },
+};
 export class ReferenceOverlays {
   constructor(globe) {
     this.g = globe;
@@ -34,6 +58,20 @@ export class ReferenceOverlays {
     this.gridLabels = null;
     this.termPrim = null;
     this.termSub = null;
+    this.hc = false;
+  }
+  /** High-contrast palette on or off (rebuilds whatever is shown). */
+  setContrast(hc) {
+    if (this.hc === !!hc) return;
+    this.hc = !!hc;
+    this.gridKey = '';
+    this.termSub = null;
+    this._t = 0;
+    this.g.requestRender();
+  }
+  _col(k) {
+    const c = REF_COLORS[this.hc ? 'hc' : 'normal'][k];
+    return new this.g.C.Color(c[0], c[1], c[2], c[3]);
   }
   /** Latitude / longitude grid; spacing adapts to the camera height and only the visible part is built when close. */
   setGrid(on) {
@@ -139,8 +177,8 @@ export class ReferenceOverlays {
         const minor = lines.filter((l) => !l.major).map((l) => l.pts);
         const major = lines.filter((l) => l.major).map((l) => l.pts);
         R.gridPrim = this._linesPrim([
-          { lines: minor, color: new C.Color(0.66, 0.84, 1, 0.26), sample },
-          { lines: major, color: new C.Color(0.22, 0.91, 1, 0.55), sample },
+          { lines: minor, color: this._col('minor'), sample },
+          { lines: major, color: this._col('major'), sample },
         ]);
         // labels along the parallel and meridian nearest the view centre
         const lab = new C.LabelCollection();
@@ -157,7 +195,7 @@ export class ReferenceOverlays {
             position: C.Cartesian3.fromDegrees(lo, la, sagH(sample)),
             text: graticuleLabel(l.kind, l.value),
             font,
-            fillColor: l.major ? new C.Color(0.22, 0.91, 1, 0.95) : new C.Color(0.8, 0.9, 1, 0.8),
+            fillColor: this._col(l.major ? 'labMajor' : 'labMinor'),
             outlineColor: new C.Color(0.01, 0.02, 0.05, 0.9),
             outlineWidth: 3,
             style: C.LabelStyle.FILL_AND_OUTLINE,
@@ -178,10 +216,10 @@ export class ReferenceOverlays {
         if (R.termPrim) this.g.scene.primitives.remove(R.termPrim);
         const rings = terminatorRings(sub, 180);
         R.termPrim = this._linesPrim([
-          { lines: [rings[0].pts], color: new C.Color(1, 0.78, 0.34, 0.85), sample: 2 },
-          { lines: [rings[1].pts], color: new C.Color(1, 0.62, 0.3, 0.42), dashed: true, sample: 2 },
-          { lines: [rings[2].pts], color: new C.Color(0.62, 0.56, 1, 0.32), dashed: true, sample: 2 },
-          { lines: [rings[3].pts], color: new C.Color(0.45, 0.5, 1, 0.24), dashed: true, sample: 2 },
+          { lines: [rings[0].pts], color: this._col('term'), sample: 2 },
+          { lines: [rings[1].pts], color: this._col('civil'), dashed: true, sample: 2 },
+          { lines: [rings[2].pts], color: this._col('nautical'), dashed: true, sample: 2 },
+          { lines: [rings[3].pts], color: this._col('astro'), dashed: true, sample: 2 },
         ]);
         this.g.requestRender(600);
       }

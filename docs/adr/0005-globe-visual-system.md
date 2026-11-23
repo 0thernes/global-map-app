@@ -63,6 +63,9 @@ polar circles, and the dash count.
   grid, terminator and heatmap; legend. They have shortcuts (J, Y), appear in the omnibox, and have a Globe section
   in Settings. The choice is remembered.
 
+In the high-contrast theme the overlays switch to opaque white and yellow (`REF_COLORS.hc`). The normal palette
+mirrors the `--ref-*` tokens in `css/tokens.css`, and a unit test keeps the two equal.
+
 These overlays are reference geometry drawn from the camera and the date. They never add, move or hide a case.
 
 **Considered and rejected:** Cesium's `GridImageryProvider` (it draws on tile edges, not on round degrees, and gives
