@@ -1,6 +1,7 @@
 """Copy matching before / after audit screenshots into docs/screenshots/vX.Y/ and write an index.
 
-Usage: python3 scripts/audit/pair_shots.py --release 1.4 --shots ../gma-ui-shots14
+Usage: python3 scripts/audit/pair_shots.py --release 1.5 --shots ../gma-ui-shots15
+       python3 scripts/audit/pair_shots.py --release 1.4 --shots ../gma-ui-shots14
        python3 scripts/audit/pair_shots.py --release 1.3 --shots ../gma-ui-shots
 Images are palette-quantised (256 colours) to keep the repo small. Both phases use the same view script
 (test/ui_views.mjs) at the same viewport. A view that is new in the release is paired with the closest earlier state
@@ -41,14 +42,29 @@ RELEASES = {
         ("3840x2160", "main", "main"),
         ("3840x2160", "dossier", "dossier"),
     ]),
+    # v1.5: before = v1.4.0 at the same camera (the J / Y keys do nothing there), after = v1.5.0
+    "1.5": ("v1.4.0", "v1.5.0", [
+        ("1920x1080", "main", "main"),
+        ("1920x1080", "globe_reference", "globe_reference"),
+        ("1920x1080", "markers_close", "markers_close"),
+        ("1920x1080", "legend_info", "legend_info"),
+        ("1920x1080", "settings", "settings"),
+        ("1920x1080", "feed", "feed"),
+        ("1920x1080", "dossier", "dossier"),
+        ("1920x1080", "help", "help"),
+        ("1280x800", "main", "main"),
+        ("1280x800", "globe_reference", "globe_reference"),
+        ("3840x2160", "main", "main"),
+        ("3840x2160", "globe_reference", "globe_reference"),
+    ]),
 }
 
 ap = argparse.ArgumentParser()
-ap.add_argument("--release", default="1.4", choices=sorted(RELEASES))
+ap.add_argument("--release", default="1.5", choices=sorted(RELEASES))
 ap.add_argument("--shots", default=None)
 ap.add_argument("--out", default=None)
 a = ap.parse_args()
-shots = a.shots or ("../gma-ui-shots14" if a.release == "1.4" else "../gma-ui-shots")
+shots = a.shots or {"1.4": "../gma-ui-shots14", "1.5": "../gma-ui-shots15"}.get(a.release, "../gma-ui-shots")
 out = a.out or f"docs/screenshots/v{a.release}"
 bl, al, pairs = RELEASES[a.release]
 os.makedirs(out, exist_ok=True)

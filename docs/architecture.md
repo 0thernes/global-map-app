@@ -34,10 +34,15 @@ Since v1.1 the globe is **CesiumJS** (decision record: [adr/0001-cesium-renderer
 - `src/cesium/C.js` lists the engine classes used (tree-shaken from `@cesium/engine` / `@cesium/core`).
 - `src/cesium/sources.js` is the keyless imagery and terrain catalogue; `src/basemap.js` switches and persists it.
 - `src/cesium/terrarium.js` turns AWS Terrain Tiles (terrarium PNG) into a `CustomHeightmapTerrainProvider`.
-- `src/cesium/icons.js` draws the marker shapes (glow, pin, imprecise dot, glitch) and cluster badges as data URLs.
+- `src/cesium/icons.js` draws the marker shapes as data URLs: glow, pin, the imprecise-row diamond, glitch, and
+  (v1.5) six grade-gauge pins, plus cluster badges.
+- `src/cesium/reference.js` (v1.5, [ADR 0005](adr/0005-globe-visual-system.md)) draws the latitude/longitude grid
+  and the terminator with its twilight rings as batched GL_LINES primitives, from the pure geometry in
+  `src/cesium/graticule.js`. It rebuilds on a key change only. `src/cesium/flight.js` plans each fly-to: duration,
+  easing and apex height.
 - Point layers are `BillboardCollection`s whose alpha/scale are recomputed on the CPU only when time, filters or
-  playback mode change. Uncertainty circles are batched ellipse primitives at real radii in metres with
-  per-instance `show`. Line layers are one GL_LINES primitive each.
+  playback mode change. Uncertainty circles are a batched ellipse fill plus a dashed
+  GL_LINES edge (v1.5) at real radii in metres, with per-instance `show`. Line layers are one GL_LINES primitive each.
 - `src/labels_cesium.js` places labels and cluster badges as world-anchored primitives; level of detail and greedy
   collision avoidance only choose which labels are visible.
 - Lighting uses the sun at the timeline date and UTC hour (`clock.currentTime`), with NASA Black Marble night lights,
@@ -62,6 +67,9 @@ they never disagree.
 | `coverage.js`                                     | breadth/depth measures and the layers-of-layers coverage tree                            |
 | `report_gen.js` · `index_gen.js`                  | report and reference content                                                             |
 | `grades.js` · `taxonomy.js` · `geo.js` · `sun.js` | grade classes, sub-layer keys, geodesy, solar position                                   |
+| `cesium/graticule.js` · `cesium/flight.js`        | grid lines and labels, small circles, terminator and twilight rings, fly-to planning     |
+| `ui/symbology.js` · `ui/states.js`                | category colours and icons, pin vs circle, grade gauge; loading / empty / error markup   |
+| `ui/breakpoints.js` · `ui/shortcuts.js`           | the one breakpoint list (checked against the CSS); the one keyboard registry             |
 
 Tests: `test/unit/*.test.mjs` (Node test runner). Headless end-to-end: `test/smoke.mjs` (Playwright, SwiftShader).
 The statistics are re-derived independently in Python by `scripts/audit/stats_crosscheck.py`.

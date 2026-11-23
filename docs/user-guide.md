@@ -15,7 +15,9 @@ you asked for it. Press **Esc** to skip.
 - **Activity bar** (left edge): one button per view, grouped Explore, Analyze and Reference. The small letter is its
   key. Click Layers or Filters again to fold the rail away.
 - **Legend** (bottom left, **K**): pin versus circle, the category colours and icons with counts, and the grades.
-- **Map tools** (top right): home view (**O**), lasso (**S**), random case (**R**) and the legend.
+- **Map tools** (top right): home view (**O**), lasso (**S**) and random case (**R**); since v1.5 the
+  latitude/longitude grid (**J**), the terminator and twilight rings (**Y**) and the density heatmap (**H**); then the
+  legend (**K**). A pressed toggle is drawn in the accent colour.
 - **Activity feed** (**N**): Live lists USGS earthquakes and NASA EONET events, newest first; Recent lists the cases
   you opened and the filters you changed in this session. Click an entry to fly there.
 - **Hover** a marker for its card (grade, pin or circle, coordinate source). **Click** it for the dossier; amber corner
@@ -32,8 +34,16 @@ caveat, what is happening now, and your turn. ←/→ or Space to move, Esc to s
 
 ## Reading the globe
 
-- **Pins** are exact or within 1 km. **Circles** are uncertainty areas (locality 10 km, region 100 km, or the row's own
-  radius). Nothing is jittered.
+- **Pins** are exact or within 1 km. Since v1.5 the pin's ring is a gauge for the evidence grade: a full ring for CIT
+  and official records (CIT adds a thin halo), three quarters for ST, a half for testimony and a quarter for online
+  claims and ungraded rows.
+- **Circles** are uncertainty areas: locality 10 km, region 100 km, or the row's own radius. Their edge is dashed and
+  their centre is a hollow diamond, so they never read as pins. Nothing is jittered.
+- **Grid (J):** the spacing follows the zoom, from 30° in orbit to 0.25° at street level. Labels run along the
+  parallel and meridian nearest the view centre.
+- **Terminator (Y):** the amber line is where the Sun is on the horizon at the timeline date and hour. It is
+  geometric, without refraction. The dashed rings beyond it are where civil, nautical and astronomical twilight end:
+  the Sun 6°, 12° and 18° below the horizon.
 - Colours and icons follow the legend (bottom left, **K**). Cluster badges show the count with a ring split by
   category. The dossier opens with a Provenance block: source, grade, coordinate source, precision and coordinates.
   Badges in dossiers show grade, precision, _conflict_ (sources

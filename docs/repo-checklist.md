@@ -21,7 +21,8 @@ Copilot, and no `.github/dependabot.yml` or pull-request template. This list rep
       Cesium ion requests **(CI)**
 - [ ] `npm run test:a11y` passes: axe-core 4.11 (WCAG 2.0 / 2.1 / 2.2 A + AA, including colour contrast) on every UI
       view at 1920x1080 reports 0 violations
-- [ ] `npm run test:perf` passes: an idle globe renders at most 20 frames in 10 s (render on demand) and a dossier
+- [ ] `npm run test:perf` passes: an idle globe renders at most 20 frames in 10 s (render on demand, also with the
+      grid and terminator on) and a dossier
       opens and captures in under 60 s on SwiftShader; `ui_audit --check` also fails a view over its time budget
 - [ ] CodeQL reports no new alerts **(CI)**
 
@@ -35,7 +36,7 @@ Copilot, and no `.github/dependabot.yml` or pull-request template. This list rep
 - [ ] Icons come from Lucide via `scripts/gen_icons.mjs` (`npm run icons`); no Unicode glyphs as icons
 - [ ] Only Inter and JetBrains Mono are vendored and used (`vendor/fonts`, SIL OFL licences alongside)
 - [ ] The UI audit has been re-run for UI changes (`npm run audit:ui -- --phase after --check`, then
-      `python3 scripts/audit/ui_audit_v14.py`) and `docs/audit/v1.4-ui-audit.md` has no open bugs or errors
+      `python3 scripts/audit/ui_audit_v15.py`) and `docs/audit/v1.5-ui-audit.md` has no open bugs or errors
 
 ## OSINT console (v1.4, [ADR 0004](adr/0004-osint-console-information-architecture.md))
 
@@ -51,12 +52,30 @@ Copilot, and no `.github/dependabot.yml` or pull-request template. This list rep
 - [ ] The status strip shows grades, data freshness and live feeds only; no classification or caveat markings
 - [ ] Times are shown in UTC and US Pacific; numbers, coordinates and dates use tabular numerals
 - [ ] Dynamic `import()` uses literal paths only, so esbuild bundles the module (a variable path 404s at run time)
-- [ ] Wireframes are regenerated when the layout tokens change (`node scripts/design/wireframes_v14.mjs`)
+- [ ] Wireframes are regenerated when the layout tokens change (`node scripts/design/wireframes_v15.mjs`; the v1.4
+      set is archived and regenerated with `wireframes_v14.mjs`)
 - [ ] Rail layer names are short and human; dataset ids, versions and caveats go into `NICE` / `l.note`
       (`src/layers.js`), shown in the tooltip and the row details, never in the label
 - [ ] Icon-only controls have an `aria-label` and are matched by the tooltip selector in `src/ui/tips.js`
 - [ ] State changes that the globe must show outside a camera move call `globe.requestRender()` (or go through
       `emit()`), so render on demand never shows a stale frame
+
+## Globe visual system (v1.5, [ADR 0005](adr/0005-globe-visual-system.md))
+
+- [ ] Reference geometry (grid, terminator, rings, dashed circles, flight plans) lives in pure modules
+      (`src/cesium/graticule.js`, `src/cesium/flight.js`) with unit tests; Cesium adapters only draw it
+- [ ] Overlays never add, move or hide a case; they rebuild only on a key change and call `requestRender()`.
+      `npm run test:perf` checks idle frames with the grid and terminator on
+- [ ] Pins carry the grade gauge (`pinShape()` / `GRADE_GAUGE`); `GAUGES` in `src/cesium/icons.js` equals it (unit
+      test); circles stay dashed at the stated radius; the legend glyphs match the sprites
+- [ ] Loading, empty and error use `src/ui/states.js` (live-region roles); an error offers one recovery action where
+      one exists
+- [ ] Media queries use range syntax and only widths from `src/ui/breakpoints.js` (unit test); JS reads the same list
+- [ ] `:focus-visible` is defined only in `css/tokens.css` and still shows under `forced-colors: active`
+- [ ] Motion respects both the OS preference and the in-app Reduced motion setting (instant flights, no flash scale,
+      zeroed `--dur-*`)
+- [ ] The UI audit for the release is regenerated (`python3 scripts/audit/ui_audit_v15.py`), with one label per
+      finding and no open bugs or errors; before / after pairs come from `scripts/audit/pair_shots.py --release 1.5`
 
 ## Security and privacy
 

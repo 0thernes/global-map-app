@@ -15,8 +15,10 @@ water and sky layers. Every plotted row cites its source.**
 [![No API keys](https://img.shields.io/badge/API%20keys-none-success.svg)](docs/data-sources.md)
 [![No Cesium ion](https://img.shields.io/badge/Cesium%20ion-not%20used-success.svg)](docs/adr/0001-cesium-renderer.md)
 [![Static site](https://img.shields.io/badge/runs-GitHub%20Pages%20%7C%20file%3A%2F%2F-success.svg)](#quick-start)
-[![WCAG 2.2 AA: axe 0 violations](https://img.shields.io/badge/WCAG%202.2%20AA-axe%200%20violations-success.svg)](docs/audit/v1.4-ui-audit.md)
-[![UI audit v1.4](https://img.shields.io/badge/UI%20audit-v1.4-informational.svg)](docs/audit/v1.4-ui-audit.md)
+[![WCAG 2.2 AA: axe 0 violations](https://img.shields.io/badge/WCAG%202.2%20AA-axe%200%20violations-success.svg)](docs/audit/v1.5-ui-audit.md)
+[![UI audit v1.5](https://img.shields.io/badge/UI%20audit-v1.5-informational.svg)](docs/audit/v1.5-ui-audit.md)
+[![Unit tests 153](https://img.shields.io/badge/unit%20tests-153-success.svg)](test/unit)
+[![Render on demand](https://img.shields.io/badge/idle-%E2%89%A420%20frames%20%2F%2010%20s-success.svg)](test/perf.mjs)
 [![Keyboard first](https://img.shields.io/badge/keyboard-Ctrl%2BK%20%C2%B7%20%3F-informational.svg)](#keyboard)
 [![X @0thernes_ai](https://img.shields.io/badge/X-%400thernes__ai-000000.svg)](https://x.com/0thernes_ai)
 
@@ -50,7 +52,16 @@ sources shown rather than hidden.**
 | **Data (PDF 7 as data)**     | Everything that is not a place, kept off the globe: 660 PDF 7 entries with § and page, all 165 PDF 7 tables as sortable data tables, charts rebuilt from the PDF 7 CSVs, source-type breakdowns, a seven-test battery with permutation p-values, Holm adjustment and caveats, and 397 unplaced-but-sourced rows. CSV export for every table.                                                                                          |
 | **Reference**                | Sources, glossary, A–Z, sites, countries, coverage matrix (breadth × depth), off-world targets, PDF 7 index and credits.                                                                                                                                                                                                                                                                                                              |
 | **OSINT console (v1.4)**     | Command bar with omnibox (`Ctrl+K`: commands, cases, places, layers), status strip by grade with data age and live-feed state, UTC and Pacific clocks; activity bar; legend chip (pin vs circle counts, expands to category icons); focus + context timeline with era presets; provenance-first dossier; selection reticle and hover card; activity feed; comfortable / compact density and a high-contrast theme.                    |
+| **Globe reference (v1.5)**   | Adaptive latitude / longitude grid (`J`, 30° in orbit to 0.25° at street level), terminator and civil / nautical / astronomical twilight rings for the timeline date (`Y`), grade-gauge pins (ring arc = evidence weight), dashed uncertainty circles, planned fly-to easing, one loading / empty / error state for every panel.                                                                                                      |
 | **OSINT tools**              | Search, filters (grade, precision, water distance, conflicts, `[verify]`), link graph, compare view, charts, lasso, exports (CSV, GeoJSON, Markdown), workspaces.                                                                                                                                                                                                                                                                     |
+
+v1.5 adds geographic reference and a marker grammar to the globe: grid (`J`), terminator and twilight (`Y`),
+grade-gauge pins and dashed uncertainty circles ([ADR 0005](docs/adr/0005-globe-visual-system.md),
+[before / after](docs/screenshots/v1.5/README.md)):
+
+<table>
+<tr><td><img src="docs/screenshots/v1.5/1920x1080_globe_reference_after.png" alt="v1.5 globe with the latitude/longitude grid and the terminator with twilight rings"></td><td><img src="docs/screenshots/v1.5/1920x1080_markers_close_after.png" alt="Grade-gauge pins and dashed uncertainty circles over the central United States"></td></tr>
+</table>
 
 The v1.4 OSINT console: command bar with omnibox (`Ctrl+K`), grade status strip and UTC / Pacific clocks; activity
 bar; layer rail with plain names; legend chip; case dossier with provenance first; activity feed; timeline dock
@@ -124,7 +135,8 @@ generated from it.
 
 `Ctrl+K` or `/` omnibox · `?` help · `Space` play · `←/→` day (Shift month, Alt year) · `L` layers · `F` filters ·
 `W` wars · `A` analyze · `Z` hotspots · `V` charts · `G` graph · `C` compare · `E` reports · `D` data · `I` index ·
-`B` briefings · `N` activity feed · `O` home view · `S` lasso · `R` random case · `H` heatmap · `K` legend (expand) ·
+`B` briefings · `N` activity feed · `O` home view · `S` lasso · `R` random case · `H` heatmap · `J` lat/lon grid ·
+`Y` terminator and twilight · `K` legend (expand) ·
 `U` density · `X` high contrast · `T` tour · `M` mute · `,` settings · `P` frame rate · `0` reset windows ·
 `Esc` close
 
@@ -149,6 +161,8 @@ flowchart LR
   subgraph App[Browser app  file:// or Pages]
     CORE[app_core + layers]
     GLOBE[globe_cesium.js CesiumJS<br/>keyless tiles + terrain]
+    REF[cesium/reference.js<br/>grid + terminator]
+    PURE[pure: graticule, flight,<br/>symbology, states, breakpoints]
     UI[panels, hotspots, reports,<br/>reference, analysis, cinema]
   end
   QWM --> BD
@@ -163,6 +177,10 @@ flowchart LR
   PRIV -. local only .-> CORE
   CORE --> GLOBE
   CORE --> UI
+  GLOBE --> REF
+  PURE --> REF
+  PURE --> GLOBE
+  PURE --> UI
 ```
 
 Details: [docs/architecture.md](docs/architecture.md) · [docs/data-pipeline.md](docs/data-pipeline.md).
@@ -185,6 +203,8 @@ Ten forensic passes (sources, values, cross-dataset conflicts, grades, duplicate
 glossary, code and security, UX) are in [docs/audit](docs/audit/SUMMARY.md). Every finding is classed as a bug, error,
 issue, problem, dilemma or conflict ([TAXONOMY.md](docs/audit/TAXONOMY.md)) and listed in
 [qwm-data-issues.csv](docs/audit/qwm-data-issues.csv).
+The v1.5 UI audit ([v1.5-ui-audit.md](docs/audit/v1.5-ui-audit.md)) measures v1.4.0 against v1.5.0 at three sizes
+and reviews the globe, visuals, ergonomics and system design, one label per finding.
 The v1.2 data gap audit ([v1.2-data-gap-audit.md](docs/audit/v1.2-data-gap-audit.md)) inventories every PDF 7 table,
 figure, stated count and list and every QWM data file (356 items) and tracks each from v1.1.0 to v1.2.0.
 
