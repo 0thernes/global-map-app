@@ -322,7 +322,7 @@ function breakdown(r, key, title) {
 }
 function histSVG(x) {
   const W = 420,
-    H = 120,
+    H = 132, // v1.5: 12 px axis labels (the audit floor); was 9 px
     P = 24;
   const n = EDGES.length - 1;
   const bw = (W - P) / n;
@@ -347,10 +347,10 @@ function histSVG(x) {
    ${EDGES.slice(0, -1)
      .map(
        (e, i) =>
-         `<text x="${P + i * bw + 2}" y="${H - 4}" font-size="9" fill="#9DB1C2">${e >= 1000 ? e / 1000 + 'k' : e}</text>`,
+         `<text x="${P + i * bw + 2}" y="${H - 4}" font-size="12" fill="#9DB1C2">${e >= 1000 ? e / 1000 + 'k' : e}</text>`,
      )
      .join('')}
-   <text x="${W - 4}" y="10" font-size="10" text-anchor="end" fill="#9DB1C2"><tspan fill="#38E8FF">■ observed</tspan> <tspan fill="#7A90A3">■ uniform land</tspan> <tspan fill="#FFC857">■ pop-weighted</tspan> · km</text></svg>`;
+   <text x="${W - 4}" y="12" font-size="12" text-anchor="end" fill="#9DB1C2"><tspan fill="#38E8FF">■ observed</tspan> <tspan fill="#7A90A3">■ uniform land</tspan> <tspan fill="#FFC857">■ pop-weighted</tspan> · km</text></svg>`;
 }
 function hotspot(r) {
   const W = 720,

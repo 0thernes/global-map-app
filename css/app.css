@@ -659,7 +659,8 @@ table.an thead th {
   margin-top: var(--s-2);
 }
 .hist {
-  width: 100%;
+  width: 420px; /* drawn 1:1 so the 12 px axis labels stay 12 px (v1.5 audit) */
+  max-width: 100%;
   height: auto;
   margin-top: var(--s-1);
 }
