@@ -204,9 +204,32 @@ const win = (id) =>
     head: !!e.querySelector(':scope > .win-head .win-min') && !!e.querySelector(':scope > .win-head .win-close'),
     bodies: e.querySelectorAll(':scope > .win-body').length,
   }));
+// windows animate left / top / width / height (--dur-2, 240 ms); under software WebGL a frame can take ~1 s, so the
+// transition may still be running when the next geometry read happens. Read rects only once it has finished, or
+// the drag below grabs the title bar where it was mid-flight and lands on the globe instead (v1.5 smoke flake).
+const settled = (id) =>
+  page.evaluate(
+    (sel) =>
+      Promise.all(
+        document
+          .querySelector(sel)
+          .getAnimations()
+          .map((a) => a.finished.catch(() => null)),
+      ),
+    '#' + id,
+  );
 async function cycle(id, open) {
+  try {
+    await cycleOnce(id, open);
+  } finally {
+    // a failed check must not leave the window open: later steps toggle the same windows and would close it instead
+    if (!(await win(id)).hidden) await page.click(`#${id} .win-close`).catch(() => null);
+  }
+}
+async function cycleOnce(id, open) {
   await open();
   await page.waitForSelector('#' + id + ':not([hidden])');
+  await settled(id);
   let w = await win(id);
   if (!w.head || w.bodies !== 1) throw new Error(id + ': no standard header / single body');
   await page.click(`#${id} .win-min`);
@@ -216,6 +239,7 @@ async function cycle(id, open) {
   await page.click(`#${id} .win-max`);
   if ((await win(id)).mode !== 'max') throw new Error(id + ': maximize');
   await page.click(`#${id} .win-max`);
+  await settled(id);
   w = await win(id);
   // drag the title bar 120 px toward the centre and 40 px down: the window floats where it was dropped
   // (dragging toward an edge would snap it to that dock instead, which the dock step below checks)
@@ -229,6 +253,7 @@ async function cycle(id, open) {
   await page.mouse.move(t.x + dx / 2, t.y + 20, { steps: 4 });
   await page.mouse.move(t.x + dx, t.y + 40, { steps: 4 });
   await page.mouse.up();
+  await settled(id);
   const d = await win(id);
   // (a full-width window is clamped inside the safe area, so it may only move vertically)
   if (d.mode !== 'float' || (Math.abs(d.x - (w.x + dx)) > 24 && Math.abs(d.y - (w.y + 40)) > 24))
@@ -276,6 +301,9 @@ await step('windows: open / minimize / restore / maximize / drag / close', async
 });
 // v1.4 console: omnibox commands, legend, activity bar state, density and contrast themes, clocks, status strip
 await step('console: omnibox, legend, activity bar, themes, clocks, status strip', async () => {
+  // precondition: the omnibox "Charts" command toggles the window, so it must start closed (v1.5 smoke: a window
+  // left open by an earlier failure turned this into a 120 s wait for a window the command had just closed)
+  if (!(await page.$eval('#charts', (e) => e.hidden))) throw new Error('charts window left open by an earlier step');
   await page.keyboard.press('Control+k');
   await page.waitForSelector('#search-results:not([hidden]) li[data-i]');
   await page.keyboard.type('charts');
