@@ -511,6 +511,7 @@ export class Globe {
       fade = Math.max(u.fade.value, 1e-3),
       flash = Math.max(u.flash.value, 1e-3),
       hist = u.history.value,
+      rm = this.reducedMotion,
       op = u.opacity.value;
     const c = this._sc || (this._sc = new C.Color());
     for (let i = 0; i < bbs.length; i++) {
@@ -540,13 +541,15 @@ export class Globe {
       c.blue = bc.blue;
       c.alpha = Math.min(1, a * op);
       b.color = c;
-      const s = 1 + fl * 1.5;
+      // v1.5 time-lapse tuning: the arrival flash eases out (fl^1.6) so a new row pops and settles instead of
+      // lingering as a blob; reduced motion keeps every marker at its rest size (alpha still carries the time)
+      const s = rm ? 1 : 1 + 1.4 * fl ** 1.6;
       if (b.scale !== s) b.scale = s;
     }
   }
   _updatePoints(L, now) {
     const u = L.u;
-    const sig = `${u.cur.value},${u.fade.value},${u.mode.value},${u.flash.value},${u.history.value},${u.timeAware.value},${u.opacity.value},${L.curB}`;
+    const sig = `${u.cur.value},${u.fade.value},${u.mode.value},${u.flash.value},${u.history.value},${u.timeAware.value},${u.opacity.value},${L.curB},${this.reducedMotion}`;
     if (!L._dirty && sig === L._sig) return;
     if (!L._dirty && now - L._t < 60) return;
     L._dirty = false;

@@ -5,6 +5,59 @@ All notable changes to this project are documented here. The format follows
 
 ## [Unreleased]
 
+## [1.5.0] - 2026-11-23
+
+The globe release: geographic reference on the map, a marker grammar that shows evidence grade without colour,
+proportionate camera flights, and one way for every panel to say loading, empty or failed. No data changed; every
+plotted row is still a sourced row, pins are still only for `exact_site` and `within_1km`, and nothing is jittered.
+
+### Added
+
+- **Latitude / longitude grid** (`J`, map tools, Settings › Globe reference). The spacing adapts from 30° in orbit to
+  0.25° at street level, with labels along the parallel and meridian nearest the view centre. Only the visible part
+  is built when you are close (`src/cesium/graticule.js`, `src/cesium/reference.js`).
+- **Terminator and twilight rings** (`Y`): the sunrise and sunset line for the timeline date in amber, and the civil,
+  nautical and astronomical twilight limits (Sun 6°, 12° and 18° below the horizon) dashed. They move with the
+  timeline.
+- **Heatmap toggle in the map tools** (`H` already existed). The map-tool column is now home, lasso and random; grid,
+  terminator and heatmap; legend. Pressed toggles are drawn in the accent colour.
+- **Panel states** (`src/ui/states.js`): one loading, empty and error markup with live-region roles. The feed, Data,
+  Analysis, Hotspots and the legend use it, and the feed's error state has a **Try again** button.
+- **ADR 0005** ([globe visual system](docs/adr/0005-globe-visual-system.md)) and **v1.5 wireframes**: 12 frames at
+  1280x800, 1920x1080 and 3840x2160, including the globe reference state and the panel states
+  (`scripts/design/wireframes_v15.mjs`). The v1.4 set is archived in `docs/design/wireframes/v1.4/`.
+- **Unit tests** for the new modules: `graticule`, `flight`, `states` and `breakpoints`, plus the grade gauge in
+  `symbology` (153 tests, up from 140).
+- **Audit views** `globe_reference` and `markers_close` in `test/ui_views.mjs`. `test/perf.mjs` also checks idle
+  frames with the grid and terminator on.
+
+### Changed
+
+- **Pins show the evidence grade.** The ring is a gauge: full for CIT and official records (CIT adds a halo), three
+  quarters for ST, a half for testimony, and a quarter for online claims and ungraded rows. The category stays the
+  colour. The legend draws the same glyphs.
+- **Uncertainty circles are dashed**, with a lighter fill (7 %) and a hollow diamond at the centre, so a locality or
+  region row can't be read as a pin. The radius is still the stated uncertainty on the true geodesic.
+- **Camera flights are planned per hop** (`src/cesium/flight.js`). The duration follows the distance and the change
+  of altitude, short hops ease out, long ones ease in and out and rise to an apex for context, and reduced motion
+  makes them instant.
+- **Time-lapse arrivals** pop and settle (the flash eases out) and stay at rest size under reduced motion.
+- **Atmosphere and night lights**: a crisper limb and less blue wash on the ground, and brighter, higher-contrast
+  NASA Black Marble city lights on the night side. Everything is still keyless.
+- **Breakpoints**: one list in `src/ui/breakpoints.js`. Every stylesheet uses range syntax (`width < N`), and a unit
+  test rejects unlisted widths.
+- **Focus ring** is declared once, in `css/tokens.css`. The in-app Reduced motion setting zeroes the motion tokens.
+- `src/globe_cesium.js` delegates the overlays to `ReferenceOverlays`. Version 1.5.0.
+
+### Fixed
+
+- **At exactly 900 px wide**, CSS and JS disagreed about bottom sheets. CSS used `max-width: 900px`, which includes
+  900; JS used `innerWidth < 900`.
+- **Keyboard focus was invisible in Windows forced-colors mode.** The ring was a box-shadow only; it now gets an
+  outline there.
+- **Loading and error messages were not announced** to screen readers. They were plain paragraphs with no live
+  region.
+
 ## [1.4.0] - 2026-11-18
 
 The OSINT console release: a new information architecture around the globe, keyboard-first ergonomics and one
@@ -328,7 +381,8 @@ First public release.
 - Duplicated composite grades (`X / X`) collapsed.
 - Briefing Markdown is sanitised with an allow-list; data links are limited to http(s) and mailto.
 
-[Unreleased]: https://github.com/0thernes/global-map-app/compare/v1.4.0...HEAD
+[Unreleased]: https://github.com/0thernes/global-map-app/compare/v1.5.0...HEAD
+[1.5.0]: https://github.com/0thernes/global-map-app/compare/v1.4.0...v1.5.0
 [1.4.0]: https://github.com/0thernes/global-map-app/compare/v1.3.0...v1.4.0
 [1.3.0]: https://github.com/0thernes/global-map-app/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/0thernes/global-map-app/compare/v1.1.0...v1.2.0
