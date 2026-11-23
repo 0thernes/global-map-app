@@ -80,6 +80,38 @@ await step('basemap + terrain switch', async () => {
     return g.setTerrain('off');
   });
 });
+await step('globe reference overlays (v1.5): grid J, terminator Y, dashed circles, grade pins', async () => {
+  await page.mouse.move(1, 1);
+  await page.keyboard.press('j');
+  await page.keyboard.press('y');
+  await page.waitForTimeout(1500);
+  const r = await page.evaluate(() => {
+    const g = window.__globe();
+    const shapes = new Set(g.pointLayers.cases.shp);
+    return {
+      grid: !!g.ref.gridPrim,
+      labels: g.ref.gridLabels ? g.ref.gridLabels.length : 0,
+      term: !!g.ref.termPrim,
+      gridPressed: document.querySelector('#btn-grid').getAttribute('aria-pressed'),
+      termPressed: document.querySelector('#btn-term').getAttribute('aria-pressed'),
+      pinShapes: [...shapes].filter((s) => s >= 4).length,
+      plainPins: shapes.has(1),
+      circles: !!(g.circleLayers.cases && g.circleLayers.cases.edge),
+      flight: g.lastFlight || null,
+    };
+  });
+  if (!r.grid || !r.term || r.labels < 4) throw new Error('reference overlays not drawn ' + JSON.stringify(r));
+  if (r.gridPressed !== 'true' || r.termPressed !== 'true')
+    throw new Error('map-tool pressed state ' + JSON.stringify(r));
+  if (!r.pinShapes || r.plainPins) throw new Error('case pins must use the grade-gauge shapes ' + JSON.stringify(r));
+  if (!r.circles) throw new Error('uncertainty circles missing');
+  if (!r.flight || !(r.flight.duration >= 0)) throw new Error('fly-to was not planned');
+  await page.keyboard.press('j');
+  await page.keyboard.press('y');
+  await page.waitForTimeout(400);
+  const off = await page.evaluate(() => !window.__globe().ref.gridPrim && !window.__globe().ref.termPrim);
+  if (!off) throw new Error('overlays did not switch off');
+});
 await step('layers panel', () => page.keyboard.press('l'));
 await step('filters panel', () => page.keyboard.press('f'));
 await step('search', async () => {
