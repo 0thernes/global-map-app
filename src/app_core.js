@@ -22,7 +22,7 @@ export {
 };
 
 // category colours + icons live in src/ui/symbology.js (v1.4) so the map, legend, charts and dossier share them
-import { PALETTE, catColor } from './ui/symbology.js';
+import { PALETTE, catColor, radiusKm } from './ui/symbology.js';
 export { PALETTE, catColor };
 export const CASE_CATS = Object.keys(PALETTE).filter((k) => !k.includes(':'));
 export const UAP_TYPES = [
@@ -37,6 +37,8 @@ export const UAP_TYPES = [
 ];
 export { GRADES, gradeClass, gradeColor } from './grades.js';
 import { gradeClass } from './grades.js';
+import { fold, csvCell, toCSV } from './text.js';
+export { fold, csvCell, toCSV };
 export const ERAS = [
   ['Deep past (before 3000 BCE)', -1e9, dayOf(-2999)],
   ['Ancient (3000 BCE - 500 CE)', dayOf(-2999), dayOf(500)],
@@ -189,7 +191,7 @@ export function prepCases(raw) {
       _hi: isFinite(hi) ? hi : d,
       _era: eraOf(d),
       _gc: gc,
-      _r: +c.coord_radius_km || 10,
+      _r: radiusKm(c),
       _toks: { w, wit },
       _people: people,
       _dom: domain(c.source_url),
@@ -211,8 +213,8 @@ export function prepCases(raw) {
         c.notes,
         c.id,
       ]
-        .join(' ')
-        .toLowerCase(),
+        .map(fold)
+        .join(' '),
     };
   });
 }
@@ -261,13 +263,6 @@ export function download(name, text, type) {
     URL.revokeObjectURL(a.href);
     a.remove();
   }, 500);
-}
-export function toCSV(rows, cols) {
-  const q = (v) => {
-    const s = String(v ?? '');
-    return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
-  };
-  return [cols.join(','), ...rows.map((r) => cols.map((c) => q(r[c])).join(','))].join('\n');
 }
 export const COMMON =
   'id,name,date,date_precision,date_low,date_high,date_disputed,lat,lon,coord_precision,coord_source,continent,country_iso,country,admin1,admin2,locality,postal_code,urban_rural,category,subtype,count,summary,source_title,source_url,source_type,dataset,grade,witness_count,nearest_military_site_km,nearest_nuclear_site_km,linked_case,notes'.split(

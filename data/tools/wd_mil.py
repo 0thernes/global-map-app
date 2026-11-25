@@ -1,3 +1,7 @@
+# Wikidata 'unknown value' arrives as a blank node / .well-known/genid IRI: that is not a value, keep it empty
+def lit(b, k):
+    v = b.get(k, {})
+    return '' if v.get('type') in ('bnode', 'uri') or '/.well-known/genid/' in v.get('value', '') else v.get('value', '')
 import requests, json, time
 UA={'User-Agent':'GlobalMapApp/1.0 (personal research; Alex Donahue)','Accept':'application/sparql-results+json'}
 CLASSES={'Q18691599':'military base','Q695850':'air base','Q1324633':'naval base','Q1785071':'fort','Q4127976':'military airfield','Q245016':'military installation','Q1248784':'airport (military)'}
@@ -20,7 +24,7 @@ for q,label in CLASSES.items():
         c=b['coord']['value']
         if not c.startswith('Point('): continue
         lon,lat=map(float,c[6:-1].split())
-        out[qid]=dict(qid=qid,name=b.get('sLabel',{}).get('value',qid),lat=lat,lon=lon,cls=label,country=b.get('ccLabel',{}).get('value',''),inception=b.get('inc',{}).get('value','')[:10],dissolved=b.get('dis',{}).get('value','')[:10])
+        out[qid]=dict(qid=qid,name=b.get('sLabel',{}).get('value',qid),lat=lat,lon=lon,cls=label,country=lit(b,'ccLabel'),inception=lit(b,'inc')[:10],dissolved=lit(b,'dis')[:10],dis_unknown='dis' in b and not lit(b,'dis'))
     time.sleep(5)
 json.dump(list(out.values()),open('wd_military.json','w'))
 print('DONE',len(out))

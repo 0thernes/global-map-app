@@ -68,14 +68,17 @@ export class GeoIndex {
       [i2, j2] = this.cellOf(la2, lo2);
     const it = { t: 1, la1, lo1, la2, lo2, ref };
     const ncol = Math.round(360 / this.cell);
-    let jA = j1,
-      jB = j2;
-    if (Math.abs(jB - jA) > ncol / 2) {
-      jA = j1;
-      jB = j1;
-    } // antimeridian crossing: register at first cell
-    for (let i = Math.min(i1, i2); i <= Math.max(i1, i2); i++)
-      for (let j = Math.min(jA, jB); j <= Math.max(jA, jB); j++) this._push(i, j, it);
+    // columns covered the short way round: a segment crossing the antimeridian (e.g. 179.5 -> -179.5) wraps through
+    // column ncol-1 -> 0 instead of spanning the whole globe or being registered at one end only
+    const lo = Math.min(j1, j2),
+      hi = Math.max(j1, j2);
+    const cols = [];
+    if (hi - lo <= ncol / 2) for (let j = lo; j <= hi; j++) cols.push(j);
+    else {
+      for (let j = hi; j < ncol; j++) cols.push(j);
+      for (let j = 0; j <= lo; j++) cols.push(j);
+    }
+    for (let i = Math.min(i1, i2); i <= Math.max(i1, i2); i++) for (const j of cols) this._push(i, j, it);
   }
   _push(i, j, it) {
     const k = this.key(i, j);
@@ -252,13 +255,20 @@ export function dbscan(points, epsKm, minPts) {
     }
     label[i] = c;
     const S = N.filter((j) => j !== i);
+    const inS = new Set(S); // O(1) membership: Array.includes made seed expansion O(n^3) on dense clusters
+    inS.add(i);
     for (let k = 0; k < S.length; k++) {
       const j = S[k];
       if (label[j] === -1) label[j] = c;
       if (label[j] !== undefined) continue;
       label[j] = c;
       const N2 = neigh(j);
-      if (N2.length >= minPts) for (const q of N2) if (!S.includes(q)) S.push(q);
+      if (N2.length >= minPts)
+        for (const q of N2)
+          if (!inS.has(q)) {
+            inS.add(q);
+            S.push(q);
+          }
     }
     c++;
   }
@@ -314,6 +324,8 @@ export function weightedSampler(items, weightFn) {
     s += Math.max(0, weightFn(it));
     cum.push(s);
   }
+  // all weights zero (or no items): there is nothing to draw from; return null rather than always the first item
+  if (!(s > 0)) return () => null;
   return (rand) => {
     const x = rand() * s;
     let lo = 0,

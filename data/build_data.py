@@ -39,23 +39,34 @@ PRIVATE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'private'
 PREC = {'exact_site': 0.1, 'within_1km': 1.0, 'locality': 10.0, 'region': 100.0, 'unspecified': 25.0}
 COMMON = 'id,name,date,date_precision,date_low,date_high,date_disputed,lat,lon,coord_precision,coord_source,continent,country_iso,country,admin1,admin2,locality,postal_code,urban_rural,category,subtype,count,summary,source_title,source_url,source_type,dataset,grade,witness_count,nearest_military_site_km,nearest_nuclear_site_km,linked_case,notes'.split(',')
 
+DAYS_IN_MONTH = (31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31)
+def is_leap(y):  # proleptic Gregorian, astronomical years (0 = 1 BCE is a leap year)
+    return y % 4 == 0 and (y % 100 != 0 or y % 400 == 0)
+
 def norm_date(s):
     """-> (iso, precision) ; accepts ISO with negative years, bare years, 'YYYY-MM', '19 Sep 1976'."""
     s = (s or '').strip()
     if not s or '://' in s: return '', ''   # Wikidata 'unknown value' placeholders etc. are not dates
     m = re.match(r'^(\d{3})(?:-|0s|x)$', s)  # decade only, e.g. GEIPAN '198-' / '1980s'
     if m: return '%04d-01-01' % (int(m.group(1)) * 10), 'decade'
-    m = re.match(r'^([+-]?\d{1,6})(?:-(\d{1,2}))?(?:-(\d{1,2}))?$', s)
+    m = re.match(r'^([+-]?\d{1,6})(?:\.0)?(?:-(\d{1,2}))?(?:-(\d{1,2}))?$', s)  # '1723.0': spreadsheet float year
     if m:
         y = int(m.group(1)); mo = int(m.group(2) or 1); d = int(m.group(3) or 1)
         prec = 'day' if m.group(3) else 'month' if m.group(2) else 'year'
+        if not 1 <= mo <= 12:  # impossible month: keep only the year, never roll over into another month
+            mo, d, prec = 1, 1, 'year'
+        elif not 1 <= d <= DAYS_IN_MONTH[mo - 1] + (mo == 2 and is_leap(y)):
+            d, prec = 1, 'month'
         return ('-' if y < 0 else '') + '%04d-%02d-%02d' % (abs(y), mo, d), prec
     for fmt, prec in (('%d %b %Y', 'day'), ('%d %B %Y', 'day'), ('%Y%m%d', 'day'), ('%m/%d/%Y', 'day')):
         try: return datetime.datetime.strptime(s, fmt).strftime('%Y-%m-%d'), prec
         except ValueError: pass
-    m = re.search(r'(-?\d{3,4})', s)
+    # last resort: a standalone 3-4 digit year in free text ('c. 1950', 'summer 1976'); never a digit run inside an id
+    # ('Q836568') and never a year after the build year
+    m = re.search(r'(?<![\w-])(-?\d{3,4})(?![\w])', s)
     if not m: return '', ''
     y = int(m.group(1))
+    if y > datetime.date.today().year: return '', ''
     return ('-' if y < 0 else '') + '%04d-01-01' % abs(y), 'year'
 
 def country_display(r):
@@ -394,7 +405,6 @@ def main(args):
                     continue
             keep.append(c)
         cases = keep; bad += superseded
-    cases.sort(key=lambda c: (c['date'].startswith('-'), c['date']) if not c['date'].startswith('-') else (False, c['date']))
     def dkey(c):
         d = c.get('date', ''); m = re.match(r'^(-?\d+)-(\d\d)-(\d\d)', d)
         return (int(m.group(1)), int(m.group(2)), int(m.group(3))) if m else (99999, 0, 0)

@@ -51,7 +51,7 @@ if os.path.exists(WD):
         if k is None: pol_n['drop'] += 1; continue
         if k != w['cls']: pol_n['police' if k.startswith('gend') else 'historic'] += 1; w = dict(w, cls=k)
         if any(_hav(w['lat'],w['lon'],items[i]['lat'],items[i]['lon'])<0.5 for dy in (-1,0,1) for dx in (-1,0,1) for i in g0.get((round(w['lat'])+dy,round(w['lon'])+dx),[])): continue
-        items.append(dict(name=w['name'],lat=round(w['lat'],5),lon=round(w['lon'],5),kind=w['cls']+(' (Wikidata; often historic)' if w['cls'] in ('fort', 'gendarmerie/police barracks') else ' (Wikidata)'),country=w['country'],status=('dissolved '+w['dissolved'] if w['dissolved'] else ''),
+        items.append(dict(name=w['name'],lat=round(w['lat'],5),lon=round(w['lon'],5),kind=w['cls']+(' (Wikidata; often historic)' if w['cls'] in ('fort', 'gendarmerie/police barracks') else ' (Wikidata)'),country=w['country'],status=('dissolved '+w['dissolved'] if w['dissolved'] else 'dissolved (date unknown in Wikidata)' if w.get('dis_unknown') else ''),
             inception=w['inception'],dissolved=w['dissolved'],src='Wikidata',url='https://www.wikidata.org/wiki/'+w['qid'],coord_note='Wikidata P625 (usually the site; large bases are one representative point)'))
         wd_n+=1
 print('wikidata added',wd_n,'class policy',pol_n if os.path.exists(WD) else {})

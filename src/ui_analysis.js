@@ -20,6 +20,7 @@ import {
   layerById,
 } from './app_core.js';
 import { ensureLayer } from './layers.js';
+import { militaryInAnalysis } from './taxonomy.js';
 import { loadingState } from './ui/states.js';
 import { activeConflicts } from './ui_conflicts.js';
 
@@ -51,7 +52,7 @@ async function refs(win) {
     if (l && l.present !== false && !l.loaded) await ensureLayer(l);
   }
   const R = {};
-  const mil = (layerById('military').items || []).filter((m) => !/^(fort|gendarmerie)/.test(m.kind || ''));
+  const mil = (layerById('military').items || []).filter(militaryInAnalysis);
   const mi = new S.GeoIndex(2);
   mil.forEach((m) => mi.addPoint(m.lat, m.lon, m));
   mil.forEach((m) => {

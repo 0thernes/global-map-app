@@ -43,6 +43,7 @@ import { initGlobeTools } from './ui/globe_tools.js';
 import { mergeColliding } from './ui/cluster.js';
 import { pinShape } from './ui/symbology.js';
 import { badgeRadius, uiScale } from './cesium/icons.js';
+import { bootFailure, errorState } from './ui/states.js';
 
 const fpsHist = [],
   cpuHist = [];
@@ -377,7 +378,7 @@ function postalLOD(alt) {
           dy: 10,
         },
       );
-      setStatus(`Postal codes loaded: ${c.name} (${p.items.length.toLocaleString()})`);
+      setStatus(`Postal codes loaded: ${c.name} (${p.items.length.toLocaleString('en-US')})`);
     });
   });
 }
@@ -639,4 +640,12 @@ window.__globe = () => ctx.globe;
 boot().catch((e) => {
   console.error(e);
   setStatus('Boot error: ' + e.message);
+  // a visible, announced error with one recovery action instead of a blank globe (src/ui/states.js bootFailure)
+  const f = bootFailure(e);
+  const box = document.createElement('div');
+  box.id = 'boot-error';
+  box.className = 'boot-error';
+  box.innerHTML = errorState(f.title, { detail: f.detail, action: { id: 'boot-reload', label: 'Reload' } });
+  document.body.appendChild(box);
+  box.querySelector('#boot-reload').onclick = () => location.reload();
 });

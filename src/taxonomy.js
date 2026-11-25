@@ -33,6 +33,13 @@ export function caseSub(c) {
   return c.subtype || '';
 }
 
+/**
+ * Project rule: gendarmerie / police barracks (and forts, mostly historic fortifications) are shown on the map but are
+ * never counted as military in any analysis (distance tests, hotspots, dossier "nearest reference sites", pipeline
+ * nearest_military_site_km). One predicate so every analysis applies the same exclusion.
+ */
+export const militaryInAnalysis = (it) => !/^(fort|gendarmerie)/i.test(String((it && it.kind) || ''));
+
 /** Reference-layer sub-layer keys. */
 export const SUB_FIELD = {
   military: (it) =>

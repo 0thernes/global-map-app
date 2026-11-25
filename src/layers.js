@@ -1,6 +1,8 @@
 // Layer registry: every toggleable layer, its legend, source and how to build it on the globe.
 import { ctx, st, L, loadLayer, dateToDay, PALETTE, emit, setStatus } from './app_core.js';
 import { usgsQuakes, nasaEonet } from './live_feeds.js';
+import { cleanWikidataPlaceholders } from './data_clean.js';
+import { radiusKm } from './ui/symbology.js';
 
 const ENV_COLOR = {
   atmospheric: '#ff9a3c',
@@ -345,7 +347,7 @@ export async function ensureLayer(l) {
 }
 function normItem(it, l) {
   // common-schema rows (QWM) keep their fields; older reference payloads are mapped onto the same names
-  const o = { ...it, _layer: l.id };
+  const o = { ...cleanWikidataPlaceholders(it), _layer: l.id };
   if (l.common) {
     o._day = dateToDay(it.date_low || it.date);
     o._t1 = dateToDay(it.date_high);
@@ -409,10 +411,6 @@ async function buildPoints(l) {
                           ? '#6f7d98'
                           : '#c7d4ff'
                 : () => l.color;
-  if (l.id === 'hydrolakes') {
-    const f = colorFn;
-    void f;
-  }
   const sizeFn =
     l.id === 'hydrolakes'
       ? (it) => 2.5 + Math.min(7, Math.log10(1 + it.area_km2) * 1.6)
@@ -443,10 +441,9 @@ async function buildPoints(l) {
     (it) => it.coord_precision && !['exact_site', 'within_1km'].includes(it.coord_precision),
   );
   if (imprecise.length) {
-    const PR = { locality: 10, region: 100, unspecified: 25 };
     l.circ = ctx.globe.addCircles(l.id, imprecise, {
       colorFn,
-      radiusKmFn: (it) => +it.coord_radius_km || PR[it.coord_precision] || 25,
+      radiusKmFn: radiusKm,
       t0Fn: (it) => (isFinite(it._day) ? it._day : -1e9),
       timeAware,
       opacity: 0.5,

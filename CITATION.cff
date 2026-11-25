@@ -1,4 +1,4 @@
-cff-version: 1.3.0
+cff-version: 1.2.0
 message: 'If you use Global Map or its compiled data, please cite it as below, and cite the original data sources listed in CREDITS.md.'
 title: 'Global Map: a cinematic OSINT globe of sourced high-strangeness cases'
 type: software
@@ -15,10 +15,15 @@ keywords:
   - OSINT
   - UAP
   - geospatial
-  - three.js
+  - CesiumJS
+  - open data
+  - reproducible research
   - data visualization
   - globe
 abstract: >-
-  A static three.js globe that plots sourced UAP and other high-strangeness cases against military, nuclear,
-  conflict, water, sky and ancient-site reference layers, with a timeline, dossiers, a link graph, convergence
-  hotspots, a hypothesis-testing panel with explicit baselines, generated reports and a full audit trail.
+  A static CesiumJS globe (keyless: no Cesium ion, no API keys) that plots sourced UAP and other high-strangeness
+  cases against military, nuclear, conflict, water, sky and ancient-site reference layers, with an 8000 BCE to
+  present timeline, dossiers that state the source, evidence grade and coordinate source of every point, a link
+  graph, convergence hotspots, a hypothesis-testing panel with explicit, seeded baselines, generated reports and a
+  full audit trail. Rows are plotted only when sourced; imprecise locations are drawn as uncertainty circles and
+  never jittered. Methodology, limitations and a data dictionary are in docs/.

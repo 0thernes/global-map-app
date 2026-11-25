@@ -13,7 +13,6 @@ import { usgsQuakes, nasaEonet, refreshLive, LIVE, onLive } from '../live_feeds.
 const recent = [];
 const MAX = 60;
 let tab = 'live',
-  tabs = null,
   live = { usgs: null, eonet: null };
 
 const kindIcon = (k) => {
@@ -139,7 +138,7 @@ export function toggleFeed(show) {
   if (!el.hidden) load(false);
 }
 export function initFeed() {
-  tabs = makeTabs(
+  makeTabs(
     $('#feed-tabs'),
     [
       ['live', 'Live'],
@@ -185,5 +184,4 @@ export function initFeed() {
   });
   lastFilterSig = filterSig();
   onLive(() => !$('#feed').hidden && tab === 'live' && render());
-  void tabs;
 }

@@ -97,6 +97,13 @@ function liveDot(id, name) {
           : `${name}: not loaded (open the feed or switch the live layer on)`;
   return `<span class="live live-${s.state}" title="${esc(txt)}"><i aria-hidden="true"></i><span class="lv-n">${esc(name)}</span><span class="sr-only"> ${esc(s.state)}</span></span>`;
 }
+// the latest dated case is measured from the loaded rows (the timeline end NDAYS is a fixed constant, not a data fact)
+let latestDay = null;
+function latestCaseLabel() {
+  if (latestDay == null && ctx.cases.length)
+    latestDay = ctx.cases.reduce((m, c) => (Number.isFinite(c._day) && c._day > m ? c._day : m), -Infinity);
+  return Number.isFinite(latestDay) ? dayLabel(latestDay) : 'n/a';
+}
 function renderStatus() {
   const el = $('#statusbar');
   if (!el) return;
@@ -111,7 +118,7 @@ function renderStatus() {
         return `<button type="button" class="gchip" data-grade="${esc(g.k)}" aria-pressed="${on}" style="--c:${g.color}" title="${esc(g.label)}: ${g.n.toLocaleString('en-US')} cases. ${esc(g.desc)} Click to ${on ? 'remove this grade from' : 'add this grade to'} the grade filter."><i aria-hidden="true"></i><span class="gl">${esc(g.k === 'Official record' ? 'Official' : g.k === 'Online claim' ? 'Online' : g.k === 'Testimony' ? 'TE' : g.k)}</span> <b class="mono">${compact(g.n)}</b></button>`;
       })
       .join('')}</span>` +
-    `<span class="st-fresh" title="Dataset built ${esc(built.replace('T', ' '))}${age != null ? ` (${age} d ago)` : ''}; latest dated case ${esc(dayLabel(NDAYS))}">${icon('database', 14)}<span class="mono">${esc(built.slice(0, 10))}</span></span>` +
+    `<span class="st-fresh" title="Dataset built ${esc(built.replace('T', ' '))}${age != null ? ` (${age} d ago)` : ''}; latest dated case ${esc(latestCaseLabel())}; timeline ends ${esc(dayLabel(NDAYS))}">${icon('database', 14)}<span class="mono">${esc(built.slice(0, 10))}</span></span>` +
     `<span class="st-live" aria-label="Live feeds">${liveDot('usgs', 'USGS')}${liveDot('eonet', 'EONET')}</span>`;
 }
 // grade chips in the status strip are filters (the same set as the Filters panel's Grade chips)

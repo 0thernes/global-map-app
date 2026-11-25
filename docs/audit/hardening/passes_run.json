@@ -1,0 +1,1500 @@
+{
+ "passes": [
+  {
+   "id": "A01",
+   "layer": "A",
+   "lens": "Index completeness",
+   "scope": "every tracked file vs index.csv",
+   "kind": "auto",
+   "ok": true,
+   "summary": "1120 indexed / 1120 tracked",
+   "detail": []
+  },
+  {
+   "id": "A02",
+   "layer": "A",
+   "lens": "Large files and working-tree hygiene",
+   "scope": "all tracked files",
+   "kind": "auto",
+   "ok": true,
+   "summary": "0 files over 50 MB; working tree changes: 0",
+   "detail": []
+  },
+  {
+   "id": "A03",
+   "layer": "A",
+   "lens": "Role classification",
+   "scope": "index.csv roles",
+   "kind": "auto",
+   "ok": true,
+   "summary": "0 files without a role",
+   "detail": []
+  },
+  {
+   "id": "B01",
+   "layer": "B",
+   "lens": "ESLint (recommended + project rules)",
+   "scope": "src/, scripts/, test/",
+   "kind": "auto",
+   "ok": true,
+   "summary": "eslint exit 0",
+   "detail": []
+  },
+  {
+   "id": "B02",
+   "layer": "B",
+   "lens": "Prettier formatting",
+   "scope": "whole repo (minus ignores)",
+   "kind": "auto",
+   "ok": true,
+   "summary": "prettier exit 0",
+   "detail": [
+    "Checking formatting...",
+    "All matched files use Prettier code style!"
+   ]
+  },
+  {
+   "id": "B03",
+   "layer": "B",
+   "lens": "Bundle reproducibility",
+   "scope": "src/ -> js/app.js",
+   "kind": "auto",
+   "ok": true,
+   "summary": "bundle reproducible",
+   "detail": [
+    "built js/app.js (4963 KB)"
+   ]
+  },
+  {
+   "id": "B04",
+   "layer": "B",
+   "lens": "Unit tests",
+   "scope": "test/unit/*.test.mjs",
+   "kind": "auto",
+   "ok": true,
+   "summary": "tests 154 / pass 154 / fail 0",
+   "detail": []
+  },
+  {
+   "id": "B05",
+   "layer": "B",
+   "lens": "Dead-code markers",
+   "scope": "src/",
+   "kind": "auto",
+   "ok": false,
+   "summary": "3 dead-code markers in src/",
+   "detail": [
+    "src/layers.js:414: void f;",
+    "src/ui/feed.js:188: void tabs;",
+    "src/ui/window.js:551: void kind;"
+   ]
+  },
+  {
+   "id": "B06",
+   "layer": "B",
+   "lens": "Debug leftovers",
+   "scope": "src/, css/, index.html",
+   "kind": "auto",
+   "ok": true,
+   "summary": "0 console.log / TODO markers in shipped code",
+   "detail": []
+  },
+  {
+   "id": "B07",
+   "layer": "B",
+   "lens": "Dynamic import literal paths",
+   "scope": "src/",
+   "kind": "auto",
+   "ok": true,
+   "summary": "0 dynamic import() with a non-literal path",
+   "detail": []
+  },
+  {
+   "id": "B08",
+   "layer": "B",
+   "lens": "Unchecked JSON.parse",
+   "scope": "src/",
+   "kind": "auto",
+   "ok": false,
+   "summary": "2 JSON.parse calls with no try/catch nearby",
+   "detail": [
+    "src/ui_panels.js:195: if (f) f.text().then((t) => restore(JSON.parse(t)));",
+    "src/ui_panels.js:203: if (s) restore(JSON.parse(s));"
+   ]
+  },
+  {
+   "id": "B09",
+   "layer": "B",
+   "lens": "Unguarded localStorage",
+   "scope": "src/",
+   "kind": "auto",
+   "ok": false,
+   "summary": "2 localStorage calls outside try (throws in privacy mode / quota)",
+   "detail": [
+    "src/ui_panels.js:198: localStorage.setItem('gm-workspace', JSON.stringify(workspace()));",
+    "src/ui_panels.js:202: const s = localStorage.getItem('gm-workspace');"
+   ]
+  },
+  {
+   "id": "B10",
+   "layer": "B",
+   "lens": "Popup-blocked window.open",
+   "scope": "src/",
+   "kind": "auto",
+   "ok": false,
+   "summary": "1 window.open() results used without a popup-blocked check",
+   "detail": [
+    "src/ui_panels.js:687: const w = window.open('', '_blank');"
+   ]
+  },
+  {
+   "id": "B11",
+   "layer": "B",
+   "lens": "Calendar maths review",
+   "scope": "src/geo.js (proleptic Gregorian, BCE, NDAYS)",
+   "kind": "manual",
+   "ok": null,
+   "summary": "Read every line. dateToDay/civil verified against known anchors by unit tests; NDAYS is a fixed constant (2026-11-11) presented in the UI as \"latest dated case\" (F-B11-1). dateToDay accepts out-of-range month/day silently (validated upstream by validate_data.py; decided).",
+   "detail": []
+  },
+  {
+   "id": "B12",
+   "layer": "B",
+   "lens": "Statistics review",
+   "scope": "src/stats.js",
+   "kind": "manual",
+   "ok": null,
+   "summary": "Read every line. Haversine, Wilson, Monte Carlo (+1 correction), permutation test and bootstrap verified; DBSCAN expansion uses Array.includes (O(n^3) worst case, F-B12-1); weightedSampler with all-zero weights returns item 0 (F-B12-2).",
+   "detail": []
+  },
+  {
+   "id": "B13",
+   "layer": "B",
+   "lens": "Grade classifier review",
+   "scope": "src/grades.js vs every grade string in data",
+   "kind": "manual",
+   "ok": null,
+   "summary": "Every raw grade string in data/cases.js and data/layers/*.js run through gradeClass(). \"Origin note (nearby case CIT)\" classed as CIT (F-B13-1); \"unofficial\"/\"non-official\" would class as Official record (F-B13-2).",
+   "detail": []
+  },
+  {
+   "id": "B14",
+   "layer": "B",
+   "lens": "Marker rule review",
+   "scope": "src/ui/symbology.js, src/layers.js shapeFn, src/app.js buildCases",
+   "kind": "manual",
+   "ok": null,
+   "summary": "Pins only for exact_site/within_1km confirmed for cases and QWM layers. Case circle default radius is 10 km for every precision while layers use locality 10 / region 100 / unspecified 25 (F-B14-1, conflict with glossary).",
+   "detail": []
+  },
+  {
+   "id": "B15",
+   "layer": "B",
+   "lens": "Workspace import / export review",
+   "scope": "src/ui_panels.js workspace()/restore()",
+   "kind": "manual",
+   "ok": null,
+   "summary": "restore() trusts the file: no try/catch around JSON.parse, no shape or range checks, camera spread of undefined throws, localStorage unguarded (F-B15-1).",
+   "detail": []
+  },
+  {
+   "id": "B16",
+   "layer": "B",
+   "lens": "CSV / GeoJSON export review",
+   "scope": "src/app_core.js toCSV, exportCases",
+   "kind": "manual",
+   "ok": null,
+   "summary": "toCSV quotes on [\",\\n] but not \\r, and does not neutralise spreadsheet formulas (=,+,-,@) from third-party text (F-B16-1).",
+   "detail": []
+  },
+  {
+   "id": "B17",
+   "layer": "B",
+   "lens": "Omnibox / search review",
+   "scope": "src/ui_panels.js search, prepCases._search",
+   "kind": "manual",
+   "ok": null,
+   "summary": "Search is case-folded but not accent-folded: \"nurnberg\" does not find \"Nürnberg\" (F-G01-1).",
+   "detail": []
+  },
+  {
+   "id": "B18",
+   "layer": "B",
+   "lens": "Timeline bounds review",
+   "scope": "src/geo.js NDAYS vs data max date, ui_timeline setDay clamp",
+   "kind": "manual",
+   "ok": null,
+   "summary": "Latest public case 2026-04-25 <= NDAYS; no unit test guards that a future data refresh stays inside the timeline (F-B11-1).",
+   "detail": []
+  },
+  {
+   "id": "B19",
+   "layer": "B",
+   "lens": "Dossier review",
+   "scope": "src/ui_panels.js caseHTML/refHTML/printable",
+   "kind": "manual",
+   "ok": null,
+   "summary": "Every interpolation reviewed: escaped. Printable view calls w.document.write on a possibly null popup (F-B10-1); stray row(\"Dataset\", \"\") call (F-B05-2); reference-layer dossiers have no Coord. source row (F-D15-1); nearby() counts forts and gendarmerie as military (F-D11-1).",
+   "detail": []
+  },
+  {
+   "id": "B20",
+   "layer": "B",
+   "lens": "Layer build review",
+   "scope": "src/layers.js normItem/buildPoints/buildGed/hydroTiles",
+   "kind": "manual",
+   "ok": null,
+   "summary": "Read every line. Dead block `if (l.id === \"hydrolakes\") { const f = colorFn; void f; }` (F-B05-1). Live layers are not time-filtered (correct).",
+   "detail": []
+  },
+  {
+   "id": "B21",
+   "layer": "B",
+   "lens": "Listener leaks in render paths",
+   "scope": "src/",
+   "kind": "auto",
+   "ok": true,
+   "summary": "0 render functions that add global listeners",
+   "detail": []
+  },
+  {
+   "id": "B22",
+   "layer": "B",
+   "lens": "Boot path review",
+   "scope": "src/app.js boot()",
+   "kind": "manual",
+   "ok": null,
+   "summary": "A WebGL / Cesium construction failure only writes one line to #status; no visible, accessible error with a recovery hint (F-H01-1).",
+   "detail": []
+  },
+  {
+   "id": "C01",
+   "layer": "C",
+   "lens": "CSP vs hosts actually fetched",
+   "scope": "index.html CSP, src/",
+   "kind": "auto",
+   "ok": false,
+   "summary": "10 CSP hosts; fetched-but-not-allowed ['cloudless.eox.at']; allowed-but-unused ['services.arcgisonline.com']",
+   "detail": []
+  },
+  {
+   "id": "C02",
+   "layer": "C",
+   "lens": "HTML sink inventory",
+   "scope": "src/ innerHTML / insertAdjacentHTML",
+   "kind": "auto",
+   "ok": true,
+   "summary": "73 HTML sinks inventoried (each reviewed manually, see note)",
+   "detail": [
+    "src/app.js:518",
+    "src/app.js:521",
+    "src/cinema.js:94",
+    "src/cinema.js:149",
+    "src/cinema.js:240",
+    "src/cinema.js:515",
+    "src/cinema.js:518",
+    "src/cinema.js:555",
+    "src/cinema.js:563",
+    "src/cinema.js:577",
+    "src/cinema.js:578",
+    "src/cinema.js:579",
+    "src/ui/console.js:106",
+    "src/ui/console.js:134",
+    "src/ui/console.js:137",
+    "src/ui/console.js:166",
+    "src/ui/console.js:173",
+    "src/ui/console.js:251",
+    "src/ui/console.js:268",
+    "src/ui/feed.js:130",
+    "src/ui/feed.js:133",
+    "src/ui/globe_tools.js:48",
+    "src/ui/tabs.js:24",
+    "src/ui/tabs.js:39",
+    "src/ui/tabs.js:93",
+    "src/ui/tips.js:46",
+    "src/ui/window.js:203",
+    "src/ui/window.js:235",
+    "src/ui/window.js:309",
+    "src/ui/window.js:314",
+    "src/ui_analysis.js:124",
+    "src/ui_analysis.js:297",
+    "src/ui_charts.js:47",
+    "src/ui_charts.js:102",
+    "src/ui_charts.js:155",
+    "src/ui_charts.js:217",
+    "src/ui_charts.js:231",
+    "src/ui_charts.js:242",
+    "src/ui_conflicts.js:104",
+    "src/ui_data.js:74",
+    "src/ui_data.js:561",
+    "src/ui_graph.js:63",
+    "src/ui_hotspots.js:241",
+    "src/ui_hotspots.js:252",
+    "src/ui_hotspots.js:281",
+    "src/ui_hotspots.js:283",
+    "src/ui_hotspots.js:306",
+    "src/ui_hotspots.js:307",
+    "src/ui_misc.js:291",
+    "src/ui_misc.js:410",
+    "src/ui_panels.js:123",
+    "src/ui_panels.js:222",
+    "src/ui_panels.js:256",
+    "src/ui_panels.js:266",
+    "src/ui_panels.js:278",
+    "src/ui_panels.js:479",
+    "src/ui_panels.js:658",
+    "src/ui_panels.js:659",
+    "src/ui_panels.js:699",
+    "src/ui_reference.js:74",
+    "src/ui_reference.js:124",
+    "src/ui_reference.js:135",
+    "src/ui_reference.js:153",
+    "src/ui_reference.js:169",
+    "src/ui_reference.js:192",
+    "src/ui_reference.js:205",
+    "src/ui_reference.js:216",
+    "src/ui_reference.js:274",
+    "src/ui_reports.js:18",
+    "src/ui_reports.js:76",
+    "src/ui_timeline.js:61",
+    "src/ui_timeline.js:182",
+    "src/ui_timeline.js:235"
+   ]
+  },
+  {
+   "id": "C03",
+   "layer": "C",
+   "lens": "Attribute interpolation audit",
+   "scope": "src/ href/src templates",
+   "kind": "auto",
+   "ok": true,
+   "summary": "2 attribute interpolations without esc() (reviewed: ids, numbers, constants)",
+   "detail": [
+    "src/report_gen.js:137: <td>${escH(c.coord_precision || '')}</td><td><a href=\"${escH(c.source_url)}\" target=\"_blank\" rel=\"noopener\">${escH(domainOf(c.source_url))}</a></td></tr>`,",
+    "src/report_gen.js:148: <section class=\"rp-sec rp-cols\"><div><h2>2. Map inset</h2>${opt.snapshot ? `<img class=\"rp-snap\" src=\"${opt.snapshot}\" alt=\"Globe view at report time\">` : ''}${"
+   ]
+  },
+  {
+   "id": "C04",
+   "layer": "C",
+   "lens": "Markdown sanitizer review",
+   "scope": "src/ui_misc.js safeHTML + marked",
+   "kind": "manual",
+   "ok": null,
+   "summary": "Allow-list of URL schemes and removal of active elements/attributes reviewed; sound, but untested and SECURITY.md describes it as \"<script> removal\" (F-C04-1, F-K02-2).",
+   "detail": []
+  },
+  {
+   "id": "C05",
+   "layer": "C",
+   "lens": "Reverse tabnabbing",
+   "scope": "src/, index.html",
+   "kind": "auto",
+   "ok": false,
+   "summary": "2 target=_blank without rel=noopener",
+   "detail": [
+    "src/ui/feed.js:89: `<li><button class=\"feed-row\" data-live=\"${i}\" title=\"Fly to ${esc(r.name)}\"><span class=\"fi\">${icon(kindIcon(r.kind), 14)}</span><span class=\"ft mono\">${esc(r.",
+    "src/ui_panels.js:820: return `<h4>Imagery</h4><details class=\"imgry\"><summary>Sentinel-2 cloudless close-up (loads from EOX when opened)</summary><div class=\"s2grid\">${tiles.join('')"
+   ]
+  },
+  {
+   "id": "C06",
+   "layer": "C",
+   "lens": "Code-execution sinks",
+   "scope": "src/",
+   "kind": "auto",
+   "ok": false,
+   "summary": "1 eval / new Function / string timers / document.write",
+   "detail": [
+    "src/ui_panels.js:688: w.document.write("
+   ]
+  },
+  {
+   "id": "C07",
+   "layer": "C",
+   "lens": "Secret scan",
+   "scope": "every tracked text file incl. vendor",
+   "kind": "auto",
+   "ok": false,
+   "summary": "2 secret-shaped strings in tracked text files",
+   "detail": [
+    "js/app.js:13935: `;var sD={name:\"SelectedFeatureIdPipelineStage\",STRUCT_ID_SELECTED_FEATURE:\"SelectedFeature\",STRUCT_NAME_SELECTED_FEATURE:\"SelectedFeature\"};sD.process=function",
+    "js/app.js.map:4: \"sourcesContent\": [\"/**\\n * @license\\n * Copyright 2010-2024 Three.js Authors\\n * SPDX-License-Identifier: MIT\\n */\\nconst t=\\\"170\\\",e={LEFT:0,MIDDLE:1,RIGHT:2,"
+   ]
+  },
+  {
+   "id": "C08",
+   "layer": "C",
+   "lens": "Workflow permissions",
+   "scope": ".github/workflows",
+   "kind": "auto",
+   "ok": true,
+   "summary": "0 workflow permission problems",
+   "detail": []
+  },
+  {
+   "id": "C09",
+   "layer": "C",
+   "lens": "Action pinning",
+   "scope": ".github/workflows",
+   "kind": "auto",
+   "ok": true,
+   "summary": "13 action refs, 13 pinned to a major tag rather than a SHA (decided: see H-finding)",
+   "detail": [
+    ".github/workflows/ci.yml: actions/checkout@v4",
+    ".github/workflows/ci.yml: actions/setup-node@v4",
+    ".github/workflows/ci.yml: actions/setup-python@v5",
+    ".github/workflows/codeql.yml: actions/checkout@v4",
+    ".github/workflows/codeql.yml: github/codeql-action/init@v3",
+    ".github/workflows/codeql.yml: github/codeql-action/analyze@v3",
+    ".github/workflows/pages.yml: actions/checkout@v4",
+    ".github/workflows/pages.yml: actions/setup-node@v4",
+    ".github/workflows/pages.yml: actions/configure-pages@v5",
+    ".github/workflows/pages.yml: actions/upload-pages-artifact@v3",
+    ".github/workflows/pages.yml: actions/deploy-pages@v4",
+    ".github/workflows/release.yml: actions/checkout@v4",
+    ".github/workflows/release.yml: actions/setup-node@v4"
+   ]
+  },
+  {
+   "id": "C10",
+   "layer": "C",
+   "lens": "npm audit",
+   "scope": "package-lock.json",
+   "kind": "auto",
+   "ok": false,
+   "summary": "npm audit: {'moderate': 1}",
+   "detail": []
+  },
+  {
+   "id": "C11",
+   "layer": "C",
+   "lens": "Lockfile integrity",
+   "scope": "package-lock.json",
+   "kind": "auto",
+   "ok": true,
+   "summary": "0 lockfile entries without integrity or not from registry.npmjs.org",
+   "detail": []
+  },
+  {
+   "id": "C12",
+   "layer": "C",
+   "lens": "Python risky calls",
+   "scope": "all tracked .py",
+   "kind": "auto",
+   "ok": false,
+   "summary": "1 risky calls in Python tooling",
+   "detail": [
+    "data/tools/build_conflicts.py:10: cmeta=pickle.load(open(os.path.join(RAW,'cmeta.pkl'),'rb'))['cmeta']"
+   ]
+  },
+  {
+   "id": "C13",
+   "layer": "C",
+   "lens": "Debug globals",
+   "scope": "src/app.js window.__*",
+   "kind": "manual",
+   "ok": null,
+   "summary": "window.__case/__open/__pick/__fly/__globe and window.GMAPP are test hooks used by Playwright; a static site with no secrets or accounts, so exposure has no confidentiality impact (F-C13-1, decided).",
+   "detail": []
+  },
+  {
+   "id": "C14",
+   "layer": "C",
+   "lens": "actionlint + shellcheck",
+   "scope": ".github/workflows, *.sh",
+   "kind": "auto",
+   "ok": false,
+   "summary": "actionlint exit 1, shellcheck exit 0",
+   "detail": [
+    ".github/workflows/release.yml:27:9: shellcheck reported issue in this script: SC2086:info:4:46: Double quote to prevent globbing and word splitting [shellcheck]",
+    "   |",
+    "27 |         run: |",
+    "   |         ^~~~"
+   ]
+  },
+  {
+   "id": "C15",
+   "layer": "C",
+   "lens": "Cesium ion independence",
+   "scope": "src/, index.html",
+   "kind": "auto",
+   "ok": true,
+   "summary": "0 Cesium ion token or ion endpoint references",
+   "detail": []
+  },
+  {
+   "id": "C16",
+   "layer": "C",
+   "lens": "XSS via data fields (dossier, hover card, omnibox, feed, charts)",
+   "scope": "all src/ templates that interpolate row fields",
+   "kind": "manual",
+   "ok": null,
+   "summary": "Grepped every ${...} that reads a row field (name, summary, notes, source_*, place, country, witnesses, id, ...) and opened each in context: all go through esc()/link()/textContent or Cesium label text. No unescaped data field reaches innerHTML.",
+   "detail": []
+  },
+  {
+   "id": "D01",
+   "layer": "D",
+   "lens": "CSV schema validation",
+   "scope": "data/sources/**/*.csv(.gz)",
+   "kind": "auto",
+   "ok": true,
+   "summary": "validated 44 CSV files: 0 errors, 78 warnings",
+   "detail": []
+  },
+  {
+   "id": "D02",
+   "layer": "D",
+   "lens": "coord_precision vocabulary",
+   "scope": "data/cases.js",
+   "kind": "auto",
+   "ok": true,
+   "summary": "0 public cases with a coord_precision outside the plotting vocabulary",
+   "detail": []
+  },
+  {
+   "id": "D03",
+   "layer": "D",
+   "lens": "source_url present and http(s)",
+   "scope": "data/cases.js",
+   "kind": "auto",
+   "ok": true,
+   "summary": "0 public cases without an http(s) source_url",
+   "detail": []
+  },
+  {
+   "id": "D04",
+   "layer": "D",
+   "lens": "coord_source present",
+   "scope": "data/cases.js",
+   "kind": "auto",
+   "ok": true,
+   "summary": "0 public cases without coord_source",
+   "detail": []
+  },
+  {
+   "id": "D05",
+   "layer": "D",
+   "lens": "Coordinate ranges / null island",
+   "scope": "data/cases.js",
+   "kind": "auto",
+   "ok": true,
+   "summary": "0 cases with out-of-range or null-island coordinates",
+   "detail": []
+  },
+  {
+   "id": "D06",
+   "layer": "D",
+   "lens": "Duplicate ids",
+   "scope": "data/cases.js",
+   "kind": "auto",
+   "ok": true,
+   "summary": "0 duplicate case ids",
+   "detail": []
+  },
+  {
+   "id": "D07",
+   "layer": "D",
+   "lens": "Dates ISO, ranges, low <= high",
+   "scope": "data/cases.js",
+   "kind": "auto",
+   "ok": true,
+   "summary": "0 case date problems",
+   "detail": []
+  },
+  {
+   "id": "D08",
+   "layer": "D",
+   "lens": "BCE handling in the pipeline",
+   "scope": "data/build_data.py norm_date, case sort",
+   "kind": "manual",
+   "ok": null,
+   "summary": "Case sort key is (False, date) for both signs, so BCE rows sort lexicographically (-0450 before -2560) (F-D08-1). norm_date fallback pulls any 3-4 digit run out of free text and accepts month 13 / day 45 (F-D08-2).",
+   "detail": []
+  },
+  {
+   "id": "D09",
+   "layer": "D",
+   "lens": "Grade vocabulary mapping",
+   "scope": "data/cases.js grades -> gradeClass",
+   "kind": "auto",
+   "ok": true,
+   "summary": "14 raw grade strings; mapped to Other: {'Partly explained': 4, 'Anecdotal': 2, 'Established anomaly': 3, 'Resolved / debunked': 12, 'Disputed': 4, 'Folklore': 1}",
+   "detail": [
+    "'Official record' -> Official record",
+    "'Partly explained' -> Other",
+    "'Anecdotal' -> Other",
+    "'Established anomaly' -> Other",
+    "'Resolved / debunked' -> Other",
+    "'Disputed' -> Other",
+    "'ST' -> ST",
+    "'CIT' -> CIT",
+    "'Cred. Insider Testimony' -> CIT",
+    "'Credible Insider Testimony' -> CIT",
+    "'Official record / Cred. Insider Testimony' -> CIT",
+    "'TE' -> Testimony",
+    "'Folklore' -> Other",
+    "'Online claim (ungraded)' -> Online claim"
+   ]
+  },
+  {
+   "id": "D10",
+   "layer": "D",
+   "lens": "NUFORC privacy",
+   "scope": "tracked tree, public data, site package",
+   "kind": "auto",
+   "ok": false,
+   "summary": "tracked private files 0, NUFORC rows in public data 1, package excludes data/private: True",
+   "detail": [
+    "data/catalog.js:1: window.GM_CATALOG={\"built\": \"2026-11-12T09:54:54\", \"map_dir\": \"/workspace/qwm/wiw/data/map\", \"files\": [{\"file\": \"pdf7_cases.csv\", \"kind\": \"cases\", \"layer\": \"pdf"
+   ]
+  },
+  {
+   "id": "D11",
+   "layer": "D",
+   "lens": "Gendarmerie excluded from analysis",
+   "scope": "src/ (analysis, hotspots, dossier nearby), data/build_data.py",
+   "kind": "manual",
+   "ok": null,
+   "summary": "ui_analysis, ui_hotspots and build_data.nearest_military exclude fort/gendarmerie; the dossier \"Nearest reference sites\" (nearby()) does not (F-D11-1).",
+   "detail": []
+  },
+  {
+   "id": "D12",
+   "layer": "D",
+   "lens": "Never jitter",
+   "scope": "src/ map code",
+   "kind": "auto",
+   "ok": false,
+   "summary": "1 jitter / random coordinate offsets in map code",
+   "detail": [
+    "src/glossary.js:162: def: \"How exact a row's coordinates are: exact_site, within_1km, locality (about 10 km), region (about 100 km) or unspecified. Only exact_site and within_1km ge"
+   ]
+  },
+  {
+   "id": "D13",
+   "layer": "D",
+   "lens": "Stacked identical coordinates",
+   "scope": "data/cases.js",
+   "kind": "manual",
+   "ok": null,
+   "summary": "44 cases share 48.8589,2.347 (Paris commune centroid, GEIPAN locality) — correct per never-jitter; drawn as one circle with a count badge (F-D13-1, decided).",
+   "detail": []
+  },
+  {
+   "id": "D14",
+   "layer": "D",
+   "lens": "Reference-layer provenance",
+   "scope": "data/layers/*.js",
+   "kind": "manual",
+   "ok": null,
+   "summary": "Every QWM row has source_url + coord_source. 46 GeoNuclearData reactors have no row URL; the dataset-level citation is shown (F-D14-1, decided).",
+   "detail": []
+  },
+  {
+   "id": "D15",
+   "layer": "D",
+   "lens": "coord_source shown on click",
+   "scope": "cases, QWM layers, reference layers",
+   "kind": "manual",
+   "ok": null,
+   "summary": "Cases and QWM rows show it; reference layers (volcanoes, reactors, military, fireballs, GED) show none (F-D15-1).",
+   "detail": []
+  },
+  {
+   "id": "D16",
+   "layer": "D",
+   "lens": "Wikidata placeholder artefacts",
+   "scope": "data/layers, data/cases.js",
+   "kind": "auto",
+   "ok": false,
+   "summary": "2 Wikidata unknown-value placeholders leaking into text fields",
+   "detail": [
+    "data/layers/map_nuclear_sites.js:1: GM.reg(\"map_nuclear_sites\",{\"title\":\"map_nuclear_sites\",\"source\":\"QWM layer file map_nuclear_sites.csv (per-row source_url / dataset)\",\"type\":\"points\",\"schema\":",
+    "data/layers/military.js:1: GM.reg(\"military\",{\"title\":\"Military bases & sites\",\"source\":\"US DoD MIRTA DoD Sites - Points (public domain, DISDI via data.gov/ArcGIS FeatureServer) + Wikidat"
+   ]
+  },
+  {
+   "id": "D17",
+   "layer": "D",
+   "lens": "Radius defaults by precision",
+   "scope": "build_data PREC, layers PR, app_core _r, glossary",
+   "kind": "manual",
+   "ok": null,
+   "summary": "build_data writes coord_radius_km for every public case (PREC table), so the 10 km fallback in prepCases is only reached by private/local rows; it still contradicts PREC for region (100) and unspecified (25) (F-B14-1).",
+   "detail": []
+  },
+  {
+   "id": "D18",
+   "layer": "D",
+   "lens": "Source URL liveness record",
+   "scope": "data/url_status.js, docs/audit/url_status.csv",
+   "kind": "manual",
+   "ok": null,
+   "summary": "url_status.js checked date reviewed; re-checking 2.6k URLs from the box is not cheap and some hosts block bots, so the stored check is kept and its date is shown in the UI (F-D18-1, decided).",
+   "detail": []
+  },
+  {
+   "id": "D19",
+   "layer": "D",
+   "lens": "Private data in aggregates",
+   "scope": "data/catalog.js",
+   "kind": "manual",
+   "ok": null,
+   "summary": "catalog.js carries aggregate NUFORC distance statistics (no rows, no identifiers) from the analysis briefing (F-D19-1, decided).",
+   "detail": []
+  },
+  {
+   "id": "D20",
+   "layer": "D",
+   "lens": "Source -> built row reconciliation",
+   "scope": "data/sources/qwm vs data/layers",
+   "kind": "auto",
+   "ok": true,
+   "summary": "9 QWM reference layers reconciled (built ≤ source; differences are unsourced / unplaceable rows, listed in the Data panel)",
+   "detail": [
+    "map_ancient_cities_remote_sensing: source 18 rows, built 17 items",
+    "map_caves_underground: source 30 rows, built 28 items",
+    "map_conflicts: source 409 rows, built 370 items",
+    "map_megaliths: source 50 rows, built 49 items",
+    "map_nuclear_sites: source 833 rows, built 833 items",
+    "map_nuclear_tests: source 2057 rows, built 2057 items",
+    "map_ocean: source 17 rows, built 15 items",
+    "map_pyramids: source 580 rows, built 580 items",
+    "map_weird_coordinates: source 38 rows, built 38 items"
+   ]
+  },
+  {
+   "id": "D21",
+   "layer": "D",
+   "lens": "Spreadsheet float years in QWM snapshot",
+   "scope": "data/sources/qwm/*.csv.gz",
+   "kind": "manual",
+   "ok": null,
+   "summary": "38 date cells written as floats (\"1723.0\", \"-2480.0\") by the upstream export; norm_date reads them correctly as years and the validator warns (F-D21-1, decided: snapshot is kept byte-identical to the cited drop).",
+   "detail": []
+  },
+  {
+   "id": "E01",
+   "layer": "E",
+   "lens": "axe-core WCAG 2.2 AA",
+   "scope": "every UI view at 1920x1080",
+   "kind": "manual",
+   "ok": null,
+   "summary": "npm run test:a11y (Step 4 re-verification).",
+   "detail": []
+  },
+  {
+   "id": "E02",
+   "layer": "E",
+   "lens": "UI audit --check 1280x800",
+   "scope": "all views",
+   "kind": "manual",
+   "ok": null,
+   "summary": "node test/ui_audit.mjs --check (Step 4).",
+   "detail": []
+  },
+  {
+   "id": "E03",
+   "layer": "E",
+   "lens": "UI audit --check 1920x1080",
+   "scope": "all views",
+   "kind": "manual",
+   "ok": null,
+   "summary": "node test/ui_audit.mjs --check (Step 4).",
+   "detail": []
+  },
+  {
+   "id": "E04",
+   "layer": "E",
+   "lens": "UI audit --check 3840x2160",
+   "scope": "all views",
+   "kind": "manual",
+   "ok": null,
+   "summary": "node test/ui_audit.mjs --check (Step 4).",
+   "detail": []
+  },
+  {
+   "id": "E05",
+   "layer": "E",
+   "lens": "Shortcut collisions",
+   "scope": "src/ui/shortcuts.js",
+   "kind": "manual",
+   "ok": null,
+   "summary": "Covered by test/unit/shortcuts.test.mjs (unique keys, every key has a handler).",
+   "detail": []
+  },
+  {
+   "id": "E06",
+   "layer": "E",
+   "lens": "Icon-button names",
+   "scope": "index.html",
+   "kind": "auto",
+   "ok": false,
+   "summary": "1 icon-only buttons in index.html without aria-label",
+   "detail": [
+    "<button class=\"btn sm\" id=\"feed-refresh\" data-icon=\"rotate-ccw\">"
+   ]
+  },
+  {
+   "id": "E07",
+   "layer": "E",
+   "lens": "Reduced motion",
+   "scope": "css/tokens.css, src/globe_cesium.js, cinema",
+   "kind": "manual",
+   "ok": null,
+   "summary": "prefers-reduced-motion and the in-app setting both zero --dur-* and make flights instant; boot error state added in this audit respects it (no animation).",
+   "detail": []
+  },
+  {
+   "id": "E08",
+   "layer": "E",
+   "lens": "Document metadata",
+   "scope": "index.html",
+   "kind": "auto",
+   "ok": true,
+   "summary": "0 missing document-level a11y metadata",
+   "detail": []
+  },
+  {
+   "id": "F01",
+   "layer": "F",
+   "lens": "Render-on-demand budget",
+   "scope": "test/perf.mjs",
+   "kind": "manual",
+   "ok": null,
+   "summary": "node test/perf.mjs (Step 4).",
+   "detail": []
+  },
+  {
+   "id": "F02",
+   "layer": "F",
+   "lens": "Bundle composition",
+   "scope": "js/app.js inputs",
+   "kind": "auto",
+   "ok": true,
+   "summary": "bundle composition (bytes in output)",
+   "detail": [
+    "[[\"@cesium/engine\",2919388],[\"vendor/three\",686034],[\"@cesium/core\",479569],[\"@spz-loader/core\",276100],[\"meshoptimizer\",147049],[\"src/ui\",47421],[\"urijs\",43043],[\"@cesium/gltf\",40650]]"
+   ]
+  },
+  {
+   "id": "F03",
+   "layer": "F",
+   "lens": "Algorithmic complexity",
+   "scope": "src/stats.js dbscan, kde; src/ui_hotspots.js",
+   "kind": "manual",
+   "ok": null,
+   "summary": "DBSCAN seed expansion de-duplicated with Array.includes -> Set (F-B12-1).",
+   "detail": []
+  },
+  {
+   "id": "F04",
+   "layer": "F",
+   "lens": "Large tracked files",
+   "scope": "all tracked files",
+   "kind": "auto",
+   "ok": true,
+   "summary": "8 tracked files over 5 MB",
+   "detail": [
+    "20.0 MB js/app.js.map",
+    "10.7 MB data/layers/faults_usgs.js",
+    "8.9 MB data/layers/postal/JP.js",
+    "8.8 MB data/layers/postal/MX.js",
+    "8.4 MB data/layers/postal/IN.js",
+    "6.1 MB data/layers/ged.js",
+    "6.0 MB data/layers/military.js",
+    "5.1 MB js/app.js"
+   ]
+  },
+  {
+   "id": "G01",
+   "layer": "G",
+   "lens": "Accent-insensitive search",
+   "scope": "src/app_core.js, src/ui_panels.js",
+   "kind": "manual",
+   "ok": null,
+   "summary": "See B17 (F-G01-1).",
+   "detail": []
+  },
+  {
+   "id": "G02",
+   "layer": "G",
+   "lens": "Explicit locale formatting",
+   "scope": "src/",
+   "kind": "auto",
+   "ok": false,
+   "summary": "1 locale-dependent formatting without an explicit locale",
+   "detail": [
+    "src/app.js:380: setStatus(`Postal codes loaded: ${c.name} (${p.items.length.toLocaleString()})`);"
+   ]
+  },
+  {
+   "id": "G03",
+   "layer": "G",
+   "lens": "Portable paths",
+   "scope": "all tracked paths",
+   "kind": "auto",
+   "ok": true,
+   "summary": "0 tracked paths with spaces or non-ASCII characters",
+   "detail": []
+  },
+  {
+   "id": "G04",
+   "layer": "G",
+   "lens": "Trojan Source characters",
+   "scope": "all tracked text (minus vendor)",
+   "kind": "auto",
+   "ok": true,
+   "summary": "0 bidi-control / zero-width characters (Trojan Source)",
+   "detail": []
+  },
+  {
+   "id": "G05",
+   "layer": "G",
+   "lens": "Time zones",
+   "scope": "src/ui/clock.js, docs",
+   "kind": "manual",
+   "ok": null,
+   "summary": "Clocks use Intl with America/Los_Angeles and derive PST/PDT from the offset (unit-tested in clock.test.mjs); data dates are civil dates with no zone, documented as such.",
+   "detail": []
+  },
+  {
+   "id": "H01",
+   "layer": "H",
+   "lens": "Boot failure UX",
+   "scope": "src/app.js",
+   "kind": "manual",
+   "ok": null,
+   "summary": "See B22 (F-H01-1).",
+   "detail": []
+  },
+  {
+   "id": "H02",
+   "layer": "H",
+   "lens": "Live-feed failure states",
+   "scope": "src/live_feeds.js, src/ui/feed.js",
+   "kind": "manual",
+   "ok": null,
+   "summary": "Errors set state=error with a Refresh action; memo is cleared on failure so a retry refetches. Sound.",
+   "detail": []
+  },
+  {
+   "id": "H03",
+   "layer": "H",
+   "lens": "Tile-failure fallback",
+   "scope": "src/globe_cesium.js _watchErrors",
+   "kind": "manual",
+   "ok": null,
+   "summary": "Streaming basemap errors switch to the bundled offline basemap with a status message. Sound.",
+   "detail": []
+  },
+  {
+   "id": "H04",
+   "layer": "H",
+   "lens": "file:// mode",
+   "scope": "launch.cmd, src/loader.js",
+   "kind": "manual",
+   "ok": null,
+   "summary": "Data is JS (GM.reg) so file:// works with no fetch; launch.cmd passes --allow-file-access-from-files. Sound.",
+   "detail": []
+  },
+  {
+   "id": "H05",
+   "layer": "H",
+   "lens": "Absent private data",
+   "scope": "src/app.js",
+   "kind": "manual",
+   "ok": null,
+   "summary": "Missing data/private/*.js rejects and falls back to [] (one 404 in the network log on Pages; no console error). Sound.",
+   "detail": []
+  },
+  {
+   "id": "I01",
+   "layer": "I",
+   "lens": "Module test coverage map",
+   "scope": "src/ vs test/unit",
+   "kind": "auto",
+   "ok": true,
+   "summary": "35 of 55 src modules imported by a unit test",
+   "detail": [
+    "src/app_core.js",
+    "src/audio.js",
+    "src/cases_codec.js",
+    "src/globe_cesium.js",
+    "src/labels_cesium.js",
+    "src/live_feeds.js",
+    "src/loader.js",
+    "src/ui/console.js",
+    "src/ui/globe_tools.js",
+    "src/ui/tips.js",
+    "src/ui_analysis.js",
+    "src/ui_charts.js",
+    "src/ui_conflicts.js",
+    "src/ui_data.js",
+    "src/ui_graph.js",
+    "src/ui_hotspots.js",
+    "src/ui_panels.js",
+    "src/ui_reference.js",
+    "src/ui_reports.js",
+    "src/ui_timeline.js"
+   ]
+  },
+  {
+   "id": "I02",
+   "layer": "I",
+   "lens": "Regression tests for every bug fixed here",
+   "scope": "test/unit, test/py",
+   "kind": "manual",
+   "ok": null,
+   "summary": "Each bug in findings.csv cites its test (see the fix column).",
+   "detail": []
+  },
+  {
+   "id": "I03",
+   "layer": "I",
+   "lens": "Full smoke test",
+   "scope": "test/smoke.mjs",
+   "kind": "manual",
+   "ok": null,
+   "summary": "Detached run in Step 4, log in /workspace/gma16/.",
+   "detail": []
+  },
+  {
+   "id": "I04",
+   "layer": "I",
+   "lens": "Test determinism",
+   "scope": "seeded RNGs in analysis and tests",
+   "kind": "manual",
+   "ok": null,
+   "summary": "stats.rng(seed) everywhere in analysis; cinema starfield uses Math.random (visual only); ui_misc randomCase is a user \"surprise me\" action. Sound.",
+   "detail": []
+  },
+  {
+   "id": "J01",
+   "layer": "J",
+   "lens": "Job timeouts",
+   "scope": ".github/workflows",
+   "kind": "auto",
+   "ok": false,
+   "summary": "10 jobs without a timeout",
+   "detail": [
+    ".github/workflows/ci.yml: job push has no timeout-minutes",
+    ".github/workflows/ci.yml: job workflow_dispatch has no timeout-minutes",
+    ".github/workflows/codeql.yml: job push has no timeout-minutes",
+    ".github/workflows/codeql.yml: job schedule has no timeout-minutes",
+    ".github/workflows/codeql.yml: job analyze has no timeout-minutes",
+    ".github/workflows/pages.yml: job push has no timeout-minutes",
+    ".github/workflows/pages.yml: job workflow_dispatch has no timeout-minutes",
+    ".github/workflows/pages.yml: job build has no timeout-minutes",
+    ".github/workflows/release.yml: job push has no timeout-minutes",
+    ".github/workflows/release.yml: job release has no timeout-minutes"
+   ]
+  },
+  {
+   "id": "J02",
+   "layer": "J",
+   "lens": "Concurrency groups",
+   "scope": ".github/workflows",
+   "kind": "manual",
+   "ok": null,
+   "summary": "CI and Pages have concurrency groups; Release runs once per tag; CodeQL is idempotent. Sound.",
+   "detail": []
+  },
+  {
+   "id": "J03",
+   "layer": "J",
+   "lens": "CI gate scope",
+   "scope": "ci.yml vs npm run check",
+   "kind": "manual",
+   "ok": null,
+   "summary": "CI runs lint, unit, data, build-diff, smoke. a11y/perf/ui_audit are release gates run locally (SwiftShader minutes) (F-J03-1, decided). Python lint was not in CI (F-Q02-1).",
+   "detail": []
+  },
+  {
+   "id": "J04",
+   "layer": "J",
+   "lens": "Release workflow",
+   "scope": "release.yml",
+   "kind": "manual",
+   "ok": null,
+   "summary": "Uses RELEASE_NOTES_<tag>.md when present, else CHANGELOG; SC2086 unquoted zip path (F-C14-1).",
+   "detail": []
+  },
+  {
+   "id": "J05",
+   "layer": "J",
+   "lens": "Pages artefact contents",
+   "scope": "pages.yml + scripts/package.mjs",
+   "kind": "manual",
+   "ok": null,
+   "summary": "Excludes data/private, data/tools, data/sources, *.py. package.mjs walks the filesystem rather than git ls-files, so a local zip can pick up untracked files (F-J05-1).",
+   "detail": []
+  },
+  {
+   "id": "K01",
+   "layer": "K",
+   "lens": "README test badge vs actual",
+   "scope": "README.md",
+   "kind": "auto",
+   "ok": true,
+   "summary": "README badge 154 vs actual 154",
+   "detail": []
+  },
+  {
+   "id": "K02",
+   "layer": "K",
+   "lens": "SECURITY.md accuracy",
+   "scope": "SECURITY.md vs index.html CSP, safeHTML, versions",
+   "kind": "manual",
+   "ok": null,
+   "summary": "Supported versions table says 1.0.x (F-K02-1); CSP and Markdown sanitiser descriptions are stale (F-K02-2).",
+   "detail": []
+  },
+  {
+   "id": "K03",
+   "layer": "K",
+   "lens": "CITATION.cff validity",
+   "scope": "CITATION.cff",
+   "kind": "auto",
+   "ok": false,
+   "summary": "2 CITATION.cff problems",
+   "detail": [
+    "cff-version 1.3.0 is not a published CFF schema version (latest 1.2.0)",
+    "abstract/keywords still describe a three.js globe (renderer is CesiumJS, ADR 0001)"
+   ]
+  },
+  {
+   "id": "K04",
+   "layer": "K",
+   "lens": "CHANGELOG structure",
+   "scope": "CHANGELOG.md",
+   "kind": "manual",
+   "ok": null,
+   "summary": "Keep a Changelog headings, newest first, one section per tag; compare links checked.",
+   "detail": []
+  },
+  {
+   "id": "K05",
+   "layer": "K",
+   "lens": "Relative links",
+   "scope": "every tracked .md",
+   "kind": "auto",
+   "ok": true,
+   "summary": "0 broken relative links in Markdown",
+   "detail": []
+  },
+  {
+   "id": "K06",
+   "layer": "K",
+   "lens": "Version consistency",
+   "scope": "package.json, lockfile, index.html, CITATION.cff, CHANGELOG",
+   "kind": "auto",
+   "ok": true,
+   "summary": "{'package': '1.5.0', 'lock': '1.5.0', 'html': '1.5.0', 'citation': '1.5.0', 'changelog': '1.5.0'}",
+   "detail": []
+  },
+  {
+   "id": "K07",
+   "layer": "K",
+   "lens": "Glossary vs code",
+   "scope": "src/glossary.js",
+   "kind": "manual",
+   "ok": null,
+   "summary": "Uncertainty-circle definition matched against code after the radius fix (F-B14-1).",
+   "detail": []
+  },
+  {
+   "id": "K08",
+   "layer": "K",
+   "lens": "Architecture doc vs tree",
+   "scope": "docs/architecture.md vs src/",
+   "kind": "manual",
+   "ok": null,
+   "summary": "Module list compared with src/ (F-K08-1 if drift).",
+   "detail": []
+  },
+  {
+   "id": "K09",
+   "layer": "K",
+   "lens": "Data-sources doc vs live endpoints",
+   "scope": "docs/data-sources.md vs src/live_feeds.js, src/cesium/sources.js",
+   "kind": "manual",
+   "ok": null,
+   "summary": "USGS 4.5_month, EONET v3 open/60 d, Esri/EOX/OSM/CARTO/GIBS/Terrarium endpoints match.",
+   "detail": []
+  },
+  {
+   "id": "L01",
+   "layer": "L",
+   "lens": "Dataset attribution coverage",
+   "scope": "CREDITS.md + DATA_LICENSE.md",
+   "kind": "auto",
+   "ok": true,
+   "summary": "0 datasets / providers used by the app but absent from CREDITS.md + DATA_LICENSE.md",
+   "detail": []
+  },
+  {
+   "id": "L02",
+   "layer": "L",
+   "lens": "Vendored licences",
+   "scope": "vendor/",
+   "kind": "auto",
+   "ok": true,
+   "summary": "0 vendored third-party code without its licence",
+   "detail": []
+  },
+  {
+   "id": "L03",
+   "layer": "L",
+   "lens": "Audio attribution",
+   "scope": "assets/audio vs CREDITS.md",
+   "kind": "auto",
+   "ok": true,
+   "summary": "0 audio files not attributed in CREDITS.md",
+   "detail": []
+  },
+  {
+   "id": "L04",
+   "layer": "L",
+   "lens": "Imagery attribution on screen",
+   "scope": "Cesium credit container, basemap status",
+   "kind": "manual",
+   "ok": null,
+   "summary": "Every basemap passes its credit to Cesium credits and to the status line on switch. Sound.",
+   "detail": []
+  },
+  {
+   "id": "L05",
+   "layer": "L",
+   "lens": "Share-alike obligations",
+   "scope": "OSM-derived military, GeoNuclearData (ODbL)",
+   "kind": "manual",
+   "ok": null,
+   "summary": "DATA_LICENSE.md states ODbL for OSM and GeoNuclearData derived layers and keeps them as separate databases. Sound.",
+   "detail": []
+  },
+  {
+   "id": "M01",
+   "layer": "M",
+   "lens": "Methodology document",
+   "scope": "docs/data-and-grading.md, docs/convergence.md",
+   "kind": "manual",
+   "ok": null,
+   "summary": "Present; grading policy, baselines and convergence score documented.",
+   "detail": []
+  },
+  {
+   "id": "M02",
+   "layer": "M",
+   "lens": "Limitations and threats to validity",
+   "scope": "docs/",
+   "kind": "manual",
+   "ok": null,
+   "summary": "Limitations were scattered across docs; no single section on reporting bias, geocoding bias, multiple comparisons, confounding (F-M02-1).",
+   "detail": []
+  },
+  {
+   "id": "M03",
+   "layer": "M",
+   "lens": "Data dictionary",
+   "scope": "COMMON export columns",
+   "kind": "auto",
+   "ok": false,
+   "summary": "20 COMMON export columns not defined in a data dictionary",
+   "detail": [
+    "id",
+    "date_precision",
+    "date_disputed",
+    "continent",
+    "country_iso",
+    "country",
+    "admin1",
+    "admin2",
+    "postal_code",
+    "urban_rural",
+    "category",
+    "subtype",
+    "count",
+    "summary",
+    "source_type",
+    "dataset",
+    "grade",
+    "witness_count",
+    "linked_case",
+    "notes"
+   ]
+  },
+  {
+   "id": "M04",
+   "layer": "M",
+   "lens": "Statistical reporting",
+   "scope": "ui_analysis, stats",
+   "kind": "manual",
+   "ok": null,
+   "summary": "Seeds, iterations and one-sided p are shown; no family-wise correction across the hypotheses panel (F-M04-1, decided: documented in LIMITATIONS).",
+   "detail": []
+  },
+  {
+   "id": "M05",
+   "layer": "M",
+   "lens": "Citation metadata",
+   "scope": "CITATION.cff",
+   "kind": "manual",
+   "ok": null,
+   "summary": "See K03 (F-K03-1).",
+   "detail": []
+  },
+  {
+   "id": "N01",
+   "layer": "N",
+   "lens": "Checklist files present",
+   "scope": "repo root, .github",
+   "kind": "auto",
+   "ok": false,
+   "summary": "1 of 28 checklist files missing",
+   "detail": [
+    ".nvmrc"
+   ]
+  },
+  {
+   "id": "N02",
+   "layer": "N",
+   "lens": "No-bot / no-PR policy files",
+   "scope": ".github",
+   "kind": "auto",
+   "ok": true,
+   "summary": "0 bot / PR files present against the no-PR, no-bot policy",
+   "detail": []
+  },
+  {
+   "id": "O01",
+   "layer": "O",
+   "lens": "ESLint vs Prettier ignore lists",
+   "scope": "eslint.config.js, .prettierignore",
+   "kind": "auto",
+   "ok": true,
+   "summary": "eslint ignores ['coverage', 'data', 'dist', 'docs/screenshots', 'js', 'node_modules', 'shots', 'textures', 'vendor']; prettier ignores ['*.min.js', 'data', 'dist', 'docs/audit/hardening/INDEX.md', 'docs/audit/v1.2-data-gap-audit.md', 'docs/audit/v1.3-ui-audit.md', 'docs/screenshots', 'docs/wireframes', 'js', 'node_modules', 'package-lock.json', 'shots', 'textures', 'vendor']",
+   "detail": [
+    "coverage",
+    "docs/wireframes"
+   ]
+  },
+  {
+   "id": "O02",
+   "layer": "O",
+   "lens": "Node version pins",
+   "scope": "package.json engines, workflows, .nvmrc",
+   "kind": "auto",
+   "ok": true,
+   "summary": "engines >=22; workflows ['22']; .nvmrc None",
+   "detail": []
+  },
+  {
+   "id": "O03",
+   "layer": "O",
+   "lens": "Breakpoints CSS vs JS",
+   "scope": "src/ui/breakpoints.js",
+   "kind": "manual",
+   "ok": null,
+   "summary": "Covered by test/unit/breakpoints.test.mjs.",
+   "detail": []
+  },
+  {
+   "id": "P01",
+   "layer": "P",
+   "lens": "Outdated dependencies",
+   "scope": "package.json",
+   "kind": "auto",
+   "ok": true,
+   "summary": "10 outdated devDependencies (majors decided per finding)",
+   "detail": [
+    "@eslint/js: 9.39.5 → wanted 9.39.5 / latest 10.0.1",
+    "axe-core: 4.11.0 → wanted 4.14.1 / latest 4.14.1",
+    "esbuild: 0.24.2 → wanted 0.24.2 / latest 0.28.2",
+    "eslint: 9.39.5 → wanted 9.39.5 / latest 10.15.0",
+    "globals: 16.5.0 → wanted 16.5.0 / latest 17.14.0",
+    "jsdom: 25.0.1 → wanted 25.0.1 / latest 31.0.1",
+    "lucide-static: 1.72.0 → wanted 1.79.0 / latest 1.79.0",
+    "marked: 14.1.4 → wanted 14.1.4 / latest 18.3.0",
+    "playwright: 1.65.0 → wanted 1.65.1 / latest 1.65.1",
+    "three: 0.170.0 → wanted 0.170.0 / latest 0.187.0"
+   ]
+  },
+  {
+   "id": "P02",
+   "layer": "P",
+   "lens": "Unused dependencies",
+   "scope": "package.json",
+   "kind": "auto",
+   "ok": false,
+   "summary": "1 devDependencies not referenced by src/, scripts/ or test/",
+   "detail": [
+    "prettier"
+   ]
+  },
+  {
+   "id": "Q01",
+   "layer": "Q",
+   "lens": "Python byte-compile",
+   "scope": "all tracked .py",
+   "kind": "auto",
+   "ok": true,
+   "summary": "compileall exit 0",
+   "detail": []
+  },
+  {
+   "id": "Q02",
+   "layer": "Q",
+   "lens": "Python lint (ruff F, E9)",
+   "scope": "all tracked .py",
+   "kind": "auto",
+   "ok": false,
+   "summary": "ruff F,E9: 15 problems",
+   "detail": [
+    "data/tools/build_conflicts.py:6:41: F401 [*] `datetime` imported but unused",
+    "data/tools/build_layers.py:5:28: F401 [*] `re` imported but unused",
+    "data/tools/build_layers.py:5:45: F401 [*] `math` imported but unused",
+    "data/tools/build_layers.py:5:59: F401 [*] `collections` imported but unused",
+    "data/tools/build_layers.py:5:72: F401 [*] `datetime` imported but unused",
+    "data/tools/build_layers.py:6:49: F401 [*] `shapely.geometry.MultiLineString` imported but unused",
+    "data/tools/build_layers.py:6:73: F401 [*] `shapely.geometry.mapping` imported but unused",
+    "data/tools/build_layers.py:7:30: F401 [*] `shapely.prepared.prep` imported but unused",
+    "data/tools/fetch_osm_military.py:1:34: F401 [*] `sys` imported but unused",
+    "data/tools/pdf7_tex.py:6:8: F401 [*] `os` imported but unused",
+    "scripts/audit/forensics.py:9:19: F401 [*] `glob` imported but unused",
+    "scripts/audit/forensics.py:9:53: F401 [*] `sys` imported but unused",
+    "scripts/audit/forensics.py:128:5: F841 Local variable `land` is assigned to but never used",
+    "scripts/audit/forensics.py:250:5: F841 Local variable `known` is assigned to but never used",
+    "scripts/audit/ui_audit_v14.py:336:9: F841 Local variable `f` is assigned to but never used"
+   ]
+  },
+  {
+   "id": "Q03",
+   "layer": "Q",
+   "lens": "Python unit tests",
+   "scope": "test/py",
+   "kind": "auto",
+   "ok": false,
+   "summary": "no Python tests FAILED",
+   "detail": [
+    "    self.test = loader.discover(self.start, self.pattern, self.top)",
+    "                ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+    "  File \"/usr/lib/python3.13/unittest/loader.py\", line 308, in discover",
+    "    raise ImportError('Start directory is not importable: %r' % start_dir)",
+    "ImportError: Start directory is not importable: 'test/py'"
+   ]
+  },
+  {
+   "id": "Q04",
+   "layer": "Q",
+   "lens": "Pipeline determinism / pickle",
+   "scope": "data/tools/build_layers.py, build_conflicts.py",
+   "kind": "manual",
+   "ok": null,
+   "summary": "cmeta passed between steps as a pickle (F-C12-1).",
+   "detail": []
+  }
+ ]
+}

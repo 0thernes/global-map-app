@@ -765,6 +765,21 @@ a[data-pdf7] {
   line-height: var(--ctl-sm);
 }
 
+/* v1.5.1: boot failure (no WebGL, script error) shows one centred, announced error with a Reload action */
+.boot-error {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  display: grid;
+  place-items: center;
+  padding: var(--s-4);
+  background: color-mix(in srgb, var(--bg-0) 88%, transparent);
+}
+.boot-error .pstate {
+  max-width: 560px;
+  background: var(--bg-2);
+}
+
 /* v1.5 panel states (src/ui/states.js, ADR 0005 section 5): loading, empty and error look the same in every panel */
 .pstate {
   display: flex;

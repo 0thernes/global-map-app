@@ -4,12 +4,12 @@
 import { dayOf, civil, posToDay, dayToPos, DAYMIN, NDAYS } from '../geo.js';
 
 export const ERAS = [
-  { id: 'all', label: 'All time', title: '8000 BCE to today on the segmented scale', w: null },
+  { id: 'all', label: 'All time', title: '8000 BCE to the end of the timeline, on the segmented scale', w: null },
   { id: 'ancient', label: 'Ancient', title: '8000 BCE to 1500 CE', w: [DAYMIN, dayOf(1500)] },
   { id: 'ww', label: '1900–1945', title: '1900 to 1945: the world wars', w: [dayOf(1900), dayOf(1946)] },
   { id: 'cold', label: 'Cold War', title: '1947 to 1991', w: [dayOf(1947), dayOf(1992)] },
-  { id: 'modern', label: '1990–now', title: '1990 to the latest dated case', w: [dayOf(1990), NDAYS] },
-  { id: 'recent', label: 'Last 10 y', title: 'The ten years up to the latest dated case', w: [NDAYS - 3653, NDAYS] },
+  { id: 'modern', label: '1990–now', title: '1990 to the end of the timeline', w: [dayOf(1990), NDAYS] },
+  { id: 'recent', label: 'Last 10 y', title: 'The ten years up to the end of the timeline', w: [NDAYS - 3653, NDAYS] },
 ];
 export const eraById = (id) => ERAS.find((e) => e.id === id) || ERAS[0];
 

@@ -1,5 +1,6 @@
 // Keyboard, help, compare (swipe/split), briefings, heatmap, lasso, screenshot, random case, FPS HUD.
 import { marked } from 'marked';
+import { safeHTML } from './ui/sanitize.js';
 import {
   ctx,
   st,
@@ -405,30 +406,6 @@ function screenshot() {
   a.click();
 }
 // briefings Markdown comes from the QWM folder: allow-list sanitise the rendered HTML (CSP also blocks inline script)
-function safeHTML(html) {
-  const t = document.createElement('template');
-  t.innerHTML = html;
-  t.content
-    .querySelectorAll('script,style,iframe,object,embed,link,meta,form,input,button,textarea,select,base,svg,math')
-    .forEach((n) => n.remove());
-  t.content.querySelectorAll('*').forEach((n) => {
-    for (const a of [...n.attributes]) {
-      const v = a.value.trim().toLowerCase();
-      if (
-        /^on/i.test(a.name) ||
-        a.name === 'style' ||
-        (/^(href|src|xlink:href|action|formaction)$/i.test(a.name) &&
-          !/^(https?:|mailto:|#|data\/|\.\/|[a-z0-9_-]+\.(png|jpe?g|svg|md)$)/.test(v))
-      )
-        n.removeAttribute(a.name);
-    }
-    if (n.tagName === 'A') {
-      n.setAttribute('rel', 'noopener noreferrer');
-      n.setAttribute('target', '_blank');
-    }
-  });
-  return t.innerHTML;
-}
 function randomCase() {
   const cs = filteredCases();
   if (cs.length) openDossier(cs[Math.floor(Math.random() * cs.length)]);

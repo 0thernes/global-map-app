@@ -1,7 +1,7 @@
 // Data panel (D): the non-spatial PDF 7 layer and everything that cannot be a pin. Entries, PDF 7 tables as sortable
 // data tables, charts that reproduce PDF 7 figures from the CSVs, source types, a cross-layer test battery with
 // honest p-values, and the unplaced-but-sourced list. Every number names its PDF 7 § and page or its source column.
-import { ctx, $, $$, esc, fmt, link, download } from './app_core.js';
+import { ctx, $, $$, esc, fmt, link, download, csvCell } from './app_core.js';
 import { inject } from './loader.js';
 import { makeTabs } from './ui/tabs.js';
 import { icon } from './icons.js';
@@ -149,7 +149,6 @@ function hist(values, edges, labels, color = 'var(--chart-1)') {
   );
 }
 const csvReg = new Map();
-const csvCell = (v) => (/[",\n]/.test(String(v ?? '')) ? `"${String(v).replace(/"/g, '""')}"` : String(v ?? ''));
 function sortable(id, head, rows, { limit = 0, html = null } = {}) {
   const s = sortState[id] || { col: -1, dir: 1 };
   const rs = s.col >= 0 ? sortRows(rows, s.col, s.dir) : rows;

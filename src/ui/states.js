@@ -35,3 +35,23 @@ export function panelState(kind, title, o = {}) {
 export const loadingState = (title, o) => panelState('loading', title, o);
 export const emptyState = (title, o) => panelState('empty', title, o);
 export const errorState = (title, o) => panelState('error', title, o);
+
+/**
+ * What to tell the user when the app cannot start (v1.5.1 hardening). A WebGL failure is the common case (hardware
+ * acceleration off, blocked GPU, very old browser); anything else is reported as it is, with the same recovery.
+ * @param {unknown} err
+ * @returns {{title: string, detail: string}}
+ */
+export function bootFailure(err) {
+  const msg = String((err && err.message) || err || 'unknown error').slice(0, 300);
+  const gl = /webgl|context|gpu|getContext/i.test(msg);
+  return gl
+    ? {
+        title: 'The 3D globe could not start: WebGL is not available.',
+        detail: `Turn on hardware acceleration in the browser settings, update the graphics driver, or try a current Chrome, Edge or Firefox. (${msg})`,
+      }
+    : {
+        title: 'Global Map could not start.',
+        detail: `Reload the page. If it happens again, open an issue with this message: ${msg}`,
+      };
+}

@@ -69,10 +69,16 @@ export const PRECISION = {
   region: { marker: 'circle', label: 'Region (uncertainty circle)', short: 'region' },
 };
 export const isPrecise = (p) => p === 'exact_site' || p === 'within_1km';
+/**
+ * Default uncertainty radius (km) per coord_precision when a row states no coord_radius_km. Same table as PREC in
+ * data/build_data.py (a unit test keeps them equal) and as the glossary entry "Uncertainty circle".
+ */
+export const DEFAULT_RADIUS_KM = { exact_site: 0.1, within_1km: 1, locality: 10, region: 100, unspecified: 25 };
+export const radiusKm = (c) => +(c && c.coord_radius_km) || DEFAULT_RADIUS_KM[c && c.coord_precision] || 25;
 export function markerOf(c) {
   const p = c && c.coord_precision;
   const def = PRECISION[p];
-  const r = +(c && c.coord_radius_km) || 10;
+  const r = radiusKm(c);
   if (isPrecise(p)) return { kind: 'pin', label: def.label, precision: p, text: `Pin · ${def.label.toLowerCase()}` };
   return {
     kind: 'circle',

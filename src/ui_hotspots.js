@@ -18,6 +18,7 @@ import {
   loadLayer,
 } from './app_core.js';
 import { ensureLayer } from './layers.js';
+import { militaryInAnalysis } from './taxonomy.js';
 import { loadingState } from './ui/states.js';
 import { computeHotspots, FORMULA, TIERS } from './convergence.js';
 import { domainOf } from './report_gen.js';
@@ -111,7 +112,7 @@ async function inputs() {
   for (const [id, g] of Object.entries(REF_GROUPS)) {
     const l = layerById(id);
     for (const it of (l && l.items) || [])
-      if (!(id === 'military' && /^(fort|gendarmerie)/.test(it.kind || '')))
+      if (id !== 'military' || militaryInAnalysis(it))
         recs.push({
           lat: +it.lat,
           lon: +it.lon,

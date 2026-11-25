@@ -84,7 +84,7 @@ export function initTimeline() {
     <label class="tl-date"><span class="tl-cap">Date</span><input id="tl-date" spellcheck="false" title="ISO date; negative years = BCE (e.g. -2560-01-01)"></label>
     <span id="tl-label" class="mono"></span>
     <label class="tl-hour" title="UTC hour for the sun terminator"><span class="tl-cap">UTC</span><input id="tl-hour" type="range" min="0" max="23" value="12" aria-label="UTC hour"><span id="tl-hour-v" class="mono">12:00</span></label>
-    <button class="btn sm ghost" id="tl-now" title="Jump to the latest dated case (2026-11-11)">Latest</button>
+    <button class="btn sm ghost" id="tl-now" title="Jump to the end of the timeline (${dayLabel(NDAYS)})">Latest</button>
   </div>
   <canvas id="tl-canvas" aria-label="Timeline. Top strip: the whole span; click it to move the focus. Main track: drag to scrub, Shift+drag to select a date range, wheel to zoom the focus"></canvas>
   <div class="tl-foot">

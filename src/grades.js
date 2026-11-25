@@ -29,7 +29,13 @@ export const GRADES = [
   { k: 'Other', label: 'Other / ungraded', desc: 'Any other grade string found in the data', color: '#7a90a3' },
 ];
 export function gradeClass(g) {
-  const s = String(g || '').toLowerCase();
+  // parenthetical qualifiers describe something else ("Origin note (nearby case CIT)" is not a CIT row), so they never
+  // raise the class; "unofficial" / "non-official" are not official records
+  const s = String(g || '')
+    .toLowerCase()
+    .replace(/\([^)]*\)/g, ' ')
+    .replace(/\b(un|non-?)official\b/g, ' ')
+    .trim();
   if (!s) return 'Other';
   if (/\bcit\b|cred\.? insider|credible insider/.test(s)) return 'CIT';
   if (/official record|official/.test(s)) return 'Official record';

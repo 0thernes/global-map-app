@@ -27,6 +27,9 @@ import {
   setStatus,
   layerById,
   caseSub,
+  DAYMIN,
+  NDAYS,
+  fold,
 } from './app_core.js';
 import { setLayerOn, ensureLayer, applyLayerVis } from './layers.js';
 import { setDay } from './ui_timeline.js';
@@ -36,6 +39,8 @@ import { makeTabs } from './ui/tabs.js';
 import { icon } from './icons.js';
 import { catIcon, markerOf } from './ui/symbology.js';
 import { SHORTCUTS } from './ui/shortcuts.js';
+import { militaryInAnalysis } from './taxonomy.js';
+import { sanitizeWorkspace } from './ui/workspace.js';
 
 let railTabs = null;
 
@@ -49,7 +54,7 @@ export function initPanels() {
   // reference rows. Ctrl+K or / focuses it; empty input lists the commands.
   const CMDS = SHORTCUTS.filter((x) => x.cmd);
   const run = () => {
-    const q = inp.value.trim().toLowerCase();
+    const q = fold(inp.value.trim());
     hits = [];
     sel = -1;
     if (q.length === 1 || (q.length === 0 && document.activeElement !== inp)) {
@@ -61,7 +66,7 @@ export function initPanels() {
     const add = (name, arr) => arr.length && groups.push([name, arr]);
     add(
       'Commands',
-      CMDS.filter((c) => !q || c.label.toLowerCase().includes(q) || c.id.includes(q))
+      CMDS.filter((c) => !q || fold(c.label).includes(q) || c.id.includes(q))
         .slice(0, q ? 6 : 12)
         .map((c) => ({ t: 'cmd', id: c.id, label: c.label, sub: 'command', kbd: c.kbd.join(' ') })),
     );
@@ -77,14 +82,14 @@ export function initPanels() {
         add(
           'Places',
           ctx.countries.countries
-            .filter((c) => c.name.toLowerCase().includes(q))
+            .filter((c) => fold(c.name).includes(q))
             .slice(0, 6)
             .map((c) => ({ t: 'country', it: c, label: c.name, sub: 'country · ' + c.continent })),
         );
       add(
         'Layers',
         ctx.layers
-          .filter((l) => (l.full || l.name).toLowerCase().includes(q) || l.id.includes(q))
+          .filter((l) => fold(l.full || l.name).includes(q) || l.id.includes(q))
           .slice(0, 6)
           .map((l) => ({ t: 'layer', it: l, label: l.name, sub: `layer · ${l.group || ''} · ${l.on ? 'on' : 'off'}` })),
       );
@@ -93,12 +98,7 @@ export function initPanels() {
         if (l.items && l.kind !== 'ged')
           for (const it of l.items) {
             if (refs.length >= 12) break;
-            if (
-              String(it.name || '')
-                .toLowerCase()
-                .includes(q)
-            )
-              refs.push({ t: l.id, it, label: it.name, sub: l.name });
+            if ((it._fold ??= fold(it.name)).includes(q)) refs.push({ t: l.id, it, label: it.name, sub: l.name });
           }
       add('Reference', refs);
     }
@@ -129,7 +129,9 @@ export function initPanels() {
   };
   const hl = (s, q) => {
     s = String(s || '');
-    const i = s.toLowerCase().indexOf(q);
+    const f = fold(s);
+    // highlight only when folding kept the length (true for Latin, Greek, Cyrillic; not for e.g. Hangul syllables)
+    const i = f.length === s.length ? f.indexOf(q) : -1;
     return i < 0
       ? esc(s)
       : esc(s.slice(0, i)) + '<mark>' + esc(s.slice(i, i + q.length)) + '</mark>' + esc(s.slice(i + q.length));
@@ -167,7 +169,7 @@ export function initPanels() {
       inp.setAttribute('aria-activedescendant', 'sr-' + sel);
     } else if (e.key === 'Enter') {
       if (e.shiftKey) {
-        st.f.q = inp.value.trim().toLowerCase();
+        st.f.q = fold(inp.value.trim());
         emit('filters');
         res.hidden = true;
       } else if (hits[Math.max(0, sel)]) go(hits[Math.max(0, sel)]);
@@ -192,15 +194,25 @@ export function initPanels() {
     download('globalmap-workspace.json', JSON.stringify(workspace(), null, 2), 'application/json');
   $('#imp-ws').onchange = (e) => {
     const f = e.target.files[0];
-    if (f) f.text().then((t) => restore(JSON.parse(t)));
+    e.target.value = ''; // the same file can be chosen again after a fix
+    if (f) f.text().then(restoreText, (err) => setStatus('Workspace not loaded: ' + err.message));
   };
   $('#ws-save').onclick = () => {
-    localStorage.setItem('gm-workspace', JSON.stringify(workspace()));
-    setStatus('Workspace saved in this browser');
+    try {
+      localStorage.setItem('gm-workspace', JSON.stringify(workspace()));
+      setStatus('Workspace saved in this browser');
+    } catch (err) {
+      setStatus('Workspace not saved: browser storage is unavailable or full (' + err.name + ')');
+    }
   };
   $('#ws-load').onclick = () => {
-    const s = localStorage.getItem('gm-workspace');
-    if (s) restore(JSON.parse(s));
+    let s = null;
+    try {
+      s = localStorage.getItem('gm-workspace');
+    } catch {
+      return setStatus('Workspace not loaded: browser storage is unavailable');
+    }
+    if (s) restoreText(s);
     else setStatus('No saved workspace yet');
   };
 
@@ -685,6 +697,11 @@ export function openDossier(it, kind = 'case') {
   if (ph)
     ph.onclick = () => {
       const w = window.open('', '_blank');
+      if (!w)
+        return setStatus(
+          'Printable view blocked by the browser pop-up blocker: allow pop-ups for this page, or use Export Markdown',
+        );
+      w.opener = null;
       w.document.write(
         `<!doctype html><meta charset=utf-8><title>${esc(it.name)}</title><style>body{font:14px/1.5 Inter,system-ui,sans-serif;max-width:760px;margin:32px auto;color:#111}th{text-align:left;vertical-align:top;padding-right:12px;color:#555}a{color:#0645ad}</style>` +
           dossierPrintable(it),
@@ -762,7 +779,7 @@ function caseHTML(c) {
           .join('<br>')
       : ''
   }</p>
-  ${row('Dataset', '')}${c.dataset || c.file ? `<p class="muted small">Dataset: ${esc(c.dataset || '')} ${esc(c.file || '')}${c.origin ? ' · ' + esc(c.origin) : ''}</p>` : ''}
+  ${c.dataset || c.file ? `<p class="muted small">Dataset: ${esc(c.dataset || '')} ${esc(c.file || '')}${c.origin ? ' · ' + esc(c.origin) : ''}</p>` : ''}
   ${c.notes || c.flag ? `<h4>Notes</h4><p>${esc([c.notes, c.flag].filter(Boolean).join(' · '))}</p>` : ''}
   <h4>Related cases <small>(${rel.length})</small></h4>${
     rel.length
@@ -781,7 +798,24 @@ function caseHTML(c) {
 }
 function refHTML(it, kind) {
   const l = layerById(kind);
-  const skip = new Set(['lat', 'lon', '_layer', '_day', '_t1', 'name', 'source_url', 'url', 'seed_url', 'pdf7_ref']);
+  const skip = new Set([
+    'lat',
+    'lon',
+    '_layer',
+    '_day',
+    '_t1',
+    'name',
+    'source_url',
+    'url',
+    'seed_url',
+    'pdf7_ref',
+    'coord_source',
+    'coord_note',
+  ]);
+  // project rule: every clicked point states where its coordinates come from; reference datasets that publish no
+  // per-row coordinate source get the dataset itself, never an invented method
+  const csrc =
+    it.coord_source || it.coord_note || (l ? `As published in the ${l.name} dataset (see Source below)` : '');
   const kv = Object.entries(it).filter(
     ([k, v]) => !skip.has(k) && !k.startsWith('_') && v !== '' && v != null && typeof v !== 'object',
   );
@@ -789,7 +823,7 @@ function refHTML(it, kind) {
     it.coord_precision || (it.coord_note && /approx/i.test(it.coord_note) ? 'approximate (area centre)' : '');
   return `<div class="kicker"><span class="dot" style="background:${(l && l.color) || '#9db1c2'}"></span>${esc(l ? l.name : kind)} ${it.grade ? badge(gradeOf(it.grade), it.grade) : ''} ${prec ? `<span class="pbadge">${esc(prec)}</span>` : ''}</div>
    <h2>${esc(it.name || it.conflict || '(unnamed)')}</h2>
-   <table class="kv">${row('Coordinates', `<span class="mono">${(+it.lat).toFixed(4)}, ${(+it.lon).toFixed(4)}</span>`)}${isFinite(it._day) ? row('Date', `<a href="#" data-date="${it._day}">${esc(dayLabel(it._day))}</a>`) : ''}${kv.map(([k, v]) => row(k.replace(/_/g, ' '), esc(v))).join('')}</table>
+   <table class="kv">${row('Coordinates', `<span class="mono">${(+it.lat).toFixed(4)}, ${(+it.lon).toFixed(4)}</span>`)}${row('Coord. source', esc(csrc || 'not stated'))}${isFinite(it._day) ? row('Date', `<a href="#" data-date="${it._day}">${esc(dayLabel(it._day))}</a>`) : ''}${kv.map(([k, v]) => row(k.replace(/_/g, ' '), esc(v))).join('')}</table>
    ${it.why_weird ? `<h4>Why weird</h4><p>${esc(it.why_weird)}</p>` : ''}
    ${pdf7HTML(it)}<h4>Source</h4><p>${link(it.source_url || it.url || it.seed_url, it.source_title)}</p><p class="muted small">${esc(l ? l.source || '' : '')}</p>${imageryHTML(it)}`;
 }
@@ -847,6 +881,7 @@ export function nearby(c) {
       bd = Infinity;
     for (const it of l.items) {
       if (id === 'ged' && Math.abs(it._day - c._day) > st.coWin) continue;
+      if (id === 'military' && !militaryInAnalysis(it)) continue; // gendarmerie / forts: shown, never analysed
       const d = S.haversine(c.lat, c.lon, it.lat, it.lon);
       if (d < bd) {
         bd = d;
@@ -855,7 +890,7 @@ export function nearby(c) {
     }
     if (best)
       out.push({
-        layer: l.name + (id === 'ged' ? ` (±${st.coWin} d)` : ''),
+        layer: l.name + (id === 'ged' ? ` (±${st.coWin} d)` : id === 'military' ? ' (excl. forts, gendarmerie)' : ''),
         name: best.name || best.conflict || '',
         d: bd,
       });
@@ -935,17 +970,30 @@ export function workspace() {
     selected: st.selected && st.selected.id,
   };
 }
+/** Parse + validate a workspace JSON string; a bad file leaves the current state untouched and says why. */
+export function restoreText(text) {
+  let w;
+  try {
+    w = sanitizeWorkspace(JSON.parse(text), { dayMin: DAYMIN, dayMax: NDAYS, layerIds: ctx.layers.map((l) => l.id) });
+  } catch (err) {
+    setStatus('Workspace not loaded: ' + (err instanceof SyntaxError ? 'the file is not valid JSON' : err.message));
+    return false;
+  }
+  restore(w);
+  return true;
+}
+/** Apply an already sanitised workspace (see sanitizeWorkspace in src/ui/workspace.js). */
 export function restore(w) {
   st.cur = w.cur;
-  st.hour = w.hour ?? 12;
-  ctx.globe.camera.position.set(...w.camera);
+  st.hour = w.hour;
+  if (w.camera) ctx.globe.camera.position.set(...w.camera);
   for (const l of ctx.layers) if (!['expected', 'merged'].includes(l.kind)) setLayerOn(l.id, w.layers.includes(l.id));
   const f = st.f;
-  for (const k of ['cats', 'grades', 'eras', 'countries', 'prec']) f[k] = new Set(w.filters[k] || []);
+  for (const k of ['cats', 'grades', 'eras', 'countries', 'prec']) f[k] = new Set(w.filters[k]);
   f.range = w.filters.range;
-  f.q = w.filters.q || '';
-  st.notes = w.notes || '';
-  st.pinned = new Set(w.pinned || []);
+  f.q = w.filters.q;
+  st.notes = w.notes;
+  st.pinned = new Set(w.pinned);
   const n = $('#notes');
   if (n) n.value = st.notes;
   emit('filters');

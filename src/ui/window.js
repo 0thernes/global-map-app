@@ -548,7 +548,6 @@ function startResize(e, w, kind) {
   };
   addEventListener('pointermove', move);
   addEventListener('pointerup', up);
-  void kind;
 }
 function showPreview(zone, safe) {
   if (!preview) {
