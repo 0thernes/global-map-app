@@ -65,5 +65,11 @@ class NormDate(unittest.TestCase):
         self.assertEqual(bd.fix_integer_text({'count': '2.5'})['count'], '2.5')
 
 
+    def test_dataset_label_from_the_file_never_guessed(self):
+        self.assertEqual(bd.dataset_of({'file': 'qwm_uap_cases.csv', 'origin': 'qwm/wiw/hs_candidates.csv row 1'}),
+                         'local CSV qwm_uap_cases.csv (from qwm/wiw/hs_candidates.csv)')
+        self.assertEqual(bd.dataset_of({'file': 'x.csv'}), 'local CSV x.csv')
+
+
 if __name__ == '__main__':
     unittest.main()

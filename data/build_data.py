@@ -71,6 +71,12 @@ def norm_date(s):
     if y > datetime.date.today().year: return '', ''
     return ('-' if y < 0 else '') + '%04d-01-01' % abs(y), 'year'
 
+def dataset_of(c):
+    """provenance label for a row whose CSV has no dataset column: the file it was read from (and the upstream list
+    named in its 'origin' column), never a guess."""
+    m = re.match(r'(\S+?\.csv)', str(c.get('origin') or ''))
+    return 'local CSV %s%s' % (c.get('file', ''), ' (from %s)' % m.group(1) if m else '')
+
 PREC_RANK = {'day': 0, 'month': 1, 'year': 2, 'decade': 3}
 def coarser_precision(a, b):
     """the coarser of two date precisions: a source column may say 'day' while its date is not a real calendar day."""
@@ -360,6 +366,7 @@ def main(args):
                 parts = [g.strip() for g in c['grade'].split(' / ')]
                 if len(parts) > 1 and len(set(parts)) == 1: c['grade_raw'] = c['grade']; c['grade'] = parts[0]
             c.update(id=rid, lat=round(lat, 6), lon=round(lon, 6), layer=stem, file=os.path.basename(fn))
+            if not c.get('dataset'): c['dataset'] = dataset_of(c)
             if rid in pdf7 and not c.get('pdf7_ref'): c['pdf7_ref'] = pdf7[rid]
             if iso:
                 c['date'] = iso; c['date_precision'] = coarser_precision(r.get('date_precision'), prec)
