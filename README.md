@@ -22,7 +22,7 @@ water and sky layers. Every plotted row cites its source.**
 [![Keyboard first](https://img.shields.io/badge/keyboard-Ctrl%2BK%20%C2%B7%20%3F-informational.svg)](#keyboard)
 [![X @0thernes_ai](https://img.shields.io/badge/X-%400thernes__ai-000000.svg)](https://x.com/0thernes_ai)
 
-**[Live demo](https://0thernes.github.io/global-map-app/)** · [User guide](docs/user-guide.md) · [Layer catalog](docs/layer-catalog.md) · [Audit](docs/audit/SUMMARY.md) · [Data sources](docs/data-sources.md) · [ADR: Cesium](docs/adr/0001-cesium-renderer.md) · [Changelog](CHANGELOG.md)
+**[Live demo](https://0thernes.github.io/global-map-app/)** · [User guide](docs/user-guide.md) · [Layer catalog](docs/layer-catalog.md) · [Audit](docs/audit/SUMMARY.md) · [Data sources](docs/data-sources.md) · [Data dictionary](docs/data-dictionary.md) · [Limitations](docs/limitations.md) · [ADR: Cesium](docs/adr/0001-cesium-renderer.md) · [Changelog](CHANGELOG.md)
 
 ![Global Map: CesiumJS globe with streamed satellite imagery, sun lighting, cases and surface-anchored labels](docs/screenshots/02_globe.png)
 

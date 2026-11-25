@@ -1166,9 +1166,9 @@
    "layer": "K",
    "lens": "Architecture doc vs tree",
    "scope": "docs/architecture.md vs src/",
-   "kind": "manual",
-   "ok": null,
-   "summary": "Module list compared with src/ (F-K08-1 if drift).",
+   "kind": "auto",
+   "ok": true,
+   "summary": "0 src/ files missing from the architecture module index (F-K08-1)",
    "detail": []
   },
   {
@@ -1248,7 +1248,7 @@
    "scope": "docs/",
    "kind": "manual",
    "ok": null,
-   "summary": "Limitations were scattered across docs; no single section on reporting bias, geocoding bias, multiple comparisons, confounding (F-M02-1).",
+   "summary": "Limitations were scattered across docs; no single section on reporting bias, geocoding bias, multiple comparisons, confounding (F-M02-1, fixed: docs/limitations.md).",
    "detail": []
   },
   {
@@ -1257,30 +1257,9 @@
    "lens": "Data dictionary",
    "scope": "COMMON export columns",
    "kind": "auto",
-   "ok": false,
-   "summary": "20 COMMON export columns not defined in a data dictionary",
-   "detail": [
-    "id",
-    "date_precision",
-    "date_disputed",
-    "continent",
-    "country_iso",
-    "country",
-    "admin1",
-    "admin2",
-    "postal_code",
-    "urban_rural",
-    "category",
-    "subtype",
-    "count",
-    "summary",
-    "source_type",
-    "dataset",
-    "grade",
-    "witness_count",
-    "linked_case",
-    "notes"
-   ]
+   "ok": true,
+   "summary": "0 COMMON export columns not defined in a data dictionary",
+   "detail": []
   },
   {
    "id": "M04",
@@ -1289,7 +1268,7 @@
    "scope": "ui_analysis, stats",
    "kind": "manual",
    "ok": null,
-   "summary": "Seeds, iterations and one-sided p are shown; no family-wise correction across the hypotheses panel (F-M04-1, decided: documented in LIMITATIONS).",
+   "summary": "Seeds, iterations and one-sided p are shown; Analyze prints a Bonferroni threshold for its baseline tests (src/ui_analysis.js) and the Data panel battery gives Holm-adjusted p (src/pdf7_stats.js holm). No finding; an earlier draft note claiming no correction was wrong and is withdrawn.",
    "detail": []
   },
   {
@@ -1427,10 +1406,10 @@
    "id": "Q04",
    "layer": "Q",
    "lens": "Pipeline determinism / pickle",
-   "scope": "data/tools/build_layers.py, build_conflicts.py",
-   "kind": "manual",
-   "ok": null,
-   "summary": "cmeta passed between steps as a pickle (F-C12-1).",
+   "scope": "data/tools/*.py",
+   "kind": "auto",
+   "ok": true,
+   "summary": "0 pickle uses in the Python pipeline (cmeta now JSON, F-C12-1)",
    "detail": []
   }
  ]

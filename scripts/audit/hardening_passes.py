@@ -564,6 +564,19 @@ def m03():
     return ok_if_empty(miss, 'COMMON export columns not defined in a data dictionary')
 
 
+def q04():
+    hits = grep(r'^\s*import pickle|^\s*from pickle|pickle\.(load|dump)', [f for f in tracked('*.py') if not f.endswith('hardening_passes.py')])
+    return ok_if_empty(hits, 'pickle uses in the Python pipeline (cmeta now JSON, F-C12-1)')
+
+
+def k08():
+    doc = open('docs/architecture.md', encoding='utf-8').read()
+    files = [f for f in tracked('src/*.js') + tracked('src/**/*.js')]
+    miss = sorted({f for f in files if f'`{f[4:]}`' not in doc and f'`{os.path.basename(f)}`' not in doc
+                   and not (f.startswith('src/cesium/') and '`cesium/*`' in doc)})
+    return ok_if_empty(miss, 'src/ files missing from the architecture module index (F-K08-1)')
+
+
 def n01():
     want = ['README.md', 'LICENSE', 'DATA_LICENSE.md', 'CHANGELOG.md', 'CITATION.cff', 'CONTRIBUTING.md', 'CODE_OF_CONDUCT.md',
             'SECURITY.md', 'SUPPORT.md', 'CREDITS.md', '.github/CODEOWNERS', '.github/ISSUE_TEMPLATE/bug_report.yml',
@@ -732,7 +745,7 @@ PASSES = [
     ('K05', 'K', 'Relative links', 'every tracked .md', A, k05, False),
     ('K06', 'K', 'Version consistency', 'package.json, lockfile, index.html, CITATION.cff, CHANGELOG', A, k06, False),
     ('K07', 'K', 'Glossary vs code', 'src/glossary.js', M, 'Uncertainty-circle definition matched against code after the radius fix (F-B14-1).', False),
-    ('K08', 'K', 'Architecture doc vs tree', 'docs/architecture.md vs src/', M, 'Module list compared with src/ (F-K08-1 if drift).', False),
+    ('K08', 'K', 'Architecture doc vs tree', 'docs/architecture.md vs src/', A, k08, False),
     ('K09', 'K', 'Data-sources doc vs live endpoints', 'docs/data-sources.md vs src/live_feeds.js, src/cesium/sources.js', M, 'USGS 4.5_month, EONET v3 open/60 d, Esri/EOX/OSM/CARTO/GIBS/Terrarium endpoints match.', False),
     ('L01', 'L', 'Dataset attribution coverage', 'CREDITS.md + DATA_LICENSE.md', A, l01, False),
     ('L02', 'L', 'Vendored licences', 'vendor/', A, l02, False),
@@ -740,9 +753,9 @@ PASSES = [
     ('L04', 'L', 'Imagery attribution on screen', 'Cesium credit container, basemap status', M, 'Every basemap passes its credit to Cesium credits and to the status line on switch. Sound.', False),
     ('L05', 'L', 'Share-alike obligations', 'OSM-derived military, GeoNuclearData (ODbL)', M, 'DATA_LICENSE.md states ODbL for OSM and GeoNuclearData derived layers and keeps them as separate databases. Sound.', False),
     ('M01', 'M', 'Methodology document', 'docs/data-and-grading.md, docs/convergence.md', M, 'Present; grading policy, baselines and convergence score documented.', False),
-    ('M02', 'M', 'Limitations and threats to validity', 'docs/', M, 'Limitations were scattered across docs; no single section on reporting bias, geocoding bias, multiple comparisons, confounding (F-M02-1).', False),
+    ('M02', 'M', 'Limitations and threats to validity', 'docs/', M, 'Limitations were scattered across docs; no single section on reporting bias, geocoding bias, multiple comparisons, confounding (F-M02-1, fixed: docs/limitations.md).', False),
     ('M03', 'M', 'Data dictionary', 'COMMON export columns', A, m03, False),
-    ('M04', 'M', 'Statistical reporting', 'ui_analysis, stats', M, 'Seeds, iterations and one-sided p are shown; no family-wise correction across the hypotheses panel (F-M04-1, decided: documented in LIMITATIONS).', False),
+    ('M04', 'M', 'Statistical reporting', 'ui_analysis, stats', M, 'Seeds, iterations and one-sided p are shown; Analyze prints a Bonferroni threshold for its baseline tests (src/ui_analysis.js) and the Data panel battery gives Holm-adjusted p (src/pdf7_stats.js holm). No finding; an earlier draft note claiming no correction was wrong and is withdrawn.', False),
     ('M05', 'M', 'Citation metadata', 'CITATION.cff', M, 'See K03 (F-K03-1).', False),
     ('N01', 'N', 'Checklist files present', 'repo root, .github', A, n01, False),
     ('N02', 'N', 'No-bot / no-PR policy files', '.github', A, n02, False),
@@ -754,7 +767,7 @@ PASSES = [
     ('Q01', 'Q', 'Python byte-compile', 'all tracked .py', A, q01, False),
     ('Q02', 'Q', 'Python lint (ruff F, E9)', 'all tracked .py', A, q02, False),
     ('Q03', 'Q', 'Python unit tests', 'test/py', A, q03, False),
-    ('Q04', 'Q', 'Pipeline determinism / pickle', 'data/tools/build_layers.py, build_conflicts.py', M, 'cmeta passed between steps as a pickle (F-C12-1).', False),
+    ('Q04', 'Q', 'Pipeline determinism / pickle', 'data/tools/*.py', A, q04, False),
 ]
 
 
@@ -781,7 +794,10 @@ def main():
         elif kind == M:
             r.update(ok=None, summary=fn, detail=[])
         res.append(r)
-    json.dump({'passes': res}, open(OUT / 'passes_run.json', 'w'), indent=1, ensure_ascii=False)
+    tmp = OUT / 'passes_run.json.tmp'  # atomic: a crash while writing never leaves a truncated record behind
+    with open(tmp, 'w') as fh:
+        json.dump({'passes': res}, fh, indent=1, ensure_ascii=False)
+    os.replace(tmp, OUT / 'passes_run.json')
     write_md(res)
     print(f'{len(PASSES)} passes in the catalogue ({sum(p[4] == A for p in PASSES)} auto, {sum(p[4] == M for p in PASSES)} manual); '
           f'failing auto passes: {fails or "none"}')
