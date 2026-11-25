@@ -79,3 +79,7 @@ Step 4 run at 3787935, from 2026-11-24 17:10 PST, one check at a time (`/workspa
 - [x] smoke at 9772edc (03:56–04:07 PST, `smoke_final.log`): 21 steps ok, boot+steps 638 s, errors: 0
 - [ ] ui_audit run 7 (04:07–04:09 PST): 3840x2160 hover_card again 83.5 s against 60 s at load ~8.9; recorded as open
       finding F-E02-6 (rerun on an idle box). Every other view at every size has passed (runs 2, 4, 5, 6).
+- [x] Final pass run at 934121a: 127 passes (71 auto, all clean; 56 manual), 181 Node and 13 Python tests, lint, ruff,
+      findings report `--check` clean (66 findings: 50 fixed, 15 decided, 1 open).
+- [x] Release: annotated tag v1.5.1 on this commit; incremental bundle `main v1.5.1 ^v1.5.0`, verified, split into
+      4 MiB parts with SHA256SUMS in `/workspace/gma-parts16/` on the build box (not pushed).
