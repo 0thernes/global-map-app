@@ -353,26 +353,37 @@ test('F-E02-3: map tools hide while a window covers their column', async () => {
 });
 
 test('F-E02-5: the open legend stays left of the map-tool column, so it cannot cover #btn-legend', () => {
-  const css = readFileSync('css/console.css', 'utf8');
-  const i = css.indexOf('#legend {');
-  const rule = css.slice(i, css.indexOf('}', i));
-  assert.match(
-    rule,
-    /min\(\s*var\(--legend-w\),\s*calc\(100vw - var\(--occ-left, 0px\) - var\(--occ-right, 0px\) - var\(--maptools-w\) - 3 \* var\(--s-1\)\)/,
-  );
+  const css = readFileSync('css/console.css', 'utf8').replace(/\/\*[\s\S]*?\*\//g, '');
   assert.match(css, /--maptools-w: calc\(var\(--ctl\) \+ 2 \* var\(--s-h\) \+ 2px\)/);
-  // the same arithmetic on the run-4 layout (1280x800, a right dock leaving #btn-legend at x = 604): legend right
-  // edge vs the left edge of the tool column, with --ctl 32, --s-h 4, --s-1 8
-  const vw = 1280,
-    occLeft = 336,
-    s1 = 8,
-    toolsW = 32 + 2 * 4 + 2;
-  const occRight = vw - (604 + 32 + 4 + 1) - s1;
-  const w = Math.max(160, Math.min(272, vw - occLeft - occRight - toolsW - 3 * s1));
-  const legendRight = occLeft + s1 + w;
-  const toolsLeft = vw - occRight - s1 - toolsW;
-  assert.ok(legendRight <= toolsLeft - s1, `${legendRight} <= ${toolsLeft - s1}`);
-  assert.ok(occLeft + s1 + 272 > toolsLeft, 'the uncapped 272 px legend did overlap');
+  assert.match(
+    css,
+    /--legend-fit: max\(\s*160px,\s*min\(\s*var\(--legend-w\),\s*calc\(100vw - var\(--occ-left, 0px\) - var\(--occ-right, 0px\) - var\(--maptools-w\) - 3 \* var\(--s-1\)\)/,
+  );
+  // the cascade, not one rule: the first fix capped the width in the base #legend rule, but the later chip rule
+  // #legend:not(.collapsed) { width: var(--legend-w) } won, so the legend stayed 272 px. Every rule that sizes the
+  // legend box itself must go through --legend-fit.
+  const sizing = [];
+  for (const m of css.matchAll(/([^{}]+)\{([^{}]*)\}/g)) {
+    const sels = m[1].split(',').map((x) => x.trim());
+    if (!sels.some((x) => /^(body[^ ]* )?#legend(\[[^\]]*\]|[.:][\w-]+(\([^)]*\))?)*$/.test(x))) continue;
+    for (const d of m[2].matchAll(/(?:^|;)\s*((?:max-)?width):\s*([^;]+)/g)) sizing.push(`${d[1]}: ${d[2].trim()}`);
+  }
+  assert.ok(sizing.length >= 2, sizing.join(' | '));
+  for (const d of sizing) assert.match(d, /var\(--legend-fit\)|: auto$/, d);
+  // the run-4 layouts at 1280x800 (probe_legend2.log): legend right edge vs the tool column's left edge
+  for (const [occLeft, occRight] of [
+    [376, 631], // feed_recent
+    [376, 597], // wars, analysis, graph
+    [671, 330], // hs_dossier
+  ]) {
+    const vw = 1280,
+      s1 = 8,
+      toolsW = 32 + 2 * 4 + 2;
+    const w = Math.max(160, Math.min(272, vw - occLeft - occRight - toolsW - 3 * s1));
+    const toolsLeft = vw - occRight - s1 - toolsW;
+    assert.ok(occLeft + s1 + w <= toolsLeft - s1, `${occLeft},${occRight}: ${occLeft + s1 + w} > ${toolsLeft - s1}`);
+    assert.ok(occLeft + s1 + 272 > toolsLeft, 'the uncapped 272 px legend did overlap');
+  }
 });
 
 test('F-B21-1: tab overflow is measured on the bar, so toggling the arrows cannot feed back into a ResizeObserver', async () => {
