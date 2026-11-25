@@ -23,19 +23,19 @@ class NormDate(unittest.TestCase):
         self.assertEqual(bd.norm_date('1723.0'), ('1723-01-01', 'year'))
         self.assertEqual(bd.norm_date('-2480.0'), ('-2480-01-01', 'year'))
 
-    def test_impossible_month_or_day_never_rolls_over(self):
+    def test_impossible_month_or_day_never_rolls_over(self):  # F-D08-2
         self.assertEqual(bd.norm_date('1980-13-05'), ('1980-01-01', 'year'))
         self.assertEqual(bd.norm_date('1981-02-29'), ('1981-02-01', 'month'))
         self.assertEqual(bd.norm_date('1980-02-29'), ('1980-02-29', 'day'))
         self.assertEqual(bd.norm_date('1900-02-29'), ('1900-02-01', 'month'))
 
-    def test_placeholders_and_ids_are_not_dates(self):
+    def test_placeholders_and_ids_are_not_dates(self):  # F-D08-2
         self.assertEqual(bd.norm_date('http://www'), ('', ''))
         self.assertEqual(bd.norm_date('Q836568'), ('', ''))
         self.assertEqual(bd.norm_date('case 98765'), ('', ''))
         self.assertEqual(bd.norm_date('unknown'), ('', ''))
 
-    def test_free_text_year(self):
+    def test_free_text_year(self):  # F-D08-2
         self.assertEqual(bd.norm_date('c. 1950'), ('1950-01-01', 'year'))
         self.assertEqual(bd.norm_date('19 Sep 1976'), ('1976-09-19', 'day'))
         self.assertEqual(bd.norm_date('198-'), ('1980-01-01', 'decade'))

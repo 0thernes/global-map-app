@@ -39,6 +39,7 @@
     "test:py": "python3 -m unittest discover -s test/py -p \"test_*.py\"",
     "audit:hardening": "python3 scripts/audit/hardening_passes.py",
     "audit:index": "python3 scripts/audit/index_repo.py",
+    "audit:findings": "python3 scripts/audit/hardening_report.py",
     "test:smoke": "node test/smoke.mjs",
     "test:a11y": "node test/a11y.mjs",
     "test:perf": "node test/perf.mjs",

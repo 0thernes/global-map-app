@@ -382,7 +382,7 @@ def d09():
 def d10():
     hits = [f for f in tracked() if f.startswith('data/private/') and f != 'data/private/README.md']
     rows = [h for h in grep(r'"dataset":\s*"NUFORC|nuforc\.org/webreports|nuforc\.org/sighting', text_files(['data/']))
-            if not h.startswith('data/catalog.js:')]  # aggregate statistics only, decided in F-D19-1
+            if not h.startswith('data/catalog.js:')]  # aggregate statistics only, decided in F-D10-1
     _, site = sh("node -e \"\"")  # package exclusion is checked in the source below
     pkg = open('scripts/package.mjs').read()
     excl = r'/^data\/private\//' in pkg
@@ -747,7 +747,7 @@ PASSES = [
     ('D16', 'D', 'Wikidata placeholder artefacts', 'data/layers, data/cases.js', A, d16, False),
     ('D17', 'D', 'Radius defaults by precision', 'build_data PREC, layers PR, app_core _r, glossary', M, 'build_data writes coord_radius_km for every public case (PREC table), so the 10 km fallback in prepCases is only reached by private/local rows; it still contradicts PREC for region (100) and unspecified (25) (F-B14-1).', False),
     ('D18', 'D', 'Source URL liveness record', 'data/url_status.js, docs/audit/url_status.csv', M, 'url_status.js checked date reviewed; re-checking 2.6k URLs from the box is not cheap and some hosts block bots, so the stored check is kept and its date is shown in the UI (F-D18-1, decided).', False),
-    ('D19', 'D', 'Private data in aggregates', 'data/catalog.js', M, 'catalog.js carries aggregate NUFORC distance statistics (no rows, no identifiers) from the analysis briefing (F-D19-1, decided).', False),
+    ('D19', 'D', 'Private data in aggregates', 'data/catalog.js', M, 'catalog.js carries aggregate NUFORC distance statistics (no rows, no identifiers) from the analysis briefing (F-D10-1, decided).', False),
     ('D20', 'D', 'Source -> built row reconciliation', 'data/sources/qwm vs data/layers', A, d20, False),
     ('D21', 'D', 'Spreadsheet float years in QWM snapshot', 'data/sources/qwm/*.csv.gz', M, '38 date cells written as floats ("1723.0", "-2480.0") by the upstream export; norm_date reads them correctly as years and the validator warns (F-D21-1, decided: snapshot is kept byte-identical to the cited drop).', False),
     ('D22', 'D', 'Datetime truncation', 'data/layers/map_conflicts.js', A, d22, False),

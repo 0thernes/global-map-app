@@ -6,19 +6,9 @@
    "lens": "Index completeness",
    "scope": "every tracked file vs index.csv",
    "kind": "auto",
-   "ok": false,
-   "summary": "1120 indexed / 1129 tracked",
-   "detail": [
-    "docs/audit/hardening/PASSES.md",
-    "docs/audit/hardening/passes_run.json",
-    "scripts/audit/hardening_passes.py",
-    "src/data_clean.js",
-    "src/text.js",
-    "src/ui/sanitize.js",
-    "src/ui/workspace.js",
-    "test/py/test_build_data.py",
-    "test/unit/hardening.test.mjs"
-   ]
+   "ok": true,
+   "summary": "1136 indexed / 1136 tracked",
+   "detail": []
   },
   {
    "id": "A02",
@@ -27,7 +17,7 @@
    "scope": "all tracked files",
    "kind": "auto",
    "ok": true,
-   "summary": "0 files over 50 MB; working tree changes: 23",
+   "summary": "0 files over 50 MB; working tree changes: 16",
    "detail": []
   },
   {
@@ -594,7 +584,7 @@
    "scope": "data/build_data.py norm_date, case sort",
    "kind": "manual",
    "ok": null,
-   "summary": "Case sort key is (False, date) for both signs, so BCE rows sort lexicographically (-0450 before -2560) (F-D08-1). norm_date fallback pulls any 3-4 digit run out of free text and accepts month 13 / day 45 (F-D08-2).",
+   "summary": "A first case sort with key (False, date) looked lexicographic for BCE rows, but a later numeric sort overrides it, so it was redundant dead code, not a mis-sort (F-D08-1, removed). norm_date fallback pulls any 3-4 digit run out of free text and accepts month 13 / day 45 (F-D08-2).",
    "detail": []
   },
   {
@@ -719,7 +709,7 @@
    "scope": "data/catalog.js",
    "kind": "manual",
    "ok": null,
-   "summary": "catalog.js carries aggregate NUFORC distance statistics (no rows, no identifiers) from the analysis briefing (F-D19-1, decided).",
+   "summary": "catalog.js carries aggregate NUFORC distance statistics (no rows, no identifiers) from the analysis briefing (F-D10-1, decided).",
    "detail": []
   },
   {
@@ -769,7 +759,7 @@
    "scope": "data/cases.js",
    "kind": "auto",
    "ok": true,
-   "summary": "0 case dates that are not calendar dates (F-D23-1); 18 GEIPAN titles whose date differs from the observation date (F-D26-1, kept as published)",
+   "summary": "0 case dates that are not calendar dates (F-D23-1); 18 GEIPAN titles whose date differs from the observation date (F-D23-2, kept as published)",
    "detail": [
     "GEIPAN-4422",
     "GEIPAN-390",
@@ -1194,11 +1184,9 @@
    "lens": "Relative links",
    "scope": "every tracked .md",
    "kind": "auto",
-   "ok": false,
-   "summary": "1 broken relative links in Markdown",
-   "detail": [
-    "docs/audit/hardening/PASSES.md: findings.csv"
-   ]
+   "ok": true,
+   "summary": "0 broken relative links in Markdown",
+   "detail": []
   },
   {
    "id": "K06",
@@ -1346,11 +1334,9 @@
    "lens": "Checklist files present",
    "scope": "repo root, .github",
    "kind": "auto",
-   "ok": false,
-   "summary": "1 of 28 checklist files missing",
-   "detail": [
-    ".nvmrc"
-   ]
+   "ok": true,
+   "summary": "0 of 28 checklist files missing",
+   "detail": []
   },
   {
    "id": "N02",
@@ -1369,7 +1355,7 @@
    "scope": "eslint.config.js, .prettierignore",
    "kind": "auto",
    "ok": true,
-   "summary": "eslint ignores ['coverage', 'data', 'dist', 'docs/screenshots', 'js', 'node_modules', 'shots', 'textures', 'vendor']; prettier ignores ['*.min.js', 'coverage', 'data', 'dist', 'docs/audit/hardening/INDEX.md', 'docs/audit/hardening/PASSES.md', 'docs/audit/hardening/passes_run.json', 'docs/audit/v1.2-data-gap-audit.md', 'docs/audit/v1.3-ui-audit.md', 'docs/screenshots', 'docs/wireframes', 'js', 'node_modules', 'package-lock.json', 'shots', 'textures', 'vendor']",
+   "summary": "eslint ignores ['coverage', 'data', 'dist', 'docs/screenshots', 'js', 'node_modules', 'shots', 'textures', 'vendor']; prettier ignores ['*.min.js', 'coverage', 'data', 'dist', 'docs/audit/hardening/FINDINGS.md', 'docs/audit/hardening/INDEX.md', 'docs/audit/hardening/PASSES.md', 'docs/audit/hardening/passes_run.json', 'docs/audit/v1.2-data-gap-audit.md', 'docs/audit/v1.3-ui-audit.md', 'docs/screenshots', 'docs/wireframes', 'js', 'node_modules', 'package-lock.json', 'shots', 'textures', 'vendor']",
    "detail": [
     "docs/wireframes"
    ]
@@ -1452,11 +1438,11 @@
    "scope": "test/py",
    "kind": "auto",
    "ok": true,
-   "summary": "Ran 6 tests OK",
+   "summary": "Ran 13 tests OK",
    "detail": [
-    "......",
+    ".............",
     "----------------------------------------------------------------------",
-    "Ran 6 tests in 0.003s",
+    "Ran 13 tests in 0.087s",
     "",
     "OK"
    ]

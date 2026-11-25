@@ -284,3 +284,35 @@ test('F-C05-1: every new-tab link drops the opener and the referrer', () => {
     for (const a of blank) assert.match(a, /rel="noopener noreferrer"/, `${f}: ${a}`);
   }
 });
+
+test('F-B10-1 (static guard): the printable dossier checks for a blocked pop-up before writing to it', () => {
+  const src = readFileSync('src/ui_panels.js', 'utf8');
+  const i = src.indexOf("window.open('', '_blank')");
+  assert.ok(i > 0);
+  const after = src.slice(i, i + 400);
+  assert.match(after, /if \(!w\)/);
+  assert.match(after, /w\.opener = null/);
+  assert.ok(after.indexOf('if (!w)') < after.indexOf('w.document.write'));
+});
+
+test('F-D15-1 / F-D23-1 (static guard): every reference dossier has a Coord. source row; case dossiers show date_note', () => {
+  const src = readFileSync('src/ui_panels.js', 'utf8');
+  const ref = src.slice(src.indexOf('function refHTML'), src.indexOf('function refHTML') + 4000);
+  assert.match(ref, /row\('Coord\. source', esc\(csrc \|\| 'not stated'\)\)/);
+  assert.match(ref, /As published in the/);
+  assert.match(src.slice(src.indexOf('function caseHTML'), src.indexOf('function caseHTML') + 800), /c\.date_note/);
+});
+
+test('F-J05-1: the site package ships git-tracked files only', async () => {
+  const { execFileSync } = await import('node:child_process');
+  const { writeFileSync, rmSync, existsSync } = await import('node:fs');
+  const probe = 'data/__untracked_probe.js';
+  writeFileSync(probe, '// untracked probe\n');
+  try {
+    execFileSync('node', ['scripts/package.mjs', '--site'], { stdio: 'pipe' });
+    assert.equal(existsSync('dist/site/' + probe), false);
+    assert.equal(existsSync('dist/site/js/app.js'), true);
+  } finally {
+    rmSync(probe, { force: true });
+  }
+});

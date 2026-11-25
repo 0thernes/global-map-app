@@ -757,7 +757,8 @@ function caseHTML(c) {
     `${esc(c.date_original || c.date)}${c.date_precision ? ` <small>(${esc(c.date_precision)})</small>` : ''}` +
     (c._hi - c._lo > 1
       ? `<br><small>range ${esc(dayLabel(c._lo))} → ${esc(dayLabel(c._hi))}${c.date_disputed ? ' · disputed' : ''}</small>`
-      : '');
+      : '') +
+    (c.date_note ? `<br><small class="muted">${esc(c.date_note)}</small>` : '');
   const mk = markerOf(c);
   const col = catColor(c.category, c.subtype);
   // v1.4 dossier: identity header, then provenance (source, grade, coord_source, precision) before the narrative
