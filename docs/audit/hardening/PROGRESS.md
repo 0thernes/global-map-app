@@ -34,3 +34,9 @@ Step 4 run at 3787935, from 2026-11-24 17:10 PST, one check at a time (`/workspa
 - [x] data: 44 CSV files, 0 errors, 78 warnings (float years and similar, decided F-D21-1)
 - [x] build: js/app.js reproducible (no diff)
 - [x] perf: idle 4 frames in 10 s (budget 20), 4 with grid + terminator; dossier open + capture 21.6 s (budget 60 s)
+- [ ] ui_audit --check, every view at 3 sizes, run 1 (17:11–18:07 PST): **failed, 140 failures** (log
+      `ui_audit_run1.log`). Legend cluster glyph text 9 px in every view (F-E02-1), graph toggles 23 px (F-E02-2), map
+      tools half covered by windows (F-E02-3), a 19 px index link at 4K (F-E04-1), a button past a narrow window's edge
+      (F-E02-4), and one slow `reports` view at 4K under box load ~9 (464 s). Earlier release runs used `--only`
+      subsets (F-I03-1). The a11y run that followed was stopped. Fixed in 68a6c4e, findings in ac05271.
+- [ ] ui_audit --check run 2 at ac05271: started 20:21 PST
