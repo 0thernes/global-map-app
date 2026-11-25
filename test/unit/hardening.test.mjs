@@ -351,3 +351,42 @@ test('F-E02-3: map tools hide while a window covers their column', async () => {
   assert.equal(overlapsAny(tools, []), false);
   assert.match(readFileSync('css/console.css', 'utf8'), /body\.tools-covered #maptools/);
 });
+
+test('F-B21-1: tab overflow is measured on the bar, so toggling the arrows cannot feed back into a ResizeObserver', async () => {
+  const { overflowState, makeTabs } = await import('../../src/ui/tabs.js');
+  // arrows shown or hidden, the answer depends only on content vs bar width
+  assert.deepEqual(
+    { ...overflowState({ content: 500, host: 400, left: 0, view: 336 }) },
+    { over: true, prevOff: true, nextOff: false },
+  );
+  assert.deepEqual(
+    { ...overflowState({ content: 500, host: 400, left: 164, view: 336 }) },
+    { over: true, prevOff: false, nextOff: true },
+  );
+  assert.equal(overflowState({ content: 400, host: 400 }).over, false);
+  assert.equal(overflowState({ content: 401, host: 400 }).over, false); // 1 px rounding slack
+  const w = new JSDOM('<!doctype html><div id="t"></div>', { pretendToBeVisual: true }).window;
+  const saved = { document: globalThis.document, RO: globalThis.ResizeObserver };
+  const observed = [];
+  globalThis.document = w.document;
+  globalThis.ResizeObserver = class {
+    constructor(cb) {
+      this.cb = cb;
+    }
+    observe(el) {
+      observed.push(el);
+    }
+  };
+  try {
+    const t = makeTabs(w.document.getElementById('t'), [
+      ['a', 'Alpha'],
+      ['b', 'Beta'],
+    ]);
+    assert.equal(observed.length, 1);
+    assert.equal(observed[0], t.el, 'observes the tab bar, not the scrolling list');
+    assert.notEqual(observed[0], t.list);
+  } finally {
+    globalThis.document = saved.document;
+    globalThis.ResizeObserver = saved.RO;
+  }
+});
