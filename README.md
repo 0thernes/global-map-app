@@ -17,7 +17,7 @@ water and sky layers. Every plotted row cites its source.**
 [![Static site](https://img.shields.io/badge/runs-GitHub%20Pages%20%7C%20file%3A%2F%2F-success.svg)](#quick-start)
 [![WCAG 2.2 AA: axe 0 violations](https://img.shields.io/badge/WCAG%202.2%20AA-axe%200%20violations-success.svg)](docs/audit/v1.5-ui-audit.md)
 [![UI audit v1.5](https://img.shields.io/badge/UI%20audit-v1.5-informational.svg)](docs/audit/v1.5-ui-audit.md)
-[![Unit tests 154](https://img.shields.io/badge/unit%20tests-154-success.svg)](test/unit)
+[![Unit tests 176 + 13 Python](https://img.shields.io/badge/unit%20tests-176%20%2B%2013%20py-success.svg)](test/unit)
 [![Render on demand](https://img.shields.io/badge/idle-%E2%89%A420%20frames%20%2F%2010%20s-success.svg)](test/perf.mjs)
 [![Keyboard first](https://img.shields.io/badge/keyboard-Ctrl%2BK%20%C2%B7%20%3F-informational.svg)](#keyboard)
 [![X @0thernes_ai](https://img.shields.io/badge/X-%400thernes__ai-000000.svg)](https://x.com/0thernes_ai)
@@ -247,7 +247,7 @@ If you use Global Map in research, cite it with [CITATION.cff](CITATION.cff) (Gi
 button), and cite the underlying datasets listed in [CREDITS.md](CREDITS.md).
 
 ```
-0thernes L.L.C. (2026). Global Map (Version 1.5.0) [Computer software]. https://github.com/0thernes/global-map-app
+0thernes L.L.C. (2026). Global Map (Version 1.5.1) [Computer software]. https://github.com/0thernes/global-map-app
 ```
 
 ## Licence

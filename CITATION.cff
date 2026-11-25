@@ -2,8 +2,8 @@ cff-version: 1.2.0
 message: 'If you use Global Map or its compiled data, please cite it as below, and cite the original data sources listed in CREDITS.md.'
 title: 'Global Map: a cinematic OSINT globe of sourced high-strangeness cases'
 type: software
-version: 1.5.0
-date-released: 2026-11-23
+version: 1.5.1
+date-released: 2026-11-24
 license: MIT
 authors:
   - name: '0thernes L.L.C.'

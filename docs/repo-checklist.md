@@ -12,6 +12,13 @@ Copilot, and no `.github/dependabot.yml` or pull-request template. This list rep
 - [ ] `npm run lint` passes: ESLint and Prettier **(CI)**
 - [ ] `npm test` passes: Node unit tests, including the keyless-source and terrarium maths tests **(CI)**
 - [ ] `npm run test:data` passes: CSV schema validation, 0 errors **(CI)**
+- [ ] `npm run test:py` passes: Python unit tests for the data pipeline and the audit tooling **(CI)**
+- [ ] `ruff check --select F,E9` is clean on every tracked `.py` file (ruff 0.17.6) **(CI)**
+- [ ] `npm run audit:hardening` reports no failing automatic pass (`--skip-slow` for a quick run), and
+      `npm run audit:findings` validates `docs/audit/hardening/findings.csv` (one label, one category, a known pass, a
+      real commit and a regression test per fixed bug) and regenerates `FINDINGS.md`
+- [ ] `npm run audit:index` has been re-run after adding or removing files (`docs/audit/hardening/INDEX.md`)
+- [ ] `npm audit` reports 0 vulnerabilities
 - [ ] `npm run build` has been run and the regenerated `js/app.js` and `js/app.js.map` are committed
 - [ ] No orphaned headless Chrome is left from an earlier run (`pgrep -fa chrome`; stop them first). Two SwiftShader
       runs at once slow each other down and time out
@@ -81,7 +88,7 @@ Copilot, and no `.github/dependabot.yml` or pull-request template. This list rep
 
 - [ ] No API keys, tokens or ion assets anywhere: `rg -i "key=|token=|ion\.cesium|cesium\.com/" src index.html`
       finds nothing
-- [ ] The CSP in `index.html` lists only the hosts in use. The only relaxation is `'wasm-unsafe-eval'`; there is no
+- [ ] The CSP in `index.html` lists only the hosts in use (hardening pass C01 compares it with the code). The only relaxation is `'wasm-unsafe-eval'`; there is no
       `'unsafe-eval'` and no inline script
 - [ ] `data/private/` holds only its README in git (NUFORC and other unlicensed rows never ship)
 - [ ] The briefings sanitiser and the link scheme check are still in place (`safeHTML`, `link()` allows only
@@ -104,6 +111,10 @@ Copilot, and no `.github/dependabot.yml` or pull-request template. This list rep
 - [ ] Every number in the Data panel names its PDF 7 § and page or its source column; new statistical tests are
       seeded, report n, method, raw and Holm p, and a caveat, and have a unit test
 - [ ] `docs/layer-catalog.md` is regenerated (`python3 scripts/layer_catalog.py`)
+- [ ] A new export column is defined in `docs/data-dictionary.md` (pass M03), and a new known bias or caveat is added
+      to `docs/limitations.md`
+- [ ] Data fixes only correct format or provenance against a cited source; the rebuilt files are diffed field by field
+      before commit (no row added, removed or moved)
 
 ## Docs and release
 

@@ -5,6 +5,55 @@ All notable changes to this project are documented here. The format follows
 
 ## [Unreleased]
 
+## [1.5.1] - 2026-11-24
+
+The hardening release. A repository-wide audit (127 passes over an indexed table of contents of every tracked file)
+recorded 57 findings; 42 are fixed with a regression test for every bug, and 15 are decided with the reason recorded
+([FINDINGS.md](docs/audit/hardening/FINDINGS.md), [PASSES.md](docs/audit/hardening/PASSES.md)). No row was added,
+removed or moved; the data fixes correct format and provenance against the source files.
+
+### Fixed
+
+- **Conflict dates.** Since v1.5.0 the build read spreadsheet datetimes (`1991-12-01 00:00:00.000`) as a bare year,
+  so 188 UCDP conflict start dates and 236 end dates were shown as 1 January while labelled day precision. They now
+  keep their day.
+- **Date precision is never finer than the date.** An impossible source date (GEIPAN `2000-09-31`) is kept to the
+  month, with a `date_note` in the dossier. Impossible months and days no longer roll over, ids such as `Q836568` are
+  no longer mined for a year, and future years in free text are refused.
+- **Spreadsheet artefacts**: 2,454 French postal codes lost their leading zero or carried `.0` (`8430.0` is now
+  `08430`), and 1,926 witness counts read `1.0`.
+- **Wikidata "unknown value" placeholders** (`http://www…`) no longer appear as dissolution dates, statuses or
+  countries on 337 reference rows; military sites with an unknown dissolution date say so.
+- **Provenance**: every reference-layer dossier now has a Coord. source row, and two cases without a dataset label
+  name their source file.
+- **Nearest military site** in the dossier no longer counts gendarmerie and forts, matching the analysis rule.
+- **Grades**: a parenthetical about another case (`(nearby case CIT)`) or "unofficial" no longer raises a grade.
+- **CSV exports** are RFC 4180 (quoted CR, CRLF rows) and neutralise spreadsheet formulas from the data.
+- **Workspace import** validates and clamps every field and reports a bad file instead of throwing.
+- **Printable dossier** reports a blocked pop-up instead of failing silently.
+- **Uncertainty radii** in the app come from one table that a test keeps equal to the pipeline's.
+- **Statistics**: antimeridian-crossing segments are indexed the short way round; an all-zero-weight sampler draws
+  nothing.
+- **Boot failure** (no WebGL, data load error) shows a message with a Reload button instead of a blank page.
+
+### Changed
+
+- **Search ignores accents** (`Bacouel` finds `Bacouël`) in the omnibox, the filter and case search.
+- The console says "end of the timeline" for the fixed timeline end and measures the latest case from the data.
+- New-tab links send no referrer; the CSP drops a host no code uses.
+- The site package ships git-tracked files only; the Python pipeline passes JSON instead of a pickle.
+- esbuild 0.25.12 (clears a moderate advisory; `npm audit` reports 0 vulnerabilities).
+- CI runs the Python unit tests and ruff, and every workflow job has a timeout.
+
+### Added
+
+- `docs/data-dictionary.md` (every export column), `docs/limitations.md` (threats to validity) and a module index in
+  `docs/architecture.md`.
+- `docs/audit/hardening/`: `INDEX.md` (generated table of contents), the pass runner
+  (`npm run audit:hardening`), `findings.csv` with a validating report generator (`npm run audit:findings`) and
+  `PROGRESS.md`.
+- 22 Node regression tests (176 in total) and 13 Python tests (`npm run test:py`); `.nvmrc`.
+
 ## [1.5.0] - 2026-11-23
 
 The globe release: geographic reference on the map, a marker grammar that shows evidence grade without colour,
@@ -382,7 +431,8 @@ First public release.
 - Duplicated composite grades (`X / X`) collapsed.
 - Briefing Markdown is sanitised with an allow-list; data links are limited to http(s) and mailto.
 
-[Unreleased]: https://github.com/0thernes/global-map-app/compare/v1.5.0...HEAD
+[Unreleased]: https://github.com/0thernes/global-map-app/compare/v1.5.1...HEAD
+[1.5.1]: https://github.com/0thernes/global-map-app/compare/v1.5.0...v1.5.1
 [1.5.0]: https://github.com/0thernes/global-map-app/compare/v1.4.0...v1.5.0
 [1.4.0]: https://github.com/0thernes/global-map-app/compare/v1.3.0...v1.4.0
 [1.3.0]: https://github.com/0thernes/global-map-app/compare/v1.2.0...v1.3.0
