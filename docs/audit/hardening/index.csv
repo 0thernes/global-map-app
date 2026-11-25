@@ -14,1124 +14,1125 @@ n,path,lines,bytes,role,owner
 13,.nvmrc,1,3,Tool config,repo
 14,.prettierignore,18,320,Tool config,repo
 15,.prettierrc.json,6,94,Tool config,repo
-16,CHANGELOG.md,391,27089,Change history (Keep a Changelog),repo
+16,CHANGELOG.md,448,31216,Change history (Keep a Changelog),repo
 17,CITATION.cff,29,1303,Citation metadata,repo
 18,CODE_OF_CONDUCT.md,83,5471,Code of conduct,repo
 19,CONTRIBUTING.md,48,2616,Contribution guide,repo
 20,CREDITS.md,102,23819,Third-party credits,repo
 21,DATA_LICENSE.md,41,5073,Data licensing/attribution,repo
 22,LICENSE,21,1072,Code licence (MIT),repo
-23,README.md,257,22141,Project overview + repo checklist,repo
+23,README.md,257,22169,Project overview + repo checklist,repo
 24,RELEASE_NOTES_v1.0.0.md,47,2775,Release notes,docs
 25,RELEASE_NOTES_v1.1.0.md,38,2022,Release notes,docs
 26,RELEASE_NOTES_v1.2.0.md,58,3034,Release notes,docs
 27,RELEASE_NOTES_v1.3.0.md,33,2154,Release notes,docs
 28,RELEASE_NOTES_v1.4.0.md,64,4239,Release notes,docs
 29,RELEASE_NOTES_v1.5.0.md,78,4489,Release notes,docs
-30,SECURITY.md,49,3204,Security policy,repo
-31,SUPPORT.md,10,703,Support policy,repo
-32,assets/audio/boom_low.mp3,,12181,Audio asset,assets
-33,assets/audio/data_chatter.mp3,,12806,Audio asset,assets
-34,assets/audio/drone_manaos_tozan.mp3,,900746,Audio asset,assets
-35,assets/audio/score_persistence_cinameng.mp3,,690092,Audio asset,assets
-36,assets/audio/ui_blip.mp3,,1087,Audio asset,assets
-37,assets/audio/ui_tick.mp3,,1296,Audio asset,assets
-38,assets/audio/whoosh.mp3,,2463,Audio asset,assets
-39,assets/favicon.svg,1,360,Static asset,assets
-40,build.sh,3,139,Convenience build script,repo
-41,css/app.css,1795,32324,Stylesheet,ui-shell
-42,css/components.css,833,16744,Stylesheet,ui-shell
-43,css/console.css,1382,29115,Stylesheet,ui-shell
-44,css/tokens.css,195,6525,Stylesheet,ui-shell
-45,data/briefings/README.md,63,8712,Briefing material,data-briefings
-46,data/briefings/analysis_summary.md,89,10244,Briefing material,data-briefings
-47,data/briefings/counts_by_country.png,,245558,Briefing material,data-briefings
-48,data/briefings/counts_by_grade.png,,130074,Briefing material,data-briefings
-49,data/briefings/heatmap_conflict_deaths_ucdp.png,,570426,Briefing material,data-briefings
-50,data/briefings/heatmap_nuclear_tests.png,,452211,Briefing material,data-briefings
-51,data/briefings/heatmap_uap_cit.png,,748031,Briefing material,data-briefings
-52,data/briefings/languages_searched.csv,13,1038,Briefing material,data-briefings
-53,data/briefings/map_abductions.png,,501928,Briefing material,data-briefings
-54,data/briefings/map_ancient_cities_remote_sensing.png,,508344,Briefing material,data-briefings
-55,data/briefings/map_animal_mutilations.png,,505394,Briefing material,data-briefings
-56,data/briefings/map_caves_underground.png,,521532,Briefing material,data-briefings
-57,data/briefings/map_combined_overlay.png,,892628,Briefing material,data-briefings
-58,data/briefings/map_conflicts.png,,551751,Briefing material,data-briefings
-59,data/briefings/map_megaliths.png,,510055,Briefing material,data-briefings
-60,data/briefings/map_missing_unsolved.png,,506672,Briefing material,data-briefings
-61,data/briefings/map_nuclear_sites.png,,569702,Briefing material,data-briefings
-62,data/briefings/map_nuclear_tests.png,,533487,Briefing material,data-briefings
-63,data/briefings/map_ocean.png,,506542,Briefing material,data-briefings
-64,data/briefings/map_pyramids.png,,532892,Briefing material,data-briefings
-65,data/briefings/map_satellite_anomalies.png,,513857,Briefing material,data-briefings
-66,data/briefings/map_uap_cit.png,,584224,Briefing material,data-briefings
-67,data/briefings/map_uso_water.png,,504252,Briefing material,data-briefings
-68,data/briefings/map_weird_coordinates.png,,522876,Briefing material,data-briefings
-69,data/briefings/nuclear_yield_by_environment.png,,178221,Briefing material,data-briefings
-70,data/briefings/ref_military_bases_wikidata.png,,693148,Briefing material,data-briefings
-71,data/briefings/sources_registry.csv,30,5407,Briefing material,data-briefings
-72,data/briefings/timeline_by_era.png,,218162,Briefing material,data-briefings
-73,data/briefings/timeline_by_year_1900_2026.png,,427818,Briefing material,data-briefings
-74,data/briefings/uap_distance_vs_baselines.png,,1040787,Briefing material,data-briefings
-75,data/build_data.py,492,37213,Data file,data
-76,data/cases.js,2,3585055,Data file,data
-77,data/catalog.js,1,42086,Data file,data
-78,data/layers/admin0_10.js,1,719087,Generated layer data,data-layers
-79,data/layers/admin0_50.js,1,243886,Generated layer data,data-layers
-80,data/layers/admin1_10.js,1,2899920,Generated layer data,data-layers
-81,data/layers/cities15000.js,1,1426668,Generated layer data,data-layers
-82,data/layers/cities5000.js,1,1485520,Generated layer data,data-layers
-83,data/layers/coast10.js,1,3561759,Generated layer data,data-layers
-84,data/layers/coast50.js,1,788012,Generated layer data,data-layers
-85,data/layers/conflicts.js,1,513151,Generated layer data,data-layers
-86,data/layers/countries.js,1,251433,Generated layer data,data-layers
-87,data/layers/faults_gem.js,1,1650921,Generated layer data,data-layers
-88,data/layers/faults_usgs.js,1,10691561,Generated layer data,data-layers
-89,data/layers/fireballs.js,1,116449,Generated layer data,data-layers
-90,data/layers/gebco_unmapped.js,1,1116719,Generated layer data,data-layers
-91,data/layers/ged.js,1,6092158,Generated layer data,data-layers
-92,data/layers/hydrolakes.js,1,1067141,Generated layer data,data-layers
-93,data/layers/hydrolakes_tiles/-10_-100.js,1,228,Generated layer data,data-layers
-94,data/layers/hydrolakes_tiles/-10_-180.js,1,229,Generated layer data,data-layers
-95,data/layers/hydrolakes_tiles/-10_-40.js,1,9371,Generated layer data,data-layers
-96,data/layers/hydrolakes_tiles/-10_-50.js,1,13298,Generated layer data,data-layers
-97,data/layers/hydrolakes_tiles/-10_-60.js,1,36595,Generated layer data,data-layers
-98,data/layers/hydrolakes_tiles/-10_-70.js,1,48327,Generated layer data,data-layers
-99,data/layers/hydrolakes_tiles/-10_-80.js,1,20898,Generated layer data,data-layers
-100,data/layers/hydrolakes_tiles/-10_-90.js,1,8096,Generated layer data,data-layers
-101,data/layers/hydrolakes_tiles/-10_0.js,1,1775,Generated layer data,data-layers
-102,data/layers/hydrolakes_tiles/-10_10.js,1,7198,Generated layer data,data-layers
-103,data/layers/hydrolakes_tiles/-10_100.js,1,6718,Generated layer data,data-layers
-104,data/layers/hydrolakes_tiles/-10_110.js,1,12222,Generated layer data,data-layers
-105,data/layers/hydrolakes_tiles/-10_120.js,1,2559,Generated layer data,data-layers
-106,data/layers/hydrolakes_tiles/-10_130.js,1,8793,Generated layer data,data-layers
-107,data/layers/hydrolakes_tiles/-10_140.js,1,16993,Generated layer data,data-layers
-108,data/layers/hydrolakes_tiles/-10_150.js,1,589,Generated layer data,data-layers
-109,data/layers/hydrolakes_tiles/-10_160.js,1,233,Generated layer data,data-layers
-110,data/layers/hydrolakes_tiles/-10_20.js,1,7918,Generated layer data,data-layers
-111,data/layers/hydrolakes_tiles/-10_30.js,1,8448,Generated layer data,data-layers
-112,data/layers/hydrolakes_tiles/-10_40.js,1,673,Generated layer data,data-layers
-113,data/layers/hydrolakes_tiles/-20_-140.js,1,228,Generated layer data,data-layers
-114,data/layers/hydrolakes_tiles/-20_-160.js,1,288,Generated layer data,data-layers
-115,data/layers/hydrolakes_tiles/-20_-180.js,1,353,Generated layer data,data-layers
-116,data/layers/hydrolakes_tiles/-20_-40.js,1,1959,Generated layer data,data-layers
-117,data/layers/hydrolakes_tiles/-20_-50.js,1,8514,Generated layer data,data-layers
-118,data/layers/hydrolakes_tiles/-20_-60.js,1,20826,Generated layer data,data-layers
-119,data/layers/hydrolakes_tiles/-20_-70.js,1,47514,Generated layer data,data-layers
-120,data/layers/hydrolakes_tiles/-20_-80.js,1,10330,Generated layer data,data-layers
-121,data/layers/hydrolakes_tiles/-20_10.js,1,3086,Generated layer data,data-layers
-122,data/layers/hydrolakes_tiles/-20_120.js,1,7841,Generated layer data,data-layers
-123,data/layers/hydrolakes_tiles/-20_130.js,1,17410,Generated layer data,data-layers
-124,data/layers/hydrolakes_tiles/-20_140.js,1,6335,Generated layer data,data-layers
-125,data/layers/hydrolakes_tiles/-20_160.js,1,476,Generated layer data,data-layers
-126,data/layers/hydrolakes_tiles/-20_170.js,1,346,Generated layer data,data-layers
-127,data/layers/hydrolakes_tiles/-20_20.js,1,7918,Generated layer data,data-layers
-128,data/layers/hydrolakes_tiles/-20_30.js,1,6003,Generated layer data,data-layers
-129,data/layers/hydrolakes_tiles/-20_40.js,1,11686,Generated layer data,data-layers
-130,data/layers/hydrolakes_tiles/-20_50.js,1,477,Generated layer data,data-layers
-131,data/layers/hydrolakes_tiles/-30_-140.js,1,228,Generated layer data,data-layers
-132,data/layers/hydrolakes_tiles/-30_-180.js,1,227,Generated layer data,data-layers
-133,data/layers/hydrolakes_tiles/-30_-50.js,1,6855,Generated layer data,data-layers
-134,data/layers/hydrolakes_tiles/-30_-60.js,1,20867,Generated layer data,data-layers
-135,data/layers/hydrolakes_tiles/-30_-70.js,1,19091,Generated layer data,data-layers
-136,data/layers/hydrolakes_tiles/-30_10.js,1,1218,Generated layer data,data-layers
-137,data/layers/hydrolakes_tiles/-30_110.js,1,3954,Generated layer data,data-layers
-138,data/layers/hydrolakes_tiles/-30_120.js,1,11101,Generated layer data,data-layers
-139,data/layers/hydrolakes_tiles/-30_130.js,1,13650,Generated layer data,data-layers
-140,data/layers/hydrolakes_tiles/-30_140.js,1,17026,Generated layer data,data-layers
-141,data/layers/hydrolakes_tiles/-30_150.js,1,3630,Generated layer data,data-layers
-142,data/layers/hydrolakes_tiles/-30_160.js,1,345,Generated layer data,data-layers
-143,data/layers/hydrolakes_tiles/-30_20.js,1,16987,Generated layer data,data-layers
-144,data/layers/hydrolakes_tiles/-30_30.js,1,11836,Generated layer data,data-layers
-145,data/layers/hydrolakes_tiles/-30_40.js,1,3245,Generated layer data,data-layers
-146,data/layers/hydrolakes_tiles/-30_50.js,1,292,Generated layer data,data-layers
-147,data/layers/hydrolakes_tiles/-40_-60.js,1,14842,Generated layer data,data-layers
-148,data/layers/hydrolakes_tiles/-40_-70.js,1,81473,Generated layer data,data-layers
-149,data/layers/hydrolakes_tiles/-40_-80.js,1,4160,Generated layer data,data-layers
-150,data/layers/hydrolakes_tiles/-40_10.js,1,1530,Generated layer data,data-layers
-151,data/layers/hydrolakes_tiles/-40_110.js,1,12036,Generated layer data,data-layers
-152,data/layers/hydrolakes_tiles/-40_120.js,1,15576,Generated layer data,data-layers
-153,data/layers/hydrolakes_tiles/-40_130.js,1,10386,Generated layer data,data-layers
-154,data/layers/hydrolakes_tiles/-40_140.js,1,19004,Generated layer data,data-layers
-155,data/layers/hydrolakes_tiles/-40_150.js,1,2100,Generated layer data,data-layers
-156,data/layers/hydrolakes_tiles/-40_170.js,1,2086,Generated layer data,data-layers
-157,data/layers/hydrolakes_tiles/-40_20.js,1,3152,Generated layer data,data-layers
-158,data/layers/hydrolakes_tiles/-50_-180.js,1,429,Generated layer data,data-layers
-159,data/layers/hydrolakes_tiles/-50_-70.js,1,8112,Generated layer data,data-layers
-160,data/layers/hydrolakes_tiles/-50_-80.js,1,31474,Generated layer data,data-layers
-161,data/layers/hydrolakes_tiles/-50_140.js,1,3618,Generated layer data,data-layers
-162,data/layers/hydrolakes_tiles/-50_160.js,1,2711,Generated layer data,data-layers
-163,data/layers/hydrolakes_tiles/-50_170.js,1,2561,Generated layer data,data-layers
-164,data/layers/hydrolakes_tiles/-50_60.js,1,2365,Generated layer data,data-layers
-165,data/layers/hydrolakes_tiles/-50_70.js,1,286,Generated layer data,data-layers
-166,data/layers/hydrolakes_tiles/-60_-60.js,1,1244,Generated layer data,data-layers
-167,data/layers/hydrolakes_tiles/-60_-70.js,1,3692,Generated layer data,data-layers
-168,data/layers/hydrolakes_tiles/-60_-80.js,1,17061,Generated layer data,data-layers
-169,data/layers/hydrolakes_tiles/0_-10.js,1,2450,Generated layer data,data-layers
-170,data/layers/hydrolakes_tiles/0_-160.js,1,1315,Generated layer data,data-layers
-171,data/layers/hydrolakes_tiles/0_-170.js,1,227,Generated layer data,data-layers
-172,data/layers/hydrolakes_tiles/0_-20.js,1,1155,Generated layer data,data-layers
-173,data/layers/hydrolakes_tiles/0_-60.js,1,4296,Generated layer data,data-layers
-174,data/layers/hydrolakes_tiles/0_-70.js,1,14728,Generated layer data,data-layers
-175,data/layers/hydrolakes_tiles/0_-80.js,1,32654,Generated layer data,data-layers
-176,data/layers/hydrolakes_tiles/0_-90.js,1,1433,Generated layer data,data-layers
-177,data/layers/hydrolakes_tiles/0_0.js,1,3663,Generated layer data,data-layers
-178,data/layers/hydrolakes_tiles/0_10.js,1,3193,Generated layer data,data-layers
-179,data/layers/hydrolakes_tiles/0_100.js,1,4431,Generated layer data,data-layers
-180,data/layers/hydrolakes_tiles/0_110.js,1,4025,Generated layer data,data-layers
-181,data/layers/hydrolakes_tiles/0_120.js,1,4694,Generated layer data,data-layers
-182,data/layers/hydrolakes_tiles/0_20.js,1,1408,Generated layer data,data-layers
-183,data/layers/hydrolakes_tiles/0_30.js,1,15571,Generated layer data,data-layers
-184,data/layers/hydrolakes_tiles/0_40.js,1,520,Generated layer data,data-layers
-185,data/layers/hydrolakes_tiles/0_70.js,1,3598,Generated layer data,data-layers
-186,data/layers/hydrolakes_tiles/0_80.js,1,8970,Generated layer data,data-layers
-187,data/layers/hydrolakes_tiles/0_90.js,1,1297,Generated layer data,data-layers
-188,data/layers/hydrolakes_tiles/10_-10.js,1,8207,Generated layer data,data-layers
-189,data/layers/hydrolakes_tiles/10_-100.js,1,20368,Generated layer data,data-layers
-190,data/layers/hydrolakes_tiles/10_-110.js,1,2586,Generated layer data,data-layers
-191,data/layers/hydrolakes_tiles/10_-20.js,1,3314,Generated layer data,data-layers
-192,data/layers/hydrolakes_tiles/10_-70.js,1,4257,Generated layer data,data-layers
-193,data/layers/hydrolakes_tiles/10_-80.js,1,7433,Generated layer data,data-layers
-194,data/layers/hydrolakes_tiles/10_-90.js,1,11650,Generated layer data,data-layers
-195,data/layers/hydrolakes_tiles/10_0.js,1,4436,Generated layer data,data-layers
-196,data/layers/hydrolakes_tiles/10_10.js,1,3303,Generated layer data,data-layers
-197,data/layers/hydrolakes_tiles/10_100.js,1,29684,Generated layer data,data-layers
-198,data/layers/hydrolakes_tiles/10_110.js,1,2208,Generated layer data,data-layers
-199,data/layers/hydrolakes_tiles/10_120.js,1,4289,Generated layer data,data-layers
-200,data/layers/hydrolakes_tiles/10_20.js,1,570,Generated layer data,data-layers
-201,data/layers/hydrolakes_tiles/10_30.js,1,1309,Generated layer data,data-layers
-202,data/layers/hydrolakes_tiles/10_40.js,1,959,Generated layer data,data-layers
-203,data/layers/hydrolakes_tiles/10_70.js,1,26587,Generated layer data,data-layers
-204,data/layers/hydrolakes_tiles/10_80.js,1,4492,Generated layer data,data-layers
-205,data/layers/hydrolakes_tiles/10_90.js,1,5089,Generated layer data,data-layers
-206,data/layers/hydrolakes_tiles/20_-10.js,1,227,Generated layer data,data-layers
-207,data/layers/hydrolakes_tiles/20_-100.js,1,30305,Generated layer data,data-layers
-208,data/layers/hydrolakes_tiles/20_-110.js,1,10308,Generated layer data,data-layers
-209,data/layers/hydrolakes_tiles/20_-120.js,1,1206,Generated layer data,data-layers
-210,data/layers/hydrolakes_tiles/20_-160.js,1,245,Generated layer data,data-layers
-211,data/layers/hydrolakes_tiles/20_-20.js,1,463,Generated layer data,data-layers
-212,data/layers/hydrolakes_tiles/20_-80.js,1,17265,Generated layer data,data-layers
-213,data/layers/hydrolakes_tiles/20_-90.js,1,32541,Generated layer data,data-layers
-214,data/layers/hydrolakes_tiles/20_10.js,1,224,Generated layer data,data-layers
-215,data/layers/hydrolakes_tiles/20_100.js,1,14202,Generated layer data,data-layers
-216,data/layers/hydrolakes_tiles/20_110.js,1,38766,Generated layer data,data-layers
-217,data/layers/hydrolakes_tiles/20_120.js,1,3413,Generated layer data,data-layers
-218,data/layers/hydrolakes_tiles/20_20.js,1,678,Generated layer data,data-layers
-219,data/layers/hydrolakes_tiles/20_30.js,1,528,Generated layer data,data-layers
-220,data/layers/hydrolakes_tiles/20_40.js,1,351,Generated layer data,data-layers
-221,data/layers/hydrolakes_tiles/20_50.js,1,557,Generated layer data,data-layers
-222,data/layers/hydrolakes_tiles/20_60.js,1,5323,Generated layer data,data-layers
-223,data/layers/hydrolakes_tiles/20_70.js,1,20960,Generated layer data,data-layers
-224,data/layers/hydrolakes_tiles/20_80.js,1,29657,Generated layer data,data-layers
-225,data/layers/hydrolakes_tiles/20_90.js,1,10264,Generated layer data,data-layers
-226,data/layers/hydrolakes_tiles/30_-10.js,1,11394,Generated layer data,data-layers
-227,data/layers/hydrolakes_tiles/30_-100.js,1,58734,Generated layer data,data-layers
-228,data/layers/hydrolakes_tiles/30_-110.js,1,13442,Generated layer data,data-layers
-229,data/layers/hydrolakes_tiles/30_-120.js,1,15917,Generated layer data,data-layers
-230,data/layers/hydrolakes_tiles/30_-130.js,1,13465,Generated layer data,data-layers
-231,data/layers/hydrolakes_tiles/30_-30.js,1,359,Generated layer data,data-layers
-232,data/layers/hydrolakes_tiles/30_-70.js,1,232,Generated layer data,data-layers
-233,data/layers/hydrolakes_tiles/30_-80.js,1,11674,Generated layer data,data-layers
-234,data/layers/hydrolakes_tiles/30_-90.js,1,28134,Generated layer data,data-layers
-235,data/layers/hydrolakes_tiles/30_0.js,1,5556,Generated layer data,data-layers
-236,data/layers/hydrolakes_tiles/30_10.js,1,2728,Generated layer data,data-layers
-237,data/layers/hydrolakes_tiles/30_100.js,1,8817,Generated layer data,data-layers
-238,data/layers/hydrolakes_tiles/30_110.js,1,64700,Generated layer data,data-layers
-239,data/layers/hydrolakes_tiles/30_120.js,1,20001,Generated layer data,data-layers
-240,data/layers/hydrolakes_tiles/30_130.js,1,8858,Generated layer data,data-layers
-241,data/layers/hydrolakes_tiles/30_140.js,1,1968,Generated layer data,data-layers
-242,data/layers/hydrolakes_tiles/30_20.js,1,4271,Generated layer data,data-layers
-243,data/layers/hydrolakes_tiles/30_30.js,1,7515,Generated layer data,data-layers
-244,data/layers/hydrolakes_tiles/30_40.js,1,7621,Generated layer data,data-layers
-245,data/layers/hydrolakes_tiles/30_50.js,1,3882,Generated layer data,data-layers
-246,data/layers/hydrolakes_tiles/30_60.js,1,5204,Generated layer data,data-layers
-247,data/layers/hydrolakes_tiles/30_70.js,1,8459,Generated layer data,data-layers
-248,data/layers/hydrolakes_tiles/30_80.js,1,23023,Generated layer data,data-layers
-249,data/layers/hydrolakes_tiles/30_90.js,1,12695,Generated layer data,data-layers
-250,data/layers/hydrolakes_tiles/40_-10.js,1,8434,Generated layer data,data-layers
-251,data/layers/hydrolakes_tiles/40_-100.js,1,214891,Generated layer data,data-layers
-252,data/layers/hydrolakes_tiles/40_-110.js,1,36922,Generated layer data,data-layers
-253,data/layers/hydrolakes_tiles/40_-120.js,1,30483,Generated layer data,data-layers
-254,data/layers/hydrolakes_tiles/40_-130.js,1,24230,Generated layer data,data-layers
-255,data/layers/hydrolakes_tiles/40_-60.js,1,53408,Generated layer data,data-layers
-256,data/layers/hydrolakes_tiles/40_-70.js,1,73097,Generated layer data,data-layers
-257,data/layers/hydrolakes_tiles/40_-80.js,1,221928,Generated layer data,data-layers
-258,data/layers/hydrolakes_tiles/40_-90.js,1,166861,Generated layer data,data-layers
-259,data/layers/hydrolakes_tiles/40_0.js,1,14330,Generated layer data,data-layers
-260,data/layers/hydrolakes_tiles/40_10.js,1,23255,Generated layer data,data-layers
-261,data/layers/hydrolakes_tiles/40_100.js,1,4747,Generated layer data,data-layers
-262,data/layers/hydrolakes_tiles/40_110.js,1,25960,Generated layer data,data-layers
-263,data/layers/hydrolakes_tiles/40_120.js,1,52388,Generated layer data,data-layers
-264,data/layers/hydrolakes_tiles/40_130.js,1,7076,Generated layer data,data-layers
-265,data/layers/hydrolakes_tiles/40_140.js,1,5357,Generated layer data,data-layers
-266,data/layers/hydrolakes_tiles/40_150.js,1,351,Generated layer data,data-layers
-267,data/layers/hydrolakes_tiles/40_20.js,1,32182,Generated layer data,data-layers
-268,data/layers/hydrolakes_tiles/40_30.js,1,29692,Generated layer data,data-layers
-269,data/layers/hydrolakes_tiles/40_40.js,1,40238,Generated layer data,data-layers
-270,data/layers/hydrolakes_tiles/40_50.js,1,32795,Generated layer data,data-layers
-271,data/layers/hydrolakes_tiles/40_60.js,1,41175,Generated layer data,data-layers
-272,data/layers/hydrolakes_tiles/40_70.js,1,17401,Generated layer data,data-layers
-273,data/layers/hydrolakes_tiles/40_80.js,1,13856,Generated layer data,data-layers
-274,data/layers/hydrolakes_tiles/40_90.js,1,6540,Generated layer data,data-layers
-275,data/layers/hydrolakes_tiles/50_-10.js,1,19400,Generated layer data,data-layers
-276,data/layers/hydrolakes_tiles/50_-100.js,1,402436,Generated layer data,data-layers
-277,data/layers/hydrolakes_tiles/50_-110.js,1,384886,Generated layer data,data-layers
-278,data/layers/hydrolakes_tiles/50_-120.js,1,95975,Generated layer data,data-layers
-279,data/layers/hydrolakes_tiles/50_-130.js,1,67022,Generated layer data,data-layers
-280,data/layers/hydrolakes_tiles/50_-140.js,1,28648,Generated layer data,data-layers
-281,data/layers/hydrolakes_tiles/50_-150.js,1,941,Generated layer data,data-layers
-282,data/layers/hydrolakes_tiles/50_-160.js,1,26316,Generated layer data,data-layers
-283,data/layers/hydrolakes_tiles/50_-170.js,1,10112,Generated layer data,data-layers
-284,data/layers/hydrolakes_tiles/50_-180.js,1,400,Generated layer data,data-layers
-285,data/layers/hydrolakes_tiles/50_-20.js,1,468,Generated layer data,data-layers
-286,data/layers/hydrolakes_tiles/50_-60.js,1,65176,Generated layer data,data-layers
-287,data/layers/hydrolakes_tiles/50_-70.js,1,461280,Generated layer data,data-layers
-288,data/layers/hydrolakes_tiles/50_-80.js,1,603859,Generated layer data,data-layers
-289,data/layers/hydrolakes_tiles/50_-90.js,1,158925,Generated layer data,data-layers
-290,data/layers/hydrolakes_tiles/50_0.js,1,36380,Generated layer data,data-layers
-291,data/layers/hydrolakes_tiles/50_10.js,1,102801,Generated layer data,data-layers
-292,data/layers/hydrolakes_tiles/50_100.js,1,4257,Generated layer data,data-layers
-293,data/layers/hydrolakes_tiles/50_110.js,1,11829,Generated layer data,data-layers
-294,data/layers/hydrolakes_tiles/50_120.js,1,2623,Generated layer data,data-layers
-295,data/layers/hydrolakes_tiles/50_130.js,1,5366,Generated layer data,data-layers
-296,data/layers/hydrolakes_tiles/50_140.js,1,6033,Generated layer data,data-layers
-297,data/layers/hydrolakes_tiles/50_150.js,1,5531,Generated layer data,data-layers
-298,data/layers/hydrolakes_tiles/50_160.js,1,4793,Generated layer data,data-layers
-299,data/layers/hydrolakes_tiles/50_170.js,1,477,Generated layer data,data-layers
-300,data/layers/hydrolakes_tiles/50_20.js,1,56252,Generated layer data,data-layers
-301,data/layers/hydrolakes_tiles/50_30.js,1,33321,Generated layer data,data-layers
-302,data/layers/hydrolakes_tiles/50_40.js,1,15938,Generated layer data,data-layers
-303,data/layers/hydrolakes_tiles/50_50.js,1,15692,Generated layer data,data-layers
-304,data/layers/hydrolakes_tiles/50_60.js,1,138875,Generated layer data,data-layers
-305,data/layers/hydrolakes_tiles/50_70.js,1,107698,Generated layer data,data-layers
-306,data/layers/hydrolakes_tiles/50_80.js,1,28662,Generated layer data,data-layers
-307,data/layers/hydrolakes_tiles/50_90.js,1,10604,Generated layer data,data-layers
-308,data/layers/hydrolakes_tiles/60_-10.js,1,364,Generated layer data,data-layers
-309,data/layers/hydrolakes_tiles/60_-100.js,1,384591,Generated layer data,data-layers
-310,data/layers/hydrolakes_tiles/60_-110.js,1,504489,Generated layer data,data-layers
-311,data/layers/hydrolakes_tiles/60_-120.js,1,439792,Generated layer data,data-layers
-312,data/layers/hydrolakes_tiles/60_-130.js,1,141637,Generated layer data,data-layers
-313,data/layers/hydrolakes_tiles/60_-140.js,1,129574,Generated layer data,data-layers
-314,data/layers/hydrolakes_tiles/60_-150.js,1,43688,Generated layer data,data-layers
-315,data/layers/hydrolakes_tiles/60_-160.js,1,55709,Generated layer data,data-layers
-316,data/layers/hydrolakes_tiles/60_-170.js,1,122252,Generated layer data,data-layers
-317,data/layers/hydrolakes_tiles/60_-180.js,1,18894,Generated layer data,data-layers
-318,data/layers/hydrolakes_tiles/60_-20.js,1,6826,Generated layer data,data-layers
-319,data/layers/hydrolakes_tiles/60_-30.js,1,4443,Generated layer data,data-layers
-320,data/layers/hydrolakes_tiles/60_-40.js,1,1761,Generated layer data,data-layers
-321,data/layers/hydrolakes_tiles/60_-50.js,1,18068,Generated layer data,data-layers
-322,data/layers/hydrolakes_tiles/60_-60.js,1,43759,Generated layer data,data-layers
-323,data/layers/hydrolakes_tiles/60_-70.js,1,88452,Generated layer data,data-layers
-324,data/layers/hydrolakes_tiles/60_-80.js,1,208553,Generated layer data,data-layers
-325,data/layers/hydrolakes_tiles/60_-90.js,1,109372,Generated layer data,data-layers
-326,data/layers/hydrolakes_tiles/60_0.js,1,30600,Generated layer data,data-layers
-327,data/layers/hydrolakes_tiles/60_10.js,1,161015,Generated layer data,data-layers
-328,data/layers/hydrolakes_tiles/60_100.js,1,18126,Generated layer data,data-layers
-329,data/layers/hydrolakes_tiles/60_110.js,1,9919,Generated layer data,data-layers
-330,data/layers/hydrolakes_tiles/60_120.js,1,82115,Generated layer data,data-layers
-331,data/layers/hydrolakes_tiles/60_130.js,1,13758,Generated layer data,data-layers
-332,data/layers/hydrolakes_tiles/60_140.js,1,94131,Generated layer data,data-layers
-333,data/layers/hydrolakes_tiles/60_150.js,1,227032,Generated layer data,data-layers
-334,data/layers/hydrolakes_tiles/60_160.js,1,42012,Generated layer data,data-layers
-335,data/layers/hydrolakes_tiles/60_170.js,1,29080,Generated layer data,data-layers
-336,data/layers/hydrolakes_tiles/60_20.js,1,166113,Generated layer data,data-layers
-337,data/layers/hydrolakes_tiles/60_30.js,1,112260,Generated layer data,data-layers
-338,data/layers/hydrolakes_tiles/60_40.js,1,20769,Generated layer data,data-layers
-339,data/layers/hydrolakes_tiles/60_50.js,1,19782,Generated layer data,data-layers
-340,data/layers/hydrolakes_tiles/60_60.js,1,78045,Generated layer data,data-layers
-341,data/layers/hydrolakes_tiles/60_70.js,1,246561,Generated layer data,data-layers
-342,data/layers/hydrolakes_tiles/60_80.js,1,49428,Generated layer data,data-layers
-343,data/layers/hydrolakes_tiles/60_90.js,1,11137,Generated layer data,data-layers
-344,data/layers/hydrolakes_tiles/70_-100.js,1,25490,Generated layer data,data-layers
-345,data/layers/hydrolakes_tiles/70_-110.js,1,103661,Generated layer data,data-layers
-346,data/layers/hydrolakes_tiles/70_-120.js,1,63721,Generated layer data,data-layers
-347,data/layers/hydrolakes_tiles/70_-130.js,1,13481,Generated layer data,data-layers
-348,data/layers/hydrolakes_tiles/70_-140.js,1,1740,Generated layer data,data-layers
-349,data/layers/hydrolakes_tiles/70_-150.js,1,6437,Generated layer data,data-layers
-350,data/layers/hydrolakes_tiles/70_-160.js,1,96611,Generated layer data,data-layers
-351,data/layers/hydrolakes_tiles/70_-170.js,1,3536,Generated layer data,data-layers
-352,data/layers/hydrolakes_tiles/70_-180.js,1,1338,Generated layer data,data-layers
-353,data/layers/hydrolakes_tiles/70_-20.js,1,590,Generated layer data,data-layers
-354,data/layers/hydrolakes_tiles/70_-30.js,1,10307,Generated layer data,data-layers
-355,data/layers/hydrolakes_tiles/70_-60.js,1,4356,Generated layer data,data-layers
-356,data/layers/hydrolakes_tiles/70_-70.js,1,4374,Generated layer data,data-layers
-357,data/layers/hydrolakes_tiles/70_-80.js,1,25129,Generated layer data,data-layers
-358,data/layers/hydrolakes_tiles/70_-90.js,1,44617,Generated layer data,data-layers
-359,data/layers/hydrolakes_tiles/70_10.js,1,2292,Generated layer data,data-layers
-360,data/layers/hydrolakes_tiles/70_100.js,1,47797,Generated layer data,data-layers
-361,data/layers/hydrolakes_tiles/70_110.js,1,27964,Generated layer data,data-layers
-362,data/layers/hydrolakes_tiles/70_120.js,1,38615,Generated layer data,data-layers
-363,data/layers/hydrolakes_tiles/70_130.js,1,52649,Generated layer data,data-layers
-364,data/layers/hydrolakes_tiles/70_140.js,1,91156,Generated layer data,data-layers
-365,data/layers/hydrolakes_tiles/70_150.js,1,50565,Generated layer data,data-layers
-366,data/layers/hydrolakes_tiles/70_160.js,1,223,Generated layer data,data-layers
-367,data/layers/hydrolakes_tiles/70_170.js,1,1277,Generated layer data,data-layers
-368,data/layers/hydrolakes_tiles/70_20.js,1,5542,Generated layer data,data-layers
-369,data/layers/hydrolakes_tiles/70_30.js,1,226,Generated layer data,data-layers
-370,data/layers/hydrolakes_tiles/70_50.js,1,11210,Generated layer data,data-layers
-371,data/layers/hydrolakes_tiles/70_60.js,1,13204,Generated layer data,data-layers
-372,data/layers/hydrolakes_tiles/70_70.js,1,52649,Generated layer data,data-layers
-373,data/layers/hydrolakes_tiles/70_80.js,1,40341,Generated layer data,data-layers
-374,data/layers/hydrolakes_tiles/70_90.js,1,79969,Generated layer data,data-layers
-375,data/layers/hydrolakes_tiles/80_-100.js,1,882,Generated layer data,data-layers
-376,data/layers/hydrolakes_tiles/80_-20.js,1,468,Generated layer data,data-layers
-377,data/layers/hydrolakes_tiles/80_-30.js,1,2509,Generated layer data,data-layers
-378,data/layers/hydrolakes_tiles/80_-40.js,1,1874,Generated layer data,data-layers
-379,data/layers/hydrolakes_tiles/80_-50.js,1,2041,Generated layer data,data-layers
-380,data/layers/hydrolakes_tiles/80_-60.js,1,1511,Generated layer data,data-layers
-381,data/layers/hydrolakes_tiles/80_-70.js,1,2796,Generated layer data,data-layers
-382,data/layers/hydrolakes_tiles/80_-80.js,1,2032,Generated layer data,data-layers
-383,data/layers/hydrolakes_tiles/80_-90.js,1,1905,Generated layer data,data-layers
-384,data/layers/hydrolakes_tiles/80_10.js,1,396,Generated layer data,data-layers
-385,data/layers/hydrolakes_tiles/80_20.js,1,514,Generated layer data,data-layers
-386,data/layers/hydrolakes_tiles/80_40.js,1,224,Generated layer data,data-layers
-387,data/layers/hydrolakes_tiles/80_50.js,1,813,Generated layer data,data-layers
-388,data/layers/hydrolakes_tiles/80_60.js,1,223,Generated layer data,data-layers
-389,data/layers/hydrolakes_tiles/80_90.js,1,695,Generated layer data,data-layers
-390,data/layers/labels_admin1.js,1,193878,Generated layer data,data-layers
-391,data/layers/labels_base.js,1,491492,Generated layer data,data-layers
-392,data/layers/lakes10.js,1,1175610,Generated layer data,data-layers
-393,data/layers/map_ancient_cities_remote_sensing.js,1,23762,Generated layer data,data-layers
-394,data/layers/map_caves_underground.js,1,31891,Generated layer data,data-layers
-395,data/layers/map_conflicts.js,1,554798,Generated layer data,data-layers
-396,data/layers/map_megaliths.js,1,66281,Generated layer data,data-layers
-397,data/layers/map_nuclear_sites.js,1,852062,Generated layer data,data-layers
-398,data/layers/map_nuclear_tests.js,1,3833847,Generated layer data,data-layers
-399,data/layers/map_ocean.js,1,16139,Generated layer data,data-layers
-400,data/layers/map_offlimits_mountains.js,1,276017,Generated layer data,data-layers
-401,data/layers/map_pyramids.js,1,594191,Generated layer data,data-layers
-402,data/layers/map_weird_coordinates.js,1,76519,Generated layer data,data-layers
-403,data/layers/military.js,1,5967550,Generated layer data,data-layers
-404,data/layers/nuclear.js,1,343814,Generated layer data,data-layers
-405,data/layers/nuclear_osm.js,1,195,Generated layer data,data-layers
-406,data/layers/plates.js,1,94182,Generated layer data,data-layers
-407,data/layers/postal/AU.js,1,1063121,Generated layer data,data-layers
-408,data/layers/postal/BR.js,1,339908,Generated layer data,data-layers
-409,data/layers/postal/CA.js,1,108815,Generated layer data,data-layers
-410,data/layers/postal/DE.js,1,1454329,Generated layer data,data-layers
-411,data/layers/postal/FR.js,1,3165950,Generated layer data,data-layers
-412,data/layers/postal/GB.js,1,1342160,Generated layer data,data-layers
-413,data/layers/postal/IN.js,1,8408359,Generated layer data,data-layers
-414,data/layers/postal/JP.js,1,8854874,Generated layer data,data-layers
-415,data/layers/postal/MX.js,1,8845369,Generated layer data,data-layers
-416,data/layers/postal/US.js,1,2152692,Generated layer data,data-layers
-417,data/layers/postal_index.js,1,196,Generated layer data,data-layers
-418,data/layers/rivers10.js,1,2044639,Generated layer data,data-layers
-419,data/layers/trenches.js,1,14614,Generated layer data,data-layers
-420,data/layers/urban.js,1,2390954,Generated layer data,data-layers
-421,data/layers/volcanoes.js,1,269611,Generated layer data,data-layers
-422,data/pdf7_data.js,1,1030380,Data file,data
-423,data/pdf7_index.js,2,62161,Data file,data
-424,data/private/README.md,16,997,Data file,data
-425,data/refresh.sh,16,991,Data file,data
-426,data/sources/external/cneos_fireball.json,1,26657,Source snapshot (provenance input),data-sources
-427,data/sources/external/wikidata_deeps.json,162,3830,Source snapshot (provenance input),data-sources
-428,data/sources/external/wikidata_trenches.json,849,22860,Source snapshot (provenance input),data-sources
-429,data/sources/offlimits_mountains.csv,249,95513,Source snapshot (provenance input),data-sources
-430,data/sources/pdf7/curation.csv,121,9209,Source snapshot (provenance input),data-sources
-431,data/sources/pdf7/links.csv,135,8495,Source snapshot (provenance input),data-sources
-432,data/sources/pdf7/pdf7_entries.csv,382,134915,Source snapshot (provenance input),data-sources
-433,data/sources/pdf7/snap/case_docs.csv,238,19668,Source snapshot (provenance input),data-sources
-434,data/sources/pdf7/snap/cit.csv,145,88003,Source snapshot (provenance input),data-sources
-435,data/sources/pdf7/snap/cit_register.csv,116,3040,Source snapshot (provenance input),data-sources
-436,data/sources/pdf7/snap/counts_by_country.csv,191,8946,Source snapshot (provenance input),data-sources
-437,data/sources/pdf7/snap/counts_by_era.csv,12,834,Source snapshot (provenance input),data-sources
-438,data/sources/pdf7/snap/counts_by_grade.csv,6,467,Source snapshot (provenance input),data-sources
-439,data/sources/pdf7/snap/figures.csv,59,12864,Source snapshot (provenance input),data-sources
-440,data/sources/pdf7/snap/glitches.csv,382,321751,Source snapshot (provenance input),data-sources
-441,data/sources/pdf7/snap/labels.csv,924,18849,Source snapshot (provenance input),data-sources
-442,data/sources/pdf7/snap/nuclear_tests_by_state_environment.csv,9,249,Source snapshot (provenance input),data-sources
-443,data/sources/pdf7/snap/nuclear_yield_by_environment.csv,6,242,Source snapshot (provenance input),data-sources
-444,data/sources/pdf7/snap/path_labels.csv,280,6433,Source snapshot (provenance input),data-sources
-445,data/sources/pdf7/snap/pyramids_by_country.csv,47,1126,Source snapshot (provenance input),data-sources
-446,data/sources/pdf7/snap/sections.csv,95,4828,Source snapshot (provenance input),data-sources
-447,data/sources/pdf7/snap/tables.json.gz,,164936,Source snapshot (provenance input),data-sources
-448,data/sources/pdf7/snap/theories.csv,280,149802,Source snapshot (provenance input),data-sources
-449,data/sources/pdf7/snap/uap_distance_analysis.csv,10,2125,Source snapshot (provenance input),data-sources
-450,data/sources/pdf7/snap/uapnhi.csv,170,39802,Source snapshot (provenance input),data-sources
-451,data/sources/pdf7/status.csv,382,12724,Source snapshot (provenance input),data-sources
-452,data/sources/pdf7_cases.csv,32,19433,Source snapshot (provenance input),data-sources
-453,data/sources/qwm/languages_searched.csv.gz,,609,Source snapshot (provenance input),data-sources
-454,data/sources/qwm/map_abductions.csv.gz,,3798,Source snapshot (provenance input),data-sources
-455,data/sources/qwm/map_ancient_cities_remote_sensing.csv.gz,,4969,Source snapshot (provenance input),data-sources
-456,data/sources/qwm/map_animal_mutilations.csv.gz,,3606,Source snapshot (provenance input),data-sources
-457,data/sources/qwm/map_caves_underground.csv.gz,,5984,Source snapshot (provenance input),data-sources
-458,data/sources/qwm/map_conflicts.csv.gz,,43792,Source snapshot (provenance input),data-sources
-459,data/sources/qwm/map_megaliths.csv.gz,,7619,Source snapshot (provenance input),data-sources
-460,data/sources/qwm/map_military_bases.csv.gz,,257,Source snapshot (provenance input),data-sources
-461,data/sources/qwm/map_missing_unsolved.csv.gz,,3377,Source snapshot (provenance input),data-sources
-462,data/sources/qwm/map_nuclear_sites.csv.gz,,49181,Source snapshot (provenance input),data-sources
-463,data/sources/qwm/map_nuclear_tests.csv.gz,,86435,Source snapshot (provenance input),data-sources
-464,data/sources/qwm/map_ocean.csv.gz,,3335,Source snapshot (provenance input),data-sources
-465,data/sources/qwm/map_pyramids.csv.gz,,44645,Source snapshot (provenance input),data-sources
-466,data/sources/qwm/map_satellite_anomalies.csv.gz,,5810,Source snapshot (provenance input),data-sources
-467,data/sources/qwm/map_uap_cit.csv.gz,,288264,Source snapshot (provenance input),data-sources
-468,data/sources/qwm/map_uso_water.csv.gz,,6713,Source snapshot (provenance input),data-sources
-469,data/sources/qwm/map_weird_coordinates.csv.gz,,7780,Source snapshot (provenance input),data-sources
-470,data/sources/qwm/sources_registry.csv.gz,,2702,Source snapshot (provenance input),data-sources
-471,data/sources/qwm_uap_cases.csv,39,42467,Source snapshot (provenance input),data-sources
-472,data/tools/.layers_ok,1,2,Data pipeline tool,data-pipeline
-473,data/tools/build_conflicts.py,174,15482,Data pipeline tool,data-pipeline
-474,data/tools/build_extra.py,115,8942,Data pipeline tool,data-pipeline
-475,data/tools/build_layers.py,163,11867,Data pipeline tool,data-pipeline
-476,data/tools/build_military.py,91,8017,Data pipeline tool,data-pipeline
-477,data/tools/fetch_osm_military.py,30,1539,Data pipeline tool,data-pipeline
-478,data/tools/gap_audit.py,339,33328,Data pipeline tool,data-pipeline
-479,data/tools/geocode_cache.json,1346,34435,Data pipeline tool,data-pipeline
-480,data/tools/geocode_qwm.py,142,12302,Data pipeline tool,data-pipeline
-481,data/tools/military_class_policy.json,465,8909,Data pipeline tool,data-pipeline
-482,data/tools/pdf7_dataset.py,171,13898,Data pipeline tool,data-pipeline
-483,data/tools/pdf7_mine.py,130,9507,Data pipeline tool,data-pipeline
-484,data/tools/pdf7_tex.py,139,7551,Data pipeline tool,data-pipeline
-485,data/tools/snapshot_qwm.py,18,1488,Data pipeline tool,data-pipeline
-486,data/tools/wd_mil.py,30,1908,Data pipeline tool,data-pipeline
-487,data/unplaced.js,2,217407,Data file,data
-488,data/unplotted.csv,15,3322,Data file,data
-489,data/unplotted_loader.csv,444,41949,Data file,data
-490,data/url_status.js,2,72375,Data file,data
-491,docs/adr/0001-cesium-renderer.md,103,8626,Architecture decision record,docs
-492,docs/adr/0002-non-spatial-data-layer.md,79,4333,Architecture decision record,docs
-493,docs/adr/0003-design-system.md,80,5772,Architecture decision record,docs
-494,docs/adr/0004-osint-console-information-architecture.md,142,11122,Architecture decision record,docs
-495,docs/adr/0005-globe-visual-system.md,182,11340,Architecture decision record,docs
-496,docs/architecture.md,124,11442,Documentation,docs
-497,docs/audit/SUMMARY.md,69,7824,Audit record,audit
-498,docs/audit/TAXONOMY.md,82,6330,Audit record,audit
-499,docs/audit/checks.json,10,612,Audit record,audit
-500,docs/audit/coverage.md,707,189245,Audit record,audit
-501,docs/audit/findings.json,1082,32137,Audit record,audit
-502,docs/audit/hardening/FINDINGS.md,77,15388,Hardening audit record,audit
-503,docs/audit/hardening/INDEX.md,1249,107231,Hardening audit record,audit
-504,docs/audit/hardening/PASSES.md,237,24181,Hardening audit record,audit
-505,docs/audit/hardening/PROGRESS.md,9,360,Hardening audit record,audit
-506,docs/audit/hardening/findings.csv,58,13428,Hardening audit record,audit
-507,docs/audit/hardening/index.csv,1121,95738,Hardening audit record,audit
-508,docs/audit/hardening/passes_run.json,1474,41975,Hardening audit record,audit
-509,docs/audit/pass-01.md,35,4659,Audit record,audit
-510,docs/audit/pass-02.md,36,6124,Audit record,audit
-511,docs/audit/pass-03.md,31,2569,Audit record,audit
-512,docs/audit/pass-04.md,33,3548,Audit record,audit
-513,docs/audit/pass-05.md,35,4251,Audit record,audit
-514,docs/audit/pass-06.md,34,4618,Audit record,audit
-515,docs/audit/pass-07-data.json,274,7278,Audit record,audit
-516,docs/audit/pass-07.md,37,3672,Audit record,audit
-517,docs/audit/pass-08.md,23,1047,Audit record,audit
-518,docs/audit/pass-09.md,43,4090,Audit record,audit
-519,docs/audit/pass-10.md,29,2489,Audit record,audit
-520,docs/audit/pdf7-unplaced.csv,33,10180,Audit record,audit
-521,docs/audit/qwm-data-issues.csv,3073,542559,Audit record,audit
-522,docs/audit/totals.json,58,819,Audit record,audit
-523,docs/audit/url_status.csv,1484,140123,Audit record,audit
-524,docs/audit/v1.2-data-gap-audit.csv,357,101402,Audit record,audit
-525,docs/audit/v1.2-data-gap-audit.md,109,10482,Audit record,audit
-526,docs/audit/v1.3-ui-audit.csv,139,47349,Audit record,audit
-527,docs/audit/v1.3-ui-audit.md,180,38376,Audit record,audit
-528,docs/audit/v1.4-ui-audit.csv,74,23610,Audit record,audit
-529,docs/audit/v1.4-ui-audit.md,128,64547,Audit record,audit
-530,docs/audit/v1.5-ui-audit.csv,29,8010,Audit record,audit
-531,docs/audit/v1.5-ui-audit.md,62,16806,Audit record,audit
-532,docs/convergence.md,54,2770,Documentation,docs
-533,docs/data-and-grading.md,54,4847,Documentation,docs
-534,docs/data-dictionary.md,60,13531,Documentation,docs
-535,docs/data-pipeline.md,70,4326,Documentation,docs
-536,docs/data-sources.md,105,15365,Documentation,docs
-537,docs/design/style-guide.md,248,17007,Design documentation,design
-538,docs/design/wireframes/1280x800_dossier.png,,119065,Design documentation,design
-539,docs/design/wireframes/1280x800_dossier.svg,27,8106,Design documentation,design
-540,docs/design/wireframes/1280x800_main.png,,115432,Design documentation,design
-541,docs/design/wireframes/1280x800_main.svg,26,7682,Design documentation,design
-542,docs/design/wireframes/1280x800_reference.png,,137403,Design documentation,design
-543,docs/design/wireframes/1280x800_reference.svg,26,8927,Design documentation,design
-544,docs/design/wireframes/1920x1080_analysis.png,,157164,Design documentation,design
-545,docs/design/wireframes/1920x1080_analysis.svg,28,8832,Design documentation,design
-546,docs/design/wireframes/1920x1080_dossier.png,,174067,Design documentation,design
-547,docs/design/wireframes/1920x1080_dossier.svg,29,9558,Design documentation,design
-548,docs/design/wireframes/1920x1080_main.png,,145665,Design documentation,design
-549,docs/design/wireframes/1920x1080_main.svg,26,7833,Design documentation,design
-550,docs/design/wireframes/1920x1080_palette.png,,165481,Design documentation,design
-551,docs/design/wireframes/1920x1080_palette.svg,28,8948,Design documentation,design
-552,docs/design/wireframes/1920x1080_reference.png,,204817,Design documentation,design
-553,docs/design/wireframes/1920x1080_reference.svg,27,9776,Design documentation,design
-554,docs/design/wireframes/1920x1080_states.png,,178739,Design documentation,design
-555,docs/design/wireframes/1920x1080_states.svg,30,9497,Design documentation,design
-556,docs/design/wireframes/3840x2160_dossier.png,,327436,Design documentation,design
-557,docs/design/wireframes/3840x2160_dossier.svg,30,10806,Design documentation,design
-558,docs/design/wireframes/3840x2160_main.png,,266770,Design documentation,design
-559,docs/design/wireframes/3840x2160_main.svg,26,8212,Design documentation,design
-560,docs/design/wireframes/3840x2160_reference.png,,443534,Design documentation,design
-561,docs/design/wireframes/3840x2160_reference.svg,29,11798,Design documentation,design
-562,docs/design/wireframes/README.md,48,4357,Design documentation,design
-563,docs/design/wireframes/v1.4/1280x800_dossier.png,,114892,Design documentation,design
-564,docs/design/wireframes/v1.4/1280x800_dossier.svg,25,6656,Design documentation,design
-565,docs/design/wireframes/v1.4/1280x800_main.png,,111837,Design documentation,design
-566,docs/design/wireframes/v1.4/1280x800_main.svg,24,6227,Design documentation,design
-567,docs/design/wireframes/v1.4/1920x1080_analysis.png,,153095,Design documentation,design
-568,docs/design/wireframes/v1.4/1920x1080_analysis.svg,26,7375,Design documentation,design
-569,docs/design/wireframes/v1.4/1920x1080_dossier.png,,169249,Design documentation,design
-570,docs/design/wireframes/v1.4/1920x1080_dossier.svg,27,8102,Design documentation,design
-571,docs/design/wireframes/v1.4/1920x1080_main.png,,141486,Design documentation,design
-572,docs/design/wireframes/v1.4/1920x1080_main.svg,24,6356,Design documentation,design
-573,docs/design/wireframes/v1.4/1920x1080_palette.png,,162072,Design documentation,design
-574,docs/design/wireframes/v1.4/1920x1080_palette.svg,26,7471,Design documentation,design
-575,docs/design/wireframes/v1.4/3840x2160_dossier.png,,321247,Design documentation,design
-576,docs/design/wireframes/v1.4/3840x2160_dossier.svg,28,9200,Design documentation,design
-577,docs/design/wireframes/v1.4/3840x2160_main.png,,261475,Design documentation,design
-578,docs/design/wireframes/v1.4/3840x2160_main.svg,24,6607,Design documentation,design
-579,docs/design/wireframes/v1.4/README.md,29,2327,Design documentation,design
-580,docs/layer-catalog.md,61,21017,Documentation,docs
-581,docs/limitations.md,66,4405,Documentation,docs
-582,docs/make_wireframes.py,29,4397,Documentation,docs
-583,docs/render_wireframes.py,9,546,Documentation,docs
-584,docs/repo-checklist.md,125,9528,Documentation,docs
-585,docs/repo-metadata.json,34,1252,Documentation,docs
-586,docs/screenshots/01_engage.png,,61459,Screenshot evidence,docs-media
-587,docs/screenshots/02_globe.png,,546904,Screenshot evidence,docs-media
-588,docs/screenshots/03_layers_tree.png,,599220,Screenshot evidence,docs-media
-589,docs/screenshots/04_offlimits_layer.png,,674150,Screenshot evidence,docs-media
-590,docs/screenshots/05_dossier.png,,517735,Screenshot evidence,docs-media
-591,docs/screenshots/05b_dossier_pdf7_ref.png,,522550,Screenshot evidence,docs-media
-592,docs/screenshots/06_tour.png,,512868,Screenshot evidence,docs-media
-593,docs/screenshots/07_hotspots.png,,315247,Screenshot evidence,docs-media
-594,docs/screenshots/08_report.png,,346078,Screenshot evidence,docs-media
-595,docs/screenshots/09_index_coverage.png,,370919,Screenshot evidence,docs-media
-596,docs/screenshots/09_index_glossary.png,,388571,Screenshot evidence,docs-media
-597,docs/screenshots/09_index_offworld.png,,427421,Screenshot evidence,docs-media
-598,docs/screenshots/09_index_pdf7.png,,322173,Screenshot evidence,docs-media
-599,docs/screenshots/09_index_sources.png,,392238,Screenshot evidence,docs-media
-600,docs/screenshots/10_charts.png,,395963,Screenshot evidence,docs-media
-601,docs/screenshots/11_analysis.png,,532369,Screenshot evidence,docs-media
-602,docs/screenshots/12_settings.png,,586471,Screenshot evidence,docs-media
-603,docs/screenshots/13_zoom_regional_europe.png,,676952,Screenshot evidence,docs-media
-604,docs/screenshots/14_zoom_city_london.png,,923922,Screenshot evidence,docs-media
-605,docs/screenshots/15_zoom_street_nyc.png,,927154,Screenshot evidence,docs-media
-606,docs/screenshots/16_zoom_terrain_everest.png,,789376,Screenshot evidence,docs-media
-607,docs/screenshots/17_zoom_case_rendlesham.png,,653879,Screenshot evidence,docs-media
-608,docs/screenshots/18_sentinel2_basemap.png,,650987,Screenshot evidence,docs-media
-609,docs/screenshots/19_data_overview.png,,262397,Screenshot evidence,docs-media
-610,docs/screenshots/20_data_entries.png,,288555,Screenshot evidence,docs-media
-611,docs/screenshots/21_data_charts.png,,244700,Screenshot evidence,docs-media
-612,docs/screenshots/22_data_tables.png,,286102,Screenshot evidence,docs-media
-613,docs/screenshots/23_data_sources.png,,261534,Screenshot evidence,docs-media
-614,docs/screenshots/24_data_stats.png,,275562,Screenshot evidence,docs-media
-615,docs/screenshots/25_data_unplaced.png,,269618,Screenshot evidence,docs-media
-616,docs/screenshots/v1.3/1280x800_main_after.png,,423262,Screenshot evidence,docs-media
-617,docs/screenshots/v1.3/1280x800_main_before.png,,430095,Screenshot evidence,docs-media
-618,docs/screenshots/v1.3/1280x800_multi_open_after.png,,213887,Screenshot evidence,docs-media
-619,docs/screenshots/v1.3/1280x800_multi_open_before.png,,189495,Screenshot evidence,docs-media
-620,docs/screenshots/v1.3/1920x1080_charts_after.png,,490259,Screenshot evidence,docs-media
-621,docs/screenshots/v1.3/1920x1080_charts_before.png,,495347,Screenshot evidence,docs-media
-622,docs/screenshots/v1.3/1920x1080_data_overview_after.png,,365817,Screenshot evidence,docs-media
-623,docs/screenshots/v1.3/1920x1080_data_overview_before.png,,376276,Screenshot evidence,docs-media
-624,docs/screenshots/v1.3/1920x1080_data_stats_after.png,,390394,Screenshot evidence,docs-media
-625,docs/screenshots/v1.3/1920x1080_data_stats_before.png,,422285,Screenshot evidence,docs-media
-626,docs/screenshots/v1.3/1920x1080_data_tables_after.png,,566450,Screenshot evidence,docs-media
-627,docs/screenshots/v1.3/1920x1080_data_tables_before.png,,397376,Screenshot evidence,docs-media
-628,docs/screenshots/v1.3/1920x1080_dossier_after.png,,817325,Screenshot evidence,docs-media
-629,docs/screenshots/v1.3/1920x1080_dossier_before.png,,827140,Screenshot evidence,docs-media
-630,docs/screenshots/v1.3/1920x1080_help_after.png,,580566,Screenshot evidence,docs-media
-631,docs/screenshots/v1.3/1920x1080_help_before.png,,565100,Screenshot evidence,docs-media
-632,docs/screenshots/v1.3/1920x1080_hotspots_after.png,,702018,Screenshot evidence,docs-media
-633,docs/screenshots/v1.3/1920x1080_hotspots_before.png,,729909,Screenshot evidence,docs-media
-634,docs/screenshots/v1.3/1920x1080_index_glossary_after.png,,478581,Screenshot evidence,docs-media
-635,docs/screenshots/v1.3/1920x1080_index_glossary_before.png,,469234,Screenshot evidence,docs-media
-636,docs/screenshots/v1.3/1920x1080_main_after.png,,878303,Screenshot evidence,docs-media
-637,docs/screenshots/v1.3/1920x1080_main_before.png,,886551,Screenshot evidence,docs-media
-638,docs/screenshots/v1.3/1920x1080_multi_open_after.png,,389883,Screenshot evidence,docs-media
-639,docs/screenshots/v1.3/1920x1080_multi_open_before.png,,390674,Screenshot evidence,docs-media
-640,docs/screenshots/v1.3/1920x1080_rail_layers_after.png,,885525,Screenshot evidence,docs-media
-641,docs/screenshots/v1.3/1920x1080_rail_layers_before.png,,889409,Screenshot evidence,docs-media
-642,docs/screenshots/v1.3/1920x1080_settings_after.png,,786462,Screenshot evidence,docs-media
-643,docs/screenshots/v1.3/1920x1080_settings_before.png,,800865,Screenshot evidence,docs-media
-644,docs/screenshots/v1.3/1920x1080_wars_after.png,,677255,Screenshot evidence,docs-media
-645,docs/screenshots/v1.3/1920x1080_wars_before.png,,670035,Screenshot evidence,docs-media
-646,docs/screenshots/v1.3/3840x2160_main_after.png,,814718,Screenshot evidence,docs-media
-647,docs/screenshots/v1.3/3840x2160_main_before.png,,823066,Screenshot evidence,docs-media
-648,docs/screenshots/v1.3/README.md,23,2060,Screenshot evidence,docs-media
-649,docs/screenshots/v1.4/1280x800_console_full_after.png,,219018,Screenshot evidence,docs-media
-650,docs/screenshots/v1.4/1280x800_console_full_before.png,,215749,Screenshot evidence,docs-media
-651,docs/screenshots/v1.4/1280x800_main_after.png,,392995,Screenshot evidence,docs-media
-652,docs/screenshots/v1.4/1280x800_main_before.png,,426742,Screenshot evidence,docs-media
-653,docs/screenshots/v1.4/1920x1080_charts_after.png,,477093,Screenshot evidence,docs-media
-654,docs/screenshots/v1.4/1920x1080_charts_before.png,,489665,Screenshot evidence,docs-media
-655,docs/screenshots/v1.4/1920x1080_compact_after.png,,783342,Screenshot evidence,docs-media
-656,docs/screenshots/v1.4/1920x1080_compact_before.png,,880434,Screenshot evidence,docs-media
-657,docs/screenshots/v1.4/1920x1080_console_full_after.png,,425371,Screenshot evidence,docs-media
-658,docs/screenshots/v1.4/1920x1080_console_full_before.png,,374183,Screenshot evidence,docs-media
-659,docs/screenshots/v1.4/1920x1080_dossier_after.png,,764898,Screenshot evidence,docs-media
-660,docs/screenshots/v1.4/1920x1080_dossier_before.png,,886904,Screenshot evidence,docs-media
-661,docs/screenshots/v1.4/1920x1080_feed_after.png,,873123,Screenshot evidence,docs-media
-662,docs/screenshots/v1.4/1920x1080_feed_before.png,,880434,Screenshot evidence,docs-media
-663,docs/screenshots/v1.4/1920x1080_help_after.png,,546292,Screenshot evidence,docs-media
-664,docs/screenshots/v1.4/1920x1080_help_before.png,,584561,Screenshot evidence,docs-media
-665,docs/screenshots/v1.4/1920x1080_high_contrast_after.png,,729144,Screenshot evidence,docs-media
-666,docs/screenshots/v1.4/1920x1080_high_contrast_before.png,,880434,Screenshot evidence,docs-media
-667,docs/screenshots/v1.4/1920x1080_hotspots_after.png,,641082,Screenshot evidence,docs-media
-668,docs/screenshots/v1.4/1920x1080_hotspots_before.png,,703257,Screenshot evidence,docs-media
-669,docs/screenshots/v1.4/1920x1080_hover_card_after.png,,1025231,Screenshot evidence,docs-media
-670,docs/screenshots/v1.4/1920x1080_hover_card_before.png,,880434,Screenshot evidence,docs-media
-671,docs/screenshots/v1.4/1920x1080_main_after.png,,832939,Screenshot evidence,docs-media
-672,docs/screenshots/v1.4/1920x1080_main_before.png,,880434,Screenshot evidence,docs-media
-673,docs/screenshots/v1.4/1920x1080_palette_query_after.png,,759677,Screenshot evidence,docs-media
-674,docs/screenshots/v1.4/1920x1080_palette_query_before.png,,863325,Screenshot evidence,docs-media
-675,docs/screenshots/v1.4/1920x1080_rail_filters_after.png,,834042,Screenshot evidence,docs-media
-676,docs/screenshots/v1.4/1920x1080_rail_filters_before.png,,885817,Screenshot evidence,docs-media
-677,docs/screenshots/v1.4/1920x1080_rail_layers_after.png,,829647,Screenshot evidence,docs-media
-678,docs/screenshots/v1.4/1920x1080_rail_layers_before.png,,883819,Screenshot evidence,docs-media
-679,docs/screenshots/v1.4/1920x1080_settings_after.png,,790464,Screenshot evidence,docs-media
-680,docs/screenshots/v1.4/1920x1080_settings_before.png,,784672,Screenshot evidence,docs-media
-681,docs/screenshots/v1.4/3840x2160_main_after.png,,785225,Screenshot evidence,docs-media
-682,docs/screenshots/v1.4/3840x2160_main_before.png,,812641,Screenshot evidence,docs-media
-683,docs/screenshots/v1.4/README.md,26,2450,Screenshot evidence,docs-media
-684,docs/screenshots/v1.5/1280x800_globe_reference_after.png,,461439,Screenshot evidence,docs-media
-685,docs/screenshots/v1.5/1280x800_globe_reference_before.png,,392965,Screenshot evidence,docs-media
-686,docs/screenshots/v1.5/1280x800_main_after.png,,391762,Screenshot evidence,docs-media
-687,docs/screenshots/v1.5/1280x800_main_before.png,,392184,Screenshot evidence,docs-media
-688,docs/screenshots/v1.5/1920x1080_dossier_after.png,,802854,Screenshot evidence,docs-media
-689,docs/screenshots/v1.5/1920x1080_dossier_before.png,,783637,Screenshot evidence,docs-media
-690,docs/screenshots/v1.5/1920x1080_feed_after.png,,703051,Screenshot evidence,docs-media
-691,docs/screenshots/v1.5/1920x1080_feed_before.png,,707143,Screenshot evidence,docs-media
-692,docs/screenshots/v1.5/1920x1080_globe_reference_after.png,,963580,Screenshot evidence,docs-media
-693,docs/screenshots/v1.5/1920x1080_globe_reference_before.png,,943432,Screenshot evidence,docs-media
-694,docs/screenshots/v1.5/1920x1080_help_after.png,,486675,Screenshot evidence,docs-media
-695,docs/screenshots/v1.5/1920x1080_help_before.png,,541397,Screenshot evidence,docs-media
-696,docs/screenshots/v1.5/1920x1080_legend_info_after.png,,834344,Screenshot evidence,docs-media
-697,docs/screenshots/v1.5/1920x1080_legend_info_before.png,,830043,Screenshot evidence,docs-media
-698,docs/screenshots/v1.5/1920x1080_main_after.png,,812898,Screenshot evidence,docs-media
-699,docs/screenshots/v1.5/1920x1080_main_before.png,,831017,Screenshot evidence,docs-media
-700,docs/screenshots/v1.5/1920x1080_markers_close_after.png,,732993,Screenshot evidence,docs-media
-701,docs/screenshots/v1.5/1920x1080_markers_close_before.png,,737172,Screenshot evidence,docs-media
-702,docs/screenshots/v1.5/1920x1080_settings_after.png,,590706,Screenshot evidence,docs-media
-703,docs/screenshots/v1.5/1920x1080_settings_before.png,,621861,Screenshot evidence,docs-media
-704,docs/screenshots/v1.5/3840x2160_globe_reference_after.png,,940675,Screenshot evidence,docs-media
-705,docs/screenshots/v1.5/3840x2160_globe_reference_before.png,,790386,Screenshot evidence,docs-media
-706,docs/screenshots/v1.5/3840x2160_main_after.png,,783443,Screenshot evidence,docs-media
-707,docs/screenshots/v1.5/3840x2160_main_before.png,,788798,Screenshot evidence,docs-media
-708,docs/screenshots/v1.5/README.md,19,1720,Screenshot evidence,docs-media
-709,docs/user-guide.md,131,10071,Documentation,docs
-710,docs/wireframes.md,91,6983,Documentation,docs
-711,docs/wireframes/01_main_console.png,,84741,Wireframe image,design
-712,docs/wireframes/01_main_console.svg,25,2843,Wireframe image,design
-713,docs/wireframes/02_dossier.png,,93527,Wireframe image,design
-714,docs/wireframes/02_dossier.svg,25,2904,Wireframe image,design
-715,docs/wireframes/03_link_graph.png,,13064,Wireframe image,design
-716,docs/wireframes/03_link_graph.svg,26,3016,Wireframe image,design
-717,docs/wireframes/04_compare.png,,73716,Wireframe image,design
-718,docs/wireframes/04_compare.svg,17,1972,Wireframe image,design
-719,docs/wireframes/05_hypothesis.png,,96355,Wireframe image,design
-720,docs/wireframes/05_hypothesis.svg,28,3319,Wireframe image,design
-721,docs/wireframes/06_briefings.png,,58513,Wireframe image,design
-722,docs/wireframes/06_briefings.svg,22,2519,Wireframe image,design
-723,eslint.config.js,47,1182,Lint config,repo
-724,index.html,481,20046,"App entry HTML (CSP, layout skeleton)",ui-shell
-725,js/app.js,21840,5086737,Built bundle (generated by scripts/build.mjs),build-output
-726,js/app.js.map,7,20060528,Built bundle (generated by scripts/build.mjs),build-output
-727,launch.cmd,26,1086,Windows launcher,repo
-728,package-lock.json,2798,96169,npm lockfile,repo
-729,package.json,68,2315,npm manifest,repo
-730,scripts/audit/check_urls.py,123,5824,Audit tooling,audit
-731,scripts/audit/dump_analysis.mjs,57,2027,Audit tooling,audit
-732,scripts/audit/forensics.py,422,31824,Audit tooling,audit
-733,scripts/audit/hardening_passes.py,880,53623,Audit tooling,audit
-734,scripts/audit/hardening_report.py,85,4921,Audit tooling,audit
-735,scripts/audit/index_repo.py,145,6208,Audit tooling,audit
-736,scripts/audit/pair_shots.py,103,4857,Audit tooling,audit
-737,scripts/audit/stats_crosscheck.py,99,6428,Audit tooling,audit
-738,scripts/audit/ui_audit_report.py,422,26412,Audit tooling,audit
-739,scripts/audit/ui_audit_v14.py,416,27883,Audit tooling,audit
-740,scripts/audit/ui_audit_v15.py,236,15532,Audit tooling,audit
-741,scripts/audit/write_passes.py,163,16069,Audit tooling,audit
-742,scripts/build.mjs,38,1214,Build/validation tooling,build
-743,scripts/coverage.mjs,91,4483,Build/validation tooling,build
-744,scripts/design/wireframes_v14.mjs,287,12369,Design/wireframe generator,design
-745,scripts/design/wireframes_v15.mjs,385,16704,Design/wireframe generator,design
-746,scripts/gen_icons.mjs,42,2866,Build/validation tooling,build
-747,scripts/layer_catalog.py,32,2124,Build/validation tooling,build
-748,scripts/package.mjs,122,4518,Build/validation tooling,build
-749,scripts/validate_data.py,98,5376,Build/validation tooling,build
-750,src/app.js,651,22555,App bootstrap/state,core
-751,src/app_core.js,270,9357,App bootstrap/state,core
-752,src/audio.js,145,4201,Domain/analysis module,core
-753,src/basemap.js,50,1857,Domain/analysis module,core
-754,src/cases_codec.js,19,744,Domain/analysis module,core
-755,src/cesium/C.js,100,2227,Globe renderer module (Cesium),globe
-756,src/cesium/flight.js,30,1754,Globe renderer module (Cesium),globe
-757,src/cesium/graticule.js,137,5850,Globe renderer module (Cesium),globe
-758,src/cesium/icons.js,182,6216,Globe renderer module (Cesium),globe
-759,src/cesium/reference.js,228,8787,Globe renderer module (Cesium),globe
-760,src/cesium/sources.js,87,3524,Globe renderer module (Cesium),globe
-761,src/cesium/terrarium.js,113,4331,Globe renderer module (Cesium),globe
-762,src/cinema.js,663,23933,Domain/analysis module,core
-763,src/convergence.js,218,9118,Domain/analysis module,core
-764,src/coverage.js,173,6624,Domain/analysis module,core
-765,src/data_clean.js,33,1869,Domain/analysis module,core
-766,src/geo.js,100,3528,Domain/analysis module,core
-767,src/globe_cesium.js,1124,41031,Globe renderer entry,globe
-768,src/glossary.js,244,11149,Domain/analysis module,core
-769,src/grades.js,47,2102,Domain/analysis module,core
-770,src/icons.js,163,18071,Domain/analysis module,core
-771,src/index_gen.js,105,3751,Domain/analysis module,core
-772,src/labels_cesium.js,194,6614,Globe labels,globe
-773,src/layers.js,550,20654,Domain/analysis module,core
-774,src/live_feeds.js,82,3334,Domain/analysis module,core
-775,src/loader.js,58,1868,Domain/analysis module,core
-776,src/pdf7_stats.js,390,13547,Domain/analysis module,core
-777,src/report_gen.js,170,10005,Domain/analysis module,core
-778,src/stats.js,348,12046,Domain/analysis module,core
-779,src/sun.js,15,734,Domain/analysis module,core
-780,src/taxonomy.js,68,3273,Domain/analysis module,core
-781,src/text.js,21,1228,Domain/analysis module,core
-782,src/ui/breakpoints.js,18,1207,Console UI component,ui-shell
-783,src/ui/clock.js,43,1465,Console UI component,ui-shell
-784,src/ui/cluster.js,33,1315,Console UI component,ui-shell
-785,src/ui/console.js,382,19238,Console UI component,ui-shell
-786,src/ui/feed.js,187,7474,Console UI component,ui-shell
-787,src/ui/globe_tools.js,76,3287,Console UI component,ui-shell
-788,src/ui/sanitize.js,30,1333,Console UI component,ui-shell
-789,src/ui/shortcuts.js,104,5441,Console UI component,ui-shell
-790,src/ui/states.js,57,3022,Console UI component,ui-shell
-791,src/ui/symbology.js,144,6133,Console UI component,ui-shell
-792,src/ui/table.js,18,678,Console UI component,ui-shell
-793,src/ui/tabs.js,95,3910,Console UI component,ui-shell
-794,src/ui/timescale.js,73,3392,Console UI component,ui-shell
-795,src/ui/tips.js,85,3556,Console UI component,ui-shell
-796,src/ui/window.js,609,23278,Console UI component,ui-shell
-797,src/ui/workspace.js,63,2648,Console UI component,ui-shell
-798,src/ui_analysis.js,456,19279,Panel UI module,ui-panels
-799,src/ui_charts.js,247,10230,Panel UI module,ui-panels
-800,src/ui_conflicts.js,189,7941,Panel UI module,ui-panels
-801,src/ui_data.js,598,29381,Panel UI module,ui-panels
-802,src/ui_graph.js,259,8208,Panel UI module,ui-panels
-803,src/ui_hotspots.js,353,14031,Panel UI module,ui-panels
-804,src/ui_misc.js,412,15014,Panel UI module,ui-panels
-805,src/ui_panels.js,1007,44378,Panel UI module,ui-panels
-806,src/ui_reference.js,276,14747,Panel UI module,ui-panels
-807,src/ui_reports.js,102,4359,Panel UI module,ui-panels
-808,src/ui_timeline.js,489,17613,Panel UI module,ui-panels
-809,test/a11y.mjs,67,2832,Browser/e2e test harness (Playwright),tests
-810,test/devshot.mjs,39,1746,Browser/e2e test harness (Playwright),tests
-811,test/perf.mjs,76,4174,Browser/e2e test harness (Playwright),tests
-812,test/py/test_build_data.py,75,4297,Browser/e2e test harness (Playwright),tests
-813,test/py/test_hardening_tools.py,27,1050,Browser/e2e test harness (Playwright),tests
-814,test/screens.mjs,231,6527,Browser/e2e test harness (Playwright),tests
-815,test/shots.py,70,8278,Browser/e2e test harness (Playwright),tests
-816,test/smoke.mjs,361,16900,Browser/e2e test harness (Playwright),tests
-817,test/static_server.mjs,34,1181,Browser/e2e test harness (Playwright),tests
-818,test/ui_audit.mjs,444,19377,Browser/e2e test harness (Playwright),tests
-819,test/ui_views.mjs,217,6450,Browser/e2e test harness (Playwright),tests
-820,test/unit/breakpoints.test.mjs,36,1577,Unit test (node:test),tests
-821,test/unit/cesium.test.mjs,42,1881,Unit test (node:test),tests
-822,test/unit/clock.test.mjs,23,1037,Unit test (node:test),tests
-823,test/unit/cluster.test.mjs,61,2270,Unit test (node:test),tests
-824,test/unit/convergence.test.mjs,125,5088,Unit test (node:test),tests
-825,test/unit/flight.test.mjs,30,1844,Unit test (node:test),tests
-826,test/unit/geo.test.mjs,61,2172,Unit test (node:test),tests
-827,test/unit/grades.test.mjs,34,1240,Unit test (node:test),tests
-828,test/unit/graticule.test.mjs,122,5575,Unit test (node:test),tests
-829,test/unit/hardening.test.mjs,318,15426,Unit test (node:test),tests
-830,test/unit/pdf7.test.mjs,50,1886,Unit test (node:test),tests
-831,test/unit/pdf7_data.test.mjs,103,4583,Unit test (node:test),tests
-832,test/unit/pdf7_stats.test.mjs,94,3629,Unit test (node:test),tests
-833,test/unit/reports.test.mjs,160,4898,Unit test (node:test),tests
-834,test/unit/shortcuts.test.mjs,46,2118,Unit test (node:test),tests
-835,test/unit/states.test.mjs,26,1497,Unit test (node:test),tests
-836,test/unit/stats.test.mjs,102,4619,Unit test (node:test),tests
-837,test/unit/symbology.test.mjs,99,3855,Unit test (node:test),tests
-838,test/unit/tabs.test.mjs,90,3454,Unit test (node:test),tests
-839,test/unit/timescale.test.mjs,47,2171,Unit test (node:test),tests
-840,test/unit/window.test.mjs,243,11656,Unit test (node:test),tests
-841,textures/bump4k.js,1,412632,Earth texture (base64 JS module),assets
-842,textures/day2k.js,1,337739,Earth texture (base64 JS module),assets
-843,textures/day8k.js,1,4218435,Earth texture (base64 JS module),assets
-844,textures/night2k.js,1,212545,Earth texture (base64 JS module),assets
-845,textures/night8k.js,1,2730441,Earth texture (base64 JS module),assets
-846,textures/spec4k.js,1,81551,Earth texture (base64 JS module),assets
-847,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_0.json,1,67428,Vendored CesiumJS build (third party),vendor
-848,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_1.json,1,67313,Vendored CesiumJS build (third party),vendor
-849,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_10.json,1,65984,Vendored CesiumJS build (third party),vendor
-850,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_11.json,1,65007,Vendored CesiumJS build (third party),vendor
-851,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_12.json,1,64663,Vendored CesiumJS build (third party),vendor
-852,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_13.json,1,65854,Vendored CesiumJS build (third party),vendor
-853,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_14.json,1,65547,Vendored CesiumJS build (third party),vendor
-854,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_15.json,1,65709,Vendored CesiumJS build (third party),vendor
-855,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_16.json,1,66030,Vendored CesiumJS build (third party),vendor
-856,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_17.json,1,65622,Vendored CesiumJS build (third party),vendor
-857,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_18.json,1,65310,Vendored CesiumJS build (third party),vendor
-858,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_19.json,1,65537,Vendored CesiumJS build (third party),vendor
-859,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_2.json,1,67802,Vendored CesiumJS build (third party),vendor
-860,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_20.json,1,65328,Vendored CesiumJS build (third party),vendor
-861,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_21.json,1,64843,Vendored CesiumJS build (third party),vendor
-862,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_22.json,1,64977,Vendored CesiumJS build (third party),vendor
-863,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_23.json,1,66084,Vendored CesiumJS build (third party),vendor
-864,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_24.json,1,64894,Vendored CesiumJS build (third party),vendor
-865,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_25.json,1,64953,Vendored CesiumJS build (third party),vendor
-866,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_26.json,1,65311,Vendored CesiumJS build (third party),vendor
-867,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_27.json,1,27595,Vendored CesiumJS build (third party),vendor
-868,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_3.json,1,66400,Vendored CesiumJS build (third party),vendor
-869,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_4.json,1,65900,Vendored CesiumJS build (third party),vendor
-870,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_5.json,1,65378,Vendored CesiumJS build (third party),vendor
-871,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_6.json,1,65596,Vendored CesiumJS build (third party),vendor
-872,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_7.json,1,67099,Vendored CesiumJS build (third party),vendor
-873,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_8.json,1,66931,Vendored CesiumJS build (third party),vendor
-874,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_9.json,1,66857,Vendored CesiumJS build (third party),vendor
-875,vendor/cesium/Assets/Images/bing_maps_credit.png,,18831,Vendored CesiumJS build (third party),vendor
-876,vendor/cesium/Assets/Images/cesium_credit.png,,4242,Vendored CesiumJS build (third party),vendor
-877,vendor/cesium/Assets/Images/google_earth_credit.png,,7703,Vendored CesiumJS build (third party),vendor
-878,vendor/cesium/Assets/Images/ion-credit.png,,6028,Vendored CesiumJS build (third party),vendor
-879,vendor/cesium/Assets/Textures/LensFlare/DirtMask.jpg,,113718,Vendored CesiumJS build (third party),vendor
-880,vendor/cesium/Assets/Textures/LensFlare/StarBurst.jpg,,195728,Vendored CesiumJS build (third party),vendor
-881,vendor/cesium/Assets/Textures/NaturalEarthII/0/0/0.jpg,,12067,Vendored CesiumJS build (third party),vendor
-882,vendor/cesium/Assets/Textures/NaturalEarthII/0/1/0.jpg,,14055,Vendored CesiumJS build (third party),vendor
-883,vendor/cesium/Assets/Textures/NaturalEarthII/1/0/0.jpg,,7278,Vendored CesiumJS build (third party),vendor
-884,vendor/cesium/Assets/Textures/NaturalEarthII/1/0/1.jpg,,11399,Vendored CesiumJS build (third party),vendor
-885,vendor/cesium/Assets/Textures/NaturalEarthII/1/1/0.jpg,,10652,Vendored CesiumJS build (third party),vendor
-886,vendor/cesium/Assets/Textures/NaturalEarthII/1/1/1.jpg,,13142,Vendored CesiumJS build (third party),vendor
-887,vendor/cesium/Assets/Textures/NaturalEarthII/1/2/0.jpg,,9643,Vendored CesiumJS build (third party),vendor
-888,vendor/cesium/Assets/Textures/NaturalEarthII/1/2/1.jpg,,15312,Vendored CesiumJS build (third party),vendor
-889,vendor/cesium/Assets/Textures/NaturalEarthII/1/3/0.jpg,,10532,Vendored CesiumJS build (third party),vendor
-890,vendor/cesium/Assets/Textures/NaturalEarthII/1/3/1.jpg,,13262,Vendored CesiumJS build (third party),vendor
-891,vendor/cesium/Assets/Textures/NaturalEarthII/2/0/0.jpg,,8157,Vendored CesiumJS build (third party),vendor
-892,vendor/cesium/Assets/Textures/NaturalEarthII/2/0/1.jpg,,9307,Vendored CesiumJS build (third party),vendor
-893,vendor/cesium/Assets/Textures/NaturalEarthII/2/0/2.jpg,,7891,Vendored CesiumJS build (third party),vendor
-894,vendor/cesium/Assets/Textures/NaturalEarthII/2/0/3.jpg,,10341,Vendored CesiumJS build (third party),vendor
-895,vendor/cesium/Assets/Textures/NaturalEarthII/2/1/0.jpg,,7852,Vendored CesiumJS build (third party),vendor
-896,vendor/cesium/Assets/Textures/NaturalEarthII/2/1/1.jpg,,6850,Vendored CesiumJS build (third party),vendor
-897,vendor/cesium/Assets/Textures/NaturalEarthII/2/1/2.jpg,,11581,Vendored CesiumJS build (third party),vendor
-898,vendor/cesium/Assets/Textures/NaturalEarthII/2/1/3.jpg,,15862,Vendored CesiumJS build (third party),vendor
-899,vendor/cesium/Assets/Textures/NaturalEarthII/2/2/0.jpg,,10657,Vendored CesiumJS build (third party),vendor
-900,vendor/cesium/Assets/Textures/NaturalEarthII/2/2/1.jpg,,12456,Vendored CesiumJS build (third party),vendor
-901,vendor/cesium/Assets/Textures/NaturalEarthII/2/2/2.jpg,,12262,Vendored CesiumJS build (third party),vendor
-902,vendor/cesium/Assets/Textures/NaturalEarthII/2/2/3.jpg,,14940,Vendored CesiumJS build (third party),vendor
-903,vendor/cesium/Assets/Textures/NaturalEarthII/2/3/0.jpg,,9531,Vendored CesiumJS build (third party),vendor
-904,vendor/cesium/Assets/Textures/NaturalEarthII/2/3/1.jpg,,10234,Vendored CesiumJS build (third party),vendor
-905,vendor/cesium/Assets/Textures/NaturalEarthII/2/3/2.jpg,,11678,Vendored CesiumJS build (third party),vendor
-906,vendor/cesium/Assets/Textures/NaturalEarthII/2/3/3.jpg,,10754,Vendored CesiumJS build (third party),vendor
-907,vendor/cesium/Assets/Textures/NaturalEarthII/2/4/0.jpg,,8474,Vendored CesiumJS build (third party),vendor
-908,vendor/cesium/Assets/Textures/NaturalEarthII/2/4/1.jpg,,12265,Vendored CesiumJS build (third party),vendor
-909,vendor/cesium/Assets/Textures/NaturalEarthII/2/4/2.jpg,,16477,Vendored CesiumJS build (third party),vendor
-910,vendor/cesium/Assets/Textures/NaturalEarthII/2/4/3.jpg,,11888,Vendored CesiumJS build (third party),vendor
-911,vendor/cesium/Assets/Textures/NaturalEarthII/2/5/0.jpg,,7540,Vendored CesiumJS build (third party),vendor
-912,vendor/cesium/Assets/Textures/NaturalEarthII/2/5/1.jpg,,10274,Vendored CesiumJS build (third party),vendor
-913,vendor/cesium/Assets/Textures/NaturalEarthII/2/5/2.jpg,,16112,Vendored CesiumJS build (third party),vendor
-914,vendor/cesium/Assets/Textures/NaturalEarthII/2/5/3.jpg,,11877,Vendored CesiumJS build (third party),vendor
-915,vendor/cesium/Assets/Textures/NaturalEarthII/2/6/0.jpg,,6636,Vendored CesiumJS build (third party),vendor
-916,vendor/cesium/Assets/Textures/NaturalEarthII/2/6/1.jpg,,11564,Vendored CesiumJS build (third party),vendor
-917,vendor/cesium/Assets/Textures/NaturalEarthII/2/6/2.jpg,,16411,Vendored CesiumJS build (third party),vendor
-918,vendor/cesium/Assets/Textures/NaturalEarthII/2/6/3.jpg,,12756,Vendored CesiumJS build (third party),vendor
-919,vendor/cesium/Assets/Textures/NaturalEarthII/2/7/0.jpg,,9032,Vendored CesiumJS build (third party),vendor
-920,vendor/cesium/Assets/Textures/NaturalEarthII/2/7/1.jpg,,12957,Vendored CesiumJS build (third party),vendor
-921,vendor/cesium/Assets/Textures/NaturalEarthII/2/7/2.jpg,,11362,Vendored CesiumJS build (third party),vendor
-922,vendor/cesium/Assets/Textures/NaturalEarthII/2/7/3.jpg,,11859,Vendored CesiumJS build (third party),vendor
-923,vendor/cesium/Assets/Textures/NaturalEarthII/tilemapresource.xml,14,780,Vendored CesiumJS build (third party),vendor
-924,vendor/cesium/Assets/Textures/SkyBox/tycho2t3_80_mx.jpg,,118775,Vendored CesiumJS build (third party),vendor
-925,vendor/cesium/Assets/Textures/SkyBox/tycho2t3_80_my.jpg,,152501,Vendored CesiumJS build (third party),vendor
-926,vendor/cesium/Assets/Textures/SkyBox/tycho2t3_80_mz.jpg,,167980,Vendored CesiumJS build (third party),vendor
-927,vendor/cesium/Assets/Textures/SkyBox/tycho2t3_80_px.jpg,,122746,Vendored CesiumJS build (third party),vendor
-928,vendor/cesium/Assets/Textures/SkyBox/tycho2t3_80_py.jpg,,152999,Vendored CesiumJS build (third party),vendor
-929,vendor/cesium/Assets/Textures/SkyBox/tycho2t3_80_pz.jpg,,152537,Vendored CesiumJS build (third party),vendor
-930,vendor/cesium/Assets/Textures/maki/airfield.png,,1188,Vendored CesiumJS build (third party),vendor
-931,vendor/cesium/Assets/Textures/maki/airport.png,,1554,Vendored CesiumJS build (third party),vendor
-932,vendor/cesium/Assets/Textures/maki/alcohol-shop.png,,1293,Vendored CesiumJS build (third party),vendor
-933,vendor/cesium/Assets/Textures/maki/america-football.png,,2595,Vendored CesiumJS build (third party),vendor
-934,vendor/cesium/Assets/Textures/maki/art-gallery.png,,3159,Vendored CesiumJS build (third party),vendor
-935,vendor/cesium/Assets/Textures/maki/bakery.png,,2714,Vendored CesiumJS build (third party),vendor
-936,vendor/cesium/Assets/Textures/maki/bank.png,,936,Vendored CesiumJS build (third party),vendor
-937,vendor/cesium/Assets/Textures/maki/bar.png,,1435,Vendored CesiumJS build (third party),vendor
-938,vendor/cesium/Assets/Textures/maki/baseball.png,,1838,Vendored CesiumJS build (third party),vendor
-939,vendor/cesium/Assets/Textures/maki/basketball.png,,1318,Vendored CesiumJS build (third party),vendor
-940,vendor/cesium/Assets/Textures/maki/beer.png,,1403,Vendored CesiumJS build (third party),vendor
-941,vendor/cesium/Assets/Textures/maki/bicycle.png,,3989,Vendored CesiumJS build (third party),vendor
-942,vendor/cesium/Assets/Textures/maki/building.png,,1765,Vendored CesiumJS build (third party),vendor
-943,vendor/cesium/Assets/Textures/maki/bus.png,,998,Vendored CesiumJS build (third party),vendor
-944,vendor/cesium/Assets/Textures/maki/cafe.png,,1518,Vendored CesiumJS build (third party),vendor
-945,vendor/cesium/Assets/Textures/maki/camera.png,,1976,Vendored CesiumJS build (third party),vendor
-946,vendor/cesium/Assets/Textures/maki/campsite.png,,2411,Vendored CesiumJS build (third party),vendor
-947,vendor/cesium/Assets/Textures/maki/car.png,,1498,Vendored CesiumJS build (third party),vendor
-948,vendor/cesium/Assets/Textures/maki/cemetery.png,,967,Vendored CesiumJS build (third party),vendor
-949,vendor/cesium/Assets/Textures/maki/cesium.png,,3610,Vendored CesiumJS build (third party),vendor
-950,vendor/cesium/Assets/Textures/maki/chemist.png,,1603,Vendored CesiumJS build (third party),vendor
-951,vendor/cesium/Assets/Textures/maki/cinema.png,,1492,Vendored CesiumJS build (third party),vendor
-952,vendor/cesium/Assets/Textures/maki/circle-stroked.png,,2126,Vendored CesiumJS build (third party),vendor
-953,vendor/cesium/Assets/Textures/maki/circle.png,,1459,Vendored CesiumJS build (third party),vendor
-954,vendor/cesium/Assets/Textures/maki/city.png,,788,Vendored CesiumJS build (third party),vendor
-955,vendor/cesium/Assets/Textures/maki/clothing-store.png,,2037,Vendored CesiumJS build (third party),vendor
-956,vendor/cesium/Assets/Textures/maki/college.png,,2502,Vendored CesiumJS build (third party),vendor
-957,vendor/cesium/Assets/Textures/maki/commercial.png,,1002,Vendored CesiumJS build (third party),vendor
-958,vendor/cesium/Assets/Textures/maki/cricket.png,,1677,Vendored CesiumJS build (third party),vendor
-959,vendor/cesium/Assets/Textures/maki/cross.png,,1888,Vendored CesiumJS build (third party),vendor
-960,vendor/cesium/Assets/Textures/maki/dam.png,,1703,Vendored CesiumJS build (third party),vendor
-961,vendor/cesium/Assets/Textures/maki/danger.png,,2429,Vendored CesiumJS build (third party),vendor
-962,vendor/cesium/Assets/Textures/maki/disability.png,,3437,Vendored CesiumJS build (third party),vendor
-963,vendor/cesium/Assets/Textures/maki/dog-park.png,,3146,Vendored CesiumJS build (third party),vendor
-964,vendor/cesium/Assets/Textures/maki/embassy.png,,1680,Vendored CesiumJS build (third party),vendor
-965,vendor/cesium/Assets/Textures/maki/emergency-telephone.png,,1533,Vendored CesiumJS build (third party),vendor
-966,vendor/cesium/Assets/Textures/maki/entrance.png,,1307,Vendored CesiumJS build (third party),vendor
-967,vendor/cesium/Assets/Textures/maki/farm.png,,1686,Vendored CesiumJS build (third party),vendor
-968,vendor/cesium/Assets/Textures/maki/fast-food.png,,2019,Vendored CesiumJS build (third party),vendor
-969,vendor/cesium/Assets/Textures/maki/ferry.png,,2879,Vendored CesiumJS build (third party),vendor
-970,vendor/cesium/Assets/Textures/maki/fire-station.png,,2228,Vendored CesiumJS build (third party),vendor
-971,vendor/cesium/Assets/Textures/maki/fuel.png,,1741,Vendored CesiumJS build (third party),vendor
-972,vendor/cesium/Assets/Textures/maki/garden.png,,2057,Vendored CesiumJS build (third party),vendor
-973,vendor/cesium/Assets/Textures/maki/gift.png,,1606,Vendored CesiumJS build (third party),vendor
-974,vendor/cesium/Assets/Textures/maki/golf.png,,1999,Vendored CesiumJS build (third party),vendor
-975,vendor/cesium/Assets/Textures/maki/grocery.png,,1425,Vendored CesiumJS build (third party),vendor
-976,vendor/cesium/Assets/Textures/maki/hairdresser.png,,3301,Vendored CesiumJS build (third party),vendor
-977,vendor/cesium/Assets/Textures/maki/harbor.png,,2048,Vendored CesiumJS build (third party),vendor
-978,vendor/cesium/Assets/Textures/maki/heart.png,,1745,Vendored CesiumJS build (third party),vendor
-979,vendor/cesium/Assets/Textures/maki/heliport.png,,2059,Vendored CesiumJS build (third party),vendor
-980,vendor/cesium/Assets/Textures/maki/hospital.png,,909,Vendored CesiumJS build (third party),vendor
-981,vendor/cesium/Assets/Textures/maki/ice-cream.png,,1602,Vendored CesiumJS build (third party),vendor
-982,vendor/cesium/Assets/Textures/maki/industrial.png,,1092,Vendored CesiumJS build (third party),vendor
-983,vendor/cesium/Assets/Textures/maki/land-use.png,,1773,Vendored CesiumJS build (third party),vendor
-984,vendor/cesium/Assets/Textures/maki/laundry.png,,2407,Vendored CesiumJS build (third party),vendor
-985,vendor/cesium/Assets/Textures/maki/library.png,,1355,Vendored CesiumJS build (third party),vendor
-986,vendor/cesium/Assets/Textures/maki/lighthouse.png,,1944,Vendored CesiumJS build (third party),vendor
-987,vendor/cesium/Assets/Textures/maki/lodging.png,,1362,Vendored CesiumJS build (third party),vendor
-988,vendor/cesium/Assets/Textures/maki/logging.png,,1378,Vendored CesiumJS build (third party),vendor
-989,vendor/cesium/Assets/Textures/maki/london-underground.png,,2979,Vendored CesiumJS build (third party),vendor
-990,vendor/cesium/Assets/Textures/maki/marker-stroked.png,,3414,Vendored CesiumJS build (third party),vendor
-991,vendor/cesium/Assets/Textures/maki/marker.png,,2448,Vendored CesiumJS build (third party),vendor
-992,vendor/cesium/Assets/Textures/maki/minefield.png,,1907,Vendored CesiumJS build (third party),vendor
-993,vendor/cesium/Assets/Textures/maki/mobilephone.png,,1474,Vendored CesiumJS build (third party),vendor
-994,vendor/cesium/Assets/Textures/maki/monument.png,,1376,Vendored CesiumJS build (third party),vendor
-995,vendor/cesium/Assets/Textures/maki/museum.png,,2578,Vendored CesiumJS build (third party),vendor
-996,vendor/cesium/Assets/Textures/maki/music.png,,1371,Vendored CesiumJS build (third party),vendor
-997,vendor/cesium/Assets/Textures/maki/oil-well.png,,3357,Vendored CesiumJS build (third party),vendor
-998,vendor/cesium/Assets/Textures/maki/park.png,,2059,Vendored CesiumJS build (third party),vendor
-999,vendor/cesium/Assets/Textures/maki/park2.png,,2284,Vendored CesiumJS build (third party),vendor
-1000,vendor/cesium/Assets/Textures/maki/parking-garage.png,,1563,Vendored CesiumJS build (third party),vendor
-1001,vendor/cesium/Assets/Textures/maki/parking.png,,1250,Vendored CesiumJS build (third party),vendor
-1002,vendor/cesium/Assets/Textures/maki/pharmacy.png,,2258,Vendored CesiumJS build (third party),vendor
-1003,vendor/cesium/Assets/Textures/maki/pitch.png,,3288,Vendored CesiumJS build (third party),vendor
-1004,vendor/cesium/Assets/Textures/maki/place-of-worship.png,,1111,Vendored CesiumJS build (third party),vendor
-1005,vendor/cesium/Assets/Textures/maki/playground.png,,3856,Vendored CesiumJS build (third party),vendor
-1006,vendor/cesium/Assets/Textures/maki/police.png,,2194,Vendored CesiumJS build (third party),vendor
-1007,vendor/cesium/Assets/Textures/maki/polling-place.png,,1772,Vendored CesiumJS build (third party),vendor
-1008,vendor/cesium/Assets/Textures/maki/post.png,,1273,Vendored CesiumJS build (third party),vendor
-1009,vendor/cesium/Assets/Textures/maki/prison.png,,1371,Vendored CesiumJS build (third party),vendor
-1010,vendor/cesium/Assets/Textures/maki/rail-above.png,,2071,Vendored CesiumJS build (third party),vendor
-1011,vendor/cesium/Assets/Textures/maki/rail-light.png,,2816,Vendored CesiumJS build (third party),vendor
-1012,vendor/cesium/Assets/Textures/maki/rail-metro.png,,2249,Vendored CesiumJS build (third party),vendor
-1013,vendor/cesium/Assets/Textures/maki/rail-underground.png,,1996,Vendored CesiumJS build (third party),vendor
-1014,vendor/cesium/Assets/Textures/maki/rail.png,,2073,Vendored CesiumJS build (third party),vendor
-1015,vendor/cesium/Assets/Textures/maki/religious-christian.png,,948,Vendored CesiumJS build (third party),vendor
-1016,vendor/cesium/Assets/Textures/maki/religious-jewish.png,,2384,Vendored CesiumJS build (third party),vendor
-1017,vendor/cesium/Assets/Textures/maki/religious-muslim.png,,3925,Vendored CesiumJS build (third party),vendor
-1018,vendor/cesium/Assets/Textures/maki/restaurant.png,,2499,Vendored CesiumJS build (third party),vendor
-1019,vendor/cesium/Assets/Textures/maki/roadblock.png,,1312,Vendored CesiumJS build (third party),vendor
-1020,vendor/cesium/Assets/Textures/maki/rocket.png,,1653,Vendored CesiumJS build (third party),vendor
-1021,vendor/cesium/Assets/Textures/maki/school.png,,3838,Vendored CesiumJS build (third party),vendor
-1022,vendor/cesium/Assets/Textures/maki/scooter.png,,2942,Vendored CesiumJS build (third party),vendor
-1023,vendor/cesium/Assets/Textures/maki/shop.png,,1544,Vendored CesiumJS build (third party),vendor
-1024,vendor/cesium/Assets/Textures/maki/skiing.png,,3345,Vendored CesiumJS build (third party),vendor
-1025,vendor/cesium/Assets/Textures/maki/slaughterhouse.png,,2270,Vendored CesiumJS build (third party),vendor
-1026,vendor/cesium/Assets/Textures/maki/soccer.png,,2420,Vendored CesiumJS build (third party),vendor
-1027,vendor/cesium/Assets/Textures/maki/square-stroked.png,,650,Vendored CesiumJS build (third party),vendor
-1028,vendor/cesium/Assets/Textures/maki/square.png,,582,Vendored CesiumJS build (third party),vendor
-1029,vendor/cesium/Assets/Textures/maki/star-stroked.png,,3460,Vendored CesiumJS build (third party),vendor
-1030,vendor/cesium/Assets/Textures/maki/star.png,,2703,Vendored CesiumJS build (third party),vendor
-1031,vendor/cesium/Assets/Textures/maki/suitcase.png,,1129,Vendored CesiumJS build (third party),vendor
-1032,vendor/cesium/Assets/Textures/maki/swimming.png,,2106,Vendored CesiumJS build (third party),vendor
-1033,vendor/cesium/Assets/Textures/maki/telephone.png,,1702,Vendored CesiumJS build (third party),vendor
-1034,vendor/cesium/Assets/Textures/maki/tennis.png,,1658,Vendored CesiumJS build (third party),vendor
-1035,vendor/cesium/Assets/Textures/maki/theatre.png,,3233,Vendored CesiumJS build (third party),vendor
-1036,vendor/cesium/Assets/Textures/maki/toilets.png,,2917,Vendored CesiumJS build (third party),vendor
-1037,vendor/cesium/Assets/Textures/maki/town-hall.png,,2005,Vendored CesiumJS build (third party),vendor
-1038,vendor/cesium/Assets/Textures/maki/town.png,,1125,Vendored CesiumJS build (third party),vendor
-1039,vendor/cesium/Assets/Textures/maki/triangle-stroked.png,,2837,Vendored CesiumJS build (third party),vendor
-1040,vendor/cesium/Assets/Textures/maki/triangle.png,,2137,Vendored CesiumJS build (third party),vendor
-1041,vendor/cesium/Assets/Textures/maki/village.png,,2145,Vendored CesiumJS build (third party),vendor
-1042,vendor/cesium/Assets/Textures/maki/warehouse.png,,1908,Vendored CesiumJS build (third party),vendor
-1043,vendor/cesium/Assets/Textures/maki/waste-basket.png,,1917,Vendored CesiumJS build (third party),vendor
-1044,vendor/cesium/Assets/Textures/maki/water.png,,2411,Vendored CesiumJS build (third party),vendor
-1045,vendor/cesium/Assets/Textures/maki/wetland.png,,2151,Vendored CesiumJS build (third party),vendor
-1046,vendor/cesium/Assets/Textures/maki/zoo.png,,2681,Vendored CesiumJS build (third party),vendor
-1047,vendor/cesium/Assets/Textures/moonSmall.jpg,,18196,Vendored CesiumJS build (third party),vendor
-1048,vendor/cesium/Assets/Textures/pin.svg,1,348,Vendored CesiumJS build (third party),vendor
-1049,vendor/cesium/Assets/Textures/waterNormals.jpg,,294196,Vendored CesiumJS build (third party),vendor
-1050,vendor/cesium/Assets/Textures/waterNormalsSmall.jpg,,34121,Vendored CesiumJS build (third party),vendor
-1051,vendor/cesium/Assets/approximateTerrainHeights.json,1,299471,Vendored CesiumJS build (third party),vendor
-1052,vendor/cesium/LICENSE.md,928,50087,Vendored CesiumJS build (third party),vendor
-1053,vendor/cesium/ThirdParty/Workers/package.json,1,19,Vendored CesiumJS build (third party),vendor
-1054,vendor/cesium/ThirdParty/Workers/zip-web-worker.js,1,28349,Vendored CesiumJS build (third party),vendor
-1055,vendor/cesium/ThirdParty/basis_transcoder.wasm,,500839,Vendored CesiumJS build (third party),vendor
-1056,vendor/cesium/ThirdParty/draco_decoder.wasm,,285948,Vendored CesiumJS build (third party),vendor
-1057,vendor/cesium/ThirdParty/google-earth-dbroot-parser.js,8337,501930,Vendored CesiumJS build (third party),vendor
-1058,vendor/cesium/ThirdParty/wasm_splats_bg.wasm,,26522,Vendored CesiumJS build (third party),vendor
-1059,vendor/cesium/ThirdParty/zip-module.wasm,,55126,Vendored CesiumJS build (third party),vendor
-1060,vendor/cesium/Widgets/CesiumWidget.css,119,2265,Vendored CesiumJS build (third party),vendor
-1061,vendor/cesium/Workers/chunk-7QBJGNT7.js,41306,1504573,Vendored CesiumJS build (third party),vendor
-1062,vendor/cesium/Workers/chunk-7WPQTQP5.js,455,17412,Vendored CesiumJS build (third party),vendor
-1063,vendor/cesium/Workers/chunk-A366PYP7.js,758,25946,Vendored CesiumJS build (third party),vendor
-1064,vendor/cesium/Workers/chunk-BDKN5F6V.js,2004,60073,Vendored CesiumJS build (third party),vendor
-1065,vendor/cesium/Workers/chunk-DE3R5UOC.js,82,2451,Vendored CesiumJS build (third party),vendor
-1066,vendor/cesium/Workers/chunk-O4MKUNQU.js,346,12952,Vendored CesiumJS build (third party),vendor
-1067,vendor/cesium/Workers/chunk-PWOTIYNL.js,280,9386,Vendored CesiumJS build (third party),vendor
-1068,vendor/cesium/Workers/chunk-QV7GZYO4.js,1800,84441,Vendored CesiumJS build (third party),vendor
-1069,vendor/cesium/Workers/chunk-XGNRWOT7.js,455,17005,Vendored CesiumJS build (third party),vendor
-1070,vendor/cesium/Workers/chunk-ZKM7BGGI.js,4296,269672,Vendored CesiumJS build (third party),vendor
-1071,vendor/cesium/Workers/combineGeometry.js,46,1548,Vendored CesiumJS build (third party),vendor
-1072,vendor/cesium/Workers/createBoxGeometry.js,41,1299,Vendored CesiumJS build (third party),vendor
-1073,vendor/cesium/Workers/createBoxOutlineGeometry.js,41,1355,Vendored CesiumJS build (third party),vendor
-1074,vendor/cesium/Workers/createCircleGeometry.js,49,1621,Vendored CesiumJS build (third party),vendor
-1075,vendor/cesium/Workers/createCircleOutlineGeometry.js,49,1677,Vendored CesiumJS build (third party),vendor
-1076,vendor/cesium/Workers/createCoplanarPolygonGeometry.js,41,1411,Vendored CesiumJS build (third party),vendor
-1077,vendor/cesium/Workers/createCoplanarPolygonOutlineGeometry.js,46,1590,Vendored CesiumJS build (third party),vendor
-1078,vendor/cesium/Workers/createCorridorGeometry.js,43,1466,Vendored CesiumJS build (third party),vendor
-1079,vendor/cesium/Workers/createCorridorOutlineGeometry.js,48,1590,Vendored CesiumJS build (third party),vendor
-1080,vendor/cesium/Workers/createCylinderGeometry.js,41,1359,Vendored CesiumJS build (third party),vendor
-1081,vendor/cesium/Workers/createCylinderOutlineGeometry.js,41,1415,Vendored CesiumJS build (third party),vendor
-1082,vendor/cesium/Workers/createEllipseGeometry.js,45,1553,Vendored CesiumJS build (third party),vendor
-1083,vendor/cesium/Workers/createEllipseOutlineGeometry.js,45,1609,Vendored CesiumJS build (third party),vendor
-1084,vendor/cesium/Workers/createEllipsoidGeometry.js,41,1371,Vendored CesiumJS build (third party),vendor
-1085,vendor/cesium/Workers/createEllipsoidOutlineGeometry.js,44,1471,Vendored CesiumJS build (third party),vendor
-1086,vendor/cesium/Workers/createFrustumGeometry.js,43,1385,Vendored CesiumJS build (third party),vendor
-1087,vendor/cesium/Workers/createFrustumOutlineGeometry.js,212,7632,Vendored CesiumJS build (third party),vendor
-1088,vendor/cesium/Workers/createGeometry.js,152,7646,Vendored CesiumJS build (third party),vendor
-1089,vendor/cesium/Workers/createGroundPolylineGeometry.js,1625,58908,Vendored CesiumJS build (third party),vendor
-1090,vendor/cesium/Workers/createPlaneGeometry.js,41,1323,Vendored CesiumJS build (third party),vendor
-1091,vendor/cesium/Workers/createPlaneOutlineGeometry.js,41,1379,Vendored CesiumJS build (third party),vendor
-1092,vendor/cesium/Workers/createPolygonGeometry.js,43,1452,Vendored CesiumJS build (third party),vendor
-1093,vendor/cesium/Workers/createPolygonOutlineGeometry.js,43,1508,Vendored CesiumJS build (third party),vendor
-1094,vendor/cesium/Workers/createPolylineGeometry.js,43,1466,Vendored CesiumJS build (third party),vendor
-1095,vendor/cesium/Workers/createPolylineVolumeGeometry.js,48,1576,Vendored CesiumJS build (third party),vendor
-1096,vendor/cesium/Workers/createPolylineVolumeOutlineGeometry.js,50,1682,Vendored CesiumJS build (third party),vendor
-1097,vendor/cesium/Workers/createRectangleGeometry.js,45,1589,Vendored CesiumJS build (third party),vendor
-1098,vendor/cesium/Workers/createRectangleOutlineGeometry.js,48,1663,Vendored CesiumJS build (third party),vendor
-1099,vendor/cesium/Workers/createSimplePolylineGeometry.js,48,1576,Vendored CesiumJS build (third party),vendor
-1100,vendor/cesium/Workers/createSphereGeometry.js,41,1335,Vendored CesiumJS build (third party),vendor
-1101,vendor/cesium/Workers/createSphereOutlineGeometry.js,41,1391,Vendored CesiumJS build (third party),vendor
-1102,vendor/cesium/Workers/createTaskProcessorWorker.js,32,1011,Vendored CesiumJS build (third party),vendor
-1103,vendor/cesium/Workers/createVectorTileClampedPolylines.js,476,16536,Vendored CesiumJS build (third party),vendor
-1104,vendor/cesium/Workers/createVectorTileGeometries.js,358,14114,Vendored CesiumJS build (third party),vendor
-1105,vendor/cesium/Workers/createVectorTilePoints.js,100,3526,Vendored CesiumJS build (third party),vendor
-1106,vendor/cesium/Workers/createVectorTilePolygons.js,359,13557,Vendored CesiumJS build (third party),vendor
-1107,vendor/cesium/Workers/createVectorTilePolylines.js,246,8812,Vendored CesiumJS build (third party),vendor
-1108,vendor/cesium/Workers/createVerticesFromCesium3DTilesTerrain.js,73,2494,Vendored CesiumJS build (third party),vendor
-1109,vendor/cesium/Workers/createVerticesFromGoogleEarthEnterpriseBuffer.js,537,18791,Vendored CesiumJS build (third party),vendor
-1110,vendor/cesium/Workers/createVerticesFromHeightmap.js,2226,91836,Vendored CesiumJS build (third party),vendor
-1111,vendor/cesium/Workers/createVerticesFromQuantizedTerrainMesh.js,479,15055,Vendored CesiumJS build (third party),vendor
-1112,vendor/cesium/Workers/createWallGeometry.js,43,1410,Vendored CesiumJS build (third party),vendor
-1113,vendor/cesium/Workers/createWallOutlineGeometry.js,43,1466,Vendored CesiumJS build (third party),vendor
-1114,vendor/cesium/Workers/decodeDraco.js,360,11513,Vendored CesiumJS build (third party),vendor
-1115,vendor/cesium/Workers/decodeGoogleEarthEnterprisePacket.js,1335,61336,Vendored CesiumJS build (third party),vendor
-1116,vendor/cesium/Workers/decodeI3S.js,1311,45515,Vendored CesiumJS build (third party),vendor
-1117,vendor/cesium/Workers/gaussianSplatSorter.js,62,1957,Vendored CesiumJS build (third party),vendor
-1118,vendor/cesium/Workers/gaussianSplatTextureGenerator.js,68,2087,Vendored CesiumJS build (third party),vendor
-1119,vendor/cesium/Workers/incrementallyBuildTerrainPicker.js,120,4260,Vendored CesiumJS build (third party),vendor
-1120,vendor/cesium/Workers/transcodeKTX2.js,3002,124134,Vendored CesiumJS build (third party),vendor
-1121,vendor/cesium/Workers/transferTypedArrayTest.js,41,1171,Vendored CesiumJS build (third party),vendor
-1122,vendor/cesium/Workers/upsampleQuantizedTerrainMesh.js,581,17846,Vendored CesiumJS build (third party),vendor
-1123,vendor/cesium/Workers/upsampleVerticesFromCesium3DTilesTerrain.js,77,2652,Vendored CesiumJS build (third party),vendor
-1124,vendor/fonts/LICENSE-Inter.txt,93,4477,Vendored asset (third party),vendor
-1125,vendor/fonts/LICENSE-JetBrainsMono.txt,93,4524,Vendored asset (third party),vendor
-1126,vendor/fonts/inter-latin-400-normal.woff2,,23664,Vendored asset (third party),vendor
-1127,vendor/fonts/inter-latin-500-normal.woff2,,24272,Vendored asset (third party),vendor
-1128,vendor/fonts/inter-latin-600-normal.woff2,,24452,Vendored asset (third party),vendor
-1129,vendor/fonts/inter-latin-700-normal.woff2,,24356,Vendored asset (third party),vendor
-1130,vendor/fonts/jetbrains-mono-latin-400-normal.woff2,,21168,Vendored asset (third party),vendor
-1131,vendor/fonts/jetbrains-mono-latin-500-normal.woff2,,21832,Vendored asset (third party),vendor
-1132,vendor/fonts/jetbrains-mono-latin-700-normal.woff2,,21908,Vendored asset (third party),vendor
-1133,vendor/icons/LICENSE-Lucide.txt,43,3208,Vendored asset (third party),vendor
-1134,vendor/three/LICENSE,21,1081,Vendored three.js (third party),vendor
-1135,vendor/three/OrbitControls.js,1523,32134,Vendored three.js (third party),vendor
-1136,vendor/three/three.module.min.js,6,691648,Vendored three.js (third party),vendor
+30,RELEASE_NOTES_v1.5.1.md,46,3114,Release notes,docs
+31,SECURITY.md,49,3204,Security policy,repo
+32,SUPPORT.md,10,703,Support policy,repo
+33,assets/audio/boom_low.mp3,,12181,Audio asset,assets
+34,assets/audio/data_chatter.mp3,,12806,Audio asset,assets
+35,assets/audio/drone_manaos_tozan.mp3,,900746,Audio asset,assets
+36,assets/audio/score_persistence_cinameng.mp3,,690092,Audio asset,assets
+37,assets/audio/ui_blip.mp3,,1087,Audio asset,assets
+38,assets/audio/ui_tick.mp3,,1296,Audio asset,assets
+39,assets/audio/whoosh.mp3,,2463,Audio asset,assets
+40,assets/favicon.svg,1,360,Static asset,assets
+41,build.sh,3,139,Convenience build script,repo
+42,css/app.css,1797,32450,Stylesheet,ui-shell
+43,css/components.css,849,17207,Stylesheet,ui-shell
+44,css/console.css,1394,29780,Stylesheet,ui-shell
+45,css/tokens.css,195,6525,Stylesheet,ui-shell
+46,data/briefings/README.md,63,8712,Briefing material,data-briefings
+47,data/briefings/analysis_summary.md,89,10244,Briefing material,data-briefings
+48,data/briefings/counts_by_country.png,,245558,Briefing material,data-briefings
+49,data/briefings/counts_by_grade.png,,130074,Briefing material,data-briefings
+50,data/briefings/heatmap_conflict_deaths_ucdp.png,,570426,Briefing material,data-briefings
+51,data/briefings/heatmap_nuclear_tests.png,,452211,Briefing material,data-briefings
+52,data/briefings/heatmap_uap_cit.png,,748031,Briefing material,data-briefings
+53,data/briefings/languages_searched.csv,13,1038,Briefing material,data-briefings
+54,data/briefings/map_abductions.png,,501928,Briefing material,data-briefings
+55,data/briefings/map_ancient_cities_remote_sensing.png,,508344,Briefing material,data-briefings
+56,data/briefings/map_animal_mutilations.png,,505394,Briefing material,data-briefings
+57,data/briefings/map_caves_underground.png,,521532,Briefing material,data-briefings
+58,data/briefings/map_combined_overlay.png,,892628,Briefing material,data-briefings
+59,data/briefings/map_conflicts.png,,551751,Briefing material,data-briefings
+60,data/briefings/map_megaliths.png,,510055,Briefing material,data-briefings
+61,data/briefings/map_missing_unsolved.png,,506672,Briefing material,data-briefings
+62,data/briefings/map_nuclear_sites.png,,569702,Briefing material,data-briefings
+63,data/briefings/map_nuclear_tests.png,,533487,Briefing material,data-briefings
+64,data/briefings/map_ocean.png,,506542,Briefing material,data-briefings
+65,data/briefings/map_pyramids.png,,532892,Briefing material,data-briefings
+66,data/briefings/map_satellite_anomalies.png,,513857,Briefing material,data-briefings
+67,data/briefings/map_uap_cit.png,,584224,Briefing material,data-briefings
+68,data/briefings/map_uso_water.png,,504252,Briefing material,data-briefings
+69,data/briefings/map_weird_coordinates.png,,522876,Briefing material,data-briefings
+70,data/briefings/nuclear_yield_by_environment.png,,178221,Briefing material,data-briefings
+71,data/briefings/ref_military_bases_wikidata.png,,693148,Briefing material,data-briefings
+72,data/briefings/sources_registry.csv,30,5407,Briefing material,data-briefings
+73,data/briefings/timeline_by_era.png,,218162,Briefing material,data-briefings
+74,data/briefings/timeline_by_year_1900_2026.png,,427818,Briefing material,data-briefings
+75,data/briefings/uap_distance_vs_baselines.png,,1040787,Briefing material,data-briefings
+76,data/build_data.py,492,37213,Data file,data
+77,data/cases.js,2,3585055,Data file,data
+78,data/catalog.js,1,42086,Data file,data
+79,data/layers/admin0_10.js,1,719087,Generated layer data,data-layers
+80,data/layers/admin0_50.js,1,243886,Generated layer data,data-layers
+81,data/layers/admin1_10.js,1,2899920,Generated layer data,data-layers
+82,data/layers/cities15000.js,1,1426668,Generated layer data,data-layers
+83,data/layers/cities5000.js,1,1485520,Generated layer data,data-layers
+84,data/layers/coast10.js,1,3561759,Generated layer data,data-layers
+85,data/layers/coast50.js,1,788012,Generated layer data,data-layers
+86,data/layers/conflicts.js,1,513151,Generated layer data,data-layers
+87,data/layers/countries.js,1,251433,Generated layer data,data-layers
+88,data/layers/faults_gem.js,1,1650921,Generated layer data,data-layers
+89,data/layers/faults_usgs.js,1,10691561,Generated layer data,data-layers
+90,data/layers/fireballs.js,1,116449,Generated layer data,data-layers
+91,data/layers/gebco_unmapped.js,1,1116719,Generated layer data,data-layers
+92,data/layers/ged.js,1,6092158,Generated layer data,data-layers
+93,data/layers/hydrolakes.js,1,1067141,Generated layer data,data-layers
+94,data/layers/hydrolakes_tiles/-10_-100.js,1,228,Generated layer data,data-layers
+95,data/layers/hydrolakes_tiles/-10_-180.js,1,229,Generated layer data,data-layers
+96,data/layers/hydrolakes_tiles/-10_-40.js,1,9371,Generated layer data,data-layers
+97,data/layers/hydrolakes_tiles/-10_-50.js,1,13298,Generated layer data,data-layers
+98,data/layers/hydrolakes_tiles/-10_-60.js,1,36595,Generated layer data,data-layers
+99,data/layers/hydrolakes_tiles/-10_-70.js,1,48327,Generated layer data,data-layers
+100,data/layers/hydrolakes_tiles/-10_-80.js,1,20898,Generated layer data,data-layers
+101,data/layers/hydrolakes_tiles/-10_-90.js,1,8096,Generated layer data,data-layers
+102,data/layers/hydrolakes_tiles/-10_0.js,1,1775,Generated layer data,data-layers
+103,data/layers/hydrolakes_tiles/-10_10.js,1,7198,Generated layer data,data-layers
+104,data/layers/hydrolakes_tiles/-10_100.js,1,6718,Generated layer data,data-layers
+105,data/layers/hydrolakes_tiles/-10_110.js,1,12222,Generated layer data,data-layers
+106,data/layers/hydrolakes_tiles/-10_120.js,1,2559,Generated layer data,data-layers
+107,data/layers/hydrolakes_tiles/-10_130.js,1,8793,Generated layer data,data-layers
+108,data/layers/hydrolakes_tiles/-10_140.js,1,16993,Generated layer data,data-layers
+109,data/layers/hydrolakes_tiles/-10_150.js,1,589,Generated layer data,data-layers
+110,data/layers/hydrolakes_tiles/-10_160.js,1,233,Generated layer data,data-layers
+111,data/layers/hydrolakes_tiles/-10_20.js,1,7918,Generated layer data,data-layers
+112,data/layers/hydrolakes_tiles/-10_30.js,1,8448,Generated layer data,data-layers
+113,data/layers/hydrolakes_tiles/-10_40.js,1,673,Generated layer data,data-layers
+114,data/layers/hydrolakes_tiles/-20_-140.js,1,228,Generated layer data,data-layers
+115,data/layers/hydrolakes_tiles/-20_-160.js,1,288,Generated layer data,data-layers
+116,data/layers/hydrolakes_tiles/-20_-180.js,1,353,Generated layer data,data-layers
+117,data/layers/hydrolakes_tiles/-20_-40.js,1,1959,Generated layer data,data-layers
+118,data/layers/hydrolakes_tiles/-20_-50.js,1,8514,Generated layer data,data-layers
+119,data/layers/hydrolakes_tiles/-20_-60.js,1,20826,Generated layer data,data-layers
+120,data/layers/hydrolakes_tiles/-20_-70.js,1,47514,Generated layer data,data-layers
+121,data/layers/hydrolakes_tiles/-20_-80.js,1,10330,Generated layer data,data-layers
+122,data/layers/hydrolakes_tiles/-20_10.js,1,3086,Generated layer data,data-layers
+123,data/layers/hydrolakes_tiles/-20_120.js,1,7841,Generated layer data,data-layers
+124,data/layers/hydrolakes_tiles/-20_130.js,1,17410,Generated layer data,data-layers
+125,data/layers/hydrolakes_tiles/-20_140.js,1,6335,Generated layer data,data-layers
+126,data/layers/hydrolakes_tiles/-20_160.js,1,476,Generated layer data,data-layers
+127,data/layers/hydrolakes_tiles/-20_170.js,1,346,Generated layer data,data-layers
+128,data/layers/hydrolakes_tiles/-20_20.js,1,7918,Generated layer data,data-layers
+129,data/layers/hydrolakes_tiles/-20_30.js,1,6003,Generated layer data,data-layers
+130,data/layers/hydrolakes_tiles/-20_40.js,1,11686,Generated layer data,data-layers
+131,data/layers/hydrolakes_tiles/-20_50.js,1,477,Generated layer data,data-layers
+132,data/layers/hydrolakes_tiles/-30_-140.js,1,228,Generated layer data,data-layers
+133,data/layers/hydrolakes_tiles/-30_-180.js,1,227,Generated layer data,data-layers
+134,data/layers/hydrolakes_tiles/-30_-50.js,1,6855,Generated layer data,data-layers
+135,data/layers/hydrolakes_tiles/-30_-60.js,1,20867,Generated layer data,data-layers
+136,data/layers/hydrolakes_tiles/-30_-70.js,1,19091,Generated layer data,data-layers
+137,data/layers/hydrolakes_tiles/-30_10.js,1,1218,Generated layer data,data-layers
+138,data/layers/hydrolakes_tiles/-30_110.js,1,3954,Generated layer data,data-layers
+139,data/layers/hydrolakes_tiles/-30_120.js,1,11101,Generated layer data,data-layers
+140,data/layers/hydrolakes_tiles/-30_130.js,1,13650,Generated layer data,data-layers
+141,data/layers/hydrolakes_tiles/-30_140.js,1,17026,Generated layer data,data-layers
+142,data/layers/hydrolakes_tiles/-30_150.js,1,3630,Generated layer data,data-layers
+143,data/layers/hydrolakes_tiles/-30_160.js,1,345,Generated layer data,data-layers
+144,data/layers/hydrolakes_tiles/-30_20.js,1,16987,Generated layer data,data-layers
+145,data/layers/hydrolakes_tiles/-30_30.js,1,11836,Generated layer data,data-layers
+146,data/layers/hydrolakes_tiles/-30_40.js,1,3245,Generated layer data,data-layers
+147,data/layers/hydrolakes_tiles/-30_50.js,1,292,Generated layer data,data-layers
+148,data/layers/hydrolakes_tiles/-40_-60.js,1,14842,Generated layer data,data-layers
+149,data/layers/hydrolakes_tiles/-40_-70.js,1,81473,Generated layer data,data-layers
+150,data/layers/hydrolakes_tiles/-40_-80.js,1,4160,Generated layer data,data-layers
+151,data/layers/hydrolakes_tiles/-40_10.js,1,1530,Generated layer data,data-layers
+152,data/layers/hydrolakes_tiles/-40_110.js,1,12036,Generated layer data,data-layers
+153,data/layers/hydrolakes_tiles/-40_120.js,1,15576,Generated layer data,data-layers
+154,data/layers/hydrolakes_tiles/-40_130.js,1,10386,Generated layer data,data-layers
+155,data/layers/hydrolakes_tiles/-40_140.js,1,19004,Generated layer data,data-layers
+156,data/layers/hydrolakes_tiles/-40_150.js,1,2100,Generated layer data,data-layers
+157,data/layers/hydrolakes_tiles/-40_170.js,1,2086,Generated layer data,data-layers
+158,data/layers/hydrolakes_tiles/-40_20.js,1,3152,Generated layer data,data-layers
+159,data/layers/hydrolakes_tiles/-50_-180.js,1,429,Generated layer data,data-layers
+160,data/layers/hydrolakes_tiles/-50_-70.js,1,8112,Generated layer data,data-layers
+161,data/layers/hydrolakes_tiles/-50_-80.js,1,31474,Generated layer data,data-layers
+162,data/layers/hydrolakes_tiles/-50_140.js,1,3618,Generated layer data,data-layers
+163,data/layers/hydrolakes_tiles/-50_160.js,1,2711,Generated layer data,data-layers
+164,data/layers/hydrolakes_tiles/-50_170.js,1,2561,Generated layer data,data-layers
+165,data/layers/hydrolakes_tiles/-50_60.js,1,2365,Generated layer data,data-layers
+166,data/layers/hydrolakes_tiles/-50_70.js,1,286,Generated layer data,data-layers
+167,data/layers/hydrolakes_tiles/-60_-60.js,1,1244,Generated layer data,data-layers
+168,data/layers/hydrolakes_tiles/-60_-70.js,1,3692,Generated layer data,data-layers
+169,data/layers/hydrolakes_tiles/-60_-80.js,1,17061,Generated layer data,data-layers
+170,data/layers/hydrolakes_tiles/0_-10.js,1,2450,Generated layer data,data-layers
+171,data/layers/hydrolakes_tiles/0_-160.js,1,1315,Generated layer data,data-layers
+172,data/layers/hydrolakes_tiles/0_-170.js,1,227,Generated layer data,data-layers
+173,data/layers/hydrolakes_tiles/0_-20.js,1,1155,Generated layer data,data-layers
+174,data/layers/hydrolakes_tiles/0_-60.js,1,4296,Generated layer data,data-layers
+175,data/layers/hydrolakes_tiles/0_-70.js,1,14728,Generated layer data,data-layers
+176,data/layers/hydrolakes_tiles/0_-80.js,1,32654,Generated layer data,data-layers
+177,data/layers/hydrolakes_tiles/0_-90.js,1,1433,Generated layer data,data-layers
+178,data/layers/hydrolakes_tiles/0_0.js,1,3663,Generated layer data,data-layers
+179,data/layers/hydrolakes_tiles/0_10.js,1,3193,Generated layer data,data-layers
+180,data/layers/hydrolakes_tiles/0_100.js,1,4431,Generated layer data,data-layers
+181,data/layers/hydrolakes_tiles/0_110.js,1,4025,Generated layer data,data-layers
+182,data/layers/hydrolakes_tiles/0_120.js,1,4694,Generated layer data,data-layers
+183,data/layers/hydrolakes_tiles/0_20.js,1,1408,Generated layer data,data-layers
+184,data/layers/hydrolakes_tiles/0_30.js,1,15571,Generated layer data,data-layers
+185,data/layers/hydrolakes_tiles/0_40.js,1,520,Generated layer data,data-layers
+186,data/layers/hydrolakes_tiles/0_70.js,1,3598,Generated layer data,data-layers
+187,data/layers/hydrolakes_tiles/0_80.js,1,8970,Generated layer data,data-layers
+188,data/layers/hydrolakes_tiles/0_90.js,1,1297,Generated layer data,data-layers
+189,data/layers/hydrolakes_tiles/10_-10.js,1,8207,Generated layer data,data-layers
+190,data/layers/hydrolakes_tiles/10_-100.js,1,20368,Generated layer data,data-layers
+191,data/layers/hydrolakes_tiles/10_-110.js,1,2586,Generated layer data,data-layers
+192,data/layers/hydrolakes_tiles/10_-20.js,1,3314,Generated layer data,data-layers
+193,data/layers/hydrolakes_tiles/10_-70.js,1,4257,Generated layer data,data-layers
+194,data/layers/hydrolakes_tiles/10_-80.js,1,7433,Generated layer data,data-layers
+195,data/layers/hydrolakes_tiles/10_-90.js,1,11650,Generated layer data,data-layers
+196,data/layers/hydrolakes_tiles/10_0.js,1,4436,Generated layer data,data-layers
+197,data/layers/hydrolakes_tiles/10_10.js,1,3303,Generated layer data,data-layers
+198,data/layers/hydrolakes_tiles/10_100.js,1,29684,Generated layer data,data-layers
+199,data/layers/hydrolakes_tiles/10_110.js,1,2208,Generated layer data,data-layers
+200,data/layers/hydrolakes_tiles/10_120.js,1,4289,Generated layer data,data-layers
+201,data/layers/hydrolakes_tiles/10_20.js,1,570,Generated layer data,data-layers
+202,data/layers/hydrolakes_tiles/10_30.js,1,1309,Generated layer data,data-layers
+203,data/layers/hydrolakes_tiles/10_40.js,1,959,Generated layer data,data-layers
+204,data/layers/hydrolakes_tiles/10_70.js,1,26587,Generated layer data,data-layers
+205,data/layers/hydrolakes_tiles/10_80.js,1,4492,Generated layer data,data-layers
+206,data/layers/hydrolakes_tiles/10_90.js,1,5089,Generated layer data,data-layers
+207,data/layers/hydrolakes_tiles/20_-10.js,1,227,Generated layer data,data-layers
+208,data/layers/hydrolakes_tiles/20_-100.js,1,30305,Generated layer data,data-layers
+209,data/layers/hydrolakes_tiles/20_-110.js,1,10308,Generated layer data,data-layers
+210,data/layers/hydrolakes_tiles/20_-120.js,1,1206,Generated layer data,data-layers
+211,data/layers/hydrolakes_tiles/20_-160.js,1,245,Generated layer data,data-layers
+212,data/layers/hydrolakes_tiles/20_-20.js,1,463,Generated layer data,data-layers
+213,data/layers/hydrolakes_tiles/20_-80.js,1,17265,Generated layer data,data-layers
+214,data/layers/hydrolakes_tiles/20_-90.js,1,32541,Generated layer data,data-layers
+215,data/layers/hydrolakes_tiles/20_10.js,1,224,Generated layer data,data-layers
+216,data/layers/hydrolakes_tiles/20_100.js,1,14202,Generated layer data,data-layers
+217,data/layers/hydrolakes_tiles/20_110.js,1,38766,Generated layer data,data-layers
+218,data/layers/hydrolakes_tiles/20_120.js,1,3413,Generated layer data,data-layers
+219,data/layers/hydrolakes_tiles/20_20.js,1,678,Generated layer data,data-layers
+220,data/layers/hydrolakes_tiles/20_30.js,1,528,Generated layer data,data-layers
+221,data/layers/hydrolakes_tiles/20_40.js,1,351,Generated layer data,data-layers
+222,data/layers/hydrolakes_tiles/20_50.js,1,557,Generated layer data,data-layers
+223,data/layers/hydrolakes_tiles/20_60.js,1,5323,Generated layer data,data-layers
+224,data/layers/hydrolakes_tiles/20_70.js,1,20960,Generated layer data,data-layers
+225,data/layers/hydrolakes_tiles/20_80.js,1,29657,Generated layer data,data-layers
+226,data/layers/hydrolakes_tiles/20_90.js,1,10264,Generated layer data,data-layers
+227,data/layers/hydrolakes_tiles/30_-10.js,1,11394,Generated layer data,data-layers
+228,data/layers/hydrolakes_tiles/30_-100.js,1,58734,Generated layer data,data-layers
+229,data/layers/hydrolakes_tiles/30_-110.js,1,13442,Generated layer data,data-layers
+230,data/layers/hydrolakes_tiles/30_-120.js,1,15917,Generated layer data,data-layers
+231,data/layers/hydrolakes_tiles/30_-130.js,1,13465,Generated layer data,data-layers
+232,data/layers/hydrolakes_tiles/30_-30.js,1,359,Generated layer data,data-layers
+233,data/layers/hydrolakes_tiles/30_-70.js,1,232,Generated layer data,data-layers
+234,data/layers/hydrolakes_tiles/30_-80.js,1,11674,Generated layer data,data-layers
+235,data/layers/hydrolakes_tiles/30_-90.js,1,28134,Generated layer data,data-layers
+236,data/layers/hydrolakes_tiles/30_0.js,1,5556,Generated layer data,data-layers
+237,data/layers/hydrolakes_tiles/30_10.js,1,2728,Generated layer data,data-layers
+238,data/layers/hydrolakes_tiles/30_100.js,1,8817,Generated layer data,data-layers
+239,data/layers/hydrolakes_tiles/30_110.js,1,64700,Generated layer data,data-layers
+240,data/layers/hydrolakes_tiles/30_120.js,1,20001,Generated layer data,data-layers
+241,data/layers/hydrolakes_tiles/30_130.js,1,8858,Generated layer data,data-layers
+242,data/layers/hydrolakes_tiles/30_140.js,1,1968,Generated layer data,data-layers
+243,data/layers/hydrolakes_tiles/30_20.js,1,4271,Generated layer data,data-layers
+244,data/layers/hydrolakes_tiles/30_30.js,1,7515,Generated layer data,data-layers
+245,data/layers/hydrolakes_tiles/30_40.js,1,7621,Generated layer data,data-layers
+246,data/layers/hydrolakes_tiles/30_50.js,1,3882,Generated layer data,data-layers
+247,data/layers/hydrolakes_tiles/30_60.js,1,5204,Generated layer data,data-layers
+248,data/layers/hydrolakes_tiles/30_70.js,1,8459,Generated layer data,data-layers
+249,data/layers/hydrolakes_tiles/30_80.js,1,23023,Generated layer data,data-layers
+250,data/layers/hydrolakes_tiles/30_90.js,1,12695,Generated layer data,data-layers
+251,data/layers/hydrolakes_tiles/40_-10.js,1,8434,Generated layer data,data-layers
+252,data/layers/hydrolakes_tiles/40_-100.js,1,214891,Generated layer data,data-layers
+253,data/layers/hydrolakes_tiles/40_-110.js,1,36922,Generated layer data,data-layers
+254,data/layers/hydrolakes_tiles/40_-120.js,1,30483,Generated layer data,data-layers
+255,data/layers/hydrolakes_tiles/40_-130.js,1,24230,Generated layer data,data-layers
+256,data/layers/hydrolakes_tiles/40_-60.js,1,53408,Generated layer data,data-layers
+257,data/layers/hydrolakes_tiles/40_-70.js,1,73097,Generated layer data,data-layers
+258,data/layers/hydrolakes_tiles/40_-80.js,1,221928,Generated layer data,data-layers
+259,data/layers/hydrolakes_tiles/40_-90.js,1,166861,Generated layer data,data-layers
+260,data/layers/hydrolakes_tiles/40_0.js,1,14330,Generated layer data,data-layers
+261,data/layers/hydrolakes_tiles/40_10.js,1,23255,Generated layer data,data-layers
+262,data/layers/hydrolakes_tiles/40_100.js,1,4747,Generated layer data,data-layers
+263,data/layers/hydrolakes_tiles/40_110.js,1,25960,Generated layer data,data-layers
+264,data/layers/hydrolakes_tiles/40_120.js,1,52388,Generated layer data,data-layers
+265,data/layers/hydrolakes_tiles/40_130.js,1,7076,Generated layer data,data-layers
+266,data/layers/hydrolakes_tiles/40_140.js,1,5357,Generated layer data,data-layers
+267,data/layers/hydrolakes_tiles/40_150.js,1,351,Generated layer data,data-layers
+268,data/layers/hydrolakes_tiles/40_20.js,1,32182,Generated layer data,data-layers
+269,data/layers/hydrolakes_tiles/40_30.js,1,29692,Generated layer data,data-layers
+270,data/layers/hydrolakes_tiles/40_40.js,1,40238,Generated layer data,data-layers
+271,data/layers/hydrolakes_tiles/40_50.js,1,32795,Generated layer data,data-layers
+272,data/layers/hydrolakes_tiles/40_60.js,1,41175,Generated layer data,data-layers
+273,data/layers/hydrolakes_tiles/40_70.js,1,17401,Generated layer data,data-layers
+274,data/layers/hydrolakes_tiles/40_80.js,1,13856,Generated layer data,data-layers
+275,data/layers/hydrolakes_tiles/40_90.js,1,6540,Generated layer data,data-layers
+276,data/layers/hydrolakes_tiles/50_-10.js,1,19400,Generated layer data,data-layers
+277,data/layers/hydrolakes_tiles/50_-100.js,1,402436,Generated layer data,data-layers
+278,data/layers/hydrolakes_tiles/50_-110.js,1,384886,Generated layer data,data-layers
+279,data/layers/hydrolakes_tiles/50_-120.js,1,95975,Generated layer data,data-layers
+280,data/layers/hydrolakes_tiles/50_-130.js,1,67022,Generated layer data,data-layers
+281,data/layers/hydrolakes_tiles/50_-140.js,1,28648,Generated layer data,data-layers
+282,data/layers/hydrolakes_tiles/50_-150.js,1,941,Generated layer data,data-layers
+283,data/layers/hydrolakes_tiles/50_-160.js,1,26316,Generated layer data,data-layers
+284,data/layers/hydrolakes_tiles/50_-170.js,1,10112,Generated layer data,data-layers
+285,data/layers/hydrolakes_tiles/50_-180.js,1,400,Generated layer data,data-layers
+286,data/layers/hydrolakes_tiles/50_-20.js,1,468,Generated layer data,data-layers
+287,data/layers/hydrolakes_tiles/50_-60.js,1,65176,Generated layer data,data-layers
+288,data/layers/hydrolakes_tiles/50_-70.js,1,461280,Generated layer data,data-layers
+289,data/layers/hydrolakes_tiles/50_-80.js,1,603859,Generated layer data,data-layers
+290,data/layers/hydrolakes_tiles/50_-90.js,1,158925,Generated layer data,data-layers
+291,data/layers/hydrolakes_tiles/50_0.js,1,36380,Generated layer data,data-layers
+292,data/layers/hydrolakes_tiles/50_10.js,1,102801,Generated layer data,data-layers
+293,data/layers/hydrolakes_tiles/50_100.js,1,4257,Generated layer data,data-layers
+294,data/layers/hydrolakes_tiles/50_110.js,1,11829,Generated layer data,data-layers
+295,data/layers/hydrolakes_tiles/50_120.js,1,2623,Generated layer data,data-layers
+296,data/layers/hydrolakes_tiles/50_130.js,1,5366,Generated layer data,data-layers
+297,data/layers/hydrolakes_tiles/50_140.js,1,6033,Generated layer data,data-layers
+298,data/layers/hydrolakes_tiles/50_150.js,1,5531,Generated layer data,data-layers
+299,data/layers/hydrolakes_tiles/50_160.js,1,4793,Generated layer data,data-layers
+300,data/layers/hydrolakes_tiles/50_170.js,1,477,Generated layer data,data-layers
+301,data/layers/hydrolakes_tiles/50_20.js,1,56252,Generated layer data,data-layers
+302,data/layers/hydrolakes_tiles/50_30.js,1,33321,Generated layer data,data-layers
+303,data/layers/hydrolakes_tiles/50_40.js,1,15938,Generated layer data,data-layers
+304,data/layers/hydrolakes_tiles/50_50.js,1,15692,Generated layer data,data-layers
+305,data/layers/hydrolakes_tiles/50_60.js,1,138875,Generated layer data,data-layers
+306,data/layers/hydrolakes_tiles/50_70.js,1,107698,Generated layer data,data-layers
+307,data/layers/hydrolakes_tiles/50_80.js,1,28662,Generated layer data,data-layers
+308,data/layers/hydrolakes_tiles/50_90.js,1,10604,Generated layer data,data-layers
+309,data/layers/hydrolakes_tiles/60_-10.js,1,364,Generated layer data,data-layers
+310,data/layers/hydrolakes_tiles/60_-100.js,1,384591,Generated layer data,data-layers
+311,data/layers/hydrolakes_tiles/60_-110.js,1,504489,Generated layer data,data-layers
+312,data/layers/hydrolakes_tiles/60_-120.js,1,439792,Generated layer data,data-layers
+313,data/layers/hydrolakes_tiles/60_-130.js,1,141637,Generated layer data,data-layers
+314,data/layers/hydrolakes_tiles/60_-140.js,1,129574,Generated layer data,data-layers
+315,data/layers/hydrolakes_tiles/60_-150.js,1,43688,Generated layer data,data-layers
+316,data/layers/hydrolakes_tiles/60_-160.js,1,55709,Generated layer data,data-layers
+317,data/layers/hydrolakes_tiles/60_-170.js,1,122252,Generated layer data,data-layers
+318,data/layers/hydrolakes_tiles/60_-180.js,1,18894,Generated layer data,data-layers
+319,data/layers/hydrolakes_tiles/60_-20.js,1,6826,Generated layer data,data-layers
+320,data/layers/hydrolakes_tiles/60_-30.js,1,4443,Generated layer data,data-layers
+321,data/layers/hydrolakes_tiles/60_-40.js,1,1761,Generated layer data,data-layers
+322,data/layers/hydrolakes_tiles/60_-50.js,1,18068,Generated layer data,data-layers
+323,data/layers/hydrolakes_tiles/60_-60.js,1,43759,Generated layer data,data-layers
+324,data/layers/hydrolakes_tiles/60_-70.js,1,88452,Generated layer data,data-layers
+325,data/layers/hydrolakes_tiles/60_-80.js,1,208553,Generated layer data,data-layers
+326,data/layers/hydrolakes_tiles/60_-90.js,1,109372,Generated layer data,data-layers
+327,data/layers/hydrolakes_tiles/60_0.js,1,30600,Generated layer data,data-layers
+328,data/layers/hydrolakes_tiles/60_10.js,1,161015,Generated layer data,data-layers
+329,data/layers/hydrolakes_tiles/60_100.js,1,18126,Generated layer data,data-layers
+330,data/layers/hydrolakes_tiles/60_110.js,1,9919,Generated layer data,data-layers
+331,data/layers/hydrolakes_tiles/60_120.js,1,82115,Generated layer data,data-layers
+332,data/layers/hydrolakes_tiles/60_130.js,1,13758,Generated layer data,data-layers
+333,data/layers/hydrolakes_tiles/60_140.js,1,94131,Generated layer data,data-layers
+334,data/layers/hydrolakes_tiles/60_150.js,1,227032,Generated layer data,data-layers
+335,data/layers/hydrolakes_tiles/60_160.js,1,42012,Generated layer data,data-layers
+336,data/layers/hydrolakes_tiles/60_170.js,1,29080,Generated layer data,data-layers
+337,data/layers/hydrolakes_tiles/60_20.js,1,166113,Generated layer data,data-layers
+338,data/layers/hydrolakes_tiles/60_30.js,1,112260,Generated layer data,data-layers
+339,data/layers/hydrolakes_tiles/60_40.js,1,20769,Generated layer data,data-layers
+340,data/layers/hydrolakes_tiles/60_50.js,1,19782,Generated layer data,data-layers
+341,data/layers/hydrolakes_tiles/60_60.js,1,78045,Generated layer data,data-layers
+342,data/layers/hydrolakes_tiles/60_70.js,1,246561,Generated layer data,data-layers
+343,data/layers/hydrolakes_tiles/60_80.js,1,49428,Generated layer data,data-layers
+344,data/layers/hydrolakes_tiles/60_90.js,1,11137,Generated layer data,data-layers
+345,data/layers/hydrolakes_tiles/70_-100.js,1,25490,Generated layer data,data-layers
+346,data/layers/hydrolakes_tiles/70_-110.js,1,103661,Generated layer data,data-layers
+347,data/layers/hydrolakes_tiles/70_-120.js,1,63721,Generated layer data,data-layers
+348,data/layers/hydrolakes_tiles/70_-130.js,1,13481,Generated layer data,data-layers
+349,data/layers/hydrolakes_tiles/70_-140.js,1,1740,Generated layer data,data-layers
+350,data/layers/hydrolakes_tiles/70_-150.js,1,6437,Generated layer data,data-layers
+351,data/layers/hydrolakes_tiles/70_-160.js,1,96611,Generated layer data,data-layers
+352,data/layers/hydrolakes_tiles/70_-170.js,1,3536,Generated layer data,data-layers
+353,data/layers/hydrolakes_tiles/70_-180.js,1,1338,Generated layer data,data-layers
+354,data/layers/hydrolakes_tiles/70_-20.js,1,590,Generated layer data,data-layers
+355,data/layers/hydrolakes_tiles/70_-30.js,1,10307,Generated layer data,data-layers
+356,data/layers/hydrolakes_tiles/70_-60.js,1,4356,Generated layer data,data-layers
+357,data/layers/hydrolakes_tiles/70_-70.js,1,4374,Generated layer data,data-layers
+358,data/layers/hydrolakes_tiles/70_-80.js,1,25129,Generated layer data,data-layers
+359,data/layers/hydrolakes_tiles/70_-90.js,1,44617,Generated layer data,data-layers
+360,data/layers/hydrolakes_tiles/70_10.js,1,2292,Generated layer data,data-layers
+361,data/layers/hydrolakes_tiles/70_100.js,1,47797,Generated layer data,data-layers
+362,data/layers/hydrolakes_tiles/70_110.js,1,27964,Generated layer data,data-layers
+363,data/layers/hydrolakes_tiles/70_120.js,1,38615,Generated layer data,data-layers
+364,data/layers/hydrolakes_tiles/70_130.js,1,52649,Generated layer data,data-layers
+365,data/layers/hydrolakes_tiles/70_140.js,1,91156,Generated layer data,data-layers
+366,data/layers/hydrolakes_tiles/70_150.js,1,50565,Generated layer data,data-layers
+367,data/layers/hydrolakes_tiles/70_160.js,1,223,Generated layer data,data-layers
+368,data/layers/hydrolakes_tiles/70_170.js,1,1277,Generated layer data,data-layers
+369,data/layers/hydrolakes_tiles/70_20.js,1,5542,Generated layer data,data-layers
+370,data/layers/hydrolakes_tiles/70_30.js,1,226,Generated layer data,data-layers
+371,data/layers/hydrolakes_tiles/70_50.js,1,11210,Generated layer data,data-layers
+372,data/layers/hydrolakes_tiles/70_60.js,1,13204,Generated layer data,data-layers
+373,data/layers/hydrolakes_tiles/70_70.js,1,52649,Generated layer data,data-layers
+374,data/layers/hydrolakes_tiles/70_80.js,1,40341,Generated layer data,data-layers
+375,data/layers/hydrolakes_tiles/70_90.js,1,79969,Generated layer data,data-layers
+376,data/layers/hydrolakes_tiles/80_-100.js,1,882,Generated layer data,data-layers
+377,data/layers/hydrolakes_tiles/80_-20.js,1,468,Generated layer data,data-layers
+378,data/layers/hydrolakes_tiles/80_-30.js,1,2509,Generated layer data,data-layers
+379,data/layers/hydrolakes_tiles/80_-40.js,1,1874,Generated layer data,data-layers
+380,data/layers/hydrolakes_tiles/80_-50.js,1,2041,Generated layer data,data-layers
+381,data/layers/hydrolakes_tiles/80_-60.js,1,1511,Generated layer data,data-layers
+382,data/layers/hydrolakes_tiles/80_-70.js,1,2796,Generated layer data,data-layers
+383,data/layers/hydrolakes_tiles/80_-80.js,1,2032,Generated layer data,data-layers
+384,data/layers/hydrolakes_tiles/80_-90.js,1,1905,Generated layer data,data-layers
+385,data/layers/hydrolakes_tiles/80_10.js,1,396,Generated layer data,data-layers
+386,data/layers/hydrolakes_tiles/80_20.js,1,514,Generated layer data,data-layers
+387,data/layers/hydrolakes_tiles/80_40.js,1,224,Generated layer data,data-layers
+388,data/layers/hydrolakes_tiles/80_50.js,1,813,Generated layer data,data-layers
+389,data/layers/hydrolakes_tiles/80_60.js,1,223,Generated layer data,data-layers
+390,data/layers/hydrolakes_tiles/80_90.js,1,695,Generated layer data,data-layers
+391,data/layers/labels_admin1.js,1,193878,Generated layer data,data-layers
+392,data/layers/labels_base.js,1,491492,Generated layer data,data-layers
+393,data/layers/lakes10.js,1,1175610,Generated layer data,data-layers
+394,data/layers/map_ancient_cities_remote_sensing.js,1,23762,Generated layer data,data-layers
+395,data/layers/map_caves_underground.js,1,31891,Generated layer data,data-layers
+396,data/layers/map_conflicts.js,1,554798,Generated layer data,data-layers
+397,data/layers/map_megaliths.js,1,66281,Generated layer data,data-layers
+398,data/layers/map_nuclear_sites.js,1,852062,Generated layer data,data-layers
+399,data/layers/map_nuclear_tests.js,1,3833847,Generated layer data,data-layers
+400,data/layers/map_ocean.js,1,16139,Generated layer data,data-layers
+401,data/layers/map_offlimits_mountains.js,1,276017,Generated layer data,data-layers
+402,data/layers/map_pyramids.js,1,594191,Generated layer data,data-layers
+403,data/layers/map_weird_coordinates.js,1,76519,Generated layer data,data-layers
+404,data/layers/military.js,1,5967550,Generated layer data,data-layers
+405,data/layers/nuclear.js,1,343814,Generated layer data,data-layers
+406,data/layers/nuclear_osm.js,1,195,Generated layer data,data-layers
+407,data/layers/plates.js,1,94182,Generated layer data,data-layers
+408,data/layers/postal/AU.js,1,1063121,Generated layer data,data-layers
+409,data/layers/postal/BR.js,1,339908,Generated layer data,data-layers
+410,data/layers/postal/CA.js,1,108815,Generated layer data,data-layers
+411,data/layers/postal/DE.js,1,1454329,Generated layer data,data-layers
+412,data/layers/postal/FR.js,1,3165950,Generated layer data,data-layers
+413,data/layers/postal/GB.js,1,1342160,Generated layer data,data-layers
+414,data/layers/postal/IN.js,1,8408359,Generated layer data,data-layers
+415,data/layers/postal/JP.js,1,8854874,Generated layer data,data-layers
+416,data/layers/postal/MX.js,1,8845369,Generated layer data,data-layers
+417,data/layers/postal/US.js,1,2152692,Generated layer data,data-layers
+418,data/layers/postal_index.js,1,196,Generated layer data,data-layers
+419,data/layers/rivers10.js,1,2044639,Generated layer data,data-layers
+420,data/layers/trenches.js,1,14614,Generated layer data,data-layers
+421,data/layers/urban.js,1,2390954,Generated layer data,data-layers
+422,data/layers/volcanoes.js,1,269611,Generated layer data,data-layers
+423,data/pdf7_data.js,1,1030380,Data file,data
+424,data/pdf7_index.js,2,62161,Data file,data
+425,data/private/README.md,16,997,Data file,data
+426,data/refresh.sh,16,991,Data file,data
+427,data/sources/external/cneos_fireball.json,1,26657,Source snapshot (provenance input),data-sources
+428,data/sources/external/wikidata_deeps.json,162,3830,Source snapshot (provenance input),data-sources
+429,data/sources/external/wikidata_trenches.json,849,22860,Source snapshot (provenance input),data-sources
+430,data/sources/offlimits_mountains.csv,249,95513,Source snapshot (provenance input),data-sources
+431,data/sources/pdf7/curation.csv,121,9209,Source snapshot (provenance input),data-sources
+432,data/sources/pdf7/links.csv,135,8495,Source snapshot (provenance input),data-sources
+433,data/sources/pdf7/pdf7_entries.csv,382,134915,Source snapshot (provenance input),data-sources
+434,data/sources/pdf7/snap/case_docs.csv,238,19668,Source snapshot (provenance input),data-sources
+435,data/sources/pdf7/snap/cit.csv,145,88003,Source snapshot (provenance input),data-sources
+436,data/sources/pdf7/snap/cit_register.csv,116,3040,Source snapshot (provenance input),data-sources
+437,data/sources/pdf7/snap/counts_by_country.csv,191,8946,Source snapshot (provenance input),data-sources
+438,data/sources/pdf7/snap/counts_by_era.csv,12,834,Source snapshot (provenance input),data-sources
+439,data/sources/pdf7/snap/counts_by_grade.csv,6,467,Source snapshot (provenance input),data-sources
+440,data/sources/pdf7/snap/figures.csv,59,12864,Source snapshot (provenance input),data-sources
+441,data/sources/pdf7/snap/glitches.csv,382,321751,Source snapshot (provenance input),data-sources
+442,data/sources/pdf7/snap/labels.csv,924,18849,Source snapshot (provenance input),data-sources
+443,data/sources/pdf7/snap/nuclear_tests_by_state_environment.csv,9,249,Source snapshot (provenance input),data-sources
+444,data/sources/pdf7/snap/nuclear_yield_by_environment.csv,6,242,Source snapshot (provenance input),data-sources
+445,data/sources/pdf7/snap/path_labels.csv,280,6433,Source snapshot (provenance input),data-sources
+446,data/sources/pdf7/snap/pyramids_by_country.csv,47,1126,Source snapshot (provenance input),data-sources
+447,data/sources/pdf7/snap/sections.csv,95,4828,Source snapshot (provenance input),data-sources
+448,data/sources/pdf7/snap/tables.json.gz,,164936,Source snapshot (provenance input),data-sources
+449,data/sources/pdf7/snap/theories.csv,280,149802,Source snapshot (provenance input),data-sources
+450,data/sources/pdf7/snap/uap_distance_analysis.csv,10,2125,Source snapshot (provenance input),data-sources
+451,data/sources/pdf7/snap/uapnhi.csv,170,39802,Source snapshot (provenance input),data-sources
+452,data/sources/pdf7/status.csv,382,12724,Source snapshot (provenance input),data-sources
+453,data/sources/pdf7_cases.csv,32,19433,Source snapshot (provenance input),data-sources
+454,data/sources/qwm/languages_searched.csv.gz,,609,Source snapshot (provenance input),data-sources
+455,data/sources/qwm/map_abductions.csv.gz,,3798,Source snapshot (provenance input),data-sources
+456,data/sources/qwm/map_ancient_cities_remote_sensing.csv.gz,,4969,Source snapshot (provenance input),data-sources
+457,data/sources/qwm/map_animal_mutilations.csv.gz,,3606,Source snapshot (provenance input),data-sources
+458,data/sources/qwm/map_caves_underground.csv.gz,,5984,Source snapshot (provenance input),data-sources
+459,data/sources/qwm/map_conflicts.csv.gz,,43792,Source snapshot (provenance input),data-sources
+460,data/sources/qwm/map_megaliths.csv.gz,,7619,Source snapshot (provenance input),data-sources
+461,data/sources/qwm/map_military_bases.csv.gz,,257,Source snapshot (provenance input),data-sources
+462,data/sources/qwm/map_missing_unsolved.csv.gz,,3377,Source snapshot (provenance input),data-sources
+463,data/sources/qwm/map_nuclear_sites.csv.gz,,49181,Source snapshot (provenance input),data-sources
+464,data/sources/qwm/map_nuclear_tests.csv.gz,,86435,Source snapshot (provenance input),data-sources
+465,data/sources/qwm/map_ocean.csv.gz,,3335,Source snapshot (provenance input),data-sources
+466,data/sources/qwm/map_pyramids.csv.gz,,44645,Source snapshot (provenance input),data-sources
+467,data/sources/qwm/map_satellite_anomalies.csv.gz,,5810,Source snapshot (provenance input),data-sources
+468,data/sources/qwm/map_uap_cit.csv.gz,,288264,Source snapshot (provenance input),data-sources
+469,data/sources/qwm/map_uso_water.csv.gz,,6713,Source snapshot (provenance input),data-sources
+470,data/sources/qwm/map_weird_coordinates.csv.gz,,7780,Source snapshot (provenance input),data-sources
+471,data/sources/qwm/sources_registry.csv.gz,,2702,Source snapshot (provenance input),data-sources
+472,data/sources/qwm_uap_cases.csv,39,42467,Source snapshot (provenance input),data-sources
+473,data/tools/.layers_ok,1,2,Data pipeline tool,data-pipeline
+474,data/tools/build_conflicts.py,174,15482,Data pipeline tool,data-pipeline
+475,data/tools/build_extra.py,115,8942,Data pipeline tool,data-pipeline
+476,data/tools/build_layers.py,163,11867,Data pipeline tool,data-pipeline
+477,data/tools/build_military.py,91,8017,Data pipeline tool,data-pipeline
+478,data/tools/fetch_osm_military.py,30,1539,Data pipeline tool,data-pipeline
+479,data/tools/gap_audit.py,339,33328,Data pipeline tool,data-pipeline
+480,data/tools/geocode_cache.json,1346,34435,Data pipeline tool,data-pipeline
+481,data/tools/geocode_qwm.py,142,12302,Data pipeline tool,data-pipeline
+482,data/tools/military_class_policy.json,465,8909,Data pipeline tool,data-pipeline
+483,data/tools/pdf7_dataset.py,171,13898,Data pipeline tool,data-pipeline
+484,data/tools/pdf7_mine.py,130,9507,Data pipeline tool,data-pipeline
+485,data/tools/pdf7_tex.py,139,7551,Data pipeline tool,data-pipeline
+486,data/tools/snapshot_qwm.py,18,1488,Data pipeline tool,data-pipeline
+487,data/tools/wd_mil.py,30,1908,Data pipeline tool,data-pipeline
+488,data/unplaced.js,2,217407,Data file,data
+489,data/unplotted.csv,15,3322,Data file,data
+490,data/unplotted_loader.csv,444,41949,Data file,data
+491,data/url_status.js,2,72375,Data file,data
+492,docs/adr/0001-cesium-renderer.md,103,8626,Architecture decision record,docs
+493,docs/adr/0002-non-spatial-data-layer.md,79,4333,Architecture decision record,docs
+494,docs/adr/0003-design-system.md,80,5772,Architecture decision record,docs
+495,docs/adr/0004-osint-console-information-architecture.md,142,11122,Architecture decision record,docs
+496,docs/adr/0005-globe-visual-system.md,182,11340,Architecture decision record,docs
+497,docs/architecture.md,124,11442,Documentation,docs
+498,docs/audit/SUMMARY.md,69,7824,Audit record,audit
+499,docs/audit/TAXONOMY.md,82,6330,Audit record,audit
+500,docs/audit/checks.json,10,612,Audit record,audit
+501,docs/audit/coverage.md,707,189245,Audit record,audit
+502,docs/audit/findings.json,1082,32137,Audit record,audit
+503,docs/audit/hardening/FINDINGS.md,87,19854,Hardening audit record,audit
+504,docs/audit/hardening/INDEX.md,1265,108451,Hardening audit record,audit
+505,docs/audit/hardening/PASSES.md,237,24179,Hardening audit record,audit
+506,docs/audit/hardening/PROGRESS.md,81,7320,Hardening audit record,audit
+507,docs/audit/hardening/findings.csv,67,17665,Hardening audit record,audit
+508,docs/audit/hardening/index.csv,1137,96813,Hardening audit record,audit
+509,docs/audit/hardening/passes_run.json,1461,41610,Hardening audit record,audit
+510,docs/audit/pass-01.md,35,4659,Audit record,audit
+511,docs/audit/pass-02.md,36,6124,Audit record,audit
+512,docs/audit/pass-03.md,31,2569,Audit record,audit
+513,docs/audit/pass-04.md,33,3548,Audit record,audit
+514,docs/audit/pass-05.md,35,4251,Audit record,audit
+515,docs/audit/pass-06.md,34,4618,Audit record,audit
+516,docs/audit/pass-07-data.json,274,7278,Audit record,audit
+517,docs/audit/pass-07.md,37,3672,Audit record,audit
+518,docs/audit/pass-08.md,23,1047,Audit record,audit
+519,docs/audit/pass-09.md,43,4090,Audit record,audit
+520,docs/audit/pass-10.md,29,2489,Audit record,audit
+521,docs/audit/pdf7-unplaced.csv,33,10180,Audit record,audit
+522,docs/audit/qwm-data-issues.csv,3073,542559,Audit record,audit
+523,docs/audit/totals.json,58,819,Audit record,audit
+524,docs/audit/url_status.csv,1484,140123,Audit record,audit
+525,docs/audit/v1.2-data-gap-audit.csv,357,101402,Audit record,audit
+526,docs/audit/v1.2-data-gap-audit.md,109,10482,Audit record,audit
+527,docs/audit/v1.3-ui-audit.csv,139,47349,Audit record,audit
+528,docs/audit/v1.3-ui-audit.md,180,38376,Audit record,audit
+529,docs/audit/v1.4-ui-audit.csv,74,23610,Audit record,audit
+530,docs/audit/v1.4-ui-audit.md,128,64547,Audit record,audit
+531,docs/audit/v1.5-ui-audit.csv,29,8010,Audit record,audit
+532,docs/audit/v1.5-ui-audit.md,62,16806,Audit record,audit
+533,docs/convergence.md,54,2770,Documentation,docs
+534,docs/data-and-grading.md,54,4847,Documentation,docs
+535,docs/data-dictionary.md,60,13531,Documentation,docs
+536,docs/data-pipeline.md,70,4326,Documentation,docs
+537,docs/data-sources.md,105,15365,Documentation,docs
+538,docs/design/style-guide.md,248,17007,Design documentation,design
+539,docs/design/wireframes/1280x800_dossier.png,,119065,Design documentation,design
+540,docs/design/wireframes/1280x800_dossier.svg,27,8106,Design documentation,design
+541,docs/design/wireframes/1280x800_main.png,,115432,Design documentation,design
+542,docs/design/wireframes/1280x800_main.svg,26,7682,Design documentation,design
+543,docs/design/wireframes/1280x800_reference.png,,137403,Design documentation,design
+544,docs/design/wireframes/1280x800_reference.svg,26,8927,Design documentation,design
+545,docs/design/wireframes/1920x1080_analysis.png,,157164,Design documentation,design
+546,docs/design/wireframes/1920x1080_analysis.svg,28,8832,Design documentation,design
+547,docs/design/wireframes/1920x1080_dossier.png,,174067,Design documentation,design
+548,docs/design/wireframes/1920x1080_dossier.svg,29,9558,Design documentation,design
+549,docs/design/wireframes/1920x1080_main.png,,145665,Design documentation,design
+550,docs/design/wireframes/1920x1080_main.svg,26,7833,Design documentation,design
+551,docs/design/wireframes/1920x1080_palette.png,,165481,Design documentation,design
+552,docs/design/wireframes/1920x1080_palette.svg,28,8948,Design documentation,design
+553,docs/design/wireframes/1920x1080_reference.png,,204817,Design documentation,design
+554,docs/design/wireframes/1920x1080_reference.svg,27,9776,Design documentation,design
+555,docs/design/wireframes/1920x1080_states.png,,178739,Design documentation,design
+556,docs/design/wireframes/1920x1080_states.svg,30,9497,Design documentation,design
+557,docs/design/wireframes/3840x2160_dossier.png,,327436,Design documentation,design
+558,docs/design/wireframes/3840x2160_dossier.svg,30,10806,Design documentation,design
+559,docs/design/wireframes/3840x2160_main.png,,266770,Design documentation,design
+560,docs/design/wireframes/3840x2160_main.svg,26,8212,Design documentation,design
+561,docs/design/wireframes/3840x2160_reference.png,,443534,Design documentation,design
+562,docs/design/wireframes/3840x2160_reference.svg,29,11798,Design documentation,design
+563,docs/design/wireframes/README.md,48,4357,Design documentation,design
+564,docs/design/wireframes/v1.4/1280x800_dossier.png,,114892,Design documentation,design
+565,docs/design/wireframes/v1.4/1280x800_dossier.svg,25,6656,Design documentation,design
+566,docs/design/wireframes/v1.4/1280x800_main.png,,111837,Design documentation,design
+567,docs/design/wireframes/v1.4/1280x800_main.svg,24,6227,Design documentation,design
+568,docs/design/wireframes/v1.4/1920x1080_analysis.png,,153095,Design documentation,design
+569,docs/design/wireframes/v1.4/1920x1080_analysis.svg,26,7375,Design documentation,design
+570,docs/design/wireframes/v1.4/1920x1080_dossier.png,,169249,Design documentation,design
+571,docs/design/wireframes/v1.4/1920x1080_dossier.svg,27,8102,Design documentation,design
+572,docs/design/wireframes/v1.4/1920x1080_main.png,,141486,Design documentation,design
+573,docs/design/wireframes/v1.4/1920x1080_main.svg,24,6356,Design documentation,design
+574,docs/design/wireframes/v1.4/1920x1080_palette.png,,162072,Design documentation,design
+575,docs/design/wireframes/v1.4/1920x1080_palette.svg,26,7471,Design documentation,design
+576,docs/design/wireframes/v1.4/3840x2160_dossier.png,,321247,Design documentation,design
+577,docs/design/wireframes/v1.4/3840x2160_dossier.svg,28,9200,Design documentation,design
+578,docs/design/wireframes/v1.4/3840x2160_main.png,,261475,Design documentation,design
+579,docs/design/wireframes/v1.4/3840x2160_main.svg,24,6607,Design documentation,design
+580,docs/design/wireframes/v1.4/README.md,29,2327,Design documentation,design
+581,docs/layer-catalog.md,61,21017,Documentation,docs
+582,docs/limitations.md,66,4405,Documentation,docs
+583,docs/make_wireframes.py,29,4397,Documentation,docs
+584,docs/render_wireframes.py,9,546,Documentation,docs
+585,docs/repo-checklist.md,136,10586,Documentation,docs
+586,docs/repo-metadata.json,34,1252,Documentation,docs
+587,docs/screenshots/01_engage.png,,61459,Screenshot evidence,docs-media
+588,docs/screenshots/02_globe.png,,546904,Screenshot evidence,docs-media
+589,docs/screenshots/03_layers_tree.png,,599220,Screenshot evidence,docs-media
+590,docs/screenshots/04_offlimits_layer.png,,674150,Screenshot evidence,docs-media
+591,docs/screenshots/05_dossier.png,,517735,Screenshot evidence,docs-media
+592,docs/screenshots/05b_dossier_pdf7_ref.png,,522550,Screenshot evidence,docs-media
+593,docs/screenshots/06_tour.png,,512868,Screenshot evidence,docs-media
+594,docs/screenshots/07_hotspots.png,,315247,Screenshot evidence,docs-media
+595,docs/screenshots/08_report.png,,346078,Screenshot evidence,docs-media
+596,docs/screenshots/09_index_coverage.png,,370919,Screenshot evidence,docs-media
+597,docs/screenshots/09_index_glossary.png,,388571,Screenshot evidence,docs-media
+598,docs/screenshots/09_index_offworld.png,,427421,Screenshot evidence,docs-media
+599,docs/screenshots/09_index_pdf7.png,,322173,Screenshot evidence,docs-media
+600,docs/screenshots/09_index_sources.png,,392238,Screenshot evidence,docs-media
+601,docs/screenshots/10_charts.png,,395963,Screenshot evidence,docs-media
+602,docs/screenshots/11_analysis.png,,532369,Screenshot evidence,docs-media
+603,docs/screenshots/12_settings.png,,586471,Screenshot evidence,docs-media
+604,docs/screenshots/13_zoom_regional_europe.png,,676952,Screenshot evidence,docs-media
+605,docs/screenshots/14_zoom_city_london.png,,923922,Screenshot evidence,docs-media
+606,docs/screenshots/15_zoom_street_nyc.png,,927154,Screenshot evidence,docs-media
+607,docs/screenshots/16_zoom_terrain_everest.png,,789376,Screenshot evidence,docs-media
+608,docs/screenshots/17_zoom_case_rendlesham.png,,653879,Screenshot evidence,docs-media
+609,docs/screenshots/18_sentinel2_basemap.png,,650987,Screenshot evidence,docs-media
+610,docs/screenshots/19_data_overview.png,,262397,Screenshot evidence,docs-media
+611,docs/screenshots/20_data_entries.png,,288555,Screenshot evidence,docs-media
+612,docs/screenshots/21_data_charts.png,,244700,Screenshot evidence,docs-media
+613,docs/screenshots/22_data_tables.png,,286102,Screenshot evidence,docs-media
+614,docs/screenshots/23_data_sources.png,,261534,Screenshot evidence,docs-media
+615,docs/screenshots/24_data_stats.png,,275562,Screenshot evidence,docs-media
+616,docs/screenshots/25_data_unplaced.png,,269618,Screenshot evidence,docs-media
+617,docs/screenshots/v1.3/1280x800_main_after.png,,423262,Screenshot evidence,docs-media
+618,docs/screenshots/v1.3/1280x800_main_before.png,,430095,Screenshot evidence,docs-media
+619,docs/screenshots/v1.3/1280x800_multi_open_after.png,,213887,Screenshot evidence,docs-media
+620,docs/screenshots/v1.3/1280x800_multi_open_before.png,,189495,Screenshot evidence,docs-media
+621,docs/screenshots/v1.3/1920x1080_charts_after.png,,490259,Screenshot evidence,docs-media
+622,docs/screenshots/v1.3/1920x1080_charts_before.png,,495347,Screenshot evidence,docs-media
+623,docs/screenshots/v1.3/1920x1080_data_overview_after.png,,365817,Screenshot evidence,docs-media
+624,docs/screenshots/v1.3/1920x1080_data_overview_before.png,,376276,Screenshot evidence,docs-media
+625,docs/screenshots/v1.3/1920x1080_data_stats_after.png,,390394,Screenshot evidence,docs-media
+626,docs/screenshots/v1.3/1920x1080_data_stats_before.png,,422285,Screenshot evidence,docs-media
+627,docs/screenshots/v1.3/1920x1080_data_tables_after.png,,566450,Screenshot evidence,docs-media
+628,docs/screenshots/v1.3/1920x1080_data_tables_before.png,,397376,Screenshot evidence,docs-media
+629,docs/screenshots/v1.3/1920x1080_dossier_after.png,,817325,Screenshot evidence,docs-media
+630,docs/screenshots/v1.3/1920x1080_dossier_before.png,,827140,Screenshot evidence,docs-media
+631,docs/screenshots/v1.3/1920x1080_help_after.png,,580566,Screenshot evidence,docs-media
+632,docs/screenshots/v1.3/1920x1080_help_before.png,,565100,Screenshot evidence,docs-media
+633,docs/screenshots/v1.3/1920x1080_hotspots_after.png,,702018,Screenshot evidence,docs-media
+634,docs/screenshots/v1.3/1920x1080_hotspots_before.png,,729909,Screenshot evidence,docs-media
+635,docs/screenshots/v1.3/1920x1080_index_glossary_after.png,,478581,Screenshot evidence,docs-media
+636,docs/screenshots/v1.3/1920x1080_index_glossary_before.png,,469234,Screenshot evidence,docs-media
+637,docs/screenshots/v1.3/1920x1080_main_after.png,,878303,Screenshot evidence,docs-media
+638,docs/screenshots/v1.3/1920x1080_main_before.png,,886551,Screenshot evidence,docs-media
+639,docs/screenshots/v1.3/1920x1080_multi_open_after.png,,389883,Screenshot evidence,docs-media
+640,docs/screenshots/v1.3/1920x1080_multi_open_before.png,,390674,Screenshot evidence,docs-media
+641,docs/screenshots/v1.3/1920x1080_rail_layers_after.png,,885525,Screenshot evidence,docs-media
+642,docs/screenshots/v1.3/1920x1080_rail_layers_before.png,,889409,Screenshot evidence,docs-media
+643,docs/screenshots/v1.3/1920x1080_settings_after.png,,786462,Screenshot evidence,docs-media
+644,docs/screenshots/v1.3/1920x1080_settings_before.png,,800865,Screenshot evidence,docs-media
+645,docs/screenshots/v1.3/1920x1080_wars_after.png,,677255,Screenshot evidence,docs-media
+646,docs/screenshots/v1.3/1920x1080_wars_before.png,,670035,Screenshot evidence,docs-media
+647,docs/screenshots/v1.3/3840x2160_main_after.png,,814718,Screenshot evidence,docs-media
+648,docs/screenshots/v1.3/3840x2160_main_before.png,,823066,Screenshot evidence,docs-media
+649,docs/screenshots/v1.3/README.md,23,2060,Screenshot evidence,docs-media
+650,docs/screenshots/v1.4/1280x800_console_full_after.png,,219018,Screenshot evidence,docs-media
+651,docs/screenshots/v1.4/1280x800_console_full_before.png,,215749,Screenshot evidence,docs-media
+652,docs/screenshots/v1.4/1280x800_main_after.png,,392995,Screenshot evidence,docs-media
+653,docs/screenshots/v1.4/1280x800_main_before.png,,426742,Screenshot evidence,docs-media
+654,docs/screenshots/v1.4/1920x1080_charts_after.png,,477093,Screenshot evidence,docs-media
+655,docs/screenshots/v1.4/1920x1080_charts_before.png,,489665,Screenshot evidence,docs-media
+656,docs/screenshots/v1.4/1920x1080_compact_after.png,,783342,Screenshot evidence,docs-media
+657,docs/screenshots/v1.4/1920x1080_compact_before.png,,880434,Screenshot evidence,docs-media
+658,docs/screenshots/v1.4/1920x1080_console_full_after.png,,425371,Screenshot evidence,docs-media
+659,docs/screenshots/v1.4/1920x1080_console_full_before.png,,374183,Screenshot evidence,docs-media
+660,docs/screenshots/v1.4/1920x1080_dossier_after.png,,764898,Screenshot evidence,docs-media
+661,docs/screenshots/v1.4/1920x1080_dossier_before.png,,886904,Screenshot evidence,docs-media
+662,docs/screenshots/v1.4/1920x1080_feed_after.png,,873123,Screenshot evidence,docs-media
+663,docs/screenshots/v1.4/1920x1080_feed_before.png,,880434,Screenshot evidence,docs-media
+664,docs/screenshots/v1.4/1920x1080_help_after.png,,546292,Screenshot evidence,docs-media
+665,docs/screenshots/v1.4/1920x1080_help_before.png,,584561,Screenshot evidence,docs-media
+666,docs/screenshots/v1.4/1920x1080_high_contrast_after.png,,729144,Screenshot evidence,docs-media
+667,docs/screenshots/v1.4/1920x1080_high_contrast_before.png,,880434,Screenshot evidence,docs-media
+668,docs/screenshots/v1.4/1920x1080_hotspots_after.png,,641082,Screenshot evidence,docs-media
+669,docs/screenshots/v1.4/1920x1080_hotspots_before.png,,703257,Screenshot evidence,docs-media
+670,docs/screenshots/v1.4/1920x1080_hover_card_after.png,,1025231,Screenshot evidence,docs-media
+671,docs/screenshots/v1.4/1920x1080_hover_card_before.png,,880434,Screenshot evidence,docs-media
+672,docs/screenshots/v1.4/1920x1080_main_after.png,,832939,Screenshot evidence,docs-media
+673,docs/screenshots/v1.4/1920x1080_main_before.png,,880434,Screenshot evidence,docs-media
+674,docs/screenshots/v1.4/1920x1080_palette_query_after.png,,759677,Screenshot evidence,docs-media
+675,docs/screenshots/v1.4/1920x1080_palette_query_before.png,,863325,Screenshot evidence,docs-media
+676,docs/screenshots/v1.4/1920x1080_rail_filters_after.png,,834042,Screenshot evidence,docs-media
+677,docs/screenshots/v1.4/1920x1080_rail_filters_before.png,,885817,Screenshot evidence,docs-media
+678,docs/screenshots/v1.4/1920x1080_rail_layers_after.png,,829647,Screenshot evidence,docs-media
+679,docs/screenshots/v1.4/1920x1080_rail_layers_before.png,,883819,Screenshot evidence,docs-media
+680,docs/screenshots/v1.4/1920x1080_settings_after.png,,790464,Screenshot evidence,docs-media
+681,docs/screenshots/v1.4/1920x1080_settings_before.png,,784672,Screenshot evidence,docs-media
+682,docs/screenshots/v1.4/3840x2160_main_after.png,,785225,Screenshot evidence,docs-media
+683,docs/screenshots/v1.4/3840x2160_main_before.png,,812641,Screenshot evidence,docs-media
+684,docs/screenshots/v1.4/README.md,26,2450,Screenshot evidence,docs-media
+685,docs/screenshots/v1.5/1280x800_globe_reference_after.png,,461439,Screenshot evidence,docs-media
+686,docs/screenshots/v1.5/1280x800_globe_reference_before.png,,392965,Screenshot evidence,docs-media
+687,docs/screenshots/v1.5/1280x800_main_after.png,,391762,Screenshot evidence,docs-media
+688,docs/screenshots/v1.5/1280x800_main_before.png,,392184,Screenshot evidence,docs-media
+689,docs/screenshots/v1.5/1920x1080_dossier_after.png,,802854,Screenshot evidence,docs-media
+690,docs/screenshots/v1.5/1920x1080_dossier_before.png,,783637,Screenshot evidence,docs-media
+691,docs/screenshots/v1.5/1920x1080_feed_after.png,,703051,Screenshot evidence,docs-media
+692,docs/screenshots/v1.5/1920x1080_feed_before.png,,707143,Screenshot evidence,docs-media
+693,docs/screenshots/v1.5/1920x1080_globe_reference_after.png,,963580,Screenshot evidence,docs-media
+694,docs/screenshots/v1.5/1920x1080_globe_reference_before.png,,943432,Screenshot evidence,docs-media
+695,docs/screenshots/v1.5/1920x1080_help_after.png,,486675,Screenshot evidence,docs-media
+696,docs/screenshots/v1.5/1920x1080_help_before.png,,541397,Screenshot evidence,docs-media
+697,docs/screenshots/v1.5/1920x1080_legend_info_after.png,,834344,Screenshot evidence,docs-media
+698,docs/screenshots/v1.5/1920x1080_legend_info_before.png,,830043,Screenshot evidence,docs-media
+699,docs/screenshots/v1.5/1920x1080_main_after.png,,812898,Screenshot evidence,docs-media
+700,docs/screenshots/v1.5/1920x1080_main_before.png,,831017,Screenshot evidence,docs-media
+701,docs/screenshots/v1.5/1920x1080_markers_close_after.png,,732993,Screenshot evidence,docs-media
+702,docs/screenshots/v1.5/1920x1080_markers_close_before.png,,737172,Screenshot evidence,docs-media
+703,docs/screenshots/v1.5/1920x1080_settings_after.png,,590706,Screenshot evidence,docs-media
+704,docs/screenshots/v1.5/1920x1080_settings_before.png,,621861,Screenshot evidence,docs-media
+705,docs/screenshots/v1.5/3840x2160_globe_reference_after.png,,940675,Screenshot evidence,docs-media
+706,docs/screenshots/v1.5/3840x2160_globe_reference_before.png,,790386,Screenshot evidence,docs-media
+707,docs/screenshots/v1.5/3840x2160_main_after.png,,783443,Screenshot evidence,docs-media
+708,docs/screenshots/v1.5/3840x2160_main_before.png,,788798,Screenshot evidence,docs-media
+709,docs/screenshots/v1.5/README.md,19,1720,Screenshot evidence,docs-media
+710,docs/user-guide.md,131,10071,Documentation,docs
+711,docs/wireframes.md,91,6983,Documentation,docs
+712,docs/wireframes/01_main_console.png,,84741,Wireframe image,design
+713,docs/wireframes/01_main_console.svg,25,2843,Wireframe image,design
+714,docs/wireframes/02_dossier.png,,93527,Wireframe image,design
+715,docs/wireframes/02_dossier.svg,25,2904,Wireframe image,design
+716,docs/wireframes/03_link_graph.png,,13064,Wireframe image,design
+717,docs/wireframes/03_link_graph.svg,26,3016,Wireframe image,design
+718,docs/wireframes/04_compare.png,,73716,Wireframe image,design
+719,docs/wireframes/04_compare.svg,17,1972,Wireframe image,design
+720,docs/wireframes/05_hypothesis.png,,96355,Wireframe image,design
+721,docs/wireframes/05_hypothesis.svg,28,3319,Wireframe image,design
+722,docs/wireframes/06_briefings.png,,58513,Wireframe image,design
+723,docs/wireframes/06_briefings.svg,22,2519,Wireframe image,design
+724,eslint.config.js,47,1182,Lint config,repo
+725,index.html,481,20046,"App entry HTML (CSP, layout skeleton)",ui-shell
+726,js/app.js,21840,5087389,Built bundle (generated by scripts/build.mjs),build-output
+727,js/app.js.map,7,20063913,Built bundle (generated by scripts/build.mjs),build-output
+728,launch.cmd,26,1086,Windows launcher,repo
+729,package-lock.json,2798,96169,npm lockfile,repo
+730,package.json,68,2315,npm manifest,repo
+731,scripts/audit/check_urls.py,123,5824,Audit tooling,audit
+732,scripts/audit/dump_analysis.mjs,57,2027,Audit tooling,audit
+733,scripts/audit/forensics.py,422,31824,Audit tooling,audit
+734,scripts/audit/hardening_passes.py,880,53623,Audit tooling,audit
+735,scripts/audit/hardening_report.py,85,4921,Audit tooling,audit
+736,scripts/audit/index_repo.py,145,6208,Audit tooling,audit
+737,scripts/audit/pair_shots.py,103,4857,Audit tooling,audit
+738,scripts/audit/stats_crosscheck.py,99,6428,Audit tooling,audit
+739,scripts/audit/ui_audit_report.py,422,26412,Audit tooling,audit
+740,scripts/audit/ui_audit_v14.py,416,27883,Audit tooling,audit
+741,scripts/audit/ui_audit_v15.py,236,15532,Audit tooling,audit
+742,scripts/audit/write_passes.py,163,16069,Audit tooling,audit
+743,scripts/build.mjs,38,1214,Build/validation tooling,build
+744,scripts/coverage.mjs,91,4483,Build/validation tooling,build
+745,scripts/design/wireframes_v14.mjs,287,12369,Design/wireframe generator,design
+746,scripts/design/wireframes_v15.mjs,385,16704,Design/wireframe generator,design
+747,scripts/gen_icons.mjs,42,2866,Build/validation tooling,build
+748,scripts/layer_catalog.py,32,2124,Build/validation tooling,build
+749,scripts/package.mjs,122,4518,Build/validation tooling,build
+750,scripts/validate_data.py,98,5376,Build/validation tooling,build
+751,src/app.js,651,22555,App bootstrap/state,core
+752,src/app_core.js,270,9357,App bootstrap/state,core
+753,src/audio.js,145,4201,Domain/analysis module,core
+754,src/basemap.js,50,1857,Domain/analysis module,core
+755,src/cases_codec.js,19,744,Domain/analysis module,core
+756,src/cesium/C.js,100,2227,Globe renderer module (Cesium),globe
+757,src/cesium/flight.js,30,1754,Globe renderer module (Cesium),globe
+758,src/cesium/graticule.js,137,5850,Globe renderer module (Cesium),globe
+759,src/cesium/icons.js,182,6216,Globe renderer module (Cesium),globe
+760,src/cesium/reference.js,228,8787,Globe renderer module (Cesium),globe
+761,src/cesium/sources.js,87,3524,Globe renderer module (Cesium),globe
+762,src/cesium/terrarium.js,113,4331,Globe renderer module (Cesium),globe
+763,src/cinema.js,663,23933,Domain/analysis module,core
+764,src/convergence.js,218,9118,Domain/analysis module,core
+765,src/coverage.js,173,6624,Domain/analysis module,core
+766,src/data_clean.js,33,1869,Domain/analysis module,core
+767,src/geo.js,100,3528,Domain/analysis module,core
+768,src/globe_cesium.js,1124,41031,Globe renderer entry,globe
+769,src/glossary.js,244,11149,Domain/analysis module,core
+770,src/grades.js,47,2102,Domain/analysis module,core
+771,src/icons.js,163,18071,Domain/analysis module,core
+772,src/index_gen.js,105,3751,Domain/analysis module,core
+773,src/labels_cesium.js,194,6614,Globe labels,globe
+774,src/layers.js,550,20654,Domain/analysis module,core
+775,src/live_feeds.js,82,3334,Domain/analysis module,core
+776,src/loader.js,58,1868,Domain/analysis module,core
+777,src/pdf7_stats.js,390,13547,Domain/analysis module,core
+778,src/report_gen.js,170,10005,Domain/analysis module,core
+779,src/stats.js,348,12046,Domain/analysis module,core
+780,src/sun.js,15,734,Domain/analysis module,core
+781,src/taxonomy.js,68,3273,Domain/analysis module,core
+782,src/text.js,21,1228,Domain/analysis module,core
+783,src/ui/breakpoints.js,18,1207,Console UI component,ui-shell
+784,src/ui/clock.js,43,1465,Console UI component,ui-shell
+785,src/ui/cluster.js,33,1315,Console UI component,ui-shell
+786,src/ui/console.js,383,19333,Console UI component,ui-shell
+787,src/ui/feed.js,187,7474,Console UI component,ui-shell
+788,src/ui/globe_tools.js,76,3287,Console UI component,ui-shell
+789,src/ui/sanitize.js,30,1333,Console UI component,ui-shell
+790,src/ui/shortcuts.js,104,5441,Console UI component,ui-shell
+791,src/ui/states.js,57,3022,Console UI component,ui-shell
+792,src/ui/symbology.js,144,6133,Console UI component,ui-shell
+793,src/ui/table.js,18,678,Console UI component,ui-shell
+794,src/ui/tabs.js,108,4639,Console UI component,ui-shell
+795,src/ui/timescale.js,73,3392,Console UI component,ui-shell
+796,src/ui/tips.js,85,3556,Console UI component,ui-shell
+797,src/ui/window.js,635,24581,Console UI component,ui-shell
+798,src/ui/workspace.js,63,2648,Console UI component,ui-shell
+799,src/ui_analysis.js,456,19279,Panel UI module,ui-panels
+800,src/ui_charts.js,247,10230,Panel UI module,ui-panels
+801,src/ui_conflicts.js,189,7941,Panel UI module,ui-panels
+802,src/ui_data.js,598,29381,Panel UI module,ui-panels
+803,src/ui_graph.js,259,8208,Panel UI module,ui-panels
+804,src/ui_hotspots.js,353,14031,Panel UI module,ui-panels
+805,src/ui_misc.js,412,15014,Panel UI module,ui-panels
+806,src/ui_panels.js,1007,44378,Panel UI module,ui-panels
+807,src/ui_reference.js,276,14747,Panel UI module,ui-panels
+808,src/ui_reports.js,102,4359,Panel UI module,ui-panels
+809,src/ui_timeline.js,489,17613,Panel UI module,ui-panels
+810,test/a11y.mjs,67,2832,Browser/e2e test harness (Playwright),tests
+811,test/devshot.mjs,39,1746,Browser/e2e test harness (Playwright),tests
+812,test/perf.mjs,76,4174,Browser/e2e test harness (Playwright),tests
+813,test/py/test_build_data.py,75,4297,Browser/e2e test harness (Playwright),tests
+814,test/py/test_hardening_tools.py,27,1050,Browser/e2e test harness (Playwright),tests
+815,test/screens.mjs,231,6527,Browser/e2e test harness (Playwright),tests
+816,test/shots.py,70,8278,Browser/e2e test harness (Playwright),tests
+817,test/smoke.mjs,361,16900,Browser/e2e test harness (Playwright),tests
+818,test/static_server.mjs,34,1181,Browser/e2e test harness (Playwright),tests
+819,test/ui_audit.mjs,444,19377,Browser/e2e test harness (Playwright),tests
+820,test/ui_views.mjs,217,6450,Browser/e2e test harness (Playwright),tests
+821,test/unit/breakpoints.test.mjs,36,1577,Unit test (node:test),tests
+822,test/unit/cesium.test.mjs,42,1881,Unit test (node:test),tests
+823,test/unit/clock.test.mjs,23,1037,Unit test (node:test),tests
+824,test/unit/cluster.test.mjs,61,2270,Unit test (node:test),tests
+825,test/unit/convergence.test.mjs,125,5088,Unit test (node:test),tests
+826,test/unit/flight.test.mjs,30,1844,Unit test (node:test),tests
+827,test/unit/geo.test.mjs,61,2172,Unit test (node:test),tests
+828,test/unit/grades.test.mjs,34,1240,Unit test (node:test),tests
+829,test/unit/graticule.test.mjs,122,5575,Unit test (node:test),tests
+830,test/unit/hardening.test.mjs,426,20989,Unit test (node:test),tests
+831,test/unit/pdf7.test.mjs,50,1886,Unit test (node:test),tests
+832,test/unit/pdf7_data.test.mjs,103,4583,Unit test (node:test),tests
+833,test/unit/pdf7_stats.test.mjs,94,3629,Unit test (node:test),tests
+834,test/unit/reports.test.mjs,160,4898,Unit test (node:test),tests
+835,test/unit/shortcuts.test.mjs,46,2118,Unit test (node:test),tests
+836,test/unit/states.test.mjs,26,1497,Unit test (node:test),tests
+837,test/unit/stats.test.mjs,102,4619,Unit test (node:test),tests
+838,test/unit/symbology.test.mjs,99,3855,Unit test (node:test),tests
+839,test/unit/tabs.test.mjs,90,3454,Unit test (node:test),tests
+840,test/unit/timescale.test.mjs,47,2171,Unit test (node:test),tests
+841,test/unit/window.test.mjs,243,11656,Unit test (node:test),tests
+842,textures/bump4k.js,1,412632,Earth texture (base64 JS module),assets
+843,textures/day2k.js,1,337739,Earth texture (base64 JS module),assets
+844,textures/day8k.js,1,4218435,Earth texture (base64 JS module),assets
+845,textures/night2k.js,1,212545,Earth texture (base64 JS module),assets
+846,textures/night8k.js,1,2730441,Earth texture (base64 JS module),assets
+847,textures/spec4k.js,1,81551,Earth texture (base64 JS module),assets
+848,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_0.json,1,67428,Vendored CesiumJS build (third party),vendor
+849,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_1.json,1,67313,Vendored CesiumJS build (third party),vendor
+850,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_10.json,1,65984,Vendored CesiumJS build (third party),vendor
+851,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_11.json,1,65007,Vendored CesiumJS build (third party),vendor
+852,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_12.json,1,64663,Vendored CesiumJS build (third party),vendor
+853,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_13.json,1,65854,Vendored CesiumJS build (third party),vendor
+854,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_14.json,1,65547,Vendored CesiumJS build (third party),vendor
+855,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_15.json,1,65709,Vendored CesiumJS build (third party),vendor
+856,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_16.json,1,66030,Vendored CesiumJS build (third party),vendor
+857,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_17.json,1,65622,Vendored CesiumJS build (third party),vendor
+858,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_18.json,1,65310,Vendored CesiumJS build (third party),vendor
+859,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_19.json,1,65537,Vendored CesiumJS build (third party),vendor
+860,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_2.json,1,67802,Vendored CesiumJS build (third party),vendor
+861,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_20.json,1,65328,Vendored CesiumJS build (third party),vendor
+862,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_21.json,1,64843,Vendored CesiumJS build (third party),vendor
+863,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_22.json,1,64977,Vendored CesiumJS build (third party),vendor
+864,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_23.json,1,66084,Vendored CesiumJS build (third party),vendor
+865,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_24.json,1,64894,Vendored CesiumJS build (third party),vendor
+866,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_25.json,1,64953,Vendored CesiumJS build (third party),vendor
+867,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_26.json,1,65311,Vendored CesiumJS build (third party),vendor
+868,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_27.json,1,27595,Vendored CesiumJS build (third party),vendor
+869,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_3.json,1,66400,Vendored CesiumJS build (third party),vendor
+870,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_4.json,1,65900,Vendored CesiumJS build (third party),vendor
+871,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_5.json,1,65378,Vendored CesiumJS build (third party),vendor
+872,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_6.json,1,65596,Vendored CesiumJS build (third party),vendor
+873,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_7.json,1,67099,Vendored CesiumJS build (third party),vendor
+874,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_8.json,1,66931,Vendored CesiumJS build (third party),vendor
+875,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_9.json,1,66857,Vendored CesiumJS build (third party),vendor
+876,vendor/cesium/Assets/Images/bing_maps_credit.png,,18831,Vendored CesiumJS build (third party),vendor
+877,vendor/cesium/Assets/Images/cesium_credit.png,,4242,Vendored CesiumJS build (third party),vendor
+878,vendor/cesium/Assets/Images/google_earth_credit.png,,7703,Vendored CesiumJS build (third party),vendor
+879,vendor/cesium/Assets/Images/ion-credit.png,,6028,Vendored CesiumJS build (third party),vendor
+880,vendor/cesium/Assets/Textures/LensFlare/DirtMask.jpg,,113718,Vendored CesiumJS build (third party),vendor
+881,vendor/cesium/Assets/Textures/LensFlare/StarBurst.jpg,,195728,Vendored CesiumJS build (third party),vendor
+882,vendor/cesium/Assets/Textures/NaturalEarthII/0/0/0.jpg,,12067,Vendored CesiumJS build (third party),vendor
+883,vendor/cesium/Assets/Textures/NaturalEarthII/0/1/0.jpg,,14055,Vendored CesiumJS build (third party),vendor
+884,vendor/cesium/Assets/Textures/NaturalEarthII/1/0/0.jpg,,7278,Vendored CesiumJS build (third party),vendor
+885,vendor/cesium/Assets/Textures/NaturalEarthII/1/0/1.jpg,,11399,Vendored CesiumJS build (third party),vendor
+886,vendor/cesium/Assets/Textures/NaturalEarthII/1/1/0.jpg,,10652,Vendored CesiumJS build (third party),vendor
+887,vendor/cesium/Assets/Textures/NaturalEarthII/1/1/1.jpg,,13142,Vendored CesiumJS build (third party),vendor
+888,vendor/cesium/Assets/Textures/NaturalEarthII/1/2/0.jpg,,9643,Vendored CesiumJS build (third party),vendor
+889,vendor/cesium/Assets/Textures/NaturalEarthII/1/2/1.jpg,,15312,Vendored CesiumJS build (third party),vendor
+890,vendor/cesium/Assets/Textures/NaturalEarthII/1/3/0.jpg,,10532,Vendored CesiumJS build (third party),vendor
+891,vendor/cesium/Assets/Textures/NaturalEarthII/1/3/1.jpg,,13262,Vendored CesiumJS build (third party),vendor
+892,vendor/cesium/Assets/Textures/NaturalEarthII/2/0/0.jpg,,8157,Vendored CesiumJS build (third party),vendor
+893,vendor/cesium/Assets/Textures/NaturalEarthII/2/0/1.jpg,,9307,Vendored CesiumJS build (third party),vendor
+894,vendor/cesium/Assets/Textures/NaturalEarthII/2/0/2.jpg,,7891,Vendored CesiumJS build (third party),vendor
+895,vendor/cesium/Assets/Textures/NaturalEarthII/2/0/3.jpg,,10341,Vendored CesiumJS build (third party),vendor
+896,vendor/cesium/Assets/Textures/NaturalEarthII/2/1/0.jpg,,7852,Vendored CesiumJS build (third party),vendor
+897,vendor/cesium/Assets/Textures/NaturalEarthII/2/1/1.jpg,,6850,Vendored CesiumJS build (third party),vendor
+898,vendor/cesium/Assets/Textures/NaturalEarthII/2/1/2.jpg,,11581,Vendored CesiumJS build (third party),vendor
+899,vendor/cesium/Assets/Textures/NaturalEarthII/2/1/3.jpg,,15862,Vendored CesiumJS build (third party),vendor
+900,vendor/cesium/Assets/Textures/NaturalEarthII/2/2/0.jpg,,10657,Vendored CesiumJS build (third party),vendor
+901,vendor/cesium/Assets/Textures/NaturalEarthII/2/2/1.jpg,,12456,Vendored CesiumJS build (third party),vendor
+902,vendor/cesium/Assets/Textures/NaturalEarthII/2/2/2.jpg,,12262,Vendored CesiumJS build (third party),vendor
+903,vendor/cesium/Assets/Textures/NaturalEarthII/2/2/3.jpg,,14940,Vendored CesiumJS build (third party),vendor
+904,vendor/cesium/Assets/Textures/NaturalEarthII/2/3/0.jpg,,9531,Vendored CesiumJS build (third party),vendor
+905,vendor/cesium/Assets/Textures/NaturalEarthII/2/3/1.jpg,,10234,Vendored CesiumJS build (third party),vendor
+906,vendor/cesium/Assets/Textures/NaturalEarthII/2/3/2.jpg,,11678,Vendored CesiumJS build (third party),vendor
+907,vendor/cesium/Assets/Textures/NaturalEarthII/2/3/3.jpg,,10754,Vendored CesiumJS build (third party),vendor
+908,vendor/cesium/Assets/Textures/NaturalEarthII/2/4/0.jpg,,8474,Vendored CesiumJS build (third party),vendor
+909,vendor/cesium/Assets/Textures/NaturalEarthII/2/4/1.jpg,,12265,Vendored CesiumJS build (third party),vendor
+910,vendor/cesium/Assets/Textures/NaturalEarthII/2/4/2.jpg,,16477,Vendored CesiumJS build (third party),vendor
+911,vendor/cesium/Assets/Textures/NaturalEarthII/2/4/3.jpg,,11888,Vendored CesiumJS build (third party),vendor
+912,vendor/cesium/Assets/Textures/NaturalEarthII/2/5/0.jpg,,7540,Vendored CesiumJS build (third party),vendor
+913,vendor/cesium/Assets/Textures/NaturalEarthII/2/5/1.jpg,,10274,Vendored CesiumJS build (third party),vendor
+914,vendor/cesium/Assets/Textures/NaturalEarthII/2/5/2.jpg,,16112,Vendored CesiumJS build (third party),vendor
+915,vendor/cesium/Assets/Textures/NaturalEarthII/2/5/3.jpg,,11877,Vendored CesiumJS build (third party),vendor
+916,vendor/cesium/Assets/Textures/NaturalEarthII/2/6/0.jpg,,6636,Vendored CesiumJS build (third party),vendor
+917,vendor/cesium/Assets/Textures/NaturalEarthII/2/6/1.jpg,,11564,Vendored CesiumJS build (third party),vendor
+918,vendor/cesium/Assets/Textures/NaturalEarthII/2/6/2.jpg,,16411,Vendored CesiumJS build (third party),vendor
+919,vendor/cesium/Assets/Textures/NaturalEarthII/2/6/3.jpg,,12756,Vendored CesiumJS build (third party),vendor
+920,vendor/cesium/Assets/Textures/NaturalEarthII/2/7/0.jpg,,9032,Vendored CesiumJS build (third party),vendor
+921,vendor/cesium/Assets/Textures/NaturalEarthII/2/7/1.jpg,,12957,Vendored CesiumJS build (third party),vendor
+922,vendor/cesium/Assets/Textures/NaturalEarthII/2/7/2.jpg,,11362,Vendored CesiumJS build (third party),vendor
+923,vendor/cesium/Assets/Textures/NaturalEarthII/2/7/3.jpg,,11859,Vendored CesiumJS build (third party),vendor
+924,vendor/cesium/Assets/Textures/NaturalEarthII/tilemapresource.xml,14,780,Vendored CesiumJS build (third party),vendor
+925,vendor/cesium/Assets/Textures/SkyBox/tycho2t3_80_mx.jpg,,118775,Vendored CesiumJS build (third party),vendor
+926,vendor/cesium/Assets/Textures/SkyBox/tycho2t3_80_my.jpg,,152501,Vendored CesiumJS build (third party),vendor
+927,vendor/cesium/Assets/Textures/SkyBox/tycho2t3_80_mz.jpg,,167980,Vendored CesiumJS build (third party),vendor
+928,vendor/cesium/Assets/Textures/SkyBox/tycho2t3_80_px.jpg,,122746,Vendored CesiumJS build (third party),vendor
+929,vendor/cesium/Assets/Textures/SkyBox/tycho2t3_80_py.jpg,,152999,Vendored CesiumJS build (third party),vendor
+930,vendor/cesium/Assets/Textures/SkyBox/tycho2t3_80_pz.jpg,,152537,Vendored CesiumJS build (third party),vendor
+931,vendor/cesium/Assets/Textures/maki/airfield.png,,1188,Vendored CesiumJS build (third party),vendor
+932,vendor/cesium/Assets/Textures/maki/airport.png,,1554,Vendored CesiumJS build (third party),vendor
+933,vendor/cesium/Assets/Textures/maki/alcohol-shop.png,,1293,Vendored CesiumJS build (third party),vendor
+934,vendor/cesium/Assets/Textures/maki/america-football.png,,2595,Vendored CesiumJS build (third party),vendor
+935,vendor/cesium/Assets/Textures/maki/art-gallery.png,,3159,Vendored CesiumJS build (third party),vendor
+936,vendor/cesium/Assets/Textures/maki/bakery.png,,2714,Vendored CesiumJS build (third party),vendor
+937,vendor/cesium/Assets/Textures/maki/bank.png,,936,Vendored CesiumJS build (third party),vendor
+938,vendor/cesium/Assets/Textures/maki/bar.png,,1435,Vendored CesiumJS build (third party),vendor
+939,vendor/cesium/Assets/Textures/maki/baseball.png,,1838,Vendored CesiumJS build (third party),vendor
+940,vendor/cesium/Assets/Textures/maki/basketball.png,,1318,Vendored CesiumJS build (third party),vendor
+941,vendor/cesium/Assets/Textures/maki/beer.png,,1403,Vendored CesiumJS build (third party),vendor
+942,vendor/cesium/Assets/Textures/maki/bicycle.png,,3989,Vendored CesiumJS build (third party),vendor
+943,vendor/cesium/Assets/Textures/maki/building.png,,1765,Vendored CesiumJS build (third party),vendor
+944,vendor/cesium/Assets/Textures/maki/bus.png,,998,Vendored CesiumJS build (third party),vendor
+945,vendor/cesium/Assets/Textures/maki/cafe.png,,1518,Vendored CesiumJS build (third party),vendor
+946,vendor/cesium/Assets/Textures/maki/camera.png,,1976,Vendored CesiumJS build (third party),vendor
+947,vendor/cesium/Assets/Textures/maki/campsite.png,,2411,Vendored CesiumJS build (third party),vendor
+948,vendor/cesium/Assets/Textures/maki/car.png,,1498,Vendored CesiumJS build (third party),vendor
+949,vendor/cesium/Assets/Textures/maki/cemetery.png,,967,Vendored CesiumJS build (third party),vendor
+950,vendor/cesium/Assets/Textures/maki/cesium.png,,3610,Vendored CesiumJS build (third party),vendor
+951,vendor/cesium/Assets/Textures/maki/chemist.png,,1603,Vendored CesiumJS build (third party),vendor
+952,vendor/cesium/Assets/Textures/maki/cinema.png,,1492,Vendored CesiumJS build (third party),vendor
+953,vendor/cesium/Assets/Textures/maki/circle-stroked.png,,2126,Vendored CesiumJS build (third party),vendor
+954,vendor/cesium/Assets/Textures/maki/circle.png,,1459,Vendored CesiumJS build (third party),vendor
+955,vendor/cesium/Assets/Textures/maki/city.png,,788,Vendored CesiumJS build (third party),vendor
+956,vendor/cesium/Assets/Textures/maki/clothing-store.png,,2037,Vendored CesiumJS build (third party),vendor
+957,vendor/cesium/Assets/Textures/maki/college.png,,2502,Vendored CesiumJS build (third party),vendor
+958,vendor/cesium/Assets/Textures/maki/commercial.png,,1002,Vendored CesiumJS build (third party),vendor
+959,vendor/cesium/Assets/Textures/maki/cricket.png,,1677,Vendored CesiumJS build (third party),vendor
+960,vendor/cesium/Assets/Textures/maki/cross.png,,1888,Vendored CesiumJS build (third party),vendor
+961,vendor/cesium/Assets/Textures/maki/dam.png,,1703,Vendored CesiumJS build (third party),vendor
+962,vendor/cesium/Assets/Textures/maki/danger.png,,2429,Vendored CesiumJS build (third party),vendor
+963,vendor/cesium/Assets/Textures/maki/disability.png,,3437,Vendored CesiumJS build (third party),vendor
+964,vendor/cesium/Assets/Textures/maki/dog-park.png,,3146,Vendored CesiumJS build (third party),vendor
+965,vendor/cesium/Assets/Textures/maki/embassy.png,,1680,Vendored CesiumJS build (third party),vendor
+966,vendor/cesium/Assets/Textures/maki/emergency-telephone.png,,1533,Vendored CesiumJS build (third party),vendor
+967,vendor/cesium/Assets/Textures/maki/entrance.png,,1307,Vendored CesiumJS build (third party),vendor
+968,vendor/cesium/Assets/Textures/maki/farm.png,,1686,Vendored CesiumJS build (third party),vendor
+969,vendor/cesium/Assets/Textures/maki/fast-food.png,,2019,Vendored CesiumJS build (third party),vendor
+970,vendor/cesium/Assets/Textures/maki/ferry.png,,2879,Vendored CesiumJS build (third party),vendor
+971,vendor/cesium/Assets/Textures/maki/fire-station.png,,2228,Vendored CesiumJS build (third party),vendor
+972,vendor/cesium/Assets/Textures/maki/fuel.png,,1741,Vendored CesiumJS build (third party),vendor
+973,vendor/cesium/Assets/Textures/maki/garden.png,,2057,Vendored CesiumJS build (third party),vendor
+974,vendor/cesium/Assets/Textures/maki/gift.png,,1606,Vendored CesiumJS build (third party),vendor
+975,vendor/cesium/Assets/Textures/maki/golf.png,,1999,Vendored CesiumJS build (third party),vendor
+976,vendor/cesium/Assets/Textures/maki/grocery.png,,1425,Vendored CesiumJS build (third party),vendor
+977,vendor/cesium/Assets/Textures/maki/hairdresser.png,,3301,Vendored CesiumJS build (third party),vendor
+978,vendor/cesium/Assets/Textures/maki/harbor.png,,2048,Vendored CesiumJS build (third party),vendor
+979,vendor/cesium/Assets/Textures/maki/heart.png,,1745,Vendored CesiumJS build (third party),vendor
+980,vendor/cesium/Assets/Textures/maki/heliport.png,,2059,Vendored CesiumJS build (third party),vendor
+981,vendor/cesium/Assets/Textures/maki/hospital.png,,909,Vendored CesiumJS build (third party),vendor
+982,vendor/cesium/Assets/Textures/maki/ice-cream.png,,1602,Vendored CesiumJS build (third party),vendor
+983,vendor/cesium/Assets/Textures/maki/industrial.png,,1092,Vendored CesiumJS build (third party),vendor
+984,vendor/cesium/Assets/Textures/maki/land-use.png,,1773,Vendored CesiumJS build (third party),vendor
+985,vendor/cesium/Assets/Textures/maki/laundry.png,,2407,Vendored CesiumJS build (third party),vendor
+986,vendor/cesium/Assets/Textures/maki/library.png,,1355,Vendored CesiumJS build (third party),vendor
+987,vendor/cesium/Assets/Textures/maki/lighthouse.png,,1944,Vendored CesiumJS build (third party),vendor
+988,vendor/cesium/Assets/Textures/maki/lodging.png,,1362,Vendored CesiumJS build (third party),vendor
+989,vendor/cesium/Assets/Textures/maki/logging.png,,1378,Vendored CesiumJS build (third party),vendor
+990,vendor/cesium/Assets/Textures/maki/london-underground.png,,2979,Vendored CesiumJS build (third party),vendor
+991,vendor/cesium/Assets/Textures/maki/marker-stroked.png,,3414,Vendored CesiumJS build (third party),vendor
+992,vendor/cesium/Assets/Textures/maki/marker.png,,2448,Vendored CesiumJS build (third party),vendor
+993,vendor/cesium/Assets/Textures/maki/minefield.png,,1907,Vendored CesiumJS build (third party),vendor
+994,vendor/cesium/Assets/Textures/maki/mobilephone.png,,1474,Vendored CesiumJS build (third party),vendor
+995,vendor/cesium/Assets/Textures/maki/monument.png,,1376,Vendored CesiumJS build (third party),vendor
+996,vendor/cesium/Assets/Textures/maki/museum.png,,2578,Vendored CesiumJS build (third party),vendor
+997,vendor/cesium/Assets/Textures/maki/music.png,,1371,Vendored CesiumJS build (third party),vendor
+998,vendor/cesium/Assets/Textures/maki/oil-well.png,,3357,Vendored CesiumJS build (third party),vendor
+999,vendor/cesium/Assets/Textures/maki/park.png,,2059,Vendored CesiumJS build (third party),vendor
+1000,vendor/cesium/Assets/Textures/maki/park2.png,,2284,Vendored CesiumJS build (third party),vendor
+1001,vendor/cesium/Assets/Textures/maki/parking-garage.png,,1563,Vendored CesiumJS build (third party),vendor
+1002,vendor/cesium/Assets/Textures/maki/parking.png,,1250,Vendored CesiumJS build (third party),vendor
+1003,vendor/cesium/Assets/Textures/maki/pharmacy.png,,2258,Vendored CesiumJS build (third party),vendor
+1004,vendor/cesium/Assets/Textures/maki/pitch.png,,3288,Vendored CesiumJS build (third party),vendor
+1005,vendor/cesium/Assets/Textures/maki/place-of-worship.png,,1111,Vendored CesiumJS build (third party),vendor
+1006,vendor/cesium/Assets/Textures/maki/playground.png,,3856,Vendored CesiumJS build (third party),vendor
+1007,vendor/cesium/Assets/Textures/maki/police.png,,2194,Vendored CesiumJS build (third party),vendor
+1008,vendor/cesium/Assets/Textures/maki/polling-place.png,,1772,Vendored CesiumJS build (third party),vendor
+1009,vendor/cesium/Assets/Textures/maki/post.png,,1273,Vendored CesiumJS build (third party),vendor
+1010,vendor/cesium/Assets/Textures/maki/prison.png,,1371,Vendored CesiumJS build (third party),vendor
+1011,vendor/cesium/Assets/Textures/maki/rail-above.png,,2071,Vendored CesiumJS build (third party),vendor
+1012,vendor/cesium/Assets/Textures/maki/rail-light.png,,2816,Vendored CesiumJS build (third party),vendor
+1013,vendor/cesium/Assets/Textures/maki/rail-metro.png,,2249,Vendored CesiumJS build (third party),vendor
+1014,vendor/cesium/Assets/Textures/maki/rail-underground.png,,1996,Vendored CesiumJS build (third party),vendor
+1015,vendor/cesium/Assets/Textures/maki/rail.png,,2073,Vendored CesiumJS build (third party),vendor
+1016,vendor/cesium/Assets/Textures/maki/religious-christian.png,,948,Vendored CesiumJS build (third party),vendor
+1017,vendor/cesium/Assets/Textures/maki/religious-jewish.png,,2384,Vendored CesiumJS build (third party),vendor
+1018,vendor/cesium/Assets/Textures/maki/religious-muslim.png,,3925,Vendored CesiumJS build (third party),vendor
+1019,vendor/cesium/Assets/Textures/maki/restaurant.png,,2499,Vendored CesiumJS build (third party),vendor
+1020,vendor/cesium/Assets/Textures/maki/roadblock.png,,1312,Vendored CesiumJS build (third party),vendor
+1021,vendor/cesium/Assets/Textures/maki/rocket.png,,1653,Vendored CesiumJS build (third party),vendor
+1022,vendor/cesium/Assets/Textures/maki/school.png,,3838,Vendored CesiumJS build (third party),vendor
+1023,vendor/cesium/Assets/Textures/maki/scooter.png,,2942,Vendored CesiumJS build (third party),vendor
+1024,vendor/cesium/Assets/Textures/maki/shop.png,,1544,Vendored CesiumJS build (third party),vendor
+1025,vendor/cesium/Assets/Textures/maki/skiing.png,,3345,Vendored CesiumJS build (third party),vendor
+1026,vendor/cesium/Assets/Textures/maki/slaughterhouse.png,,2270,Vendored CesiumJS build (third party),vendor
+1027,vendor/cesium/Assets/Textures/maki/soccer.png,,2420,Vendored CesiumJS build (third party),vendor
+1028,vendor/cesium/Assets/Textures/maki/square-stroked.png,,650,Vendored CesiumJS build (third party),vendor
+1029,vendor/cesium/Assets/Textures/maki/square.png,,582,Vendored CesiumJS build (third party),vendor
+1030,vendor/cesium/Assets/Textures/maki/star-stroked.png,,3460,Vendored CesiumJS build (third party),vendor
+1031,vendor/cesium/Assets/Textures/maki/star.png,,2703,Vendored CesiumJS build (third party),vendor
+1032,vendor/cesium/Assets/Textures/maki/suitcase.png,,1129,Vendored CesiumJS build (third party),vendor
+1033,vendor/cesium/Assets/Textures/maki/swimming.png,,2106,Vendored CesiumJS build (third party),vendor
+1034,vendor/cesium/Assets/Textures/maki/telephone.png,,1702,Vendored CesiumJS build (third party),vendor
+1035,vendor/cesium/Assets/Textures/maki/tennis.png,,1658,Vendored CesiumJS build (third party),vendor
+1036,vendor/cesium/Assets/Textures/maki/theatre.png,,3233,Vendored CesiumJS build (third party),vendor
+1037,vendor/cesium/Assets/Textures/maki/toilets.png,,2917,Vendored CesiumJS build (third party),vendor
+1038,vendor/cesium/Assets/Textures/maki/town-hall.png,,2005,Vendored CesiumJS build (third party),vendor
+1039,vendor/cesium/Assets/Textures/maki/town.png,,1125,Vendored CesiumJS build (third party),vendor
+1040,vendor/cesium/Assets/Textures/maki/triangle-stroked.png,,2837,Vendored CesiumJS build (third party),vendor
+1041,vendor/cesium/Assets/Textures/maki/triangle.png,,2137,Vendored CesiumJS build (third party),vendor
+1042,vendor/cesium/Assets/Textures/maki/village.png,,2145,Vendored CesiumJS build (third party),vendor
+1043,vendor/cesium/Assets/Textures/maki/warehouse.png,,1908,Vendored CesiumJS build (third party),vendor
+1044,vendor/cesium/Assets/Textures/maki/waste-basket.png,,1917,Vendored CesiumJS build (third party),vendor
+1045,vendor/cesium/Assets/Textures/maki/water.png,,2411,Vendored CesiumJS build (third party),vendor
+1046,vendor/cesium/Assets/Textures/maki/wetland.png,,2151,Vendored CesiumJS build (third party),vendor
+1047,vendor/cesium/Assets/Textures/maki/zoo.png,,2681,Vendored CesiumJS build (third party),vendor
+1048,vendor/cesium/Assets/Textures/moonSmall.jpg,,18196,Vendored CesiumJS build (third party),vendor
+1049,vendor/cesium/Assets/Textures/pin.svg,1,348,Vendored CesiumJS build (third party),vendor
+1050,vendor/cesium/Assets/Textures/waterNormals.jpg,,294196,Vendored CesiumJS build (third party),vendor
+1051,vendor/cesium/Assets/Textures/waterNormalsSmall.jpg,,34121,Vendored CesiumJS build (third party),vendor
+1052,vendor/cesium/Assets/approximateTerrainHeights.json,1,299471,Vendored CesiumJS build (third party),vendor
+1053,vendor/cesium/LICENSE.md,928,50087,Vendored CesiumJS build (third party),vendor
+1054,vendor/cesium/ThirdParty/Workers/package.json,1,19,Vendored CesiumJS build (third party),vendor
+1055,vendor/cesium/ThirdParty/Workers/zip-web-worker.js,1,28349,Vendored CesiumJS build (third party),vendor
+1056,vendor/cesium/ThirdParty/basis_transcoder.wasm,,500839,Vendored CesiumJS build (third party),vendor
+1057,vendor/cesium/ThirdParty/draco_decoder.wasm,,285948,Vendored CesiumJS build (third party),vendor
+1058,vendor/cesium/ThirdParty/google-earth-dbroot-parser.js,8337,501930,Vendored CesiumJS build (third party),vendor
+1059,vendor/cesium/ThirdParty/wasm_splats_bg.wasm,,26522,Vendored CesiumJS build (third party),vendor
+1060,vendor/cesium/ThirdParty/zip-module.wasm,,55126,Vendored CesiumJS build (third party),vendor
+1061,vendor/cesium/Widgets/CesiumWidget.css,119,2265,Vendored CesiumJS build (third party),vendor
+1062,vendor/cesium/Workers/chunk-7QBJGNT7.js,41306,1504573,Vendored CesiumJS build (third party),vendor
+1063,vendor/cesium/Workers/chunk-7WPQTQP5.js,455,17412,Vendored CesiumJS build (third party),vendor
+1064,vendor/cesium/Workers/chunk-A366PYP7.js,758,25946,Vendored CesiumJS build (third party),vendor
+1065,vendor/cesium/Workers/chunk-BDKN5F6V.js,2004,60073,Vendored CesiumJS build (third party),vendor
+1066,vendor/cesium/Workers/chunk-DE3R5UOC.js,82,2451,Vendored CesiumJS build (third party),vendor
+1067,vendor/cesium/Workers/chunk-O4MKUNQU.js,346,12952,Vendored CesiumJS build (third party),vendor
+1068,vendor/cesium/Workers/chunk-PWOTIYNL.js,280,9386,Vendored CesiumJS build (third party),vendor
+1069,vendor/cesium/Workers/chunk-QV7GZYO4.js,1800,84441,Vendored CesiumJS build (third party),vendor
+1070,vendor/cesium/Workers/chunk-XGNRWOT7.js,455,17005,Vendored CesiumJS build (third party),vendor
+1071,vendor/cesium/Workers/chunk-ZKM7BGGI.js,4296,269672,Vendored CesiumJS build (third party),vendor
+1072,vendor/cesium/Workers/combineGeometry.js,46,1548,Vendored CesiumJS build (third party),vendor
+1073,vendor/cesium/Workers/createBoxGeometry.js,41,1299,Vendored CesiumJS build (third party),vendor
+1074,vendor/cesium/Workers/createBoxOutlineGeometry.js,41,1355,Vendored CesiumJS build (third party),vendor
+1075,vendor/cesium/Workers/createCircleGeometry.js,49,1621,Vendored CesiumJS build (third party),vendor
+1076,vendor/cesium/Workers/createCircleOutlineGeometry.js,49,1677,Vendored CesiumJS build (third party),vendor
+1077,vendor/cesium/Workers/createCoplanarPolygonGeometry.js,41,1411,Vendored CesiumJS build (third party),vendor
+1078,vendor/cesium/Workers/createCoplanarPolygonOutlineGeometry.js,46,1590,Vendored CesiumJS build (third party),vendor
+1079,vendor/cesium/Workers/createCorridorGeometry.js,43,1466,Vendored CesiumJS build (third party),vendor
+1080,vendor/cesium/Workers/createCorridorOutlineGeometry.js,48,1590,Vendored CesiumJS build (third party),vendor
+1081,vendor/cesium/Workers/createCylinderGeometry.js,41,1359,Vendored CesiumJS build (third party),vendor
+1082,vendor/cesium/Workers/createCylinderOutlineGeometry.js,41,1415,Vendored CesiumJS build (third party),vendor
+1083,vendor/cesium/Workers/createEllipseGeometry.js,45,1553,Vendored CesiumJS build (third party),vendor
+1084,vendor/cesium/Workers/createEllipseOutlineGeometry.js,45,1609,Vendored CesiumJS build (third party),vendor
+1085,vendor/cesium/Workers/createEllipsoidGeometry.js,41,1371,Vendored CesiumJS build (third party),vendor
+1086,vendor/cesium/Workers/createEllipsoidOutlineGeometry.js,44,1471,Vendored CesiumJS build (third party),vendor
+1087,vendor/cesium/Workers/createFrustumGeometry.js,43,1385,Vendored CesiumJS build (third party),vendor
+1088,vendor/cesium/Workers/createFrustumOutlineGeometry.js,212,7632,Vendored CesiumJS build (third party),vendor
+1089,vendor/cesium/Workers/createGeometry.js,152,7646,Vendored CesiumJS build (third party),vendor
+1090,vendor/cesium/Workers/createGroundPolylineGeometry.js,1625,58908,Vendored CesiumJS build (third party),vendor
+1091,vendor/cesium/Workers/createPlaneGeometry.js,41,1323,Vendored CesiumJS build (third party),vendor
+1092,vendor/cesium/Workers/createPlaneOutlineGeometry.js,41,1379,Vendored CesiumJS build (third party),vendor
+1093,vendor/cesium/Workers/createPolygonGeometry.js,43,1452,Vendored CesiumJS build (third party),vendor
+1094,vendor/cesium/Workers/createPolygonOutlineGeometry.js,43,1508,Vendored CesiumJS build (third party),vendor
+1095,vendor/cesium/Workers/createPolylineGeometry.js,43,1466,Vendored CesiumJS build (third party),vendor
+1096,vendor/cesium/Workers/createPolylineVolumeGeometry.js,48,1576,Vendored CesiumJS build (third party),vendor
+1097,vendor/cesium/Workers/createPolylineVolumeOutlineGeometry.js,50,1682,Vendored CesiumJS build (third party),vendor
+1098,vendor/cesium/Workers/createRectangleGeometry.js,45,1589,Vendored CesiumJS build (third party),vendor
+1099,vendor/cesium/Workers/createRectangleOutlineGeometry.js,48,1663,Vendored CesiumJS build (third party),vendor
+1100,vendor/cesium/Workers/createSimplePolylineGeometry.js,48,1576,Vendored CesiumJS build (third party),vendor
+1101,vendor/cesium/Workers/createSphereGeometry.js,41,1335,Vendored CesiumJS build (third party),vendor
+1102,vendor/cesium/Workers/createSphereOutlineGeometry.js,41,1391,Vendored CesiumJS build (third party),vendor
+1103,vendor/cesium/Workers/createTaskProcessorWorker.js,32,1011,Vendored CesiumJS build (third party),vendor
+1104,vendor/cesium/Workers/createVectorTileClampedPolylines.js,476,16536,Vendored CesiumJS build (third party),vendor
+1105,vendor/cesium/Workers/createVectorTileGeometries.js,358,14114,Vendored CesiumJS build (third party),vendor
+1106,vendor/cesium/Workers/createVectorTilePoints.js,100,3526,Vendored CesiumJS build (third party),vendor
+1107,vendor/cesium/Workers/createVectorTilePolygons.js,359,13557,Vendored CesiumJS build (third party),vendor
+1108,vendor/cesium/Workers/createVectorTilePolylines.js,246,8812,Vendored CesiumJS build (third party),vendor
+1109,vendor/cesium/Workers/createVerticesFromCesium3DTilesTerrain.js,73,2494,Vendored CesiumJS build (third party),vendor
+1110,vendor/cesium/Workers/createVerticesFromGoogleEarthEnterpriseBuffer.js,537,18791,Vendored CesiumJS build (third party),vendor
+1111,vendor/cesium/Workers/createVerticesFromHeightmap.js,2226,91836,Vendored CesiumJS build (third party),vendor
+1112,vendor/cesium/Workers/createVerticesFromQuantizedTerrainMesh.js,479,15055,Vendored CesiumJS build (third party),vendor
+1113,vendor/cesium/Workers/createWallGeometry.js,43,1410,Vendored CesiumJS build (third party),vendor
+1114,vendor/cesium/Workers/createWallOutlineGeometry.js,43,1466,Vendored CesiumJS build (third party),vendor
+1115,vendor/cesium/Workers/decodeDraco.js,360,11513,Vendored CesiumJS build (third party),vendor
+1116,vendor/cesium/Workers/decodeGoogleEarthEnterprisePacket.js,1335,61336,Vendored CesiumJS build (third party),vendor
+1117,vendor/cesium/Workers/decodeI3S.js,1311,45515,Vendored CesiumJS build (third party),vendor
+1118,vendor/cesium/Workers/gaussianSplatSorter.js,62,1957,Vendored CesiumJS build (third party),vendor
+1119,vendor/cesium/Workers/gaussianSplatTextureGenerator.js,68,2087,Vendored CesiumJS build (third party),vendor
+1120,vendor/cesium/Workers/incrementallyBuildTerrainPicker.js,120,4260,Vendored CesiumJS build (third party),vendor
+1121,vendor/cesium/Workers/transcodeKTX2.js,3002,124134,Vendored CesiumJS build (third party),vendor
+1122,vendor/cesium/Workers/transferTypedArrayTest.js,41,1171,Vendored CesiumJS build (third party),vendor
+1123,vendor/cesium/Workers/upsampleQuantizedTerrainMesh.js,581,17846,Vendored CesiumJS build (third party),vendor
+1124,vendor/cesium/Workers/upsampleVerticesFromCesium3DTilesTerrain.js,77,2652,Vendored CesiumJS build (third party),vendor
+1125,vendor/fonts/LICENSE-Inter.txt,93,4477,Vendored asset (third party),vendor
+1126,vendor/fonts/LICENSE-JetBrainsMono.txt,93,4524,Vendored asset (third party),vendor
+1127,vendor/fonts/inter-latin-400-normal.woff2,,23664,Vendored asset (third party),vendor
+1128,vendor/fonts/inter-latin-500-normal.woff2,,24272,Vendored asset (third party),vendor
+1129,vendor/fonts/inter-latin-600-normal.woff2,,24452,Vendored asset (third party),vendor
+1130,vendor/fonts/inter-latin-700-normal.woff2,,24356,Vendored asset (third party),vendor
+1131,vendor/fonts/jetbrains-mono-latin-400-normal.woff2,,21168,Vendored asset (third party),vendor
+1132,vendor/fonts/jetbrains-mono-latin-500-normal.woff2,,21832,Vendored asset (third party),vendor
+1133,vendor/fonts/jetbrains-mono-latin-700-normal.woff2,,21908,Vendored asset (third party),vendor
+1134,vendor/icons/LICENSE-Lucide.txt,43,3208,Vendored asset (third party),vendor
+1135,vendor/three/LICENSE,21,1081,Vendored three.js (third party),vendor
+1136,vendor/three/OrbitControls.js,1523,32134,Vendored three.js (third party),vendor
+1137,vendor/three/three.module.min.js,6,691648,Vendored three.js (third party),vendor
