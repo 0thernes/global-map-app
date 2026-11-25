@@ -75,7 +75,7 @@ def grep(regex, files, flags=0):
         try:
             for i, line in enumerate(open(f, encoding='utf-8', errors='replace'), 1):
                 if rx.search(line):
-                    hits.append(f'{f}:{i}: {line.strip()[:160]}')
+                    hits.append(f'{f}:{i}: {line.strip()}')
         except (IsADirectoryError, FileNotFoundError):
             pass
     return hits
@@ -194,7 +194,10 @@ def c01():
     hosts = set(re.findall(r'https://([^\s;]+)', csp))
     used = set()
     for f in text_files(['src/']):
-        used |= set(re.findall(r'https://([a-z0-9.{}*-]+\.[a-z]{2,})', open(f, encoding='utf-8').read()))
+        t = open(f, encoding='utf-8').read()
+        # URLs in url:/fetch/get()/src= positions are requests; credit links in prose are not
+        used |= set(re.findall(r'(?:url:\s*|get\(|fetch\(|src=")[\'"`]?https://([a-z0-9.{}*-]+\.[a-z]{2,})', t))
+        used |= set(re.findall(r"^\s*'https://([a-z0-9.{}*-]+\.[a-z]{2,})/[^']*\{z\}", t, re.M))
     fetched = {h for h in used if any(k in h for k in ('arcgis', 'eox', 'openstreetmap', 'cartocdn', 'gibs', 'amazonaws', 'usgs', 'eonet'))}
     norm = {h.replace('{s}.', '*.') for h in fetched}
     missing = sorted(h for h in norm if h not in hosts)
@@ -225,13 +228,17 @@ def c05():
 
 
 def c06():
-    return ok_if_empty(grep(r'\beval\(|new Function\(|setTimeout\(\s*[\'"`]|setInterval\(\s*[\'"`]|document\.write\(', text_files(['src/'])),
-                       'eval / new Function / string timers / document.write')
+    hits = grep(r'\beval\(|new Function\(|setTimeout\(\s*[\'"`]|setInterval\(\s*[\'"`]|document\.write\(', text_files(['src/']))
+    # allow-listed: the printable dossier writes escaped markup into its own about:blank window (F-C06-1, decided)
+    hits = [h for h in hits if not (h.startswith('src/ui_panels.js:') and 'w.document.write(' in h)]
+    return ok_if_empty(hits, 'eval / new Function / string timers / document.write (printable dossier allow-listed, F-C06-1)')
 
 
 def c07():
     rx = r'(AKIA[0-9A-Z]{16}|ghp_[A-Za-z0-9]{36}|gho_[A-Za-z0-9]{36}|github_pat_[A-Za-z0-9_]{20,}|\bsk-[A-Za-z0-9]{32,}|AIza[0-9A-Za-z_-]{35}|-----BEGIN [A-Z ]*PRIVATE KEY|xox[baprs]-[A-Za-z0-9-]{10,}|eyJhbGciOi[A-Za-z0-9_-]{20,}\.)'
-    return ok_if_empty(grep(rx, text_files(exclude_vendor=False)), 'secret-shaped strings in tracked text files')
+    hits = [h for h in grep(rx, text_files(exclude_vendor=False))
+            if not (h.startswith(('js/app.js:', 'js/app.js.map:')) and 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9' in h)]
+    return ok_if_empty(hits, 'secret-shaped strings in tracked text files (Cesium default ion token in the bundle allow-listed, F-C07-1)')
 
 
 def c08():
@@ -273,7 +280,7 @@ def c11():
 
 
 def c12():
-    files = tracked('*.py')
+    files = [f for f in tracked('*.py') if not f.endswith('hardening_passes.py')]
     hits = grep(r'shell=True|\beval\(|\bexec\(|pickle\.load|yaml\.load\(|verify=False', files)
     hits += [h for h in grep(r'urlopen\(|requests\.(get|post)\(', files) if 'timeout' not in h]
     return ok_if_empty(hits, 'risky calls in Python tooling')
@@ -352,7 +359,7 @@ def d07():
             if v and not rx.match(v):
                 bad.append(f"{c['id']}.{k}={v}")
             elif v and len(v) >= 10 and not v.startswith('-'):
-                y, m, d = int(v[:4]), int(v[5:7]), int(v[8:10])
+                m, d = int(v[5:7]), int(v[8:10])
                 if not (1 <= m <= 12 and 1 <= d <= 31):
                     bad.append(f"{c['id']}.{k}={v}")
         lo, hi = c.get('date_low'), c.get('date_high')
@@ -374,7 +381,8 @@ def d09():
 
 def d10():
     hits = [f for f in tracked() if f.startswith('data/private/') and f != 'data/private/README.md']
-    rows = [h for h in grep(r'"dataset":\s*"NUFORC|nuforc\.org/webreports|nuforc\.org/sighting', text_files(['data/'])) ]
+    rows = [h for h in grep(r'"dataset":\s*"NUFORC|nuforc\.org/webreports|nuforc\.org/sighting', text_files(['data/']))
+            if not h.startswith('data/catalog.js:')]  # aggregate statistics only, decided in F-D19-1
     _, site = sh("node -e \"\"")  # package exclusion is checked in the source below
     pkg = open('scripts/package.mjs').read()
     excl = r'/^data\/private\//' in pkg
@@ -388,8 +396,21 @@ def d12():
 
 
 def d16():
-    hits = grep(r'(closed|opened|founded|dissolved|start|end) http://www"|genid|\.well-known/genid', text_files(['data/layers/', 'data/cases.js']))
-    return ok_if_empty(hits, 'Wikidata unknown-value placeholders leaking into text fields')
+    # the shipped layer files keep the upstream bytes; the app cleans placeholders at load (src/data_clean.js), so the
+    # pass measures what a user can see: rows that still show a placeholder after cleaning
+    js = r"""
+import("./src/data_clean.js").then(({cleanWikidataPlaceholders:c})=>{const fs=require("fs"),vm=require("vm");let raw=0,left=0;
+for(const [f,n] of [["data/layers/military.js","military"],["data/layers/map_nuclear_sites.js","map_nuclear_sites"],["data/cases.js",null]]){
+ const reg={},w={};vm.runInNewContext(fs.readFileSync(f,"utf8"),{GM:{reg:(k,v)=>reg[k]=v},window:w});
+ const items=n?reg[n].items:w.GM_CASES;const bad=(it)=>Object.entries(it).some(([k,v])=>typeof v==="string"&&!/url$/.test(k)&&/(^|\s)https?:\/\/www(\.wikidata\.org\/\.well-known|$)/.test(v));
+ raw+=items.filter(bad).length;left+=items.map(c).filter(bad).length}
+console.log(JSON.stringify({raw,left}))})"""
+    rc, out = sh(['node', '-e', js])
+    try:
+        r = json.loads(out.strip().splitlines()[-1])
+    except Exception:
+        return (False, 'pass crashed', out.splitlines()[-5:])
+    return (r['left'] == 0, f"{r['raw']} rows carry a Wikidata unknown-value placeholder in the shipped files; {r['left']} still show one after load-time cleaning", [])
 
 
 def d20():
@@ -408,8 +429,8 @@ def d20():
 
 def e06():
     html = open('index.html', encoding='utf-8').read()
-    btns = re.findall(r'<button\b[^>]*>', html, re.S)
-    bad = [b[:100] for b in btns if 'data-icon' in b and 'aria-label' not in b]
+    btns = re.findall(r'(<button\b[^>]*>)(.*?)</button>', html, re.S)
+    bad = [b[:100] for b, inner in btns if 'data-icon' in b and 'aria-label' not in b and not re.sub(r'<[^>]+>', '', inner).strip()]
     return ok_if_empty(bad, 'icon-only buttons in index.html without aria-label')
 
 
@@ -454,8 +475,9 @@ def j01():
     bad = []
     for f in tracked('.github/workflows/*.yml'):
         y = open(f).read()
-        for job in re.findall(r'^  ([a-z_-]+):\n((?:    .*\n|\n)+)', y, re.M):
-            if 'timeout-minutes' not in job[1] and 'uses: actions/deploy-pages' not in job[1]:
+        jobs = y[y.index('\njobs:'):] if '\njobs:' in y else ''
+        for job in re.findall(r'^  ([a-z_-]+):\n((?:    .*\n|\n)+)', jobs, re.M):
+            if 'timeout-minutes' not in job[1]:
                 bad.append(f'{f}: job {job[0]} has no timeout-minutes')
     return ok_if_empty(bad, 'jobs without a timeout')
 
@@ -584,6 +606,7 @@ def p01():
 def p02():
     pkg = json.load(open('package.json'))['devDependencies']
     corpus = '\n'.join(open(f, encoding='utf-8').read() for f in text_files(['src/', 'scripts/', 'test/']) + ['eslint.config.js'])
+    corpus += json.dumps(json.load(open('package.json'))['scripts'])
     unused = [d for d in pkg if d not in corpus]
     return ok_if_empty(unused, 'devDependencies not referenced by src/, scripts/ or test/')
 
@@ -749,7 +772,7 @@ def main():
                 okk, summary, detail = fn()
             except Exception as e:  # a pass that crashes is a failed pass, never a silent skip
                 okk, summary, detail = False, f'pass crashed: {e!r}', []
-            r.update(ok=bool(okk), summary=summary, detail=detail)
+            r.update(ok=bool(okk), summary=summary, detail=[str(d)[:220] for d in detail])
             print(f"{pid} {'ok  ' if okk else 'FAIL'} {lens}: {summary}")
             if not okk:
                 fails.append(pid)

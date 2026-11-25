@@ -10,6 +10,7 @@ permissions:
 jobs:
   release:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -28,4 +29,4 @@ jobs:
           TAG="${GITHUB_REF_NAME}"
           NOTES="RELEASE_NOTES_${TAG}.md"
           [ -f "$NOTES" ] || NOTES=CHANGELOG.md
-          gh release create "$TAG" dist/global-map-app-${TAG}.zip --title "Global Map ${TAG}" --notes-file "$NOTES" --verify-tag
+          gh release create "$TAG" "dist/global-map-app-${TAG}.zip" --title "Global Map ${TAG}" --notes-file "$NOTES" --verify-tag

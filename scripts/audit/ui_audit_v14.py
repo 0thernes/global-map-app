@@ -333,7 +333,6 @@ def main():
     for key in sorted(set(FB) | set(FA), key=lambda k: (k[0], str(k[1]))):
         check, item = key
         label, sev, cat, title = CHECKS[check]
-        f = FA.get(key) or FB.get(key)
         inb, ina = key in FB, key in FA
         status = 'open' if ina else 'fixed'
         if ina and not inb:

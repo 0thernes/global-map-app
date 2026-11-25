@@ -2,9 +2,8 @@
 Usage: python build_layers.py RAW_DIR   (RAW_DIR holds the downloads listed in CREDITS.md)
 Every output is a JS file calling GM.reg(name, payload) so it loads from file:// without a server.
 Nothing here invents data: each record comes from a cited dataset; only geometry is simplified."""
-import json, csv, os, sys, re, zipfile, io, math, base64, collections, datetime
-from shapely.geometry import shape, LineString, MultiLineString, Point, mapping
-from shapely.prepared import prep
+import json, csv, os, sys, zipfile, io, base64
+from shapely.geometry import shape, LineString, Point
 from shapely.strtree import STRtree
 RAW=sys.argv[1] if len(sys.argv)>1 else '/workspace/gm_build'
 OUT=os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),'layers')
@@ -158,8 +157,7 @@ for r in csv.DictReader(open(R('GeoNuclearData-master/data/csv/denormalized/nucl
     N.append(dict(name=r['Name'],lon=float(r['Longitude']),lat=float(r['Latitude']),kind='Power reactor',country=r['Country'],status=r['Status'],reactor=r['ReactorType']+(' '+r['ReactorModel'] if r['ReactorModel'] else ''),capacity_mw=r['Capacity'],construction_start=r['ConstructionStartAt'],operational_from=r['OperationalFrom'],operational_to=r['OperationalTo'],src=r['Source'],iaea_id=r['IAEAId'],url=('https://pris.iaea.org/PRIS/CountryStatistics/ReactorDetails.aspx?current=%s'%r['IAEAId']) if r['IAEAId'] else '',coord_note='GeoNuclearData coordinates (site-level; from WNA/IAEA/Google Maps per row)'))
 write('nuclear',dict(title='Nuclear power reactors',source='GeoNuclearData v0.17 (Cristian Stoica, ODbL 1.0), derived from IAEA PRIS and World Nuclear Association; github.com/cristianst85/GeoNuclearData',type='points',items=N))
 json.dump(dict(),open(os.path.join(OUT,'..','tools','.layers_ok'),'w'))
-# export helpers for other scripts
-import pickle
-pickle.dump(dict(cmeta=cmeta),open(os.path.join(RAW,'cmeta.pkl'),'wb'))
+# country metadata for build_conflicts.py: plain JSON (no pickle, so a tampered file cannot execute code on load)
+json.dump(dict(cmeta=cmeta),open(os.path.join(RAW,'cmeta.json'),'w',encoding='utf-8'))
 if __name__=='__main__':
     pass

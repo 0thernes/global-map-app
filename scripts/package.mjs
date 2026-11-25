@@ -4,6 +4,7 @@
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, statSync, copyFileSync, rmSync } from 'node:fs';
 import { join, relative, dirname } from 'node:path';
 import { deflateRawSync, crc32 } from 'node:zlib';
+import { execFileSync } from 'node:child_process';
 
 const pkg = JSON.parse(readFileSync('package.json', 'utf8'));
 const INCLUDE = [
@@ -41,7 +42,19 @@ function walk(p, out = []) {
   else out.push(p.replace(/\\/g, '/'));
   return out;
 }
-const files = INCLUDE.flatMap((p) => walk(p)).filter((f) => !EXCLUDE.some((r) => r.test(f)));
+// Ship only files that are tracked in git when a git checkout is available, so a local package can never pick up
+// untracked scratch output (or a stray private file that slipped past .gitignore); fall back to a directory walk for
+// a source tarball without .git.
+let tracked = null;
+try {
+  tracked = new Set(execFileSync('git', ['ls-files', '-z'], { encoding: 'utf8' }).split('\0').filter(Boolean));
+} catch {
+  tracked = null;
+}
+const files = INCLUDE.flatMap((p) => walk(p))
+  .filter((f) => !EXCLUDE.some((r) => r.test(f)))
+  .filter((f) => !tracked || tracked.has(f));
+if (tracked && !files.includes('js/app.js')) throw new Error('js/app.js is not tracked: run npm run build and commit');
 
 if (want.site) {
   const dir = 'dist/site';

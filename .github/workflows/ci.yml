@@ -32,10 +32,14 @@ jobs:
         run: npm run lint:js
       - name: Prettier check
         run: npm run format:check
-      - name: Unit tests (stats, geo, grades, convergence, reports, index, coverage)
+      - name: Unit tests (node:test, incl. hardening regressions)
         run: npm test
       - name: CSV schema validation
         run: npm run test:data
+      - name: Python pipeline tests (date normalisation)
+        run: npm run test:py
+      - name: Python lint (ruff, pyflakes + syntax rules)
+        run: git ls-files -z '*.py' | xargs -0 pipx run ruff==0.17.6 check --select F,E9 --output-format github
       - name: Bundle is up to date
         run: |
           npm run build

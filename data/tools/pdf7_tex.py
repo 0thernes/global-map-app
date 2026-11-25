@@ -3,7 +3,7 @@
 Pages: section numbers and start pages come from main.aux. A table's own page is located by searching the PDF's text
 layer (pdftotext, one page at a time) for the first distinctive cell text, starting at the section's first page; if
 not found, the section's first page is used and 'page_basis' says so."""
-import os, re, subprocess
+import re, subprocess
 
 def tex2txt(s):
     s = re.sub(r'\\(?:phantomsection|leavevmode|centering|par|noindent|raggedright|arraybackslash|quad|qquad|hfill|newpage|clearpage|small|footnotesize|scriptsize|tiny|normalsize|large|Large|toprule|midrule|bottomrule|hline|endhead|endfirsthead|endfoot|endlastfoot)\b', ' ', s)

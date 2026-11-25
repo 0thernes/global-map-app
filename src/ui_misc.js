@@ -272,7 +272,7 @@ function toggleBrief(show) {
         const nm = p.split('/').pop();
         const cap =
           (b.captions || {})[p] || Object.entries(b.captions || {}).find(([k]) => k.split('/').pop() === nm)?.[1] || '';
-        return `<figure><a href="${esc(p)}" target="_blank" rel="noopener"><img src="${esc(p)}" alt="${esc(cap || nm)}" loading="lazy"></a><figcaption><b>${esc(nm)}</b>${cap ? `<br>${esc(cap)}` : ''}</figcaption></figure>`;
+        return `<figure><a href="${esc(p)}" target="_blank" rel="noopener noreferrer"><img src="${esc(p)}" alt="${esc(cap || nm)}" loading="lazy"></a><figcaption><b>${esc(nm)}</b>${cap ? `<br>${esc(cap)}` : ''}</figcaption></figure>`;
       })
       .join('')}</div>`;
   if (b.registry)

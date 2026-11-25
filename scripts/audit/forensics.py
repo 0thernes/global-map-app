@@ -6,7 +6,7 @@ only), the built layers in data/layers, and the v1 build (for 'grades only go up
 Every finding has exactly one class: bug | error | issue | problem | dilemma | conflict (definitions in TAXONOMY.md).
 Nothing in the source data is modified; QWM rows are flagged, never silently regraded or moved.
 """
-import csv, gzip, glob, json, math, os, re, random, sys, zipfile, collections, datetime
+import csv, gzip, json, math, os, re, random, zipfile, collections, datetime
 from shapely.geometry import Point, shape
 from shapely.strtree import STRtree
 import shapefile
@@ -125,7 +125,6 @@ def load_admin1_centroids():
 def main():
     print('loading geometry…', flush=True)
     geoms, meta, tree = load_admin0()
-    land = shape({'type': 'MultiPolygon', 'coordinates': []})
     a1 = load_admin1_centroids()
     a1grid = collections.defaultdict(list)
     for la, lo, nm, lla, llo in a1:
@@ -247,7 +246,6 @@ def main():
         print('v1 compare unavailable', e)
     BOILER = re.compile(r'\b(debunk\w*|hoax(?:ed)?|misidentif\w+|explained as|prosaic explanation|skeptic\w*|no evidence (?:of|that)|likely (?:venus|a balloon|a satellite|starlink)|mass hysteria)\b', re.I)
     ZERO = re.compile(r'\b(steven\s+greer|dr\.?\s*greer|greer\b|jaime\s+maussan|maussan)\b', re.I)
-    known = set(RANK) | {''}
     for stem in CASE_LAYERS:
         for r in all_rows[stem]:
             g = (r.get('grade') or '').strip(); gn = gnorm(g)

@@ -851,7 +851,7 @@ export function imageryHTML(it) {
       tiles.push(
         `<img alt="" loading="lazy" referrerpolicy="no-referrer" src="https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless_3857/default/g/${z}/${y + dy}/${(((x + dx) % n) + n) % n}.jpg">`,
       );
-  return `<h4>Imagery</h4><details class="imgry"><summary>Sentinel-2 cloudless close-up (loads from EOX when opened)</summary><div class="s2grid">${tiles.join('')}<i class="s2x"></i></div><p class="muted small">EOxCloudless <a href="https://cloudless.eox.at" target="_blank" rel="noopener">https://cloudless.eox.at</a> by EOX IT Services GmbH (Contains modified Copernicus Sentinel data 2016 &amp; 2017), CC BY 4.0. Centre tile contains the point; ~5 km across at this latitude scale.</p></details>
+  return `<h4>Imagery</h4><details class="imgry"><summary>Sentinel-2 cloudless close-up (loads from EOX when opened)</summary><div class="s2grid">${tiles.join('')}<i class="s2x"></i></div><p class="muted small">EOxCloudless <a href="https://cloudless.eox.at" target="_blank" rel="noopener noreferrer">https://cloudless.eox.at</a> by EOX IT Services GmbH (Contains modified Copernicus Sentinel data 2016 &amp; 2017), CC BY 4.0. Centre tile contains the point; ~5 km across at this latitude scale.</p></details>
   <p class="imgl">${link(`https://www.google.com/maps/@${la},${lo},2000m/data=!3m1!1e3`, 'Google Maps satellite')} · ${link(`https://s2maps.eu/#lat=${la}&lng=${lo}&zoom=14`, 'EOX Sentinel-2')} · ${link(`https://worldview.earthdata.nasa.gov/?v=${lo - 0.5},${la - 0.3},${lo + 0.5},${la + 0.3}`, 'NASA Worldview')}</p>`;
 }
 export function related(c) {

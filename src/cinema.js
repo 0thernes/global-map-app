@@ -513,7 +513,7 @@ async function show() {
   $('#lt-kicker').textContent = s.kicker || `${t.i + 1} / ${t.steps.length}`;
   $('#lt-title').textContent = s.t;
   $('#lt-src').innerHTML = s.src
-    ? `<a href="${esc(s.src)}" target="_blank" rel="noopener">${esc(domainOf(s.src))}</a>`
+    ? `<a href="${esc(s.src)}" target="_blank" rel="noopener noreferrer">${esc(domainOf(s.src))}</a>`
     : '';
   $('#lt-pause').innerHTML = icon(t.paused ? 'play' : 'pause', 16);
   $('#lt-progress').style.setProperty('--p', ((t.i + 1) / t.steps.length) * 100 + '%');

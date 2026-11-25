@@ -134,7 +134,7 @@ export function reportHTML(r, opt = {}) {
         i,
       ) => `<tr><td class="rp-n">${i + 1}</td><td><a href="#" data-case="${escH(c.id)}">${escH(c.name)}</a><div class="rp-sub">${escH(c.summary || '')}</div></td>
       <td>${escH(c.date || '')}</td><td>${escH(c._area || c.country_display || c.country || '')}</td><td><span class="rp-grade" data-g="${escH(gc(c))}">${escH(c.grade || gc(c))}</span></td>
-      <td>${escH(c.coord_precision || '')}</td><td><a href="${escH(c.source_url)}" target="_blank" rel="noopener">${escH(domainOf(c.source_url))}</a></td></tr>`,
+      <td>${escH(c.coord_precision || '')}</td><td><a href="${escH(c.source_url)}" target="_blank" rel="noopener noreferrer">${escH(domainOf(c.source_url))}</a></td></tr>`,
     )
     .join('');
   return `<article class="rp-doc">
@@ -159,7 +159,7 @@ ${r.grades.map(([k, v, c]) => `<li><b style="color:${c}">${fmtN(v)}</b><span>${e
     .slice(0, 40)
     .map(
       ([d, v]) =>
-        `<li><a href="https://${escH(d)}" target="_blank" rel="noopener">${escH(d)}</a> <span>${fmtN(v)}</span></li>`,
+        `<li><a href="https://${escH(d)}" target="_blank" rel="noopener noreferrer">${escH(d)}</a> <span>${fmtN(v)}</span></li>`,
     )
     .join(
       '',

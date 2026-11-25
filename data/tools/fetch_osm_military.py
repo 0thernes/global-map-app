@@ -1,4 +1,4 @@
-import requests, json, time, os, sys
+import requests, json, time, os
 UA={'User-Agent':'GlobalMapApp/1.0 (personal research; contact via Alex Donahue)'}
 EP=['https://overpass-api.de/api/interpreter','https://overpass.private.coffee/api/interpreter','https://overpass.kumi.systems/api/interpreter']
 Q='''[out:json][timeout:300];

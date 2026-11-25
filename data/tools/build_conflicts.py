@@ -3,11 +3,11 @@
  UCDP One-Sided Violence v25.1, UCDP GED v25.1 (aggregated), Correlates of War Inter/Intra/Extra-State War Data (v4.0/4.1/4.0).
  Genocides: only tolls stated by USHMM, UN, ICTY, Yale GSP (URLs per item). No tolls are interpolated; sums of
  sourced annual figures are labelled as sums."""
-import csv, json, os, sys, collections, datetime, pickle
+import csv, json, os, sys, collections
 RAW=sys.argv[1] if len(sys.argv)>1 else '/workspace/gm_build'
 OUT=os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),'layers')
 W=os.path.join(RAW,'war')
-cmeta=pickle.load(open(os.path.join(RAW,'cmeta.pkl'),'rb'))['cmeta']
+cmeta=json.load(open(os.path.join(RAW,'cmeta.json'),encoding='utf-8'))['cmeta']
 byname={}
 for m in cmeta:
     for k in (m['name'],m['admin']): byname[k.lower()]=m['iso3']

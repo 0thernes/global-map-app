@@ -12,3 +12,6 @@ package-lock.json
 docs/audit/v1.2-data-gap-audit.md
 docs/audit/v1.3-ui-audit.md
 docs/audit/hardening/INDEX.md
+docs/audit/hardening/PASSES.md
+docs/audit/hardening/passes_run.json
+coverage/

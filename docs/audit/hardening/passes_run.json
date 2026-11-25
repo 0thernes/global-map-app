@@ -6,9 +6,19 @@
    "lens": "Index completeness",
    "scope": "every tracked file vs index.csv",
    "kind": "auto",
-   "ok": true,
-   "summary": "1120 indexed / 1120 tracked",
-   "detail": []
+   "ok": false,
+   "summary": "1120 indexed / 1129 tracked",
+   "detail": [
+    "docs/audit/hardening/PASSES.md",
+    "docs/audit/hardening/passes_run.json",
+    "scripts/audit/hardening_passes.py",
+    "src/data_clean.js",
+    "src/text.js",
+    "src/ui/sanitize.js",
+    "src/ui/workspace.js",
+    "test/py/test_build_data.py",
+    "test/unit/hardening.test.mjs"
+   ]
   },
   {
    "id": "A02",
@@ -17,7 +27,7 @@
    "scope": "all tracked files",
    "kind": "auto",
    "ok": true,
-   "summary": "0 files over 50 MB; working tree changes: 0",
+   "summary": "0 files over 50 MB; working tree changes: 23",
    "detail": []
   },
   {
@@ -81,13 +91,9 @@
    "lens": "Dead-code markers",
    "scope": "src/",
    "kind": "auto",
-   "ok": false,
-   "summary": "3 dead-code markers in src/",
-   "detail": [
-    "src/layers.js:414: void f;",
-    "src/ui/feed.js:188: void tabs;",
-    "src/ui/window.js:551: void kind;"
-   ]
+   "ok": true,
+   "summary": "0 dead-code markers in src/",
+   "detail": []
   },
   {
    "id": "B06",
@@ -115,12 +121,9 @@
    "lens": "Unchecked JSON.parse",
    "scope": "src/",
    "kind": "auto",
-   "ok": false,
-   "summary": "2 JSON.parse calls with no try/catch nearby",
-   "detail": [
-    "src/ui_panels.js:195: if (f) f.text().then((t) => restore(JSON.parse(t)));",
-    "src/ui_panels.js:203: if (s) restore(JSON.parse(s));"
-   ]
+   "ok": true,
+   "summary": "0 JSON.parse calls with no try/catch nearby",
+   "detail": []
   },
   {
    "id": "B09",
@@ -128,12 +131,9 @@
    "lens": "Unguarded localStorage",
    "scope": "src/",
    "kind": "auto",
-   "ok": false,
-   "summary": "2 localStorage calls outside try (throws in privacy mode / quota)",
-   "detail": [
-    "src/ui_panels.js:198: localStorage.setItem('gm-workspace', JSON.stringify(workspace()));",
-    "src/ui_panels.js:202: const s = localStorage.getItem('gm-workspace');"
-   ]
+   "ok": true,
+   "summary": "0 localStorage calls outside try (throws in privacy mode / quota)",
+   "detail": []
   },
   {
    "id": "B10",
@@ -141,11 +141,9 @@
    "lens": "Popup-blocked window.open",
    "scope": "src/",
    "kind": "auto",
-   "ok": false,
-   "summary": "1 window.open() results used without a popup-blocked check",
-   "detail": [
-    "src/ui_panels.js:687: const w = window.open('', '_blank');"
-   ]
+   "ok": true,
+   "summary": "0 window.open() results used without a popup-blocked check",
+   "detail": []
   },
   {
    "id": "B11",
@@ -273,8 +271,8 @@
    "lens": "CSP vs hosts actually fetched",
    "scope": "index.html CSP, src/",
    "kind": "auto",
-   "ok": false,
-   "summary": "10 CSP hosts; fetched-but-not-allowed ['cloudless.eox.at']; allowed-but-unused ['services.arcgisonline.com']",
+   "ok": true,
+   "summary": "9 CSP hosts; fetched-but-not-allowed []; allowed-but-unused []",
    "detail": []
   },
   {
@@ -284,10 +282,11 @@
    "scope": "src/ innerHTML / insertAdjacentHTML",
    "kind": "auto",
    "ok": true,
-   "summary": "73 HTML sinks inventoried (each reviewed manually, see note)",
+   "summary": "74 HTML sinks inventoried (each reviewed manually, see note)",
    "detail": [
-    "src/app.js:518",
-    "src/app.js:521",
+    "src/app.js:519",
+    "src/app.js:522",
+    "src/app.js:648",
     "src/cinema.js:94",
     "src/cinema.js:149",
     "src/cinema.js:240",
@@ -298,16 +297,17 @@
     "src/cinema.js:577",
     "src/cinema.js:578",
     "src/cinema.js:579",
-    "src/ui/console.js:106",
-    "src/ui/console.js:134",
-    "src/ui/console.js:137",
-    "src/ui/console.js:166",
+    "src/ui/console.js:113",
+    "src/ui/console.js:141",
+    "src/ui/console.js:144",
     "src/ui/console.js:173",
-    "src/ui/console.js:251",
-    "src/ui/console.js:268",
-    "src/ui/feed.js:130",
-    "src/ui/feed.js:133",
+    "src/ui/console.js:180",
+    "src/ui/console.js:258",
+    "src/ui/console.js:275",
+    "src/ui/feed.js:129",
+    "src/ui/feed.js:132",
     "src/ui/globe_tools.js:48",
+    "src/ui/sanitize.js:6",
     "src/ui/tabs.js:24",
     "src/ui/tabs.js:39",
     "src/ui/tabs.js:93",
@@ -316,8 +316,8 @@
     "src/ui/window.js:235",
     "src/ui/window.js:309",
     "src/ui/window.js:314",
-    "src/ui_analysis.js:124",
-    "src/ui_analysis.js:297",
+    "src/ui_analysis.js:125",
+    "src/ui_analysis.js:298",
     "src/ui_charts.js:47",
     "src/ui_charts.js:102",
     "src/ui_charts.js:155",
@@ -326,25 +326,24 @@
     "src/ui_charts.js:242",
     "src/ui_conflicts.js:104",
     "src/ui_data.js:74",
-    "src/ui_data.js:561",
+    "src/ui_data.js:560",
     "src/ui_graph.js:63",
-    "src/ui_hotspots.js:241",
-    "src/ui_hotspots.js:252",
-    "src/ui_hotspots.js:281",
-    "src/ui_hotspots.js:283",
-    "src/ui_hotspots.js:306",
+    "src/ui_hotspots.js:242",
+    "src/ui_hotspots.js:253",
+    "src/ui_hotspots.js:282",
+    "src/ui_hotspots.js:284",
     "src/ui_hotspots.js:307",
-    "src/ui_misc.js:291",
-    "src/ui_misc.js:410",
+    "src/ui_hotspots.js:308",
+    "src/ui_misc.js:292",
     "src/ui_panels.js:123",
-    "src/ui_panels.js:222",
-    "src/ui_panels.js:256",
-    "src/ui_panels.js:266",
+    "src/ui_panels.js:234",
+    "src/ui_panels.js:268",
     "src/ui_panels.js:278",
-    "src/ui_panels.js:479",
-    "src/ui_panels.js:658",
-    "src/ui_panels.js:659",
-    "src/ui_panels.js:699",
+    "src/ui_panels.js:290",
+    "src/ui_panels.js:491",
+    "src/ui_panels.js:670",
+    "src/ui_panels.js:671",
+    "src/ui_panels.js:716",
     "src/ui_reference.js:74",
     "src/ui_reference.js:124",
     "src/ui_reference.js:135",
@@ -370,8 +369,8 @@
    "ok": true,
    "summary": "2 attribute interpolations without esc() (reviewed: ids, numbers, constants)",
    "detail": [
-    "src/report_gen.js:137: <td>${escH(c.coord_precision || '')}</td><td><a href=\"${escH(c.source_url)}\" target=\"_blank\" rel=\"noopener\">${escH(domainOf(c.source_url))}</a></td></tr>`,",
-    "src/report_gen.js:148: <section class=\"rp-sec rp-cols\"><div><h2>2. Map inset</h2>${opt.snapshot ? `<img class=\"rp-snap\" src=\"${opt.snapshot}\" alt=\"Globe view at report time\">` : ''}${"
+    "src/report_gen.js:137: <td>${escH(c.coord_precision || '')}</td><td><a href=\"${escH(c.source_url)}\" target=\"_blank\" rel=\"noopener noreferrer\">${escH(domainOf(c.source_url))}</a></td></tr>`,",
+    "src/report_gen.js:148: <section class=\"rp-sec rp-cols\"><div><h2>2. Map inset</h2>${opt.snapshot ? `<img class=\"rp-snap\" src=\"${opt.snapshot}\" alt=\"Globe view at report time\">` : ''}${insetSVG(r.points)}<p class=\"rp-cap\">"
    ]
   },
   {
@@ -390,12 +389,9 @@
    "lens": "Reverse tabnabbing",
    "scope": "src/, index.html",
    "kind": "auto",
-   "ok": false,
-   "summary": "2 target=_blank without rel=noopener",
-   "detail": [
-    "src/ui/feed.js:89: `<li><button class=\"feed-row\" data-live=\"${i}\" title=\"Fly to ${esc(r.name)}\"><span class=\"fi\">${icon(kindIcon(r.kind), 14)}</span><span class=\"ft mono\">${esc(r.",
-    "src/ui_panels.js:820: return `<h4>Imagery</h4><details class=\"imgry\"><summary>Sentinel-2 cloudless close-up (loads from EOX when opened)</summary><div class=\"s2grid\">${tiles.join('')"
-   ]
+   "ok": true,
+   "summary": "0 target=_blank without rel=noopener",
+   "detail": []
   },
   {
    "id": "C06",
@@ -403,11 +399,9 @@
    "lens": "Code-execution sinks",
    "scope": "src/",
    "kind": "auto",
-   "ok": false,
-   "summary": "1 eval / new Function / string timers / document.write",
-   "detail": [
-    "src/ui_panels.js:688: w.document.write("
-   ]
+   "ok": true,
+   "summary": "0 eval / new Function / string timers / document.write (printable dossier allow-listed, F-C06-1)",
+   "detail": []
   },
   {
    "id": "C07",
@@ -415,12 +409,9 @@
    "lens": "Secret scan",
    "scope": "every tracked text file incl. vendor",
    "kind": "auto",
-   "ok": false,
-   "summary": "2 secret-shaped strings in tracked text files",
-   "detail": [
-    "js/app.js:13935: `;var sD={name:\"SelectedFeatureIdPipelineStage\",STRUCT_ID_SELECTED_FEATURE:\"SelectedFeature\",STRUCT_NAME_SELECTED_FEATURE:\"SelectedFeature\"};sD.process=function",
-    "js/app.js.map:4: \"sourcesContent\": [\"/**\\n * @license\\n * Copyright 2010-2024 Three.js Authors\\n * SPDX-License-Identifier: MIT\\n */\\nconst t=\\\"170\\\",e={LEFT:0,MIDDLE:1,RIGHT:2,"
-   ]
+   "ok": true,
+   "summary": "0 secret-shaped strings in tracked text files (Cesium default ion token in the bundle allow-listed, F-C07-1)",
+   "detail": []
   },
   {
    "id": "C08",
@@ -482,11 +473,9 @@
    "lens": "Python risky calls",
    "scope": "all tracked .py",
    "kind": "auto",
-   "ok": false,
-   "summary": "1 risky calls in Python tooling",
-   "detail": [
-    "data/tools/build_conflicts.py:10: cmeta=pickle.load(open(os.path.join(RAW,'cmeta.pkl'),'rb'))['cmeta']"
-   ]
+   "ok": true,
+   "summary": "0 risky calls in Python tooling",
+   "detail": []
   },
   {
    "id": "C13",
@@ -504,14 +493,9 @@
    "lens": "actionlint + shellcheck",
    "scope": ".github/workflows, *.sh",
    "kind": "auto",
-   "ok": false,
-   "summary": "actionlint exit 1, shellcheck exit 0",
-   "detail": [
-    ".github/workflows/release.yml:27:9: shellcheck reported issue in this script: SC2086:info:4:46: Double quote to prevent globbing and word splitting [shellcheck]",
-    "   |",
-    "27 |         run: |",
-    "   |         ^~~~"
-   ]
+   "ok": true,
+   "summary": "actionlint exit 0, shellcheck exit 0",
+   "detail": []
   },
   {
    "id": "C15",
@@ -644,11 +628,9 @@
    "lens": "NUFORC privacy",
    "scope": "tracked tree, public data, site package",
    "kind": "auto",
-   "ok": false,
-   "summary": "tracked private files 0, NUFORC rows in public data 1, package excludes data/private: True",
-   "detail": [
-    "data/catalog.js:1: window.GM_CATALOG={\"built\": \"2026-11-12T09:54:54\", \"map_dir\": \"/workspace/qwm/wiw/data/map\", \"files\": [{\"file\": \"pdf7_cases.csv\", \"kind\": \"cases\", \"layer\": \"pdf"
-   ]
+   "ok": true,
+   "summary": "tracked private files 0, NUFORC rows in public data 0, package excludes data/private: True",
+   "detail": []
   },
   {
    "id": "D11",
@@ -666,11 +648,9 @@
    "lens": "Never jitter",
    "scope": "src/ map code",
    "kind": "auto",
-   "ok": false,
-   "summary": "1 jitter / random coordinate offsets in map code",
-   "detail": [
-    "src/glossary.js:162: def: \"How exact a row's coordinates are: exact_site, within_1km, locality (about 10 km), region (about 100 km) or unspecified. Only exact_site and within_1km ge"
-   ]
+   "ok": true,
+   "summary": "0 jitter / random coordinate offsets in map code",
+   "detail": []
   },
   {
    "id": "D13",
@@ -708,12 +688,9 @@
    "lens": "Wikidata placeholder artefacts",
    "scope": "data/layers, data/cases.js",
    "kind": "auto",
-   "ok": false,
-   "summary": "2 Wikidata unknown-value placeholders leaking into text fields",
-   "detail": [
-    "data/layers/map_nuclear_sites.js:1: GM.reg(\"map_nuclear_sites\",{\"title\":\"map_nuclear_sites\",\"source\":\"QWM layer file map_nuclear_sites.csv (per-row source_url / dataset)\",\"type\":\"points\",\"schema\":",
-    "data/layers/military.js:1: GM.reg(\"military\",{\"title\":\"Military bases & sites\",\"source\":\"US DoD MIRTA DoD Sites - Points (public domain, DISDI via data.gov/ArcGIS FeatureServer) + Wikidat"
-   ]
+   "ok": true,
+   "summary": "337 rows carry a Wikidata unknown-value placeholder in the shipped files; 0 still show one after load-time cleaning",
+   "detail": []
   },
   {
    "id": "D17",
@@ -831,11 +808,9 @@
    "lens": "Icon-button names",
    "scope": "index.html",
    "kind": "auto",
-   "ok": false,
-   "summary": "1 icon-only buttons in index.html without aria-label",
-   "detail": [
-    "<button class=\"btn sm\" id=\"feed-refresh\" data-icon=\"rotate-ccw\">"
-   ]
+   "ok": true,
+   "summary": "0 icon-only buttons in index.html without aria-label",
+   "detail": []
   },
   {
    "id": "E07",
@@ -898,7 +873,7 @@
    "ok": true,
    "summary": "8 tracked files over 5 MB",
    "detail": [
-    "20.0 MB js/app.js.map",
+    "20.1 MB js/app.js.map",
     "10.7 MB data/layers/faults_usgs.js",
     "8.9 MB data/layers/postal/JP.js",
     "8.8 MB data/layers/postal/MX.js",
@@ -924,11 +899,9 @@
    "lens": "Explicit locale formatting",
    "scope": "src/",
    "kind": "auto",
-   "ok": false,
-   "summary": "1 locale-dependent formatting without an explicit locale",
-   "detail": [
-    "src/app.js:380: setStatus(`Postal codes loaded: ${c.name} (${p.items.length.toLocaleString()})`);"
-   ]
+   "ok": true,
+   "summary": "0 locale-dependent formatting without an explicit locale",
+   "detail": []
   },
   {
    "id": "G03",
@@ -1017,9 +990,8 @@
    "scope": "src/ vs test/unit",
    "kind": "auto",
    "ok": true,
-   "summary": "35 of 55 src modules imported by a unit test",
+   "summary": "44 of 59 src modules imported by a unit test",
    "detail": [
-    "src/app_core.js",
     "src/audio.js",
     "src/cases_codec.js",
     "src/globe_cesium.js",
@@ -1029,16 +1001,12 @@
     "src/ui/console.js",
     "src/ui/globe_tools.js",
     "src/ui/tips.js",
-    "src/ui_analysis.js",
     "src/ui_charts.js",
     "src/ui_conflicts.js",
     "src/ui_data.js",
     "src/ui_graph.js",
-    "src/ui_hotspots.js",
-    "src/ui_panels.js",
     "src/ui_reference.js",
-    "src/ui_reports.js",
-    "src/ui_timeline.js"
+    "src/ui_reports.js"
    ]
   },
   {
@@ -1077,20 +1045,9 @@
    "lens": "Job timeouts",
    "scope": ".github/workflows",
    "kind": "auto",
-   "ok": false,
-   "summary": "10 jobs without a timeout",
-   "detail": [
-    ".github/workflows/ci.yml: job push has no timeout-minutes",
-    ".github/workflows/ci.yml: job workflow_dispatch has no timeout-minutes",
-    ".github/workflows/codeql.yml: job push has no timeout-minutes",
-    ".github/workflows/codeql.yml: job schedule has no timeout-minutes",
-    ".github/workflows/codeql.yml: job analyze has no timeout-minutes",
-    ".github/workflows/pages.yml: job push has no timeout-minutes",
-    ".github/workflows/pages.yml: job workflow_dispatch has no timeout-minutes",
-    ".github/workflows/pages.yml: job build has no timeout-minutes",
-    ".github/workflows/release.yml: job push has no timeout-minutes",
-    ".github/workflows/release.yml: job release has no timeout-minutes"
-   ]
+   "ok": true,
+   "summary": "0 jobs without a timeout",
+   "detail": []
   },
   {
    "id": "J02",
@@ -1158,12 +1115,9 @@
    "lens": "CITATION.cff validity",
    "scope": "CITATION.cff",
    "kind": "auto",
-   "ok": false,
-   "summary": "2 CITATION.cff problems",
-   "detail": [
-    "cff-version 1.3.0 is not a published CFF schema version (latest 1.2.0)",
-    "abstract/keywords still describe a three.js globe (renderer is CesiumJS, ADR 0001)"
-   ]
+   "ok": true,
+   "summary": "0 CITATION.cff problems",
+   "detail": []
   },
   {
    "id": "K04",
@@ -1181,9 +1135,11 @@
    "lens": "Relative links",
    "scope": "every tracked .md",
    "kind": "auto",
-   "ok": true,
-   "summary": "0 broken relative links in Markdown",
-   "detail": []
+   "ok": false,
+   "summary": "1 broken relative links in Markdown",
+   "detail": [
+    "docs/audit/hardening/PASSES.md: findings.csv"
+   ]
   },
   {
    "id": "K06",
@@ -1375,9 +1331,8 @@
    "scope": "eslint.config.js, .prettierignore",
    "kind": "auto",
    "ok": true,
-   "summary": "eslint ignores ['coverage', 'data', 'dist', 'docs/screenshots', 'js', 'node_modules', 'shots', 'textures', 'vendor']; prettier ignores ['*.min.js', 'data', 'dist', 'docs/audit/hardening/INDEX.md', 'docs/audit/v1.2-data-gap-audit.md', 'docs/audit/v1.3-ui-audit.md', 'docs/screenshots', 'docs/wireframes', 'js', 'node_modules', 'package-lock.json', 'shots', 'textures', 'vendor']",
+   "summary": "eslint ignores ['coverage', 'data', 'dist', 'docs/screenshots', 'js', 'node_modules', 'shots', 'textures', 'vendor']; prettier ignores ['*.min.js', 'coverage', 'data', 'dist', 'docs/audit/hardening/INDEX.md', 'docs/audit/hardening/PASSES.md', 'docs/audit/hardening/passes_run.json', 'docs/audit/v1.2-data-gap-audit.md', 'docs/audit/v1.3-ui-audit.md', 'docs/screenshots', 'docs/wireframes', 'js', 'node_modules', 'package-lock.json', 'shots', 'textures', 'vendor']",
    "detail": [
-    "coverage",
     "docs/wireframes"
    ]
   },
@@ -1388,7 +1343,7 @@
    "scope": "package.json engines, workflows, .nvmrc",
    "kind": "auto",
    "ok": true,
-   "summary": "engines >=22; workflows ['22']; .nvmrc None",
+   "summary": "engines >=22; workflows ['22']; .nvmrc 22",
    "detail": []
   },
   {
@@ -1428,11 +1383,9 @@
    "lens": "Unused dependencies",
    "scope": "package.json",
    "kind": "auto",
-   "ok": false,
-   "summary": "1 devDependencies not referenced by src/, scripts/ or test/",
-   "detail": [
-    "prettier"
-   ]
+   "ok": true,
+   "summary": "0 devDependencies not referenced by src/, scripts/ or test/",
+   "detail": []
   },
   {
    "id": "Q01",
@@ -1450,25 +1403,9 @@
    "lens": "Python lint (ruff F, E9)",
    "scope": "all tracked .py",
    "kind": "auto",
-   "ok": false,
-   "summary": "ruff F,E9: 15 problems",
-   "detail": [
-    "data/tools/build_conflicts.py:6:41: F401 [*] `datetime` imported but unused",
-    "data/tools/build_layers.py:5:28: F401 [*] `re` imported but unused",
-    "data/tools/build_layers.py:5:45: F401 [*] `math` imported but unused",
-    "data/tools/build_layers.py:5:59: F401 [*] `collections` imported but unused",
-    "data/tools/build_layers.py:5:72: F401 [*] `datetime` imported but unused",
-    "data/tools/build_layers.py:6:49: F401 [*] `shapely.geometry.MultiLineString` imported but unused",
-    "data/tools/build_layers.py:6:73: F401 [*] `shapely.geometry.mapping` imported but unused",
-    "data/tools/build_layers.py:7:30: F401 [*] `shapely.prepared.prep` imported but unused",
-    "data/tools/fetch_osm_military.py:1:34: F401 [*] `sys` imported but unused",
-    "data/tools/pdf7_tex.py:6:8: F401 [*] `os` imported but unused",
-    "scripts/audit/forensics.py:9:19: F401 [*] `glob` imported but unused",
-    "scripts/audit/forensics.py:9:53: F401 [*] `sys` imported but unused",
-    "scripts/audit/forensics.py:128:5: F841 Local variable `land` is assigned to but never used",
-    "scripts/audit/forensics.py:250:5: F841 Local variable `known` is assigned to but never used",
-    "scripts/audit/ui_audit_v14.py:336:9: F841 Local variable `f` is assigned to but never used"
-   ]
+   "ok": true,
+   "summary": "ruff F,E9: 0 problems",
+   "detail": []
   },
   {
    "id": "Q03",
@@ -1476,14 +1413,14 @@
    "lens": "Python unit tests",
    "scope": "test/py",
    "kind": "auto",
-   "ok": false,
-   "summary": "no Python tests FAILED",
+   "ok": true,
+   "summary": "Ran 6 tests OK",
    "detail": [
-    "    self.test = loader.discover(self.start, self.pattern, self.top)",
-    "                ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
-    "  File \"/usr/lib/python3.13/unittest/loader.py\", line 308, in discover",
-    "    raise ImportError('Start directory is not importable: %r' % start_dir)",
-    "ImportError: Start directory is not importable: 'test/py'"
+    "......",
+    "----------------------------------------------------------------------",
+    "Ran 6 tests in 0.003s",
+    "",
+    "OK"
    ]
   },
   {
