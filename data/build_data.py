@@ -47,6 +47,8 @@ def norm_date(s):
     """-> (iso, precision) ; accepts ISO with negative years, bare years, 'YYYY-MM', '19 Sep 1976'."""
     s = (s or '').strip()
     if not s or '://' in s: return '', ''   # Wikidata 'unknown value' placeholders etc. are not dates
+    m = re.match(r'^([+-]?\d{1,6}-\d{1,2}-\d{1,2})[T ]\d{1,2}:\d{2}(?::\d{2}(?:\.\d+)?)?(?:Z|[+-]\d{2}:?\d{2})?$', s)
+    if m: return norm_date(m.group(1))  # '1989-01-01 00:00:00.000' (spreadsheet datetime): the day part
     m = re.match(r'^(\d{3})(?:-|0s|x)$', s)  # decade only, e.g. GEIPAN '198-' / '1980s'
     if m: return '%04d-01-01' % (int(m.group(1)) * 10), 'decade'
     m = re.match(r'^([+-]?\d{1,6})(?:\.0)?(?:-(\d{1,2}))?(?:-(\d{1,2}))?$', s)  # '1723.0': spreadsheet float year
@@ -68,6 +70,24 @@ def norm_date(s):
     y = int(m.group(1))
     if y > datetime.date.today().year: return '', ''
     return ('-' if y < 0 else '') + '%04d-01-01' % abs(y), 'year'
+
+PREC_RANK = {'day': 0, 'month': 1, 'year': 2, 'decade': 3}
+def coarser_precision(a, b):
+    """the coarser of two date precisions: a source column may say 'day' while its date is not a real calendar day."""
+    if not a: return b
+    if not b or a not in PREC_RANK or b not in PREC_RANK: return a  # unknown labels: keep the source's own
+    return a if PREC_RANK[a] >= PREC_RANK[b] else b
+
+def fix_integer_text(c):
+    """Spreadsheet float artefacts in integer-valued text columns: '1.0' -> '1', and French postal codes that lost
+    their leading zero ('8430.0' -> '08430'; La Poste codes are always 5 digits). Format only, values unchanged."""
+    for k in ('postal_code', 'witness_count', 'count'):
+        v = c.get(k)
+        if isinstance(v, str) and re.fullmatch(r'-?\d+\.0+', v.strip()): c[k] = v.strip().split('.')[0]
+    pc = c.get('postal_code')
+    french = (c.get('country_iso') or '').upper() == 'FR' or 'INSEE' in str(c.get('coord_source') or '')  # GEIPAN: French communes
+    if isinstance(pc, str) and french and re.fullmatch(r'\d{4}', pc): c['postal_code'] = pc.zfill(5)
+    return c
 
 def country_display(r):
     c = (r.get('country') or '').strip(); iso = (r.get('country_iso') or '').strip(); cont = (r.get('continent') or '').strip()
@@ -342,7 +362,9 @@ def main(args):
             c.update(id=rid, lat=round(lat, 6), lon=round(lon, 6), layer=stem, file=os.path.basename(fn))
             if rid in pdf7 and not c.get('pdf7_ref'): c['pdf7_ref'] = pdf7[rid]
             if iso:
-                c['date'] = iso; c['date_precision'] = r.get('date_precision') or prec
+                c['date'] = iso; c['date_precision'] = coarser_precision(r.get('date_precision'), prec)
+                if c['date_precision'] != (r.get('date_precision') or prec) and r.get('date_precision'):
+                    c['date_note'] = 'source date %s is not a calendar date; kept to the %s' % (r.get('date'), c['date_precision'])
             for k in ('date_low', 'date_high'):
                 v = norm_date(r[k])[0] if r.get(k) else ''
                 if v: c[k] = v
@@ -376,6 +398,7 @@ def main(args):
                 if hit and not c.get('country'): c['country'] = hit['NAME']; c.setdefault('country_iso', hit['ISO_A2_EH']); c.setdefault('continent', hit['CONTINENT'])
                 if not hit and not c.get('country'): c['country'] = 'Ocean/International waters'
                 c.setdefault('urban_rural', urban)
+            fix_integer_text(c)  # after the geo lookup, which can fill country_iso
             c['country_display'] = country_display(c) or c.get('country', '')
             out.append(c)
         entry['plotted'] = len(out)

@@ -43,5 +43,27 @@ class NormDate(unittest.TestCase):
         self.assertEqual(bd.norm_date('around 2999'), ('', ''))  # but a future year mined from free text is not
 
 
+    def test_spreadsheet_datetimes_keep_the_day(self):
+        # v1.5.0 bug: '1991-12-01 00:00:00.000' fell through to the free-text year rule -> 1991-01-01 (188 UCDP starts)
+        self.assertEqual(bd.norm_date('1991-12-01 00:00:00.000'), ('1991-12-01', 'day'))
+        self.assertEqual(bd.norm_date('2024-12-31T00:00:00Z'), ('2024-12-31', 'day'))
+        self.assertEqual(bd.norm_date('1996-02-29 10:00'), ('1996-02-29', 'day'))
+
+    def test_source_precision_never_finer_than_the_date(self):
+        self.assertEqual(bd.coarser_precision('day', 'month'), 'month')  # '2000-09-31' labelled 'day' in GEIPAN
+        self.assertEqual(bd.coarser_precision('year', 'day'), 'year')
+        self.assertEqual(bd.coarser_precision('', 'day'), 'day')
+        self.assertEqual(bd.coarser_precision('approximate', 'day'), 'approximate')  # unknown label: source wins
+
+    def test_integer_text_artefacts(self):
+        c = bd.fix_integer_text({'postal_code': '8430.0', 'country_iso': 'FR', 'witness_count': '10.0', 'count': '3'})
+        self.assertEqual((c['postal_code'], c['witness_count'], c['count']), ('08430', '10', '3'))
+        c = bd.fix_integer_text({'postal_code': '8600.0', 'country_iso': 'BE', 'coord_source': 'geo.api.gouv.fr commune centre: Givet (INSEE 08190)'})
+        self.assertEqual(c['postal_code'], '08600')  # GEIPAN commune: French code even when the point geocodes abroad
+        c = bd.fix_integer_text({'postal_code': '1000', 'country_iso': 'BE'})
+        self.assertEqual(c['postal_code'], '1000')  # Belgian codes are 4 digits: untouched
+        self.assertEqual(bd.fix_integer_text({'count': '2.5'})['count'], '2.5')
+
+
 if __name__ == '__main__':
     unittest.main()
