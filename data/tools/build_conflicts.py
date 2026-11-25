@@ -88,7 +88,6 @@ def span(rows,ks=('StartYear1','StartMonth1','StartDay1'),ke=('EndYear1','EndMon
     for r in rows:
         en.append(cdate(r[ke[0]],r[ke[1]],r[ke[2]]))
         if 'EndYear2' in r and int((r['EndYear2'] or '-8').strip() or -8)>0: en.append(cdate(r['EndYear2'],r['EndMonth2'],r.get('EndDay2',r.get('EndDay2 ','-9'))))
-        if False and 'EndDay2 ' in r and int((r.get('EndYear2') or '-8').strip() or -8)>0: en.append(cdate(r['EndYear2'],r['EndMonth2'],r['EndDay2 ']))
     st=[s for s in st if s]; en=[e for e in en if e]
     return (min(st) if st else ''),(max(en) if en else '')
 COWSRC='Correlates of War Project, %s (Sarkees & Wayman 2010, Resort to War), correlatesofwar.org'

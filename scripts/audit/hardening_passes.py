@@ -593,7 +593,7 @@ def d23():
     # GEIPAN titles end with the case date (DD.MM.YYYY); where it differs from the observation date both stay as published
     title = [c['id'] for c in cases if c.get('date_precision') == 'day' and (m := re.search(r'(\d\d)\.(\d\d)\.(\d{4})\s*$', c.get('name', '')))
              and f'{m[3]}-{m[2]}-{m[1]}' != c.get('date')]
-    return (not bad, f'{len(bad)} case dates that are not calendar dates (F-D23-1); {len(title)} GEIPAN titles whose date differs from the observation date (F-D26-1, kept as published)', bad + title[:20])
+    return (not bad, f'{len(bad)} case dates that are not calendar dates (F-D23-1); {len(title)} GEIPAN titles whose date differs from the observation date (F-D23-2, kept as published)', bad + title[:20])
 
 
 def d24():
@@ -736,7 +736,7 @@ PASSES = [
     ('D05', 'D', 'Coordinate ranges / null island', 'data/cases.js', A, d05, False),
     ('D06', 'D', 'Duplicate ids', 'data/cases.js', A, d06, False),
     ('D07', 'D', 'Dates ISO, ranges, low <= high', 'data/cases.js', A, d07, False),
-    ('D08', 'D', 'BCE handling in the pipeline', 'data/build_data.py norm_date, case sort', M, 'Case sort key is (False, date) for both signs, so BCE rows sort lexicographically (-0450 before -2560) (F-D08-1). norm_date fallback pulls any 3-4 digit run out of free text and accepts month 13 / day 45 (F-D08-2).', False),
+    ('D08', 'D', 'BCE handling in the pipeline', 'data/build_data.py norm_date, case sort', M, 'A first case sort with key (False, date) looked lexicographic for BCE rows, but a later numeric sort overrides it, so it was redundant dead code, not a mis-sort (F-D08-1, removed). norm_date fallback pulls any 3-4 digit run out of free text and accepts month 13 / day 45 (F-D08-2).', False),
     ('D09', 'D', 'Grade vocabulary mapping', 'data/cases.js grades -> gradeClass', A, d09, False),
     ('D10', 'D', 'NUFORC privacy', 'tracked tree, public data, site package', A, d10, False),
     ('D11', 'D', 'Gendarmerie excluded from analysis', 'src/ (analysis, hotspots, dossier nearby), data/build_data.py', M, 'ui_analysis, ui_hotspots and build_data.nearest_military exclude fort/gendarmerie; the dossier "Nearest reference sites" (nearby()) does not (F-D11-1).', False),
