@@ -39,4 +39,25 @@ Step 4 run at 3787935, from 2026-11-24 17:10 PST, one check at a time (`/workspa
       tools half covered by windows (F-E02-3), a 19 px index link at 4K (F-E04-1), a button past a narrow window's edge
       (F-E02-4), and one slow `reports` view at 4K under box load ~9 (464 s). Earlier release runs used `--only`
       subsets (F-I03-1). The a11y run that followed was stopped. Fixed in 68a6c4e, findings in ac05271.
-- [ ] ui_audit --check run 2 at ac05271: started 20:21 PST
+- [ ] ui_audit --check run 2 at ac05271 (20:21–21:26 PST): all 49 views at 1280x800 passed and 10 at 1920x1080,
+      0 failures, then headless Chrome aborted (`FATAL dbus_thread_linux: D-Bus connection was disconnected`, an
+      environment crash). The log showed 21 `ResizeObserver loop completed` messages, traced to the tab bar
+      (F-B21-1, fixed in 70dc505, recorded in 0e106c6).
+- [ ] ui_audit --check run 3 at 0e106c6 (23:01 PST): one browser per viewport (`ui3.sh`). At 1280x800, 16 views
+      passed, then `analysis` timed out (240 s wait) and `hs_dossier` (over 300 s), with other jobs loading the box
+      (rabbitmq-diagnostics at 100 % CPU and a crawler). Stopped by hand.
+- [x] Diagnosis (00:01–00:14 PST): 70dc505 only changes `src/ui/tabs.js`; no selector or class that the audit waits
+      on (`#an-run`, `#an-out .an-ref`, `.hsb`). With a counting ResizeObserver, the audit sequence main → hs_dossier
+      at 0e106c6 gave analysis 41 s, hotspots 33 s, hs_dossier 0.7 s and 4–6 observer callbacks in total (one per tab
+      bar at boot, two on the feed), both with and without `DBUS_SESSION_BUS_ADDRESS=disabled:`, against 48 s for
+      analysis in run 2 at ac05271. So the slowdown was box load, not an app or harness regression; no code change
+      (logs `probe_ro_0e106c6.log`, `probe_ro_dbusoff.log`).
+- [ ] ui_audit --check run 4 at 0e106c6 (`ui3.sh`, 00:22–03:19 PST, box load ~8). 1280x800: axe `target-size`
+      (serious, 1 node) on `#btn-legend` in feed_recent and hs_dossier ("smallest space 32px by 13.3px") and in wars,
+      analysis and graph ("15px by 32px"), plus hotspots over 300 s. 1920x1080: only multi_open over 300 s. 3840x2160:
+      47 views pass, rail_collapsed and hover_card over 300 s. The `#btn-legend` messages are the same as in run 1,
+      which predates 70dc505, so the tab-bar change is not the cause; the 300 s timeouts are box load.
+- [x] Legend probe at 0e106c6 (03:20–03:27 PST, log `probe_legend.log`): the audit sequence at 1280x800 with axe
+      `relatedNodes` and `elementsFromPoint` over `#btn-legend`. The covering element is `#legend-toggle`, the open
+      legend's header: beside a right dock the free globe area is ~300 px wide and the 272 px legend reached under the
+      map-tool column. Fixed in 1d74627 (legend width capped at the free area minus `--maptools-w`), finding F-E02-5.
