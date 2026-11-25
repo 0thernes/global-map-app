@@ -7,7 +7,7 @@
    "scope": "every tracked file vs index.csv",
    "kind": "auto",
    "ok": true,
-   "summary": "1136 indexed / 1136 tracked",
+   "summary": "1137 indexed / 1137 tracked",
    "detail": []
   },
   {
@@ -17,7 +17,7 @@
    "scope": "all tracked files",
    "kind": "auto",
    "ok": true,
-   "summary": "0 files over 50 MB; working tree changes: 16",
+   "summary": "0 files over 50 MB; working tree changes: 2",
    "detail": []
   },
   {
@@ -62,7 +62,7 @@
    "ok": true,
    "summary": "bundle reproducible",
    "detail": [
-    "built js/app.js (4963 KB)"
+    "built js/app.js (4968 KB)"
    ]
   },
   {
@@ -72,7 +72,7 @@
    "scope": "test/unit/*.test.mjs",
    "kind": "auto",
    "ok": true,
-   "summary": "tests 154 / pass 154 / fail 0",
+   "summary": "tests 181 / pass 181 / fail 0",
    "detail": []
   },
   {
@@ -290,22 +290,22 @@
     "src/ui/console.js:113",
     "src/ui/console.js:141",
     "src/ui/console.js:144",
-    "src/ui/console.js:173",
-    "src/ui/console.js:180",
-    "src/ui/console.js:258",
-    "src/ui/console.js:275",
+    "src/ui/console.js:174",
+    "src/ui/console.js:181",
+    "src/ui/console.js:259",
+    "src/ui/console.js:276",
     "src/ui/feed.js:129",
     "src/ui/feed.js:132",
     "src/ui/globe_tools.js:48",
     "src/ui/sanitize.js:6",
     "src/ui/tabs.js:24",
     "src/ui/tabs.js:39",
-    "src/ui/tabs.js:93",
+    "src/ui/tabs.js:106",
     "src/ui/tips.js:46",
-    "src/ui/window.js:203",
-    "src/ui/window.js:235",
-    "src/ui/window.js:309",
-    "src/ui/window.js:314",
+    "src/ui/window.js:217",
+    "src/ui/window.js:249",
+    "src/ui/window.js:323",
+    "src/ui/window.js:328",
     "src/ui_analysis.js:125",
     "src/ui_analysis.js:298",
     "src/ui_charts.js:47",
@@ -443,8 +443,8 @@
    "lens": "npm audit",
    "scope": "package-lock.json",
    "kind": "auto",
-   "ok": false,
-   "summary": "npm audit: {'moderate': 1}",
+   "ok": true,
+   "summary": "npm audit: 0 vulnerabilities",
    "detail": []
   },
   {
@@ -900,7 +900,7 @@
    "ok": true,
    "summary": "bundle composition (bytes in output)",
    "detail": [
-    "[[\"@cesium/engine\",2919388],[\"vendor/three\",686034],[\"@cesium/core\",479569],[\"@spz-loader/core\",276100],[\"meshoptimizer\",147049],[\"src/ui\",47421],[\"urijs\",43043],[\"@cesium/gltf\",40650]]"
+    "[[\"@cesium/engine\",2919280],[\"vendor/three\",686344],[\"@cesium/core\",479530],[\"@spz-loader/core\",276103],[\"meshoptimizer\",147059],[\"src/ui\",50945],[\"urijs\",43043],[\"@cesium/gltf\",40650]]"
    ]
   },
   {
@@ -1039,7 +1039,7 @@
    "scope": "src/ vs test/unit",
    "kind": "auto",
    "ok": true,
-   "summary": "44 of 59 src modules imported by a unit test",
+   "summary": "45 of 59 src modules imported by a unit test",
    "detail": [
     "src/audio.js",
     "src/cases_codec.js",
@@ -1047,7 +1047,6 @@
     "src/labels_cesium.js",
     "src/live_feeds.js",
     "src/loader.js",
-    "src/ui/console.js",
     "src/ui/globe_tools.js",
     "src/ui/tips.js",
     "src/ui_charts.js",
@@ -1145,7 +1144,7 @@
    "scope": "README.md",
    "kind": "auto",
    "ok": true,
-   "summary": "README badge 154 vs actual 154",
+   "summary": "README badge 181 vs actual 181",
    "detail": []
   },
   {
@@ -1195,7 +1194,7 @@
    "scope": "package.json, lockfile, index.html, CITATION.cff, CHANGELOG",
    "kind": "auto",
    "ok": true,
-   "summary": "{'package': '1.5.0', 'lock': '1.5.0', 'html': '1.5.0', 'citation': '1.5.0', 'changelog': '1.5.0'}",
+   "summary": "{'package': '1.5.1', 'lock': '1.5.1', 'html': '1.5.1', 'citation': '1.5.1', 'changelog': '1.5.1'}",
    "detail": []
   },
   {
@@ -1391,11 +1390,11 @@
    "detail": [
     "@eslint/js: 9.39.5 → wanted 9.39.5 / latest 10.0.1",
     "axe-core: 4.11.0 → wanted 4.14.1 / latest 4.14.1",
-    "esbuild: 0.24.2 → wanted 0.24.2 / latest 0.28.2",
+    "esbuild: 0.25.12 → wanted 0.25.12 / latest 0.28.2",
     "eslint: 9.39.5 → wanted 9.39.5 / latest 10.15.0",
     "globals: 16.5.0 → wanted 16.5.0 / latest 17.14.0",
     "jsdom: 25.0.1 → wanted 25.0.1 / latest 31.0.1",
-    "lucide-static: 1.72.0 → wanted 1.79.0 / latest 1.79.0",
+    "lucide-static: 1.72.0 → wanted 1.80.0 / latest 1.80.0",
     "marked: 14.1.4 → wanted 14.1.4 / latest 18.3.0",
     "playwright: 1.65.0 → wanted 1.65.1 / latest 1.65.1",
     "three: 0.170.0 → wanted 0.170.0 / latest 0.187.0"
@@ -1442,7 +1441,7 @@
    "detail": [
     ".............",
     "----------------------------------------------------------------------",
-    "Ran 13 tests in 0.087s",
+    "Ran 13 tests in 0.111s",
     "",
     "OK"
    ]

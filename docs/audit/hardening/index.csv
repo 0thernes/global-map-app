@@ -502,12 +502,12 @@ n,path,lines,bytes,role,owner
 501,docs/audit/coverage.md,707,189245,Audit record,audit
 502,docs/audit/findings.json,1082,32137,Audit record,audit
 503,docs/audit/hardening/FINDINGS.md,87,19854,Hardening audit record,audit
-504,docs/audit/hardening/INDEX.md,1265,108451,Hardening audit record,audit
-505,docs/audit/hardening/PASSES.md,237,24179,Hardening audit record,audit
+504,docs/audit/hardening/INDEX.md,1266,108522,Hardening audit record,audit
+505,docs/audit/hardening/PASSES.md,237,24177,Hardening audit record,audit
 506,docs/audit/hardening/PROGRESS.md,81,7320,Hardening audit record,audit
 507,docs/audit/hardening/findings.csv,67,17665,Hardening audit record,audit
-508,docs/audit/hardening/index.csv,1137,96813,Hardening audit record,audit
-509,docs/audit/hardening/passes_run.json,1461,41610,Hardening audit record,audit
+508,docs/audit/hardening/index.csv,1138,96873,Hardening audit record,audit
+509,docs/audit/hardening/passes_run.json,1460,41588,Hardening audit record,audit
 510,docs/audit/pass-01.md,35,4659,Audit record,audit
 511,docs/audit/pass-02.md,36,6124,Audit record,audit
 512,docs/audit/pass-03.md,31,2569,Audit record,audit
