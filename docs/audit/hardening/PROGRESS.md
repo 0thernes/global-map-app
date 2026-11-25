@@ -61,3 +61,12 @@ Step 4 run at 3787935, from 2026-11-24 17:10 PST, one check at a time (`/workspa
       `relatedNodes` and `elementsFromPoint` over `#btn-legend`. The covering element is `#legend-toggle`, the open
       legend's header: beside a right dock the free globe area is ~300 px wide and the 272 px legend reached under the
       map-tool column. Fixed in 1d74627 (legend width capped at the free area minus `--maptools-w`), finding F-E02-5.
+- [ ] ui_audit run 5 at beb43d9 (`ui5.sh`, 03:28–03:34 PST): 1920x1080 multi_open passes; 3840x2160 rail_collapsed
+      passes, hover_card 60.4 s against its 60 s budget (box load ~8); 1280x800 still fails axe target-size on
+      `#btn-legend` in feed_recent, wars, analysis, graph and hs_dossier.
+- [x] Probe 2 (03:35–03:39 PST, `probe_legend2.log`), per failing view: the target-size node is `#btn-legend`, its
+      relatedNode `#legend-toggle` (feed_recent, wars, analysis, graph: rect x 385, y 311, 270 x 32; hs_dossier: x 680),
+      no window over the button (windows: feed + dossier, wars, analysis, graph, hotspots + hs-dossier, all to the right
+      of the tool column). The legend was still 272 px: 1d74627 set the width in the base `#legend` rule, but the later
+      chip rule `#legend:not(.collapsed) { width: var(--legend-w) }` won the cascade. Fixed in ff344c3 (`--legend-fit`
+      in every sizing rule; the test now checks the cascade).
