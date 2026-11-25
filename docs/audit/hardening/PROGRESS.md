@@ -25,3 +25,12 @@ Resumable log. A resumed run reads this file and continues from the first unchec
 ## Verification log
 
 Logs in `/workspace/gma16/` on the build box (not in the repository).
+
+Step 4 run at 3787935, from 2026-11-24 17:10 PST, one check at a time (`/workspace/gma16/verify.sh`):
+
+- [x] lint (ESLint + Prettier): pass
+- [x] unit: 176 tests, 176 pass, 0 fail
+- [x] Python: 13 tests OK; ruff F,E9 clean
+- [x] data: 44 CSV files, 0 errors, 78 warnings (float years and similar, decided F-D21-1)
+- [x] build: js/app.js reproducible (no diff)
+- [x] perf: idle 4 frames in 10 s (budget 20), 4 with grid + terminator; dossier open + capture 21.6 s (budget 60 s)
