@@ -9,6 +9,8 @@
   --act-btn: 40px;
   --credit-h: 24px; /* strip above the timeline: imagery credits, camera read-out, date */
   --legend-w: 272px;
+  /* map-tool column: a --ctl button + --s-h padding + 1 px border on each side (#maptools) */
+  --maptools-w: calc(var(--ctl) + 2 * var(--s-h) + 2px);
   --hc-focus: #ffe14d;
 }
 /* density: comfortable (default) lifts every small control to the 32 px desktop target; compact keeps 24 px */
@@ -372,7 +374,15 @@ body.tools-covered #maptools {
   position: fixed;
   left: calc(var(--occ-left, 0px) + var(--s-1));
   bottom: calc(var(--timeline-h) + var(--credit-h) + var(--occ-bottom, 0px) + var(--s-h));
-  width: var(--legend-w);
+  /* never wider than the free globe area minus the map-tool column on its right: beside a right dock at 1280 px
+     the open legend's header ran under #btn-legend (axe target-size, F-E02-5). 160 px floor keeps it readable. */
+  width: max(
+    160px,
+    min(
+      var(--legend-w),
+      calc(100vw - var(--occ-left, 0px) - var(--occ-right, 0px) - var(--maptools-w) - 3 * var(--s-1))
+    )
+  );
   max-height: calc(100vh - var(--topbar-h) - var(--timeline-h) - var(--credit-h) - var(--occ-bottom, 0px) - var(--s-6));
   display: flex;
   flex-direction: column;
