@@ -564,6 +564,49 @@ def m03():
     return ok_if_empty(miss, 'COMMON export columns not defined in a data dictionary')
 
 
+def _js_items(path, key=None):
+    t = open(path, encoding='utf-8').read()
+    if key is None:  # data/cases.js: window.GM_CASES = [...]
+        return json.loads(t[t.index('['):t.rindex(']') + 1])
+    return json.loads(t[t.index(',') + 1:t.rindex(')')])['items']
+
+
+def d22():
+    items = _js_items('data/layers/map_conflicts.js', 'map_conflicts')
+    ends = [r['date_high'] for r in items if r.get('date_high')]
+    jan1 = sum(1 for d in ends if d.endswith('-01-01'))
+    return (jan1 < len(ends) / 2, f'{jan1} of {len(ends)} UCDP conflict end dates fall on 1 January (truncation check, F-D22-1)', [])
+
+
+def d23():
+    import datetime as _dt
+    cases = _js_items('data/cases.js')
+    bad = []
+    for c in cases:
+        d = c.get('date', '')
+        if not d or d.startswith('-'):
+            continue
+        try:
+            _dt.date.fromisoformat(d)
+        except ValueError:
+            bad.append(f"{c['id']}: {d}")
+    # GEIPAN titles end with the case date (DD.MM.YYYY); where it differs from the observation date both stay as published
+    title = [c['id'] for c in cases if c.get('date_precision') == 'day' and (m := re.search(r'(\d\d)\.(\d\d)\.(\d{4})\s*$', c.get('name', '')))
+             and f'{m[3]}-{m[2]}-{m[1]}' != c.get('date')]
+    return (not bad, f'{len(bad)} case dates that are not calendar dates (F-D23-1); {len(title)} GEIPAN titles whose date differs from the observation date (F-D26-1, kept as published)', bad + title[:20])
+
+
+def d24():
+    cases = _js_items('data/cases.js')
+    bad = [f"{c['id']}: {k}={c[k]}" for c in cases for k in ('postal_code', 'witness_count', 'count') if re.fullmatch(r'-?\d+\.0+', str(c.get(k, '')))]
+    bad += [f"{c['id']}: postal_code={c['postal_code']}" for c in cases if 'INSEE' in str(c.get('coord_source', '')) and not re.fullmatch(r'\d{5}', str(c.get('postal_code', '00000')))]
+    return ok_if_empty(bad, 'integer fields with a spreadsheet float tail or a French postal code without 5 digits (F-D24-1)')
+
+
+def d25():
+    return ok_if_empty([c['id'] for c in _js_items('data/cases.js') if not c.get('dataset')], 'public cases without a dataset label (F-D25-1)')
+
+
 def q04():
     hits = grep(r'^\s*import pickle|^\s*from pickle|pickle\.(load|dump)', [f for f in tracked('*.py') if not f.endswith('hardening_passes.py')])
     return ok_if_empty(hits, 'pickle uses in the Python pipeline (cmeta now JSON, F-C12-1)')
@@ -707,6 +750,10 @@ PASSES = [
     ('D19', 'D', 'Private data in aggregates', 'data/catalog.js', M, 'catalog.js carries aggregate NUFORC distance statistics (no rows, no identifiers) from the analysis briefing (F-D19-1, decided).', False),
     ('D20', 'D', 'Source -> built row reconciliation', 'data/sources/qwm vs data/layers', A, d20, False),
     ('D21', 'D', 'Spreadsheet float years in QWM snapshot', 'data/sources/qwm/*.csv.gz', M, '38 date cells written as floats ("1723.0", "-2480.0") by the upstream export; norm_date reads them correctly as years and the validator warns (F-D21-1, decided: snapshot is kept byte-identical to the cited drop).', False),
+    ('D22', 'D', 'Datetime truncation', 'data/layers/map_conflicts.js', A, d22, False),
+    ('D23', 'D', 'Date precision vs date', 'data/cases.js', A, d23, False),
+    ('D24', 'D', 'Integer text artefacts', 'data/cases.js', A, d24, False),
+    ('D25', 'D', 'Dataset label on every case', 'data/cases.js', A, d25, False),
     ('E01', 'E', 'axe-core WCAG 2.2 AA', 'every UI view at 1920x1080', M, 'npm run test:a11y (Step 4 re-verification).', False),
     ('E02', 'E', 'UI audit --check 1280x800', 'all views', M, 'node test/ui_audit.mjs --check (Step 4).', False),
     ('E03', 'E', 'UI audit --check 1920x1080', 'all views', M, 'node test/ui_audit.mjs --check (Step 4).', False),

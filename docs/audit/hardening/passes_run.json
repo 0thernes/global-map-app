@@ -753,6 +753,65 @@
    "detail": []
   },
   {
+   "id": "D22",
+   "layer": "D",
+   "lens": "Datetime truncation",
+   "scope": "data/layers/map_conflicts.js",
+   "kind": "auto",
+   "ok": true,
+   "summary": "134 of 370 UCDP conflict end dates fall on 1 January (truncation check, F-D22-1)",
+   "detail": []
+  },
+  {
+   "id": "D23",
+   "layer": "D",
+   "lens": "Date precision vs date",
+   "scope": "data/cases.js",
+   "kind": "auto",
+   "ok": true,
+   "summary": "0 case dates that are not calendar dates (F-D23-1); 18 GEIPAN titles whose date differs from the observation date (F-D26-1, kept as published)",
+   "detail": [
+    "GEIPAN-4422",
+    "GEIPAN-390",
+    "GEIPAN-416",
+    "GEIPAN-421",
+    "GEIPAN-423",
+    "GEIPAN-516",
+    "GEIPAN-556",
+    "GEIPAN-632",
+    "GEIPAN-674",
+    "GEIPAN-681",
+    "GEIPAN-1042",
+    "GEIPAN-1117",
+    "GEIPAN-1229",
+    "GEIPAN-1234",
+    "GEIPAN-1312",
+    "GEIPAN-1448",
+    "GEIPAN-1622",
+    "GEIPAN-1714"
+   ]
+  },
+  {
+   "id": "D24",
+   "layer": "D",
+   "lens": "Integer text artefacts",
+   "scope": "data/cases.js",
+   "kind": "auto",
+   "ok": true,
+   "summary": "0 integer fields with a spreadsheet float tail or a French postal code without 5 digits (F-D24-1)",
+   "detail": []
+  },
+  {
+   "id": "D25",
+   "layer": "D",
+   "lens": "Dataset label on every case",
+   "scope": "data/cases.js",
+   "kind": "auto",
+   "ok": true,
+   "summary": "0 public cases without a dataset label (F-D25-1)",
+   "detail": []
+  },
+  {
    "id": "E01",
    "layer": "E",
    "lens": "axe-core WCAG 2.2 AA",

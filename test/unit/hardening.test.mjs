@@ -237,3 +237,50 @@ test('F-K06-1: one version string everywhere', () => {
   assert.match(readFileSync('CITATION.cff', 'utf8'), /^cff-version: 1\.2\.0$/m);
   assert.match(readFileSync('CHANGELOG.md', 'utf8'), new RegExp(`^## \\[${v.replace(/\./g, '\\.')}\\]`, 'm'));
 });
+
+test('F-D22-1: spreadsheet datetimes keep their day (UCDP conflict starts/ends were truncated to 1 January)', () => {
+  const items = loadReg('data/layers/map_conflicts.js').map_conflicts.items;
+  const dated = items.filter((r) => r.date_high);
+  assert.ok(dated.length > 300);
+  // a real end-date distribution: most UCDP episodes do not end on 1 January
+  assert.ok(dated.filter((r) => !/-01-01$/.test(r.date_high)).length > 200);
+  assert.ok(items.every((r) => !r.date || /^-?\d{4}-\d\d-\d\d$/.test(r.date)));
+});
+
+test('F-D23-1: date_precision is never finer than the date (impossible GEIPAN day kept to the month)', () => {
+  const c = publicCases().find((r) => r.id === 'GEIPAN-1811');
+  assert.equal(c.date, '2000-09-01');
+  assert.equal(c.date_precision, 'month');
+  assert.match(c.date_note, /2000-09-31/);
+});
+
+test('F-D24-1: integer text has no spreadsheet float tail; French postal codes keep 5 digits', () => {
+  const cases = publicCases();
+  assert.ok(cases.every((r) => !/\.0$/.test(r.witness_count ?? '') && !/\.0$/.test(r.count ?? '')));
+  const fr = cases.filter((r) => r.postal_code != null && /INSEE/.test(r.coord_source || ''));
+  assert.ok(fr.length > 2000);
+  assert.ok(
+    fr.every((r) => /^\d{5}$/.test(r.postal_code)),
+    'French postal codes are 5 digits',
+  );
+});
+
+test('F-D25-1: every public case names its dataset', () => {
+  const missing = publicCases().filter((r) => !r.dataset);
+  assert.equal(missing.length, 0, missing.map((r) => r.id).join(', '));
+});
+
+test('F-C05-1: every new-tab link drops the opener and the referrer', () => {
+  for (const f of [
+    'src/app_core.js',
+    'src/cinema.js',
+    'src/report_gen.js',
+    'src/ui_misc.js',
+    'src/ui_panels.js',
+    'src/ui/feed.js',
+  ]) {
+    const src = readFileSync(f, 'utf8');
+    const blank = src.match(/target="_blank"[^>]*/g) || [];
+    for (const a of blank) assert.match(a, /rel="noopener noreferrer"/, `${f}: ${a}`);
+  }
+});
