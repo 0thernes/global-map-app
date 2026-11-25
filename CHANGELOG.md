@@ -8,7 +8,7 @@ All notable changes to this project are documented here. The format follows
 ## [1.5.1] - 2026-11-24
 
 The hardening release. A repository-wide audit (127 passes over an indexed table of contents of every tracked file)
-recorded 57 findings; 42 are fixed with a regression test for every bug, and 15 are decided with the reason recorded
+recorded 65 findings; 50 are fixed with a regression test for every bug, and 15 are decided with the reason recorded
 ([FINDINGS.md](docs/audit/hardening/FINDINGS.md), [PASSES.md](docs/audit/hardening/PASSES.md)). No row was added,
 removed or moved; the data fixes correct format and provenance against the source files.
 
@@ -35,6 +35,12 @@ removed or moved; the data fixes correct format and provenance against the sourc
 - **Statistics**: antimeridian-crossing segments are indexed the short way round; an all-zero-weight sampler draws
   nothing.
 - **Boot failure** (no WebGL, data load error) shows a message with a Reload button instead of a blank page.
+- **Accessibility at every view and size** (UI audit over all 49 views at 1280x800, 1920x1080 and 3840x2160): legend
+  cluster glyph text is 12 px (was 9), checkbox toggles, index links and window buttons have 24 px targets, long
+  window buttons wrap instead of running past the edge, the map tools hide while a window covers their column, and the
+  open legend no longer slides under the map-tool column beside a right dock.
+- **Tab bars** measure overflow on the bar itself, so showing the scroll arrows no longer feeds back into the resize
+  observer ("ResizeObserver loop" console messages).
 
 ### Changed
 
@@ -52,7 +58,7 @@ removed or moved; the data fixes correct format and provenance against the sourc
 - `docs/audit/hardening/`: `INDEX.md` (generated table of contents), the pass runner
   (`npm run audit:hardening`), `findings.csv` with a validating report generator (`npm run audit:findings`) and
   `PROGRESS.md`.
-- 22 Node regression tests (176 in total) and 13 Python tests (`npm run test:py`); `.nvmrc`.
+- 27 Node regression tests (181 in total) and 13 Python tests (`npm run test:py`); `.nvmrc`.
 
 ## [1.5.0] - 2026-11-23
 

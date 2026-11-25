@@ -2,7 +2,7 @@
 
 **Same globe, fewer ways to be wrong.** v1.5.1 is the result of a repository-wide audit: 127 passes over a generated
 table of contents of every tracked file, covering code, data, pipeline, CI, security, accessibility, docs and
-methodology. It recorded 57 findings. 42 are fixed, each bug with a regression test; 15 are decided, with the reason
+methodology. It recorded 65 findings. 50 are fixed, each bug with a regression test; 15 are decided, with the reason
 written down. Nothing was added to or removed from the data: the data fixes correct format and provenance against the
 source files, and the rebuilt files were diffed field by field.
 
@@ -20,6 +20,8 @@ source files, and the rebuilt files were diffed field by field.
 - **Safer exports**: CSV files follow RFC 4180 and neutralise spreadsheet formulas; workspace files are validated
   before they are applied.
 - **Honest failure**: a blocked pop-up or a failed boot now tells you what happened.
+- **Readable and reachable at every size**: no text under 12 px and no control under 24 px in any of the 49 views at
+  1280, 1920 and 4K; the map tools and the legend no longer cover each other or hide under windows.
 - The dossier's nearest military site follows the same rule as the analysis (no gendarmerie, no forts), and a note
   about a nearby case can no longer raise a row's grade.
 
@@ -33,7 +35,7 @@ source files, and the rebuilt files were diffed field by field.
 
 ## Checks for this release
 
-- Lint (ESLint, Prettier), 176 Node unit tests, 13 Python tests, data validation (0 errors), ruff, actionlint,
+- Lint (ESLint, Prettier), 181 Node unit tests, 13 Python tests, data validation (0 errors), ruff, actionlint,
   `npm audit` (0 vulnerabilities).
 - Perf, UI audit `--check` at 1280x800, 1920x1080 and 3840x2160, axe and the full smoke test: see the
   [CHANGELOG](CHANGELOG.md#151---2026-11-24) and `docs/audit/hardening/PROGRESS.md` for the run results.
