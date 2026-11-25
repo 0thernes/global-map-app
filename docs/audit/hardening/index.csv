@@ -11,7 +11,7 @@ n,path,lines,bytes,role,owner
 10,.github/workflows/pages.yml,39,791,CI/CD workflow,ci
 11,.github/workflows/release.yml,31,792,CI/CD workflow,ci
 12,.gitignore,25,409,Tool config,repo
-13,.prettierignore,13,179,Tool config,repo
+13,.prettierignore,14,209,Tool config,repo
 14,.prettierrc.json,6,94,Tool config,repo
 15,CHANGELOG.md,391,27089,Change history (Keep a Changelog),repo
 16,CITATION.cff,24,945,Citation metadata,repo
@@ -499,619 +499,623 @@ n,path,lines,bytes,role,owner
 498,docs/audit/checks.json,10,612,Audit record,audit
 499,docs/audit/coverage.md,707,189245,Audit record,audit
 500,docs/audit/findings.json,1082,32137,Audit record,audit
-501,docs/audit/pass-01.md,35,4659,Audit record,audit
-502,docs/audit/pass-02.md,36,6124,Audit record,audit
-503,docs/audit/pass-03.md,31,2569,Audit record,audit
-504,docs/audit/pass-04.md,33,3548,Audit record,audit
-505,docs/audit/pass-05.md,35,4251,Audit record,audit
-506,docs/audit/pass-06.md,34,4618,Audit record,audit
-507,docs/audit/pass-07-data.json,274,7278,Audit record,audit
-508,docs/audit/pass-07.md,37,3672,Audit record,audit
-509,docs/audit/pass-08.md,23,1047,Audit record,audit
-510,docs/audit/pass-09.md,43,4090,Audit record,audit
-511,docs/audit/pass-10.md,29,2489,Audit record,audit
-512,docs/audit/pdf7-unplaced.csv,33,10180,Audit record,audit
-513,docs/audit/qwm-data-issues.csv,3073,542559,Audit record,audit
-514,docs/audit/totals.json,58,819,Audit record,audit
-515,docs/audit/url_status.csv,1484,140123,Audit record,audit
-516,docs/audit/v1.2-data-gap-audit.csv,357,101402,Audit record,audit
-517,docs/audit/v1.2-data-gap-audit.md,109,10482,Audit record,audit
-518,docs/audit/v1.3-ui-audit.csv,139,47349,Audit record,audit
-519,docs/audit/v1.3-ui-audit.md,180,38376,Audit record,audit
-520,docs/audit/v1.4-ui-audit.csv,74,23610,Audit record,audit
-521,docs/audit/v1.4-ui-audit.md,128,64547,Audit record,audit
-522,docs/audit/v1.5-ui-audit.csv,29,8010,Audit record,audit
-523,docs/audit/v1.5-ui-audit.md,62,16806,Audit record,audit
-524,docs/convergence.md,54,2770,Documentation,docs
-525,docs/data-and-grading.md,54,4847,Documentation,docs
-526,docs/data-pipeline.md,70,4326,Documentation,docs
-527,docs/data-sources.md,105,15365,Documentation,docs
-528,docs/design/style-guide.md,248,17007,Design documentation,design
-529,docs/design/wireframes/1280x800_dossier.png,,119065,Design documentation,design
-530,docs/design/wireframes/1280x800_dossier.svg,27,8106,Design documentation,design
-531,docs/design/wireframes/1280x800_main.png,,115432,Design documentation,design
-532,docs/design/wireframes/1280x800_main.svg,26,7682,Design documentation,design
-533,docs/design/wireframes/1280x800_reference.png,,137403,Design documentation,design
-534,docs/design/wireframes/1280x800_reference.svg,26,8927,Design documentation,design
-535,docs/design/wireframes/1920x1080_analysis.png,,157164,Design documentation,design
-536,docs/design/wireframes/1920x1080_analysis.svg,28,8832,Design documentation,design
-537,docs/design/wireframes/1920x1080_dossier.png,,174067,Design documentation,design
-538,docs/design/wireframes/1920x1080_dossier.svg,29,9558,Design documentation,design
-539,docs/design/wireframes/1920x1080_main.png,,145665,Design documentation,design
-540,docs/design/wireframes/1920x1080_main.svg,26,7833,Design documentation,design
-541,docs/design/wireframes/1920x1080_palette.png,,165481,Design documentation,design
-542,docs/design/wireframes/1920x1080_palette.svg,28,8948,Design documentation,design
-543,docs/design/wireframes/1920x1080_reference.png,,204817,Design documentation,design
-544,docs/design/wireframes/1920x1080_reference.svg,27,9776,Design documentation,design
-545,docs/design/wireframes/1920x1080_states.png,,178739,Design documentation,design
-546,docs/design/wireframes/1920x1080_states.svg,30,9497,Design documentation,design
-547,docs/design/wireframes/3840x2160_dossier.png,,327436,Design documentation,design
-548,docs/design/wireframes/3840x2160_dossier.svg,30,10806,Design documentation,design
-549,docs/design/wireframes/3840x2160_main.png,,266770,Design documentation,design
-550,docs/design/wireframes/3840x2160_main.svg,26,8212,Design documentation,design
-551,docs/design/wireframes/3840x2160_reference.png,,443534,Design documentation,design
-552,docs/design/wireframes/3840x2160_reference.svg,29,11798,Design documentation,design
-553,docs/design/wireframes/README.md,48,4357,Design documentation,design
-554,docs/design/wireframes/v1.4/1280x800_dossier.png,,114892,Design documentation,design
-555,docs/design/wireframes/v1.4/1280x800_dossier.svg,25,6656,Design documentation,design
-556,docs/design/wireframes/v1.4/1280x800_main.png,,111837,Design documentation,design
-557,docs/design/wireframes/v1.4/1280x800_main.svg,24,6227,Design documentation,design
-558,docs/design/wireframes/v1.4/1920x1080_analysis.png,,153095,Design documentation,design
-559,docs/design/wireframes/v1.4/1920x1080_analysis.svg,26,7375,Design documentation,design
-560,docs/design/wireframes/v1.4/1920x1080_dossier.png,,169249,Design documentation,design
-561,docs/design/wireframes/v1.4/1920x1080_dossier.svg,27,8102,Design documentation,design
-562,docs/design/wireframes/v1.4/1920x1080_main.png,,141486,Design documentation,design
-563,docs/design/wireframes/v1.4/1920x1080_main.svg,24,6356,Design documentation,design
-564,docs/design/wireframes/v1.4/1920x1080_palette.png,,162072,Design documentation,design
-565,docs/design/wireframes/v1.4/1920x1080_palette.svg,26,7471,Design documentation,design
-566,docs/design/wireframes/v1.4/3840x2160_dossier.png,,321247,Design documentation,design
-567,docs/design/wireframes/v1.4/3840x2160_dossier.svg,28,9200,Design documentation,design
-568,docs/design/wireframes/v1.4/3840x2160_main.png,,261475,Design documentation,design
-569,docs/design/wireframes/v1.4/3840x2160_main.svg,24,6607,Design documentation,design
-570,docs/design/wireframes/v1.4/README.md,29,2327,Design documentation,design
-571,docs/layer-catalog.md,61,21017,Documentation,docs
-572,docs/make_wireframes.py,29,4397,Documentation,docs
-573,docs/render_wireframes.py,9,546,Documentation,docs
-574,docs/repo-checklist.md,125,9528,Documentation,docs
-575,docs/repo-metadata.json,34,1252,Documentation,docs
-576,docs/screenshots/01_engage.png,,61459,Screenshot evidence,docs-media
-577,docs/screenshots/02_globe.png,,546904,Screenshot evidence,docs-media
-578,docs/screenshots/03_layers_tree.png,,599220,Screenshot evidence,docs-media
-579,docs/screenshots/04_offlimits_layer.png,,674150,Screenshot evidence,docs-media
-580,docs/screenshots/05_dossier.png,,517735,Screenshot evidence,docs-media
-581,docs/screenshots/05b_dossier_pdf7_ref.png,,522550,Screenshot evidence,docs-media
-582,docs/screenshots/06_tour.png,,512868,Screenshot evidence,docs-media
-583,docs/screenshots/07_hotspots.png,,315247,Screenshot evidence,docs-media
-584,docs/screenshots/08_report.png,,346078,Screenshot evidence,docs-media
-585,docs/screenshots/09_index_coverage.png,,370919,Screenshot evidence,docs-media
-586,docs/screenshots/09_index_glossary.png,,388571,Screenshot evidence,docs-media
-587,docs/screenshots/09_index_offworld.png,,427421,Screenshot evidence,docs-media
-588,docs/screenshots/09_index_pdf7.png,,322173,Screenshot evidence,docs-media
-589,docs/screenshots/09_index_sources.png,,392238,Screenshot evidence,docs-media
-590,docs/screenshots/10_charts.png,,395963,Screenshot evidence,docs-media
-591,docs/screenshots/11_analysis.png,,532369,Screenshot evidence,docs-media
-592,docs/screenshots/12_settings.png,,586471,Screenshot evidence,docs-media
-593,docs/screenshots/13_zoom_regional_europe.png,,676952,Screenshot evidence,docs-media
-594,docs/screenshots/14_zoom_city_london.png,,923922,Screenshot evidence,docs-media
-595,docs/screenshots/15_zoom_street_nyc.png,,927154,Screenshot evidence,docs-media
-596,docs/screenshots/16_zoom_terrain_everest.png,,789376,Screenshot evidence,docs-media
-597,docs/screenshots/17_zoom_case_rendlesham.png,,653879,Screenshot evidence,docs-media
-598,docs/screenshots/18_sentinel2_basemap.png,,650987,Screenshot evidence,docs-media
-599,docs/screenshots/19_data_overview.png,,262397,Screenshot evidence,docs-media
-600,docs/screenshots/20_data_entries.png,,288555,Screenshot evidence,docs-media
-601,docs/screenshots/21_data_charts.png,,244700,Screenshot evidence,docs-media
-602,docs/screenshots/22_data_tables.png,,286102,Screenshot evidence,docs-media
-603,docs/screenshots/23_data_sources.png,,261534,Screenshot evidence,docs-media
-604,docs/screenshots/24_data_stats.png,,275562,Screenshot evidence,docs-media
-605,docs/screenshots/25_data_unplaced.png,,269618,Screenshot evidence,docs-media
-606,docs/screenshots/v1.3/1280x800_main_after.png,,423262,Screenshot evidence,docs-media
-607,docs/screenshots/v1.3/1280x800_main_before.png,,430095,Screenshot evidence,docs-media
-608,docs/screenshots/v1.3/1280x800_multi_open_after.png,,213887,Screenshot evidence,docs-media
-609,docs/screenshots/v1.3/1280x800_multi_open_before.png,,189495,Screenshot evidence,docs-media
-610,docs/screenshots/v1.3/1920x1080_charts_after.png,,490259,Screenshot evidence,docs-media
-611,docs/screenshots/v1.3/1920x1080_charts_before.png,,495347,Screenshot evidence,docs-media
-612,docs/screenshots/v1.3/1920x1080_data_overview_after.png,,365817,Screenshot evidence,docs-media
-613,docs/screenshots/v1.3/1920x1080_data_overview_before.png,,376276,Screenshot evidence,docs-media
-614,docs/screenshots/v1.3/1920x1080_data_stats_after.png,,390394,Screenshot evidence,docs-media
-615,docs/screenshots/v1.3/1920x1080_data_stats_before.png,,422285,Screenshot evidence,docs-media
-616,docs/screenshots/v1.3/1920x1080_data_tables_after.png,,566450,Screenshot evidence,docs-media
-617,docs/screenshots/v1.3/1920x1080_data_tables_before.png,,397376,Screenshot evidence,docs-media
-618,docs/screenshots/v1.3/1920x1080_dossier_after.png,,817325,Screenshot evidence,docs-media
-619,docs/screenshots/v1.3/1920x1080_dossier_before.png,,827140,Screenshot evidence,docs-media
-620,docs/screenshots/v1.3/1920x1080_help_after.png,,580566,Screenshot evidence,docs-media
-621,docs/screenshots/v1.3/1920x1080_help_before.png,,565100,Screenshot evidence,docs-media
-622,docs/screenshots/v1.3/1920x1080_hotspots_after.png,,702018,Screenshot evidence,docs-media
-623,docs/screenshots/v1.3/1920x1080_hotspots_before.png,,729909,Screenshot evidence,docs-media
-624,docs/screenshots/v1.3/1920x1080_index_glossary_after.png,,478581,Screenshot evidence,docs-media
-625,docs/screenshots/v1.3/1920x1080_index_glossary_before.png,,469234,Screenshot evidence,docs-media
-626,docs/screenshots/v1.3/1920x1080_main_after.png,,878303,Screenshot evidence,docs-media
-627,docs/screenshots/v1.3/1920x1080_main_before.png,,886551,Screenshot evidence,docs-media
-628,docs/screenshots/v1.3/1920x1080_multi_open_after.png,,389883,Screenshot evidence,docs-media
-629,docs/screenshots/v1.3/1920x1080_multi_open_before.png,,390674,Screenshot evidence,docs-media
-630,docs/screenshots/v1.3/1920x1080_rail_layers_after.png,,885525,Screenshot evidence,docs-media
-631,docs/screenshots/v1.3/1920x1080_rail_layers_before.png,,889409,Screenshot evidence,docs-media
-632,docs/screenshots/v1.3/1920x1080_settings_after.png,,786462,Screenshot evidence,docs-media
-633,docs/screenshots/v1.3/1920x1080_settings_before.png,,800865,Screenshot evidence,docs-media
-634,docs/screenshots/v1.3/1920x1080_wars_after.png,,677255,Screenshot evidence,docs-media
-635,docs/screenshots/v1.3/1920x1080_wars_before.png,,670035,Screenshot evidence,docs-media
-636,docs/screenshots/v1.3/3840x2160_main_after.png,,814718,Screenshot evidence,docs-media
-637,docs/screenshots/v1.3/3840x2160_main_before.png,,823066,Screenshot evidence,docs-media
-638,docs/screenshots/v1.3/README.md,23,2060,Screenshot evidence,docs-media
-639,docs/screenshots/v1.4/1280x800_console_full_after.png,,219018,Screenshot evidence,docs-media
-640,docs/screenshots/v1.4/1280x800_console_full_before.png,,215749,Screenshot evidence,docs-media
-641,docs/screenshots/v1.4/1280x800_main_after.png,,392995,Screenshot evidence,docs-media
-642,docs/screenshots/v1.4/1280x800_main_before.png,,426742,Screenshot evidence,docs-media
-643,docs/screenshots/v1.4/1920x1080_charts_after.png,,477093,Screenshot evidence,docs-media
-644,docs/screenshots/v1.4/1920x1080_charts_before.png,,489665,Screenshot evidence,docs-media
-645,docs/screenshots/v1.4/1920x1080_compact_after.png,,783342,Screenshot evidence,docs-media
-646,docs/screenshots/v1.4/1920x1080_compact_before.png,,880434,Screenshot evidence,docs-media
-647,docs/screenshots/v1.4/1920x1080_console_full_after.png,,425371,Screenshot evidence,docs-media
-648,docs/screenshots/v1.4/1920x1080_console_full_before.png,,374183,Screenshot evidence,docs-media
-649,docs/screenshots/v1.4/1920x1080_dossier_after.png,,764898,Screenshot evidence,docs-media
-650,docs/screenshots/v1.4/1920x1080_dossier_before.png,,886904,Screenshot evidence,docs-media
-651,docs/screenshots/v1.4/1920x1080_feed_after.png,,873123,Screenshot evidence,docs-media
-652,docs/screenshots/v1.4/1920x1080_feed_before.png,,880434,Screenshot evidence,docs-media
-653,docs/screenshots/v1.4/1920x1080_help_after.png,,546292,Screenshot evidence,docs-media
-654,docs/screenshots/v1.4/1920x1080_help_before.png,,584561,Screenshot evidence,docs-media
-655,docs/screenshots/v1.4/1920x1080_high_contrast_after.png,,729144,Screenshot evidence,docs-media
-656,docs/screenshots/v1.4/1920x1080_high_contrast_before.png,,880434,Screenshot evidence,docs-media
-657,docs/screenshots/v1.4/1920x1080_hotspots_after.png,,641082,Screenshot evidence,docs-media
-658,docs/screenshots/v1.4/1920x1080_hotspots_before.png,,703257,Screenshot evidence,docs-media
-659,docs/screenshots/v1.4/1920x1080_hover_card_after.png,,1025231,Screenshot evidence,docs-media
-660,docs/screenshots/v1.4/1920x1080_hover_card_before.png,,880434,Screenshot evidence,docs-media
-661,docs/screenshots/v1.4/1920x1080_main_after.png,,832939,Screenshot evidence,docs-media
-662,docs/screenshots/v1.4/1920x1080_main_before.png,,880434,Screenshot evidence,docs-media
-663,docs/screenshots/v1.4/1920x1080_palette_query_after.png,,759677,Screenshot evidence,docs-media
-664,docs/screenshots/v1.4/1920x1080_palette_query_before.png,,863325,Screenshot evidence,docs-media
-665,docs/screenshots/v1.4/1920x1080_rail_filters_after.png,,834042,Screenshot evidence,docs-media
-666,docs/screenshots/v1.4/1920x1080_rail_filters_before.png,,885817,Screenshot evidence,docs-media
-667,docs/screenshots/v1.4/1920x1080_rail_layers_after.png,,829647,Screenshot evidence,docs-media
-668,docs/screenshots/v1.4/1920x1080_rail_layers_before.png,,883819,Screenshot evidence,docs-media
-669,docs/screenshots/v1.4/1920x1080_settings_after.png,,790464,Screenshot evidence,docs-media
-670,docs/screenshots/v1.4/1920x1080_settings_before.png,,784672,Screenshot evidence,docs-media
-671,docs/screenshots/v1.4/3840x2160_main_after.png,,785225,Screenshot evidence,docs-media
-672,docs/screenshots/v1.4/3840x2160_main_before.png,,812641,Screenshot evidence,docs-media
-673,docs/screenshots/v1.4/README.md,26,2450,Screenshot evidence,docs-media
-674,docs/screenshots/v1.5/1280x800_globe_reference_after.png,,461439,Screenshot evidence,docs-media
-675,docs/screenshots/v1.5/1280x800_globe_reference_before.png,,392965,Screenshot evidence,docs-media
-676,docs/screenshots/v1.5/1280x800_main_after.png,,391762,Screenshot evidence,docs-media
-677,docs/screenshots/v1.5/1280x800_main_before.png,,392184,Screenshot evidence,docs-media
-678,docs/screenshots/v1.5/1920x1080_dossier_after.png,,802854,Screenshot evidence,docs-media
-679,docs/screenshots/v1.5/1920x1080_dossier_before.png,,783637,Screenshot evidence,docs-media
-680,docs/screenshots/v1.5/1920x1080_feed_after.png,,703051,Screenshot evidence,docs-media
-681,docs/screenshots/v1.5/1920x1080_feed_before.png,,707143,Screenshot evidence,docs-media
-682,docs/screenshots/v1.5/1920x1080_globe_reference_after.png,,963580,Screenshot evidence,docs-media
-683,docs/screenshots/v1.5/1920x1080_globe_reference_before.png,,943432,Screenshot evidence,docs-media
-684,docs/screenshots/v1.5/1920x1080_help_after.png,,486675,Screenshot evidence,docs-media
-685,docs/screenshots/v1.5/1920x1080_help_before.png,,541397,Screenshot evidence,docs-media
-686,docs/screenshots/v1.5/1920x1080_legend_info_after.png,,834344,Screenshot evidence,docs-media
-687,docs/screenshots/v1.5/1920x1080_legend_info_before.png,,830043,Screenshot evidence,docs-media
-688,docs/screenshots/v1.5/1920x1080_main_after.png,,812898,Screenshot evidence,docs-media
-689,docs/screenshots/v1.5/1920x1080_main_before.png,,831017,Screenshot evidence,docs-media
-690,docs/screenshots/v1.5/1920x1080_markers_close_after.png,,732993,Screenshot evidence,docs-media
-691,docs/screenshots/v1.5/1920x1080_markers_close_before.png,,737172,Screenshot evidence,docs-media
-692,docs/screenshots/v1.5/1920x1080_settings_after.png,,590706,Screenshot evidence,docs-media
-693,docs/screenshots/v1.5/1920x1080_settings_before.png,,621861,Screenshot evidence,docs-media
-694,docs/screenshots/v1.5/3840x2160_globe_reference_after.png,,940675,Screenshot evidence,docs-media
-695,docs/screenshots/v1.5/3840x2160_globe_reference_before.png,,790386,Screenshot evidence,docs-media
-696,docs/screenshots/v1.5/3840x2160_main_after.png,,783443,Screenshot evidence,docs-media
-697,docs/screenshots/v1.5/3840x2160_main_before.png,,788798,Screenshot evidence,docs-media
-698,docs/screenshots/v1.5/README.md,19,1720,Screenshot evidence,docs-media
-699,docs/user-guide.md,131,10071,Documentation,docs
-700,docs/wireframes.md,91,6983,Documentation,docs
-701,docs/wireframes/01_main_console.png,,84741,Wireframe image,design
-702,docs/wireframes/01_main_console.svg,25,2843,Wireframe image,design
-703,docs/wireframes/02_dossier.png,,93527,Wireframe image,design
-704,docs/wireframes/02_dossier.svg,25,2904,Wireframe image,design
-705,docs/wireframes/03_link_graph.png,,13064,Wireframe image,design
-706,docs/wireframes/03_link_graph.svg,26,3016,Wireframe image,design
-707,docs/wireframes/04_compare.png,,73716,Wireframe image,design
-708,docs/wireframes/04_compare.svg,17,1972,Wireframe image,design
-709,docs/wireframes/05_hypothesis.png,,96355,Wireframe image,design
-710,docs/wireframes/05_hypothesis.svg,28,3319,Wireframe image,design
-711,docs/wireframes/06_briefings.png,,58513,Wireframe image,design
-712,docs/wireframes/06_briefings.svg,22,2519,Wireframe image,design
-713,eslint.config.js,47,1182,Lint config,repo
-714,index.html,481,20114,"App entry HTML (CSP, layout skeleton)",ui-shell
-715,js/app.js,21840,5082246,Built bundle (generated by scripts/build.mjs),build-output
-716,js/app.js.map,7,20043628,Built bundle (generated by scripts/build.mjs),build-output
-717,launch.cmd,26,1086,Windows launcher,repo
-718,package-lock.json,2780,95531,npm lockfile,repo
-719,package.json,64,2027,npm manifest,repo
-720,scripts/audit/check_urls.py,123,5824,Audit tooling,audit
-721,scripts/audit/dump_analysis.mjs,57,2027,Audit tooling,audit
-722,scripts/audit/forensics.py,424,31926,Audit tooling,audit
-723,scripts/audit/pair_shots.py,103,4857,Audit tooling,audit
-724,scripts/audit/stats_crosscheck.py,99,6428,Audit tooling,audit
-725,scripts/audit/ui_audit_report.py,422,26412,Audit tooling,audit
-726,scripts/audit/ui_audit_v14.py,417,27922,Audit tooling,audit
-727,scripts/audit/ui_audit_v15.py,236,15532,Audit tooling,audit
-728,scripts/audit/write_passes.py,163,16069,Audit tooling,audit
-729,scripts/build.mjs,38,1214,Build/validation tooling,build
-730,scripts/coverage.mjs,91,4483,Build/validation tooling,build
-731,scripts/design/wireframes_v14.mjs,287,12369,Design/wireframe generator,design
-732,scripts/design/wireframes_v15.mjs,385,16704,Design/wireframe generator,design
-733,scripts/gen_icons.mjs,42,2866,Build/validation tooling,build
-734,scripts/layer_catalog.py,32,2124,Build/validation tooling,build
-735,scripts/package.mjs,109,3865,Build/validation tooling,build
-736,scripts/validate_data.py,98,5376,Build/validation tooling,build
-737,src/app.js,642,22033,App bootstrap/state,core
-738,src/app_core.js,275,9539,App bootstrap/state,core
-739,src/audio.js,145,4201,Domain/analysis module,core
-740,src/basemap.js,50,1857,Domain/analysis module,core
-741,src/cases_codec.js,19,744,Domain/analysis module,core
-742,src/cesium/C.js,100,2227,Globe renderer module (Cesium),globe
-743,src/cesium/flight.js,30,1754,Globe renderer module (Cesium),globe
-744,src/cesium/graticule.js,137,5850,Globe renderer module (Cesium),globe
-745,src/cesium/icons.js,182,6216,Globe renderer module (Cesium),globe
-746,src/cesium/reference.js,228,8787,Globe renderer module (Cesium),globe
-747,src/cesium/sources.js,87,3524,Globe renderer module (Cesium),globe
-748,src/cesium/terrarium.js,113,4331,Globe renderer module (Cesium),globe
-749,src/cinema.js,663,23922,Domain/analysis module,core
-750,src/convergence.js,218,9118,Domain/analysis module,core
-751,src/coverage.js,173,6624,Domain/analysis module,core
-752,src/geo.js,100,3528,Domain/analysis module,core
-753,src/globe_cesium.js,1124,41031,Globe renderer entry,globe
-754,src/glossary.js,244,11149,Domain/analysis module,core
-755,src/grades.js,41,1811,Domain/analysis module,core
-756,src/icons.js,163,18071,Domain/analysis module,core
-757,src/index_gen.js,105,3751,Domain/analysis module,core
-758,src/labels_cesium.js,194,6614,Globe labels,globe
-759,src/layers.js,553,20704,Domain/analysis module,core
-760,src/live_feeds.js,82,3334,Domain/analysis module,core
-761,src/loader.js,58,1868,Domain/analysis module,core
-762,src/pdf7_stats.js,390,13547,Domain/analysis module,core
-763,src/report_gen.js,170,9983,Domain/analysis module,core
-764,src/stats.js,336,11417,Domain/analysis module,core
-765,src/sun.js,15,734,Domain/analysis module,core
-766,src/taxonomy.js,61,2835,Domain/analysis module,core
-767,src/ui/breakpoints.js,18,1207,Console UI component,ui-shell
-768,src/ui/clock.js,43,1465,Console UI component,ui-shell
-769,src/ui/cluster.js,33,1315,Console UI component,ui-shell
-770,src/ui/console.js,375,18803,Console UI component,ui-shell
-771,src/ui/feed.js,189,7509,Console UI component,ui-shell
-772,src/ui/globe_tools.js,76,3287,Console UI component,ui-shell
-773,src/ui/shortcuts.js,104,5441,Console UI component,ui-shell
-774,src/ui/states.js,37,2124,Console UI component,ui-shell
-775,src/ui/symbology.js,138,5707,Console UI component,ui-shell
-776,src/ui/table.js,18,678,Console UI component,ui-shell
-777,src/ui/tabs.js,95,3910,Console UI component,ui-shell
-778,src/ui/timescale.js,73,3369,Console UI component,ui-shell
-779,src/ui/tips.js,85,3556,Console UI component,ui-shell
-780,src/ui/window.js,610,23291,Console UI component,ui-shell
-781,src/ui_analysis.js,455,19257,Panel UI module,ui-panels
-782,src/ui_charts.js,247,10230,Panel UI module,ui-panels
-783,src/ui_conflicts.js,189,7941,Panel UI module,ui-panels
-784,src/ui_data.js,599,29486,Panel UI module,ui-panels
-785,src/ui_graph.js,259,8208,Panel UI module,ui-panels
-786,src/ui_hotspots.js,352,14001,Panel UI module,ui-panels
-787,src/ui_misc.js,435,15791,Panel UI module,ui-panels
-788,src/ui_panels.js,958,42417,Panel UI module,ui-panels
-789,src/ui_reference.js,276,14747,Panel UI module,ui-panels
-790,src/ui_reports.js,102,4359,Panel UI module,ui-panels
-791,src/ui_timeline.js,489,17603,Panel UI module,ui-panels
-792,test/a11y.mjs,67,2832,Browser/e2e test harness (Playwright),tests
-793,test/devshot.mjs,39,1746,Browser/e2e test harness (Playwright),tests
-794,test/perf.mjs,76,4174,Browser/e2e test harness (Playwright),tests
-795,test/screens.mjs,231,6527,Browser/e2e test harness (Playwright),tests
-796,test/shots.py,70,8278,Browser/e2e test harness (Playwright),tests
-797,test/smoke.mjs,361,16900,Browser/e2e test harness (Playwright),tests
-798,test/static_server.mjs,34,1181,Browser/e2e test harness (Playwright),tests
-799,test/ui_audit.mjs,444,19377,Browser/e2e test harness (Playwright),tests
-800,test/ui_views.mjs,217,6450,Browser/e2e test harness (Playwright),tests
-801,test/unit/breakpoints.test.mjs,36,1577,Unit test (node:test),tests
-802,test/unit/cesium.test.mjs,42,1881,Unit test (node:test),tests
-803,test/unit/clock.test.mjs,23,1037,Unit test (node:test),tests
-804,test/unit/cluster.test.mjs,61,2270,Unit test (node:test),tests
-805,test/unit/convergence.test.mjs,125,5088,Unit test (node:test),tests
-806,test/unit/flight.test.mjs,30,1844,Unit test (node:test),tests
-807,test/unit/geo.test.mjs,61,2172,Unit test (node:test),tests
-808,test/unit/grades.test.mjs,34,1240,Unit test (node:test),tests
-809,test/unit/graticule.test.mjs,122,5575,Unit test (node:test),tests
-810,test/unit/pdf7.test.mjs,50,1886,Unit test (node:test),tests
-811,test/unit/pdf7_data.test.mjs,103,4583,Unit test (node:test),tests
-812,test/unit/pdf7_stats.test.mjs,94,3629,Unit test (node:test),tests
-813,test/unit/reports.test.mjs,160,4898,Unit test (node:test),tests
-814,test/unit/shortcuts.test.mjs,46,2118,Unit test (node:test),tests
-815,test/unit/states.test.mjs,26,1497,Unit test (node:test),tests
-816,test/unit/stats.test.mjs,102,4619,Unit test (node:test),tests
-817,test/unit/symbology.test.mjs,99,3855,Unit test (node:test),tests
-818,test/unit/tabs.test.mjs,90,3454,Unit test (node:test),tests
-819,test/unit/timescale.test.mjs,47,2171,Unit test (node:test),tests
-820,test/unit/window.test.mjs,243,11656,Unit test (node:test),tests
-821,textures/bump4k.js,1,412632,Earth texture (base64 JS module),assets
-822,textures/day2k.js,1,337739,Earth texture (base64 JS module),assets
-823,textures/day8k.js,1,4218435,Earth texture (base64 JS module),assets
-824,textures/night2k.js,1,212545,Earth texture (base64 JS module),assets
-825,textures/night8k.js,1,2730441,Earth texture (base64 JS module),assets
-826,textures/spec4k.js,1,81551,Earth texture (base64 JS module),assets
-827,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_0.json,1,67428,Vendored CesiumJS build (third party),vendor
-828,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_1.json,1,67313,Vendored CesiumJS build (third party),vendor
-829,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_10.json,1,65984,Vendored CesiumJS build (third party),vendor
-830,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_11.json,1,65007,Vendored CesiumJS build (third party),vendor
-831,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_12.json,1,64663,Vendored CesiumJS build (third party),vendor
-832,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_13.json,1,65854,Vendored CesiumJS build (third party),vendor
-833,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_14.json,1,65547,Vendored CesiumJS build (third party),vendor
-834,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_15.json,1,65709,Vendored CesiumJS build (third party),vendor
-835,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_16.json,1,66030,Vendored CesiumJS build (third party),vendor
-836,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_17.json,1,65622,Vendored CesiumJS build (third party),vendor
-837,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_18.json,1,65310,Vendored CesiumJS build (third party),vendor
-838,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_19.json,1,65537,Vendored CesiumJS build (third party),vendor
-839,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_2.json,1,67802,Vendored CesiumJS build (third party),vendor
-840,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_20.json,1,65328,Vendored CesiumJS build (third party),vendor
-841,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_21.json,1,64843,Vendored CesiumJS build (third party),vendor
-842,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_22.json,1,64977,Vendored CesiumJS build (third party),vendor
-843,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_23.json,1,66084,Vendored CesiumJS build (third party),vendor
-844,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_24.json,1,64894,Vendored CesiumJS build (third party),vendor
-845,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_25.json,1,64953,Vendored CesiumJS build (third party),vendor
-846,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_26.json,1,65311,Vendored CesiumJS build (third party),vendor
-847,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_27.json,1,27595,Vendored CesiumJS build (third party),vendor
-848,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_3.json,1,66400,Vendored CesiumJS build (third party),vendor
-849,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_4.json,1,65900,Vendored CesiumJS build (third party),vendor
-850,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_5.json,1,65378,Vendored CesiumJS build (third party),vendor
-851,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_6.json,1,65596,Vendored CesiumJS build (third party),vendor
-852,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_7.json,1,67099,Vendored CesiumJS build (third party),vendor
-853,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_8.json,1,66931,Vendored CesiumJS build (third party),vendor
-854,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_9.json,1,66857,Vendored CesiumJS build (third party),vendor
-855,vendor/cesium/Assets/Images/bing_maps_credit.png,,18831,Vendored CesiumJS build (third party),vendor
-856,vendor/cesium/Assets/Images/cesium_credit.png,,4242,Vendored CesiumJS build (third party),vendor
-857,vendor/cesium/Assets/Images/google_earth_credit.png,,7703,Vendored CesiumJS build (third party),vendor
-858,vendor/cesium/Assets/Images/ion-credit.png,,6028,Vendored CesiumJS build (third party),vendor
-859,vendor/cesium/Assets/Textures/LensFlare/DirtMask.jpg,,113718,Vendored CesiumJS build (third party),vendor
-860,vendor/cesium/Assets/Textures/LensFlare/StarBurst.jpg,,195728,Vendored CesiumJS build (third party),vendor
-861,vendor/cesium/Assets/Textures/NaturalEarthII/0/0/0.jpg,,12067,Vendored CesiumJS build (third party),vendor
-862,vendor/cesium/Assets/Textures/NaturalEarthII/0/1/0.jpg,,14055,Vendored CesiumJS build (third party),vendor
-863,vendor/cesium/Assets/Textures/NaturalEarthII/1/0/0.jpg,,7278,Vendored CesiumJS build (third party),vendor
-864,vendor/cesium/Assets/Textures/NaturalEarthII/1/0/1.jpg,,11399,Vendored CesiumJS build (third party),vendor
-865,vendor/cesium/Assets/Textures/NaturalEarthII/1/1/0.jpg,,10652,Vendored CesiumJS build (third party),vendor
-866,vendor/cesium/Assets/Textures/NaturalEarthII/1/1/1.jpg,,13142,Vendored CesiumJS build (third party),vendor
-867,vendor/cesium/Assets/Textures/NaturalEarthII/1/2/0.jpg,,9643,Vendored CesiumJS build (third party),vendor
-868,vendor/cesium/Assets/Textures/NaturalEarthII/1/2/1.jpg,,15312,Vendored CesiumJS build (third party),vendor
-869,vendor/cesium/Assets/Textures/NaturalEarthII/1/3/0.jpg,,10532,Vendored CesiumJS build (third party),vendor
-870,vendor/cesium/Assets/Textures/NaturalEarthII/1/3/1.jpg,,13262,Vendored CesiumJS build (third party),vendor
-871,vendor/cesium/Assets/Textures/NaturalEarthII/2/0/0.jpg,,8157,Vendored CesiumJS build (third party),vendor
-872,vendor/cesium/Assets/Textures/NaturalEarthII/2/0/1.jpg,,9307,Vendored CesiumJS build (third party),vendor
-873,vendor/cesium/Assets/Textures/NaturalEarthII/2/0/2.jpg,,7891,Vendored CesiumJS build (third party),vendor
-874,vendor/cesium/Assets/Textures/NaturalEarthII/2/0/3.jpg,,10341,Vendored CesiumJS build (third party),vendor
-875,vendor/cesium/Assets/Textures/NaturalEarthII/2/1/0.jpg,,7852,Vendored CesiumJS build (third party),vendor
-876,vendor/cesium/Assets/Textures/NaturalEarthII/2/1/1.jpg,,6850,Vendored CesiumJS build (third party),vendor
-877,vendor/cesium/Assets/Textures/NaturalEarthII/2/1/2.jpg,,11581,Vendored CesiumJS build (third party),vendor
-878,vendor/cesium/Assets/Textures/NaturalEarthII/2/1/3.jpg,,15862,Vendored CesiumJS build (third party),vendor
-879,vendor/cesium/Assets/Textures/NaturalEarthII/2/2/0.jpg,,10657,Vendored CesiumJS build (third party),vendor
-880,vendor/cesium/Assets/Textures/NaturalEarthII/2/2/1.jpg,,12456,Vendored CesiumJS build (third party),vendor
-881,vendor/cesium/Assets/Textures/NaturalEarthII/2/2/2.jpg,,12262,Vendored CesiumJS build (third party),vendor
-882,vendor/cesium/Assets/Textures/NaturalEarthII/2/2/3.jpg,,14940,Vendored CesiumJS build (third party),vendor
-883,vendor/cesium/Assets/Textures/NaturalEarthII/2/3/0.jpg,,9531,Vendored CesiumJS build (third party),vendor
-884,vendor/cesium/Assets/Textures/NaturalEarthII/2/3/1.jpg,,10234,Vendored CesiumJS build (third party),vendor
-885,vendor/cesium/Assets/Textures/NaturalEarthII/2/3/2.jpg,,11678,Vendored CesiumJS build (third party),vendor
-886,vendor/cesium/Assets/Textures/NaturalEarthII/2/3/3.jpg,,10754,Vendored CesiumJS build (third party),vendor
-887,vendor/cesium/Assets/Textures/NaturalEarthII/2/4/0.jpg,,8474,Vendored CesiumJS build (third party),vendor
-888,vendor/cesium/Assets/Textures/NaturalEarthII/2/4/1.jpg,,12265,Vendored CesiumJS build (third party),vendor
-889,vendor/cesium/Assets/Textures/NaturalEarthII/2/4/2.jpg,,16477,Vendored CesiumJS build (third party),vendor
-890,vendor/cesium/Assets/Textures/NaturalEarthII/2/4/3.jpg,,11888,Vendored CesiumJS build (third party),vendor
-891,vendor/cesium/Assets/Textures/NaturalEarthII/2/5/0.jpg,,7540,Vendored CesiumJS build (third party),vendor
-892,vendor/cesium/Assets/Textures/NaturalEarthII/2/5/1.jpg,,10274,Vendored CesiumJS build (third party),vendor
-893,vendor/cesium/Assets/Textures/NaturalEarthII/2/5/2.jpg,,16112,Vendored CesiumJS build (third party),vendor
-894,vendor/cesium/Assets/Textures/NaturalEarthII/2/5/3.jpg,,11877,Vendored CesiumJS build (third party),vendor
-895,vendor/cesium/Assets/Textures/NaturalEarthII/2/6/0.jpg,,6636,Vendored CesiumJS build (third party),vendor
-896,vendor/cesium/Assets/Textures/NaturalEarthII/2/6/1.jpg,,11564,Vendored CesiumJS build (third party),vendor
-897,vendor/cesium/Assets/Textures/NaturalEarthII/2/6/2.jpg,,16411,Vendored CesiumJS build (third party),vendor
-898,vendor/cesium/Assets/Textures/NaturalEarthII/2/6/3.jpg,,12756,Vendored CesiumJS build (third party),vendor
-899,vendor/cesium/Assets/Textures/NaturalEarthII/2/7/0.jpg,,9032,Vendored CesiumJS build (third party),vendor
-900,vendor/cesium/Assets/Textures/NaturalEarthII/2/7/1.jpg,,12957,Vendored CesiumJS build (third party),vendor
-901,vendor/cesium/Assets/Textures/NaturalEarthII/2/7/2.jpg,,11362,Vendored CesiumJS build (third party),vendor
-902,vendor/cesium/Assets/Textures/NaturalEarthII/2/7/3.jpg,,11859,Vendored CesiumJS build (third party),vendor
-903,vendor/cesium/Assets/Textures/NaturalEarthII/tilemapresource.xml,14,780,Vendored CesiumJS build (third party),vendor
-904,vendor/cesium/Assets/Textures/SkyBox/tycho2t3_80_mx.jpg,,118775,Vendored CesiumJS build (third party),vendor
-905,vendor/cesium/Assets/Textures/SkyBox/tycho2t3_80_my.jpg,,152501,Vendored CesiumJS build (third party),vendor
-906,vendor/cesium/Assets/Textures/SkyBox/tycho2t3_80_mz.jpg,,167980,Vendored CesiumJS build (third party),vendor
-907,vendor/cesium/Assets/Textures/SkyBox/tycho2t3_80_px.jpg,,122746,Vendored CesiumJS build (third party),vendor
-908,vendor/cesium/Assets/Textures/SkyBox/tycho2t3_80_py.jpg,,152999,Vendored CesiumJS build (third party),vendor
-909,vendor/cesium/Assets/Textures/SkyBox/tycho2t3_80_pz.jpg,,152537,Vendored CesiumJS build (third party),vendor
-910,vendor/cesium/Assets/Textures/maki/airfield.png,,1188,Vendored CesiumJS build (third party),vendor
-911,vendor/cesium/Assets/Textures/maki/airport.png,,1554,Vendored CesiumJS build (third party),vendor
-912,vendor/cesium/Assets/Textures/maki/alcohol-shop.png,,1293,Vendored CesiumJS build (third party),vendor
-913,vendor/cesium/Assets/Textures/maki/america-football.png,,2595,Vendored CesiumJS build (third party),vendor
-914,vendor/cesium/Assets/Textures/maki/art-gallery.png,,3159,Vendored CesiumJS build (third party),vendor
-915,vendor/cesium/Assets/Textures/maki/bakery.png,,2714,Vendored CesiumJS build (third party),vendor
-916,vendor/cesium/Assets/Textures/maki/bank.png,,936,Vendored CesiumJS build (third party),vendor
-917,vendor/cesium/Assets/Textures/maki/bar.png,,1435,Vendored CesiumJS build (third party),vendor
-918,vendor/cesium/Assets/Textures/maki/baseball.png,,1838,Vendored CesiumJS build (third party),vendor
-919,vendor/cesium/Assets/Textures/maki/basketball.png,,1318,Vendored CesiumJS build (third party),vendor
-920,vendor/cesium/Assets/Textures/maki/beer.png,,1403,Vendored CesiumJS build (third party),vendor
-921,vendor/cesium/Assets/Textures/maki/bicycle.png,,3989,Vendored CesiumJS build (third party),vendor
-922,vendor/cesium/Assets/Textures/maki/building.png,,1765,Vendored CesiumJS build (third party),vendor
-923,vendor/cesium/Assets/Textures/maki/bus.png,,998,Vendored CesiumJS build (third party),vendor
-924,vendor/cesium/Assets/Textures/maki/cafe.png,,1518,Vendored CesiumJS build (third party),vendor
-925,vendor/cesium/Assets/Textures/maki/camera.png,,1976,Vendored CesiumJS build (third party),vendor
-926,vendor/cesium/Assets/Textures/maki/campsite.png,,2411,Vendored CesiumJS build (third party),vendor
-927,vendor/cesium/Assets/Textures/maki/car.png,,1498,Vendored CesiumJS build (third party),vendor
-928,vendor/cesium/Assets/Textures/maki/cemetery.png,,967,Vendored CesiumJS build (third party),vendor
-929,vendor/cesium/Assets/Textures/maki/cesium.png,,3610,Vendored CesiumJS build (third party),vendor
-930,vendor/cesium/Assets/Textures/maki/chemist.png,,1603,Vendored CesiumJS build (third party),vendor
-931,vendor/cesium/Assets/Textures/maki/cinema.png,,1492,Vendored CesiumJS build (third party),vendor
-932,vendor/cesium/Assets/Textures/maki/circle-stroked.png,,2126,Vendored CesiumJS build (third party),vendor
-933,vendor/cesium/Assets/Textures/maki/circle.png,,1459,Vendored CesiumJS build (third party),vendor
-934,vendor/cesium/Assets/Textures/maki/city.png,,788,Vendored CesiumJS build (third party),vendor
-935,vendor/cesium/Assets/Textures/maki/clothing-store.png,,2037,Vendored CesiumJS build (third party),vendor
-936,vendor/cesium/Assets/Textures/maki/college.png,,2502,Vendored CesiumJS build (third party),vendor
-937,vendor/cesium/Assets/Textures/maki/commercial.png,,1002,Vendored CesiumJS build (third party),vendor
-938,vendor/cesium/Assets/Textures/maki/cricket.png,,1677,Vendored CesiumJS build (third party),vendor
-939,vendor/cesium/Assets/Textures/maki/cross.png,,1888,Vendored CesiumJS build (third party),vendor
-940,vendor/cesium/Assets/Textures/maki/dam.png,,1703,Vendored CesiumJS build (third party),vendor
-941,vendor/cesium/Assets/Textures/maki/danger.png,,2429,Vendored CesiumJS build (third party),vendor
-942,vendor/cesium/Assets/Textures/maki/disability.png,,3437,Vendored CesiumJS build (third party),vendor
-943,vendor/cesium/Assets/Textures/maki/dog-park.png,,3146,Vendored CesiumJS build (third party),vendor
-944,vendor/cesium/Assets/Textures/maki/embassy.png,,1680,Vendored CesiumJS build (third party),vendor
-945,vendor/cesium/Assets/Textures/maki/emergency-telephone.png,,1533,Vendored CesiumJS build (third party),vendor
-946,vendor/cesium/Assets/Textures/maki/entrance.png,,1307,Vendored CesiumJS build (third party),vendor
-947,vendor/cesium/Assets/Textures/maki/farm.png,,1686,Vendored CesiumJS build (third party),vendor
-948,vendor/cesium/Assets/Textures/maki/fast-food.png,,2019,Vendored CesiumJS build (third party),vendor
-949,vendor/cesium/Assets/Textures/maki/ferry.png,,2879,Vendored CesiumJS build (third party),vendor
-950,vendor/cesium/Assets/Textures/maki/fire-station.png,,2228,Vendored CesiumJS build (third party),vendor
-951,vendor/cesium/Assets/Textures/maki/fuel.png,,1741,Vendored CesiumJS build (third party),vendor
-952,vendor/cesium/Assets/Textures/maki/garden.png,,2057,Vendored CesiumJS build (third party),vendor
-953,vendor/cesium/Assets/Textures/maki/gift.png,,1606,Vendored CesiumJS build (third party),vendor
-954,vendor/cesium/Assets/Textures/maki/golf.png,,1999,Vendored CesiumJS build (third party),vendor
-955,vendor/cesium/Assets/Textures/maki/grocery.png,,1425,Vendored CesiumJS build (third party),vendor
-956,vendor/cesium/Assets/Textures/maki/hairdresser.png,,3301,Vendored CesiumJS build (third party),vendor
-957,vendor/cesium/Assets/Textures/maki/harbor.png,,2048,Vendored CesiumJS build (third party),vendor
-958,vendor/cesium/Assets/Textures/maki/heart.png,,1745,Vendored CesiumJS build (third party),vendor
-959,vendor/cesium/Assets/Textures/maki/heliport.png,,2059,Vendored CesiumJS build (third party),vendor
-960,vendor/cesium/Assets/Textures/maki/hospital.png,,909,Vendored CesiumJS build (third party),vendor
-961,vendor/cesium/Assets/Textures/maki/ice-cream.png,,1602,Vendored CesiumJS build (third party),vendor
-962,vendor/cesium/Assets/Textures/maki/industrial.png,,1092,Vendored CesiumJS build (third party),vendor
-963,vendor/cesium/Assets/Textures/maki/land-use.png,,1773,Vendored CesiumJS build (third party),vendor
-964,vendor/cesium/Assets/Textures/maki/laundry.png,,2407,Vendored CesiumJS build (third party),vendor
-965,vendor/cesium/Assets/Textures/maki/library.png,,1355,Vendored CesiumJS build (third party),vendor
-966,vendor/cesium/Assets/Textures/maki/lighthouse.png,,1944,Vendored CesiumJS build (third party),vendor
-967,vendor/cesium/Assets/Textures/maki/lodging.png,,1362,Vendored CesiumJS build (third party),vendor
-968,vendor/cesium/Assets/Textures/maki/logging.png,,1378,Vendored CesiumJS build (third party),vendor
-969,vendor/cesium/Assets/Textures/maki/london-underground.png,,2979,Vendored CesiumJS build (third party),vendor
-970,vendor/cesium/Assets/Textures/maki/marker-stroked.png,,3414,Vendored CesiumJS build (third party),vendor
-971,vendor/cesium/Assets/Textures/maki/marker.png,,2448,Vendored CesiumJS build (third party),vendor
-972,vendor/cesium/Assets/Textures/maki/minefield.png,,1907,Vendored CesiumJS build (third party),vendor
-973,vendor/cesium/Assets/Textures/maki/mobilephone.png,,1474,Vendored CesiumJS build (third party),vendor
-974,vendor/cesium/Assets/Textures/maki/monument.png,,1376,Vendored CesiumJS build (third party),vendor
-975,vendor/cesium/Assets/Textures/maki/museum.png,,2578,Vendored CesiumJS build (third party),vendor
-976,vendor/cesium/Assets/Textures/maki/music.png,,1371,Vendored CesiumJS build (third party),vendor
-977,vendor/cesium/Assets/Textures/maki/oil-well.png,,3357,Vendored CesiumJS build (third party),vendor
-978,vendor/cesium/Assets/Textures/maki/park.png,,2059,Vendored CesiumJS build (third party),vendor
-979,vendor/cesium/Assets/Textures/maki/park2.png,,2284,Vendored CesiumJS build (third party),vendor
-980,vendor/cesium/Assets/Textures/maki/parking-garage.png,,1563,Vendored CesiumJS build (third party),vendor
-981,vendor/cesium/Assets/Textures/maki/parking.png,,1250,Vendored CesiumJS build (third party),vendor
-982,vendor/cesium/Assets/Textures/maki/pharmacy.png,,2258,Vendored CesiumJS build (third party),vendor
-983,vendor/cesium/Assets/Textures/maki/pitch.png,,3288,Vendored CesiumJS build (third party),vendor
-984,vendor/cesium/Assets/Textures/maki/place-of-worship.png,,1111,Vendored CesiumJS build (third party),vendor
-985,vendor/cesium/Assets/Textures/maki/playground.png,,3856,Vendored CesiumJS build (third party),vendor
-986,vendor/cesium/Assets/Textures/maki/police.png,,2194,Vendored CesiumJS build (third party),vendor
-987,vendor/cesium/Assets/Textures/maki/polling-place.png,,1772,Vendored CesiumJS build (third party),vendor
-988,vendor/cesium/Assets/Textures/maki/post.png,,1273,Vendored CesiumJS build (third party),vendor
-989,vendor/cesium/Assets/Textures/maki/prison.png,,1371,Vendored CesiumJS build (third party),vendor
-990,vendor/cesium/Assets/Textures/maki/rail-above.png,,2071,Vendored CesiumJS build (third party),vendor
-991,vendor/cesium/Assets/Textures/maki/rail-light.png,,2816,Vendored CesiumJS build (third party),vendor
-992,vendor/cesium/Assets/Textures/maki/rail-metro.png,,2249,Vendored CesiumJS build (third party),vendor
-993,vendor/cesium/Assets/Textures/maki/rail-underground.png,,1996,Vendored CesiumJS build (third party),vendor
-994,vendor/cesium/Assets/Textures/maki/rail.png,,2073,Vendored CesiumJS build (third party),vendor
-995,vendor/cesium/Assets/Textures/maki/religious-christian.png,,948,Vendored CesiumJS build (third party),vendor
-996,vendor/cesium/Assets/Textures/maki/religious-jewish.png,,2384,Vendored CesiumJS build (third party),vendor
-997,vendor/cesium/Assets/Textures/maki/religious-muslim.png,,3925,Vendored CesiumJS build (third party),vendor
-998,vendor/cesium/Assets/Textures/maki/restaurant.png,,2499,Vendored CesiumJS build (third party),vendor
-999,vendor/cesium/Assets/Textures/maki/roadblock.png,,1312,Vendored CesiumJS build (third party),vendor
-1000,vendor/cesium/Assets/Textures/maki/rocket.png,,1653,Vendored CesiumJS build (third party),vendor
-1001,vendor/cesium/Assets/Textures/maki/school.png,,3838,Vendored CesiumJS build (third party),vendor
-1002,vendor/cesium/Assets/Textures/maki/scooter.png,,2942,Vendored CesiumJS build (third party),vendor
-1003,vendor/cesium/Assets/Textures/maki/shop.png,,1544,Vendored CesiumJS build (third party),vendor
-1004,vendor/cesium/Assets/Textures/maki/skiing.png,,3345,Vendored CesiumJS build (third party),vendor
-1005,vendor/cesium/Assets/Textures/maki/slaughterhouse.png,,2270,Vendored CesiumJS build (third party),vendor
-1006,vendor/cesium/Assets/Textures/maki/soccer.png,,2420,Vendored CesiumJS build (third party),vendor
-1007,vendor/cesium/Assets/Textures/maki/square-stroked.png,,650,Vendored CesiumJS build (third party),vendor
-1008,vendor/cesium/Assets/Textures/maki/square.png,,582,Vendored CesiumJS build (third party),vendor
-1009,vendor/cesium/Assets/Textures/maki/star-stroked.png,,3460,Vendored CesiumJS build (third party),vendor
-1010,vendor/cesium/Assets/Textures/maki/star.png,,2703,Vendored CesiumJS build (third party),vendor
-1011,vendor/cesium/Assets/Textures/maki/suitcase.png,,1129,Vendored CesiumJS build (third party),vendor
-1012,vendor/cesium/Assets/Textures/maki/swimming.png,,2106,Vendored CesiumJS build (third party),vendor
-1013,vendor/cesium/Assets/Textures/maki/telephone.png,,1702,Vendored CesiumJS build (third party),vendor
-1014,vendor/cesium/Assets/Textures/maki/tennis.png,,1658,Vendored CesiumJS build (third party),vendor
-1015,vendor/cesium/Assets/Textures/maki/theatre.png,,3233,Vendored CesiumJS build (third party),vendor
-1016,vendor/cesium/Assets/Textures/maki/toilets.png,,2917,Vendored CesiumJS build (third party),vendor
-1017,vendor/cesium/Assets/Textures/maki/town-hall.png,,2005,Vendored CesiumJS build (third party),vendor
-1018,vendor/cesium/Assets/Textures/maki/town.png,,1125,Vendored CesiumJS build (third party),vendor
-1019,vendor/cesium/Assets/Textures/maki/triangle-stroked.png,,2837,Vendored CesiumJS build (third party),vendor
-1020,vendor/cesium/Assets/Textures/maki/triangle.png,,2137,Vendored CesiumJS build (third party),vendor
-1021,vendor/cesium/Assets/Textures/maki/village.png,,2145,Vendored CesiumJS build (third party),vendor
-1022,vendor/cesium/Assets/Textures/maki/warehouse.png,,1908,Vendored CesiumJS build (third party),vendor
-1023,vendor/cesium/Assets/Textures/maki/waste-basket.png,,1917,Vendored CesiumJS build (third party),vendor
-1024,vendor/cesium/Assets/Textures/maki/water.png,,2411,Vendored CesiumJS build (third party),vendor
-1025,vendor/cesium/Assets/Textures/maki/wetland.png,,2151,Vendored CesiumJS build (third party),vendor
-1026,vendor/cesium/Assets/Textures/maki/zoo.png,,2681,Vendored CesiumJS build (third party),vendor
-1027,vendor/cesium/Assets/Textures/moonSmall.jpg,,18196,Vendored CesiumJS build (third party),vendor
-1028,vendor/cesium/Assets/Textures/pin.svg,1,348,Vendored CesiumJS build (third party),vendor
-1029,vendor/cesium/Assets/Textures/waterNormals.jpg,,294196,Vendored CesiumJS build (third party),vendor
-1030,vendor/cesium/Assets/Textures/waterNormalsSmall.jpg,,34121,Vendored CesiumJS build (third party),vendor
-1031,vendor/cesium/Assets/approximateTerrainHeights.json,1,299471,Vendored CesiumJS build (third party),vendor
-1032,vendor/cesium/LICENSE.md,928,50087,Vendored CesiumJS build (third party),vendor
-1033,vendor/cesium/ThirdParty/Workers/package.json,1,19,Vendored CesiumJS build (third party),vendor
-1034,vendor/cesium/ThirdParty/Workers/zip-web-worker.js,1,28349,Vendored CesiumJS build (third party),vendor
-1035,vendor/cesium/ThirdParty/basis_transcoder.wasm,,500839,Vendored CesiumJS build (third party),vendor
-1036,vendor/cesium/ThirdParty/draco_decoder.wasm,,285948,Vendored CesiumJS build (third party),vendor
-1037,vendor/cesium/ThirdParty/google-earth-dbroot-parser.js,8337,501930,Vendored CesiumJS build (third party),vendor
-1038,vendor/cesium/ThirdParty/wasm_splats_bg.wasm,,26522,Vendored CesiumJS build (third party),vendor
-1039,vendor/cesium/ThirdParty/zip-module.wasm,,55126,Vendored CesiumJS build (third party),vendor
-1040,vendor/cesium/Widgets/CesiumWidget.css,119,2265,Vendored CesiumJS build (third party),vendor
-1041,vendor/cesium/Workers/chunk-7QBJGNT7.js,41306,1504573,Vendored CesiumJS build (third party),vendor
-1042,vendor/cesium/Workers/chunk-7WPQTQP5.js,455,17412,Vendored CesiumJS build (third party),vendor
-1043,vendor/cesium/Workers/chunk-A366PYP7.js,758,25946,Vendored CesiumJS build (third party),vendor
-1044,vendor/cesium/Workers/chunk-BDKN5F6V.js,2004,60073,Vendored CesiumJS build (third party),vendor
-1045,vendor/cesium/Workers/chunk-DE3R5UOC.js,82,2451,Vendored CesiumJS build (third party),vendor
-1046,vendor/cesium/Workers/chunk-O4MKUNQU.js,346,12952,Vendored CesiumJS build (third party),vendor
-1047,vendor/cesium/Workers/chunk-PWOTIYNL.js,280,9386,Vendored CesiumJS build (third party),vendor
-1048,vendor/cesium/Workers/chunk-QV7GZYO4.js,1800,84441,Vendored CesiumJS build (third party),vendor
-1049,vendor/cesium/Workers/chunk-XGNRWOT7.js,455,17005,Vendored CesiumJS build (third party),vendor
-1050,vendor/cesium/Workers/chunk-ZKM7BGGI.js,4296,269672,Vendored CesiumJS build (third party),vendor
-1051,vendor/cesium/Workers/combineGeometry.js,46,1548,Vendored CesiumJS build (third party),vendor
-1052,vendor/cesium/Workers/createBoxGeometry.js,41,1299,Vendored CesiumJS build (third party),vendor
-1053,vendor/cesium/Workers/createBoxOutlineGeometry.js,41,1355,Vendored CesiumJS build (third party),vendor
-1054,vendor/cesium/Workers/createCircleGeometry.js,49,1621,Vendored CesiumJS build (third party),vendor
-1055,vendor/cesium/Workers/createCircleOutlineGeometry.js,49,1677,Vendored CesiumJS build (third party),vendor
-1056,vendor/cesium/Workers/createCoplanarPolygonGeometry.js,41,1411,Vendored CesiumJS build (third party),vendor
-1057,vendor/cesium/Workers/createCoplanarPolygonOutlineGeometry.js,46,1590,Vendored CesiumJS build (third party),vendor
-1058,vendor/cesium/Workers/createCorridorGeometry.js,43,1466,Vendored CesiumJS build (third party),vendor
-1059,vendor/cesium/Workers/createCorridorOutlineGeometry.js,48,1590,Vendored CesiumJS build (third party),vendor
-1060,vendor/cesium/Workers/createCylinderGeometry.js,41,1359,Vendored CesiumJS build (third party),vendor
-1061,vendor/cesium/Workers/createCylinderOutlineGeometry.js,41,1415,Vendored CesiumJS build (third party),vendor
-1062,vendor/cesium/Workers/createEllipseGeometry.js,45,1553,Vendored CesiumJS build (third party),vendor
-1063,vendor/cesium/Workers/createEllipseOutlineGeometry.js,45,1609,Vendored CesiumJS build (third party),vendor
-1064,vendor/cesium/Workers/createEllipsoidGeometry.js,41,1371,Vendored CesiumJS build (third party),vendor
-1065,vendor/cesium/Workers/createEllipsoidOutlineGeometry.js,44,1471,Vendored CesiumJS build (third party),vendor
-1066,vendor/cesium/Workers/createFrustumGeometry.js,43,1385,Vendored CesiumJS build (third party),vendor
-1067,vendor/cesium/Workers/createFrustumOutlineGeometry.js,212,7632,Vendored CesiumJS build (third party),vendor
-1068,vendor/cesium/Workers/createGeometry.js,152,7646,Vendored CesiumJS build (third party),vendor
-1069,vendor/cesium/Workers/createGroundPolylineGeometry.js,1625,58908,Vendored CesiumJS build (third party),vendor
-1070,vendor/cesium/Workers/createPlaneGeometry.js,41,1323,Vendored CesiumJS build (third party),vendor
-1071,vendor/cesium/Workers/createPlaneOutlineGeometry.js,41,1379,Vendored CesiumJS build (third party),vendor
-1072,vendor/cesium/Workers/createPolygonGeometry.js,43,1452,Vendored CesiumJS build (third party),vendor
-1073,vendor/cesium/Workers/createPolygonOutlineGeometry.js,43,1508,Vendored CesiumJS build (third party),vendor
-1074,vendor/cesium/Workers/createPolylineGeometry.js,43,1466,Vendored CesiumJS build (third party),vendor
-1075,vendor/cesium/Workers/createPolylineVolumeGeometry.js,48,1576,Vendored CesiumJS build (third party),vendor
-1076,vendor/cesium/Workers/createPolylineVolumeOutlineGeometry.js,50,1682,Vendored CesiumJS build (third party),vendor
-1077,vendor/cesium/Workers/createRectangleGeometry.js,45,1589,Vendored CesiumJS build (third party),vendor
-1078,vendor/cesium/Workers/createRectangleOutlineGeometry.js,48,1663,Vendored CesiumJS build (third party),vendor
-1079,vendor/cesium/Workers/createSimplePolylineGeometry.js,48,1576,Vendored CesiumJS build (third party),vendor
-1080,vendor/cesium/Workers/createSphereGeometry.js,41,1335,Vendored CesiumJS build (third party),vendor
-1081,vendor/cesium/Workers/createSphereOutlineGeometry.js,41,1391,Vendored CesiumJS build (third party),vendor
-1082,vendor/cesium/Workers/createTaskProcessorWorker.js,32,1011,Vendored CesiumJS build (third party),vendor
-1083,vendor/cesium/Workers/createVectorTileClampedPolylines.js,476,16536,Vendored CesiumJS build (third party),vendor
-1084,vendor/cesium/Workers/createVectorTileGeometries.js,358,14114,Vendored CesiumJS build (third party),vendor
-1085,vendor/cesium/Workers/createVectorTilePoints.js,100,3526,Vendored CesiumJS build (third party),vendor
-1086,vendor/cesium/Workers/createVectorTilePolygons.js,359,13557,Vendored CesiumJS build (third party),vendor
-1087,vendor/cesium/Workers/createVectorTilePolylines.js,246,8812,Vendored CesiumJS build (third party),vendor
-1088,vendor/cesium/Workers/createVerticesFromCesium3DTilesTerrain.js,73,2494,Vendored CesiumJS build (third party),vendor
-1089,vendor/cesium/Workers/createVerticesFromGoogleEarthEnterpriseBuffer.js,537,18791,Vendored CesiumJS build (third party),vendor
-1090,vendor/cesium/Workers/createVerticesFromHeightmap.js,2226,91836,Vendored CesiumJS build (third party),vendor
-1091,vendor/cesium/Workers/createVerticesFromQuantizedTerrainMesh.js,479,15055,Vendored CesiumJS build (third party),vendor
-1092,vendor/cesium/Workers/createWallGeometry.js,43,1410,Vendored CesiumJS build (third party),vendor
-1093,vendor/cesium/Workers/createWallOutlineGeometry.js,43,1466,Vendored CesiumJS build (third party),vendor
-1094,vendor/cesium/Workers/decodeDraco.js,360,11513,Vendored CesiumJS build (third party),vendor
-1095,vendor/cesium/Workers/decodeGoogleEarthEnterprisePacket.js,1335,61336,Vendored CesiumJS build (third party),vendor
-1096,vendor/cesium/Workers/decodeI3S.js,1311,45515,Vendored CesiumJS build (third party),vendor
-1097,vendor/cesium/Workers/gaussianSplatSorter.js,62,1957,Vendored CesiumJS build (third party),vendor
-1098,vendor/cesium/Workers/gaussianSplatTextureGenerator.js,68,2087,Vendored CesiumJS build (third party),vendor
-1099,vendor/cesium/Workers/incrementallyBuildTerrainPicker.js,120,4260,Vendored CesiumJS build (third party),vendor
-1100,vendor/cesium/Workers/transcodeKTX2.js,3002,124134,Vendored CesiumJS build (third party),vendor
-1101,vendor/cesium/Workers/transferTypedArrayTest.js,41,1171,Vendored CesiumJS build (third party),vendor
-1102,vendor/cesium/Workers/upsampleQuantizedTerrainMesh.js,581,17846,Vendored CesiumJS build (third party),vendor
-1103,vendor/cesium/Workers/upsampleVerticesFromCesium3DTilesTerrain.js,77,2652,Vendored CesiumJS build (third party),vendor
-1104,vendor/fonts/LICENSE-Inter.txt,93,4477,Vendored asset (third party),vendor
-1105,vendor/fonts/LICENSE-JetBrainsMono.txt,93,4524,Vendored asset (third party),vendor
-1106,vendor/fonts/inter-latin-400-normal.woff2,,23664,Vendored asset (third party),vendor
-1107,vendor/fonts/inter-latin-500-normal.woff2,,24272,Vendored asset (third party),vendor
-1108,vendor/fonts/inter-latin-600-normal.woff2,,24452,Vendored asset (third party),vendor
-1109,vendor/fonts/inter-latin-700-normal.woff2,,24356,Vendored asset (third party),vendor
-1110,vendor/fonts/jetbrains-mono-latin-400-normal.woff2,,21168,Vendored asset (third party),vendor
-1111,vendor/fonts/jetbrains-mono-latin-500-normal.woff2,,21832,Vendored asset (third party),vendor
-1112,vendor/fonts/jetbrains-mono-latin-700-normal.woff2,,21908,Vendored asset (third party),vendor
-1113,vendor/icons/LICENSE-Lucide.txt,43,3208,Vendored asset (third party),vendor
-1114,vendor/three/LICENSE,21,1081,Vendored three.js (third party),vendor
-1115,vendor/three/OrbitControls.js,1523,32134,Vendored three.js (third party),vendor
-1116,vendor/three/three.module.min.js,6,691648,Vendored three.js (third party),vendor
+501,docs/audit/hardening/INDEX.md,1245,134585,Hardening audit record,audit
+502,docs/audit/hardening/PROGRESS.md,9,360,Hardening audit record,audit
+503,docs/audit/hardening/index.csv,1117,95451,Hardening audit record,audit
+504,docs/audit/pass-01.md,35,4659,Audit record,audit
+505,docs/audit/pass-02.md,36,6124,Audit record,audit
+506,docs/audit/pass-03.md,31,2569,Audit record,audit
+507,docs/audit/pass-04.md,33,3548,Audit record,audit
+508,docs/audit/pass-05.md,35,4251,Audit record,audit
+509,docs/audit/pass-06.md,34,4618,Audit record,audit
+510,docs/audit/pass-07-data.json,274,7278,Audit record,audit
+511,docs/audit/pass-07.md,37,3672,Audit record,audit
+512,docs/audit/pass-08.md,23,1047,Audit record,audit
+513,docs/audit/pass-09.md,43,4090,Audit record,audit
+514,docs/audit/pass-10.md,29,2489,Audit record,audit
+515,docs/audit/pdf7-unplaced.csv,33,10180,Audit record,audit
+516,docs/audit/qwm-data-issues.csv,3073,542559,Audit record,audit
+517,docs/audit/totals.json,58,819,Audit record,audit
+518,docs/audit/url_status.csv,1484,140123,Audit record,audit
+519,docs/audit/v1.2-data-gap-audit.csv,357,101402,Audit record,audit
+520,docs/audit/v1.2-data-gap-audit.md,109,10482,Audit record,audit
+521,docs/audit/v1.3-ui-audit.csv,139,47349,Audit record,audit
+522,docs/audit/v1.3-ui-audit.md,180,38376,Audit record,audit
+523,docs/audit/v1.4-ui-audit.csv,74,23610,Audit record,audit
+524,docs/audit/v1.4-ui-audit.md,128,64547,Audit record,audit
+525,docs/audit/v1.5-ui-audit.csv,29,8010,Audit record,audit
+526,docs/audit/v1.5-ui-audit.md,62,16806,Audit record,audit
+527,docs/convergence.md,54,2770,Documentation,docs
+528,docs/data-and-grading.md,54,4847,Documentation,docs
+529,docs/data-pipeline.md,70,4326,Documentation,docs
+530,docs/data-sources.md,105,15365,Documentation,docs
+531,docs/design/style-guide.md,248,17007,Design documentation,design
+532,docs/design/wireframes/1280x800_dossier.png,,119065,Design documentation,design
+533,docs/design/wireframes/1280x800_dossier.svg,27,8106,Design documentation,design
+534,docs/design/wireframes/1280x800_main.png,,115432,Design documentation,design
+535,docs/design/wireframes/1280x800_main.svg,26,7682,Design documentation,design
+536,docs/design/wireframes/1280x800_reference.png,,137403,Design documentation,design
+537,docs/design/wireframes/1280x800_reference.svg,26,8927,Design documentation,design
+538,docs/design/wireframes/1920x1080_analysis.png,,157164,Design documentation,design
+539,docs/design/wireframes/1920x1080_analysis.svg,28,8832,Design documentation,design
+540,docs/design/wireframes/1920x1080_dossier.png,,174067,Design documentation,design
+541,docs/design/wireframes/1920x1080_dossier.svg,29,9558,Design documentation,design
+542,docs/design/wireframes/1920x1080_main.png,,145665,Design documentation,design
+543,docs/design/wireframes/1920x1080_main.svg,26,7833,Design documentation,design
+544,docs/design/wireframes/1920x1080_palette.png,,165481,Design documentation,design
+545,docs/design/wireframes/1920x1080_palette.svg,28,8948,Design documentation,design
+546,docs/design/wireframes/1920x1080_reference.png,,204817,Design documentation,design
+547,docs/design/wireframes/1920x1080_reference.svg,27,9776,Design documentation,design
+548,docs/design/wireframes/1920x1080_states.png,,178739,Design documentation,design
+549,docs/design/wireframes/1920x1080_states.svg,30,9497,Design documentation,design
+550,docs/design/wireframes/3840x2160_dossier.png,,327436,Design documentation,design
+551,docs/design/wireframes/3840x2160_dossier.svg,30,10806,Design documentation,design
+552,docs/design/wireframes/3840x2160_main.png,,266770,Design documentation,design
+553,docs/design/wireframes/3840x2160_main.svg,26,8212,Design documentation,design
+554,docs/design/wireframes/3840x2160_reference.png,,443534,Design documentation,design
+555,docs/design/wireframes/3840x2160_reference.svg,29,11798,Design documentation,design
+556,docs/design/wireframes/README.md,48,4357,Design documentation,design
+557,docs/design/wireframes/v1.4/1280x800_dossier.png,,114892,Design documentation,design
+558,docs/design/wireframes/v1.4/1280x800_dossier.svg,25,6656,Design documentation,design
+559,docs/design/wireframes/v1.4/1280x800_main.png,,111837,Design documentation,design
+560,docs/design/wireframes/v1.4/1280x800_main.svg,24,6227,Design documentation,design
+561,docs/design/wireframes/v1.4/1920x1080_analysis.png,,153095,Design documentation,design
+562,docs/design/wireframes/v1.4/1920x1080_analysis.svg,26,7375,Design documentation,design
+563,docs/design/wireframes/v1.4/1920x1080_dossier.png,,169249,Design documentation,design
+564,docs/design/wireframes/v1.4/1920x1080_dossier.svg,27,8102,Design documentation,design
+565,docs/design/wireframes/v1.4/1920x1080_main.png,,141486,Design documentation,design
+566,docs/design/wireframes/v1.4/1920x1080_main.svg,24,6356,Design documentation,design
+567,docs/design/wireframes/v1.4/1920x1080_palette.png,,162072,Design documentation,design
+568,docs/design/wireframes/v1.4/1920x1080_palette.svg,26,7471,Design documentation,design
+569,docs/design/wireframes/v1.4/3840x2160_dossier.png,,321247,Design documentation,design
+570,docs/design/wireframes/v1.4/3840x2160_dossier.svg,28,9200,Design documentation,design
+571,docs/design/wireframes/v1.4/3840x2160_main.png,,261475,Design documentation,design
+572,docs/design/wireframes/v1.4/3840x2160_main.svg,24,6607,Design documentation,design
+573,docs/design/wireframes/v1.4/README.md,29,2327,Design documentation,design
+574,docs/layer-catalog.md,61,21017,Documentation,docs
+575,docs/make_wireframes.py,29,4397,Documentation,docs
+576,docs/render_wireframes.py,9,546,Documentation,docs
+577,docs/repo-checklist.md,125,9528,Documentation,docs
+578,docs/repo-metadata.json,34,1252,Documentation,docs
+579,docs/screenshots/01_engage.png,,61459,Screenshot evidence,docs-media
+580,docs/screenshots/02_globe.png,,546904,Screenshot evidence,docs-media
+581,docs/screenshots/03_layers_tree.png,,599220,Screenshot evidence,docs-media
+582,docs/screenshots/04_offlimits_layer.png,,674150,Screenshot evidence,docs-media
+583,docs/screenshots/05_dossier.png,,517735,Screenshot evidence,docs-media
+584,docs/screenshots/05b_dossier_pdf7_ref.png,,522550,Screenshot evidence,docs-media
+585,docs/screenshots/06_tour.png,,512868,Screenshot evidence,docs-media
+586,docs/screenshots/07_hotspots.png,,315247,Screenshot evidence,docs-media
+587,docs/screenshots/08_report.png,,346078,Screenshot evidence,docs-media
+588,docs/screenshots/09_index_coverage.png,,370919,Screenshot evidence,docs-media
+589,docs/screenshots/09_index_glossary.png,,388571,Screenshot evidence,docs-media
+590,docs/screenshots/09_index_offworld.png,,427421,Screenshot evidence,docs-media
+591,docs/screenshots/09_index_pdf7.png,,322173,Screenshot evidence,docs-media
+592,docs/screenshots/09_index_sources.png,,392238,Screenshot evidence,docs-media
+593,docs/screenshots/10_charts.png,,395963,Screenshot evidence,docs-media
+594,docs/screenshots/11_analysis.png,,532369,Screenshot evidence,docs-media
+595,docs/screenshots/12_settings.png,,586471,Screenshot evidence,docs-media
+596,docs/screenshots/13_zoom_regional_europe.png,,676952,Screenshot evidence,docs-media
+597,docs/screenshots/14_zoom_city_london.png,,923922,Screenshot evidence,docs-media
+598,docs/screenshots/15_zoom_street_nyc.png,,927154,Screenshot evidence,docs-media
+599,docs/screenshots/16_zoom_terrain_everest.png,,789376,Screenshot evidence,docs-media
+600,docs/screenshots/17_zoom_case_rendlesham.png,,653879,Screenshot evidence,docs-media
+601,docs/screenshots/18_sentinel2_basemap.png,,650987,Screenshot evidence,docs-media
+602,docs/screenshots/19_data_overview.png,,262397,Screenshot evidence,docs-media
+603,docs/screenshots/20_data_entries.png,,288555,Screenshot evidence,docs-media
+604,docs/screenshots/21_data_charts.png,,244700,Screenshot evidence,docs-media
+605,docs/screenshots/22_data_tables.png,,286102,Screenshot evidence,docs-media
+606,docs/screenshots/23_data_sources.png,,261534,Screenshot evidence,docs-media
+607,docs/screenshots/24_data_stats.png,,275562,Screenshot evidence,docs-media
+608,docs/screenshots/25_data_unplaced.png,,269618,Screenshot evidence,docs-media
+609,docs/screenshots/v1.3/1280x800_main_after.png,,423262,Screenshot evidence,docs-media
+610,docs/screenshots/v1.3/1280x800_main_before.png,,430095,Screenshot evidence,docs-media
+611,docs/screenshots/v1.3/1280x800_multi_open_after.png,,213887,Screenshot evidence,docs-media
+612,docs/screenshots/v1.3/1280x800_multi_open_before.png,,189495,Screenshot evidence,docs-media
+613,docs/screenshots/v1.3/1920x1080_charts_after.png,,490259,Screenshot evidence,docs-media
+614,docs/screenshots/v1.3/1920x1080_charts_before.png,,495347,Screenshot evidence,docs-media
+615,docs/screenshots/v1.3/1920x1080_data_overview_after.png,,365817,Screenshot evidence,docs-media
+616,docs/screenshots/v1.3/1920x1080_data_overview_before.png,,376276,Screenshot evidence,docs-media
+617,docs/screenshots/v1.3/1920x1080_data_stats_after.png,,390394,Screenshot evidence,docs-media
+618,docs/screenshots/v1.3/1920x1080_data_stats_before.png,,422285,Screenshot evidence,docs-media
+619,docs/screenshots/v1.3/1920x1080_data_tables_after.png,,566450,Screenshot evidence,docs-media
+620,docs/screenshots/v1.3/1920x1080_data_tables_before.png,,397376,Screenshot evidence,docs-media
+621,docs/screenshots/v1.3/1920x1080_dossier_after.png,,817325,Screenshot evidence,docs-media
+622,docs/screenshots/v1.3/1920x1080_dossier_before.png,,827140,Screenshot evidence,docs-media
+623,docs/screenshots/v1.3/1920x1080_help_after.png,,580566,Screenshot evidence,docs-media
+624,docs/screenshots/v1.3/1920x1080_help_before.png,,565100,Screenshot evidence,docs-media
+625,docs/screenshots/v1.3/1920x1080_hotspots_after.png,,702018,Screenshot evidence,docs-media
+626,docs/screenshots/v1.3/1920x1080_hotspots_before.png,,729909,Screenshot evidence,docs-media
+627,docs/screenshots/v1.3/1920x1080_index_glossary_after.png,,478581,Screenshot evidence,docs-media
+628,docs/screenshots/v1.3/1920x1080_index_glossary_before.png,,469234,Screenshot evidence,docs-media
+629,docs/screenshots/v1.3/1920x1080_main_after.png,,878303,Screenshot evidence,docs-media
+630,docs/screenshots/v1.3/1920x1080_main_before.png,,886551,Screenshot evidence,docs-media
+631,docs/screenshots/v1.3/1920x1080_multi_open_after.png,,389883,Screenshot evidence,docs-media
+632,docs/screenshots/v1.3/1920x1080_multi_open_before.png,,390674,Screenshot evidence,docs-media
+633,docs/screenshots/v1.3/1920x1080_rail_layers_after.png,,885525,Screenshot evidence,docs-media
+634,docs/screenshots/v1.3/1920x1080_rail_layers_before.png,,889409,Screenshot evidence,docs-media
+635,docs/screenshots/v1.3/1920x1080_settings_after.png,,786462,Screenshot evidence,docs-media
+636,docs/screenshots/v1.3/1920x1080_settings_before.png,,800865,Screenshot evidence,docs-media
+637,docs/screenshots/v1.3/1920x1080_wars_after.png,,677255,Screenshot evidence,docs-media
+638,docs/screenshots/v1.3/1920x1080_wars_before.png,,670035,Screenshot evidence,docs-media
+639,docs/screenshots/v1.3/3840x2160_main_after.png,,814718,Screenshot evidence,docs-media
+640,docs/screenshots/v1.3/3840x2160_main_before.png,,823066,Screenshot evidence,docs-media
+641,docs/screenshots/v1.3/README.md,23,2060,Screenshot evidence,docs-media
+642,docs/screenshots/v1.4/1280x800_console_full_after.png,,219018,Screenshot evidence,docs-media
+643,docs/screenshots/v1.4/1280x800_console_full_before.png,,215749,Screenshot evidence,docs-media
+644,docs/screenshots/v1.4/1280x800_main_after.png,,392995,Screenshot evidence,docs-media
+645,docs/screenshots/v1.4/1280x800_main_before.png,,426742,Screenshot evidence,docs-media
+646,docs/screenshots/v1.4/1920x1080_charts_after.png,,477093,Screenshot evidence,docs-media
+647,docs/screenshots/v1.4/1920x1080_charts_before.png,,489665,Screenshot evidence,docs-media
+648,docs/screenshots/v1.4/1920x1080_compact_after.png,,783342,Screenshot evidence,docs-media
+649,docs/screenshots/v1.4/1920x1080_compact_before.png,,880434,Screenshot evidence,docs-media
+650,docs/screenshots/v1.4/1920x1080_console_full_after.png,,425371,Screenshot evidence,docs-media
+651,docs/screenshots/v1.4/1920x1080_console_full_before.png,,374183,Screenshot evidence,docs-media
+652,docs/screenshots/v1.4/1920x1080_dossier_after.png,,764898,Screenshot evidence,docs-media
+653,docs/screenshots/v1.4/1920x1080_dossier_before.png,,886904,Screenshot evidence,docs-media
+654,docs/screenshots/v1.4/1920x1080_feed_after.png,,873123,Screenshot evidence,docs-media
+655,docs/screenshots/v1.4/1920x1080_feed_before.png,,880434,Screenshot evidence,docs-media
+656,docs/screenshots/v1.4/1920x1080_help_after.png,,546292,Screenshot evidence,docs-media
+657,docs/screenshots/v1.4/1920x1080_help_before.png,,584561,Screenshot evidence,docs-media
+658,docs/screenshots/v1.4/1920x1080_high_contrast_after.png,,729144,Screenshot evidence,docs-media
+659,docs/screenshots/v1.4/1920x1080_high_contrast_before.png,,880434,Screenshot evidence,docs-media
+660,docs/screenshots/v1.4/1920x1080_hotspots_after.png,,641082,Screenshot evidence,docs-media
+661,docs/screenshots/v1.4/1920x1080_hotspots_before.png,,703257,Screenshot evidence,docs-media
+662,docs/screenshots/v1.4/1920x1080_hover_card_after.png,,1025231,Screenshot evidence,docs-media
+663,docs/screenshots/v1.4/1920x1080_hover_card_before.png,,880434,Screenshot evidence,docs-media
+664,docs/screenshots/v1.4/1920x1080_main_after.png,,832939,Screenshot evidence,docs-media
+665,docs/screenshots/v1.4/1920x1080_main_before.png,,880434,Screenshot evidence,docs-media
+666,docs/screenshots/v1.4/1920x1080_palette_query_after.png,,759677,Screenshot evidence,docs-media
+667,docs/screenshots/v1.4/1920x1080_palette_query_before.png,,863325,Screenshot evidence,docs-media
+668,docs/screenshots/v1.4/1920x1080_rail_filters_after.png,,834042,Screenshot evidence,docs-media
+669,docs/screenshots/v1.4/1920x1080_rail_filters_before.png,,885817,Screenshot evidence,docs-media
+670,docs/screenshots/v1.4/1920x1080_rail_layers_after.png,,829647,Screenshot evidence,docs-media
+671,docs/screenshots/v1.4/1920x1080_rail_layers_before.png,,883819,Screenshot evidence,docs-media
+672,docs/screenshots/v1.4/1920x1080_settings_after.png,,790464,Screenshot evidence,docs-media
+673,docs/screenshots/v1.4/1920x1080_settings_before.png,,784672,Screenshot evidence,docs-media
+674,docs/screenshots/v1.4/3840x2160_main_after.png,,785225,Screenshot evidence,docs-media
+675,docs/screenshots/v1.4/3840x2160_main_before.png,,812641,Screenshot evidence,docs-media
+676,docs/screenshots/v1.4/README.md,26,2450,Screenshot evidence,docs-media
+677,docs/screenshots/v1.5/1280x800_globe_reference_after.png,,461439,Screenshot evidence,docs-media
+678,docs/screenshots/v1.5/1280x800_globe_reference_before.png,,392965,Screenshot evidence,docs-media
+679,docs/screenshots/v1.5/1280x800_main_after.png,,391762,Screenshot evidence,docs-media
+680,docs/screenshots/v1.5/1280x800_main_before.png,,392184,Screenshot evidence,docs-media
+681,docs/screenshots/v1.5/1920x1080_dossier_after.png,,802854,Screenshot evidence,docs-media
+682,docs/screenshots/v1.5/1920x1080_dossier_before.png,,783637,Screenshot evidence,docs-media
+683,docs/screenshots/v1.5/1920x1080_feed_after.png,,703051,Screenshot evidence,docs-media
+684,docs/screenshots/v1.5/1920x1080_feed_before.png,,707143,Screenshot evidence,docs-media
+685,docs/screenshots/v1.5/1920x1080_globe_reference_after.png,,963580,Screenshot evidence,docs-media
+686,docs/screenshots/v1.5/1920x1080_globe_reference_before.png,,943432,Screenshot evidence,docs-media
+687,docs/screenshots/v1.5/1920x1080_help_after.png,,486675,Screenshot evidence,docs-media
+688,docs/screenshots/v1.5/1920x1080_help_before.png,,541397,Screenshot evidence,docs-media
+689,docs/screenshots/v1.5/1920x1080_legend_info_after.png,,834344,Screenshot evidence,docs-media
+690,docs/screenshots/v1.5/1920x1080_legend_info_before.png,,830043,Screenshot evidence,docs-media
+691,docs/screenshots/v1.5/1920x1080_main_after.png,,812898,Screenshot evidence,docs-media
+692,docs/screenshots/v1.5/1920x1080_main_before.png,,831017,Screenshot evidence,docs-media
+693,docs/screenshots/v1.5/1920x1080_markers_close_after.png,,732993,Screenshot evidence,docs-media
+694,docs/screenshots/v1.5/1920x1080_markers_close_before.png,,737172,Screenshot evidence,docs-media
+695,docs/screenshots/v1.5/1920x1080_settings_after.png,,590706,Screenshot evidence,docs-media
+696,docs/screenshots/v1.5/1920x1080_settings_before.png,,621861,Screenshot evidence,docs-media
+697,docs/screenshots/v1.5/3840x2160_globe_reference_after.png,,940675,Screenshot evidence,docs-media
+698,docs/screenshots/v1.5/3840x2160_globe_reference_before.png,,790386,Screenshot evidence,docs-media
+699,docs/screenshots/v1.5/3840x2160_main_after.png,,783443,Screenshot evidence,docs-media
+700,docs/screenshots/v1.5/3840x2160_main_before.png,,788798,Screenshot evidence,docs-media
+701,docs/screenshots/v1.5/README.md,19,1720,Screenshot evidence,docs-media
+702,docs/user-guide.md,131,10071,Documentation,docs
+703,docs/wireframes.md,91,6983,Documentation,docs
+704,docs/wireframes/01_main_console.png,,84741,Wireframe image,design
+705,docs/wireframes/01_main_console.svg,25,2843,Wireframe image,design
+706,docs/wireframes/02_dossier.png,,93527,Wireframe image,design
+707,docs/wireframes/02_dossier.svg,25,2904,Wireframe image,design
+708,docs/wireframes/03_link_graph.png,,13064,Wireframe image,design
+709,docs/wireframes/03_link_graph.svg,26,3016,Wireframe image,design
+710,docs/wireframes/04_compare.png,,73716,Wireframe image,design
+711,docs/wireframes/04_compare.svg,17,1972,Wireframe image,design
+712,docs/wireframes/05_hypothesis.png,,96355,Wireframe image,design
+713,docs/wireframes/05_hypothesis.svg,28,3319,Wireframe image,design
+714,docs/wireframes/06_briefings.png,,58513,Wireframe image,design
+715,docs/wireframes/06_briefings.svg,22,2519,Wireframe image,design
+716,eslint.config.js,47,1182,Lint config,repo
+717,index.html,481,20114,"App entry HTML (CSP, layout skeleton)",ui-shell
+718,js/app.js,21840,5082246,Built bundle (generated by scripts/build.mjs),build-output
+719,js/app.js.map,7,20043628,Built bundle (generated by scripts/build.mjs),build-output
+720,launch.cmd,26,1086,Windows launcher,repo
+721,package-lock.json,2780,95531,npm lockfile,repo
+722,package.json,64,2027,npm manifest,repo
+723,scripts/audit/check_urls.py,123,5824,Audit tooling,audit
+724,scripts/audit/dump_analysis.mjs,57,2027,Audit tooling,audit
+725,scripts/audit/forensics.py,424,31926,Audit tooling,audit
+726,scripts/audit/index_repo.py,145,6208,Audit tooling,audit
+727,scripts/audit/pair_shots.py,103,4857,Audit tooling,audit
+728,scripts/audit/stats_crosscheck.py,99,6428,Audit tooling,audit
+729,scripts/audit/ui_audit_report.py,422,26412,Audit tooling,audit
+730,scripts/audit/ui_audit_v14.py,417,27922,Audit tooling,audit
+731,scripts/audit/ui_audit_v15.py,236,15532,Audit tooling,audit
+732,scripts/audit/write_passes.py,163,16069,Audit tooling,audit
+733,scripts/build.mjs,38,1214,Build/validation tooling,build
+734,scripts/coverage.mjs,91,4483,Build/validation tooling,build
+735,scripts/design/wireframes_v14.mjs,287,12369,Design/wireframe generator,design
+736,scripts/design/wireframes_v15.mjs,385,16704,Design/wireframe generator,design
+737,scripts/gen_icons.mjs,42,2866,Build/validation tooling,build
+738,scripts/layer_catalog.py,32,2124,Build/validation tooling,build
+739,scripts/package.mjs,109,3865,Build/validation tooling,build
+740,scripts/validate_data.py,98,5376,Build/validation tooling,build
+741,src/app.js,642,22033,App bootstrap/state,core
+742,src/app_core.js,275,9539,App bootstrap/state,core
+743,src/audio.js,145,4201,Domain/analysis module,core
+744,src/basemap.js,50,1857,Domain/analysis module,core
+745,src/cases_codec.js,19,744,Domain/analysis module,core
+746,src/cesium/C.js,100,2227,Globe renderer module (Cesium),globe
+747,src/cesium/flight.js,30,1754,Globe renderer module (Cesium),globe
+748,src/cesium/graticule.js,137,5850,Globe renderer module (Cesium),globe
+749,src/cesium/icons.js,182,6216,Globe renderer module (Cesium),globe
+750,src/cesium/reference.js,228,8787,Globe renderer module (Cesium),globe
+751,src/cesium/sources.js,87,3524,Globe renderer module (Cesium),globe
+752,src/cesium/terrarium.js,113,4331,Globe renderer module (Cesium),globe
+753,src/cinema.js,663,23922,Domain/analysis module,core
+754,src/convergence.js,218,9118,Domain/analysis module,core
+755,src/coverage.js,173,6624,Domain/analysis module,core
+756,src/geo.js,100,3528,Domain/analysis module,core
+757,src/globe_cesium.js,1124,41031,Globe renderer entry,globe
+758,src/glossary.js,244,11149,Domain/analysis module,core
+759,src/grades.js,41,1811,Domain/analysis module,core
+760,src/icons.js,163,18071,Domain/analysis module,core
+761,src/index_gen.js,105,3751,Domain/analysis module,core
+762,src/labels_cesium.js,194,6614,Globe labels,globe
+763,src/layers.js,553,20704,Domain/analysis module,core
+764,src/live_feeds.js,82,3334,Domain/analysis module,core
+765,src/loader.js,58,1868,Domain/analysis module,core
+766,src/pdf7_stats.js,390,13547,Domain/analysis module,core
+767,src/report_gen.js,170,9983,Domain/analysis module,core
+768,src/stats.js,336,11417,Domain/analysis module,core
+769,src/sun.js,15,734,Domain/analysis module,core
+770,src/taxonomy.js,61,2835,Domain/analysis module,core
+771,src/ui/breakpoints.js,18,1207,Console UI component,ui-shell
+772,src/ui/clock.js,43,1465,Console UI component,ui-shell
+773,src/ui/cluster.js,33,1315,Console UI component,ui-shell
+774,src/ui/console.js,375,18803,Console UI component,ui-shell
+775,src/ui/feed.js,189,7509,Console UI component,ui-shell
+776,src/ui/globe_tools.js,76,3287,Console UI component,ui-shell
+777,src/ui/shortcuts.js,104,5441,Console UI component,ui-shell
+778,src/ui/states.js,37,2124,Console UI component,ui-shell
+779,src/ui/symbology.js,138,5707,Console UI component,ui-shell
+780,src/ui/table.js,18,678,Console UI component,ui-shell
+781,src/ui/tabs.js,95,3910,Console UI component,ui-shell
+782,src/ui/timescale.js,73,3369,Console UI component,ui-shell
+783,src/ui/tips.js,85,3556,Console UI component,ui-shell
+784,src/ui/window.js,610,23291,Console UI component,ui-shell
+785,src/ui_analysis.js,455,19257,Panel UI module,ui-panels
+786,src/ui_charts.js,247,10230,Panel UI module,ui-panels
+787,src/ui_conflicts.js,189,7941,Panel UI module,ui-panels
+788,src/ui_data.js,599,29486,Panel UI module,ui-panels
+789,src/ui_graph.js,259,8208,Panel UI module,ui-panels
+790,src/ui_hotspots.js,352,14001,Panel UI module,ui-panels
+791,src/ui_misc.js,435,15791,Panel UI module,ui-panels
+792,src/ui_panels.js,958,42417,Panel UI module,ui-panels
+793,src/ui_reference.js,276,14747,Panel UI module,ui-panels
+794,src/ui_reports.js,102,4359,Panel UI module,ui-panels
+795,src/ui_timeline.js,489,17603,Panel UI module,ui-panels
+796,test/a11y.mjs,67,2832,Browser/e2e test harness (Playwright),tests
+797,test/devshot.mjs,39,1746,Browser/e2e test harness (Playwright),tests
+798,test/perf.mjs,76,4174,Browser/e2e test harness (Playwright),tests
+799,test/screens.mjs,231,6527,Browser/e2e test harness (Playwright),tests
+800,test/shots.py,70,8278,Browser/e2e test harness (Playwright),tests
+801,test/smoke.mjs,361,16900,Browser/e2e test harness (Playwright),tests
+802,test/static_server.mjs,34,1181,Browser/e2e test harness (Playwright),tests
+803,test/ui_audit.mjs,444,19377,Browser/e2e test harness (Playwright),tests
+804,test/ui_views.mjs,217,6450,Browser/e2e test harness (Playwright),tests
+805,test/unit/breakpoints.test.mjs,36,1577,Unit test (node:test),tests
+806,test/unit/cesium.test.mjs,42,1881,Unit test (node:test),tests
+807,test/unit/clock.test.mjs,23,1037,Unit test (node:test),tests
+808,test/unit/cluster.test.mjs,61,2270,Unit test (node:test),tests
+809,test/unit/convergence.test.mjs,125,5088,Unit test (node:test),tests
+810,test/unit/flight.test.mjs,30,1844,Unit test (node:test),tests
+811,test/unit/geo.test.mjs,61,2172,Unit test (node:test),tests
+812,test/unit/grades.test.mjs,34,1240,Unit test (node:test),tests
+813,test/unit/graticule.test.mjs,122,5575,Unit test (node:test),tests
+814,test/unit/pdf7.test.mjs,50,1886,Unit test (node:test),tests
+815,test/unit/pdf7_data.test.mjs,103,4583,Unit test (node:test),tests
+816,test/unit/pdf7_stats.test.mjs,94,3629,Unit test (node:test),tests
+817,test/unit/reports.test.mjs,160,4898,Unit test (node:test),tests
+818,test/unit/shortcuts.test.mjs,46,2118,Unit test (node:test),tests
+819,test/unit/states.test.mjs,26,1497,Unit test (node:test),tests
+820,test/unit/stats.test.mjs,102,4619,Unit test (node:test),tests
+821,test/unit/symbology.test.mjs,99,3855,Unit test (node:test),tests
+822,test/unit/tabs.test.mjs,90,3454,Unit test (node:test),tests
+823,test/unit/timescale.test.mjs,47,2171,Unit test (node:test),tests
+824,test/unit/window.test.mjs,243,11656,Unit test (node:test),tests
+825,textures/bump4k.js,1,412632,Earth texture (base64 JS module),assets
+826,textures/day2k.js,1,337739,Earth texture (base64 JS module),assets
+827,textures/day8k.js,1,4218435,Earth texture (base64 JS module),assets
+828,textures/night2k.js,1,212545,Earth texture (base64 JS module),assets
+829,textures/night8k.js,1,2730441,Earth texture (base64 JS module),assets
+830,textures/spec4k.js,1,81551,Earth texture (base64 JS module),assets
+831,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_0.json,1,67428,Vendored CesiumJS build (third party),vendor
+832,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_1.json,1,67313,Vendored CesiumJS build (third party),vendor
+833,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_10.json,1,65984,Vendored CesiumJS build (third party),vendor
+834,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_11.json,1,65007,Vendored CesiumJS build (third party),vendor
+835,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_12.json,1,64663,Vendored CesiumJS build (third party),vendor
+836,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_13.json,1,65854,Vendored CesiumJS build (third party),vendor
+837,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_14.json,1,65547,Vendored CesiumJS build (third party),vendor
+838,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_15.json,1,65709,Vendored CesiumJS build (third party),vendor
+839,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_16.json,1,66030,Vendored CesiumJS build (third party),vendor
+840,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_17.json,1,65622,Vendored CesiumJS build (third party),vendor
+841,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_18.json,1,65310,Vendored CesiumJS build (third party),vendor
+842,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_19.json,1,65537,Vendored CesiumJS build (third party),vendor
+843,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_2.json,1,67802,Vendored CesiumJS build (third party),vendor
+844,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_20.json,1,65328,Vendored CesiumJS build (third party),vendor
+845,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_21.json,1,64843,Vendored CesiumJS build (third party),vendor
+846,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_22.json,1,64977,Vendored CesiumJS build (third party),vendor
+847,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_23.json,1,66084,Vendored CesiumJS build (third party),vendor
+848,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_24.json,1,64894,Vendored CesiumJS build (third party),vendor
+849,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_25.json,1,64953,Vendored CesiumJS build (third party),vendor
+850,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_26.json,1,65311,Vendored CesiumJS build (third party),vendor
+851,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_27.json,1,27595,Vendored CesiumJS build (third party),vendor
+852,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_3.json,1,66400,Vendored CesiumJS build (third party),vendor
+853,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_4.json,1,65900,Vendored CesiumJS build (third party),vendor
+854,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_5.json,1,65378,Vendored CesiumJS build (third party),vendor
+855,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_6.json,1,65596,Vendored CesiumJS build (third party),vendor
+856,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_7.json,1,67099,Vendored CesiumJS build (third party),vendor
+857,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_8.json,1,66931,Vendored CesiumJS build (third party),vendor
+858,vendor/cesium/Assets/IAU2006_XYS/IAU2006_XYS_9.json,1,66857,Vendored CesiumJS build (third party),vendor
+859,vendor/cesium/Assets/Images/bing_maps_credit.png,,18831,Vendored CesiumJS build (third party),vendor
+860,vendor/cesium/Assets/Images/cesium_credit.png,,4242,Vendored CesiumJS build (third party),vendor
+861,vendor/cesium/Assets/Images/google_earth_credit.png,,7703,Vendored CesiumJS build (third party),vendor
+862,vendor/cesium/Assets/Images/ion-credit.png,,6028,Vendored CesiumJS build (third party),vendor
+863,vendor/cesium/Assets/Textures/LensFlare/DirtMask.jpg,,113718,Vendored CesiumJS build (third party),vendor
+864,vendor/cesium/Assets/Textures/LensFlare/StarBurst.jpg,,195728,Vendored CesiumJS build (third party),vendor
+865,vendor/cesium/Assets/Textures/NaturalEarthII/0/0/0.jpg,,12067,Vendored CesiumJS build (third party),vendor
+866,vendor/cesium/Assets/Textures/NaturalEarthII/0/1/0.jpg,,14055,Vendored CesiumJS build (third party),vendor
+867,vendor/cesium/Assets/Textures/NaturalEarthII/1/0/0.jpg,,7278,Vendored CesiumJS build (third party),vendor
+868,vendor/cesium/Assets/Textures/NaturalEarthII/1/0/1.jpg,,11399,Vendored CesiumJS build (third party),vendor
+869,vendor/cesium/Assets/Textures/NaturalEarthII/1/1/0.jpg,,10652,Vendored CesiumJS build (third party),vendor
+870,vendor/cesium/Assets/Textures/NaturalEarthII/1/1/1.jpg,,13142,Vendored CesiumJS build (third party),vendor
+871,vendor/cesium/Assets/Textures/NaturalEarthII/1/2/0.jpg,,9643,Vendored CesiumJS build (third party),vendor
+872,vendor/cesium/Assets/Textures/NaturalEarthII/1/2/1.jpg,,15312,Vendored CesiumJS build (third party),vendor
+873,vendor/cesium/Assets/Textures/NaturalEarthII/1/3/0.jpg,,10532,Vendored CesiumJS build (third party),vendor
+874,vendor/cesium/Assets/Textures/NaturalEarthII/1/3/1.jpg,,13262,Vendored CesiumJS build (third party),vendor
+875,vendor/cesium/Assets/Textures/NaturalEarthII/2/0/0.jpg,,8157,Vendored CesiumJS build (third party),vendor
+876,vendor/cesium/Assets/Textures/NaturalEarthII/2/0/1.jpg,,9307,Vendored CesiumJS build (third party),vendor
+877,vendor/cesium/Assets/Textures/NaturalEarthII/2/0/2.jpg,,7891,Vendored CesiumJS build (third party),vendor
+878,vendor/cesium/Assets/Textures/NaturalEarthII/2/0/3.jpg,,10341,Vendored CesiumJS build (third party),vendor
+879,vendor/cesium/Assets/Textures/NaturalEarthII/2/1/0.jpg,,7852,Vendored CesiumJS build (third party),vendor
+880,vendor/cesium/Assets/Textures/NaturalEarthII/2/1/1.jpg,,6850,Vendored CesiumJS build (third party),vendor
+881,vendor/cesium/Assets/Textures/NaturalEarthII/2/1/2.jpg,,11581,Vendored CesiumJS build (third party),vendor
+882,vendor/cesium/Assets/Textures/NaturalEarthII/2/1/3.jpg,,15862,Vendored CesiumJS build (third party),vendor
+883,vendor/cesium/Assets/Textures/NaturalEarthII/2/2/0.jpg,,10657,Vendored CesiumJS build (third party),vendor
+884,vendor/cesium/Assets/Textures/NaturalEarthII/2/2/1.jpg,,12456,Vendored CesiumJS build (third party),vendor
+885,vendor/cesium/Assets/Textures/NaturalEarthII/2/2/2.jpg,,12262,Vendored CesiumJS build (third party),vendor
+886,vendor/cesium/Assets/Textures/NaturalEarthII/2/2/3.jpg,,14940,Vendored CesiumJS build (third party),vendor
+887,vendor/cesium/Assets/Textures/NaturalEarthII/2/3/0.jpg,,9531,Vendored CesiumJS build (third party),vendor
+888,vendor/cesium/Assets/Textures/NaturalEarthII/2/3/1.jpg,,10234,Vendored CesiumJS build (third party),vendor
+889,vendor/cesium/Assets/Textures/NaturalEarthII/2/3/2.jpg,,11678,Vendored CesiumJS build (third party),vendor
+890,vendor/cesium/Assets/Textures/NaturalEarthII/2/3/3.jpg,,10754,Vendored CesiumJS build (third party),vendor
+891,vendor/cesium/Assets/Textures/NaturalEarthII/2/4/0.jpg,,8474,Vendored CesiumJS build (third party),vendor
+892,vendor/cesium/Assets/Textures/NaturalEarthII/2/4/1.jpg,,12265,Vendored CesiumJS build (third party),vendor
+893,vendor/cesium/Assets/Textures/NaturalEarthII/2/4/2.jpg,,16477,Vendored CesiumJS build (third party),vendor
+894,vendor/cesium/Assets/Textures/NaturalEarthII/2/4/3.jpg,,11888,Vendored CesiumJS build (third party),vendor
+895,vendor/cesium/Assets/Textures/NaturalEarthII/2/5/0.jpg,,7540,Vendored CesiumJS build (third party),vendor
+896,vendor/cesium/Assets/Textures/NaturalEarthII/2/5/1.jpg,,10274,Vendored CesiumJS build (third party),vendor
+897,vendor/cesium/Assets/Textures/NaturalEarthII/2/5/2.jpg,,16112,Vendored CesiumJS build (third party),vendor
+898,vendor/cesium/Assets/Textures/NaturalEarthII/2/5/3.jpg,,11877,Vendored CesiumJS build (third party),vendor
+899,vendor/cesium/Assets/Textures/NaturalEarthII/2/6/0.jpg,,6636,Vendored CesiumJS build (third party),vendor
+900,vendor/cesium/Assets/Textures/NaturalEarthII/2/6/1.jpg,,11564,Vendored CesiumJS build (third party),vendor
+901,vendor/cesium/Assets/Textures/NaturalEarthII/2/6/2.jpg,,16411,Vendored CesiumJS build (third party),vendor
+902,vendor/cesium/Assets/Textures/NaturalEarthII/2/6/3.jpg,,12756,Vendored CesiumJS build (third party),vendor
+903,vendor/cesium/Assets/Textures/NaturalEarthII/2/7/0.jpg,,9032,Vendored CesiumJS build (third party),vendor
+904,vendor/cesium/Assets/Textures/NaturalEarthII/2/7/1.jpg,,12957,Vendored CesiumJS build (third party),vendor
+905,vendor/cesium/Assets/Textures/NaturalEarthII/2/7/2.jpg,,11362,Vendored CesiumJS build (third party),vendor
+906,vendor/cesium/Assets/Textures/NaturalEarthII/2/7/3.jpg,,11859,Vendored CesiumJS build (third party),vendor
+907,vendor/cesium/Assets/Textures/NaturalEarthII/tilemapresource.xml,14,780,Vendored CesiumJS build (third party),vendor
+908,vendor/cesium/Assets/Textures/SkyBox/tycho2t3_80_mx.jpg,,118775,Vendored CesiumJS build (third party),vendor
+909,vendor/cesium/Assets/Textures/SkyBox/tycho2t3_80_my.jpg,,152501,Vendored CesiumJS build (third party),vendor
+910,vendor/cesium/Assets/Textures/SkyBox/tycho2t3_80_mz.jpg,,167980,Vendored CesiumJS build (third party),vendor
+911,vendor/cesium/Assets/Textures/SkyBox/tycho2t3_80_px.jpg,,122746,Vendored CesiumJS build (third party),vendor
+912,vendor/cesium/Assets/Textures/SkyBox/tycho2t3_80_py.jpg,,152999,Vendored CesiumJS build (third party),vendor
+913,vendor/cesium/Assets/Textures/SkyBox/tycho2t3_80_pz.jpg,,152537,Vendored CesiumJS build (third party),vendor
+914,vendor/cesium/Assets/Textures/maki/airfield.png,,1188,Vendored CesiumJS build (third party),vendor
+915,vendor/cesium/Assets/Textures/maki/airport.png,,1554,Vendored CesiumJS build (third party),vendor
+916,vendor/cesium/Assets/Textures/maki/alcohol-shop.png,,1293,Vendored CesiumJS build (third party),vendor
+917,vendor/cesium/Assets/Textures/maki/america-football.png,,2595,Vendored CesiumJS build (third party),vendor
+918,vendor/cesium/Assets/Textures/maki/art-gallery.png,,3159,Vendored CesiumJS build (third party),vendor
+919,vendor/cesium/Assets/Textures/maki/bakery.png,,2714,Vendored CesiumJS build (third party),vendor
+920,vendor/cesium/Assets/Textures/maki/bank.png,,936,Vendored CesiumJS build (third party),vendor
+921,vendor/cesium/Assets/Textures/maki/bar.png,,1435,Vendored CesiumJS build (third party),vendor
+922,vendor/cesium/Assets/Textures/maki/baseball.png,,1838,Vendored CesiumJS build (third party),vendor
+923,vendor/cesium/Assets/Textures/maki/basketball.png,,1318,Vendored CesiumJS build (third party),vendor
+924,vendor/cesium/Assets/Textures/maki/beer.png,,1403,Vendored CesiumJS build (third party),vendor
+925,vendor/cesium/Assets/Textures/maki/bicycle.png,,3989,Vendored CesiumJS build (third party),vendor
+926,vendor/cesium/Assets/Textures/maki/building.png,,1765,Vendored CesiumJS build (third party),vendor
+927,vendor/cesium/Assets/Textures/maki/bus.png,,998,Vendored CesiumJS build (third party),vendor
+928,vendor/cesium/Assets/Textures/maki/cafe.png,,1518,Vendored CesiumJS build (third party),vendor
+929,vendor/cesium/Assets/Textures/maki/camera.png,,1976,Vendored CesiumJS build (third party),vendor
+930,vendor/cesium/Assets/Textures/maki/campsite.png,,2411,Vendored CesiumJS build (third party),vendor
+931,vendor/cesium/Assets/Textures/maki/car.png,,1498,Vendored CesiumJS build (third party),vendor
+932,vendor/cesium/Assets/Textures/maki/cemetery.png,,967,Vendored CesiumJS build (third party),vendor
+933,vendor/cesium/Assets/Textures/maki/cesium.png,,3610,Vendored CesiumJS build (third party),vendor
+934,vendor/cesium/Assets/Textures/maki/chemist.png,,1603,Vendored CesiumJS build (third party),vendor
+935,vendor/cesium/Assets/Textures/maki/cinema.png,,1492,Vendored CesiumJS build (third party),vendor
+936,vendor/cesium/Assets/Textures/maki/circle-stroked.png,,2126,Vendored CesiumJS build (third party),vendor
+937,vendor/cesium/Assets/Textures/maki/circle.png,,1459,Vendored CesiumJS build (third party),vendor
+938,vendor/cesium/Assets/Textures/maki/city.png,,788,Vendored CesiumJS build (third party),vendor
+939,vendor/cesium/Assets/Textures/maki/clothing-store.png,,2037,Vendored CesiumJS build (third party),vendor
+940,vendor/cesium/Assets/Textures/maki/college.png,,2502,Vendored CesiumJS build (third party),vendor
+941,vendor/cesium/Assets/Textures/maki/commercial.png,,1002,Vendored CesiumJS build (third party),vendor
+942,vendor/cesium/Assets/Textures/maki/cricket.png,,1677,Vendored CesiumJS build (third party),vendor
+943,vendor/cesium/Assets/Textures/maki/cross.png,,1888,Vendored CesiumJS build (third party),vendor
+944,vendor/cesium/Assets/Textures/maki/dam.png,,1703,Vendored CesiumJS build (third party),vendor
+945,vendor/cesium/Assets/Textures/maki/danger.png,,2429,Vendored CesiumJS build (third party),vendor
+946,vendor/cesium/Assets/Textures/maki/disability.png,,3437,Vendored CesiumJS build (third party),vendor
+947,vendor/cesium/Assets/Textures/maki/dog-park.png,,3146,Vendored CesiumJS build (third party),vendor
+948,vendor/cesium/Assets/Textures/maki/embassy.png,,1680,Vendored CesiumJS build (third party),vendor
+949,vendor/cesium/Assets/Textures/maki/emergency-telephone.png,,1533,Vendored CesiumJS build (third party),vendor
+950,vendor/cesium/Assets/Textures/maki/entrance.png,,1307,Vendored CesiumJS build (third party),vendor
+951,vendor/cesium/Assets/Textures/maki/farm.png,,1686,Vendored CesiumJS build (third party),vendor
+952,vendor/cesium/Assets/Textures/maki/fast-food.png,,2019,Vendored CesiumJS build (third party),vendor
+953,vendor/cesium/Assets/Textures/maki/ferry.png,,2879,Vendored CesiumJS build (third party),vendor
+954,vendor/cesium/Assets/Textures/maki/fire-station.png,,2228,Vendored CesiumJS build (third party),vendor
+955,vendor/cesium/Assets/Textures/maki/fuel.png,,1741,Vendored CesiumJS build (third party),vendor
+956,vendor/cesium/Assets/Textures/maki/garden.png,,2057,Vendored CesiumJS build (third party),vendor
+957,vendor/cesium/Assets/Textures/maki/gift.png,,1606,Vendored CesiumJS build (third party),vendor
+958,vendor/cesium/Assets/Textures/maki/golf.png,,1999,Vendored CesiumJS build (third party),vendor
+959,vendor/cesium/Assets/Textures/maki/grocery.png,,1425,Vendored CesiumJS build (third party),vendor
+960,vendor/cesium/Assets/Textures/maki/hairdresser.png,,3301,Vendored CesiumJS build (third party),vendor
+961,vendor/cesium/Assets/Textures/maki/harbor.png,,2048,Vendored CesiumJS build (third party),vendor
+962,vendor/cesium/Assets/Textures/maki/heart.png,,1745,Vendored CesiumJS build (third party),vendor
+963,vendor/cesium/Assets/Textures/maki/heliport.png,,2059,Vendored CesiumJS build (third party),vendor
+964,vendor/cesium/Assets/Textures/maki/hospital.png,,909,Vendored CesiumJS build (third party),vendor
+965,vendor/cesium/Assets/Textures/maki/ice-cream.png,,1602,Vendored CesiumJS build (third party),vendor
+966,vendor/cesium/Assets/Textures/maki/industrial.png,,1092,Vendored CesiumJS build (third party),vendor
+967,vendor/cesium/Assets/Textures/maki/land-use.png,,1773,Vendored CesiumJS build (third party),vendor
+968,vendor/cesium/Assets/Textures/maki/laundry.png,,2407,Vendored CesiumJS build (third party),vendor
+969,vendor/cesium/Assets/Textures/maki/library.png,,1355,Vendored CesiumJS build (third party),vendor
+970,vendor/cesium/Assets/Textures/maki/lighthouse.png,,1944,Vendored CesiumJS build (third party),vendor
+971,vendor/cesium/Assets/Textures/maki/lodging.png,,1362,Vendored CesiumJS build (third party),vendor
+972,vendor/cesium/Assets/Textures/maki/logging.png,,1378,Vendored CesiumJS build (third party),vendor
+973,vendor/cesium/Assets/Textures/maki/london-underground.png,,2979,Vendored CesiumJS build (third party),vendor
+974,vendor/cesium/Assets/Textures/maki/marker-stroked.png,,3414,Vendored CesiumJS build (third party),vendor
+975,vendor/cesium/Assets/Textures/maki/marker.png,,2448,Vendored CesiumJS build (third party),vendor
+976,vendor/cesium/Assets/Textures/maki/minefield.png,,1907,Vendored CesiumJS build (third party),vendor
+977,vendor/cesium/Assets/Textures/maki/mobilephone.png,,1474,Vendored CesiumJS build (third party),vendor
+978,vendor/cesium/Assets/Textures/maki/monument.png,,1376,Vendored CesiumJS build (third party),vendor
+979,vendor/cesium/Assets/Textures/maki/museum.png,,2578,Vendored CesiumJS build (third party),vendor
+980,vendor/cesium/Assets/Textures/maki/music.png,,1371,Vendored CesiumJS build (third party),vendor
+981,vendor/cesium/Assets/Textures/maki/oil-well.png,,3357,Vendored CesiumJS build (third party),vendor
+982,vendor/cesium/Assets/Textures/maki/park.png,,2059,Vendored CesiumJS build (third party),vendor
+983,vendor/cesium/Assets/Textures/maki/park2.png,,2284,Vendored CesiumJS build (third party),vendor
+984,vendor/cesium/Assets/Textures/maki/parking-garage.png,,1563,Vendored CesiumJS build (third party),vendor
+985,vendor/cesium/Assets/Textures/maki/parking.png,,1250,Vendored CesiumJS build (third party),vendor
+986,vendor/cesium/Assets/Textures/maki/pharmacy.png,,2258,Vendored CesiumJS build (third party),vendor
+987,vendor/cesium/Assets/Textures/maki/pitch.png,,3288,Vendored CesiumJS build (third party),vendor
+988,vendor/cesium/Assets/Textures/maki/place-of-worship.png,,1111,Vendored CesiumJS build (third party),vendor
+989,vendor/cesium/Assets/Textures/maki/playground.png,,3856,Vendored CesiumJS build (third party),vendor
+990,vendor/cesium/Assets/Textures/maki/police.png,,2194,Vendored CesiumJS build (third party),vendor
+991,vendor/cesium/Assets/Textures/maki/polling-place.png,,1772,Vendored CesiumJS build (third party),vendor
+992,vendor/cesium/Assets/Textures/maki/post.png,,1273,Vendored CesiumJS build (third party),vendor
+993,vendor/cesium/Assets/Textures/maki/prison.png,,1371,Vendored CesiumJS build (third party),vendor
+994,vendor/cesium/Assets/Textures/maki/rail-above.png,,2071,Vendored CesiumJS build (third party),vendor
+995,vendor/cesium/Assets/Textures/maki/rail-light.png,,2816,Vendored CesiumJS build (third party),vendor
+996,vendor/cesium/Assets/Textures/maki/rail-metro.png,,2249,Vendored CesiumJS build (third party),vendor
+997,vendor/cesium/Assets/Textures/maki/rail-underground.png,,1996,Vendored CesiumJS build (third party),vendor
+998,vendor/cesium/Assets/Textures/maki/rail.png,,2073,Vendored CesiumJS build (third party),vendor
+999,vendor/cesium/Assets/Textures/maki/religious-christian.png,,948,Vendored CesiumJS build (third party),vendor
+1000,vendor/cesium/Assets/Textures/maki/religious-jewish.png,,2384,Vendored CesiumJS build (third party),vendor
+1001,vendor/cesium/Assets/Textures/maki/religious-muslim.png,,3925,Vendored CesiumJS build (third party),vendor
+1002,vendor/cesium/Assets/Textures/maki/restaurant.png,,2499,Vendored CesiumJS build (third party),vendor
+1003,vendor/cesium/Assets/Textures/maki/roadblock.png,,1312,Vendored CesiumJS build (third party),vendor
+1004,vendor/cesium/Assets/Textures/maki/rocket.png,,1653,Vendored CesiumJS build (third party),vendor
+1005,vendor/cesium/Assets/Textures/maki/school.png,,3838,Vendored CesiumJS build (third party),vendor
+1006,vendor/cesium/Assets/Textures/maki/scooter.png,,2942,Vendored CesiumJS build (third party),vendor
+1007,vendor/cesium/Assets/Textures/maki/shop.png,,1544,Vendored CesiumJS build (third party),vendor
+1008,vendor/cesium/Assets/Textures/maki/skiing.png,,3345,Vendored CesiumJS build (third party),vendor
+1009,vendor/cesium/Assets/Textures/maki/slaughterhouse.png,,2270,Vendored CesiumJS build (third party),vendor
+1010,vendor/cesium/Assets/Textures/maki/soccer.png,,2420,Vendored CesiumJS build (third party),vendor
+1011,vendor/cesium/Assets/Textures/maki/square-stroked.png,,650,Vendored CesiumJS build (third party),vendor
+1012,vendor/cesium/Assets/Textures/maki/square.png,,582,Vendored CesiumJS build (third party),vendor
+1013,vendor/cesium/Assets/Textures/maki/star-stroked.png,,3460,Vendored CesiumJS build (third party),vendor
+1014,vendor/cesium/Assets/Textures/maki/star.png,,2703,Vendored CesiumJS build (third party),vendor
+1015,vendor/cesium/Assets/Textures/maki/suitcase.png,,1129,Vendored CesiumJS build (third party),vendor
+1016,vendor/cesium/Assets/Textures/maki/swimming.png,,2106,Vendored CesiumJS build (third party),vendor
+1017,vendor/cesium/Assets/Textures/maki/telephone.png,,1702,Vendored CesiumJS build (third party),vendor
+1018,vendor/cesium/Assets/Textures/maki/tennis.png,,1658,Vendored CesiumJS build (third party),vendor
+1019,vendor/cesium/Assets/Textures/maki/theatre.png,,3233,Vendored CesiumJS build (third party),vendor
+1020,vendor/cesium/Assets/Textures/maki/toilets.png,,2917,Vendored CesiumJS build (third party),vendor
+1021,vendor/cesium/Assets/Textures/maki/town-hall.png,,2005,Vendored CesiumJS build (third party),vendor
+1022,vendor/cesium/Assets/Textures/maki/town.png,,1125,Vendored CesiumJS build (third party),vendor
+1023,vendor/cesium/Assets/Textures/maki/triangle-stroked.png,,2837,Vendored CesiumJS build (third party),vendor
+1024,vendor/cesium/Assets/Textures/maki/triangle.png,,2137,Vendored CesiumJS build (third party),vendor
+1025,vendor/cesium/Assets/Textures/maki/village.png,,2145,Vendored CesiumJS build (third party),vendor
+1026,vendor/cesium/Assets/Textures/maki/warehouse.png,,1908,Vendored CesiumJS build (third party),vendor
+1027,vendor/cesium/Assets/Textures/maki/waste-basket.png,,1917,Vendored CesiumJS build (third party),vendor
+1028,vendor/cesium/Assets/Textures/maki/water.png,,2411,Vendored CesiumJS build (third party),vendor
+1029,vendor/cesium/Assets/Textures/maki/wetland.png,,2151,Vendored CesiumJS build (third party),vendor
+1030,vendor/cesium/Assets/Textures/maki/zoo.png,,2681,Vendored CesiumJS build (third party),vendor
+1031,vendor/cesium/Assets/Textures/moonSmall.jpg,,18196,Vendored CesiumJS build (third party),vendor
+1032,vendor/cesium/Assets/Textures/pin.svg,1,348,Vendored CesiumJS build (third party),vendor
+1033,vendor/cesium/Assets/Textures/waterNormals.jpg,,294196,Vendored CesiumJS build (third party),vendor
+1034,vendor/cesium/Assets/Textures/waterNormalsSmall.jpg,,34121,Vendored CesiumJS build (third party),vendor
+1035,vendor/cesium/Assets/approximateTerrainHeights.json,1,299471,Vendored CesiumJS build (third party),vendor
+1036,vendor/cesium/LICENSE.md,928,50087,Vendored CesiumJS build (third party),vendor
+1037,vendor/cesium/ThirdParty/Workers/package.json,1,19,Vendored CesiumJS build (third party),vendor
+1038,vendor/cesium/ThirdParty/Workers/zip-web-worker.js,1,28349,Vendored CesiumJS build (third party),vendor
+1039,vendor/cesium/ThirdParty/basis_transcoder.wasm,,500839,Vendored CesiumJS build (third party),vendor
+1040,vendor/cesium/ThirdParty/draco_decoder.wasm,,285948,Vendored CesiumJS build (third party),vendor
+1041,vendor/cesium/ThirdParty/google-earth-dbroot-parser.js,8337,501930,Vendored CesiumJS build (third party),vendor
+1042,vendor/cesium/ThirdParty/wasm_splats_bg.wasm,,26522,Vendored CesiumJS build (third party),vendor
+1043,vendor/cesium/ThirdParty/zip-module.wasm,,55126,Vendored CesiumJS build (third party),vendor
+1044,vendor/cesium/Widgets/CesiumWidget.css,119,2265,Vendored CesiumJS build (third party),vendor
+1045,vendor/cesium/Workers/chunk-7QBJGNT7.js,41306,1504573,Vendored CesiumJS build (third party),vendor
+1046,vendor/cesium/Workers/chunk-7WPQTQP5.js,455,17412,Vendored CesiumJS build (third party),vendor
+1047,vendor/cesium/Workers/chunk-A366PYP7.js,758,25946,Vendored CesiumJS build (third party),vendor
+1048,vendor/cesium/Workers/chunk-BDKN5F6V.js,2004,60073,Vendored CesiumJS build (third party),vendor
+1049,vendor/cesium/Workers/chunk-DE3R5UOC.js,82,2451,Vendored CesiumJS build (third party),vendor
+1050,vendor/cesium/Workers/chunk-O4MKUNQU.js,346,12952,Vendored CesiumJS build (third party),vendor
+1051,vendor/cesium/Workers/chunk-PWOTIYNL.js,280,9386,Vendored CesiumJS build (third party),vendor
+1052,vendor/cesium/Workers/chunk-QV7GZYO4.js,1800,84441,Vendored CesiumJS build (third party),vendor
+1053,vendor/cesium/Workers/chunk-XGNRWOT7.js,455,17005,Vendored CesiumJS build (third party),vendor
+1054,vendor/cesium/Workers/chunk-ZKM7BGGI.js,4296,269672,Vendored CesiumJS build (third party),vendor
+1055,vendor/cesium/Workers/combineGeometry.js,46,1548,Vendored CesiumJS build (third party),vendor
+1056,vendor/cesium/Workers/createBoxGeometry.js,41,1299,Vendored CesiumJS build (third party),vendor
+1057,vendor/cesium/Workers/createBoxOutlineGeometry.js,41,1355,Vendored CesiumJS build (third party),vendor
+1058,vendor/cesium/Workers/createCircleGeometry.js,49,1621,Vendored CesiumJS build (third party),vendor
+1059,vendor/cesium/Workers/createCircleOutlineGeometry.js,49,1677,Vendored CesiumJS build (third party),vendor
+1060,vendor/cesium/Workers/createCoplanarPolygonGeometry.js,41,1411,Vendored CesiumJS build (third party),vendor
+1061,vendor/cesium/Workers/createCoplanarPolygonOutlineGeometry.js,46,1590,Vendored CesiumJS build (third party),vendor
+1062,vendor/cesium/Workers/createCorridorGeometry.js,43,1466,Vendored CesiumJS build (third party),vendor
+1063,vendor/cesium/Workers/createCorridorOutlineGeometry.js,48,1590,Vendored CesiumJS build (third party),vendor
+1064,vendor/cesium/Workers/createCylinderGeometry.js,41,1359,Vendored CesiumJS build (third party),vendor
+1065,vendor/cesium/Workers/createCylinderOutlineGeometry.js,41,1415,Vendored CesiumJS build (third party),vendor
+1066,vendor/cesium/Workers/createEllipseGeometry.js,45,1553,Vendored CesiumJS build (third party),vendor
+1067,vendor/cesium/Workers/createEllipseOutlineGeometry.js,45,1609,Vendored CesiumJS build (third party),vendor
+1068,vendor/cesium/Workers/createEllipsoidGeometry.js,41,1371,Vendored CesiumJS build (third party),vendor
+1069,vendor/cesium/Workers/createEllipsoidOutlineGeometry.js,44,1471,Vendored CesiumJS build (third party),vendor
+1070,vendor/cesium/Workers/createFrustumGeometry.js,43,1385,Vendored CesiumJS build (third party),vendor
+1071,vendor/cesium/Workers/createFrustumOutlineGeometry.js,212,7632,Vendored CesiumJS build (third party),vendor
+1072,vendor/cesium/Workers/createGeometry.js,152,7646,Vendored CesiumJS build (third party),vendor
+1073,vendor/cesium/Workers/createGroundPolylineGeometry.js,1625,58908,Vendored CesiumJS build (third party),vendor
+1074,vendor/cesium/Workers/createPlaneGeometry.js,41,1323,Vendored CesiumJS build (third party),vendor
+1075,vendor/cesium/Workers/createPlaneOutlineGeometry.js,41,1379,Vendored CesiumJS build (third party),vendor
+1076,vendor/cesium/Workers/createPolygonGeometry.js,43,1452,Vendored CesiumJS build (third party),vendor
+1077,vendor/cesium/Workers/createPolygonOutlineGeometry.js,43,1508,Vendored CesiumJS build (third party),vendor
+1078,vendor/cesium/Workers/createPolylineGeometry.js,43,1466,Vendored CesiumJS build (third party),vendor
+1079,vendor/cesium/Workers/createPolylineVolumeGeometry.js,48,1576,Vendored CesiumJS build (third party),vendor
+1080,vendor/cesium/Workers/createPolylineVolumeOutlineGeometry.js,50,1682,Vendored CesiumJS build (third party),vendor
+1081,vendor/cesium/Workers/createRectangleGeometry.js,45,1589,Vendored CesiumJS build (third party),vendor
+1082,vendor/cesium/Workers/createRectangleOutlineGeometry.js,48,1663,Vendored CesiumJS build (third party),vendor
+1083,vendor/cesium/Workers/createSimplePolylineGeometry.js,48,1576,Vendored CesiumJS build (third party),vendor
+1084,vendor/cesium/Workers/createSphereGeometry.js,41,1335,Vendored CesiumJS build (third party),vendor
+1085,vendor/cesium/Workers/createSphereOutlineGeometry.js,41,1391,Vendored CesiumJS build (third party),vendor
+1086,vendor/cesium/Workers/createTaskProcessorWorker.js,32,1011,Vendored CesiumJS build (third party),vendor
+1087,vendor/cesium/Workers/createVectorTileClampedPolylines.js,476,16536,Vendored CesiumJS build (third party),vendor
+1088,vendor/cesium/Workers/createVectorTileGeometries.js,358,14114,Vendored CesiumJS build (third party),vendor
+1089,vendor/cesium/Workers/createVectorTilePoints.js,100,3526,Vendored CesiumJS build (third party),vendor
+1090,vendor/cesium/Workers/createVectorTilePolygons.js,359,13557,Vendored CesiumJS build (third party),vendor
+1091,vendor/cesium/Workers/createVectorTilePolylines.js,246,8812,Vendored CesiumJS build (third party),vendor
+1092,vendor/cesium/Workers/createVerticesFromCesium3DTilesTerrain.js,73,2494,Vendored CesiumJS build (third party),vendor
+1093,vendor/cesium/Workers/createVerticesFromGoogleEarthEnterpriseBuffer.js,537,18791,Vendored CesiumJS build (third party),vendor
+1094,vendor/cesium/Workers/createVerticesFromHeightmap.js,2226,91836,Vendored CesiumJS build (third party),vendor
+1095,vendor/cesium/Workers/createVerticesFromQuantizedTerrainMesh.js,479,15055,Vendored CesiumJS build (third party),vendor
+1096,vendor/cesium/Workers/createWallGeometry.js,43,1410,Vendored CesiumJS build (third party),vendor
+1097,vendor/cesium/Workers/createWallOutlineGeometry.js,43,1466,Vendored CesiumJS build (third party),vendor
+1098,vendor/cesium/Workers/decodeDraco.js,360,11513,Vendored CesiumJS build (third party),vendor
+1099,vendor/cesium/Workers/decodeGoogleEarthEnterprisePacket.js,1335,61336,Vendored CesiumJS build (third party),vendor
+1100,vendor/cesium/Workers/decodeI3S.js,1311,45515,Vendored CesiumJS build (third party),vendor
+1101,vendor/cesium/Workers/gaussianSplatSorter.js,62,1957,Vendored CesiumJS build (third party),vendor
+1102,vendor/cesium/Workers/gaussianSplatTextureGenerator.js,68,2087,Vendored CesiumJS build (third party),vendor
+1103,vendor/cesium/Workers/incrementallyBuildTerrainPicker.js,120,4260,Vendored CesiumJS build (third party),vendor
+1104,vendor/cesium/Workers/transcodeKTX2.js,3002,124134,Vendored CesiumJS build (third party),vendor
+1105,vendor/cesium/Workers/transferTypedArrayTest.js,41,1171,Vendored CesiumJS build (third party),vendor
+1106,vendor/cesium/Workers/upsampleQuantizedTerrainMesh.js,581,17846,Vendored CesiumJS build (third party),vendor
+1107,vendor/cesium/Workers/upsampleVerticesFromCesium3DTilesTerrain.js,77,2652,Vendored CesiumJS build (third party),vendor
+1108,vendor/fonts/LICENSE-Inter.txt,93,4477,Vendored asset (third party),vendor
+1109,vendor/fonts/LICENSE-JetBrainsMono.txt,93,4524,Vendored asset (third party),vendor
+1110,vendor/fonts/inter-latin-400-normal.woff2,,23664,Vendored asset (third party),vendor
+1111,vendor/fonts/inter-latin-500-normal.woff2,,24272,Vendored asset (third party),vendor
+1112,vendor/fonts/inter-latin-600-normal.woff2,,24452,Vendored asset (third party),vendor
+1113,vendor/fonts/inter-latin-700-normal.woff2,,24356,Vendored asset (third party),vendor
+1114,vendor/fonts/jetbrains-mono-latin-400-normal.woff2,,21168,Vendored asset (third party),vendor
+1115,vendor/fonts/jetbrains-mono-latin-500-normal.woff2,,21832,Vendored asset (third party),vendor
+1116,vendor/fonts/jetbrains-mono-latin-700-normal.woff2,,21908,Vendored asset (third party),vendor
+1117,vendor/icons/LICENSE-Lucide.txt,43,3208,Vendored asset (third party),vendor
+1118,vendor/three/LICENSE,21,1081,Vendored three.js (third party),vendor
+1119,vendor/three/OrbitControls.js,1523,32134,Vendored three.js (third party),vendor
+1120,vendor/three/three.module.min.js,6,691648,Vendored three.js (third party),vendor

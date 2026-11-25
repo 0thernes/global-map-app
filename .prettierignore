@@ -11,3 +11,4 @@ package-lock.json
 *.min.js
 docs/audit/v1.2-data-gap-audit.md
 docs/audit/v1.3-ui-audit.md
+docs/audit/hardening/INDEX.md
