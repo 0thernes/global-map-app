@@ -8,9 +8,10 @@ All notable changes to this project are documented here. The format follows
 ## [1.5.1] - 2026-11-24
 
 The hardening release. A repository-wide audit (127 passes over an indexed table of contents of every tracked file)
-recorded 65 findings; 50 are fixed with a regression test for every bug, and 15 are decided with the reason recorded
-([FINDINGS.md](docs/audit/hardening/FINDINGS.md), [PASSES.md](docs/audit/hardening/PASSES.md)). No row was added,
-removed or moved; the data fixes correct format and provenance against the source files.
+recorded 66 findings; 50 are fixed with a regression test for every bug, 15 are decided with the reason recorded, and
+1 is open, a 4K hover timing that tracks box load ([FINDINGS.md](docs/audit/hardening/FINDINGS.md),
+[PASSES.md](docs/audit/hardening/PASSES.md)). No row was added, removed or moved; the data fixes correct format and
+provenance against the source files.
 
 ### Fixed
 

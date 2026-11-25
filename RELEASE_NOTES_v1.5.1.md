@@ -2,9 +2,10 @@
 
 **Same globe, fewer ways to be wrong.** v1.5.1 is the result of a repository-wide audit: 127 passes over a generated
 table of contents of every tracked file, covering code, data, pipeline, CI, security, accessibility, docs and
-methodology. It recorded 65 findings. 50 are fixed, each bug with a regression test; 15 are decided, with the reason
-written down. Nothing was added to or removed from the data: the data fixes correct format and provenance against the
-source files, and the rebuilt files were diffed field by field.
+methodology. It recorded 66 findings. 50 are fixed, each bug with a regression test; 15 are decided, with the reason
+written down; 1 is open (the 4K hover card's open time on a loaded build box). Nothing was added to or removed from
+the data: the data fixes correct format and provenance against the source files, and the rebuilt files were diffed
+field by field.
 
 ## What changed for you
 

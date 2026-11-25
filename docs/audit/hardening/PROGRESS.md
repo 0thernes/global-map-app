@@ -70,3 +70,12 @@ Step 4 run at 3787935, from 2026-11-24 17:10 PST, one check at a time (`/workspa
       of the tool column). The legend was still 272 px: 1d74627 set the width in the base `#legend` rule, but the later
       chip rule `#legend:not(.collapsed) { width: var(--legend-w) }` won the cascade. Fixed in ff344c3 (`--legend-fit`
       in every sizing rule; the test now checks the cascade).
+- [x] ui_audit run 6 at ff344c3 (`ui6.sh`, 03:40–03:46 PST): 1280x800 feed_recent, wars, analysis, graph and
+      hs_dossier (with legend_info and legend_hidden before them for the same legend state): **0 failures**.
+      3840x2160 hover_card opened in 84.5 s against the 60 s budget with box load ~8.4 from other jobs (a crawler
+      sidecar at ~57 % CPU); its earlier 4K times were 51.6 s, 60.4 s and over 300 s, so it tracks load. Budget not
+      changed.
+- [x] a11y at 9772edc (03:46–03:56 PST, `a11y_final.log`): axe-core 4.11.0, 49 views at 1920x1080, 0 violations
+- [x] smoke at 9772edc (03:56–04:07 PST, `smoke_final.log`): 21 steps ok, boot+steps 638 s, errors: 0
+- [ ] ui_audit run 7 (04:07–04:09 PST): 3840x2160 hover_card again 83.5 s against 60 s at load ~8.9; recorded as open
+      finding F-E02-6 (rerun on an idle box). Every other view at every size has passed (runs 2, 4, 5, 6).
