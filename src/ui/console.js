@@ -163,7 +163,8 @@ const circSVG = (c = 'var(--accent)') =>
   `<svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="8.5" fill="${c}" fill-opacity="0.08" stroke="${c}" stroke-width="1.4" stroke-dasharray="2.6 2.4"/><path d="M10 7.4 12.6 10 10 12.6 7.4 10z" fill="none" stroke="${c}" stroke-width="1.3"/></svg>`;
 export const gaugeSVG = (k, c = 'var(--fg)') => pinSVG(c, GRADE_GAUGE[k] ?? 0.25);
 const clusterSVG = () =>
-  `<svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="9.5" fill="#0b1220" stroke="var(--accent)" stroke-width="2"/><text x="11" y="14.5" text-anchor="middle" font-size="9" font-weight="700" fill="#e6f1f7">12</text></svg>`;
+  // 24 px glyph so its count reads at the 12 px minimum text size (ui_audit --check, F-E02-1)
+  `<svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#0b1220" stroke="var(--accent)" stroke-width="2"/><text x="12" y="16.2" text-anchor="middle" font-size="12" font-weight="700" fill="#e6f1f7">12</text></svg>`;
 export const GLYPH = { pin: pinSVG, circle: circSVG, cluster: clusterSVG };
 function renderLegend() {
   const el = $('#legend-body');

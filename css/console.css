@@ -361,7 +361,9 @@ body.rail-collapsed #rail {
   background: var(--line);
 }
 body.win-max-open #maptools,
-body.win-max-open #legend {
+body.win-max-open #legend,
+body.tools-covered #maptools {
+  /* tools-covered: a window sits over the map-tool column (src/ui/window.js layout, F-E02-3) */
   visibility: hidden;
 }
 

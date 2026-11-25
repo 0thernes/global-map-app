@@ -47,7 +47,7 @@ Copilot, and no `.github/dependabot.yml` or pull-request template. This list rep
 
 ## OSINT console (v1.4, [ADR 0004](adr/0004-osint-console-information-architecture.md))
 
-- [ ] `npm run audit:ui -- --phase after --check` passes at 1280x800, 1920x1080 and 3840x2160: no overlaps between
+- [ ] `npm run audit:ui -- --phase after --check` passes over **every** view (no `--only`) at 1280x800, 1920x1080 and 3840x2160: no overlaps between
       docked parts, no clipped controls, no nested scroll bars, no text under 12 px, no target under 24 px, no chrome
       control under 32 px at comfortable density, 0 axe violations
 - [ ] A new view has an activity-bar button, a registry key in `src/ui/shortcuts.js` with a handler in `ACTIONS`

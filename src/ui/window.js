@@ -38,6 +38,20 @@ export function clampRect(rect, safe, min = { w: MIN_W, h: MIN_H }) {
   return { x, y, w, h: hh };
 }
 
+/**
+ * True when rectangle `a` ({x, y, w, h}) overlaps any of `rects` by more than `slack` px on both axes. Used to hide
+ * the map tools while a window covers their column, so no control is left half under a window (WCAG 2.5.8,
+ * F-E02-3); a window with h == null counts with `fallbackH`.
+ */
+export function overlapsAny(a, rects, { slack = 0, fallbackH = 0 } = {}) {
+  return rects.some((r) => {
+    const h = r.h ?? fallbackH;
+    const ox = Math.min(a.x + a.w, r.x + r.w) - Math.max(a.x, r.x);
+    const oy = Math.min(a.y + a.h, r.y + h) - Math.max(a.y, r.y);
+    return ox > slack && oy > slack;
+  });
+}
+
 /** Which dock zone (if any) a pointer at (px, py) is over while dragging. */
 export function snapZone(px, py, safe, t = SNAP) {
   if (px <= safe.x + t) return 'left';
@@ -464,6 +478,18 @@ export function layout() {
   root.setProperty('--occ-left', occ.left + 'px');
   root.setProperty('--occ-right', occ.right + 'px');
   root.setProperty('--occ-bottom', occ.bottom + 'px');
+  // the map tools sit at the right edge of the free globe area; a window over that column (a bottom dock reaching
+  // up, a float or a modal) would leave them half covered, so they hide until it moves (keys still work)
+  const tools = document.getElementById('maptools');
+  if (tools) {
+    const tw = tools.offsetWidth,
+      th = tools.offsetHeight;
+    const box = { x: innerWidth - occ.right - GAP - tw, y: cssPx('--topbar-h', 56) + GAP, w: tw, h: th };
+    const rects = vis
+      .filter((w) => !narrow)
+      .map((w) => ({ ...res.rects[w.id], h: res.rects[w.id].h ?? w.el.offsetHeight }));
+    document.body.classList.toggle('tools-covered', tw > 0 && overlapsAny(box, rects));
+  }
   if (prev.left !== occ.left || prev.right !== occ.right || prev.bottom !== occ.bottom)
     for (const fn of listeners) fn(occ);
 }

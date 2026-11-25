@@ -266,6 +266,12 @@ kbd {
 #charts-body {
   padding-top: var(--s-2);
 }
+/* a link alone in an index table cell is not inline text, so it needs the 24 px target (WCAG 2.5.8, F-E04-1) */
+.idx td a {
+  display: inline-block;
+  min-height: var(--ctl-sm);
+  line-height: var(--ctl-sm);
+}
 .ref-body {
   padding: var(--s-2);
 }
@@ -421,6 +427,16 @@ body.rail-collapsed #rail .rail-head {
 .btn.sm {
   height: var(--ctl-sm);
   padding: 0 var(--s-1);
+}
+/* inside a window a long label wraps instead of running past a narrow window's edge (F-E02-4) */
+.win-body .btn {
+  max-width: 100%;
+  height: auto;
+  min-height: var(--ctl);
+  white-space: normal;
+}
+.win-body .btn.sm {
+  min-height: var(--ctl-sm);
 }
 .btn.icon {
   width: var(--ctl);

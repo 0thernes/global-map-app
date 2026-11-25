@@ -395,6 +395,8 @@ body.rail-collapsed #rail .count {
   display: flex;
   gap: 8px;
   align-items: center;
+  /* the whole label is the checkbox's target: WCAG 2.5.8 minimum (ui_audit --check, F-E02-2) */
+  min-height: var(--ctl-sm);
   font-size: var(--fs-1);
   color: var(--fg-muted);
   padding: 2px 0;

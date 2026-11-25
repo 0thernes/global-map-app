@@ -316,3 +316,38 @@ test('F-J05-1: the site package ships git-tracked files only', async () => {
     rmSync(probe, { force: true });
   }
 });
+
+// ui_audit --check over every view at 1280x800, 1920x1080 and 3840x2160 (earlier release runs used --only subsets)
+test('F-E02-1: no legend or symbol glyph text under 12 px', () => {
+  // console.js needs a DOM at import time, so read the SVG source: every font-size in an inline glyph is >= 12
+  for (const f of ['src/ui/console.js', 'src/ui/symbology.js']) {
+    const sizes = [...readFileSync(f, 'utf8').matchAll(/font-size="([\d.]+)"/g)].map((m) => +m[1]);
+    for (const px of sizes) assert.ok(px >= 12, `${f}: ${px} px`);
+  }
+  assert.match(readFileSync('src/ui/console.js', 'utf8'), /const clusterSVG[\s\S]{0,400}font-size="12"/);
+});
+
+test('F-E02-2 / F-E04-1 / F-E02-4: shared CSS gives checkbox labels, index links and window buttons a 24 px target', () => {
+  const css = readFileSync('css/app.css', 'utf8') + readFileSync('css/components.css', 'utf8');
+  const rule = (sel) => {
+    const i = css.indexOf(sel + ' {');
+    assert.ok(i >= 0, sel);
+    return css.slice(i, css.indexOf('}', i));
+  };
+  assert.match(rule('.tog'), /min-height: var\(--ctl-sm\)/);
+  assert.match(rule('.idx td a'), /min-height: var\(--ctl-sm\)/);
+  assert.match(rule('.win-body .btn'), /max-width: 100%/);
+  assert.match(rule('.win-body .btn'), /white-space: normal/);
+  assert.match(readFileSync('css/tokens.css', 'utf8'), /--ctl-sm: 24px/);
+});
+
+test('F-E02-3: map tools hide while a window covers their column', async () => {
+  const { overlapsAny } = await import('../../src/ui/window.js');
+  const tools = { x: 1222, y: 64, w: 42, h: 271 };
+  assert.equal(overlapsAny(tools, [{ x: 376, y: 192, w: 896, h: 416 }]), true); // bottom dock reaching up (charts)
+  assert.equal(overlapsAny(tools, [{ x: 394, y: 80, w: 860, h: null }], { fallbackH: 528 }), true); // modal
+  assert.equal(overlapsAny(tools, [{ x: 683, y: 64, w: 589, h: 544 }]), true);
+  assert.equal(overlapsAny({ x: 633, y: 64, w: 42, h: 271 }, [{ x: 683, y: 64, w: 589, h: 544 }]), false); // beside a right dock
+  assert.equal(overlapsAny(tools, []), false);
+  assert.match(readFileSync('css/console.css', 'utf8'), /body\.tools-covered #maptools/);
+});
