@@ -1,0 +1,28 @@
+# global-map-app
+
+> Keyless static 3D CesiumJS OSINT globe of 2,624 public sourced UAP and high-strangeness cases against military, nuclear, conflict, water, seafloor, and sky reference layers. Follows Build Standard for LLMs v1.2.0.
+
+Start with `AGENTS.md` for canonical commands, hard rules, and known traps.
+
+## Agent instructions
+
+- [AGENTS.md](AGENTS.md): canonical agent instructions, commands, hard rules (R1–R8), finding classes, and known traps
+
+## Verification and integrity
+
+- [CLAIMS.md](CLAIMS.md): verifiable engineering, data-provenance, security, and UI claims with falsification criteria
+- [LIMITATIONS.md](LIMITATIONS.md): reporting bias, geocoding precision, observational statistics caveats, and literal-vs-metaphor table
+- [docs/limitations.md](docs/limitations.md): detailed threats-to-validity document
+- [REPLICATION.md](REPLICATION.md): exact clean-clone build, test, lint, and validation protocol
+- [docs/audit/SUMMARY.md](docs/audit/SUMMARY.md): ten-pass forensic audit summary
+- [docs/audit/hardening/FINDINGS.md](docs/audit/hardening/FINDINGS.md): v1.5.1 hardening audit findings
+
+## Project docs
+
+- [README.md](README.md): overview, features, quick start, URL options, keyboard shortcuts, and architecture
+- [docs/architecture.md](docs/architecture.md): module index and renderer architecture
+- [docs/data-sources.md](docs/data-sources.md): keyless imagery, terrain, and live-feed endpoints
+- [docs/data-dictionary.md](docs/data-dictionary.md): export schema column reference
+- [docs/configuration.md](docs/configuration.md): URL parameters, localStorage keys, and scripts
+- [CHANGELOG.md](CHANGELOG.md): Keep-a-Changelog release history
+- [SECURITY.md](SECURITY.md): CSP, HTML/Markdown sanitization, and vulnerability reporting

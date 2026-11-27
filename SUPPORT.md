@@ -7,4 +7,4 @@
 - **Security problems:** see [SECURITY.md](SECURITY.md); please do not file them publicly.
 - **Everything else:** 0_0@0thernes.art · [0thernes.art](https://0thernes.art) · [@0thernes_ai on X](https://x.com/0thernes_ai)
 
-This is a small project maintained by 0thernes L.L.C. Replies are best effort.
+This is a small project maintained by Alexander Stephen Donahue (0thernes). Replies are best effort.

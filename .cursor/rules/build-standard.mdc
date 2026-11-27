@@ -1,0 +1,7 @@
+---
+description: Build Standard for LLMs v1.2.0. Canonical rules live in AGENTS.md
+alwaysApply: true
+---
+
+Follow AGENTS.md at the repository root; it is the single source of truth for commands, hard rules, provenance discipline, and finding classes.
+Do not duplicate or override those rules here.

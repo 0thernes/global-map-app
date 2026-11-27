@@ -18,6 +18,7 @@ OUT = ROOT / "docs/audit/hardening"
 RULES = [
     (".github/workflows/", "CI/CD workflow", "ci"),
     (".github/", "GitHub community/config", "repo"),
+    (".cursor/", "Agent rule pointer (Cursor)", "repo"),
     ("src/cesium/", "Globe renderer module (Cesium)", "globe"),
     ("src/ui/", "Console UI component", "ui-shell"),
     ("src/ui_", "Panel UI module", "ui-panels"),
@@ -55,6 +56,16 @@ RULES = [
     ("RELEASE_NOTES_", "Release notes", "docs"),
 ]
 TOP = {
+    "AGENTS.md": "Canonical coding-agent instructions",
+    "CLAUDE.md": "Agent pointer to AGENTS.md (Claude Code)",
+    "GEMINI.md": "Agent pointer to AGENTS.md (Gemini / Antigravity)",
+    "llms.txt": "Machine-readable LLM repository map",
+    "CLAIMS.md": "Claims and falsification ledger",
+    "LIMITATIONS.md": "Top-level limitations and literal-vs-metaphor summary",
+    "REPLICATION.md": "Clean-clone replication protocol",
+    "VERSION": "Single semantic version source",
+    "repo.yaml": "Build Standard v1.2.0 repository manifest",
+    "justfile": "One-word task runner",
     "README.md": "Project overview + repo checklist",
     "CHANGELOG.md": "Change history (Keep a Changelog)",
     "CITATION.cff": "Citation metadata",

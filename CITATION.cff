@@ -6,7 +6,11 @@ version: 1.5.1
 date-released: 2026-11-24
 license: MIT
 authors:
-  - name: '0thernes L.L.C.'
+  - given-names: 'Alexander Stephen'
+    family-names: 'Donahue'
+    alias: '0thernes'
+    orcid: 'https://orcid.org/0009-0006-8168-9648'
+    affiliation: 'Independent Researcher, Spokane, WA, USA'
     email: 0_0@0thernes.art
     website: 'https://0thernes.art'
 repository-code: 'https://github.com/0thernes/global-map-app'

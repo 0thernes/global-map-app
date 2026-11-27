@@ -5,6 +5,23 @@ All notable changes to this project are documented here. The format follows
 
 ## [Unreleased]
 
+### Added
+
+- Build Standard v1.2.0 core files: `VERSION` (`1.5.1`), `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`,
+  `.cursor/rules/build-standard.mdc`, `llms.txt`, `CLAIMS.md`, `LIMITATIONS.md`, `REPLICATION.md`,
+  `docs/configuration.md`, `justfile`, and `repo.yaml`.
+- Release `SHA256SUMS` generation in `.github/workflows/release.yml` and report-only `continue-on-error: true` on
+  `.github/workflows/codeql.yml`.
+- Regression tests in `test/py/test_validate_data.py` covering `scripts/validate_data.py` on bracketed checkout paths.
+
+### Fixed
+
+- `scripts/validate_data.py`: replaced unescaped `glob.glob()` over `ROOT` with `os.walk()`, fixing a bug where
+  checkout paths containing `[` / `]` silently skipped all 44 CSV files and the 95 MB file-size check.
+- Legal hygiene (Playbook Finding 1): updated non-license active metadata (`CITATION.cff`, `package.json`, `README.md`,
+  `SUPPORT.md`, `index.html`) from `0thernes L.L.C.` to Alexander Stephen Donahue (`0thernes`, Independent Researcher).
+  Existing `LICENSE` and `DATA_LICENSE.md` copyright notices left owner-controlled.
+
 ## [1.5.1] - 2026-11-24
 
 The hardening release. A repository-wide audit (127 passes over an indexed table of contents of every tracked file)

@@ -15,6 +15,7 @@ jobs:
   analyze:
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    continue-on-error: true # R1: informational SAST, never blocks pushes
     strategy:
       fail-fast: false
       matrix:

@@ -1,0 +1,143 @@
+# Project manifest for the Build Standard for LLMs v1.2.0.
+# Keep each item on one line. status: done | todo | partial | n/a (n/a needs a note).
+standard: '1.2.0'
+name: 'global-map-app'
+description: 'Keyless static 3D CesiumJS OSINT globe of 2,624 public sourced UAP and high-strangeness cases against military, nuclear, conflict, water, and sky reference layers.'
+owner: '0thernes'
+year: '2026'
+project_type: web-app
+stack: [node, python]
+flags:
+  public: true
+  package: true
+  visual: true
+  ui: true
+  native: false
+  ai: false
+  personal_data: false
+  service: false
+  deployed: true
+  api: false
+  perf: true
+  concurrent: false
+  numeric: true
+  experimental: true
+  ml: false
+  formal: false
+items:
+  A01: { status: done, evidence: 'README.md' }
+  A02: { status: done, evidence: 'README.md' }
+  A03: { status: done, evidence: 'README.md#quick-start' }
+  A04: { status: done, evidence: 'README.md#url-options' }
+  A05: { status: done, evidence: 'docs/screenshots/02_globe.png' }
+  A06: { status: done, evidence: 'LICENSE' }
+  A07: { status: done, evidence: 'CHANGELOG.md' }
+  A08: { status: done, evidence: 'VERSION' }
+  A09: { status: done, evidence: 'test/unit/' }
+  A10: { status: done, evidence: '.github/workflows/ci.yml' }
+  A11: { status: done, evidence: '.github/workflows/release.yml' }
+  A12: { status: done, evidence: '.gitignore' }
+  A13: { status: done, evidence: '.editorconfig' }
+  A14: { status: done, evidence: 'CONTRIBUTING.md' }
+  A15: { status: done, evidence: 'CODE_OF_CONDUCT.md' }
+  A16: { status: done, evidence: 'SECURITY.md' }
+  A17: { status: done, evidence: 'SUPPORT.md' }
+  A18: { status: done, evidence: '.github/ISSUE_TEMPLATE/bug_report.yml' }
+  A19: { status: done, note: 'GitHub About/topics set on public repo' }
+  A20: { status: done, evidence: 'docs/architecture.md' }
+  A21: { status: done, evidence: 'docs/adr/0001-cesium-renderer.md' }
+  A22: { status: done, evidence: 'CITATION.cff' }
+  A23: { status: done, note: 'main branch; Alexander Stephen Donahue' }
+  A24: { status: done, evidence: 'scripts/audit/hardening_passes.py' }
+  A25: { status: todo, note: 'CI runs on ubuntu-latest; locally verified on Windows 11' }
+  A26: { status: todo }
+  A27: { status: done, evidence: '.github/workflows/pages.yml' }
+  A28: { status: done, evidence: 'package.json' }
+  A29: { status: partial, evidence: 'README.md#roadmap', note: 'Roadmap section in README.md' }
+  A30: { status: partial, evidence: 'docs/audit/TAXONOMY.md' }
+  A31: { status: done, evidence: 'justfile' }
+  A32: { status: done, evidence: 'AGENTS.md' }
+  A33: { status: done, evidence: 'docs/configuration.md' }
+  A34: { status: n/a, note: 'Static browser site with no backend service' }
+  A35: { status: todo }
+  A36: { status: partial, evidence: '.github/workflows/pages.yml', note: 'GitHub Pages static deployment on push' }
+  A37: { status: done, evidence: 'test/perf.mjs', note: 'Idle <=20 frames / 10 s and dossier <60 s budgets' }
+  A38: { status: done, evidence: 'test/a11y.mjs', note: 'WCAG 2.2 AA axe-core 0 violations' }
+  A39: { status: done, evidence: 'CREDITS.md' }
+  A40: { status: n/a, note: 'Static browser app; calls no AI models' }
+  A41: { status: n/a, note: 'End-user static web app, not an installed library' }
+  A42: { status: done, evidence: 'README.md' }
+  A43: { status: n/a, note: 'Static web application, not a library' }
+  A44: { status: partial, evidence: 'docs/data-dictionary.md' }
+  A45: { status: n/a, note: 'No accounts, cookies, telemetry, or personal-data collection' }
+  B01: { status: done, evidence: 'justfile' }
+  B02: { status: done, evidence: 'package-lock.json' }
+  B03:
+    {
+      status: done,
+      evidence: 'src/stats.js',
+      note: 'Seeded Monte Carlo / permutation tests and deterministic esbuild bundle',
+    }
+  B04: { status: done, evidence: 'CLAIMS.md' }
+  B05: { status: done, evidence: 'test/unit/' }
+  B06: { status: done, evidence: 'test/unit/hardening.test.mjs' }
+  B07:
+    {
+      status: done,
+      evidence: 'test/py/test_validate_data.py',
+      note: 'Regression tests for hardening findings and bracketed-path validate_data.py bug',
+    }
+  B08: { status: done, evidence: 'docs/screenshots/v1.5/README.md' }
+  B09: { status: n/a, note: 'Static browser client consuming public keyless tiles' }
+  B10: { status: todo }
+  B11:
+    { status: done, evidence: 'docs/audit/SUMMARY.md', note: 'Analysis statistics independently re-derived in Python' }
+  B12: { status: partial, evidence: 'test/unit/stats.test.mjs' }
+  B13: { status: todo }
+  B14: { status: todo }
+  B15: { status: n/a, note: 'No native C/C++/asm code' }
+  B16: { status: n/a, note: 'No native code' }
+  B17: { status: done, evidence: 'eslint.config.js', note: 'ESLint 9, Prettier 3, and ruff in CI' }
+  B18: { status: todo }
+  B19: { status: n/a, note: 'Single-threaded browser UI' }
+  B20: { status: partial, evidence: 'test/unit/geo.test.mjs', note: 'Antimeridian and calendar/BCE edge tests' }
+  B21: { status: n/a, note: 'Static site; offline tile fallback tested' }
+  B22: { status: n/a, note: 'No formal proof claims' }
+  B23: { status: n/a, note: 'No distributed protocol' }
+  B24: { status: n/a, note: 'JavaScript + Python static site' }
+  B25: { status: n/a, note: 'No native code' }
+  B26: { status: done, evidence: 'test/perf.mjs' }
+  B27: { status: partial, evidence: 'docs/audit/v1.5-ui-audit.md' }
+  B28:
+    { status: done, evidence: 'src/stats.js', note: 'Uniform, population-weighted, and date-permuted seeded baselines' }
+  B29: { status: done, evidence: 'src/stats.js', note: 'Seeded Monte Carlo / permutation and Fisher exact p-values' }
+  B30: { status: done, evidence: 'src/stats.js', note: 'Bootstrap confidence intervals reported in Analyze panel' }
+  B31: { status: done, evidence: 'src/stats.js', note: 'Bonferroni threshold and Holm-adjusted p-values' }
+  B32:
+    {
+      status: n/a,
+      note: 'Exploratory observational analysis with explicit caveats, not pre-registered confirmatory trial',
+    }
+  B33: { status: n/a, note: 'No ML models trained' }
+  B34: { status: n/a, note: 'No generative AI runtime' }
+  B35:
+    {
+      status: done,
+      evidence: '.github/workflows/codeql.yml',
+      note: 'CodeQL report-only plus npm audit 0 vulnerabilities',
+    }
+  B36: { status: partial, evidence: 'SECURITY.md' }
+  B37: { status: done, evidence: '.github/workflows/release.yml', note: 'SHA256SUMS generated for release zip' }
+  B38: { status: todo }
+  B39: { status: partial, evidence: 'data/sources/' }
+  B40: { status: done, evidence: 'docs/audit/hardening/PASSES.md' }
+  B41: { status: done, evidence: 'LIMITATIONS.md' }
+  B42: { status: done, evidence: 'CLAIMS.md' }
+  B43: { status: done, evidence: 'REPLICATION.md' }
+  B44:
+    {
+      status: partial,
+      evidence: 'REPLICATION.md',
+      note: 'CI and author workstation runs recorded; external replications pending',
+    }
+  B45: { status: done, evidence: 'docs/audit/hardening/FINDINGS.md' }

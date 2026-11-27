@@ -11,7 +11,7 @@ Rules for case/reference rows (files with lat/lon columns):
   - dates ISO-like (YYYY, YYYY-MM, YYYY-MM-DD, negative years for BCE, decades 198- / 1980s)
   - date_low <= date_high when both are full dates
 """
-import csv, glob, gzip, io, json, os, re, sys
+import csv, gzip, io, json, os, re, sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PREC = {'exact_site', 'within_1km', 'locality', 'region', 'unspecified', 'not_plotted', ''}
@@ -77,15 +77,34 @@ def check_built():
     n = j['n'] if isinstance(j, dict) else len(j)
     if n < 100: errors.append(f'data/cases.js has only {n} cases')
     if 'NUFORC' in t: errors.append('data/cases.js contains NUFORC rows: they belong in data/private/ only')
-    for f in glob.glob(os.path.join(ROOT, '**', '*'), recursive=True):
-        if '/node_modules/' in f or '/.git/' in f: continue
-        if os.path.isfile(f) and os.path.getsize(f) > 95 * 1024 * 1024: errors.append(f'{os.path.relpath(f, ROOT)} is over 95 MB')
+    for dirpath, dirnames, filenames in os.walk(ROOT):
+        dirnames[:] = [d for d in dirnames if d not in ('node_modules', '.git')]
+        for fn in filenames:
+            f = os.path.join(dirpath, fn)
+            if os.path.isfile(f) and os.path.getsize(f) > 95 * 1024 * 1024:
+                errors.append(f'{os.path.relpath(f, ROOT)} is over 95 MB')
+
+
+def find_csv_files(root=ROOT):
+    out = []
+    sources_dir = os.path.join(root, 'data', 'sources')
+    if os.path.isdir(sources_dir):
+        for dirpath, _, filenames in os.walk(sources_dir):
+            for fn in filenames:
+                if fn.endswith(('.csv', '.csv.gz')):
+                    out.append(os.path.join(dirpath, fn))
+    data_dir = os.path.join(root, 'data')
+    if os.path.isdir(data_dir):
+        for fn in os.listdir(data_dir):
+            p = os.path.join(data_dir, fn)
+            if os.path.isfile(p) and fn.endswith('.csv'):
+                out.append(p)
+    return sorted(out)
 
 
 def main():
-    files = sorted(glob.glob(os.path.join(ROOT, 'data', 'sources', '**', '*.csv*'), recursive=True) + glob.glob(os.path.join(ROOT, 'data', '*.csv')))
-    for p in files:
-        if p.endswith(('.csv', '.csv.gz')): check_file(p)
+    for p in find_csv_files(ROOT):
+        check_file(p)
     check_built()
     for w in warns[:40]: print('WARN ', w)
     if len(warns) > 40: print(f'WARN  … {len(warns) - 40} more warnings')
