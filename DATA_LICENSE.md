@@ -6,10 +6,10 @@ attributions: [CREDITS.md](CREDITS.md).
 
 ## Compiled case and reference rows (data/cases.js, data/layers/map_*.js, data/sources/qwm/)
 
-Compiled by QWM / 0thernes L.L.C. from the sources cited in each row's `source_url` and `coord_source`. Facts
+Compiled by Alexander Stephen Donahue (0thernes) from the sources cited in each row's `source_url` and `coord_source`. Facts
 (names, dates, coordinates) are not copyrightable in most jurisdictions; where a row quotes or summarises a source,
 the source keeps its rights. Our compilation (selection, grading, normalisation, coordinate-precision labels) is
-offered under **CC BY 4.0**: credit "Global Map / 0thernes L.L.C." and keep the per-row citations.
+offered under **CC BY 4.0**: credit "Global Map / Alexander Stephen Donahue (0thernes)" and keep the per-row citations.
 
 Exceptions that carry their own terms:
 
